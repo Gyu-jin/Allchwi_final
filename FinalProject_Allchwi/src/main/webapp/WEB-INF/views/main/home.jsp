@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <!-- home.jsp -->
 <div>
-	<h1>Allchwi</h1>
+	<h1>Allchwi올취</h1>
 	<img src="${pageContext.request.contextPath }/resources/logoImg/Allchwi_logo.png">
 </div>
