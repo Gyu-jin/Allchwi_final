@@ -3,6 +3,6 @@
 <!-- header.jsp -->
 <div>
 	<ul>
-		<li><a href="/spring22">홍</a></li>
+		<li><a href="/spring22">홈ㅋㅋㅋㅋ</a></li>
 	</ul>
 </div>
