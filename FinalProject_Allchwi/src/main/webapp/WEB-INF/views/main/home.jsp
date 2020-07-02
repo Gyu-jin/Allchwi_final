@@ -16,15 +16,15 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="${pageContext.request.contextPath}/resources/img/배너1.jpg"
+				<img src="${cp}/resources/img/배너1.jpg"
 					alt="배너1">
 			</div>
 			<div class="item">
-				<img src="${pageContext.request.contextPath}/resources/img/배너2.jpg"
+				<img src="${cp}/resources/img/배너2.jpg"
 					alt="배너2">
 			</div>
 			<div class="item">
-				<img src="${pageContext.request.contextPath}/resources/img/배너3.jpg"
+				<img src="${cp}/resources/img/배너3.jpg"
 					alt="배너3">
 			</div>
 		</div>

@@ -12,13 +12,13 @@
   <meta name="author" content="">
 
 <title>views/main/layout.jsp</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+  <link rel="stylesheet" href="${cp}/resources/css/bootstrap.css">
   <!-- Custom fonts for admin template-->
-  <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="${cp}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for admin template-->
-  <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="${cp}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -87,17 +87,17 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
+  <script src="${cp}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="${cp}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
+  <script src="${cp}/resources/js/sb-admin-2.min.js"></script>
   <!-- 부트스트랩 기본 js -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+  <script type="text/javascript" src="${cp}/resources/js/bootstrap.js"></script>
 
 </body>
 </html>
