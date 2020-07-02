@@ -3,5 +3,4 @@
 <!-- home.jsp -->
 <div>
 	<h1>Allchwi올취</h1>
-	<img src="${pageContext.request.contextPath }/resources/logoImg/Allchwi_logo.png">
 </div>
