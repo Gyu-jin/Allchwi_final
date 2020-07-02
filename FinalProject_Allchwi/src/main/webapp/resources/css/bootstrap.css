@@ -1113,9 +1113,12 @@ img {
 .thumbnail a > img,
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  width : auto;
+  height: 400px;
   display: block;
-  max-width: 100%;
-  height: auto;
 }
 .img-rounded {
   border-radius: 6px;
