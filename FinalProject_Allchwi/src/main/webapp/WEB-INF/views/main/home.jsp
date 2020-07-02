@@ -52,10 +52,10 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${cp}/resources/img/배너1.jpg" class="d-block w-100" alt="배너1">
+      <img src="${cp}/resources/img/배너1.png" class="d-block w-100" alt="배너1">
     </div>
     <div class="carousel-item">
-      <img src="${cp}/resources/img/배너2.jpg" class="d-block w-100" alt="배너2">
+      <img src="${cp}/resources/img/배너2.png" class="d-block w-100" alt="배너2">
     </div>
     <div class="carousel-item">
       <img src="${cp}/resources/img/배너1.jpg" class="d-block w-100" alt="배너3">
