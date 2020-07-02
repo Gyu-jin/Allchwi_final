@@ -12,7 +12,7 @@
   <meta name="author" content="">
 
 <title>views/main/layout.jsp</title>
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
   <!-- Custom fonts for admin template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -28,7 +28,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-      <!-- 껍데기 -->
+      <!-- 헤더 -->
 		<div id="header">
     		<tiles:insertAttribute name="header"/>
     	</div>
@@ -44,6 +44,7 @@
     	</div>
            
       </div>
+     </div>
       <!-- 메인 끝 -->
 
       <!-- Footer -->
@@ -57,13 +58,10 @@
         </div>
       </footer>
       <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
-
   </div>
   <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -97,13 +95,9 @@
 
   <!-- Custom scripts for all pages-->
   <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="${pageContext.request.contextPath}/resources/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="${pageContext.request.contextPath}/resources/js/demo/chart-area-demo.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/demo/chart-pie-demo.js"></script>
+  <!-- 부트스트랩 기본 js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 
 </body>
 </html>
