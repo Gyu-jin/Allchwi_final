@@ -12,6 +12,10 @@
 	<definition name=".admin.main" extends=".main">
 		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp"/>
 	</definition>
+	<!-- 로그인 메인페이지로 이동  -->
+	<definition name=".login.main" extends=".main">
+		<put-attribute name="body" value="/WEB-INF/views/login/main.jsp"/>
+	</definition>
 </tiles-definitions>
 
 
