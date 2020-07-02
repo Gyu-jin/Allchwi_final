@@ -21,8 +21,13 @@
                 </button>
               </div>
             </div>
+            
           </form>
-
+         <!-- 연습용메뉴 -->
+		 <div class="practice-group">
+           	 	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
+				<a href="${cp}/login/main">로그인 연습</a>
+		 </div>
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
