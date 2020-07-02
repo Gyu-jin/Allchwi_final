@@ -8,11 +8,18 @@
 	 	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
+	<definition name=".admin.memberlist" template="/WEB-INF/views/admin/layout.jsp">
+		<put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/admin/main.jsp"/>
+	</definition>
 	
 	<definition name=".*.*" extends=".main">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
+	
 
+	
+	
 </tiles-definitions>
 
 
