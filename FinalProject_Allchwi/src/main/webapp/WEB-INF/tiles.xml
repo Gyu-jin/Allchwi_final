@@ -9,17 +9,10 @@
 	</definition>
 	
 	
-	<definition name=".admin.main" extends=".main">
-		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp"/>
+	<definition name=".*.*" extends=".main">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
-	<!-- 로그인 메인페이지로 이동  -->
-	<definition name=".login.main" extends=".main">
-		<put-attribute name="body" value="/WEB-INF/views/login/main.jsp"/>
-	</definition>
-	<!--  상세 검색 페이지로 이동 -->
-	<definition name=".search.main" extends=".main">
-		<put-attribute name="body" value="/WEB-INF/views/search/search.jsp"/>
-	</definition>
+
 </tiles-definitions>
 
 
