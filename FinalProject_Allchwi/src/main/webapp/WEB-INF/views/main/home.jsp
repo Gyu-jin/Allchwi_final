@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- home.jsp -->
+
 <div>
 	<!-- 네비게이션바 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,7 +44,10 @@
 	</nav>
 
 	<!-- 네비게이션 바 끝 -->
-	<!-- 메인 배너 -->
+	 <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+        <!-- 메인 배너 -->
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -58,7 +62,7 @@
       <img src="${cp}/resources/img/배너2.png" class="d-block w-100" alt="배너2">
     </div>
     <div class="carousel-item">
-      <img src="${cp}/resources/img/배너1.jpg" class="d-block w-100" alt="배너3">
+      <img src="${cp}/resources/img/배너3.png" class="d-block w-100" alt="배너3">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -71,6 +75,10 @@
   </a>
 </div>
 	<!-- 메인배너 끝 -->
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+	
 	<!-- 카테고리 아이콘  -->
 	<!-- 카테고리 아이콘 끝  -->
 	<!-- 이번주 시작 -->
