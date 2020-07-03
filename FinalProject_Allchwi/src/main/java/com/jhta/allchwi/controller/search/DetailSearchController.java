@@ -10,6 +10,6 @@ public class DetailSearchController {
 	@PostMapping("/search/detailSearch")
 	public String search(String keyword, Model model) {
 		model.addAttribute("keyword",keyword);
-		return ".search.search";
+		return ".search.detailSearch";
 	}
 }
