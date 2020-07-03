@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>멤버리스트</title>
+  <title>SB Admin 2 - Tables</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,6 +28,9 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+
+   
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -224,7 +227,7 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">회원테이블</h1>
-          <p class="mb-4">회원들의 정보를 관리하는 테이블</p>
+          <p class="mb-4">회원들의 정보를 관리</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -783,3 +786,4 @@
 </body>
 
 </html>
+    

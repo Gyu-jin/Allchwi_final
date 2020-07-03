@@ -8,11 +8,12 @@
 	 	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 
-	
+
 	<definition name=".admin.main" extends=".main">
 	 	<put-attribute name="body" value="/WEB-INF/views/admin/sidebar.jsp"/>
 	</definition>
 	
+
 	<definition name=".admin.memberlist" template="/WEB-INF/views/admin/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jsp"/>
@@ -20,15 +21,22 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 
+ <!-- 
 
+	<definition name=".admin.main" extends=".main">
+	 	<put-attribute name="body" value="/WEB-INF/views/admin/sidebar2.jsp"/>
+	</definition>
+
+
+	<definition name=".admin.memberlist" template="/WEB-INF/views/admin/layout2.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="sidebar2" value="/WEB-INF/views/admin/memberlist.jsp"/>	
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+ -->
 
 	
-<!-- 	
-	<definition name=".admin.memberlist" template="/WEB-INF/views/admin/layout.jsp" extends=".main">
-		<put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jsp"/>
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/memberlist.jsp"/>
-	</definition>	
- -->
+
 	
 
 
