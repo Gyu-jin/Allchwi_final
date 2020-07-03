@@ -1,32 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+.header_loog{
+	margin-left:15%;
+}
+.practice-group{
+	margin-left:20%;
+}
+</style>
 <!-- header.jsp -->
 <div>
- <!-- Topbar -->
+ <!-- 반응형 Topbar?? -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 100px; height: 50px"></a>
-          <form method="post" action="${cp}/search/detailSearch"
-          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-            
-          </form>
+          <!-- 로고 , 검색창 Topbar -->
+          <div class="container-sm">
+	          <div class="header_loog">
+		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 100px; height: 50px"></a>
+		          <form method="post" action="${cp}/search/detailSearch"
+		          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+		            <div class="input-group">
+		              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+		              <div class="input-group-append">
+		                <button class="btn btn-primary" type="submit">
+		                  <i class="fas fa-search fa-sm"></i>
+		                </button>	                	               
+		              </div>
+		            </div>	            
+		          </form>
+	          </div>
+          </div>
          <!-- 연습용메뉴 -->
 		 <div class="practice-group">
-           	 	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
-				<a href="${cp}/login/main">로그인 연습</a>
+           	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
+			<a href="${cp}/login/main">로그인 연습</a>
 		 </div>
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
