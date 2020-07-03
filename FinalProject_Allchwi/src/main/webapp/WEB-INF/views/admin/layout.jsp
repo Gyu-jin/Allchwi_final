@@ -37,10 +37,10 @@
 			</div>
 				<!-- 메인 -->
 			<div class="container-fluid">
-				<div id="sidebar">
+				<div id="sidebar" style="display: inline-block;">
 					<tiles:insertAttribute name="sidebar" />
 				</div>
-				<div id="memberlist">
+				<div id="memberlist" style="display: inline-block;">
 					<tiles:insertAttribute name="memberlist" />
 				</div>
 			</div>
