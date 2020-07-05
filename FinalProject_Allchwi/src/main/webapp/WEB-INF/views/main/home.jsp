@@ -19,7 +19,7 @@
 	justify-content: space-between;
 	height: 51px;
 	margin-bottom: 34px;
-	width: 70%;
+	width: 100%;
 	margin-top: 20px
 }
 
@@ -39,9 +39,34 @@ mark {
 	background-color: transparent;
 	color: gray;
 }
-.card img{
+
+.card img {
 	width: 100%;
 	height: 100%;
+}
+.card-body li .t2 .profile {
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+.card ul li .t1 {
+    height: 44px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    letter-spacing: -0.4px;
+}
+.card li .t2 span {
+    display: inline-block;
+    color: #999;
+}
+.roundImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
 }
 </style>
 <div>
@@ -117,43 +142,60 @@ mark {
 
 	<!-- 카테고리 아이콘 끝  -->
 	<!-- 이번주 시작 -->
-	<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
-		</div>
-		<div class="card-body">
-			<p><img src="${cp}/resources/img/it.jpg" alt=""></p>
-			<p class="mb-0">수업정보</p>
-		</div>
-	</div>
-    </div>
-    <div class="col-sm">
-     <div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
-		</div>
-		<div class="card-body">
-			<p><img src="${cp}/resources/img/it.jpg" alt=""></p>
-			<p class="mb-0">수업정보</p>
-		</div>
-	</div>
-    </div>
-    <div class="col-sm">
-      <div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
-		</div>
-		<div class="card-body">
-			<p><img src="${cp}/resources/img/it.jpg" alt=""></p>
-			<p class="mb-0">수업정보</p>
-		</div>
-	</div>
-    </div>
-  </div>
-</div>
 	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				<div class="card shadow mb-4">
+					<a href="${cp}/class/detail">
+						<div class="card-body">
+						
+							<p>
+								<img src="${cp}/resources/img/it.jpg" alt="">
+							</p>
+							<p class="t1 tov2">모찌의 실무산책</p>
+							<div class="t2">
+								<span class="profile">
+									<img class="roundImg"
+									src="${cp}/resources/img/it.jpg"
+									alt="">
+								</span>	
+								<span class="name">정모찌</span> 
+								<span class="d_day">07월07일 </span> 
+								<span>목동</span>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
+					</div>
+					<div class="card-body">
+						<p>
+							<img src="${cp}/resources/img/it.jpg" alt="">
+						</p>
+						<p class="mb-0">수업정보</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
+					</div>
+					<div class="card-body">
+						<p>
+							<img src="${cp}/resources/img/it.jpg" alt="">
+						</p>
+						<p class="mb-0">수업정보</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- 이번주 시작 끝 -->
 </div>
