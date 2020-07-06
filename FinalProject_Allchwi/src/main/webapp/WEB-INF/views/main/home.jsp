@@ -131,7 +131,7 @@ h1{
 	<h1 class="h3 mb-0 text-gray-800">이번주 시작</h1>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm">
+			<div class="col-3">
 				<div class="card shadow mb-4">
 					<a href="${cp}/class/detail">
 						<div class="card-body">
@@ -153,32 +153,71 @@ h1{
 					</a>
 				</div>
 			</div>
-			<div class="col-sm">
+			<div class="col-3">
 				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
+						<a href="${cp}/class/detail">
+							<div class="card-body">
+								<p>
+									<img src="${cp}/resources/img/it.jpg" alt="">
+								</p>
+								<p class="t1 tov2">모찌의 실무산책</p>
+								<div class="t2">
+									<span class="profile">
+										<img class="roundImg"
+										src="${cp}/resources/img/it.jpg"
+										alt="">
+									</span>	
+									<span class="name">정모찌</span> 
+									<span class="d_day">07월07일 </span> 
+									<span>목동</span>
+								</div>
+							</div>
+						</a>
 					</div>
-					<div class="card-body">
-						<p>
-							<img src="${cp}/resources/img/it.jpg" alt="">
-						</p>
-						<p class="mb-0">수업정보</p>
-					</div>
+			</div>
+			<div class="col-3">
+				<div class="card shadow mb-4">
+					<a href="${cp}/class/detail">
+						<div class="card-body">
+							<p>
+								<img src="${cp}/resources/img/it.jpg" alt="">
+							</p>
+							<p class="t1 tov2">모찌의 실무산책</p>
+							<div class="t2">
+								<span class="profile">
+									<img class="roundImg"
+									src="${cp}/resources/img/it.jpg"
+									alt="">
+								</span>	
+								<span class="name">정모찌</span> 
+								<span class="d_day">07월07일 </span> 
+								<span>목동</span>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
-			<div class="col-sm">
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">카테고리이름</h6>
-					</div>
-					<div class="card-body">
-						<p>
-							<img src="${cp}/resources/img/it.jpg" alt="">
-						</p>
-						<p class="mb-0">수업정보</p>
-					</div>
+			<div class="col-3">
+			<div class="card shadow mb-4">
+					<a href="${cp}/class/detail">
+						<div class="card-body">
+							<p>
+								<img src="${cp}/resources/img/it.jpg" alt="">
+							</p>
+							<p class="t1 tov2">모찌의 실무산책</p>
+							<div class="t2">
+								<span class="profile">
+									<img class="roundImg"
+									src="${cp}/resources/img/it.jpg"
+									alt="">
+								</span>	
+								<span class="name">정모찌</span> 
+								<span class="d_day">07월07일 </span> 
+								<span>목동</span>
+							</div>
+						</div>
+					</a>
 				</div>
-			</div>
 		</div>
 	</div>
 
