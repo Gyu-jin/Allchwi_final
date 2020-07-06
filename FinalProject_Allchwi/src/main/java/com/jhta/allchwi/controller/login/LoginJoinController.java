@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginMainController {
-	@GetMapping("/login/main")
+public class LoginJoinController {
+	@GetMapping("/login/join")
 	public String adminMain() {
-		return ".login.main";
+		return ".login.join";
 	}
 }
