@@ -13,6 +13,16 @@
 <meta name="author" content="">
 
 <title>views/main/layout.jsp</title>
+<!-- Bootstrap core JavaScript-->
+<script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
+<script
+	src="${cp}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="${cp}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="${cp}/resources/js/sb-admin-2.min.js"></script>
 <!-- Custom fonts for admin template-->
 <link href="${cp}/resources/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -87,17 +97,5 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="${cp}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="${cp}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="${cp}/resources/js/sb-admin-2.min.js"></script>
-
 </body>
 </html>
