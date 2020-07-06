@@ -7,6 +7,6 @@
 <title>ClassEnorollment.jsp</title>
 </head>
 <body>
-  
+    
 </body>
 </html>
