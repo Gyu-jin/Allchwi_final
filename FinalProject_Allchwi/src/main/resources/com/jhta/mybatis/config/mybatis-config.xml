@@ -4,13 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.jhta.allchwi.vo.admin.big_categoryVo" alias="big_category" />
-		<typeAlias type="com.jhta.allchwi.vo.admin.small_categoryVo" alias="small_category" />
+		<typeAlias type="com.jhta.allchwi.vo.admin.big_categoryVo" alias="big_category"/>
+		<typeAlias type="com.jhta.allchwi.vo.admin.small_categoryVo" alias="small_category"/>
+		<!-- Login 관련 Mapper vo alias -->
+		<typeAlias type="com.jhta.allchwi.vo.login.MemberLoginVO" alias="mlv"/>		
+		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>		
+		<typeAlias type="com.jhta.allchwi.vo.login.PointVO" alias="pv"/>		
+		<typeAlias type="com.jhta.allchwi.vo.login.ProfileImgVO" alias="piv"/>		
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="com/jhta/mybatis/mapper/AdminCategoryMapper.xml" />
-
+		<mapper resource="com/jhta/mybatis/mapper/AdminCategoryMapper.xml"/>
+		<!-- Login관련 Mapper 경로 -->
+		<mapper resource="com/jhta/mybatis/mapper/MemberLoginMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/MemberInfoMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/PointMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/ProfileImgMapper.xml"/>
 	</mappers>
 </configuration>
 

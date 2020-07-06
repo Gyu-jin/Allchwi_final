@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
 <!-- 1아이콘 폰트 사용 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/allchwi/resources/css/login/loginForm.css">
+
+<div class="container">
 <div id=loginbody>
 <div class="login-form">
     <form action="#" method="post">
@@ -16,7 +19,7 @@
      	<span id="nameMsg" style="font-size: 20px;color: red;padding-left: 20px;"></span>	
       </div>
       <div class="form-group">
-        <input type="email" name="id" placeholder="이메일주소를 입력해주세요" >
+        <input type="email" name="id" placeholder="이메일주소를 입력해주세요" onblur="idCheck()">
         <span class="input-icon"><i class="fa fa-envelope"></i></span>
       </div>
       <div>
@@ -39,6 +42,7 @@
       <button class="login-btn" disabled="disabled">회원가입</button>
     </form>
   </div>
+</div>
 </div>
 <script type="text/javascript">
 //가입 버튼 활성화 변수
@@ -74,7 +78,7 @@ function nameCheck(){
 }
 //이메일 유효성 검사
 function idCheck(){
-	let id = $("input[name='id']").val();
+	var id = $("input[name='id']").val();
 	let idMsg = $("#idMsg");
 	let regExpId = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	if(!regExpId.test(id)){
@@ -87,9 +91,19 @@ function idCheck(){
 		idMsg.html("20자리 이내로 입력해주세요.");
 		idBl = false;
 	} else {
-		idMsg.html("");
-		idBl = true;
-		buttonUp();
+		$.getJSON("/allchwi/login/join",{id : id}, function(data){
+				console.log(data.code);
+				if(data.code == 'fail'){
+					idMsg.css("color","red");
+					idMsg.html("해당 아이디는 이미 존재합니다.");
+					idBl = false;
+				} else {
+					idMsg.css("color","green");
+					idMsg.html("사용가능한 아이디입니다.");
+					idBl = true;
+					buttonUp();
+				}
+		});
 	}
 }
 //비밀번호 유효성 검사
@@ -138,7 +152,12 @@ function pwdDCheck(){
 //버튼 활성화 함수
 function buttonUp(){
 	let btn = $("#insert");
+	console.log(nameBl + "1");
+	console.log(idBl + "2");
+	console.log(pwdBl + "3");
+	console.log(pwdBl1 + "4");
 	if(nameBl && idBl && pwdBl && pwdBl1){
+		console("")
 		btn.removeAttr('disabled');
 	} else {
 		btn.attr('disabled', true);

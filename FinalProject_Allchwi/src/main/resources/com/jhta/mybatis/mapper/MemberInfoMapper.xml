@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.MemberInfoMapper">
+	<!--2 회원번호, 로그인번호(참조), 이미지번호(참조), 이름, 전화번호, 닉네임, 내소개, 탈퇴여부, 탈퇴사유, 등록 및 수정일-->
+	<insert id="add_info" parameterType="miv">
+		insert into Member_info(0, 0, 0, mb_name, mb_phone, mb_nickname, mb_about, mb_auth, mb_reason, now())
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
