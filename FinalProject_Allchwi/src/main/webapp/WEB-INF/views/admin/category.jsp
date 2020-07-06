@@ -4,9 +4,9 @@
 	<div id="content-wrapper" class="d-flex flex-column">
 	<div>
 		<h1>카테고리</h1>
-		<form action="#">
-			큰카테고리 입력<input type="text" name="bigCategory"> <input
-				type="submit" value="입력">
+		<form action="${cp }/admin/big_category">
+			큰카테고리 입력<input type="text" name="bcategory_name"> 
+			<input type="submit" value="입력">
 		</form>
 		<br>
 
