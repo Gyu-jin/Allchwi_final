@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div id="wrapper">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<div id="wrapper" class="container">
 	<div id="content-wrapper" class="d-flex flex-column">
 	<div>
 		<h1>카테고리</h1>
@@ -10,75 +11,37 @@
 		</form>
 		<br>
 
-		<form action="#">
-			작은 카테고리 입력<input type="text" name="smallCategory"> <input
-				type="submit" value="입력">
+		<form action="${cp }/admin/small_category">
+			참조하는 번호 <input type="text" name="bcategory_num"><br>
+			작은 카테고리 입력<input type="text" name="scategory_name"> 
+			<input type="submit" value="입력">
 		</form>
 	</div>
 	<br>
 	<br>
 
 	<table class="table">
-		<thead class="thead-dark">
+		<thead class="thead-dark">	<!-- class="thead-light" -->
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
+				<th scope="col">큰카테고리  번호</th>
+				<th scope="col">큰카테고리  이름</th>
+				<th scope="col">참조하는 큰카테고리 번호</th>
+				<th scope="col">작은 카테고리 이름</th>	
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="vo" items="${list }">
 			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
+				<th scope="row">${vo.bcategory_num }</th>
+				<td>${vo.bcategory_name }</td>
+				<td>${vo.bcategory_num }</td>
+				<td>${vo.scategory_name }</td>
 			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 
-	<table class="table">
-		<thead class="thead-light">
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-			</tr>
-		</tbody>
-	</table>
+
 
 
 

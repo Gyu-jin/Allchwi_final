@@ -3,14 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminCategoryMapper">
-	<insert id="insert" parameterType="big_category">
+	<insert id="bcate_insert" parameterType="big_category">
 		insert into big_category values(null,#{bcategory_name})
 	</insert>
-
-
 	
 	
- 
+	<insert id="scate_insert" parameterType="small_category">
+		insert into big_category values(null,#{scategory_name})
+	</insert>
+
+	<select id="list" resultType="com.jhta.allchwi.vo.admin.bigsmall_categoryVo">
+		select b.bcategory_num,b.bcategory_name,s.scategory_num,s.bcategory_num,s.scategory_name
+		from big_category b,small_category s
+		where s.bcategory_num = b.bcategory_num;
+	</select>
+	
+	
 	
 	
 </mapper>

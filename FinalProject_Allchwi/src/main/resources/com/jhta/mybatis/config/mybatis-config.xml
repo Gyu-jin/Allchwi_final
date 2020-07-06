@@ -5,10 +5,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.jhta.allchwi.vo.admin.big_categoryVo" alias="big_category" />
+		<typeAlias type="com.jhta.allchwi.vo.admin.small_categoryVo" alias="small_category" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="com/jhta/mybatis/mapper/AdminCategoryMapper.xml" />
+
 	</mappers>
 </configuration>
 
