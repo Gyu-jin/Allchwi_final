@@ -39,34 +39,20 @@ mark {
 	background-color: transparent;
 	color: gray;
 }
-
 .card img {
 	width: 100%;
 	height: 100%;
 }
-.card-body li .t2 .profile {
-    overflow: hidden;
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-}
-.card ul li .t1 {
-    height: 44px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.38;
-    letter-spacing: -0.4px;
-}
-.card li .t2 span {
-    display: inline-block;
-    color: #999;
-}
-.roundImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+.card-body .roundImg {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+}
+h1{
+	padding-top: 30px;
+}
+.container{
+	padding-top: 30px;
 }
 </style>
 <div>
@@ -142,14 +128,13 @@ mark {
 
 	<!-- 카테고리 아이콘 끝  -->
 	<!-- 이번주 시작 -->
-	
+	<h1 class="h3 mb-0 text-gray-800">이번주 시작</h1>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm">
 				<div class="card shadow mb-4">
 					<a href="${cp}/class/detail">
 						<div class="card-body">
-						
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">
 							</p>
