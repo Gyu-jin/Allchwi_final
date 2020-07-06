@@ -9,7 +9,7 @@
 	
 	
 	<insert id="scate_insert" parameterType="small_category">
-		insert into big_category values(null,#{scategory_name})
+		insert into small_category values(null,#{bcategory_num},#{scategory_name})
 	</insert>
 
 	<select id="list" resultType="com.jhta.allchwi.vo.admin.bigsmall_categoryVo">

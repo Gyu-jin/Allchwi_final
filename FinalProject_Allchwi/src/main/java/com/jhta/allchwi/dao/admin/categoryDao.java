@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.admin.big_categoryVo;
+import com.jhta.allchwi.vo.admin.bigsmall_categoryVo;
 import com.jhta.allchwi.vo.admin.small_categoryVo;
 
 @Repository
@@ -27,7 +28,7 @@ public class categoryDao {
 	
 	
 
-	public List<big_categoryVo> list() {
+	public List<bigsmall_categoryVo> list() {
 		return session.selectList(NAMESPACE+".list");
 	}
 
