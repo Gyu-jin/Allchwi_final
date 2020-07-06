@@ -42,7 +42,8 @@
          <!-- 연습용메뉴 -->
 		 <div class="practice-group">
            	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
-			<a href="${cp}/login/main">로그인 연습</a>
+			<a href="${cp}/login/main">로그인 연습</a>&nbsp&nbsp
+			<a href="${cp}/class/enrollment">튜터등록</a>
 		 </div>
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->
