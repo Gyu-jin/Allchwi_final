@@ -1,6 +1,6 @@
 package com.jhta.allchwi.controller.admin;
 
-import java.util.List;
+import java.util.List;import java.util.function.BiConsumer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,7 +27,10 @@ public class AdminCategoryController {
 	public String adminMain(Model model) {
 		List<bigsmall_categoryVo> list = service.list();
 		
+		List<big_categoryVo> bcate_list = service.bcate_list();
+		
 		model.addAttribute("list", list);
+		model.addAttribute("bcate_list", bcate_list);
 		return ".admin.category";
 	}
 	
@@ -39,6 +42,7 @@ public class AdminCategoryController {
 		service.bcate_insert(vo);
 		
 		List<bigsmall_categoryVo> list = service.list();
+		
 		JSONArray arr = new JSONArray();
 		for(bigsmall_categoryVo vo2 :list){
 			JSONObject json = new JSONObject();
@@ -50,6 +54,23 @@ public class AdminCategoryController {
 		return arr.toString();
 	}
 
+	
+	@RequestMapping(value="/admin/big_category_list",produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public String big_category_list(Model model) {
+		List<big_categoryVo> bcate_list = service.bcate_list();
+		
+		JSONArray arr= new JSONArray();
+		for(big_categoryVo vo : bcate_list) {
+			JSONObject json = new JSONObject();
+			json.put("bcategory_num", vo.getBcategory_num());
+			json.put("bcategory_name", vo.getBcategory_name());
+			arr.put(json);
+		}
+		return arr.toString();
+	}
+	
+	
 	
 	
 	

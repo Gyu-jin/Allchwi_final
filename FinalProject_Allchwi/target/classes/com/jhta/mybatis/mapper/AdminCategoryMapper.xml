@@ -18,6 +18,12 @@
 		on s.bcategory_num = b.bcategory_num;
 	</select>
 	
+	<select id="bcate_list" resultType="big_category">
+		select bcategory_num,bcategory_name from big_category
+	</select>
+	
+	
+	
 	
 	
 	

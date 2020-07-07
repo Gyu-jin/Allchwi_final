@@ -23,10 +23,13 @@ public class categoryService {
 		return dao.scate_insert(vo);
 	}
 	
-	
-	
+
 	public List<bigsmall_categoryVo> list(){
 		return dao.list();
+	}
+	
+	public List<big_categoryVo> bcate_list(){
+		return dao.bcate_list();
 	}
 	
 	

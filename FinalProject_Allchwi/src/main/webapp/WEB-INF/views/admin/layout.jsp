@@ -40,7 +40,7 @@
 				<div id="sidebar" style="display: inline-block;">
 					<tiles:insertAttribute name="sidebar" />
 				</div>
-				<div id="memberlist" style="display: inline-block;">
+				<div id="memberlist" style="display: inline-block; width:71%;">
 					<tiles:insertAttribute name="memberlist" />
 				</div>
 			</div>

@@ -26,11 +26,13 @@ public class categoryDao {
 		return session.insert(NAMESPACE+".scate_insert", vo);
 	}	
 	
-	
-
 	public List<bigsmall_categoryVo> list() {
 		return session.selectList(NAMESPACE+".list");
 	}
 
+	public List<big_categoryVo> bcate_list(){
+		return session.selectList(NAMESPACE+".bcate_list");
+	}
+	
 
 }
