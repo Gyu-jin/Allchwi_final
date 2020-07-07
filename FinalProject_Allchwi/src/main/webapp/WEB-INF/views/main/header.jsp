@@ -18,31 +18,6 @@
     border-color: #7185bb;
 }
 
-.q_menu ul {
-	display: flex;
-	justify-content: space-between;
-	height: 51px;
-	margin-bottom: 34px;
-	width: 100%;
-	margin-top: 20px
-}
-
-.q_menu li {
-	text-align: center;
-	cursor: pointer;
-	list-style: none;
-}
-
-.q_menu img {
-	vertical-align: middle;
-	border-style: none;
-	width: 50px;
-}
-
-mark {
-	background-color: transparent;
-	color: gray;
-}
 </style>
 <!-- header.jsp -->
 <div>
@@ -153,42 +128,6 @@ mark {
         </nav>
         
         <!-- End of Topbar -->
-		         <!-- 카테고리 아이콘  -->
-	<div class="q_menu">
-		<ul>
-			<li><a href="#">
-					<div class="icon popular">
-						<img src="${cp}/resources/img/popular.png" alt="">
-					</div> <mark>인기수업</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon design">
-						<img src="${cp}/resources/img/design.png" alt="">
-					</div> <mark>디자인</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon work">
-						<img src="${cp}/resources/img/work.png" alt="">
-					</div> <mark>실무역량</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon beauty">
-						<img src="${cp}/resources/img/beauty.png" alt="">
-					</div> <mark>뷰티</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon video">
-						<img src="${cp}/resources/img/video.png" alt="">
-					</div> <mark>영상</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon language">
-						<img src="${cp}/resources/img/language.png" alt="">
-					</div> <mark>외국어</mark>
-			</a></li>
-	</div>
-
-	<!-- 카테고리 아이콘 끝  -->
-
+		
 
 </div>
