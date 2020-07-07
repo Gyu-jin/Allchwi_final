@@ -36,7 +36,7 @@ public class AdminCategoryController {
 	
 	
 	
-	@RequestMapping(value="/admin/big_category",produces= "application/json;charset=utf-8")
+	@RequestMapping(value="/admin/big_category/insert",produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public String big_category(big_categoryVo vo,Model model) {
 		service.bcate_insert(vo);
@@ -74,7 +74,6 @@ public class AdminCategoryController {
 	
 	
 	
-	//@GetMapping("/admin/small_category")
 	@RequestMapping(value="/admin/small_category",produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public String small_category(small_categoryVo vo,Model model) {
@@ -93,6 +92,52 @@ public class AdminCategoryController {
 		return arr.toString();
 	}
 	
+	
+	
+	
+
+	@RequestMapping(value = "/admin/category/deleteScate", produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public String scategory_del(int scategory_num) {
+		int n = service.del_cate(scategory_num);
+		
+		if(n>0) {
+			List<bigsmall_categoryVo> whole_list= service.list();
+			
+			JSONArray arr = new JSONArray();
+			for(bigsmall_categoryVo vo2 :whole_list){
+				JSONObject json = new JSONObject();
+				json.put("bcategory_num", vo2.getBcategory_num());
+				json.put("bcategory_name", vo2.getBcategory_name());
+				json.put("scategory_name", vo2.getScategory_name());
+				arr.put(json);
+			}
+			return arr.toString();
+		}else {
+			System.out.println("삭제 실패");
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/admin/category/deleteBcate", produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public String bcategory_del(int bcategory_num) {
+		service.del_bcate(bcategory_num);
+		
+		List<bigsmall_categoryVo> whole_list= service.list();
+		
+		JSONArray arr = new JSONArray();
+		for(bigsmall_categoryVo vo2 :whole_list){
+			JSONObject json = new JSONObject();
+			json.put("bcategory_num", vo2.getBcategory_num());
+			json.put("bcategory_name", vo2.getBcategory_name());
+			json.put("scategory_name", vo2.getScategory_name());
+			arr.put(json);
+		}
+		return arr.toString();	
+	}
+	
+
 
 
 }

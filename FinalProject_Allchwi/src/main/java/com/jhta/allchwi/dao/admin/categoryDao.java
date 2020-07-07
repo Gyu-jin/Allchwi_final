@@ -34,5 +34,14 @@ public class categoryDao {
 		return session.selectList(NAMESPACE+".bcate_list");
 	}
 	
-
+	public int del_cate(int scategory_num) {
+		return session.delete(NAMESPACE+".del_cate", scategory_num);
+	}
+	
+	public int del_bcate(int bcategory_num) {
+		return session.delete(NAMESPACE+".del_bcate", bcategory_num);
+	}
+	
+	
+	
 }
