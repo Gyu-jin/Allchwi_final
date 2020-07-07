@@ -1,257 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<style>
-.classOpen{
-	margin:auto;
-	width: 60%;
-}
-::placeholder {
-  font-size: 14px;
-}
-option{
-	font-size: 14px;
-}
-
-.title_box h3 {
-	float: left;
-	display: inline-block;
-}
-
-.title_box .steps {
-	float: right;
-	display: flex;
-}
-
-.tab-content {
-	display: block;
-}
-
-.title_box {
-	overflow: hidden;
-	margin-top: 30px;
-	padding: 19px 0;
-	border-bottom: 1px solid #c9c9c9;
-}
-.box{
-	width:100%;
-    display: flex;
-    padding: 30px 0;
-    border-bottom: 1px solid #d8d9db;
-}
-.title{
-    width: 30%;
-    color: #333;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 14px;
-    font-weight: bold;
-}
-.cont{
-	width: 70%;
-	box-sizing: border-box;
-}
-
-.info1{
-    margin-top: 10px;
-    padding: 20px 0;
-    text-align: right;
-    font-size: 14px;
-    color: #555;
-    border-bottom: 1px solid #d8d9db;
-    letter-spacing: -0.35px;
-}
-.pink{
-	color: #ff005a;
-}
-
-.box .pf {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin-top: 20px;
-    float: left;
-    margin-right: 20px;
-}
-.box .upf {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-}
-.box .upf_b {
-    position: absolute;
-    margin-left: 95px;
-    margin-top: 90px;
-}
-.verify {
-    display: inline-block;
-    font-size: 14px;
-    color: #444;
-    border-radius: 4px;
-    padding: 12px 20px;
-    border: solid 1px #aaa;
-    cursor: pointer;
-}
-.certificate_title{
-	font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    padding: 0;
-    width: initial;
-    font-weight: bold;
-    color: #333;
-}
-.certificate_gray{
-	line-height: 1.29;
-    font-size: 14px;
-    color: #888;
-
-}
-.button_box {
-    width: 480px;
-    margin: 40px auto 40px auto;
-    text-align: center;
-}
-div{
-	margin: 0;
-    padding: 0;
-    font-size: 14px;
-    color: #111;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-}
-.plus {
-    color: #fff;
-    background: #555;
-    font-size: 14px;
-    border-radius: 4px;
-    padding: 12px 20px;
-    display: inline-block;
-}
-.btn_hover:hover{
-	opacity: 0.7;
-	cursor: pointer;
-}
-#CateMain{
-	font-size: 14px;
-	margin-right: 20px;
-}
-
-#CateSub{
-	font-size: 14px;
-}
-.box .rds .rd label {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    position: absolute;
-    margin-top: 2px;
-    margin-left: -25px;
-    cursor: pointer;
-    background-image: url(https://front-img.taling.me/Content/Images/Tutor/Images/radio_normal.png);
-    background-position: center;
-    background-size: cover;
-}
-.box .rds .rd label.on {
-    background-image: url(https://front-img.taling.me/Content/Images/Tutor/Images/radio_selected.png);
-}
-.box .rds {
-    display: flex;
-    width: 330px;
-}
-.box .rds .rd {
-    width: 36.3%;
-    padding-left: 25px;
-}
-.inner2{
-    margin-top: 20px;
-}
-.box .drag_cont .drag_box {
-    background: #edf0f4;
-    color: #555;
-    font-size: 16px;
-    width: 550px;
-    height: 353px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    padding-top: 146px;
-    text-align: center;
-}
-.box .drag_cont .right {
-    margin-left: 20px;
-}
-.box .drag_cont {
-    display: flex;
-}
-.cover_img {
-    width: 120px;
-    margin-right: 23.5px;
-    float: left;
-    height: 79.7px;
-    box-sizing: border-box;
-    margin-top: 30px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
-}
-.cover_img.on {
-    border: 2px solid #ff005a;
-}
-.box .caution2 {
-    background: #edf0f4;
-}
-.box .caution {
-    line-height: 1.57;
-    letter-spacing: -0.4px;
-    border-radius: 4px;
-    padding: 12px 24px;
-}
-.box .caution2 .rs {
-    width: 50%;
-    text-align: right;
-    float: right;
-    color: #555;
-    font-size: 20px;
-}
-.box .inner1 .title {
-	color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    padding: 0;
-    width: initial;
-}
-.box .inner1 {
-    margin-top: 30px;
-}
-
-textarea.len980 {
- 	height: 190px;
-    background: #fff;
-}
-.form-control, .custom-select, textarea.basic {
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-}
-.box .curri .index {
-    color: #555;
-    font-size: 14px;
-    line-height: 1.71;
-    margin-bottom: 11px;
-    overflow: hidden;
-}
-.box .curri .index b {
-    color: #ff005a;
-    font-size: 24px;
-    margin-right: 3px;
-}
-</style>
-
+<link rel="stylesheet" href="${cp}/resources/css/classEnrollment/classEnrollment.css">
 <script>
 
 	function nextClassPage(e){
@@ -301,25 +50,31 @@ textarea.len980 {
 <div class="classOpen">
 
 <div class="title_box">
+	<!-- Nav 부트스트랩 목록 -->
 	<h3>튜터 등록</h3>
 	<div class="steps">
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			<li class="nav-item" role="presentation"><a
-				class="nav-link active" id="pills-home-tab" data-toggle="pill"
-				href="#pills-info" role="tab" aria-selected="true">01기본정보</a></li>
 			<li class="nav-item" role="presentation">
-			<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-title"
-				role="tab" aria-selected="false">02제목/이미지</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="pills-contact-tab" data-toggle="pill" href="#pills-price"
-				role="tab" aria-selected="false">03가격</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="pills-contact-tab" data-toggle="pill" href="#pills-class"
-				role="tab" aria-selected="false">04수업</a></li>
+				<a class="nav-link active" id="pills-home-tab" data-toggle="pill"
+					href="#pills-info" role="tab" aria-selected="true">01기본정보</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-title"
+					role="tab" aria-selected="false">02제목/이미지</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-price"
+					role="tab" aria-selected="false">03가격</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-class"
+					role="tab" aria-selected="false">04수업</a>
+			</li>
 		</ul>
 	</div>
 </div>
 
+<!-- 선택된 페이지 출력 -->
 <div class="tab-content" id="pills-tabContent">
 	<!-- 01튜터 기본정보 입력 페이지 -->
 	<div class="tab-pane fade show active" id="pills-info" role="tabpanel">
@@ -563,28 +318,28 @@ textarea.len980 {
 				<div class="inner2" style="display: block;" id="minmax">
 					<select class="custom-select col-3" id="MinPerson" name="MinPerson">
 						<option value="">최소인원수</option>
-						 					 <option value="2">2</option>
-						 					 <option value="3">3</option>
-						 					 <option value="4">4</option>
-						 					 <option value="5">5</option>
-						 					 <option value="6">6</option>
-						 					 <option value="7">7</option>
-						 					 <option value="8">8</option>
-						 					 <option value="9">9</option>
-						 					 <option value="10">10</option>
-						 					 <option value="11">11</option>
-						 					 <option value="12">12</option>
-						 					 <option value="13">13</option>
-						 					 <option value="14">14</option>
-						 					 <option value="15">15</option>
-						 					 <option value="16">16</option>
-						 					 <option value="17">17</option>
-						 					 <option value="18">18</option>
-						 					 <option value="19">19</option>
-						 					 <option value="20">20</option>
-						 					 <option value="30">30</option>
-						 <option value="40">40</option>
-						 <option value="50">50</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
 					</select>
 					 명 ~ 
 					<select class="custom-select col-3" id="MaxPerson" name="MaxPerson">
@@ -609,8 +364,8 @@ textarea.len980 {
 						<option value="19">19</option>
 						<option value="20">20</option>
 						<option value="30">30</option>
-						 <option value="40">40</option>
-						 <option value="50">50</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
 					</select>
 					
 					<div class="inner3 gray5">
@@ -632,7 +387,6 @@ textarea.len980 {
 		
 		<div class="box">
 		<div class="title">커버이미지<b class="pink">*</b><br><br></div>
-
 		<div class="cont">
 			<div class="drag_cont">
 				<div class="drag_box" id="dropZone">
