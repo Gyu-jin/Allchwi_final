@@ -160,7 +160,8 @@ a, span {
 						<!-- //carousel-control -->
 					</div>
 					<!-- //carousel -->
-					<!-- nav tab -->
+					
+					<!-- class_navi -->
 					<div id="class_navi" class="class_navi">
 						<ul style="margin: 0">
 							<li><a href="#sumary" class="on" id="sli">요약</a></li>
@@ -172,7 +173,7 @@ a, span {
 					</div>
 					<!-- class wrap -->
 					<div class="class_wrap">
-						<!-- 탭내용 -->
+						<!--class_navi 내용  -->
 						<!-- 1.요약 -->
 						<div class="class_detail" id="sumary">
 							<img alt="tutorprofile" class="roundImg" src="${cp}/resources/img/모찌.jpg" />
