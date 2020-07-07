@@ -3,9 +3,12 @@ package com.jhta.allchwi.service.login;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,13 +19,13 @@ import com.jhta.allchwi.vo.login.MemberLoginVO;
 
 @Service
 public class MailSenderService {
+
 	@Autowired
 	private JavaMailSender mailSender;
-	@Autowired
-	private SqlSession session;
+
 	@Autowired
 	private MemberLoginDAO mld;
-	
+
 	//난수를이용해 비밀번호를 재생성하기
 	private boolean lowerCheck;
 	private int size;
@@ -61,9 +64,27 @@ public class MailSenderService {
 	public void mailSendWithpassword(MemberLoginVO mlv, String sendEmail, Model model, HttpServletRequest req) {
 		//아이디와 비밀번호를 담기 위한 hashmap
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		//변경된 비밀번호
+		//변경된 비밀번호(9자리 + !추가 하여 10자리)
 		String key = getKey(true, 9);
+		//해쉬맵에 값 담아주기
 		hm.put("id", mlv.getId());
 		hm.put("pwd", key);
+		//비밀번호 새로 생성하여 업데이트 
+		int result = mld.searchPwd(hm);
+		if(result == 1) {
+			MimeMessage mail = mailSender.createMimeMessage();
+			String htmlStr = "<h2>Allchwi 비밀번호 인증메일입니다!</h2><br>" 
+					+ "<h3>" + hm.get("id") + "님</h3>" 
+					+ "<p> 회원님의 임시 비밀번호는 [ " + hm.get("pwd") + " ] 입니다.<br>" 
+					+ "<a href='http://localhost:8091" + req.getContextPath() + "/'>홈페이지 바로가기</a></p>";
+			try {
+				mail.setSubject("[비밀번호 재발급] Allchwi 임시비밀번호 메일입니다", "utf-8");
+				mail.setText(htmlStr, "utf-8", "html");
+				mail.addRecipient(RecipientType.TO, new InternetAddress(sendEmail));
+				mailSender.send(mail);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

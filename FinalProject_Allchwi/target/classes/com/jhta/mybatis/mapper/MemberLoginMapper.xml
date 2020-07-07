@@ -11,6 +11,10 @@
 	<select id="idCheck" resultType="mlv" parameterType="String">
 		select * from Member_login where id = #{id}
 	</select>
+	
+	<update id="searchPwd" parameterType="hashmap">
+		update Member_login set pwd = #{pwd} where id = #{id}
+	</update>
 </mapper>
 
 
