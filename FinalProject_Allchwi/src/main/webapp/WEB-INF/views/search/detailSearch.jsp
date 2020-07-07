@@ -78,9 +78,102 @@
     font-weight: bold;
 
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
 </style>
-<a href="${cp }/classapply">수업신청하기</a>
-<div class="jumbotron">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ 
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	실무역량
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">엑셀</a>
+          <a class="dropdown-item" href="#">파워포인트</a>
+          <a class="dropdown-item" href="#">프로그래밍</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	디자인
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">포토샵</a>
+          <a class="dropdown-item" href="#">일러스트</a>
+          <a class="dropdown-item" href="#">애니메이션</a>
+        </div>
+      </li>      
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	뷰티
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">메이크업</a>
+          <a class="dropdown-item" href="#">패션</a>
+          <a class="dropdown-item" href="#">헤어</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	영상
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">프리미어</a>
+          <a class="dropdown-item" href="#">여행영상</a>
+          <a class="dropdown-item" href="#">에프터이펙트</a>
+        </div>
+      </li>     
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	음악
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">보컬</a>
+          <a class="dropdown-item" href="#">피아노</a>
+          <a class="dropdown-item" href="#">기타</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	언어
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">영어</a>
+          <a class="dropdown-item" href="#">중국어</a>
+          <a class="dropdown-item" href="#">베트남어</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	라이프스타일
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">요리</a>
+          <a class="dropdown-item" href="#">반려동물</a>
+          <a class="dropdown-item" href="#">플라워</a>
+        </div>
+      </li>
+      
+    </ul>
+    <p>
+	  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+	    Link with href
+	  </a>
+	</p>
+	<div class="collapse" id="collapseExample">
+	  <div class="card card-body">
+	  	<div class="jumbotron">
 
 	<nav>
 		<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -272,6 +365,11 @@
 	</div>
 
 </div>
+	  </div>
+	</div> 
+	  </div>
+</nav>
+
 
 
 <div class="jumbotron">
