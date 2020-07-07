@@ -7,7 +7,11 @@
 	 	<put-attribute name="body" value="/WEB-INF/views/main/home.jsp"/>
 	 	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
-
+	
+	<definition name=".*.*" extends=".main">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
 
  <!-- ///////////////////////////////admin 타일즈  시작  //////////////////////////////////////////////////////// -->
 	<definition name=".admin.main" extends=".main">
@@ -36,10 +40,6 @@
 
 
 
-	<definition name=".*.*" extends=".main">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
-	</definition>
-	
 		
 </tiles-definitions>
 

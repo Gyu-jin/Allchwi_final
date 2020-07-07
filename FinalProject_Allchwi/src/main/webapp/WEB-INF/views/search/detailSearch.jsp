@@ -17,8 +17,10 @@
 	align-items: center;
 }
 
-.col-md-5 {
+.col-md-3 {
 	padding-left: 0;
+	padding-right: 0;
+	display: inline-flex;
 }
 
 #inlineFormCustomSelectPref2 {
@@ -26,8 +28,8 @@
 }
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #F44336;
-    border-color: #656776;
+    background-color: #ff936f;
+    border-color: #ff936f;
 }
 .form-inline .btn-group-toggle {
     display: inline-block;
@@ -55,9 +57,29 @@
     text-align: center;
 }
 .inbox{
- display: inline-flex;
+	display: inline-flex;
+}
+
+.form-inline .custom-select, .form-inline .input-group {
+    width: auto;
+    margin: 7px;
+;
+}
+
+.text-div{
+	display: inline-flex;
+	width:3%;   
+	text-align: center;
+}
+.text-1{
+	font-size: 16px;
+    color: #333;
+    letter-spacing: -0.4px;
+    font-weight: bold;
+
 }
 </style>
+<a href="${cp }/classapply">수업신청하기</a>
 <div class="jumbotron">
 
 	<nav>
@@ -79,43 +101,43 @@
 				<div class="label-1">
 					카테고리
 				</div> 
-				<div class="inbox">
+			
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active btn btn-primary"> 
-					<input type="checkbox"> 실무역량
+					<label class="btn btn-secondary active"> 
+					<input type="checkbox" name="offcate" value="1"> 실무역량
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 디자인
+					<input type="checkbox" name="offcate" value="2"> 디자인
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 뷰티
+					<input type="checkbox" name="offcate" value="3"> 뷰티
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 요리
+					<input type="checkbox" name="offcate" value="4"> 요리
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 영상
+					<input type="checkbox" name="offcate" value="5"> 영상
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 음악
+					<input type="checkbox" name="offcate" value="6"> 음악
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 외국어
+					<input type="checkbox" name="offcate" value="7"> 외국어
 					</label>
 				</div>
-			</div>
+		
 				<br> 
 				<div class="label-1">
 					지역
@@ -134,22 +156,21 @@
 					<option value="10">전남</option>
 					<option value="11">전북</option>
 					<option value="12">제주</option>
-				</select> <select class="custom-select my-1 mr-sm-2">
+				</select> 
+				<select class="custom-select my-1 mr-sm-2">
+					
 					<!-- inlineFormCustomSelectPref의 option value에 따라 동적으로 생성 -->
-					<option selected value="1">강남</option>
-					<option value="2">강북</option>
-					<option value="3">강서</option>
-					<option value="4">강동</option>
+				
 				</select> <br>
 				<div class="label-1">
-					시작 날짜
+					기간
 				</div> 
-				<div class='col-md-5'>
+				<div class='col-md-3'>
 					<div class="form-group">
 						<div class="input-group date" id="datetimepicker7"
 							data-target-input="nearest">
 							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker7" />
+								data-target="#datetimepicker7" name="startDate" />
 							<div class="input-group-append" data-target="#datetimepicker7"
 								data-toggle="datetimepicker">
 								<div class="input-group-text">
@@ -159,15 +180,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="label-1">
-					끝 날짜
-				</div> 
-				<div class='col-md-5'>
+				<div class="text-div"><span class="text-1">~</span></div>
+				<div class='col-md-3'>
 					<div class="form-group">
 						<div class="input-group date" id="datetimepicker8"
 							data-target-input="nearest">
 							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker8" />
+								data-target="#datetimepicker8" name="endDate"/>
 							<div class="input-group-append" data-target="#datetimepicker8"
 								data-toggle="datetimepicker">
 								<div class="input-group-text">
@@ -180,7 +199,7 @@
 
 				<br>
 				<button type="button" class="btn btn-primary my-1"
-					id="detailSearchBtn">상세검색</button>
+					id="detailSearchBtnOffline">상세검색</button>
 			</form>
 
 		</div>
@@ -196,37 +215,37 @@
 				</div> 
 				<div class="btn-group-toggle" data-toggle="buttons" id="category1">
 					<label class="btn btn-secondary active btn btn-primary"> 
-					<input type="checkbox"> 실무역량
+					<input type="checkbox" name="oncate"> 실무역량
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category2">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 디자인
+					<input type="checkbox" name="oncate"> 디자인
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category3">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 뷰티
+					<input type="checkbox" name="oncate"> 뷰티
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category4">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 요리
+					<input type="checkbox" name="oncate"> 요리
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category5">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 영상
+					<input type="checkbox" name="oncate"> 영상
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category6">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 음악
+					<input type="checkbox" name="oncate"> 음악
 					</label>
 				</div>
 				<div class="btn-group-toggle" data-toggle="buttons" id="category7">
 					<label class="btn btn-secondary active"> 
-					<input type="checkbox"> 외국어
+					<input type="checkbox" name="oncate"> 외국어
 					</label>
 				</div>
 
@@ -246,7 +265,7 @@
 
 				<br><br>
 				<button type="button" class="btn btn-primary my-1"
-					id="detailSearchBtn">상세검색</button>
+					id="detailSearchBtnOnline">상세검색</button>
 			</form>
 
 		</div>
@@ -273,33 +292,47 @@
 
 
 <script>
+	// date 형식에서 시간 삭제 
 	$('#datetimepicker7').datetimepicker({
 		format : 'L'
 	});
 	$('#datetimepicker8').datetimepicker({
 		format : 'L'
 	});
-	$("#inlineFormCustomSelectPref")
-			.click(
-					function() {
-						if ($("#inlineFormCustomSelectPref option:selected")
-								.val() == 1) {
-							console.log("1-서울 선택됨");
-						} else if ($(
-								"#inlineFormCustomSelectPref option:selected")
-								.val() == 2) {
-							console.log("2-경기 선택됨");
-						}
-					});
-
-	$("#detailSearchBtn").click(function() {
-		$.getJSON("/searchList", data, function(data, textStatus, req) {
+	
+	
+	
+	//Big Location Select-Option
+	$("#inlineFormCustomSelectPref").click(function() {
+		if ($("#inlineFormCustomSelectPref option:selected").val() == 1) {
+			console.log("1-서울 선택됨");
+			// small_location table 에서 bloc_num 이 1인 sloc_name 가져오기
+		} else if ($("#inlineFormCustomSelectPref option:selected").val() == 2) {
+			console.log("2-경기 선택됨");
+			// small_location table 에서 bloc_num 이 2인 sloc_name 가져오기
+		}
+	});
+	
+			
+	
+	// OffLine tap - 상세검색 버튼
+	$("#detailSearchBtnOffline").click(function() {
+		$("input[name=offcate]:checked").each(function(){		
+			console.log("체크된 카테고리번호 :"+ $(this).val());	
+		});	
+		
+		var startDate=$("input[name=startDate]").val();
+		var endDate=$("input[name=endDate]").val();
+		
+		console.log($("input[name=startDate]").val());
+		console.log($("input[name=endDate]").val());
+		$.getJSON("../class/searchList?startDate="+startDate, function(data, textStatus, req) {
 			var html = "<div class='col-md-4'>"
 				+ "<div class='card mb-4 shadow-sm'>"
 				+ "<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title>"
 				+ "<rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>클래스커버 대표이미지</text></svg>"
 				+ "<div class='card-body'>"
-				+ "<p class='card-text'>클래스 설명</p>"
+				+ "<p class='card-text'>"+data+"</p>"
 				+ "<div class='d-flex justify-content-between align-items-center'>"
 				+ "<div class='btn-group'>"
 				+ "<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>"
@@ -309,6 +342,5 @@
 				+ "</div>" + "</div>" + "</div>" + "</div>";
 		$("#searchList").append(html);
 		});
-		
 	});
 </script>
