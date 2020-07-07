@@ -30,7 +30,7 @@ public class MailSenderService {
 	private boolean lowerCheck;
 	private int size;
 
-	//비밀번호 난수 만들기
+	//비밀번호 난수 만들기 -> 메소드 있음.
 	private String init() {
 		Random rd = new Random();
 		StringBuffer sb = new StringBuffer();
@@ -62,7 +62,7 @@ public class MailSenderService {
 	
 	//비밀번호 변경하여 이메일 발송
 	public void mailSendWithpassword(MemberLoginVO mlv, String sendEmail, Model model, HttpServletRequest req) {
-		//아이디와 비밀번호를 담기 위한 hashmap
+		//아이디와 비밀번호를 담기 위한 hashmap 객체 생성
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		//변경된 비밀번호(9자리 + !추가 하여 10자리)
 		String key = getKey(true, 9);
@@ -72,13 +72,16 @@ public class MailSenderService {
 		//비밀번호 새로 생성하여 업데이트 
 		int result = mld.searchPwd(hm);
 		if(result == 1) {
+			//비밀번호 변경 완료후 메일보내기
 			MimeMessage mail = mailSender.createMimeMessage();
 			String htmlStr = "<h2>Allchwi 비밀번호 인증메일입니다!</h2><br>" 
 					+ "<h3>" + hm.get("id") + "님</h3>" 
 					+ "<p> 회원님의 임시 비밀번호는 [ " + hm.get("pwd") + " ] 입니다.<br>" 
 					+ "<a href='http://localhost:8091" + req.getContextPath() + "/'>홈페이지 바로가기</a></p>";
 			try {
+				//제목
 				mail.setSubject("[비밀번호 재발급] Allchwi 임시비밀번호 메일입니다", "utf-8");
+				//내용
 				mail.setText(htmlStr, "utf-8", "html");
 				mail.addRecipient(RecipientType.TO, new InternetAddress(sendEmail));
 				mailSender.send(mail);

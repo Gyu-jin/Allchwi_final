@@ -3,15 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.MemberLoginMapper">
-	<!--1 로그인번호, 아이디, 비밀번호, 튜터여부, 탈퇴여부, 등록일, 이메일 인증 -->
+	<!--0 로그인번호, 아이디, 비밀번호, 튜터여부, 탈퇴여부, 등록일, 이메일 인증 -->
 	<insert id="member_join" parameterType="mlv">
 		insert into Member_login(0, #{id}, #{pwd}, 0, 0, now(), 0)
 	</insert>
-	
+	<!--1 아이디 검사  -->
 	<select id="idCheck" resultType="mlv" parameterType="String">
 		select * from Member_login where id = #{id}
 	</select>
-	
+	<!--2 비밀번호 변경 -->
 	<update id="searchPwd" parameterType="hashmap">
 		update Member_login set pwd = #{pwd} where id = #{id}
 	</update>

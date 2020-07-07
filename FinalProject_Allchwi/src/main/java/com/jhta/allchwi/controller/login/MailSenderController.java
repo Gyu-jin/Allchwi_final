@@ -18,12 +18,10 @@ public class MailSenderController {
 	private MailSenderService mailSender;
 
 	@RequestMapping("/login/searchPwd")
-	public String searchPwdEmail(MemberLoginVO mlv, String sendEmail, Model model, HttpServletRequest req) {
-		//jsp에서 넘어온 값 받기
-		String id = mlv.getId();
-		System.out.println(id + "   " + sendEmail);		
+	public String searchPwdEmail(MemberLoginVO mlv, String sendEmail, Model model, HttpServletRequest req) {		
 		// 인증 메일 보내기 메서드
 		mailSender.mailSendWithpassword(mlv, sendEmail, model, req);
+		//메일보내고 메인으로 
 		return "redirect:/";
 	}
 }
