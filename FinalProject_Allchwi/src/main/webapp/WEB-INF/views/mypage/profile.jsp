@@ -49,7 +49,7 @@
 				</div>
 			</div>
 			<div id="btn-cont">
-				<input type="submit" value="저장" name="saveInfo" id="saveInfo" class="btn btn-danger btn-lg">
+				<input type="submit" value="저장" name="saveInfo" id="saveInfo" class="btn btn-danger btn-lg" onsubmit="return formCheck()" disabled="disabled">
 			</div>
 			<div style="padding-top: 400px"></div>
 		</div>
@@ -81,20 +81,20 @@ $("#nickname").on("propertychange change keyup paste", function() {
 	//currentVal -> 현재 변경된 데이터 셋팅
 	var currentVal = $(this).val();
 	if(currentVal == oldNickVal) {
-		console.log(1);
 		return;
 	}
 	//$(this).val()이 8자 이상 넘어갔을때
 	if($(this).val().length>8){
 		//s 알림창 띄우고 추가된 내용을 지우고 이전까지 입력된 내용을 적은 뒤 리턴
-		alert('별명은 8자 이하로 써주세요');
+		alert('별명은 8자 이하로 작성해주세요');
 		$('#nickname').val(oldNickVal).focus();
 		return;
-	}
+	} 
 	//a 현재 입력된 값의 길이를 카운트영역에 입력
 	$('#nick-count').text($(this).val().length);
 	//a 현재 값을 기존 초기 값에 대입 
 	oldNickVal = currentVal;
+	formCheck();
 });
 //a propertychange change keyup paste -> 텍스트 변경 실시간감지하여 함수 발생 처리 
 $("#introduction").on("propertychange change keyup paste input", function() {
@@ -114,6 +114,18 @@ $("#introduction").on("propertychange change keyup paste input", function() {
 	$('#introduction-count').text($(this).val().length);
 	//a 현재 값을 기존 초기 값에 대입
 	oldIntroVal = currentVal;
+	formCheck();
 });
-
+//a 입력된 값이 있으면 버튼 활성화 함수
+function formCheck(){
+	let nick = $("#nickname").val();
+	let intro = $("#introduction").val();
+	if(nick != "" && intro != ""){
+		$("#saveInfo").removeAttr("disabled");
+		return true;
+	} else {
+		$("#saveInfo").attr("disabled", true);
+		return false;	
+	}
+}
 </script>

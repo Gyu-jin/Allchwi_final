@@ -27,7 +27,7 @@
       <div class="social-icon">
 		 <c:if test="${userId eq null}">
        		<a href=" https://kauth.kakao.com/oauth/authorize?client_id=4f883a7141cac9d993029eba73513c89&redirect_uri=http://localhost:8091/kakaologin/login&response_type=code">
-            	<img src="/kakaologin/resources/img/kakao_login_medium_narrow.png">
+            	<img src="${cp}/resources/img/kakao_login_medium_narrow.png">
         	</a>
   		 </c:if>
       </div>
