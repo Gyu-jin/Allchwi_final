@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+#classcontent {
+	position: relative;
+	left: 225px;
+	bottom: 197px;
+}
+</style>
 
 <head>
 <meta charset="utf-8">
@@ -28,17 +35,24 @@
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-
-		<br>
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 
 			<!-- Main Content -->
 			<div id="content">
+				<!-- Page Heading -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">수업목록</h1>
+				</div>
+
 
 				<!-- ///////탑바/////// -->
-				<div class="bg-info">
-					<!-- Topbar Search -->
+				<div class="row bg-info">
+					 <select name="cat" class="form-control col-1">
+					
+					  </select>
+					<!-- 검색창  -->
 					<form
 						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 						<div class="input-group">
@@ -54,21 +68,11 @@
 					</form>
 				</div>
 				<!-- /////// 탑바  끝   /////// -->
-
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 
-					<!-- Page Heading -->
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">수업목록</h1>
-					</div>
-
-
 					<div class="row">
 						<div class="col-lg-6">
-
-							<!-- Dropdown Card Example -->
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div
@@ -93,47 +97,26 @@
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
-									<img src="${cp }/resources/img/수업소개이미지_1.png"
-										style="width: 200px; height: 200px;">
-									카드바디ssssssssssssssssss
-								</div>
-							</div>
-
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div
-									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">드롭다운 카드</h6>
-									<div class="dropdown no-arrow">
-										<a class="dropdown-toggle" href="#" role="button"
-											id="dropdownMenuLink" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <i
-											class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-										</a>
-										<div
-											class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-											aria-labelledby="dropdownMenuLink">
-											<div class="dropdown-header">드롭다운 Header:</div>
-											<a class="dropdown-item" href="#">액션1</a> <a
-												class="dropdown-item" href="#">액션2</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="#">무언가</a>
+									<div>
+										<img src="${cp }/resources/img/모찌.jpg">
+										<div id="classcontent">
+											심사대기 <br> 수강인원:0명 / 위시인원:0명
 										</div>
 									</div>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									<img src="${cp }/resources/img/모찌.jpg"> 
-									<a href="#"
-										class="btn btn-success btn-icon-split"> <span
-										class="icon text-white-50"> <i class="fas fa-check"></i>
-									</span> <span class="text">Split Button Success</span>
-									</a> 
-									<a href="#" class="btn btn-danger btn-icon-split"> <span
-										class="icon text-white-50"> <i
-											class="fas fa-exclamation-triangle"></i>
-									</span> <span class="text">Split Button Danger</span>
-									</a> 카드바디ssssssssssssssssss
+
+
+									<div>
+										<a href="#" class="btn btn-success btn-icon-split"> <span
+											class="icon text-white-50"> <i class="fas fa-check"></i>
+										</span> <span class="text">심사완료</span>
+										</a> <a href="#" class="btn btn-danger btn-icon-split"> <span
+											class="icon text-white-50"> <i
+												class="fas fa-exclamation-triangle"></i>
+										</span> <span class="text">심사반려</span>
+										</a>
+
+
+									</div>
 								</div>
 							</div>
 
