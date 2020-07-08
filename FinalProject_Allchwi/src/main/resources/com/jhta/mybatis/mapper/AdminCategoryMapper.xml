@@ -22,7 +22,7 @@
 		select bcategory_num,bcategory_name from big_category
 	</select>
 	
-	<delete id="del_cate" parameterType="int">
+	<delete id="del_scate" parameterType="int">
 		delete from small_category where scategory_num=#{scategory_num}
 	</delete>
 	

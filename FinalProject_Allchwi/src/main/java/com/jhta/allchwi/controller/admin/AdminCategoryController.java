@@ -64,7 +64,7 @@ public class AdminCategoryController {
 		for(big_categoryVo vo : bcate_list) {
 			JSONObject json = new JSONObject();
 			json.put("bcategory_num", vo.getBcategory_num());
-			json.put("bcategory_name", vo.getBcategory_name());
+			json.put("bcategory_name", vo.getBcategory_name());		
 			arr.put(json);
 		}
 		return arr.toString();
@@ -87,6 +87,7 @@ public class AdminCategoryController {
 			json.put("bcategory_num", vo2.getBcategory_num());
 			json.put("bcategory_name", vo2.getBcategory_name());
 			json.put("scategory_name", vo2.getScategory_name());
+			json.put("scategory_num", vo2.getScategory_num());
 			arr.put(json);
 		}	
 		return arr.toString();
@@ -99,7 +100,7 @@ public class AdminCategoryController {
 	@RequestMapping(value = "/admin/category/deleteScate", produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public String scategory_del(int scategory_num) {
-		int n = service.del_cate(scategory_num);
+		int n = service.del_scate(scategory_num);
 		
 		if(n>0) {
 			List<bigsmall_categoryVo> whole_list= service.list();
@@ -110,6 +111,9 @@ public class AdminCategoryController {
 				json.put("bcategory_num", vo2.getBcategory_num());
 				json.put("bcategory_name", vo2.getBcategory_name());
 				json.put("scategory_name", vo2.getScategory_name());
+				json.put("scategory_num", vo2.getScategory_num());
+				
+			
 				arr.put(json);
 			}
 			return arr.toString();
@@ -132,6 +136,7 @@ public class AdminCategoryController {
 			json.put("bcategory_num", vo2.getBcategory_num());
 			json.put("bcategory_name", vo2.getBcategory_name());
 			json.put("scategory_name", vo2.getScategory_name());
+			json.put("scategory_num", vo2.getScategory_num());
 			arr.put(json);
 		}
 		return arr.toString();	

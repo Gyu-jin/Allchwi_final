@@ -74,7 +74,8 @@
 							<td id="bnum">${vo.bcategory_num }</td>
 							<td>${vo.bcategory_name }</td>
 							<td>${vo.scategory_name }</td>
-							<td><button type="button" class="btn btn-outline-secondary del_btn" onclick="del(${vo.scategory_num},${vo.bcategory_num })"
+							<td><button type="button" class="btn btn-outline-secondary del_btn" 
+										onclick="del(${vo.scategory_num},${vo.bcategory_num })"
 										value="${vo.scategory_num}">삭제</button></td>
 						</tr>
 					</c:forEach>
@@ -85,58 +86,17 @@
 </div>
 
 <script type="text/javascript">
-
 		$("#bcate_btn").click(function(){
 			var bcategory_name = $("input[name='bcategory_name']").val();
 			$.getJSON({
 				url:"${cp}/admin/big_category/insert",
 				data: {bcategory_name:bcategory_name},
 				success: function(data){
-					//$("select[name=cat]").empty();
-					$("#tb").empty();
-					$(data).each(function(i,arr){
-						var bcategory_num= arr.bcategory_num;
-						var bcategory_name= arr.bcategory_name;
-						var scategory_name = arr.scategory_name;	
-						var scategory_num = arr.scategory_num;
-						
-						if(scategory_num ==null || scategory_num ==""){
-							scategory_num=0;
-						}
-						
-						
-						$("#tb").append("<tr>");
-							$("#tb").append("<td id=''>"+bcategory_num+"</td>");
-							console.log(bcategory_num);
-							$("#tb").append("<td>"+bcategory_name+"</td>");
-							if(scategory_name==undefined){
-								$("#tb").append("<td> </td>");
-							}else{
-								$("#tb").append("<td>"+scategory_name+"</td>");
-							}
-							$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num+")' value='"+bcategory_num+"'>삭제</button></td>");
-							
-						$("#tb").append("</tr>");
-						
-						$.getJSON({
-							url:"${cp}/admin/big_category_list",
-							success: function(data){
-								$("select[name=cat]").empty();
-								$(data).each(function(i,bcate){
-									var bcategory_num = bcate.bcategory_num;						
-									var bcategory_name = bcate.bcategory_name;
-									
-									$("select[name=cat]").append("<option value="+bcategory_num+">"+bcategory_name+"</option>");
-								});
-							}
-						});
-					});
+					redundlist(data);		
 				}
 			});
 		});
 		
-	
-
 		$("#scate_btn").click(function(){
 			var bcategory_num = $("select[name='cat']").val();
 			var scategory_name = $("input[name='scategory_name']").val();
@@ -144,15 +104,17 @@
 				url:"${cp}/admin/small_category",
 				data: {bcategory_num:bcategory_num, scategory_name:scategory_name},
 				dataType: "json",
-				success: function(data){	//json배열이니 each구문을 쓸수잇음
+				success: function(data){	
 					redundlist(data);
 				}
 			});
 		});
 		
+		
 		function del(scategory,bcategory){
 			var scategory_num = scategory;
 			console.log(scategory);
+			
 			if(scategory_num!=0){
 				$.getJSON({
 					url:"${cp}/admin/category/deleteScate",
@@ -160,7 +122,7 @@
 					success: function(data){	
 						redundlist(data);
 					}
-				});	
+				});
 			}else{
 				var bcategory_num = bcategory;	
 				console.log(bcategory_num);
@@ -175,14 +137,18 @@
 		}
 		
 		
-		
-		
 		function redundlist(data){
 			$("#tb").empty();
 			$(data).each(function(i,arr){
 				var bcategory_num= arr.bcategory_num;
 				var bcategory_name= arr.bcategory_name;
-				var scategory_name = arr.scategory_name;	
+				var scategory_name = arr.scategory_name;
+				var scategory_num = arr.scategory_num;
+				
+				if(scategory_num == null || scategory_num ==""){
+					scategory_num=0;
+				}
+				
 				$("#tb").append("<tr>");
 					$("#tb").append("<td>"+bcategory_num+"</td>");
 					$("#tb").append("<td>"+bcategory_name+"</td>");
@@ -191,10 +157,24 @@
 					}else{
 						$("#tb").append("<td>"+scategory_name+"</td>");
 					}
-					$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num+")' value='"+bcategory_num+"'>삭제</button></td>");
+					$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num+")'>삭제</button></td>");
 				$("#tb").append("</tr>");
-			});
-	}
-		
-		
+			
+				$.getJSON({
+					url:"${cp}/admin/big_category_list",
+					success: function(data){
+						$("select[name=cat]").empty();
+						$(data).each(function(i,bcate){
+							var bcategory_num = bcate.bcategory_num;						
+							var bcategory_name = bcate.bcategory_name;
+							var scategory_name = arr.scategory_name;	
+							var scategory_num = arr.scategory_num;
+						
+							$("select[name=cat]").append("<option value="+bcategory_num+">"+bcategory_name+"</option>");
+						});
+					}
+				});
+			});	
+		}
+
 </script>

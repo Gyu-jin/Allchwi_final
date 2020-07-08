@@ -33,8 +33,8 @@ public class categoryService {
 	}
 	
 	
-	public int del_cate(int scategory_num) {
-		return dao.del_cate(scategory_num);
+	public int del_scate(int scategory_num) {
+		return dao.del_scate(scategory_num);
 	}
 	
 	public int del_bcate(int bcategory_num) {
