@@ -100,6 +100,14 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="${cp}/resources/js/sb-admin-2.min.js"></script>
+	
+  	<!-- Page level plugins -->
+  	<script src="${cp }/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+  	<script src="${cp }/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  	<!-- Page level custom scripts -->
+  	<script src="${cp }/resources/js/demo/datatables-demo.js"></script>
+	
 
 </body>
 </html>

@@ -21,7 +21,7 @@
 <div id="wrapper" class="container">
 	<div id="content-wrapper" class="d-flex flex-column">
 		<div id="searchbar">
-			<h1>카테고리</h1>
+			<h1 class="h3 mb-2 text-gray-800">카테고리</h1>
 
 			<div class="row">
 

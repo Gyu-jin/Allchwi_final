@@ -30,7 +30,14 @@
 		<put-attribute name="memberlist" value="/WEB-INF/views/admin/category.jsp"/>
 	</definition>
 
-
+	
+	<definition name=".admin.classlist" extends=".admin.memberlist">
+		<put-attribute name="memberlist" value="/WEB-INF/views/admin/classlist.jsp"/>
+	</definition>
+	
+	
+	
+	
 	
 <!-- ////////////////////////////////admin 타일즈  끝 ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->	
 	

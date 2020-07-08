@@ -22,11 +22,9 @@ public class AdminCategoryController {
 	@Autowired
 	private categoryService service;
 	
-	
 	@GetMapping("/admin/category")
 	public String adminMain(Model model) {
 		List<bigsmall_categoryVo> list = service.list();
-		
 		List<big_categoryVo> bcate_list = service.bcate_list();
 		
 		model.addAttribute("list", list);
@@ -112,8 +110,6 @@ public class AdminCategoryController {
 				json.put("bcategory_name", vo2.getBcategory_name());
 				json.put("scategory_name", vo2.getScategory_name());
 				json.put("scategory_num", vo2.getScategory_num());
-				
-			
 				arr.put(json);
 			}
 			return arr.toString();
