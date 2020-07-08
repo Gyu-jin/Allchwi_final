@@ -50,7 +50,10 @@
            	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
 			<a href="${cp}/login/main">로그인 연습</a>&nbsp&nbsp
 			<a href="${cp}/class/enrollment">튜터등록</a>&nbsp&nbsp
-			<a href="${cp}/class/apply">수업신청하기</a>
+			<a href="${cp}/class/apply">수업신청하기</a>&nbsp&nbsp
+			<!-- 연습추가/영호 -->
+			<a href="${cp}/mypage/mypageForm">프로필</a>&nbsp&nbsp
+			<a href="${cp}/mypage/changePwd">비밀번호변경</a>	
 		 </div>
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->

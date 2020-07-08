@@ -19,7 +19,9 @@
       <div class="other">      
       	<a class="reset-psw" href="${cp}/login/searchPwd">비밀번호 찾기</a>
       	<a class="reset-psw" href="${cp}/login/join">회원가입</a>
+      	<!-- 
       	<a class="reset-psw" href="${cp}/mypage/mypageForm">마이페이지테스트</a>
+      	 -->
       </div>
       <div class="seperator"><b>or</b></div>
       <p>다른 방법으로 로그인</p>
