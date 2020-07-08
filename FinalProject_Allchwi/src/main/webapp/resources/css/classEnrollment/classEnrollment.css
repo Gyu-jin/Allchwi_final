@@ -91,6 +91,9 @@ option{
     border: solid 1px #aaa;
     cursor: pointer;
 }
+.certificate{
+	margin-top: 10px;
+}
 .certificate_title{
 	font-size: 14px;
     font-weight: 500;
@@ -120,6 +123,7 @@ div{
     font-weight: 400;
 }
 .plus {
+	margin-top: 10px;
     color: #fff;
     background: #555;
     font-size: 14px;
