@@ -17,7 +17,7 @@
 					id="picture-cover">
 					<!-- a 카메라 이미지를 버튼처럼 사용 -->
 					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png">
-					<input type="file" id="picture" name="picture">
+					<input type="file" id="picture" name="img">
 				</div>
 			</div>
 			<div class="inner-cont">
@@ -29,10 +29,9 @@
 				<div class="contents">조영호</div>
 			</div>
 			<div class="inner-cont">
-				<div class="label-title">별명</div>
+				<div class="label-title">닉네임</div>
 				<div class="contents">
-					<input type="text" placeholder="" id="nick" class="full"
-						name="Description" value="">
+					<input type="text" placeholder="닉네임을 입력해주세요" id="nickname" name="mb_nickname" class="form-controller" value="">
 					<p class="regintxt01 clearbt redtxt">ex) 열정만수르, 요조숙녀, 열혈남 (8자
 						이내)</p>
 					<div class="count_char">
@@ -43,22 +42,23 @@
 			<div class="inner-cont">
 				<div class="label-title">내소개</div>
 				<div class="contents">
-					<textarea class="full" id="introduction" placeholder=""
-						name="Intro"></textarea>
+					<textarea class="form-controller" id="introduction" placeholder="자기 소개 입력"	name="mb_about"></textarea>
 					<div class="count_char">
 						<font id="introduction-count">0</font>/300
 					</div>
 				</div>
 			</div>
-			<div class="pink-submit" id="regInfo">저장하기</div>
+			<div id="btn-cont">
+				<input type="submit" value="저장" name="saveInfo" id="saveInfo" class="btn btn-danger btn-lg">
+			</div>
 			<div style="padding-top: 400px"></div>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
-//a 이미지 변경되었을때 
+//a 이미지 변경되었을때 값을 파일에 넣고, 배경이미지 변경
 $('#picture').change(function (e) {
-	var file = (e.target || window.event.srcElement).files[0];
+	var file = (e.target).files[0];
 
 	var reader = new FileReader();
 	reader.onload = function() {
@@ -66,4 +66,54 @@ $('#picture').change(function (e) {
 	}
 	reader.readAsDataURL(file);
 });
+//a 별명 및 소개 글 글자수 체크 기능 위한 변수 선언
+var oldNickVal;
+var oldIntroVal;
+/*
+$(function(){
+	//a 초기 글자수 값
+	$('#nick-count').text($('#nickname').val().length);
+	oldValNick = $('#nickname').val();
+});
+*/
+//a propertychange change keyup paste -> 텍스트 변경 실시간감지하여 함수 발생 처리
+$("#nickname").on("propertychange change keyup paste", function() {
+	//currentVal -> 현재 변경된 데이터 셋팅
+	var currentVal = $(this).val();
+	if(currentVal == oldNickVal) {
+		console.log(1);
+		return;
+	}
+	//$(this).val()이 8자 이상 넘어갔을때
+	if($(this).val().length>8){
+		//s 알림창 띄우고 추가된 내용을 지우고 이전까지 입력된 내용을 적은 뒤 리턴
+		alert('별명은 8자 이하로 써주세요');
+		$('#nickname').val(oldNickVal).focus();
+		return;
+	}
+	//a 현재 입력된 값의 길이를 카운트영역에 입력
+	$('#nick-count').text($(this).val().length);
+	//a 현재 값을 기존 초기 값에 대입 
+	oldNickVal = currentVal;
+});
+//a propertychange change keyup paste -> 텍스트 변경 실시간감지하여 함수 발생 처리 
+$("#introduction").on("propertychange change keyup paste input", function() {
+	//currentVal -> 현재 변경된 데이터 셋팅
+	var currentVal = $(this).val();
+	if(currentVal == oldIntroVal) {
+		return;
+	}
+	//$(this).val()이 300자 이상 넘어갔을때
+	if($(this).val().length>300){
+		//s 알림창 띄우고 추가된 내용을 지우고 이전까지 입력된 내용을 적은 뒤 리턴
+		alert('내소개는 300자 이하로 써주세요');
+		$('#introduction').val(oldIntroVal).focus();
+		return;
+	}
+	//a 현재 입력된 값의 길이를 카운트영역에 입력
+	$('#introduction-count').text($(this).val().length);
+	//a 현재 값을 기존 초기 값에 대입
+	oldIntroVal = currentVal;
+});
+
 </script>

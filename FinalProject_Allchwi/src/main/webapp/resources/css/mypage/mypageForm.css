@@ -52,17 +52,16 @@
 	color:#888;
 }
 
-.container .profile-container .inner-cont input[type=text]:focus, .container .container .inner-cont textarea:focus{
-	outline:none;
-}
 
-.container input.full, .container textarea.full{
+#nickname, #introduction{
 	width:100%;
 }
 
-.container textarea.full{
+#introduction{
 	height:140px;
+	resize: none;
 }
+
 
 .container .container .inner-cont .button_white{
 	display:inline-block;
@@ -76,24 +75,12 @@
 	padding:5px;
 }
 
-.container .pink-submit{
-	background:#ff005a;
-	color:#fff;
-	border-radius:6px;
-	padding:17px;
-	width:71px;
-	color:#fff;
-	font-size:16px;
-	width:200px;
-	height:60px;
-	box-sizing:border-box;
-	margin:30px auto;
-	text-align:center;
+#btn-cont{
+	padding-top: 20px;
+	text-align: center;	
 }
-
-.pink-submit:hover{
-	background:#c80046;
-	cursor:pointer;
+#btn-cont input{
+	width: 300px;
 }
 .container .profileHead {
     position: relative;
