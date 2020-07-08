@@ -37,8 +37,7 @@ $(function(){
         
         //버튼이벤트의 data-num 값 가져오기
         var num = $(this).attr('data-num');
-        nextClassPage(num);
-        return true;
+
         // 전화번호 입력 여부 확인
         if($('#phone').val() ==''){
         	alert('튜터 번호를 등록해주세요');
@@ -76,13 +75,8 @@ $(function(){
     		return false;
     	}
     	
-    	// 로딩중인지 체크.
-        if(isUploading) {
-            alert('업로드 중입니다. 잠시만 기다려 주세요');
-            return false;
-        }
 
-        //미리 생성해 놓은 값 중에서 값이 없는 건 disabled
+/*        //미리 생성해 놓은 값 중에서 값이 없는 건 disabled
         $("input[type=text]").each(function() {
             if($(this).val() == "") {
                 $(this).attr("disabled",true);
@@ -93,9 +87,10 @@ $(function(){
                 $(this).attr("disabled",true);
             }
         });
-        
+        */
         // 입력 완료후 페이지 이동
         nextClassPage(num);
+        return true;
     });
 });
 
@@ -467,11 +462,11 @@ $(function(){
 			return false;
 		}
 
-		$("input[type=text]").each(function() {
+/*		$("input[type=text]").each(function() {
 			if($(this).val() == "") {				
 				$(this).attr("disabled",true);
 			}
-		});
+		});*/
 		nextClassPage(num);
 		return true;
 		
