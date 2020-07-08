@@ -133,8 +133,8 @@ mark {
 			</a></li>
 			<li><a href="#">
 					<div class="icon language">
-						<img src="${cp}/resources/img/language.png" alt="">
-					</div> <mark>라이프스타일</mark>
+						<img src="${cp}/resources/img/cook.png" alt="">
+					</div> <mark>요리</mark>
 			</a></li>
 	</div>
 
@@ -147,7 +147,7 @@ mark {
 		<div class="row">
 			<div class="col-3">
 				<div class="card shadow mb-4">
-					<a href="${cp}/class/detail">
+					<a href="${cp}/classDetail/detail">
 						<div class="card-body">
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">
@@ -169,7 +169,7 @@ mark {
 			</div>
 			<div class="col-3">
 				<div class="card shadow mb-4">
-						<a href="${cp}/class/detail">
+						<a href="${cp}/classDetail/detail">
 							<div class="card-body">
 								<p>
 									<img src="${cp}/resources/img/it.jpg" alt="">
@@ -191,7 +191,7 @@ mark {
 			</div>
 			<div class="col-3">
 				<div class="card shadow mb-4">
-					<a href="${cp}/class/detail">
+					<a href="${cp}/classDetail/detail">
 						<div class="card-body">
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">
@@ -213,7 +213,7 @@ mark {
 			</div>
 			<div class="col-3">
 			<div class="card shadow mb-4">
-					<a href="${cp}/class/detail">
+					<a href="${cp}/classDetail/detail">
 						<div class="card-body">
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">
