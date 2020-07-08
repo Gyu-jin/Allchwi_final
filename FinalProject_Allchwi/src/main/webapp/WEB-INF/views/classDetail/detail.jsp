@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
+#container_detail {
+	width: 100%;
+	padding: 50px 0 50px 0;
+	letter-spacing: 0;
+}
+
 .card {
 	width: 440px;
 	background: white;
@@ -9,8 +15,13 @@
 .remote {
 	width: 100%;
     background: whitesmoke;
+    position: sticky;
+    left: 1200px;
 }
-
+.remote.active{
+	position: fixed;
+	top: 0px;
+}
 .roundImg {
 	width: 200px;
 	height: 200px;
@@ -58,25 +69,24 @@
 		center top no-repeat;
 }
 
-#container_detail {
-	width: 100%;
-	padding: 50px 0 50px 0;
-	letter-spacing: 0;
-}
-
 .class_wrap {
 	float: left;
 	background: whitesmoke;
 	padding: 0 80px 0 80px;
 }
 
-#container_detail .class_navi {
+.class_navi {
 	background: white;
 	color: gray;
-	z-index: 1;
 	border-bottom: 1px solid #999;
+	padding: 10px 0px;
+	position: sticky;
+ 	top: 0px;
 }
 
+.class_navi.active{
+	position: fixed;
+}
 #container_detail .class_navi ul li a.on {
 	color: #ff936f;
 	font-weight: bold;
@@ -92,9 +102,6 @@
 	padding: 20px 0 20px 0;
 }
 
-li {
-	list-style: none;
-}
 
 .btn_wishlist {
 	padding: 10px 12px;
@@ -113,7 +120,6 @@ li {
 	font-size: 30px;
 	color: white;
 }
-
 a, span {
 	color: inherit;
 	font-size: inherit;
@@ -121,7 +127,13 @@ a, span {
 	line-height: inherit;
 	text-decoration: none;
 }
+li {
+	list-style: none;
+}   
+
+
 </style>
+
 <div class="container-fluid" id="container_detail">
 	<div class="row">
 		<div class="col-md-12">
@@ -158,9 +170,8 @@ a, span {
 							<span class="sr-only">Next</span>
 						</a>
 						<!-- //carousel-control -->
-					</div>
 					<!-- //carousel -->
-					
+					</div>
 					<!-- class_navi -->
 					<div id="class_navi" class="class_navi">
 						<ul style="margin: 0">
@@ -215,7 +226,6 @@ a, span {
 									</ul>
 								</div>
 							</div>
-
 						</div>
 						<!-- 튜터소개 -->
 						<div class="class_detail detail_sec_bor" id="tutorinfo">
@@ -390,40 +400,23 @@ a, span {
 		</div>
 	</div>
 </div>
-
 <script>
-	$(document).ready(function() {
-		// Add smooth scrolling to all links in navbar + footer link
-		$(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-			// Make sure this.hash has a value before overriding default behavior
-			if (this.hash !== "") {
-				// Prevent default anchor click behavior
-				event.preventDefault();
+  var navOffset = $( '.class_navi' ).offset();
+  var remoteOffset = $( '.remote' ).offset();
+  $( window ).scroll( function() {
+    if ( $( document ).scrollTop() > navOffset.top ) {
+      $( '.class_navi' ).addClass( 'active' );
+    }
+    else {
+      $( '.class_navi' ).removeClass( 'active' );
+    }
+    if ( $( document ).scrollTop() > remoteOffset.top ) {
+	   $( '.remote' ).addClass( 'active' );
+	}else {
+	   $( '.remote' ).removeClass( 'active' );
+	}
+  });
 
-				// Store hash
-				var hash = this.hash;
 
-				// Using jQuery's animate() method to add smooth page scroll
-				// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-				$('html, body').animate({
-					scrollTop : $(hash).offset().top
-				}, 900, function() {
 
-					// Add hash (#) to URL when done scrolling (default click behavior)
-					window.location.hash = hash;
-				});
-			} // End if
-		});
-
-		$(window).scroll(function() {
-			$(".slideanim").each(function() {
-				var pos = $(this).offset().top;
-
-				var winTop = $(window).scrollTop();
-				if (pos < winTop + 600) {
-					$(this).addClass("slide");
-				}
-			});
-		});
-	})
 </script>
