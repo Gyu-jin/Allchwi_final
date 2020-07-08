@@ -162,7 +162,6 @@
 #container_detail .tutor_t dl.tutor_txt dt {
 	width: 80px;
 	height: 80px;
-	float: left;
 	background: none;
 	padding: 0;
 	border-radius: 100px;
@@ -172,6 +171,7 @@
 #container_detail .tutor_t dl.tutor_txt dd {
 	width: 300px;
 	left: 100px;
+	top: -80px;
 	border-radius: 5px;
 	padding: 10px;
 	position: relative;
@@ -413,20 +413,23 @@ li {
 					<div class="row">
 						<div class="col-md-12">
 							<div id="card">
+								<div class="class_type">
+									<h3>클래스유형</h3>
+								</div>
 								<div class="card">
 									<div class="card-header">
 										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#card-1" href="#card-element-1">
+											data-parent="#accordion" href="#card-element-1">
 											07.08(수)14:00~16:00 강남</a>
 									</div>
-									<div id="card-element-1" class="collapse show">
+									<div id="card-element-1" class="collapse">
 										<div class="card-body">상세장소 : 강사 공방</div>
 									</div>
 								</div>
 								<div class="card">
 									<div class="card-header">
 										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#card-2" href="#card-element-2">
+											data-parent="#accordion" href="#card-element-2">
 											07.08(수)14:00~16:00 강남</a>
 									</div>
 									<div id="card-element-2" class="collapse">
@@ -473,4 +476,13 @@ li {
 			$('.remote').removeClass('active');
 		}
 	});
+	
+	$("#class_navi a").click(function() {
+		$(this).addClass('on');
+		$("#class_navi a").not(this).removeClass('on');
+	});
+	$("#card-header collapse").click(function() {
+		$(this).addClass('show');
+	});
+	card-element-1
 </script>
