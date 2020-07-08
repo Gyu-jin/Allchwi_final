@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 #container_detail {
 	width: 100%;
@@ -14,14 +15,16 @@
 
 .remote {
 	width: 100%;
-    background: whitesmoke;
-    position: sticky;
-    left: 1200px;
+	background: whitesmoke;
+	position: sticky;
+	left: 1200px;
 }
-.remote.active{
+
+.remote.active {
 	position: fixed;
 	top: 0px;
 }
+
 .roundImg {
 	width: 200px;
 	height: 200px;
@@ -81,12 +84,54 @@
 	border-bottom: 1px solid #999;
 	padding: 10px 0px;
 	position: sticky;
- 	top: 0px;
+	top: 0px;
+	z-index: 1;
 }
 
-.class_navi.active{
+.class_navi.active {
 	position: fixed;
 }
+
+#container_detail .class_wrap .class_detail {
+	width: 840px;
+	float: left;
+}
+
+#container_detail .class_wrap .class_detail .info {
+	line-height: 150%;
+	margin-top: 20px;
+}
+
+#container_detail .class_wrap .class_detail .tutor_profile {
+	width: 180px;
+	float: left;
+	color: #000;
+	text-align: center;
+	margin: 100px 0 50px 0;
+}
+
+#container_detail .class_wrap .class_detail .tutor_profile .name {
+	width: 180px;
+	font-size: 20px;
+	line-height: 200%;
+}
+
+#container_detail .class_wrap .class_detail .class_title {
+	float: right;
+	padding-top: 40px;
+	margin: 50px 0 50px 0;
+}
+
+#container_detail .class_wrap .detail_sec_bor {
+	border-top: 1px solid #e3e3e3;
+	overflow: hidden;
+}
+
+#container_detail .class_wrap .class_detail .sec01 {
+	padding-top: 125px;
+	position: relative;
+}
+
 #container_detail .class_navi ul li a.on {
 	color: #ff936f;
 	font-weight: bold;
@@ -102,24 +147,59 @@
 	padding: 20px 0 20px 0;
 }
 
-
 .btn_wishlist {
-	padding: 10px 12px;
+	padding: 10px 18px;
 	border-radius: 10px;
 	background-color: #ff936f;
 	float: right;
 	color: white;
 	margin-top: 9px;
 }
+#container_detail .tutor_t {
+	margin: 30px;
+}
 
+#container_detail .tutor_t dl.tutor_txt dt {
+	width: 80px;
+	height: 80px;
+	float: left;
+	background: none;
+	padding: 0;
+	border-radius: 100px;
+	overflow: hidden;
+}
+
+#container_detail .tutor_t dl.tutor_txt dd {
+	width: 300px;
+	left: 100px;
+	border-radius: 5px;
+	padding: 10px;
+	position: relative;
+	background: lightgray;
+	color: #666;
+	letter-spacing: 0;
+}
+#container_detail .tutor_t dl.tutor_txt dd:after {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    position: absolute;
+    border-right-color: lightgray;
+    border-width: 10px;
+    margin-top: -10px;
+}
 .btn_pay {
-	padding: 10px 160px;
+	display: inline-block;
+	padding: 10px 0 10px 0;
+    width: 407px;
+    text-align: center;
 	border-radius: 10px;
 	background-color: #7185bb;
-	margin-top: 9px;
 	font-size: 30px;
 	color: white;
 }
+
 a, span {
 	color: inherit;
 	font-size: inherit;
@@ -127,11 +207,10 @@ a, span {
 	line-height: inherit;
 	text-decoration: none;
 }
+
 li {
 	list-style: none;
-}   
-
-
+}
 </style>
 
 <div class="container-fluid" id="container_detail">
@@ -170,12 +249,12 @@ li {
 							<span class="sr-only">Next</span>
 						</a>
 						<!-- //carousel-control -->
-					<!-- //carousel -->
+						<!-- //carousel -->
 					</div>
 					<!-- class_navi -->
 					<div id="class_navi" class="class_navi">
 						<ul style="margin: 0">
-							<li><a href="#sumary" class="on" id="sli">요약</a></li>
+							<li><a href="#sumary" id="sli" class="on">요약</a></li>
 							<li><a href="#tutor" id="tli" class="">튜터</a></li>
 							<li><a href="#Introduction" id="ili" class="">수업소개</a></li>
 							<li><a href="#review" id="rli" class="">리뷰</a></li>
@@ -187,34 +266,37 @@ li {
 						<!--class_navi 내용  -->
 						<!-- 1.요약 -->
 						<div class="class_detail" id="sumary">
-							<img alt="tutorprofile" class="roundImg" src="${cp}/resources/img/모찌.jpg" />
-							<!-- 수업명 -->
-							<span>
-								<h3>정모찌의 실전산책</h3>
-								<h3>모찌에게 배우는 진짜 산책</h3>
-							</span>
-							<!-- 별점 -->
-							<div class="info">
-								<a class="starimg"> <img
-									src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									<img
-									src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									<img
-									src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									<img
-									src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									<img
-									src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									(리뷰갯수)
-								</a>
-								<!-- 찜하기 -->
-								<a href="#" class="btn_wishlist"> <!-- 예스찜 --> <img
-									src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
-									<!-- 노찜 
+							<!-- 강사프로필 -->
+							<div class="tutor_profile">
+								<div class="tutor_img">
+									<img alt="tutorprofile" class="roundImg"
+										src="${cp}/resources/img/모찌.jpg" />
+								</div>
+								<div class="name">정모찌</div>
+							</div>
+							<div class="class_title">
+								<!-- 수업명 -->
+								<div class="title">
+									<h3>정모찌의 실전산책</h3>
+									<h3>모찌에게 배우는 진짜 산책</h3>
+								</div>
+
+								<!-- 별점 -->
+								<div class="info">
+									<a class="starimg"> <c:forEach var="index" begin="1"
+											end="5">
+											<img
+												src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+										</c:forEach> (리뷰갯수)
+									</a>
+									<!-- 찜하기 -->
+									<a href="#" class="btn_wishlist"> <!-- 예스찜 --> <img
+										src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
+										<!-- 노찜 
 												<img src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
 												--> 찜하기
-								</a>
-
+									</a>
+								</div>
 								<!-- 기본정보 -->
 								<div class="info">
 									<ul>
@@ -227,18 +309,15 @@ li {
 								</div>
 							</div>
 						</div>
-						<!-- 튜터소개 -->
+						<!-- //1.요약 -->
+						<!-- 2.튜터소개 -->
 						<div class="class_detail detail_sec_bor" id="tutorinfo">
-							<div class="section01" id="tutor">
+							<div class="sec01" id="tutor">
 								<h1>튜터정보</h1>
 								<div class="cert">
 									<ul>
 										<li class="com">숙명여자대학교 미디어학부</li>
-
-
 										<li class="com">신분 인증 됨</li>
-
-
 									</ul>
 								</div>
 								<div class="d_info04">
@@ -256,10 +335,10 @@ li {
 								</div>
 							</div>
 						</div>
-
-						<!-- 수업소개 -->
+						<!-- //2.튜터소개 -->
+						<!-- 3.수업소개 -->
 						<div class="class_detail detail_sec_bor" id="Introduction">
-							<div class="section01">
+							<div class="sec01">
 								<h1>수업소개</h1>
 								<div class="d_info04">
 									♥ ♥ 프리미어 초보들에게 3시간만에 마법을 선사해드립니다.♥ ♥ <br> <br> 처음에
@@ -271,94 +350,63 @@ li {
 								</div>
 							</div>
 						</div>
-						<!-- 리뷰 -->
+						<!-- //3.수업소개 -->
+						<!-- 4.리뷰 -->
 						<div class="class_detail detail_sec_bor" id="review">
-							<div class="section01">
+							<div class="sec01">
 								<h1>리뷰(2)</h1>
 								<a class="btn_st" id="btn-write-review">리뷰쓰기</a>
 								<div class="review_box">
-									<img
-										src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-									<img
-										src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-									<img
-										src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-									<img
-										src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-									<img
-										src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+									<c:forEach var="index" begin="1" end="5">
+										<img
+											src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+									</c:forEach>
 									5.0
 								</div>
 
 								<div class="review_count01">
 									<ul>
-										<li>커리큘럼 <img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+										<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 										</li>
-										<li>전달력 <img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+										<li>전달력 <c:forEach var="index" begin="1" end="5">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 										</li>
-										<li>준비성 <img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+										<li>준비성 <c:forEach var="index" begin="1" end="5">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 										</li>
-										<li>친절도 <img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+										<li>친절도 <c:forEach var="index" begin="1" end="5">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 										</li>
-										<li>시간준수 <img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
-											<img
-											src="https://front-img.taling.me/Content/Images/class/icon_star.png">
+										<li>시간준수 <c:forEach var="index" begin="1" end="5">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 										</li>
 									</ul>
 								</div>
 							</div>
 						</div>
+						<!-- //4.리뷰 -->
+						<!-- 5.qna -->
 						<div class="class_detail detail_sec_bor" id="qna">
-							<p>
-								수업과 관련해서<br>궁금한 점이 있으세요?
-							</p>
+							<div class="sec01">
+								<h1>Q&A</h1>
+								<p>
+									수업과 관련해서<br>궁금한 점이 있으세요?
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
-
 				<!--// class wrap -->
 				<!-- 시간&날짜/ 결제창 -->
 				<div class="col-md-4 remote">
@@ -386,12 +434,22 @@ li {
 									</div>
 								</div>
 							</div>
-							<dl>
-								<dt>강사한마디</dt>
-								<dd>잘부탁드립니다</dd>
-
-							</dl>
-							<a href="#" class="btn_pay">결제하기</a>
+							<div class="tutor_t">
+								<dl class="tutor_txt">
+									<dt>
+										<div
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+										</div>
+									</dt>
+									<dd>
+										신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어
+										있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
+									</dd>
+								</dl>
+							</div>
+							<div class="button_pay">
+								<a href="#" class="btn_pay">결제하기</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -401,22 +459,18 @@ li {
 	</div>
 </div>
 <script>
-  var navOffset = $( '.class_navi' ).offset();
-  var remoteOffset = $( '.remote' ).offset();
-  $( window ).scroll( function() {
-    if ( $( document ).scrollTop() > navOffset.top ) {
-      $( '.class_navi' ).addClass( 'active' );
-    }
-    else {
-      $( '.class_navi' ).removeClass( 'active' );
-    }
-    if ( $( document ).scrollTop() > remoteOffset.top ) {
-	   $( '.remote' ).addClass( 'active' );
-	}else {
-	   $( '.remote' ).removeClass( 'active' );
-	}
-  });
-
-
-
+	var navOffset = $('.class_navi').offset();
+	var remoteOffset = $('.remote').offset();
+	$(window).scroll(function() {
+		if ($(document).scrollTop() > navOffset.top) {
+			$('.class_navi').addClass('active');
+		} else {
+			$('.class_navi').removeClass('active');
+		}
+		if ($(document).scrollTop() > remoteOffset.top) {
+			$('.remote').addClass('active');
+		} else {
+			$('.remote').removeClass('active');
+		}
+	});
 </script>
