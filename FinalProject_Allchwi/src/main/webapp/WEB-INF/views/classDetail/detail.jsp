@@ -157,12 +157,12 @@
 }
 
 .btn_write {
-	padding: 10px 18px;
+	padding: 10px 20px;
 	border-radius: 10px;
 	background-color: #ff936f;
 	float: right;
 	color: white;
-	margin-top: -50px;
+	margin-top: 10px;
 }
 
 .modal-footer {
@@ -182,12 +182,15 @@
 	font-weight: bold;
 	color: #000;
 	vertical-align: middle;
+	margin-top: 85px;
 }
+
 .sec01 .review_count01 {
-    margin-top: 30px;
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 150px;
+	margin-top: 30px;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 150px;
 }
+
 .sec01 .review_count01 ul li {
 	width: 50%;
 	height: 60px;
@@ -196,30 +199,35 @@
 	color: #000;
 	cursor: default;
 }
-.sec01 .review_list dd{
- margin-left: 130px;
+
+.sec01 .review_list dd {
+	margin-left: 130px;
 }
+
 .sec01 .review_list {
-    position: relative;
+	position: relative;
 }
+
 .sec01 .review_list dl dt {
-    width: 86px;
-    float: left;
-    text-align: center;
-    font-size: 16px;
-    color: #000;
-    cursor: default;
-    line-height: 100%;
+	width: 86px;
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	color: #000;
+	cursor: default;
+	line-height: 100%;
 }
 
 #container_detail .tutor_t {
 	margin: 30px;
 }
- .sec01 .review_list ul li {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 30px 0;
-    cursor: default;
+
+.sec01 .review_list ul li {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 30px 0;
+	cursor: default;
 }
+
 #container_detail .tutor_t dl.tutor_txt dt {
 	width: 80px;
 	height: 80px;
@@ -273,6 +281,18 @@ a, span {
 
 li {
 	list-style: none;
+}
+.qna_list ul li {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0;
+    cursor: default;
+}
+.qna_list{
+    border: 1px solid #d4cdcd;
+    margin-top: 65px;
+}
+.reply_box{
+	margin-top: 20px;
 }
 </style>
 
@@ -498,17 +518,16 @@ li {
 									<ul>
 										<div id="innerReviewDiv">
 											<c:forEach var="index" begin="1" end="3">
-											<li><dl>
-													<dt>
-														<p class="profile_img"
-															style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-														<p class="name">김경희</p>
-													</dt>
-													<dd>정말 예쁘고 영롱한 작품을 만날 수 있어요! 제가 어버버 하고 있어도 선생님이 착착
-														지도해주셔서 예쁜 비누가 나왔어요^^ 2시간 순삭입니다. 집에서 비누 보고 있으니까 너무 흐뭇하고
-														행복하네요~</dd>
-													<dd class="date">2020-06-27 00:16:41</dd>
-												</dl></li>
+												<li><dl>
+														<dt>
+															<p class="profile_img"
+																style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+															<p class="name">임다은</p>
+														</dt>
+														<dd>산책이란 무엇인가에 대해 제대로 배울 수 있는 시간이였습니다. 모찌짱짱 최고귀염둥이
+															옴쫍쫍 ㅠㅠ</dd>
+														<dd class="date">2020-06-27 00:16:41</dd>
+													</dl></li>
 											</c:forEach>
 										</div>
 									</ul>
@@ -520,13 +539,32 @@ li {
 						<div class="class_detail detail_sec_bor" id="qna">
 							<div class="sec01">
 								<h1>Q&A</h1>
+								<textarea type="text" id="form8"
+									class="md-textarea form-control" rows="4"></textarea>
+
 								<div class="btn_write">
 									<a href="#" class="btn_write_qna">문의하기</a>
 								</div>
-								<input type="text">
-								<p>
-									수업과 관련해서<br>궁금한 점이 있으세요?
-								</p>
+								<div class="qna_list" id="bookmarkqna">
+									<ul>
+										<c:forEach var="index" begin="1" end="1">
+											<li><dl>
+													<dt>
+														<p class="profile_img"
+															style="width: 50px; height: 50px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+														<p class="name">임다은</p>
+													</dt>
+													<dd>어쩌구 저쩌구가 궁금합니다</dd>
+													<dd class="date">2020-06-27 00:16:41</dd>
+												</dl></li>
+											<div class="reply_box">
+											 ^댓글 (collapse로 접히게)
+											<input type="text" id="reply_content">
+											<input type="submit" id="reply_send" value="등록">
+											</div>
+										</c:forEach>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -575,7 +613,7 @@ li {
 								</dl>
 							</div>
 							<div class="button_pay">
-								<a href="#" class="btn_pay">결제하기</a>
+								<a href="${cp }/class/apply" class="btn_pay">수업신청하기</a>
 							</div>
 						</div>
 					</div>
