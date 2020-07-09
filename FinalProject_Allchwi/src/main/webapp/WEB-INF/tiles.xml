@@ -36,7 +36,9 @@
 	</definition>
 	
 	
-	
+	<definition name=".admin.manageClass" extends=".admin.memberlist">
+		<put-attribute name="memberlist" value="/WEB-INF/views/admin/manageClass.jsp"/>
+	</definition>
 	
 	
 <!-- ////////////////////////////////admin 타일즈  끝 ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->	

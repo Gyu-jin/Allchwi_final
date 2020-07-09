@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-#classcontent {
-	position: relative;
-	left: 225px;
-	bottom: 197px;
-}
 </style>
 
 <head>
@@ -30,109 +25,79 @@
 </head>
 
 
-
 <body id="page-top">
-
 	<!-- Page Wrapper -->
-	<div id="wrapper">
 		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content-wrapper" class="d-flex flex-column" style="height:800px;">
 
 			<!-- Main Content -->
 			<div id="content">
-				<!-- Page Heading -->
-				<div
-					class="d-sm-flex align-items-center justify-content-between mb-4">
-					<h1 class="h3 mb-0 text-gray-800">수업목록</h1>
-				</div>
-
 
 				<!-- ///////탑바/////// -->
-				<div class="row bg-info">
-					 <select name="cat" class="form-control col-1">
-					
-					  </select>
-					<!-- 검색창  -->
-					<form
-						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-						<div class="input-group">
-							<input type="text" class="form-control bg-light border-0 small"
-								placeholder="Search for..." aria-label="Search"
-								aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="button">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-				<!-- /////// 탑바  끝   /////// -->
-				<!-- Begin Page Content -->
-				<div class="container-fluid">
+
+				<!-- Page Heading -->
+				<h1>수업목록</h1>
+				<br>
 
 					<div class="row">
-						<div class="col-lg-6">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div
-									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">드롭다운 카드</h6>
-									<div class="dropdown no-arrow">
-										<a class="dropdown-toggle" href="#" role="button"
-											id="dropdownMenuLink" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <i
-											class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-										</a>
-										<div
-											class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-											aria-labelledby="dropdownMenuLink">
-											<div class="dropdown-header">드롭다운 Header:</div>
-											<a class="dropdown-item" href="#">액션1</a> <a
-												class="dropdown-item" href="#">액션2</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="#">무언가</a>
-										</div>
-									</div>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									<div>
-										<img src="${cp }/resources/img/모찌.jpg">
-										<div id="classcontent">
-											심사대기 <br> 수강인원:0명 / 위시인원:0명
-										</div>
-									</div>
-
-
-									<div>
-										<a href="#" class="btn btn-success btn-icon-split"> <span
-											class="icon text-white-50"> <i class="fas fa-check"></i>
-										</span> <span class="text">심사완료</span>
-										</a> <a href="#" class="btn btn-danger btn-icon-split"> <span
-											class="icon text-white-50"> <i
-												class="fas fa-exclamation-triangle"></i>
-										</span> <span class="text">심사반려</span>
-										</a>
-
-
-									</div>
-								</div>
-							</div>
-
+						<div class="col-md-12 bg-light" style="text-align: right;">
+							<select class="form-control col-2" style="display: inline-block">
+								<option>11	</option>
+								<option>22	</option>
+							</select>
+							<form class="form-inline" style="display: inline-block">
+								<input class="form-control mr-sm-2" type="text" />
+								<button class="btn btn-primary my-2 my-sm-0" type="submit">
+									Search</button>
+							</form>
 						</div>
 					</div>
+					<hr style="border: solid 0.5px black;">
 
+
+
+
+
+			<!-- Begin Page Content -->
+
+			
+				<div class="row" style="width: 700px;">
+					<div class="col-md-12">
+						<div class="card">
+							<h5 class="card-header">수업제목</h5>
+							<div class="card-body" style="height:140px;">
+								<div style="display: inline-block;">
+									<img src="${cp }/resources/img/모찌.jpg"
+										style="width:100px; height: 100px; margin-top: -100px;">
+								</div>
+								<div style="display: inline-block">
+									<p>심사상태</p>
+									<p>신청인원:0명 / 위시인원:0명</p>
+									<a href="#" class="btn btn-success btn-icon-split"> <span
+										class="icon text-white-50"> <i class="fas fa-check"></i>
+									</span> <span class="text">심사완료</span>
+									</a> <a href="#" class="btn btn-danger btn-icon-split"> <span
+										class="icon text-white-50"> <i
+											class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!-- /.container-fluid -->
+			
 
-			</div>
-			<!-- End of Main Content -->
+			
 
 
+
+			<!-- /.container-fluid -->
 
 		</div>
-		<!-- End of Content Wrapper -->
+		<!-- End of Main Content -->
+
+
+
 
 	</div>
 	<!-- End of Page Wrapper -->
