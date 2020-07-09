@@ -8,6 +8,10 @@
 <link id="cp" data-contextPath="${cp}"/>
 
 <div class="classOpen">
+<form action="${cp}/class/enrollmentInsert" method="POST" enctype="multipart/form-data">
+        리포트 파일 : <input type="file" name="cert" /><br/>
+   <input type="submit" />
+</form>
 
 <div class="title_box">
 	<!-- Nav 부트스트랩 목록 -->
@@ -34,7 +38,7 @@
 	</div>
 </div>
 
-<form method="POST" action="${cp}/class/enrollmentInsert" enctype="multipart/form-data" id="frm-class">
+<form method="POST" enctype="multipart/form-data" id="frm-class">
 <!-- 선택된 페이지 출력 -->
 <div class="tab-content" id="pills-tabContent">
 	<!-- 01튜터 기본정보 입력 페이지 -->
@@ -44,10 +48,10 @@
         </div>
 		<div class="box">
 			<div class="title">
-				튜터번호<b class="pink">*</b>
+				튜터전화번호<b class="pink">*</b>
 			</div>
 			<div class="cont input-group col-5">
-				<input type="text" id="phone" name="phone" class="form-control" placeholder="개인연락처를 - 없이 입력해주세요."> 
+				<input type="text" id="phone" name="tutor_phone" class="form-control" placeholder="개인연락처를 - 없이 입력해주세요."> 
 			</div>
 		</div>
 
@@ -75,7 +79,7 @@
 			별명<b class="pink">*</b>
 		</div>
         <div class="input-group col-5">
-        	<input type="text" class="form-control" id="nickname" name="nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요.">
+        	<input type="text" class="form-control" id="nickname" name="tutor_nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요.">
         </div>
     </div>
 	<div class="box">
@@ -95,7 +99,7 @@
                     <div class="certificate_title">
                     	자격증
 	                    <font class="certificate_gray">
-	                   		 날짜/자격증/주관사 공인 확인 가능한 자격증 사본(최대 10개)
+	                   		 날짜/자격증/주관사 공인 확인 가능한 자격증 사본
 	                    </font>
                     </div>
                     <input type="hidden" name="deleteCert" id="deleteCert" value="">
@@ -129,7 +133,7 @@
         <div class="box">
         	<div class="title">수업등록지역<b class="pink">*</b></div>
         	<div class="cont">
-        		<input type="text" class="form-control col-4" id="address" placeholder="수업 대표지역을 검색해주세요.">
+        		<input type="text" class="form-control col-4" id="address" name="class_address" placeholder="수업 대표지역을 검색해주세요.">
 				<div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div>
         	</div>
         </div>
@@ -137,11 +141,11 @@
 		<div class="box">
 			<div class="title">수업카테고리<b class="pink">*</b></div>
 			<div class="cont row">
-				<select class="custom-select col-3" id="CateMain" name="CateMain" onchange="addSelect2(this.value)">
-					<option>수업 대표 카테고리를 선택해주세요</option>
+				<select class="custom-select col-3" id="CateMain" name="cateMain" onchange="addSelect2(this.value)">
+					<option value="1">수업 대표 카테고리를 선택해주세요</option>
 				</select>
-				<select class="custom-select col-3" id="CateSub" name="CateSub">				
-					<option>수업 대표 카테고리를 선택해주세요</option>
+				<select class="custom-select col-3" id="CateSub" name="scategory_num">				
+					<option value="1">수업 대표 카테고리를 선택해주세요</option>
 				</select>
 			</div>
 		</div>
@@ -149,8 +153,8 @@
 		<div class="title">수업형태<b class="pink">*</b></div>
 			<div class="cont">
 				<div class="rds">
-					<input type="hidden" value="0" name="classOption" id="classOption">
-					<!--classOption 0이면 원데이 / 1 이면 온라인-->
+					<input type="hidden" value="0" name="class_form" id="classOption">
+					<!--classOption 0이면 오프라인 / 1 이면 온라인-->
 					<div class="rd"><label id="classOption0" onclick="rd(0,0)" class="on"></label>오프라인 클래스</div>
 					<div class="rd"><label id="classOption1" onclick="rd(0,1)" class=""></label>온라인 수업</div>
 				</div>
@@ -173,8 +177,8 @@
 					<div class="rd"><label id="groupOption1" onclick="rd(1,1)" class=""></label>그룹수업</div>
 				</div>
 				<div class="inner2" style="display: block;" id="minmax">
-					<select class="custom-select col-3" id="MinPerson" name="MinPerson">
-						<option value="">최소인원수</option>
+					<select class="custom-select col-3" id="MinPerson" name="class_min">
+						<option value="1">최소인원수</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
@@ -199,9 +203,8 @@
 						<option value="50">50</option>
 					</select>
 					 명 ~ 
-					<select class="custom-select col-3" id="MaxPerson" name="MaxPerson">
-						<option value="">최대인원수</option>
-						<option value="2">2</option>
+					<select class="custom-select col-3" id="MaxPerson" name="class_max">
+						<option value="1">최대인원수</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
@@ -237,7 +240,7 @@
 			<div class="title">수업제목<b class="pink">*</b></div>
 			<div class="cont">
 				<div class="inner1">
-					<input type="text" class="form-control col-7" id="Title" name="Title"  placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요.">
+					<input type="text" class="form-control col-7" id="Title" name="class_title"  placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요.">
 				</div>
 			</div>
 		</div>
@@ -290,11 +293,11 @@
 			<div class="cont">
 				<div class="inner1" style="margin:0">
 					<div class="gray5 title">시간당 가격</div>
-					<input type="text" id="UnitPrice" name="UnitPrice" class="form-control col-4" placeholder="시간당 가격을 입력하세요" style="display: inline-block;">원
+					<input type="text" id="UnitPrice" name="class_price" class="form-control col-4" placeholder="시간당 가격을 입력하세요" style="display: inline-block;">원
 				</div>
 				<div class="inner1">
 					<div class="gray5 title">1회당 수업시간</div>
-					<select class="custom-select col-4" id="Time" name="Time">
+					<select class="custom-select col-4" id="Time" name="class_hour">
 						<option value="0">1회당 수업시간을 선택하세요</option>
 						<option value="1" >1시간</option>
 						<option value="2">2시간</option>
@@ -308,7 +311,7 @@
 				<div class="inner1">
 					<div class="gray5 title">총 수업횟수</div>			
 									
-						<select id="TotalTimes" name="TotalTimes" class="custom-select col-4">
+						<select id="TotalTimes" name="class_count" class="custom-select col-4">
 							<option value="0">총 수업횟수를 선택하세요</option>
 							<option value="1">1회</option>
 							<option value="2">2회</option>
@@ -353,7 +356,7 @@
 			<div class="title">튜터소개<b class="pink">*</b></div>
 			<div class="cont" style="padding-top:15px">
 				<div class="inner1">
-					<textarea class="basic len980 form-control" placeholder="수강생은 튜터님에 대해 많은 관심을 가지고 있습니다. TIP을 참고하여 최대한 자세히 소개를 해주세요." id="TutorInfo" name="TutorInfo"></textarea>
+					<textarea class="basic len980 form-control" placeholder="수강생은 튜터님에 대해 많은 관심을 가지고 있습니다. TIP을 참고하여 최대한 자세히 소개를 해주세요." id="TutorInfo" name="tutor_about"></textarea>
 				</div>
 			</div>
 		</div>	
@@ -361,7 +364,7 @@
 			<div class="title">수업소개<b class="pink">*</b></div>
 				<div class="cont">
 					<div class="inner1">
-						<textarea class="basic len980 form-control" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="Introduction" name="Introduction"></textarea>
+						<textarea class="basic len980 form-control" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="Introduction" name="class_about"></textarea>
 					</div>
 				</div>
 		</div>
@@ -369,7 +372,7 @@
 			<div class="title">수업대상<b class="pink">*</b></div>
 			<div class="cont">
 				<div class="inner1">
-					<textarea class="basic len980 form-control" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="Target" name="Target"></textarea>
+					<textarea class="basic len980 form-control" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="Target" name="class_target"></textarea>
 				</div>
 			</div>
 		</div>

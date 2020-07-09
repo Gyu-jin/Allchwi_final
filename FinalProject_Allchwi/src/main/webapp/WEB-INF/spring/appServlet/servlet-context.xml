@@ -11,12 +11,11 @@
 	<annotation-driven/>
 	
 	<!-- 파일 업로드 설정 -->
-	<beans:bean id="multipatResolver"
+	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 업로드 사이지 설정  -->
-		<beans:property name="maxUploadSize" value="5242880"/>
+		<beans:property name="maxUploadSize" value="5242880"></beans:property>
 	</beans:bean>
-	
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<!--///////////////////// tile 관련 설정 //////////////////// -->

@@ -21,7 +21,6 @@ $(function(){
     $(document).on('change','[input-file]',function (e) {
         var file = e.target.files[0];
         var targetId = $(this).attr('input-file');
-        alert(targetId);
         var reader = new FileReader();        
         reader.onload = function() {
             $('#' + targetId).attr('src', reader.result);
@@ -32,7 +31,6 @@ $(function(){
     
     
     $('#firstNext').on('click',function (e) {
-    	$('#frm-class').submit();
     	// contextPath 받기
         var cp = $('#cp').attr('data-contextPath');
         
@@ -94,14 +92,14 @@ $(function(){
         return true;
     });
     
-	// 다음 페이지로 이동 함수
-    function nextClassPage(e){
-    	$('#pills-tab li:nth-child('+ e +') a').relatedTarget;
-    	$('#pills-tab li:nth-child('+ e +') a').tab('show');
-    	$('#pills-tab li:nth-child('+ (e-1) +') a').css("pointer-events","auto");
-    }
 });
 
+// 다음 페이지로 이동 함수
+function nextClassPage(e){
+	$('#pills-tab li:nth-child('+ e +') a').relatedTarget;
+	$('#pills-tab li:nth-child('+ e +') a').tab('show');
+	$('#pills-tab li:nth-child('+ (e-1) +') a').css("pointer-events","auto");
+}
 
 //자격증 FileUpload
 
@@ -559,7 +557,7 @@ $(function(){
 						"</div>" +
 						"<div class='box'>" +
 						"<textarea class='basic len980 form-control' placeholder='커리큘럼을 입력해 주세요.' " +
-						"id='Curriculum"+ i +"' name='Curriculum"+ i +"'></textarea>"+
+						"id='Curriculum"+ i +"' name='curriculum'></textarea>"+
 						"</div></div>" 
 						);
 		}
@@ -617,8 +615,45 @@ $(function(){
 			$(eventLoc).addClass('on').focus();
 			return false;
 		}
-	
+		$('#frm-class').submit();
 		return false;
+	});
+	
+	$('#frm-class').submit(function (e) {
+		var cp = $('#cp').attr('data-contextPath');
+		var formData = new FormData(this);
+
+		var images = $('#fileList img');
+		
+		formData.append('ImageCnt', images.length);
+		
+		if(images.length < 1){
+			alert('커버 사진을 업로드 하세요');
+			return false;
+		}
+		for (var i = 0; i < images.length; i++) {
+			if(typeof  $(images[i]).data('fileData') == 'undefined')
+			{										
+				formData.append('images', $(images[i]).attr("src"));									
+			}
+			else
+			{										
+				formData.append('images', $(images[i]).data('fileData'));
+			}
+		}
+
+
+		$.ajax({
+			type: 'POST',
+			url: cp +'/class/enrollmentInsert',
+			contentType: false,
+			data: formData,
+			processData: false,
+			success: function (response) {
+				alert("완료");
+			},
+		});
+		
 	});
 });
 
