@@ -20,4 +20,9 @@ public class MemberLoginService {
 	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {
 		return mld.checkPwd(hm);
 	}
+	//현재 비밀번호, 아이디로 비밀번호 업데이트
+	public int changePwd(HashMap<String, Object> hm) {
+		return mld.changePwd(hm);
+	}
+	
 }

@@ -54,9 +54,16 @@ public class ChangePwdController {
 	
 	//비밀번호 변경 처리후 메인페이지로 리다이렉트
 	@PostMapping("/mypage/changePwd")
-	public String changePassword(MemberLoginVO mlv) {
-		
-		
-		return "redirect:/";
+	public String changePassword(MemberLoginVO mlv, String currPwd) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("id", mlv.getId());
+		hm.put("pwd", mlv.getPwd());
+		hm.put("prevPwd", currPwd);
+		int result = mls.changePwd(hm);
+		if(result > 0) {
+			return "redirect:/";			
+		} else {
+			return ".mypage.changePwd";
+		}
 	}
 }

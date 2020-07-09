@@ -21,7 +21,7 @@
 	</select>
 	<!--4 현재 비밀번호 변경 -->
 	<update id="changePwd" parameterType="hashmap">
-		update member_login set pwd = #{pwd} where id = #{id}
+		update member_login set pwd = #{pwd} where id = #{id} and pwd = #{prevPwd}
 	</update>
 </mapper>
 

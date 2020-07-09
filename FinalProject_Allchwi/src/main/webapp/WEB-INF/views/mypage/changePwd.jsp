@@ -21,7 +21,7 @@
 							<b>·</b>&nbsp;현재 비밀번호
 						</div>
 						<div class="right_box">
-							<input type="password" id="currPwd" onblur="checkPwd()"
+							<input type="password" id="currPwd" onblur="checkPwd()" name="currPwd"
 								class="form-control" placeholder="현재 비밀번호">
 							<span id="cpMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>

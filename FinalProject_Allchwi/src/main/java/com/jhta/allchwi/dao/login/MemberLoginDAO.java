@@ -29,4 +29,8 @@ public class MemberLoginDAO {
 	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {
 		return session.selectOne(NAMESPACE + ".checkPwd", hm);
 	}
+	//4 id, 이전pwd값으로 회원 비밀번호 업데이트
+	public int changePwd(HashMap<String, Object> hm) {
+		return session.update(NAMESPACE + ".changePwd", hm);
+	}
 }
