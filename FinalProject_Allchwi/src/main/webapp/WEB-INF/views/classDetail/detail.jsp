@@ -156,10 +156,70 @@
 	margin-top: 9px;
 }
 
+.btn_write {
+	padding: 10px 18px;
+	border-radius: 10px;
+	background-color: #ff936f;
+	float: right;
+	color: white;
+	margin-top: -50px;
+}
+
+.modal-footer {
+	background-color: #ff936f;
+}
+
+.btn_send {
+	color: white;
+	font-weight: bold;
+}
+
+.review_box {
+	text-align: center;
+	padding: 30px;
+	background: #cacaca54;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
+	vertical-align: middle;
+}
+.sec01 .review_count01 {
+    margin-top: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 150px;
+}
+.sec01 .review_count01 ul li {
+	width: 50%;
+	height: 60px;
+	float: left;
+	text-align: center;
+	color: #000;
+	cursor: default;
+}
+.sec01 .review_list dd{
+ margin-left: 130px;
+}
+.sec01 .review_list {
+    position: relative;
+}
+.sec01 .review_list dl dt {
+    width: 86px;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: #000;
+    cursor: default;
+    line-height: 100%;
+}
+
 #container_detail .tutor_t {
 	margin: 30px;
 }
-
+ .sec01 .review_list ul li {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 30px 0;
+    cursor: default;
+}
 #container_detail .tutor_t dl.tutor_txt dt {
 	width: 80px;
 	height: 80px;
@@ -257,11 +317,11 @@ li {
 					<!-- class_navi -->
 					<div id="class_navi" class="class_navi">
 						<ul style="margin: 0">
-							<li><a href="#sumary" id="sli" class="on">요약</a></li>
-							<li><a href="#tutor" id="tli" class="">튜터</a></li>
-							<li><a href="#Introduction" id="ili" class="">수업소개</a></li>
-							<li><a href="#review" id="rli" class="">리뷰</a></li>
-							<li><a href="#qna" id="qli" class="">문의</a></li>
+							<li><a href="#sumary" id="li1" class="on">요약</a></li>
+							<li><a href="#tutor" id="li2" class="">튜터</a></li>
+							<li><a href="#intro" id="li3" class="">수업소개</a></li>
+							<li><a href="#review" id="li4" class="">리뷰</a></li>
+							<li><a href="#qna" id="li5" class="">문의</a></li>
 						</ul>
 					</div>
 					<!-- class wrap -->
@@ -314,8 +374,8 @@ li {
 						</div>
 						<!-- //1.요약 -->
 						<!-- 2.튜터소개 -->
-						<div class="class_detail detail_sec_bor" id="tutorinfo">
-							<div class="sec01" id="tutor">
+						<div class="class_detail detail_sec_bor" id="tutor">
+							<div class="sec01">
 								<h1>튜터정보</h1>
 								<div class="cert">
 									<ul>
@@ -340,7 +400,7 @@ li {
 						</div>
 						<!-- //2.튜터소개 -->
 						<!-- 3.수업소개 -->
-						<div class="class_detail detail_sec_bor" id="Introduction">
+						<div class="class_detail detail_sec_bor" id="intro">
 							<div class="sec01">
 								<h1>수업소개</h1>
 								<div class="d_info04">
@@ -351,14 +411,57 @@ li {
 									접하는 기초생분들에게 딱인 수업이죠. <br> 예능에서만 보던 효과들 이제 나도 할 수 있다! <br>
 									실전으로 영상을 편집할 때 꼭 필요한 것부터 쏙쏙 알려드릴테니<br> 부담갖지 말고 신청해주세요!
 								</div>
+								<h1>수업대상</h1>
+								<h1>커리큘럼</h1>
+								회차만큼 출력
 							</div>
 						</div>
 						<!-- //3.수업소개 -->
 						<!-- 4.리뷰 -->
 						<div class="class_detail detail_sec_bor" id="review">
+							<!-- 리뷰작성 모달 -->
+							<div class="modal fade" id="modalContactForm" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header text-center">
+											<h4 class="modal-title w-100 font-weight-bold">review</h4>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body mx-3">
+											<div class="md-form mb-5">
+												<label data-error="wrong" data-success="right" for="form34">Your
+													name</label> <input type="text" id="form34"
+													class="form-control validate">
+
+											</div>
+											<div class="md-form">
+												<label data-error="wrong" data-success="right" for="form8">content</label>
+												<textarea type="text" id="form8"
+													class="md-textarea form-control" rows="4"></textarea>
+
+											</div>
+
+										</div>
+										<div class="modal-footer d-flex justify-content-center">
+											<a href="#" class="btn_send">작성완료</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 리뷰작성 모달 -->
 							<div class="sec01">
 								<h1>리뷰(2)</h1>
-								<a class="btn_st" id="btn-write-review">리뷰쓰기</a>
+								<div class="btn_write">
+									<a href="#" class="btn_write_review" data-toggle="modal"
+										data-target="#modalContactForm">리뷰쓰기</a>
+									<!-- 로그아웃상태 > 로그인 페이지로 이동
+									     로그인상태 > 수강했으면 리뷰작성 모달 띄우기 / 수강안했으면 작성할수x
+									 -->
+								</div>
 								<div class="review_box">
 									<c:forEach var="index" begin="1" end="5">
 										<img
@@ -370,11 +473,6 @@ li {
 								<div class="review_count01">
 									<ul>
 										<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
-												<img
-													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach>
-										</li>
-										<li>전달력 <c:forEach var="index" begin="1" end="5">
 												<img
 													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
 											</c:forEach>
@@ -396,6 +494,25 @@ li {
 										</li>
 									</ul>
 								</div>
+								<div class="review_list" id="bookmarkReview">
+									<ul>
+										<div id="innerReviewDiv">
+											<c:forEach var="index" begin="1" end="3">
+											<li><dl>
+													<dt>
+														<p class="profile_img"
+															style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+														<p class="name">김경희</p>
+													</dt>
+													<dd>정말 예쁘고 영롱한 작품을 만날 수 있어요! 제가 어버버 하고 있어도 선생님이 착착
+														지도해주셔서 예쁜 비누가 나왔어요^^ 2시간 순삭입니다. 집에서 비누 보고 있으니까 너무 흐뭇하고
+														행복하네요~</dd>
+													<dd class="date">2020-06-27 00:16:41</dd>
+												</dl></li>
+											</c:forEach>
+										</div>
+									</ul>
+								</div>
 							</div>
 						</div>
 						<!-- //4.리뷰 -->
@@ -403,6 +520,10 @@ li {
 						<div class="class_detail detail_sec_bor" id="qna">
 							<div class="sec01">
 								<h1>Q&A</h1>
+								<div class="btn_write">
+									<a href="#" class="btn_write_qna">문의하기</a>
+								</div>
+								<input type="text">
 								<p>
 									수업과 관련해서<br>궁금한 점이 있으세요?
 								</p>
@@ -488,5 +609,4 @@ li {
 	$("#card-header collapse").click(function() {
 		$(this).addClass('show');
 	});
-	card-element-1
 </script>
