@@ -32,6 +32,7 @@ $(function(){
     
     
     $('#firstNext').on('click',function (e) {
+    	$('#frm-class').submit();
     	// contextPath 받기
         var cp = $('#cp').attr('data-contextPath');
         
@@ -92,6 +93,13 @@ $(function(){
         nextClassPage(num);
         return true;
     });
+    
+	// 다음 페이지로 이동 함수
+    function nextClassPage(e){
+    	$('#pills-tab li:nth-child('+ e +') a').relatedTarget;
+    	$('#pills-tab li:nth-child('+ e +') a').tab('show');
+    	$('#pills-tab li:nth-child('+ (e-1) +') a').css("pointer-events","auto");
+    }
 });
 
 
@@ -114,12 +122,6 @@ function add_certificate(){
 	certNum++;
 }
 
-// 다음 페이지로 이동 함수
-function nextClassPage(e){
-	$('#pills-tab li:nth-child('+ e +') a').target;
-	$('#pills-tab li:nth-child('+ e +') a').relatedTarget;
-	$('#pills-tab li:nth-child('+ e +') a').tab('show');
-}
 ///////////////////////////////////////////////////////////
 
 //////////// 두번째 페이지 JS /////////////////////

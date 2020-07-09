@@ -15,26 +15,26 @@
 	<div class="steps">
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" id="pills-home-tab" data-toggle="pill"
-					href="#pills-info" role="tab" aria-selected="true">01기본정보</a>
+				<a class="nav-link active" id="pills-home-tab" data-toggle="pill" 
+					href="#pills-info" role="tab" aria-selected="true" style="pointer-events: none; ">01기본정보</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-title"
-					role="tab" aria-selected="false">02제목/이미지</a>
+					role="tab" aria-selected="false" style="pointer-events: none; ">02제목/이미지</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-price"
-					role="tab" aria-selected="false">03가격</a>
+					role="tab" aria-selected="false" style="pointer-events: none; ">03가격</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-class"
-					role="tab" aria-selected="false">04수업</a>
+					role="tab" aria-selected="false" style="pointer-events: none; ">04수업</a>
 			</li>
 		</ul>
 	</div>
 </div>
 
-<form>
+<form method="POST" action="${cp}/class/enrollmentInsert" enctype="multipart/form-data" id="frm-class">
 <!-- 선택된 페이지 출력 -->
 <div class="tab-content" id="pills-tabContent">
 	<!-- 01튜터 기본정보 입력 페이지 -->
@@ -383,5 +383,5 @@
 		</div>
 	</div>
 </div>
-</div>
 </form>
+</div>

@@ -9,8 +9,15 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<annotation-driven/>
-	<resources mapping="/resources/**" location="/resources/" />
 	
+	<!-- 파일 업로드 설정 -->
+	<beans:bean id="multipatResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업로드 사이지 설정  -->
+		<beans:property name="maxUploadSize" value="5242880"/>
+	</beans:bean>
+	
+	<resources mapping="/resources/**" location="/resources/" />
 	
 	<!--///////////////////// tile 관련 설정 //////////////////// -->
 	<!-- 설정파일 읽어오는 설정. -->
