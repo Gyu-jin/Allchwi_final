@@ -7,49 +7,48 @@
 	<div class="pw_cont02">
 		<div class="box1">
 			<div class="title_box">
-				<div class="left">비밀번호 재설정</div>
+				<div class="left">회원 탈퇴</div>
 			</div>
-			<form action="${cp}/mypage/changePwd" method="POST" id="changePwd" onsubmit="return buttonUp()">
+			<form action="#" method="POST" id="signout" onsubmit="return buttonUp()">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
 					<input type="hidden" id="mb_num" name="mb_num"
 						class="form-control" value="#">
+					<!-- id value값은 나중에 받아올수 있도록 변경 -->
 					<input type="hidden" id="id" name="id"
 						class="form-control" value="test111@naver.com">
 					<div class="input_box">
 						<div class="left_box">
-							<b>·</b>&nbsp;현재 비밀번호
+							<b>·</b>&nbsp;아이디
+						</div>
+						<!-- 나중에 값 받아서 넣기 -->
+						<div class="right_box">
+							test111@naver.com
+						</div>
+					</div>
+					<div class="input_box">
+						<div class="left_box">
+							<b>·</b>&nbsp;비밀번호
 						</div>
 						<div class="right_box">
 							<input type="password" id="currPwd" onblur="checkPwd()" name="currPwd"
-								class="form-control" placeholder="현재 비밀번호">
+								class="form-control" placeholder="비밀번호를 입력해주세요.">
 							<span id="cpMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
 					<div class="input_box">
 						<div class="left_box">
-							<b>·</b>&nbsp;새 비밀번호
 						</div>
 						<div class="right_box">
-							<input type="password" id="inPwd" name="pwd" onblur="pwdValidation()"
-								class="form-control" placeholder="새 비밀번호" disabled="disabled">
-								<span id="ipMsg" style="font-size: 15px; padding-left: 14px;"></span>
-						</div>
-					</div>
-					<div class="input_box">
-						<div class="left_box">
-							<b>·</b>&nbsp;비밀번호 확인
-						</div>
-						<div class="right_box">
-							<input type="password" id="cfmPwd"  onblur="pwdDCheck()"
-								class="form-control" placeholder="비밀번호 확인" disabled="disabled">
-								<span id="cfpMsg" style="font-size: 15px; padding-left: 14px;"></span>
+							<textarea class="form-control" name="feedback" 
+								placeholder="서비스 탈퇴 사유에 대해 알려주세요. 고객님의 소중한 피드백을 담아 더 나은 서비스로 보답 드리도록 하겠습니다.">
+							</textarea>
 						</div>
 					</div>
 				</div>
 				<div class="foot_box">
 					<input type="submit" class="btn btn-danger btn-lg" id="btn"
-					value="비밀번호 변경" onsubmit="return buttonUp()" disabled="disabled">
+					value="탈퇴 신청" onsubmit="return buttonUp()" disabled="disabled">
 				</div>
 			</form>
 		</div>
