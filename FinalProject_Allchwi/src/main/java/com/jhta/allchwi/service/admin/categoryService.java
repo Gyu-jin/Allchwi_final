@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jhta.allchwi.dao.admin.categoryDao;
 import com.jhta.allchwi.vo.admin.big_categoryVo;
 import com.jhta.allchwi.vo.admin.bigsmall_categoryVo;
+import com.jhta.allchwi.vo.admin.manage_classVo;
 import com.jhta.allchwi.vo.admin.small_categoryVo;
 
 @Service
@@ -40,6 +41,7 @@ public class categoryService {
 	public int del_bcate(int bcategory_num) {
 		return dao.del_bcate(bcategory_num);
 	}
+	
 	
 	
 }

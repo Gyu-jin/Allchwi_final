@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.admin.big_categoryVo;
 import com.jhta.allchwi.vo.admin.bigsmall_categoryVo;
+import com.jhta.allchwi.vo.admin.manage_classVo;
 import com.jhta.allchwi.vo.admin.small_categoryVo;
 
 @Repository
@@ -41,7 +42,4 @@ public class categoryDao {
 	public int del_bcate(int bcategory_num) {
 		return session.delete(NAMESPACE+".del_bcate", bcategory_num);
 	}
-	
-	
-	
 }

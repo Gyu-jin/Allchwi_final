@@ -7,7 +7,7 @@
 		insert into big_category values(null,#{bcategory_name})
 	</insert>
 	
-	
+
 	<insert id="scate_insert" parameterType="small_category">
 		insert into small_category values(null,#{bcategory_num},#{scategory_name})
 	</insert>
@@ -29,9 +29,6 @@
 	<delete id="del_bcate" parameterType="int">
 		delete from big_category where bcategory_num=#{bcategory_num}
 	</delete>
-	
-	
-	
 </mapper>
 
 

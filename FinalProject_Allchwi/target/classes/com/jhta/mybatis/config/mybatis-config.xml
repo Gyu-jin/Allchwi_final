@@ -15,7 +15,11 @@
 	</typeAliases>
 
 	<mappers>
+		<!-- admin관련 Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/AdminCategoryMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/AdminManageClassMapper.xml"/>
+		
+		
 		<!-- Login관련 Mapper 경로 -->
 		<mapper resource="com/jhta/mybatis/mapper/MemberLoginMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/MemberInfoMapper.xml"/>
