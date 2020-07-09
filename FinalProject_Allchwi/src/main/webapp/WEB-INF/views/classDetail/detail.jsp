@@ -155,6 +155,7 @@
 	color: white;
 	margin-top: 9px;
 }
+
 #container_detail .tutor_t {
 	margin: 30px;
 }
@@ -179,21 +180,23 @@
 	color: #666;
 	letter-spacing: 0;
 }
+
 #container_detail .tutor_t dl.tutor_txt dd:after {
-    right: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    position: absolute;
-    border-right-color: lightgray;
-    border-width: 10px;
-    margin-top: -10px;
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	position: absolute;
+	border-right-color: lightgray;
+	border-width: 10px;
+	margin-top: -10px;
 }
+
 .btn_pay {
 	display: inline-block;
 	padding: 10px 0 10px 0;
-    width: 407px;
-    text-align: center;
+	width: 407px;
+	text-align: center;
 	border-radius: 10px;
 	background-color: #7185bb;
 	font-size: 30px;
@@ -463,20 +466,21 @@ li {
 </div>
 <script>
 	var navOffset = $('.class_navi').offset();
-	var remoteOffset = $('.remote').offset();
 	$(window).scroll(function() {
 		if ($(document).scrollTop() > navOffset.top) {
 			$('.class_navi').addClass('active');
 		} else {
 			$('.class_navi').removeClass('active');
 		}
+	});
+	var remoteOffset = $('.remote').offset();
+	$(window).scroll(function() {
 		if ($(document).scrollTop() > remoteOffset.top) {
 			$('.remote').addClass('active');
 		} else {
 			$('.remote').removeClass('active');
 		}
 	});
-	
 	$("#class_navi a").click(function() {
 		$(this).addClass('on');
 		$("#class_navi a").not(this).removeClass('on');
