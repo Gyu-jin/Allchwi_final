@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
-<link rel="stylesheet" href="/allchwi/resources/css/mypage/changePwdForm.css">
+<link rel="stylesheet" href="/allchwi/resources/css/mypage/signoutForm.css">
 <div class="container">
 	<div class="pw_cont02">
 		<div class="box1">
@@ -22,8 +22,8 @@
 							<b>·</b>&nbsp;아이디
 						</div>
 						<!-- 나중에 값 받아서 넣기 -->
-						<div class="right_box">
-							test111@naver.com
+						<div class="right_box" id="maildiv">
+									test111@naver.com	
 						</div>
 					</div>
 					<div class="input_box">
@@ -40,7 +40,7 @@
 						<div class="left_box">
 						</div>
 						<div class="right_box">
-							<textarea class="form-control" name="feedback" 
+							<textarea class="form-control" name="feedback" id="feedback"
 								placeholder="서비스 탈퇴 사유에 대해 알려주세요. 고객님의 소중한 피드백을 담아 더 나은 서비스로 보답 드리도록 하겠습니다.">
 							</textarea>
 						</div>
