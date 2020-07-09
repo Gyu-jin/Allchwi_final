@@ -20,7 +20,8 @@ public class LoginJoinController {
 	public String goJoin() {
 		return ".login.join";
 	}
-
+	
+	//ajax로 아이디 중복확인
 	@RequestMapping(value = "/CheckID.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String idCheck(String id) {
@@ -39,11 +40,5 @@ public class LoginJoinController {
 		}
 		// json 형태로 나타냄
 		return json.toString();
-	}
-	
-	//0 비밀번호찾기 페이지 이동
-	@GetMapping("/login/searchPwd")
-	public String goSearchPwd() {
-		return ".login.searchPwd";
 	}
 }

@@ -25,4 +25,8 @@ public class MemberLoginDAO {
 	public int searchPwd(HashMap<String, Object> hm) {
 		return session.update(NAMESPACE + ".searchPwd", hm);
 	}
+	//3 id, pwd값으로 회원 비밀번호 일치 여부 확인
+	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {
+		return session.selectOne(NAMESPACE + ".checkPwd", hm);
+	}
 }

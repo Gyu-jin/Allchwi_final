@@ -98,11 +98,23 @@
 			<div class="title_box">
 				<div class="left">비밀번호 재설정</div>
 			</div>
-			<form action="#" method="POST" id="resetPwd">
+			<form action="#" method="POST" id="changePwd" onsubmit="return ">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
 					<input type="hidden" id="mb_num" name="mb_num"
 						class="form-control" value="#">
+					<input type="hidden" id="id" name="id"
+						class="form-control" value="#">
+					<div class="input_box">
+						<div class="left_box">
+							<b>·</b>&nbsp;현재 비밀번호
+						</div>
+						<div class="right_box">
+							<input type="password" id="currPwd"
+								class="form-control" placeholder="현재 비밀번호">
+							<span id="cpMsg" style="font-size: 16px; color: red; padding-left: 14px;">비밀번호가 일치하지 않습니다.</span>
+						</div>
+					</div>
 					<div class="input_box">
 						<div class="left_box">
 							<b>·</b>&nbsp;새 비밀번호
@@ -110,6 +122,7 @@
 						<div class="right_box">
 							<input type="password" id="inPwd"
 								class="form-control" placeholder="새 비밀번호">
+								<span id="ipMsg" style="font-size: 16px; color: red; padding-left: 14px;">비밀번호형식이 맞지 않습니다.</span>
 						</div>
 					</div>
 					<div class="input_box">
@@ -119,6 +132,7 @@
 						<div class="right_box">
 							<input type="password" id="cfmPwd" name="password"
 								class="form-control" placeholder="비밀번호 확인">
+								<span id="cfpMsg" style="font-size: 16px; color: red; padding-left: 14px;">새 비밀번호와 일치하지 않습니다.</span>
 						</div>
 					</div>
 				</div>
@@ -131,4 +145,5 @@
 </div>
 <script type="text/javascript">
 <!-- a 기존비밀번호와 달라야함.(ajax사용) / 자리수 8이상, 10자리 이내, 영문 숫자 특문 조합 / -->
+
 </script>

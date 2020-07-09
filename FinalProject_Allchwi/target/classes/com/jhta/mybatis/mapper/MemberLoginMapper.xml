@@ -15,6 +15,10 @@
 	<update id="searchPwd" parameterType="hashmap">
 		update Member_login set pwd = #{pwd} where id = #{id}
 	</update>
+	<!--3 현재 비밀번호  확인-->
+	<select id="checkPwd" resultType="mlv" parameterType="hashmap">
+		select * from Member_login where id = #{id} and pwd = #{pwd}
+	</select>
 </mapper>
 
 
