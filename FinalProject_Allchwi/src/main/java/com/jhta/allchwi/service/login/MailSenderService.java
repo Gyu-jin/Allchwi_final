@@ -83,7 +83,9 @@ public class MailSenderService {
 				mail.setSubject("[비밀번호 재발급] Allchwi 임시비밀번호 메일입니다", "utf-8");
 				//내용
 				mail.setText(htmlStr, "utf-8", "html");
+				//입력한 메일주소로 이메일 보낼 주소 지정
 				mail.addRecipient(RecipientType.TO, new InternetAddress(sendEmail));
+				//메일 보내기
 				mailSender.send(mail);
 			} catch (MessagingException e) {
 				e.printStackTrace();

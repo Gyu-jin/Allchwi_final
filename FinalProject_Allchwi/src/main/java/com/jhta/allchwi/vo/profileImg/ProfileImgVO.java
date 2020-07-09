@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.login;
+package com.jhta.allchwi.vo.profileImg;
 
 import java.sql.Blob;
 

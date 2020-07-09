@@ -2,117 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
-<style>
-.pw_cont02 {
-	width: 100%;
-	min-width: 1200px;
-	height: 600px;
-	padding-top: 30px;
-}
-
-.pw_cont02 .box1 {
-	width: 1020px;
-	height: 420px;
-	border: 1px solid #ccc;
-	background-color: #ffffff;
-	margin: 0 auto;
-	margin-top: 50px;
-}
-
-.pw_cont02 .box1 .title_box {
-	width: 100%;
-	height: 90px;
-	padding-top: 30px;
-	border-bottom: 1px solid #ccc;
-	letter-spacing: 1px;
-	color: black;
-}
-
-.pw_cont02 .box1 .title_box .left {
-	width: 80%;
-	height: 50px;
-	float: left;
-	padding-left: 50px;
-	font-size: 20px;
-	font-weight: 800;
-}
-
-.pw_cont02 .box1 .main_box {
-	width: 50%;
-	margin: 0 auto;
-	margin-top: 20px;
-	padding-top: 10px;
-}
-
-.pw_cont02 .box1 .main_box .input_box {
-	width: 90%;
-	height: 40px;
-	margin: 0 auto;
-	margin-top: 20px;
-}
-
-.pw_cont02 .box1 .main_box .input_box .left_box {
-	width: 27%;
-	float: left;
-	margin-top: 10px;
-	font-size: 14px;
-	font-weight: 600;
-	color: black;
-	letter-spacing: 1px;
-}
-
-.pw_cont02 .box1 .main_box .input_box .right_box {
-	width: 65%;
-	float: left;
-	font-size: 13px;
-	font-weight: 600;
-	color: black;
-	letter-spacing: 1px;
-}
-/*
-.pw_cont02 .box1 .main_box .input_box .right_box .pw_blank {
-	width: 95%;
-	height: 30px;
-	background-color: rgba(241, 241, 241, 0.43);
-	padding-left: 5%;
-	border: 1px solid #999;
-	font-size: 16px;
-	font-weight: 600;
-	border-radius: 7px;
-}
-*/
-
-.pw_cont02 .box1 .foot_box {
-	width: 50%;
-	margin: 0 auto;
-	text-align: center;
-	margin-top: 50px;
-}
-.foot_box input{
-	width: 200px;
-}
-</style>
+<link rel="stylesheet" href="/allchwi/resources/css/mypage/changePwdForm.css">
 <div class="container">
 	<div class="pw_cont02">
 		<div class="box1">
 			<div class="title_box">
 				<div class="left">비밀번호 재설정</div>
 			</div>
-			<form action="#" method="POST" id="changePwd" onsubmit="return ">
+			<form action="${cp}/mypage/changePwd" method="POST" id="changePwd" onsubmit="return ">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
 					<input type="hidden" id="mb_num" name="mb_num"
 						class="form-control" value="#">
 					<input type="hidden" id="id" name="id"
-						class="form-control" value="#">
+						class="form-control" value="test111@naver.com">
 					<div class="input_box">
 						<div class="left_box">
 							<b>·</b>&nbsp;현재 비밀번호
 						</div>
 						<div class="right_box">
-							<input type="password" id="currPwd"
+							<input type="password" id="currPwd" onblur="checkPwd()"
 								class="form-control" placeholder="현재 비밀번호">
-							<span id="cpMsg" style="font-size: 16px; color: red; padding-left: 14px;">비밀번호가 일치하지 않습니다.</span>
+							<span id="cpMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
 					<div class="input_box">
@@ -120,9 +31,9 @@
 							<b>·</b>&nbsp;새 비밀번호
 						</div>
 						<div class="right_box">
-							<input type="password" id="inPwd"
-								class="form-control" placeholder="새 비밀번호">
-								<span id="ipMsg" style="font-size: 16px; color: red; padding-left: 14px;">비밀번호형식이 맞지 않습니다.</span>
+							<input type="password" id="inPwd" name="pwd" onblur="pwdValidation()"
+								class="form-control" placeholder="새 비밀번호" disabled="disabled">
+								<span id="ipMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
 					<div class="input_box">
@@ -130,20 +41,111 @@
 							<b>·</b>&nbsp;비밀번호 확인
 						</div>
 						<div class="right_box">
-							<input type="password" id="cfmPwd" name="password"
-								class="form-control" placeholder="비밀번호 확인">
-								<span id="cfpMsg" style="font-size: 16px; color: red; padding-left: 14px;">새 비밀번호와 일치하지 않습니다.</span>
+							<input type="password" id="cfmPwd"  onblur="pwdDCheck()"
+								class="form-control" placeholder="비밀번호 확인" disabled="disabled">
+								<span id="cfpMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
 				</div>
 				<div class="foot_box">
-					<input type="submit" class="btn btn-danger btn-lg" value="비밀번호 변경">
+					<input type="submit" class="btn btn-danger btn-lg" id="btn"
+					value="비밀번호 변경" onsubmit="return buttonUp()" disabled="disabled">
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-<!-- a 기존비밀번호와 달라야함.(ajax사용) / 자리수 8이상, 10자리 이내, 영문 숫자 특문 조합 / -->
-
+//모든 값이 입력되었을때 데이터를 보내기 위한 변수 선언
+var curBl = false;
+var inBl = false;
+var cfmBl = false;
+//현재 비밀번호와 일치하는지 확인(ajax사용) 
+function checkPwd(){
+	//검색을 위한 조건 값을 받아옴
+	let id = $("#id").val();
+	let pwd = $("#currPwd").val();
+	let cpMsg = $("#cpMsg");
+	let inPwd = $("#inPwd");
+	let cfmPwd = $("#cfmPwd");
+	$.getJSON("${cp}/CheckPWD.do",
+		{id : id, pwd : pwd},
+		function(data){
+			if(data.code == 'success'){
+				cpMsg.css('color','green');
+				cpMsg.html("비밀번호가 일치합니다.");
+				inPwd.removeAttr('disabled');
+				cfmPwd.removeAttr('disabled');
+				curBl = true;
+				buttonUp();
+			} else {
+				cpMsg.css('color','red');
+				cpMsg.html("비밀번호가 일치하지 않습니다.");
+				inPwd.attr("disabled",true);
+				cfmPwd.attr("disabled",true);
+				curBl = false;
+			}
+	});
+}
+//비밀번호 유효성 검사
+function pwdValidation() {
+	let pwd = $("#inPwd").val();
+	let prevPwd = $("#currPwd").val();
+	let ipMsg = $("#ipMsg");
+	// 특문 + 숫자 + 영문
+	var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+	if(!regExpPwd.test(pwd)) {
+		ipMsg.css('color','red');
+		ipMsg.html("영문+숫자+특수문자를 조합해주세요.");
+		inBl = false;
+	} else if (pwd.length < 8) {
+		ipMsg.css('color','red');
+		ipMsg.html("8자리 이상 입력해주세요.");
+		inBl = false;
+	} else if (pwd.length > 10) {
+		ipMsg.css('color','red');
+		ipMsg.html("10자리 이내로 입력해주세요.");
+		inBl = false;
+	} else if(pwd === prevPwd){
+		ipMsg.css('color','red');
+		ipMsg.html("사용불가(전 비밀번호와 일치)");
+		inBl = false;
+	} else {
+		ipMsg.css('color','green');
+		ipMsg.html("사용가능한 비밀번호입니다.");
+		inBl = true;
+		buttonUp();
+	}
+}
+//비밀번호 확인 유효성 검사
+function pwdDCheck() {
+	let pwd = $("#inPwd").val();
+	let pwd1 = $("#cfmPwd").val();
+	let cfpMsg = $("#cfpMsg");
+	if(pwd1 === "") {
+		cfpMsg.css('color','red');
+		cfpMsg.html("비밀번호를 재입력해주세요.");
+		cfmBl = false;
+	} else if (pwd !== pwd1) {
+		cfpMsg.css('color','red');
+		cfpMsg.html("비밀번호가 일치하지 않습니다.");
+		cfmBl = false;
+	} else {
+		cfpMsg.css('color','green');
+		cfpMsg.html("비밀번호가 일치합니다.");
+		cfmBl = true;
+		buttonUp();
+	}
+}
+//버튼 활성화 함수 -> submit, 클릭 
+function buttonUp() {
+	let btn = $("#btn");
+	if(curBl && inBl && cfmBl) {
+		btn.removeAttr('disabled');
+		return true;
+	} else {
+		btn.attr('disabled', true);
+		return false;
+	}
+}
 </script>

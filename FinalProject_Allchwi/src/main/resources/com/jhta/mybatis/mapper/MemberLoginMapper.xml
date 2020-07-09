@@ -5,20 +5,24 @@
 <mapper namespace="com.jhta.mybatis.mapper.MemberLoginMapper">
 	<!--0 로그인번호, 아이디, 비밀번호, 튜터여부, 탈퇴여부, 등록일, 이메일 인증 -->
 	<insert id="member_join" parameterType="mlv">
-		insert into Member_login(0, #{id}, #{pwd}, 0, 0, now(), 0)
+		insert into member_login(0, #{id}, #{pwd}, 0, 0, now(), 0)
 	</insert>
 	<!--1 아이디 검사  -->
 	<select id="idCheck" resultType="mlv" parameterType="String">
-		select * from Member_login where id = #{id}
+		select * from member_login where id = #{id}
 	</select>
 	<!--2 비밀번호 변경 -->
 	<update id="searchPwd" parameterType="hashmap">
-		update Member_login set pwd = #{pwd} where id = #{id}
+		update member_login set pwd = #{pwd} where id = #{id}
 	</update>
 	<!--3 현재 비밀번호  확인-->
 	<select id="checkPwd" resultType="mlv" parameterType="hashmap">
-		select * from Member_login where id = #{id} and pwd = #{pwd}
+		select * from member_login where id = #{id} and pwd = #{pwd}
 	</select>
+	<!--4 현재 비밀번호 변경 -->
+	<update id="changePwd" parameterType="hashmap">
+		update member_login set pwd = #{pwd} where id = #{id}
+	</update>
 </mapper>
 
 
