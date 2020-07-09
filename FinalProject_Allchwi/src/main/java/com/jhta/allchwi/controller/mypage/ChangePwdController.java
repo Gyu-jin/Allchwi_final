@@ -61,9 +61,11 @@ public class ChangePwdController {
 		hm.put("prevPwd", currPwd);
 		int result = mls.changePwd(hm);
 		if(result > 0) {
+			//완료될 경우 메인으로 
 			return "redirect:/";			
 		} else {
-			return ".mypage.changePwd";
+			//실패시 에러 페이지로 이동
+			return ".error.error";
 		}
 	}
 }
