@@ -158,28 +158,27 @@ div {
     border-color: #ff936f;
 }
 
-.label-1 {
-	display: inline-flex;
+.label-1, .label-12, .label-1-content {
 	padding-top: 15px;
 	padding-bottom: 15px;
-	float: left;
 	width: 150px;
 	font-size: 16px;
 	color: #333;
 	letter-spacing: -0.4px;
 	font-weight: bold;
+
+}
+.label-12 {
+	margin-top:158px;
+
+}
+.label-1, .label-12{
 	text-align: center;
+	display: inline-flex;
+	float: left;
 }
 
-.label-1-content{
-	padding-top: 15px;
-	padding-bottom: 15px;
-	width: 150px;
-	font-size: 16px;
-	color: #333;
-	letter-spacing: -0.4px;
-	text-align: center;
-}
+
 .box .inner1 {
 	margin-top: 30px;
 }
@@ -205,6 +204,7 @@ textarea.len980 {
 }
 </style>
 <div class="classApply">
+
 	<div class="title_box">
 		<h3>클래스 신청서</h3>
 		<div class="steps">
@@ -310,6 +310,7 @@ textarea.len980 {
 				<div class="col-md-2">
 					<div class="label-1">나의 스킬 레벨</div>
 					<div class="label-1">튜터에게 전할말</div>
+					<div class="label-12">연락 가능한 번호</div>
 				</div>
 
 				<div class="col-md-5">
@@ -333,6 +334,9 @@ textarea.len980 {
 								id="Introduction" name="Introduction"></textarea>
 						</div>
 					</div>
+					
+					<input type="text" id="phone" name="phone" class="form-control" 
+					style="width:300px;margin-top: 20px;" placeholder="개인연락처를 - 없이 입력해주세요.">
 
 				</div>
 
@@ -379,10 +383,12 @@ textarea.len980 {
 
 				<div class="col-md-5">
 
-					<div class="label-1-content">전체수업료</div>
-					<div class="label-1-content">보유적립금</div>
-					<div class="label-1-content">사용하기</div>
-					<div class="label-1-content">결제금액</div>
+					<div class="label-1-content"><span style="color:red">76,000원</span></div>
+					<div class="label-1-content">3000 포인트</div>
+					<div class="label-1-content">
+						<input type="text" name="usePoint" style="width:88px"> 포인트
+					</div>
+					<div class="label-1-content" style="width:200px">수업료 - 사용포인트 값</div>
 					<div class="label-1-content">
 						<div class="button_box2">
 							<button type="button" class="btn btn-outline-danger" id="cardPay">신용카드/체크카드</button>
@@ -398,11 +404,19 @@ textarea.len980 {
 
 		</div>
 	</div>
-	<script>
-		$("#wirteBtn").click(function() {
-			$('#pills-tab li:nth-child(2) a').tab('show');
-		});
-		$("#payBtn").click(function() {
-			$('#pills-tab li:nth-child(3) a').tab('show');
-		});
-	</script>
+</div>
+<script>
+
+	// [수업신청서 작성하기 ] 버튼 클릭 시, 다음 탭으로 이동
+	$("#wirteBtn").click(function() {
+		$('#pills-tab li:nth-child(2) a').tab('show');
+	});
+	// [결제하기] 버튼 클릭 시, 다음  탭으로 이동
+	$("#payBtn").click(function() {
+		$('#pills-tab li:nth-child(3) a').tab('show');
+	});
+	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움
+	$("#cardPay").click(function() {
+		
+	});
+</script>

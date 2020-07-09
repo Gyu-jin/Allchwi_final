@@ -194,7 +194,7 @@
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<form class="form-inline">
-						<p>입력된 검색어 : ${keyword }</p>
+						<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
 						<div class="label-1">
 							카테고리
 						</div> 
@@ -306,12 +306,12 @@
 					aria-labelledby="nav-profile-tab">
 					<form class="form-inline">
 		
-						<p>입력된 검색어 : ${keyword }</p>
+						<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
 						<div class="label-1">
 							카테고리
 						</div> 
 						<div class="btn-group-toggle" data-toggle="buttons" id="category1">
-							<label class="btn btn-secondary active btn btn-primary"> 
+							<label class="btn btn-secondary active"> 
 							<input type="checkbox" name="oncate"> 실무역량
 							</label>
 						</div>
@@ -426,20 +426,23 @@
 		console.log($("input[name=startDate]").val());
 		console.log($("input[name=endDate]").val());
 		$.getJSON("../class/searchList?startDate="+startDate, function(data, textStatus, req) {
-			var html = "<div class='col-md-4'>"
-				+ "<div class='card mb-4 shadow-sm'>"
-				+ "<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title>"
-				+ "<rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>클래스커버 대표이미지</text></svg>"
-				+ "<div class='card-body'>"
-				+ "<p class='card-text'>"+data+"</p>"
-				+ "<div class='d-flex justify-content-between align-items-center'>"
-				+ "<div class='btn-group'>"
-				+ "<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>"
-				+ "<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>"
-				+ "</div>"
-				+ "<small class='text-muted'>9 mins</small>"
-				+ "</div>" + "</div>" + "</div>" + "</div>";
-		$("#searchList").append(html);
+			$(data).each(function(i,searchClass){
+				var html = "<div class='col-md-4'>"
+					+ "<div class='card mb-4 shadow-sm'>"
+					+ "<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title>"
+					+ "<rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>"+searchClass.class_title +"</text></svg>"
+					+ "<div class='card-body'>"
+					+ "<p class='card-text'>튜터:"+searchClass.tutor_nickname+"</p>"
+					+ "<div class='d-flex justify-content-between align-items-center'>"
+					+ "<div class='btn-group'>"
+					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>"
+					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>"
+					+ "</div>"
+					+ "<small class='text-muted'>"+(i+1)+"번째 수업</small>"
+					+ "</div>" + "</div>" + "</div>" + "</div>";
+			$("#searchList").append(html);
+			});
+			
 		});
 	});
 </script>
