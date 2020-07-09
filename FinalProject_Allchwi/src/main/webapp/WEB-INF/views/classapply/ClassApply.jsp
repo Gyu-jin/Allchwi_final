@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
+.classApply {
+	margin: auto;
+	width: 80%;
+}
+
 .title_box h3 {
 	float: left;
 	display: inline-block;
@@ -21,149 +26,383 @@
 	padding: 19px 0;
 	border-bottom: 1px solid #c9c9c9;
 }
-.box{
-	width:100%;
-    display: flex;
-    padding: 30px 0;
-    border-bottom: 1px solid #d8d9db;
+
+.box {
+	width: 100%;
+	display: flex;
+	padding: 30px 0;
+	border-bottom: 1px solid #d8d9db;
 }
-.title{
-    width: 30%;
-    text-align: center;
-    color: #333;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 14px;
-    font-weight: bold;
+
+.title {
+	width: 40%; text-align : center;
+	color: #333;
+	font-weight: 500;
+	font-size: 16px;
+	padding: 14px 14px 14px 70px;
+	font-weight: bold;
+	text-align: center;
 }
-.cont{
+
+.cont {
 	width: 70%;
 	box-sizing: border-box;
 }
 
-.info1{
-    margin-top: 10px;
-    padding: 20px 0;
-    text-align: left;
-    font-size: 24px;
-    color: #555;
-    border-bottom: 1px solid #d8d9db;
-    letter-spacing: -0.35px;
+.info1 {
+	margin-top: 10px;
+	padding: 20px 0;
+	text-align: left;
+	font-size: 24px;
+	color: #555;
+	border-bottom: 1px solid #d8d9db;
+	letter-spacing: -0.35px;
 }
-.orange{
+
+.orange {
 	color: #ff936f;
 }
 
 .box .pf {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin-top: 20px;
-    float: left;
-    margin-right: 20px;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	margin-top: 20px;
+	float: left;
+	margin-right: 20px;
 }
-.box .upf {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-}
-.box .upf_b {
-    position: absolute;
-    margin-left: 95px;
-    margin-top: 90px;
-}
-.verify {
-    display: inline-block;
-    font-size: 14px;
-    color: #444;
-    border-radius: 4px;
-    padding: 12px 20px;
-    border: solid 1px #aaa;
-    cursor: pointer;
-}
-.certificate_title{
-	font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    padding: 0;
-    width: initial;
-    font-weight: bold;
-    color: #333;
-}
-.certificate_gray{
-	line-height: 1.29;
-    font-size: 14px;
-    color: #888;
 
+.box .upf {
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	background-position: center;
+	background-size: cover;
 }
+
 .button_box {
-    /* display: flex; */
-    width: 480px;
-    margin: 40px auto 40px 550px;
+	/* display: flex; */
+	width: 480px;
+	margin: 3% 0% 3% 44%;
 }
-div{
+.button_box2 {
+	width: 200px;
+}
+div {
 	margin: 0;
-    padding: 0;
-    font-size: 14px;
-    color: #111;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
+	padding: 0;
+	font-size: 14px;
+	color: #111;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+}
+
+.form-control:disabled, .form-control[readonly] {
+	background-color: #ffffff;
+	opacity: 1;
+}
+
+.col-3 {
+	padding: 10%;
+}
+
+.tutor_txt dt {
+	width: 80px;
+	height: 80px;
+	background: none;
+	padding: 0;
+	border-radius: 100px;
+	overflow: hidden;
+}
+
+.tutor_txt dd {
+	width: 300px;
+	left: 100px;
+	top: -80px;
+	border-radius: 5px;
+	padding: 10px;
+	position: relative;
+	background: lightgray;
+	color: #666;
+	letter-spacing: 0;
+}
+
+.tutor_txt dd:after {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	position: absolute;
+	border-right-color: lightgray;
+	border-width: 10px;
+	margin-top: -10px;
+}
+
+.col-md-2 {
+	text-align: center;
+	margin: 0 auto;
+	align-items: center;
+	padding-left: 5%;
+}
+
+.form-inline .btn-group-toggle {
+	display: flex;
+	margin: 10px;
+}
+
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not
+	(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #ff936f;
+    border-color: #ff936f;
+}
+
+.label-1 {
+	display: inline-flex;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	float: left;
+	width: 150px;
+	font-size: 16px;
+	color: #333;
+	letter-spacing: -0.4px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.label-1-content{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	width: 150px;
+	font-size: 16px;
+	color: #333;
+	letter-spacing: -0.4px;
+	text-align: center;
+}
+.box .inner1 {
+	margin-top: 30px;
+}
+
+textarea.len980 {
+	height: 190px;
+	background: #fff;
+}
+
+.form-control, .custom-select, textarea.basic {
+	font-size: 14px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+}
+
+.input-group .form-control {
+	height: 38px;
+}
+
+.input-group-prepend {
+	height: 38px;
 }
 </style>
-
-<div class="title_box">
-	<h3>클래스 신청서</h3>
-	<div class="steps">
-		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			<li class="nav-item" role="presentation"><a
-				class="nav-link active" id="pills-home-tab" data-toggle="pill"
-				href="#pills-info" role="tab" aria-selected="true">01클래스 일정</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="pills-profile-tab" data-toggle="pill" href="#pills-title"
-				role="tab" aria-selected="false">02클래스신청</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="pills-contact-tab" data-toggle="pill" href="#pills-price"
-				role="tab" aria-selected="false">03결제</a></li>
-		</ul>
+<div class="classApply">
+	<div class="title_box">
+		<h3>클래스 신청서</h3>
+		<div class="steps">
+			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				<li class="nav-item" role="presentation"><a
+					class="nav-link active" id="pills-home-tab" data-toggle="pill"
+					href="#pills-info" role="tab" aria-selected="true">01클래스 일정</a></li>
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="pills-profile-tab" data-toggle="pill" href="#pills-title"
+					role="tab" aria-selected="false">02클래스신청</a></li>
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="pills-contact-tab" data-toggle="pill" href="#pills-price"
+					role="tab" aria-selected="false">03결제</a></li>
+			</ul>
+		</div>
 	</div>
-</div>
 
-<div class="tab-content" id="pills-tabContent">
-	<!-- 01클래스 일정 선택 -->
-	<div class="tab-pane fade show active" id="pills-info" role="tabpanel">
-		
-		
-		<div class="info1">
-            <span class="orange">클래스 명</span>
-        </div>
-		<div class="box">
-			<div class="title">
-				수업일정선택<b class="pink">*</b>
+	<div class="tab-content" id="pills-tabContent">
+		<!-- 01 클래스 일정 선택 탭-->
+		<div class="tab-pane fade show active" id="pills-info" role="tabpanel"
+			data-num="1">
+
+
+			<div class="info1">
+				<span class="orange">클래스 명</span>
 			</div>
-			<div class="cont input-group col-5">
-				<input type="text" id="phone" name="phone" class="form-control" placeholder="개인연락처를 - 없이 입력해주세요."> 
+			<div class="box">
+				<div class="col-md-6">
+					<div class="title">
+						수업일정선택<b class="pink">*</b>
+						<div class="col-3">
+							<div class="tutor_t">
+								<dl class="tutor_txt">
+									<dt>
+										<div
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
+										</div>
+									</dt>
+									<dd>
+										신촌,홍대 부근의 모임공간에서<br> 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅
+										비용에 포함되어 있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-6">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="radio"
+									aria-label="Radio button for following text input">
+							</div>
+						</div>
+
+						<input type="text" class="form-control" disabled="disabled"
+							aria-label="Text input with radio button"
+							value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
+					</div>
+				</div>
+
 			</div>
+
+
+			<div class="button_box">
+				<button type="button" class="btn btn-outline-danger" id="wirteBtn"
+					data-num='2'>수업 신청서 작성하기</button>
+			</div>
+
+
 		</div>
 
+		<!-- 02 수업신청서 작성 탭 -->
+		<div class="tab-pane fade" id="pills-title" role="tabpanel"
+			data-num='2'>
 
-        <div class="button_box">
-            <button type="button" class="btn btn-outline-danger" onclick="setMode(1);">수업 신청서 작성하기</button>
-        </div>
-        
-    
+			<div class="info1">
+				<span class="orange">클래스 명</span>
+			</div>
+			<div class="box">
+				<div class="col-md-5">
+					<div class="title">
+						수업신청서<b class="pink">*</b>
+						<div class="col-3">
+							<div class="tutor_t">
+								<dl class="tutor_txt">
+									<dt>
+										<div
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
+										</div>
+									</dt>
+									<dd>
+										수업준비를 위해 <br> 아래항목들에 대해 미리 말씀해주세요.<br> 감사합니다 :)
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="label-1">나의 스킬 레벨</div>
+					<div class="label-1">튜터에게 전할말</div>
+				</div>
+
+				<div class="col-md-5">
+
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-secondary active"> <input
+							type="radio" name="levels" id="lev-1" checked> 입문자
+						</label> <label class="btn btn-secondary"> <input type="radio"
+							name="levels" id="lev-2"> 초/중급자
+						</label> <label class="btn btn-secondary"> <input type="radio"
+							name="levels" id="lev-3"> 상급자
+						</label>
+					</div>
+					<br>
+
+
+					<div class="cont">
+						<div class="inner1">
+							<textarea class="basic len980 form-control"
+								placeholder="튜터에게 회원님에 대해 알려주세요. 수업을 듣는 목적은 무엇인가요? 튜터의 어떤 점이 마음에 들어 신청하셨나요?"
+								id="Introduction" name="Introduction"></textarea>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="button_box">
+				<button type="button" class="btn btn-outline-danger" id="payBtn">결제하기</button>
+			</div>
+
+		</div>
+
+		<!-- 03 결제 탭  -->
+		<div class="tab-pane fade" id="pills-price" role="tabpanel"
+			data-num='3'>
+			<div class="info1">
+				<span class="orange">클래스 명</span>
+			</div>
+			<div class="box">
+				<div class="col-md-5">
+					<div class="title">
+						결제하기<b class="pink">*</b>
+						<div class="col-3">
+							<div class="tutor_t">
+								<dl class="tutor_txt">
+									<dt>
+										<div
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
+										</div>
+									</dt>
+									<dd>
+										결제 후에 신청이 완료됩니다.<br> 수업이 조기 마감될 수 있으니<br> 서둘러주세요 :)
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="label-1">전체수업료</div>
+					<div class="label-1">보유적립금</div>
+					<div class="label-1">사용하기</div>
+					<div class="label-1">결제금액</div>
+					<div class="label-1">결제수단</div>
+				</div>
+
+				<div class="col-md-5">
+
+					<div class="label-1-content">전체수업료</div>
+					<div class="label-1-content">보유적립금</div>
+					<div class="label-1-content">사용하기</div>
+					<div class="label-1-content">결제금액</div>
+					<div class="label-1-content">
+						<div class="button_box2">
+							<button type="button" class="btn btn-outline-danger" id="cardPay">신용카드/체크카드</button>
+						</div>
+						
+					</div>
+
+
+					
+
+				</div>
+			</div>
+
+		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="tab-pane fade" id="pills-title" role="tabpanel">수업 신청서</div>
-	<div class="tab-pane fade" id="pills-price" role="tabpanel">결제</div>
-
-</div>
+	<script>
+		$("#wirteBtn").click(function() {
+			$('#pills-tab li:nth-child(2) a').tab('show');
+		});
+		$("#payBtn").click(function() {
+			$('#pills-tab li:nth-child(3) a').tab('show');
+		});
+	</script>

@@ -91,9 +91,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	실무역량
-        </a>
+        </a><!-- BigCategoryController : ${cp}/bigcate/?bcate_num=1 (서브쿼리) -->
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">엑셀</a>
+          <a class="dropdown-item" href="#">엑셀</a><!-- SmallCategoryController : ${cp}/smallcate/?scate_num=1 -->
           <a class="dropdown-item" href="#">파워포인트</a>
           <a class="dropdown-item" href="#">프로그래밍</a>
         </div>
@@ -166,210 +166,211 @@
       </li>
       
     </ul>
-    <p>
-	  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-	    Link with href
-	  </a>
-	</p>
-	<div class="collapse" id="collapseExample">
-	  <div class="card card-body">
-	  	<div class="jumbotron">
-
-	<nav>
-		<div class="nav nav-tabs" id="nav-tab" role="tablist">
-			<a class="nav-item nav-link active" id="nav-home-tab"
-				data-toggle="tab" href="#nav-home" role="tab"
-				aria-controls="nav-home" aria-selected="true">오프라인</a> <a
-				class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-				href="#nav-profile" role="tab" aria-controls="nav-profile"
-				aria-selected="false">온라인</a>
-
-		</div>
-	</nav>
-	<div class="tab-content" id="nav-tabContent">
-		<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-			aria-labelledby="nav-home-tab">
-			<form class="form-inline">
-				<p>입력된 검색어 : ${keyword }</p>
-				<div class="label-1">
-					카테고리
-				</div> 
-			
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="1"> 실무역량
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="2"> 디자인
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="3"> 뷰티
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="4"> 요리
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="5"> 영상
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="6"> 음악
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="offcate" value="7"> 외국어
-					</label>
-				</div>
-		
-				<br> 
-				<div class="label-1">
-					지역
-				</div> 
-				<select class="custom-select my-1 mr-sm-2"
-					id="inlineFormCustomSelectPref">
-					<option selected value="1">서울</option>
-					<option value="2">경기</option>
-					<option value="3">강원</option>
-					<option value="4">충남</option>
-					<option value="5">충북</option>
-					<option value="6">경남</option>
-					<option value="7">경북</option>
-					<option value="8">충남</option>
-					<option value="9">충북</option>
-					<option value="10">전남</option>
-					<option value="11">전북</option>
-					<option value="12">제주</option>
-				</select> 
-				<select class="custom-select my-1 mr-sm-2">
-					
-					<!-- inlineFormCustomSelectPref의 option value에 따라 동적으로 생성 -->
-				
-				</select> <br>
-				<div class="label-1">
-					기간
-				</div> 
-				<div class='col-md-3'>
-					<div class="form-group">
-						<div class="input-group date" id="datetimepicker7"
-							data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker7" name="startDate" />
-							<div class="input-group-append" data-target="#datetimepicker7"
-								data-toggle="datetimepicker">
-								<div class="input-group-text">
-									<i class="fa fa-calendar"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-div"><span class="text-1">~</span></div>
-				<div class='col-md-3'>
-					<div class="form-group">
-						<div class="input-group date" id="datetimepicker8"
-							data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input"
-								data-target="#datetimepicker8" name="endDate"/>
-							<div class="input-group-append" data-target="#datetimepicker8"
-								data-toggle="datetimepicker">
-								<div class="input-group-text">
-									<i class="fa fa-calendar"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<br>
-				<button type="button" class="btn btn-primary my-1"
-					id="detailSearchBtnOffline">상세검색</button>
-			</form>
-
-		</div>
-
-		<!-- @@@@@온라인 검색탭@@@@@@ -->
-		<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-			aria-labelledby="nav-profile-tab">
-			<form class="form-inline">
-
-				<p>입력된 검색어 : ${keyword }</p>
-				<div class="label-1">
-					카테고리
-				</div> 
-				<div class="btn-group-toggle" data-toggle="buttons" id="category1">
-					<label class="btn btn-secondary active btn btn-primary"> 
-					<input type="checkbox" name="oncate"> 실무역량
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category2">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 디자인
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category3">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 뷰티
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category4">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 요리
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category5">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 영상
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category6">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 음악
-					</label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons" id="category7">
-					<label class="btn btn-secondary active"> 
-					<input type="checkbox" name="oncate"> 외국어
-					</label>
-				</div>
-
-				<br>
-				<div class="label-1">
-					수업형태
-				</div> 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline-flex;">
-					<label class="btn btn-secondary active"> <input
-						type="radio" name="options" id="option1" checked> 1개월
-					</label> <label class="btn btn-secondary"> <input type="radio"
-						name="options" id="option2"> 2개월
-					</label> <label class="btn btn-secondary"> <input type="radio"
-						name="options" id="option3"> 3개월
-					</label>
-				</div>
-
-				<br><br>
-				<button type="button" class="btn btn-primary my-1"
-					id="detailSearchBtnOnline">상세검색</button>
-			</form>
-
-		</div>
-	</div>
-
-</div>
-	  </div>
-	</div> 
+	    <p>
+		  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+		    	상세검색
+		  </a>
+		</p>
+	
 	  </div>
 </nav>
 
+<div class="collapse" id="collapseExample">
+
+	  	<div class="jumbotron">
+
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-home-tab"
+						data-toggle="tab" href="#nav-home" role="tab"
+						aria-controls="nav-home" aria-selected="true">오프라인</a> <a
+						class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+						href="#nav-profile" role="tab" aria-controls="nav-profile"
+						aria-selected="false">온라인</a>
+		
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+					<form class="form-inline">
+						<p>입력된 검색어 : ${keyword }</p>
+						<div class="label-1">
+							카테고리
+						</div> 
+					
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="1"> 실무역량
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="2"> 디자인
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="3"> 뷰티
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="4"> 요리
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="5"> 영상
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="6"> 음악
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="offcate" value="7"> 외국어
+							</label>
+						</div>
+				
+						<br> 
+						<div class="label-1">
+							지역
+						</div> 
+						<select class="custom-select my-1 mr-sm-2"
+							id="inlineFormCustomSelectPref">
+							<option selected value="1">서울</option>
+							<option value="2">경기</option>
+							<option value="3">강원</option>
+							<option value="4">충남</option>
+							<option value="5">충북</option>
+							<option value="6">경남</option>
+							<option value="7">경북</option>
+							<option value="8">충남</option>
+							<option value="9">충북</option>
+							<option value="10">전남</option>
+							<option value="11">전북</option>
+							<option value="12">제주</option>
+						</select> 
+						<select class="custom-select my-1 mr-sm-2">
+							
+							<!-- inlineFormCustomSelectPref의 option value에 따라 동적으로 생성 -->
+						
+						</select> <br>
+						<div class="label-1">
+							기간
+						</div> 
+						<div class='col-md-3'>
+							<div class="form-group">
+								<div class="input-group date" id="datetimepicker7"
+									data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input"
+										data-target="#datetimepicker7" name="startDate" />
+									<div class="input-group-append" data-target="#datetimepicker7"
+										data-toggle="datetimepicker">
+										<div class="input-group-text">
+											<i class="fa fa-calendar"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-div"><span class="text-1">~</span></div>
+						<div class='col-md-3'>
+							<div class="form-group">
+								<div class="input-group date" id="datetimepicker8"
+									data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input"
+										data-target="#datetimepicker8" name="endDate"/>
+									<div class="input-group-append" data-target="#datetimepicker8"
+										data-toggle="datetimepicker">
+										<div class="input-group-text">
+											<i class="fa fa-calendar"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+		
+						<br>
+						<button type="button" class="btn btn-primary my-1"
+							id="detailSearchBtnOffline">수업찾기</button>
+					</form>
+		
+				</div>
+		
+				<!-- @@@@@온라인 검색탭@@@@@@ -->
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+					aria-labelledby="nav-profile-tab">
+					<form class="form-inline">
+		
+						<p>입력된 검색어 : ${keyword }</p>
+						<div class="label-1">
+							카테고리
+						</div> 
+						<div class="btn-group-toggle" data-toggle="buttons" id="category1">
+							<label class="btn btn-secondary active btn btn-primary"> 
+							<input type="checkbox" name="oncate"> 실무역량
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category2">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 디자인
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category3">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 뷰티
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category4">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 요리
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category5">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 영상
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category6">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 음악
+							</label>
+						</div>
+						<div class="btn-group-toggle" data-toggle="buttons" id="category7">
+							<label class="btn btn-secondary active"> 
+							<input type="checkbox" name="oncate"> 외국어
+							</label>
+						</div>
+		
+						<br>
+						<div class="label-1">
+							수업형태
+						</div> 
+						<div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline-flex;">
+							<label class="btn btn-secondary active"> <input
+								type="radio" name="options" id="option1" checked> 1개월
+							</label> <label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option2"> 2개월
+							</label> <label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option3"> 3개월
+							</label>
+						</div>
+		
+						<br><br>
+						<button type="button" class="btn btn-primary my-1"
+							id="detailSearchBtnOnline">수업찾기</button>
+					</form>
+		
+				</div>
+			</div>
+
+		</div>
+
+	</div> 
 
 
 <div class="jumbotron">
