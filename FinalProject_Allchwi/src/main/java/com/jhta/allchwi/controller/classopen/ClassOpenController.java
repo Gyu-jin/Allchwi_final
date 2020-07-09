@@ -22,6 +22,7 @@ public class ClassOpenController {
 	@PostMapping("/class/enrollmentInsert")
 	public String classInsert(@RequestParam(value = "cert") List<MultipartFile> files) {
 		System.out.println("hello");
+		
 		return null;
 	}
 }
