@@ -265,7 +265,10 @@ textarea.len980 {
 
 						<input type="text" class="form-control" disabled="disabled"
 							aria-label="Text input with radio button"
-							value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
+							name="classdate" value="1">
+						<input type="text" class="form-control" disabled="disabled"
+							aria-label="Text input with radio button"
+							name="classdate" value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
 					</div>
 				</div>
 
@@ -415,8 +418,10 @@ textarea.len980 {
 	$("#payBtn").click(function() {
 		$('#pills-tab li:nth-child(3) a').tab('show');
 	});
-	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움
+	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
 	$("#cardPay").click(function() {
-		
+		$.post("${cp}/class/apply", data, function(data, textStatus, req) {
+			
+		},"json");
 	});
 </script>

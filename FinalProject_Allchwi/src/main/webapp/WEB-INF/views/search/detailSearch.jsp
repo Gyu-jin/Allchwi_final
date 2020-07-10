@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -83,7 +84,11 @@
     margin-top: 0;
 }
 </style>
+<script>
 
+
+
+</script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
  
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -384,9 +389,34 @@
 	<div class="row" id="searchList">
 
 		<!-- 이부분 나중에 :  select 된 자료를 동적으로 생성하기 (제이쿼리,json)-->
+		<c:if test="${!empty list }">
+			<c:forEach var="vo" items="${list }">
+				<div class='col-md-4'>
+					<div class='card mb-4 shadow-sm'>
+						<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
+						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'>
+						<title>Placeholder</title>
+					   	<rect width='100%' height='100%' fill='#55595c'></rect>
+					   	<text x='50%' y='50%' fill='#eceeef' dy='.3em'>
+					   	
+					   	${vo.getClass_title() }</text></svg>
+						<div class='card-body'>
+							<p class='card-text'>튜터: ${vo.getTutor_nickname() }</p>
+							<div class='d-flex justify-content-between align-items-center'>
+							<div class='btn-group'>
+								<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>
+								<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>
+							</div>
+							<small class='text-muted'>"+(i+1)+"번째 수업</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
 	</div>
 
-
+<input type="hidden" id="keyword" value="${keyword }">
 </div>
 
 
@@ -416,16 +446,20 @@
 	
 	// OffLine tap - 상세검색 버튼
 	$("#detailSearchBtnOffline").click(function() {
-		$("input[name=offcate]:checked").each(function(){		
+		
+		let cates = [];
+		$("#searchList").empty();
+		
+		$("input[name=offcate]:checked").each(function(i){		
 			console.log("체크된 카테고리번호 :"+ $(this).val());	
+			cates[i]=($(this).val());
 		});	
 		
+		var keyword=$("#keyword").val();
 		var startDate=$("input[name=startDate]").val();
 		var endDate=$("input[name=endDate]").val();
-		
-		console.log($("input[name=startDate]").val());
-		console.log($("input[name=endDate]").val());
-		$.getJSON("../class/searchList?startDate="+startDate, function(data, textStatus, req) {
+		console.log(cates.length);		
+		$.post("../class/detailSearch",{"keyword":keyword,"startDate":startDate,"endDate":endDate,"cccc":cates} ,function(data, textStatus, req) {
 			$(data).each(function(i,searchClass){
 				var html = "<div class='col-md-4'>"
 					+ "<div class='card mb-4 shadow-sm'>"
@@ -436,13 +470,14 @@
 					+ "<div class='d-flex justify-content-between align-items-center'>"
 					+ "<div class='btn-group'>"
 					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>"
-					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>"
+					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>"+searchClass.startDate+"</button>"
 					+ "</div>"
 					+ "<small class='text-muted'>"+(i+1)+"번째 수업</small>"
 					+ "</div>" + "</div>" + "</div>" + "</div>";
+					
 			$("#searchList").append(html);
 			});
 			
-		});
+		}, "json");
 	});
 </script>

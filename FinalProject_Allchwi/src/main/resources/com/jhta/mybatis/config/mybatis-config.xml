@@ -15,6 +15,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.profileImg.ProfileImgVO" alias="piv"/>
 		<!-- 자격증테이블 alias -->
 		<typeAlias type="com.jhta.allchwi.vo.classopen.CertificateVO" alias="cert"/>		
+		<!-- classApply : 수업신청서 테이블 alias -->		
+		<typeAlias type="com.jhta.allchwi.vo.classapply.ClassApplyVO" alias="classapply"/>
 	</typeAliases>
 
 	<mappers>
@@ -33,6 +35,9 @@
 		
 		<!-- Class등록 Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/CertificateMapper.xml"/>
+		
+		<!-- Class Apply Mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/ClassApplyMapper.xml"/>
 	</mappers>
 </configuration>
 
