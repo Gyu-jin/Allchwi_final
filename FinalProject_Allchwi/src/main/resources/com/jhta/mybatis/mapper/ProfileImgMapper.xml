@@ -2,10 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhta.mybatis.mapper.PointMapper">
+<mapper namespace="com.jhta.mybatis.mapper.ProfileImgMapper">
 	<!--4 이미지번호, 이미지-->
-	<insert id="add_profileImg" parameterType="piv">
-		insert into Member_info(0, pro_img)
+	<insert id="insert" parameterType="piv">
+		insert into profile_img values(0, #{pro_img},#{pro_filename},now())
+		<selectKey keyProperty="pro_num" resultType="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
 	</insert>
 </mapper>
 

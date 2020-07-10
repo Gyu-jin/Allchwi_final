@@ -1,11 +1,13 @@
 package com.jhta.allchwi.controller.classopen;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,13 +22,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.allchwi.service.classopen.CertificateService;
+import com.jhta.allchwi.service.classopen.ClassImgService;
+import com.jhta.allchwi.service.classopen.ClassInfoService;
+import com.jhta.allchwi.service.profileImg.ProfileImgService;
 import com.jhta.allchwi.vo.classopen.CertificateVO;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 
 @Controller
 public class ClassOpenController {
 	@Autowired
-	private CertificateService service;
+	private CertificateService cert_service;
+	@Autowired
+	private ClassInfoService classinfo_service;
+	@Autowired
+	private ClassImgService classimg_service;
+	@Autowired
+	private ProfileImgService proimg_service;
 	
 	
 	@GetMapping("/class/enrollment")
@@ -42,89 +55,60 @@ public class ClassOpenController {
 			@RequestParam("certName[]")String[] certName,
 			@RequestParam("cert[]")List<MultipartFile> certes,
 			@RequestParam("images")List<MultipartFile> images,
-			@RequestParam("curriculum")String[] curriculum) {
+			@RequestParam("curriculum[]")List<String> curriculum) {
 		
-		String uploadPath = 
-				session.getServletContext().getRealPath("/resources/uploadCert");
 		
-		String originalNamez = picture.getOriginalFilename();
-		System.out.println(originalNamez);
-		String savefileNamez = UUID.randomUUID() + "_" + originalNamez;
-		
-		// 전송된 파일을 읽어오는 스트림
+		// 프로필 이미지 업로드.
+		String proImgName = picture.getOriginalFilename(); //프로필이미지 파일명
+		byte[] proImgFile = null; //vo에 담을 바이트 이미지 파일
 		try {
-			InputStream fis;
-			fis = picture.getInputStream();
-			// 전송된 파일을 읽어 오는스트림
-			// 전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
-			FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefileNamez);
-			// 파일 복사하기 ( 파일 복사 클래스 )
-			FileCopyUtils.copy(fis, fos);
-			fis.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			proImgFile = picture.getBytes(); //multipart로 얻은 File 바이트형식으로 바꿔 저장
+		} catch (IOException e1) {
+			System.out.println(e1.getMessage());
 		}
 		
+		// 프로필이미지 VO 생성
+		ProfileImgVO proVo = new ProfileImgVO(0, proImgFile, proImgName,null);
+		proimg_service.insert(proVo);
+		
+		// 자격증 데이터 가져오기.
+		
+		ArrayList<CertificateVO> certList = new ArrayList<CertificateVO>(); // 여러개 일경우 받을 List
 		for (int i = 0; i < certes.size(); i++) {
-			MultipartFile cert = certes.get(i);
-			byte[] file = null;
-			
+			MultipartFile cert = certes.get(i);	//list로 들어온 자격지 File 얻어오기
+			String originalName = cert.getOriginalFilename(); // 자격증 파일명
+			byte[] certFile = null;
 			try {
-				file = cert.getBytes();
+				certFile = cert.getBytes();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String originalName = cert.getOriginalFilename();
-			System.out.println(originalName);			
-			
-			CertificateVO vv = new CertificateVO(0, 12, originalName,file, certName[i], null);
-			/*
-			 * // 전송된 파일을 읽어오는 스트림 try { InputStream fis; fis = cert.getInputStream(); //
-			 * 전송된 파일을 읽어 오는스트림 // 전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림 FileOutputStream fos = new
-			 * FileOutputStream(uploadPath + "\\" + savefileName); // 파일 복사하기 ( 파일 복사 클래스 )
-			 * FileCopyUtils.copy(fis, fos); fis.close(); fos.close(); } catch (IOException
-			 * e) { e.printStackTrace(); }
-			 */
-			service.insert(vv);
+			CertificateVO certVo = new CertificateVO(0, 12, originalName,certFile, certName[i], null);
+			certList.add(certVo);
+
+			cert_service.insert(certVo);
 		}
 			
+		// 커버이미지 받아오기.
+		ArrayList<ClassImgVO> coverList = new ArrayList<ClassImgVO>();
 		for(MultipartFile img : images) {
 			String originalNames = img.getOriginalFilename();
-			System.out.println(originalNames);
-			String savefileNames = UUID.randomUUID() + "_" + originalNames;
-			
-			// 전송된 파일을 읽어오는 스트림
+			byte[] imgFile = null;
 			try {
-				InputStream fis;
-				fis = img.getInputStream();
-				// 전송된 파일을 읽어 오는스트림
-				// 전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
-				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefileNames);
-				// 파일 복사하기 ( 파일 복사 클래스 )
-				FileCopyUtils.copy(fis, fos);
-				fis.close();
-				fos.close();
+				imgFile = img.getBytes();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			ClassImgVO imgVo = new ClassImgVO(0, 1, originalNames, imgFile, null);
+			coverList.add(imgVo);
+			classimg_service.insert(imgVo);
+			
 		}
-		System.out.println("phone       :" + vo.getTutor_phone()       );
-		System.out.println("nickname    :" + vo.getTutor_nickname()    );
-		System.out.println("address     :" + vo.getClass_address()     );
-		System.out.println("cateSub    :" + vo.getScategory_num()    );
-		System.out.println("classOption :" + vo.getClass_form() );
-		System.out.println("minPerson   :" + vo.getClass_min()   );
-		System.out.println("maxPerson   :" + vo.getClass_max()   );
-		System.out.println("title       :" + vo.getClass_title()       );
-		System.out.println("unitPrice   :" + vo.getClass_price()   );
-		System.out.println("time        :" + vo.getClass_hour()        );
-		System.out.println("totalTimes  :" + vo.getClass_count()  );
-		System.out.println("tutorInfo   :" + vo.getTutor_about()   );
-		System.out.println("introduction:" + vo.getClass_about());
-		System.out.println("target      :" + vo.getClass_target()      );
-		for (int i = 0; i < curriculum.length; i++) {
-			System.out.println("curriculum"+i+"  :" + curriculum[i]  );
+		vo.setClass_auth(1);
+		classinfo_service.insert(vo);
+		
+		for (int i = 0; i < curriculum.size(); i++) {
+			System.out.println("curriculum"+i+"  :" + curriculum.get(i)  );
 		}
 		
 		return ".classOpen.ClassEnrollment";

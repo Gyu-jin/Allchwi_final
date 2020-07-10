@@ -3,15 +3,15 @@ package com.jhta.allchwi.service.classopen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jhta.allchwi.dao.classopen.ClassInfoDAO;
-import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.dao.classopen.ClassImgDAO;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 
 @Service
-public class ClassInfoService {
+public class ClassImgService {
 	@Autowired
-	private ClassInfoDAO dao;
+	private ClassImgDAO dao;
 	
-	public int insert(ClassInfoVO vo) {
+	public int insert(ClassImgVO vo) {
 		return dao.insert(vo);
 	}
 }

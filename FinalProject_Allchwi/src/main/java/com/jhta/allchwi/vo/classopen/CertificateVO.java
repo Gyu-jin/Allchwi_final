@@ -1,6 +1,5 @@
 package com.jhta.allchwi.vo.classopen;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 public class CertificateVO {

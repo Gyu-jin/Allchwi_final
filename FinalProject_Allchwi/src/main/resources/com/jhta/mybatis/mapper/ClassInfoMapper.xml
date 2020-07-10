@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.ClassInfoMapper">
-	
+	<insert id="insert" parameterType="classInfo">
+		insert into class_info values(null,#{ml_num},#{scategory_num},#{sloc_num},#{pro_num},
+		#{tutor_nickname},#{tutor_phone},#{class_address},#{class_form},#{class_max},#{class_min},
+		#{class_title},#{class_price},#{class_hour},#{class_count},#{tutor_about},#{class_about},#{class_target},now(),#{class_auth})
+		<selectKey keyProperty="class_num" resultType="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
 </mapper>
 

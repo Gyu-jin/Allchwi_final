@@ -557,7 +557,7 @@ $(function(){
 						"</div>" +
 						"<div class='box'>" +
 						"<textarea class='basic len980 form-control' placeholder='커리큘럼을 입력해 주세요.' " +
-						"id='Curriculum"+ i +"' name='curriculum'></textarea>"+
+						"id='Curriculum"+ i +"' name='curriculum[]'></textarea>"+
 						"</div></div>" 
 						);
 		}
