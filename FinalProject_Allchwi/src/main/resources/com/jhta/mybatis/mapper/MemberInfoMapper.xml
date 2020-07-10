@@ -5,8 +5,12 @@
 <mapper namespace="com.jhta.mybatis.mapper.MemberInfoMapper">
 	<!--2 회원번호, 로그인번호(참조), 이미지번호(참조), 이름, 전화번호, 닉네임, 내소개, 탈퇴여부, 탈퇴사유, 등록 및 수정일-->
 	<insert id="add_info" parameterType="miv">
-		insert into Member_info(0, 0, 0, mb_name, mb_phone, mb_nickname, mb_about, mb_auth, mb_reason, now())
+		insert into member_info(0, 0, 0, mb_name, mb_phone, mb_nickname, mb_about, mb_auth, mb_reason, now())
 	</insert>
+	<!-- 회원탈퇴 사유 업데이트, 나중에 id 회원번호로 변경할 것 -->
+	<update id="update_signout" parameterType="hashmap">
+		update member_info set mb_auth = #{mb_auth}, mb_reason = #{mb_reason} where mb_num = #{mb_num}
+	</update>
 </mapper>
 
 

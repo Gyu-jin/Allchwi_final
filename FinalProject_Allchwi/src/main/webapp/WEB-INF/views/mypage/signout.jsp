@@ -9,11 +9,11 @@
 			<div class="title_box">
 				<div class="left">회원 탈퇴</div>
 			</div>
-			<form action="#" method="POST" id="signout" onsubmit="return buttonUp()">
+			<form action="${cp}/mypage/signout" method="POST" id="signout" onsubmit="return buttonUp()">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
 					<input type="hidden" id="mb_num" name="mb_num"
-						class="form-control" value="#">
+						class="form-control" value="1">
 					<!-- id value값은 나중에 받아올수 있도록 변경 -->
 					<input type="hidden" id="id" name="id"
 						class="form-control" value="test111@naver.com">
@@ -31,7 +31,7 @@
 							<b>·</b>&nbsp;비밀번호
 						</div>
 						<div class="right_box">
-							<input type="password" id="currPwd" onblur="checkPwd()" name="currPwd"
+							<input type="password" id="currPwd" onblur="checkPwd()" name="pwd"
 								class="form-control" placeholder="비밀번호를 입력해주세요.">
 							<span id="cpMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
@@ -40,7 +40,7 @@
 						<div class="left_box">
 						</div>
 						<div class="right_box">
-							<textarea class="form-control" name="feedback" id="feedback" placeholder="서비스 탈퇴 사유에 대해 알려주세요." onblur="feedValidation()"></textarea>
+							<textarea class="form-control" name="mb_reason" id="feedback" placeholder="서비스 탈퇴 사유에 대해 알려주세요." onblur="feedValidation()"></textarea>
 							<span id="fdMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
@@ -80,7 +80,7 @@ function checkPwd(){
 }
 //탈퇴사유 유효성 검사
 function feedValidation() {
-	let feed = $("#feed").val();
+	let feed = $("#feedback").val();
 	let fdMsg = $("#fdMsg");
 	// 특문 + 숫자 + 영문
 	if(feed === "") {
