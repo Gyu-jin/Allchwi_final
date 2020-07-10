@@ -9,6 +9,7 @@
 
 #table {
 	margin-left: 80px;
+	text-align: center;
 }
 
 .container {
@@ -59,7 +60,7 @@
 		</div>
 		<br> <br>
 		<div id="table">
-			<table class="table">
+			<table class="table" >
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">큰카테고리 번호</th>

@@ -3,13 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminManageClassMapper">
+	<sql id="search">
+		<if test="field!=null and field!=''">
+			where ${field} like '%'||#{search}||'%'
+		</if>			
+	</sql>
+	
+	
 	
 	<select id="manage_list" resultType="com.jhta.allchwi.vo.admin.ManageClassVO" parameterType="hashmap">
 		select * from practice limit #{startRow},5
+		<include refid="search"/>
 	</select>
 	
 	<select id="count" resultType="int" >
 		select NVL(count(*),0) cnt from practice 
+		<include refid="search"/>
 	</select>
 	
 	

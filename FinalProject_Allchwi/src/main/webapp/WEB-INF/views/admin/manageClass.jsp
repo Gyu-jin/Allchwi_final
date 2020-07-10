@@ -50,16 +50,13 @@
 
 
 			<div>
-				<form method="post" action="/test/board/list">
+				<form action="${cp }/admin/manageClass">
 					<select name="field">
-						<option value="title"
-							<c:if test="${field =='title'}">selected</c:if>>제목</option>
-						<option value="content"
-							<c:if test="${field=='content'}">selected="selected"</c:if>>내용</option>
-						<option value="sum"
-							<c:if test="${field=='sum'}">selected="selected"</c:if>>제목+내용</option>
-					</select> <input type="text" name="search"> <input type="submit"
-						value="검색">
+						<option value="num">번호</option>
+						<option value="name">이름</option>
+						<option value="pwd">비밀번호</option>
+					</select> 
+					<input type="text" name="search"> <input type="submit"value="검색">
 				</form>
 			</div>
 

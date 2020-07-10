@@ -17,30 +17,25 @@ import com.jhta.allchwi.vo.admin.ManageClassVO;
 public class ManageClassController {
 	@Autowired
 	private manageClassService service;
-	
+
 	@GetMapping("/admin/manageClass")
-	public String manageClass(@RequestParam(value="pageNum",defaultValue = "1")int pageNum,Model model) {
-	
-		 
-		 int totalRowCount =service.count();
-		 PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
-		 
-		 HashMap<String, Object> map = new HashMap<String, Object>();
-		 
-		 map.put("startRow", pu.getStartRow()-1);
-		 map.put("endRow",pu.getEndRow());
-		 
-	 
-		 List<ManageClassVO> list =service.manage_list(map);
-		 
-		 model.addAttribute("list", list);
-		 model.addAttribute("pu",pu);
-		 
-		 
+	public String manageClass(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String search) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("field", field);
+		map.put("search", search);
+		int totalRowCount = service.count();
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
+
+		map.put("startRow", pu.getStartRow() - 1);
+		map.put("endRow", pu.getEndRow());
+
+		List<ManageClassVO> list = service.manage_list(map);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pu", pu);
+
 		return ".admin.manageClass";
 	}
-	
-	
-	
-	
+
 }

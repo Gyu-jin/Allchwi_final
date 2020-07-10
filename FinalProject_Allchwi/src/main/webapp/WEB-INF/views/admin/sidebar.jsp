@@ -84,7 +84,7 @@
 
 
 			<li class="nav-item active"><a class="nav-link"
-				href="${cp }/admin/statistic"> <i
+				href="${cp }/admin/statistic1"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>통계</span></a></li>
 
 
