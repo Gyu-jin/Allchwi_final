@@ -54,7 +54,8 @@
 			<!-- 연습추가/영호 -->
 			<a href="${cp}/mypage/mypageForm">프로필</a>&nbsp&nbsp
 			<a href="${cp}/mypage/changePwd">비밀번호변경</a>&nbsp&nbsp	
-			<a href="${cp}/mypage/signout">회원탈퇴</a>	
+			<a href="${cp}/mypage/signout">회원탈퇴</a>&nbsp&nbsp		
+			<a href="${cp}/mypage/pointForm">내 포인트</a>	
 		 </div>
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->
