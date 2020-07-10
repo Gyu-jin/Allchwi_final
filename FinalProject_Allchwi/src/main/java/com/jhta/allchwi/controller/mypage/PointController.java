@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PointController {
 	@GetMapping("/mypage/pointForm")
 	public String goPoint() {
-		return ".mypage.point";
+		return ".mypage.mypoint";
 	}
 }
