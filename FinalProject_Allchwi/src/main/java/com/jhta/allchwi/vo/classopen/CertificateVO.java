@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.claaopen;
+package com.jhta.allchwi.vo.classopen;
 
 import java.sql.Blob;
 import java.sql.Timestamp;
@@ -7,7 +7,7 @@ public class CertificateVO {
 	private int certif_num; // 자격증 번호
 	private int class_num; // 튜터번호
 	private String certif_filename; //파일저장이름
-	private Blob certif_file; //파일 Blob
+	private Object certif_file; //파일 Blob
 	private String certif_name; //자격증명
 	private Timestamp certif_regdate; //업로드일
 	
@@ -15,7 +15,7 @@ public class CertificateVO {
 	public CertificateVO () {}
 
 
-	public CertificateVO(int certif_num, int class_num, String certif_filename, Blob certif_file, String certif_name,
+	public CertificateVO(int certif_num, int class_num, String certif_filename, Object certif_file, String certif_name,
 			Timestamp certif_regdate) {
 		super();
 		this.certif_num = certif_num;
@@ -57,12 +57,12 @@ public class CertificateVO {
 	}
 
 
-	public Blob getCertif_file() {
+	public Object getCertif_file() {
 		return certif_file;
 	}
 
 
-	public void setCertif_file(Blob certif_file) {
+	public void setCertif_file(Object certif_file) {
 		this.certif_file = certif_file;
 	}
 

@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.claaopen;
+package com.jhta.allchwi.vo.classopen;
 
 import java.sql.Timestamp;
 

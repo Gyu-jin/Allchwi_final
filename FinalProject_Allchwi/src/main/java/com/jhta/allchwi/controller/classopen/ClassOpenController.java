@@ -3,11 +3,15 @@ package com.jhta.allchwi.controller.classopen;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jhta.allchwi.vo.claaopen.ClassInfoVO;
+import com.jhta.allchwi.service.classopen.CertificateService;
+import com.jhta.allchwi.vo.classopen.CertificateVO;
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
 @Controller
 public class ClassOpenController {
+	@Autowired
+	private CertificateService service;
+	
 	
 	@GetMapping("/class/enrollment")
 	public String goEnrollement() {
@@ -57,27 +66,27 @@ public class ClassOpenController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(uploadPath);
 		for (int i = 0; i < certes.size(); i++) {
 			MultipartFile cert = certes.get(i);
-			String originalName = cert.getOriginalFilename();
-			System.out.println(originalName);
-			String savefileName = UUID.randomUUID() + "_" + originalName;
+			byte[] file = null;
 			
-			// 전송된 파일을 읽어오는 스트림
 			try {
-				InputStream fis;
-				fis = cert.getInputStream();
-				// 전송된 파일을 읽어 오는스트림
-				// 전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
-				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefileName);
-				// 파일 복사하기 ( 파일 복사 클래스 )
-				FileCopyUtils.copy(fis, fos);
-				fis.close();
-				fos.close();
+				file = cert.getBytes();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			String originalName = cert.getOriginalFilename();
+			System.out.println(originalName);			
+			
+			CertificateVO vv = new CertificateVO(0, 12, originalName,file, certName[i], null);
+			/*
+			 * // 전송된 파일을 읽어오는 스트림 try { InputStream fis; fis = cert.getInputStream(); //
+			 * 전송된 파일을 읽어 오는스트림 // 전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림 FileOutputStream fos = new
+			 * FileOutputStream(uploadPath + "\\" + savefileName); // 파일 복사하기 ( 파일 복사 클래스 )
+			 * FileCopyUtils.copy(fis, fos); fis.close(); fos.close(); } catch (IOException
+			 * e) { e.printStackTrace(); }
+			 */
+			service.insert(vv);
 		}
 			
 		for(MultipartFile img : images) {

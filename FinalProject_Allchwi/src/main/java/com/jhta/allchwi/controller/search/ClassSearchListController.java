@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.jhta.allchwi.vo.claaopen.ClassInfoVO;
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
 @Controller
 public class ClassSearchListController {
