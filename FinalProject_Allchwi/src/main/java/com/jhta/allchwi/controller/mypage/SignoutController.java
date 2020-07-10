@@ -16,9 +16,17 @@ import com.jhta.allchwi.vo.login.MemberLoginVO;
 
 @Controller
 public class SignoutController {
+	
+	
 	//회원탈퇴 페이지로 이동
 	@GetMapping("/mypage/signout")
 	public String goPage() {
 		return ".mypage.signout";
+	}
+	//회원정보 업데이트 하기
+	@PostMapping("/mypage/signout")
+	public String signout() {
+		//
+		return "redirect:/";
 	}
 }

@@ -10,8 +10,9 @@
 		
 		<!-- Login 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberLoginVO" alias="mlv"/>		
-		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>		
-		<typeAlias type="com.jhta.allchwi.vo.login.PointVO" alias="pv"/>		
+		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>
+		<!-- point 관련 Mapper vo alias -->	
+		<typeAlias type="com.jhta.allchwi.vo.point.PointVO" alias="pv"/>		
 		<!-- 이미지 파일 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.profileImg.ProfileImgVO" alias="piv"/>		
 	</typeAliases>
@@ -25,7 +26,9 @@
 		<!-- Login관련 Mapper 경로 -->
 		<mapper resource="com/jhta/mybatis/mapper/MemberLoginMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/MemberInfoMapper.xml"/>
-		<mapper resource="com/jhta/mybatis/mapper/PointMapper.xml"/>
+		<!-- Point관련 Mapper 경로 -->
+		<mapper resource="com/jhta/mybatis/mapper/PointMapper.xml"/>			
+		<!-- ProfileImg관련 Mapper 경로 -->
 		<mapper resource="com/jhta/mybatis/mapper/ProfileImgMapper.xml"/>
 	</mappers>
 </configuration>

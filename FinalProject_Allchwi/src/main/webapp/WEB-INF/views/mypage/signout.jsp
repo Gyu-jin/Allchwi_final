@@ -40,9 +40,8 @@
 						<div class="left_box">
 						</div>
 						<div class="right_box">
-							<textarea class="form-control" name="feedback" id="feedback"
-								placeholder="서비스 탈퇴 사유에 대해 알려주세요. 고객님의 소중한 피드백을 담아 더 나은 서비스로 보답 드리도록 하겠습니다.">
-							</textarea>
+							<textarea class="form-control" name="feedback" id="feedback" placeholder="서비스 탈퇴 사유에 대해 알려주세요." onblur="feedValidation()"></textarea>
+							<span id="fdMsg" style="font-size: 15px; padding-left: 14px;"></span>
 						</div>
 					</div>
 				</div>
@@ -56,90 +55,47 @@
 </div>
 <script type="text/javascript">
 //모든 값이 입력되었을때 데이터를 보내기 위한 변수 선언
-var curBl = false;
-var inBl = false;
-var cfmBl = false;
+var currBl = false;
+var feedBl = false;
 //현재 비밀번호와 일치하는지 확인(ajax사용) 
 function checkPwd(){
 	//검색을 위한 조건 값을 받아옴
 	let id = $("#id").val();
 	let pwd = $("#currPwd").val();
 	let cpMsg = $("#cpMsg");
-	let inPwd = $("#inPwd");
-	let cfmPwd = $("#cfmPwd");
 	$.getJSON("${cp}/CheckPWD.do",
 		{id : id, pwd : pwd},
 		function(data){
 			if(data.code == 'success'){
 				cpMsg.css('color','green');
 				cpMsg.html("비밀번호가 일치합니다.");
-				inPwd.removeAttr('disabled');
-				cfmPwd.removeAttr('disabled');
-				curBl = true;
+				currBl = true;
 				buttonUp();
 			} else {
 				cpMsg.css('color','red');
 				cpMsg.html("비밀번호가 일치하지 않습니다.");
-				inPwd.attr("disabled",true);
-				cfmPwd.attr("disabled",true);
-				curBl = false;
+				currBl = false;
 			}
 	});
 }
-//비밀번호 유효성 검사
-function pwdValidation() {
-	let pwd = $("#inPwd").val();
-	let prevPwd = $("#currPwd").val();
-	let ipMsg = $("#ipMsg");
+//탈퇴사유 유효성 검사
+function feedValidation() {
+	let feed = $("#feed").val();
+	let fdMsg = $("#fdMsg");
 	// 특문 + 숫자 + 영문
-	var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
-	if(!regExpPwd.test(pwd)) {
-		ipMsg.css('color','red');
-		ipMsg.html("영문+숫자+특수문자를 조합해주세요.");
-		inBl = false;
-	} else if (pwd.length < 8) {
-		ipMsg.css('color','red');
-		ipMsg.html("8자리 이상 입력해주세요.");
-		inBl = false;
-	} else if (pwd.length > 10) {
-		ipMsg.css('color','red');
-		ipMsg.html("10자리 이내로 입력해주세요.");
-		inBl = false;
-	} else if(pwd === prevPwd){
-		ipMsg.css('color','red');
-		ipMsg.html("사용불가(전 비밀번호와 일치)");
-		inBl = false;
+	if(feed === "") {
+		fdMsg.css('color','red');
+		fdMsg.html("사유를 작성해 주세요.");
+		feedBl = false;
 	} else {
-		ipMsg.css('color','green');
-		ipMsg.html("사용가능한 비밀번호입니다.");
-		inBl = true;
-		buttonUp();
-	}
-}
-//비밀번호 확인 유효성 검사
-function pwdDCheck() {
-	let pwd = $("#inPwd").val();
-	let pwd1 = $("#cfmPwd").val();
-	let cfpMsg = $("#cfpMsg");
-	if(pwd1 === "") {
-		cfpMsg.css('color','red');
-		cfpMsg.html("비밀번호를 재입력해주세요.");
-		cfmBl = false;
-	} else if (pwd !== pwd1) {
-		cfpMsg.css('color','red');
-		cfpMsg.html("비밀번호가 일치하지 않습니다.");
-		cfmBl = false;
-	} else {
-		cfpMsg.css('color','green');
-		cfpMsg.html("비밀번호가 일치합니다.");
-		cfmBl = true;
+		feedBl = true;
 		buttonUp();
 	}
 }
 //버튼 활성화 함수 -> submit, 클릭 
 function buttonUp() {
 	let btn = $("#btn");
-	if(curBl && inBl && cfmBl) {
+	if(currBl && feedBl) {
 		btn.removeAttr('disabled');
 		return true;
 	} else {
