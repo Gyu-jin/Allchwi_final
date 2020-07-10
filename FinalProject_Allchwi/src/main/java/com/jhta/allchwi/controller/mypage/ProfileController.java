@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProfileController {
 	@GetMapping("/mypage/mypageForm")
-	public String goJoin() {
+	public String goMypage() {
 		return ".mypage.profile";
 	}
 }
