@@ -1,17 +1,17 @@
 package com.jhta.allchwi.vo.admin;
 
-public class small_categoryVo {
+public class SmallCategoryVO {
 	private int scategory_num;
 	private int bcategory_num;
 	private String scategory_name;
 	
 
-	public small_categoryVo() {
+	public SmallCategoryVO() {
 		super();
 	}
 
 
-	public small_categoryVo(int scategory_num, int bcategory_num, String scategory_name) {
+	public SmallCategoryVO(int scategory_num, int bcategory_num, String scategory_name) {
 		super();
 		this.scategory_num = scategory_num;
 		this.bcategory_num = bcategory_num;

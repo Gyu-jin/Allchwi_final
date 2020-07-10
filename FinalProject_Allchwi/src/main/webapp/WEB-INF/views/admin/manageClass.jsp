@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>수업관</h1>
+			<h1>수업관리</h1>
 
 			<table class="table table-bordered table-hover">
 				<thead>
@@ -23,7 +23,7 @@
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td>1</td>
-							<td>${vo.num }</td>
+							<td>${vo.num-1}</td>
 							<td>${vo.name }</td>
 							<td>${vo.pwd }</td>
 						</tr>
@@ -34,13 +34,13 @@
 
 			<div>
 				<c:if test="${pu.startPageNum>1 }">
-					<a href="/test/board/list?pageNum=${pu.startPageNum-1 }">[이전]</a>
+					<a href="${cp }/admin/manageClass?pageNum=${pu.startPageNum-1 }">[이전]</a>
 				</c:if>
 				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
 					<a href="${cp }/admin/manageClass?pageNum=${i }">${i }</a>
 				</c:forEach>
 				<c:if test="${pu.totalPageCount>pu.endPageNum }">
-					<a href="/test/board/list?pageNum=${pu.endPageNum+1 }">[다음]</a>
+					<a href="${cp }/admin/manageClass?pageNum=${pu.endPageNum+1 }">[다음]</a>
 				</c:if>
 			</div>
 

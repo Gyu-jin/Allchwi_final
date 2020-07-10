@@ -4,8 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.jhta.allchwi.vo.admin.big_categoryVo" alias="big_category"/>
-		<typeAlias type="com.jhta.allchwi.vo.admin.small_categoryVo" alias="small_category"/>
+		<typeAlias type="com.jhta.allchwi.vo.admin.BigCategoryVO" alias="big_category"/>
+		<typeAlias type="com.jhta.allchwi.vo.admin.SmallCategoryVO" alias="small_category"/>
+		
+		
 		<!-- Login 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberLoginVO" alias="mlv"/>		
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>		
@@ -16,7 +18,7 @@
 
 	<mappers>
 		<!-- admin관련 Mapper -->
-		<mapper resource="com/jhta/mybatis/mapper/AdminCategoryMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/CategoryMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminManageClassMapper.xml"/>
 		
 		

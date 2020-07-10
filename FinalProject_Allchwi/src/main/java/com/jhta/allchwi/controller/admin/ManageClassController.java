@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.manageClassService;
-import com.jhta.allchwi.vo.admin.manage_classVo;
+import com.jhta.allchwi.vo.admin.ManageClassVO;
 
 @Controller
 public class ManageClassController {
@@ -30,7 +30,12 @@ public class ManageClassController {
 		 map.put("startRow", pu.getStartRow());
 		 map.put("endRow",pu.getEndRow());
 		 
-		 List<manage_classVo> list =service.manage_list(map);
+		 System.out.println(pu.getStartRow());
+		 System.out.println(pu.getEndRow());
+		
+		 
+		 
+		 List<ManageClassVO> list =service.manage_list(map);
 		 
 		 model.addAttribute("list", list);
 		 model.addAttribute("pu",pu);

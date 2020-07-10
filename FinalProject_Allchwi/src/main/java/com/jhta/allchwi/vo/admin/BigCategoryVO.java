@@ -1,12 +1,12 @@
 package com.jhta.allchwi.vo.admin;
 
-public class big_categoryVo {
+public class BigCategoryVO {
 	private int bcategory_num;
 	private String bcategory_name;
 	
-	public big_categoryVo() {}
+	public BigCategoryVO() {}
 
-	public big_categoryVo(int bcategory_num, String bcategory_name) {
+	public BigCategoryVO(int bcategory_num, String bcategory_name) {
 		super();
 		this.bcategory_num = bcategory_num;
 		this.bcategory_name = bcategory_name;

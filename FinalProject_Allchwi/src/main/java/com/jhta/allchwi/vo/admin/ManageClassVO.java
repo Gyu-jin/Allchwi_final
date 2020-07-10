@@ -2,14 +2,14 @@ package com.jhta.allchwi.vo.admin;
 
 
 // 지금 practice테이블로 연습중
-public class manage_classVo {
+public class ManageClassVO {
 	private int num;
 	private String name;
 	private String pwd;
 	
-	public manage_classVo() {}
+	public ManageClassVO() {}
 
-	public manage_classVo(int num, String name, String pwd) {
+	public ManageClassVO(int num, String name, String pwd) {
 		super();
 		this.num = num;
 		this.name = name;

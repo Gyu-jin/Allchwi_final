@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jhta.allchwi.service.admin.categoryService;
-import com.jhta.allchwi.vo.admin.big_categoryVo;
-import com.jhta.allchwi.vo.admin.bigsmall_categoryVo;
-import com.jhta.allchwi.vo.admin.small_categoryVo;
+import com.jhta.allchwi.vo.admin.BigCategoryVO;
+import com.jhta.allchwi.vo.admin.BigsmallCategoryVO;
+import com.jhta.allchwi.vo.admin.SmallCategoryVO;
 
 @Controller
 public class AdminCategoryController {
@@ -24,8 +24,8 @@ public class AdminCategoryController {
 	
 	@GetMapping("/admin/category")
 	public String adminMain(Model model) {
-		List<bigsmall_categoryVo> list = service.list();
-		List<big_categoryVo> bcate_list = service.bcate_list();
+		List<BigsmallCategoryVO> list = service.list();
+		List<BigCategoryVO> bcate_list = service.bcate_list();
 		
 		model.addAttribute("list", list);
 		model.addAttribute("bcate_list", bcate_list);
@@ -36,13 +36,13 @@ public class AdminCategoryController {
 	
 	@RequestMapping(value="/admin/big_category/insert",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public String big_category(big_categoryVo vo,Model model) {
+	public String big_category(BigCategoryVO vo,Model model) {
 		service.bcate_insert(vo);
 		
-		List<bigsmall_categoryVo> list = service.list();
+		List<BigsmallCategoryVO> list = service.list();
 		
 		JSONArray arr = new JSONArray();
-		for(bigsmall_categoryVo vo2 :list){
+		for(BigsmallCategoryVO vo2 :list){
 			JSONObject json = new JSONObject();
 			json.put("bcategory_num", vo2.getBcategory_num());
 			json.put("bcategory_name", vo2.getBcategory_name());
@@ -56,10 +56,10 @@ public class AdminCategoryController {
 	@RequestMapping(value="/admin/big_category_list",produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public String big_category_list(Model model) {
-		List<big_categoryVo> bcate_list = service.bcate_list();
+		List<BigCategoryVO> bcate_list = service.bcate_list();
 		
 		JSONArray arr= new JSONArray();
-		for(big_categoryVo vo : bcate_list) {
+		for(BigCategoryVO vo : bcate_list) {
 			JSONObject json = new JSONObject();
 			json.put("bcategory_num", vo.getBcategory_num());
 			json.put("bcategory_name", vo.getBcategory_name());		
@@ -74,13 +74,13 @@ public class AdminCategoryController {
 	
 	@RequestMapping(value="/admin/small_category",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public String small_category(small_categoryVo vo,Model model) {
+	public String small_category(SmallCategoryVO vo,Model model) {
 		
 		service.scate_insert(vo);
 				
-		List<bigsmall_categoryVo> list = service.list();
+		List<BigsmallCategoryVO> list = service.list();
 		JSONArray arr= new JSONArray();		
-		for(bigsmall_categoryVo vo2 : list) {
+		for(BigsmallCategoryVO vo2 : list) {
 			JSONObject json = new JSONObject();		
 			json.put("bcategory_num", vo2.getBcategory_num());
 			json.put("bcategory_name", vo2.getBcategory_name());
@@ -101,10 +101,10 @@ public class AdminCategoryController {
 		int n = service.del_scate(scategory_num);
 		
 		if(n>0) {
-			List<bigsmall_categoryVo> whole_list= service.list();
+			List<BigsmallCategoryVO> whole_list= service.list();
 			
 			JSONArray arr = new JSONArray();
-			for(bigsmall_categoryVo vo2 :whole_list){
+			for(BigsmallCategoryVO vo2 :whole_list){
 				JSONObject json = new JSONObject();
 				json.put("bcategory_num", vo2.getBcategory_num());
 				json.put("bcategory_name", vo2.getBcategory_name());
@@ -124,10 +124,10 @@ public class AdminCategoryController {
 	public String bcategory_del(int bcategory_num) {
 		service.del_bcate(bcategory_num);
 		
-		List<bigsmall_categoryVo> whole_list= service.list();
+		List<BigsmallCategoryVO> whole_list= service.list();
 		
 		JSONArray arr = new JSONArray();
-		for(bigsmall_categoryVo vo2 :whole_list){
+		for(BigsmallCategoryVO vo2 :whole_list){
 			JSONObject json = new JSONObject();
 			json.put("bcategory_num", vo2.getBcategory_num());
 			json.put("bcategory_name", vo2.getBcategory_name());

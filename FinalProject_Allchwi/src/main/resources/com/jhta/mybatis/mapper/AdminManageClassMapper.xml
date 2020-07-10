@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminManageClassMapper">
 	
-	<select id="manage_list" resultType="com.jhta.allchwi.vo.admin.manage_classVo" parameterType="hashmap">
-		select * from practice limit #{startRow},#{endRow}
+	<select id="manage_list" resultType="com.jhta.allchwi.vo.admin.ManageClassVO" parameterType="hashmap">
+		select * from practice limit #{startRow},5
 	</select>
 	
 	<select id="count" resultType="int" >
