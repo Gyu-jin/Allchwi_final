@@ -27,14 +27,10 @@ public class ManageClassController {
 		 
 		 HashMap<String, Object> map = new HashMap<String, Object>();
 		 
-		 map.put("startRow", pu.getStartRow());
+		 map.put("startRow", pu.getStartRow()-1);
 		 map.put("endRow",pu.getEndRow());
 		 
-		 System.out.println(pu.getStartRow());
-		 System.out.println(pu.getEndRow());
-		
-		 
-		 
+	 
 		 List<ManageClassVO> list =service.manage_list(map);
 		 
 		 model.addAttribute("list", list);

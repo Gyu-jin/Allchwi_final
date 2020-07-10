@@ -18,7 +18,6 @@ public class categoryDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.CategoryMapper";	
 	
-	
 	public int bcate_insert(BigCategoryVO vo) {
 		return session.insert(NAMESPACE+".bcate_insert", vo);
 	}	
@@ -42,4 +41,9 @@ public class categoryDAO {
 	public int del_bcate(int bcategory_num) {
 		return session.delete(NAMESPACE+".del_bcate", bcategory_num);
 	}
+	
+	
+	
+	
+	
 }

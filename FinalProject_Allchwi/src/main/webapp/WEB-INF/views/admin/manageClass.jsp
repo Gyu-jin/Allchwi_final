@@ -23,7 +23,7 @@
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td>1</td>
-							<td>${vo.num-1}</td>
+							<td>${vo.num}</td>
 							<td>${vo.name }</td>
 							<td>${vo.pwd }</td>
 						</tr>

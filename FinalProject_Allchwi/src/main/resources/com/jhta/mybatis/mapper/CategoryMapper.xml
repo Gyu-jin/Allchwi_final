@@ -29,6 +29,11 @@
 	<delete id="del_bcate" parameterType="int">
 		delete from big_category where bcategory_num=#{bcategory_num}
 	</delete>
+
+
+
+
+
 </mapper>
 
 
