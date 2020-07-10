@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.login;
+package com.jhta.allchwi.vo.point;
 
 import java.sql.Timestamp;
 
