@@ -6,14 +6,14 @@
 	<typeAliases>
 		<typeAlias type="com.jhta.allchwi.vo.admin.BigCategoryVO" alias="big_category"/>
 		<typeAlias type="com.jhta.allchwi.vo.admin.SmallCategoryVO" alias="small_category"/>
-		
-		
 		<!-- Login 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberLoginVO" alias="mlv"/>		
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>		
 		<typeAlias type="com.jhta.allchwi.vo.login.PointVO" alias="pv"/>		
 		<!-- 이미지 파일 관련 Mapper vo alias -->
-		<typeAlias type="com.jhta.allchwi.vo.profileImg.ProfileImgVO" alias="piv"/>		
+		<typeAlias type="com.jhta.allchwi.vo.profileImg.ProfileImgVO" alias="piv"/>
+		<!-- 자격증테이블 alias -->
+		<typeAlias type="com.jhta.allchwi.vo.profileImg.CertificateVO" alias="cert"/>		
 	</typeAliases>
 
 	<mappers>
@@ -27,6 +27,9 @@
 		<mapper resource="com/jhta/mybatis/mapper/MemberInfoMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/PointMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/ProfileImgMapper.xml"/>
+		
+		<!-- Class등록 Mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/CertificateMapper.xml"/>
 	</mappers>
 </configuration>
 
