@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
+@font-face {
+	font-family: 'CookieRunOTF-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .classApply {
 	margin: auto;
 	width: 80%;
@@ -35,7 +44,8 @@
 }
 
 .title {
-	width: 40%; text-align : center;
+	width: 40%;
+	text-align: center;
 	color: #333;
 	font-weight: 500;
 	font-size: 16px;
@@ -61,6 +71,9 @@
 
 .orange {
 	color: #ff936f;
+	font-weight: 900;
+	font-family: 'CookieRunOTF-Bold';
+
 }
 
 .box .pf {
@@ -85,9 +98,11 @@
 	width: 480px;
 	margin: 3% 0% 3% 44%;
 }
+
 .button_box2 {
 	width: 200px;
 }
+
 div {
 	margin: 0;
 	padding: 0;
@@ -150,12 +165,12 @@ div {
 	margin: 10px;
 }
 
-
-.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not
-	(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #ff936f;
-    border-color: #ff936f;
+.btn-secondary:not (:disabled ):not (.disabled ).active, .btn-secondary:not
+	 (:disabled ):not (.disabled ):active, .show>.btn-secondary.dropdown-toggle
+	{
+	color: #fff;
+	background-color: #ff936f;
+	border-color: #ff936f;
 }
 
 .label-1, .label-12, .label-1-content {
@@ -166,18 +181,17 @@ div {
 	color: #333;
 	letter-spacing: -0.4px;
 	font-weight: bold;
-
 }
+
 .label-12 {
-	margin-top:158px;
-
+	margin-top: 158px;
 }
-.label-1, .label-12{
+
+.label-1, .label-12 {
 	text-align: center;
 	display: inline-flex;
 	float: left;
 }
-
 
 .box .inner1 {
 	margin-top: 30px;
@@ -201,6 +215,12 @@ textarea.len980 {
 
 .input-group-prepend {
 	height: 38px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	font-weight: bold;
+	color: #fff;
+	background-color: #7185bb;
 }
 </style>
 <div class="classApply">
@@ -229,7 +249,7 @@ textarea.len980 {
 
 
 			<div class="info1">
-				<span class="orange">클래스 명</span>
+				<span class="orange">모찌의 실전 산책!</span>
 			</div>
 			<div class="box">
 				<div class="col-md-6">
@@ -253,22 +273,33 @@ textarea.len980 {
 					</div>
 				</div>
 
-
+				<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
 				<div class="col-md-6">
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="Radio button for following text input">
+									aria-label="Radio button for following text input"
+									name="classdate" value="1" checked>
 							</div>
 						</div>
 
 						<input type="text" class="form-control" disabled="disabled"
 							aria-label="Text input with radio button"
-							name="classdate" value="1">
+							value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
+					</div>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="radio"
+									aria-label="Radio button for following text input"
+									name="classdate" value="2">
+							</div>
+						</div>
+
 						<input type="text" class="form-control" disabled="disabled"
-							aria-label="Text input with radio button"
-							name="classdate" value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
+							aria-label="Text input with radio button" 
+							value="일시 : 2020년 07월 05일 / 장소 :  신촌 모찌 스터디카페">
 					</div>
 				</div>
 
@@ -288,7 +319,7 @@ textarea.len980 {
 			data-num='2'>
 
 			<div class="info1">
-				<span class="orange">클래스 명</span>
+				<span class="orange">모찌의 실전 산책!</span>
 			</div>
 			<div class="box">
 				<div class="col-md-5">
@@ -319,12 +350,12 @@ textarea.len980 {
 				<div class="col-md-5">
 
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-secondary active"> <input
-							type="radio" name="levels" id="lev-1" checked> 입문자
-						</label> <label class="btn btn-secondary"> <input type="radio"
-							name="levels" id="lev-2"> 초/중급자
-						</label> <label class="btn btn-secondary"> <input type="radio"
-							name="levels" id="lev-3"> 상급자
+						<label class="btn btn-secondary active"> 
+						<input type="radio" name="levels" value="lev-1" checked> 입문자
+						</label> <label class="btn btn-secondary"> 
+						<input type="radio" name="levels" value="lev-2"> 초/중급자
+						</label> <label class="btn btn-secondary"> 
+						<input type="radio"	name="levels" value="lev-3"> 상급자
 						</label>
 					</div>
 					<br>
@@ -337,9 +368,10 @@ textarea.len980 {
 								id="Introduction" name="Introduction"></textarea>
 						</div>
 					</div>
-					
-					<input type="text" id="phone" name="phone" class="form-control" 
-					style="width:300px;margin-top: 20px;" placeholder="개인연락처를 - 없이 입력해주세요.">
+
+					<input type="text" id="phone" name="phone" class="form-control"
+						style="width: 300px; margin-top: 20px;"
+						placeholder="개인연락처를 - 없이 입력해주세요.">
 
 				</div>
 
@@ -354,7 +386,7 @@ textarea.len980 {
 		<div class="tab-pane fade" id="pills-price" role="tabpanel"
 			data-num='3'>
 			<div class="info1">
-				<span class="orange">클래스 명</span>
+				<span class="orange">모찌의 실전 산책!</span>
 			</div>
 			<div class="box">
 				<div class="col-md-5">
@@ -386,21 +418,25 @@ textarea.len980 {
 
 				<div class="col-md-5">
 
-					<div class="label-1-content"><span style="color:red">76,000원</span></div>
+					<div class="label-1-content">
+						<span style="color: red">76,000원</span>
+					</div>
 					<div class="label-1-content">3000 포인트</div>
 					<div class="label-1-content">
-						<input type="text" name="usePoint" style="width:88px"> 포인트
+						<input type="text" name="usePoint" style="width: 88px">
+						포인트
 					</div>
-					<div class="label-1-content" style="width:200px">수업료 - 사용포인트 값</div>
+					<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
+						값</div>
 					<div class="label-1-content">
 						<div class="button_box2">
 							<button type="button" class="btn btn-outline-danger" id="cardPay">신용카드/체크카드</button>
 						</div>
-						
+
 					</div>
 
 
-					
+
 
 				</div>
 			</div>
@@ -409,7 +445,6 @@ textarea.len980 {
 	</div>
 </div>
 <script>
-
 	// [수업신청서 작성하기 ] 버튼 클릭 시, 다음 탭으로 이동
 	$("#wirteBtn").click(function() {
 		$('#pills-tab li:nth-child(2) a').tab('show');
@@ -420,8 +455,17 @@ textarea.len980 {
 	});
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
 	$("#cardPay").click(function() {
-		$.post("${cp}/class/apply", data, function(data, textStatus, req) {
-			
-		},"json");
+		var date_num=$("input[name=classdate]:checked").val();
+		var stu_lev=$("input[name=levels]:checked").val();
+		console.log(date_num+","+stu_lev);
+		$.post("${cp}/class/applyOk", {"date_num":date_num,"stu_lev":stu_lev}, function(data) {
+			console.log("콜백" + data);
+			if(data=="success"){
+				location.href="${cp}/class/success";
+			}else{
+				alert("수업 신청 오류;");
+				location.href="${cp}/";
+			}
+		});
 	});
 </script>
