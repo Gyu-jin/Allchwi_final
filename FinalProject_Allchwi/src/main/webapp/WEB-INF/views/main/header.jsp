@@ -32,7 +32,7 @@
           <div class="container-sm">
 	          <div class="header_loog">
 		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 200px; height: 100px"></a>
-		          <form method="post" action="${cp}/search/detailSearch"
+		          <form action="${cp}/search/keywordSearch"
 		          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 		            <div class="input-group">
 		              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -49,8 +49,6 @@
 		 <div class="practice-group">
            	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
 			<a href="${cp}/login/main">로그인 연습</a>&nbsp&nbsp
-			<a href="${cp}/class/enrollment">튜터등록</a>&nbsp&nbsp
-			<a href="${cp}/class/apply">수업신청하기</a>&nbsp&nbsp
 			<!-- 연습추가/영호 -->
 			<a href="${cp}/mypage/mypageForm">프로필</a>&nbsp&nbsp
 			<a href="${cp}/mypage/changePwd">비밀번호변경</a>&nbsp&nbsp	
@@ -84,7 +82,7 @@
 
             <!-- 튜터등록 링크 -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="tutorEnroll" role="button">
+              <a class="nav-link dropdown-toggle" href="${cp}/class/enrollment" id="tutorEnroll" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터등록</span>
            		</a>
                 
@@ -93,7 +91,7 @@
             <!-- 수업신청서 링크 -->
             <li class="nav-item dropdown no-arrow mx-1">
             	
-                <a class="nav-link dropdown-toggle" href="#" id="classApply" role="button">
+                <a class="nav-link dropdown-toggle" href="${cp}/class/apply" id="classApply" role="button">
                		<span class="mr-2 d-none d-lg-inline text-gray-600 small">수업신청서</span>
             	</a>
                 
