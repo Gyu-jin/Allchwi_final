@@ -11,5 +11,9 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
+	
+	<select id="select" parameterType="int" resultType="classinfo">
+		
+	</select>
 </mapper>
 

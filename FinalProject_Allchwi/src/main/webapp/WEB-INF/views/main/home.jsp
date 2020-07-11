@@ -96,20 +96,21 @@ mark {
 	         <!-- 카테고리 아이콘  -->
 	<div class="q_menu">
 		<ul>
+			<!-- 위시리스트에서 count 제일 많은 클래스 번호 ?? -->
 			<li><a href="#">
 					<div class="icon popular">
 						<img src="${cp}/resources/img/popular.png" alt="">
 					</div> <mark>인기수업</mark>
 			</a></li>
-			<li><a href="#">
+			<li><a href="${cp }/category/search?bigcategory_num=1">
 					<div class="icon design">
-						<img src="${cp}/resources/img/design.png" alt="">
-					</div> <mark>디자인</mark>
-			</a></li>
-			<li><a href="#">
-					<div class="icon work">
 						<img src="${cp}/resources/img/work.png" alt="">
 					</div> <mark>실무역량</mark>
+			</a></li>
+			<li><a href="${cp }/category/search?bigcategory_num=2">
+					<div class="icon work">
+						<img src="${cp}/resources/img/design.png" alt="">
+					</div> <mark>디자인</mark>
 			</a></li>
 			<li><a href="#">
 					<div class="icon beauty">

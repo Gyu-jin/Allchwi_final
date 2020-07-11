@@ -461,7 +461,7 @@ textarea.len980 {
 		$.post("${cp}/class/applyOk", {"date_num":date_num,"stu_lev":stu_lev}, function(data) {
 			console.log("콜백" + data);
 			if(data=="success"){
-				location.href="${cp}/class/success";
+				location.href="${cp}/class/success?date_num="+date_num;
 			}else{
 				alert("수업 신청 오류;");
 				location.href="${cp}/";
