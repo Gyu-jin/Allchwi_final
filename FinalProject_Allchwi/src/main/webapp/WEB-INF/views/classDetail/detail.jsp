@@ -17,7 +17,7 @@
 	width: 100%;
 	background: whitesmoke;
 	position: sticky;
-	left: 1200px;
+	left: 63%;
 }
 
 .remote.active {
@@ -73,9 +73,7 @@
 }
 
 .class_wrap {
-	float: left;
 	background: whitesmoke;
-	padding: 0 80px 0 80px;
 }
 
 .class_navi {
@@ -89,11 +87,10 @@
 }
 
 .class_navi.active {
-	position: fixed;
+	
 }
 
 #container_detail .class_wrap .class_detail {
-	width: 840px;
 	float: left;
 }
 
@@ -282,16 +279,19 @@ a, span {
 li {
 	list-style: none;
 }
+
 .qna_list ul li {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 10px 0;
-    cursor: default;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 10px 0;
+	cursor: default;
 }
-.qna_list{
-    border: 1px solid #d4cdcd;
-    margin-top: 65px;
+
+.qna_list {
+	border: 1px solid #d4cdcd;
+	margin-top: 65px;
 }
-.reply_box{
+
+.reply_box {
 	margin-top: 20px;
 }
 </style>
@@ -335,17 +335,18 @@ li {
 						<!-- //carousel -->
 					</div>
 					<!-- class_navi -->
-					<div id="class_navi" class="class_navi">
-						<ul style="margin: 0">
-							<li><a href="#sumary" id="li1" class="on">요약</a></li>
-							<li><a href="#tutor" id="li2" class="">튜터</a></li>
-							<li><a href="#intro" id="li3" class="">수업소개</a></li>
-							<li><a href="#review" id="li4" class="">리뷰</a></li>
-							<li><a href="#qna" id="li5" class="">문의</a></li>
-						</ul>
-					</div>
-					<!-- class wrap -->
 					<div class="class_wrap">
+						<div id="class_navi" class="class_navi">
+							<ul style="margin: 0">
+								<li><a href="#sumary" id="li1" class="on">요약</a></li>
+								<li><a href="#tutor" id="li2" class="">튜터</a></li>
+								<li><a href="#intro" id="li3" class="">수업소개</a></li>
+								<li><a href="#review" id="li4" class="">리뷰</a></li>
+								<li><a href="#qna" id="li5" class="">문의</a></li>
+							</ul>
+						</div>
+						<!-- class wrap -->
+
 						<!--class_navi 내용  -->
 						<!-- 1.요약 -->
 						<div class="class_detail" id="sumary">
@@ -558,9 +559,8 @@ li {
 													<dd class="date">2020-06-27 00:16:41</dd>
 												</dl></li>
 											<div class="reply_box">
-											 ^댓글 (collapse로 접히게)
-											<input type="text" id="reply_content">
-											<input type="submit" id="reply_send" value="등록">
+												^댓글 (collapse로 접히게) <input type="text" id="reply_content">
+												<input type="submit" id="reply_send" value="등록">
 											</div>
 										</c:forEach>
 									</ul>
@@ -572,49 +572,47 @@ li {
 				<!--// class wrap -->
 				<!-- 시간&날짜/ 결제창 -->
 				<div class="col-md-4 remote">
-					<div class="row">
-						<div class="col-md-12">
-							<div id="card">
-								<div class="class_type">
-									<h3>클래스유형</h3>
-								</div>
-								<div class="card">
-									<div class="card-header">
-										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#accordion" href="#card-element-1">
-											07.08(수)14:00~16:00 강남</a>
-									</div>
-									<div id="card-element-1" class="collapse">
-										<div class="card-body">상세장소 : 강사 공방</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header">
-										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#accordion" href="#card-element-2">
-											07.08(수)14:00~16:00 강남</a>
-									</div>
-									<div id="card-element-2" class="collapse">
-										<div class="card-body">상세장소 : 강사 공방</div>
-									</div>
-								</div>
+					<div class="remote_wrap">
+						<div class="class_type">
+							<h3>클래스유형</h3>
+						</div>
+						<div class="card">
+							<div class="card-header">
+								<a class="collapsed card-link" data-toggle="collapse"
+									data-parent="#accordion" href="#card-element-1">
+									07.08(수)14:00~16:00 강남</a>
 							</div>
-							<div class="tutor_t">
-								<dl class="tutor_txt">
-									<dt>
-										<div
-											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
-										</div>
-									</dt>
-									<dd>
-										신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어
-										있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
-									</dd>
-								</dl>
+							<div id="card-element-1" class="collapse">
+								<div class="card-body">상세장소 : 강사 공방</div>
 							</div>
-							<div class="button_pay">
-								<a href="${cp }/class/apply" class="btn_pay">수업신청하기</a>
+						</div>
+						<div class="card">
+							<div class="card-header">
+								<a class="collapsed card-link" data-toggle="collapse"
+									data-parent="#accordion" href="#card-element-2">
+									07.08(수)14:00~16:00 강남</a>
 							</div>
+							<div id="card-element-2" class="collapse">
+								<div class="card-body">상세장소 : 강사 공방</div>
+							</div>
+						</div>
+
+						<div class="tutor_t">
+							<dl class="tutor_txt">
+								<dt>
+									<div
+										style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+									</div>
+								</dt>
+								<dd>
+									신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어
+									있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
+								</dd>
+							</dl>
+						</div>
+						<div class="button_pay">
+							<a href="${cp }/class/apply" class="btn_pay">수업신청하기</a>
+
 						</div>
 					</div>
 				</div>
