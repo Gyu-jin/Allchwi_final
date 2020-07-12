@@ -10,19 +10,22 @@
 	
  <!-- ///////////////////////////////admin 타일즈  시작  //////////////////////////////////////////////////////// -->
 	
+	<!-- 
 	<definition name=".admin.main" extends=".main">
 	 	<put-attribute name="body" value="/WEB-INF/views/admin/sidebar.jsp"/>
 	</definition>
+	 -->
 	
-	<definition name=".admin.memberlist" template="/WEB-INF/views/admin/layout.jsp">
+	
+	<definition name=".admin.main" template="/WEB-INF/views/admin/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jsp"/>
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/memberlist.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/admin/main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	<definition name=".admin.*" extends=".admin.memberlist">
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/{1}.jsp"/>
+	<definition name=".admin.*" extends=".admin.main">
+		<put-attribute name="main" value="/WEB-INF/views/admin/{1}.jsp"/>
 	</definition>
 	
 	

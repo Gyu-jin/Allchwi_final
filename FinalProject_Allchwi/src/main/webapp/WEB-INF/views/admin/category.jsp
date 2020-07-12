@@ -2,24 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
-<style>
-#searchbar {
-	margin-left: 80px;
-}
-
-#table {
-	margin-left: 80px;
-	text-align: center;
-}
-
-.container {
-	width: 100%;
-	margin: auto;
-}
-</style>
 
 
-<div id="wrapper" class="container">
+
+<div id="wrapper" class="container-fluid">
 	<div id="content-wrapper" class="d-flex flex-column">
 		<div id="searchbar">
 			<h1 class="h3 mb-2 text-gray-800">카테고리</h1>

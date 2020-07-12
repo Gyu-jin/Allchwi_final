@@ -40,8 +40,8 @@
 				<div id="sidebar" style="display: inline-block;">
 					<tiles:insertAttribute name="sidebar" />
 				</div>
-				<div id="memberlist" style="display: inline-block; width:73%;">
-					<tiles:insertAttribute name="memberlist" />
+				<div id="main" style="display: inline-block; width:73%;">
+					<tiles:insertAttribute name="main" />
 				</div>
 			</div>
 			<!-- 메인 끝 -->

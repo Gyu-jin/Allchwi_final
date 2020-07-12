@@ -12,15 +12,12 @@
 	</sql>
 	 -->
 	
-	
 	<select id="manage_list" resultType="com.jhta.allchwi.vo.admin.ManageClassVO" parameterType="hashmap">
 		select * from practice 
 		<if test="field!=null and field!=''">
 			where ${field} like CONCAT('%',#{keyword},'%') 
 		</if>
 		limit #{startRow},5
-	
-	
 	</select>
 	
 	<select id="count" resultType="int" parameterType="hashmap" >
