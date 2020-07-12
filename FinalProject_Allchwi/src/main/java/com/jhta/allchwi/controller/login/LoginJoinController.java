@@ -20,6 +20,8 @@ public class LoginJoinController {
 	public String goJoin() {
 		return ".login.join";
 	}
+	//회원가입정보 포스트 방식으로 받기 
+	
 	
 	//ajax로 아이디 중복확인
 	@RequestMapping(value = "/CheckID.do", produces = "application/json;charset=utf-8")

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.PointMapper">
 	<!--3 포인트번호, 로그인번호(참조), 포인트금액, 포인트적립 및 사용내용, 포인트적립일, 포인트타입(사용[u], 적립[s])-->
-	<insert id="add_point" parameterType="pv">
+	<insert id="addPoint" parameterType="pv">
 		insert into Member_info(0, 0, point, point_name, now(), point_type)
 	</insert>
 </mapper>

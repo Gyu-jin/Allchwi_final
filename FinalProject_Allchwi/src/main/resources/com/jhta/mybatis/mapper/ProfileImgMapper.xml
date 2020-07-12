@@ -10,6 +10,10 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
+	<!-- 처음 기본 이미지 삽입 -->
+	<insert id="addProfile" parameterType="piv">
+		insert into profile_img values(0, #{pro_img},#{pro_filename},now())
+	</insert>
 </mapper>
 
 

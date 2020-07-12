@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.login.MemberInfoVO;
+
 
 @Repository
 public class MemberInfoDAO {
@@ -15,6 +17,11 @@ public class MemberInfoDAO {
 	
 	//회원탈퇴정보 업데이트
 	public int UpdateSignout(HashMap<String, Object> hm) {
-		return session.update(NAMESPACE + ".update_signout", hm);
+		return session.update(NAMESPACE + ".updateSignout", hm);
 	}
+	//회원가입시 정보 삽입, 회원가입시에는 회원번호 로그인번호 이미지번호 이름 등록일만
+	public int SignIn(MemberInfoVO miv) {
+		return session.insert(NAMESPACE + ".addInfo", miv);
+	}
+	
 }
