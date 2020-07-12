@@ -14,9 +14,9 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Product</th>
-						<th>Payment Taken</th>
-						<th>Status</th>
+						<th>num</th>
+						<th>name</th>
+						<th>pwd</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,13 +50,13 @@
 
 
 			<div>
-				<form action="${cp }/admin/manageClass">
+				<form method="get" action="${cp }/admin/manageClass">
 					<select name="field">
 						<option value="num">번호</option>
 						<option value="name">이름</option>
 						<option value="pwd">비밀번호</option>
 					</select> 
-					<input type="text" name="search"> <input type="submit"value="검색">
+					<input type="text" name="keyword"> <input type="submit"value="검색">
 				</form>
 			</div>
 

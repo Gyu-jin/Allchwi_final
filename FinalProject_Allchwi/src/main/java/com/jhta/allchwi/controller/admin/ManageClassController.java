@@ -19,12 +19,17 @@ public class ManageClassController {
 	private manageClassService service;
 
 	@GetMapping("/admin/manageClass")
-	public String manageClass(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String search) {
+	public String manageClass(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String keyword) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("field", field);
-		map.put("search", search);
-		int totalRowCount = service.count();
+		map.put("keyword", keyword);
+		System.out.println(field);
+		System.out.println(keyword);
+		
+		
+		int totalRowCount = service.count(map);
+		System.out.println("토탈row" +totalRowCount);
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
 
 		map.put("startRow", pu.getStartRow() - 1);
@@ -34,6 +39,10 @@ public class ManageClassController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("pu", pu);
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("field", field);
+		
+		
 
 		return ".admin.manageClass";
 	}

@@ -8,8 +8,6 @@
 	 	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	
-
  <!-- ///////////////////////////////admin 타일즈  시작  //////////////////////////////////////////////////////// -->
 	
 	<definition name=".admin.main" extends=".main">
@@ -23,34 +21,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	
 	<definition name=".admin.*" extends=".admin.memberlist">
 		<put-attribute name="memberlist" value="/WEB-INF/views/admin/{1}.jsp"/>
 	</definition>
 	
-	
-	
-	<!-- 
-	
-	<definition name=".admin.category" extends=".admin.memberlist">
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/category.jsp"/>
-	</definition>
-
-	
-	<definition name=".admin.classlist" extends=".admin.memberlist">
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/classlist.jsp"/>
-	</definition>
-	
-	
-	<definition name=".admin.manageClass" extends=".admin.memberlist">
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/manageClass.jsp"/>
-	</definition>
-	
-	
-	<definition name=".admin.statistic1" extends=".admin.memberlist">
-		<put-attribute name="memberlist" value="/WEB-INF/views/admin/statistic1.jsp"/>
-	</definition>
-	 -->
 	
 <!-- ////////////////////////////////admin 타일즈  끝 ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->	
 	

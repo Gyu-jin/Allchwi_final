@@ -80,7 +80,10 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 
-
+			
+			<li class="nav-item active"><a class="nav-link"
+				href="${cp }/admin/payment"> <i
+					class="fas fa-fw fa-tachometer-alt"></i> <span>회원결제내역</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"

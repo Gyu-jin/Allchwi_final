@@ -27,67 +27,66 @@
 
 <body id="page-top">
 	<!-- Page Wrapper -->
-		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column" style="height:800px;">
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column"
+		style="height: 800px;">
 
-			<!-- Main Content -->
-			<div id="content">
+		<!-- Main Content -->
+		<div id="content">
 
-				<!-- ///////탑바/////// -->
+			<!-- ///////탑바/////// -->
 
-				<!-- Page Heading -->
-				<h1>수업목록</h1>
-				<br>
-
-					<div class="row">
-						<div class="col-md-12 bg-light" style="text-align: right;">
-							<select class="form-control col-2" style="display: inline-block">
-								<option>11	</option>
-								<option>22	</option>
-							</select>
-							<form class="form-inline" style="display: inline-block">
-								<input class="form-control mr-sm-2" type="text" />
-								<button class="btn btn-primary my-2 my-sm-0" type="submit">
-									Search</button>
-							</form>
-						</div>
-					</div>
-					<hr style="border: solid 0.5px black;">
-
+			<!-- Page Heading -->
+			
+			<div class="breadcrumb">
+				<h2>수업목록</h2>
+				<div style="margin-left: 631px;">
+				<select class="form-control col-2" style="display: inline-block; width: 550px;">
+					<option>11</option>
+					<option>22</option>
+				</select>
+				<form class="form-inline" style="display: inline-block">
+					<input class="form-control mr-sm-2" type="text" />
+					<button class="btn btn-primary my-2 my-sm-0" type="submit">
+						Search</button>
+				</form>
+				</div >
+			</div>
 
 
 
 
 			<!-- Begin Page Content -->
 
-			
-				<div class="row" style="width: 700px;">
-					<div class="col-md-12">
-						<div class="card">
-							<h5 class="card-header">수업제목</h5>
-							<div class="card-body" style="height:140px;">
-								<div style="display: inline-block;">
-									<img src="${cp }/resources/img/모찌.jpg"
-										style="width:100px; height: 100px; margin-top: -100px;">
-								</div>
-								<div style="display: inline-block">
-									<p>심사상태</p>
-									<p>신청인원:0명 / 위시인원:0명</p>
-									<a href="#" class="btn btn-success btn-icon-split"> <span
-										class="icon text-white-50"> <i class="fas fa-check"></i>
-									</span> <span class="text">심사완료</span>
-									</a> <a href="#" class="btn btn-danger btn-icon-split"> <span
-										class="icon text-white-50"> <i
-											class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
-									</a>
-								</div>
+
+			<div class="row" style="width: 565px;">
+				<div class="col-md-12">
+					<div class="card">
+						<h5 class="card-header" style="text-align: center;">수업제목 <button type="button" class="btn btn-danger" style="float:right">삭제</button></h5>
+						
+						<div class="card-body" style="height: 140px;">
+							<div style="display: inline-block;">
+								<img src="${cp }/resources/img/모찌.jpg"
+									style="width: 130px; height: 130px; margin-top: -100px;">
+							</div>
+							<div style="display: inline-block; margin-left: 60px;">
+								<p>심사상태</p>
+								<p>신청인원:0명 / 위시인원:0명</p>
+								<a href="#" class="btn btn-success btn-icon-split"> <span
+									class="icon text-white-50"> <i class="fas fa-check"></i>
+								</span> <span class="text">심사완료</span>
+								</a> <a href="#" class="btn btn-danger btn-icon-split"> <span
+									class="icon text-white-50"> <i
+										class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-			
+			</div>
 
-			
+
+
 
 
 
