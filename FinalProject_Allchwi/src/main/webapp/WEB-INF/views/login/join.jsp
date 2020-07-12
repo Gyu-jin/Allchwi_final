@@ -10,7 +10,7 @@
 <div class="container">
 	<div id=loginbody>
 		<div class="login-form">
-			<form action="#" method="post">
+			<form action="${cp}/login/join" method="post">
 				<h1>올취 회원가입</h1>
 				<!-- 이름 입력 -->
 				<div class="form-group">
