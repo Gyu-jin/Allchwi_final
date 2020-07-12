@@ -83,6 +83,9 @@
     display: block;
     margin-top: 0;
 }
+.input-search {
+	width: 35%;
+}
 </style>
 <script>
 
@@ -199,7 +202,20 @@
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<form class="form-inline">
-						<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
+					
+					<!-- header 검색창을 통해 검색했을 때만 keyword가 나타나도록 .. -->
+						<c:if test="${!empty keyword }">
+							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
+						</c:if>
+						<div class="label-1">
+							상세검색어
+						</div> 
+						<div class="input-search">
+				            <div class="input-group">
+				              <input type="text" name="keyword" class="form-control bg-light border-0 small" 
+				              	placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+				            </div>	            
+				       </div>
 						<div class="label-1">
 							카테고리
 						</div> 
@@ -390,12 +406,12 @@
 
 		<!-- 이부분 나중에 :  select 된 자료를 동적으로 생성하기 (제이쿼리,json)-->
 		<c:if test="${!empty list }">
-			<c:forEach var="vo" items="${list }">
+			<c:forEach var="vo" items="${list }" varStatus="status">
 				<div class='col-md-4'>
 					<div class='card mb-4 shadow-sm'>
 						<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
 						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'>
-						<title>Placeholder</title>
+						<title>	${vo.getClass_title() }</title>
 					   	<rect width='100%' height='100%' fill='#55595c'></rect>
 					   	<text x='50%' y='50%' fill='#eceeef' dy='.3em'>
 					   	
@@ -407,7 +423,7 @@
 								<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>
 								<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>
 							</div>
-							<small class='text-muted'>"+(i+1)+"번째 수업</small>
+							<small class='text-muted'>${status.count }번째 수업</small>
 							</div>
 						</div>
 					</div>
@@ -459,7 +475,7 @@
 		var startDate=$("input[name=startDate]").val();
 		var endDate=$("input[name=endDate]").val();
 		console.log(cates.length);		
-		$.post("../class/detailSearch",{"keyword":keyword,"startDate":startDate,"endDate":endDate,"cccc":cates} ,function(data, textStatus, req) {
+		$.post("${cp}/class/detailSearch",{"keyword":keyword,"startDate":startDate,"endDate":endDate,"cccc":cates} ,function(data, textStatus, req) {
 			$(data).each(function(i,searchClass){
 				var html = "<div class='col-md-4'>"
 					+ "<div class='card mb-4 shadow-sm'>"

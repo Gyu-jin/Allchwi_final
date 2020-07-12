@@ -102,12 +102,12 @@ mark {
 						<img src="${cp}/resources/img/popular.png" alt="">
 					</div> <mark>인기수업</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bigcategory_num=1">
+			<li><a href="${cp }/category/search?bcategory_num=1">
 					<div class="icon design">
 						<img src="${cp}/resources/img/work.png" alt="">
 					</div> <mark>실무역량</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bigcategory_num=2">
+			<li><a href="${cp }/category/search?bcategory_num=2">
 					<div class="icon work">
 						<img src="${cp}/resources/img/design.png" alt="">
 					</div> <mark>디자인</mark>

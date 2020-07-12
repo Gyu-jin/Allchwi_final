@@ -1,5 +1,7 @@
 package com.jhta.allchwi.service.classopen;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class ClassInfoService {
 	
 	public int insert(ClassInfoVO vo) {
 		return dao.insert(vo);
+	}
+	
+	public List<ClassInfoVO> list(int bcategory_num){
+		return dao.list(bcategory_num);
 	}
 }

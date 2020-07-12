@@ -12,8 +12,12 @@
 	    </selectKey>
 	</insert>
 	
-	<select id="select" parameterType="int" resultType="classinfo">
-		
+	<select id="list" parameterType="int" resultType="classinfo">
+		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name 
+		from (select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+				from small_category s, big_category b
+				where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num})a, class_info c
+		where a.scategory_num=c.scategory_num
 	</select>
 </mapper>
 
