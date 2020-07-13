@@ -73,7 +73,8 @@
 }
 
 .class_wrap {
-	background: whitesmoke;
+	background: #ececec;
+	
 }
 
 .class_navi {
@@ -87,11 +88,12 @@
 }
 
 .class_navi.active {
-	
+	position: fixed;
 }
 
 #container_detail .class_wrap .class_detail {
-	float: left;
+	background: #ececec;
+	width: 100%
 }
 
 #container_detail .class_wrap .class_detail .info {
@@ -104,7 +106,7 @@
 	float: left;
 	color: #000;
 	text-align: center;
-	margin: 100px 0 50px 0;
+	margin: 100px 0 50px 100px;
 }
 
 #container_detail .class_wrap .class_detail .tutor_profile .name {
@@ -116,12 +118,13 @@
 #container_detail .class_wrap .class_detail .class_title {
 	float: right;
 	padding-top: 40px;
-	margin: 50px 0 50px 0;
+	margin: 50px 50px 50px 0;
 }
 
 #container_detail .class_wrap .detail_sec_bor {
 	border-top: 1px solid #e3e3e3;
 	overflow: hidden;
+	padding: 0px 80px 80px 80px;
 }
 
 #container_detail .class_wrap .class_detail .sec01 {
@@ -275,7 +278,10 @@ a, span {
 	line-height: inherit;
 	text-decoration: none;
 }
-
+a:hover {
+   color: inherit;
+   text-decoration: none;
+}
 li {
 	list-style: none;
 }
@@ -335,7 +341,7 @@ li {
 						<!-- //carousel -->
 					</div>
 					<!-- class_navi -->
-					<div class="class_wrap">
+					<div class="class_wrap ">
 						<div id="class_navi" class="class_navi">
 							<ul style="margin: 0">
 								<li><a href="#sumary" id="li1" class="on">요약</a></li>
@@ -374,12 +380,20 @@ li {
 										</c:forEach> (리뷰갯수)
 									</a>
 									<!-- 찜하기 -->
-									<a href="#" class="btn_wishlist"> <!-- 예스찜 --> <img
-										src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
-										<!-- 노찜 
-												<img src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
-												--> 찜하기
-									</a>
+									<c:choose>
+										<c:when test="${empty id}">
+											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main" id="btn_wishlist" class="btn_wishlist">
+											<img id="wishsrc" src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png"> 
+											찜하기</a>
+										</c:when>
+										<c:otherwise>
+											<a href="javascript:void(0);" class="btn_wishlist" id="btn_before_wish"> 
+												<img id="wishsrc" src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+											찜하기</a>
+										</c:otherwise>
+									</c:choose>
+									<!-- ///찜하기 -->
+									
 								</div>
 								<!-- 기본정보 -->
 								<div class="info">
@@ -626,6 +640,7 @@ li {
 	$(window).scroll(function() {
 		if ($(document).scrollTop() > navOffset.top) {
 			$('.class_navi').addClass('active');
+			
 		} else {
 			$('.class_navi').removeClass('active');
 		}
@@ -645,4 +660,51 @@ li {
 	$("#card-header collapse").click(function() {
 		$(this).addClass('show');
 	});
+	
+	//위시전
+	 $(document).on('click', '#btn_before_wish', function () {
+		var btn = $(this);
+		$.post('${cp}/class/addWish', {}, function (res) {
+			if (res=='success') {
+				btn.attr('id', 'btn_after_wish');
+				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
+				alert('위시리스트 등록 성공');
+			} else {
+				alert('위시리스트 등록 오류');
+			}
+		});
+	});
+	//위시후
+	$(document).on('click', '#btn_after_wish', function () {
+		var btn = $(this);
+		$.post('${cp}/class/removeWish', {}, function (res) {
+			if (res=='success') {
+				btn.attr('id', 'btn_before_wish');
+				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
+				alert('위시리스트 삭제 성공');
+			} else {
+				alert('위시리스트 삭제 오류');
+			}
+		});
+	});
+
+	$('#btn-write-review').click(function () {			
+		id = document.getElementById('id').value;
+		
+		if (id == '') {
+			alert('로그인이 필요합니다');
+		}
+		else {
+			$.post('/class/classReview/23827', {}, function (res) {
+				if (res=='success') {
+					$('#popup-write-review').show();
+				} else {				
+					alert('수업을 수강한 아이디만 리뷰를 작성할 수 있습니다. 아이디를 확인해주세요!');
+				}
+			});		
+		}
+	});		
+
+
+
 </script>
