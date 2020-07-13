@@ -34,6 +34,7 @@
 		<!-- admin관련 Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/CategoryMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminManageClassMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/AdminMemberListMapper.xml"/>
 		
 		
 		<!-- Login관련 Mapper 경로 -->

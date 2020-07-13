@@ -1,0 +1,24 @@
+package com.jhta.allchwi.controller.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.jhta.allchwi.service.admin.memberListService;
+import com.jhta.allchwi.vo.admin.MemberListVO;
+
+@Controller
+public class MemberListController {
+	@Autowired
+	private memberListService service;
+	
+	@GetMapping("/admin/memberlist")
+	public String adminMain(Model model) {
+		List<MemberListVO> list = service.member_list();
+		model.addAttribute("list", list);
+		return ".admin.memberlist";
+	}
+}

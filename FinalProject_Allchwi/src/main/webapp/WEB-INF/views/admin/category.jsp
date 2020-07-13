@@ -139,6 +139,7 @@
 			}
 		}
 		
+		//ajax콜백함수(리스트 불러오기)
 		function redundlist(data,bbcategory){		
 			$("#bcate_input").val(""); 
 			$("#scate_input").val("");
@@ -176,9 +177,9 @@
 							var scategory_num = arr.scategory_num;
 										
 							if( bbcategory == bcategory_num){
-								$("select[name=cat]").append("<option value="+bcategory_num+" selected='selected'>"+bcategory_name+"</option>");
+								$("select[name='cat']").append("<option value="+bcategory_num+" selected='selected'>"+bcategory_name+"</option>");
 							}else{
-								$("select[name=cat]").append("<option value="+bcategory_num+">"+bcategory_name+"</option>");
+								$("select[name='cat']").append("<option value="+bcategory_num+">"+bcategory_name+"</option>");
 							}
 						});
 					}
@@ -186,7 +187,7 @@
 			});	
 		}
 		
-		
+		//삭제함수
 		function del(scategory,bcategory){
 			var scategory_num = scategory;
 			console.log(scategory);
