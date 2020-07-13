@@ -14,7 +14,7 @@
 				<h1>올취 회원가입</h1>
 				<!-- 이름 입력 -->
 				<div class="form-group">
-					<input type="text" name="name" placeholder="이름(실명)을 입력해주세요"
+					<input type="text" name="mb_name" placeholder="이름(실명)을 입력해주세요"
 						onblur="nameCheck()"> <span class="input-icon"><i
 						class="fa fa-user-circle-o"></i></span>
 				</div>
@@ -70,7 +70,7 @@
 
 	//이름 유효성 검사
 	function nameCheck() {
-		let name = $("input[name='name']").val();
+		let name = $("input[name='mb_name']").val();
 		console.log(name);
 		//메세지 출력위해 객체로 가져오기
 		let nameMsg = $("#nameMsg");

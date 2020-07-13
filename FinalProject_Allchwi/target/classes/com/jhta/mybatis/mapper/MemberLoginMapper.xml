@@ -3,9 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.MemberLoginMapper">
-	<!--0 로그인번호, 아이디, 비밀번호, 튜터여부, 탈퇴여부, 등록일, 이메일 인증 -->
+	<!--0 로그인번호, 아이디, 비밀번호, 튜터여부, 탈퇴여부, 등록일, 이메일 인증 / 최근 번호를 참조 할 수 있도록 selectkey를 걸어줌-->
 	<insert id="member_join" parameterType="mlv">
-		insert into member_login(0, #{id}, #{pwd}, 0, 0, now(), 0)
+		insert into member_login values (0, #{id}, #{pwd}, #{tutor_auth}, #{login_auth}, now(), #{email_auth})
+		<selectKey keyProperty="ml_num" resultType="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
 	</insert>
 	<!--1 아이디 검사  -->
 	<select id="idCheck" resultType="mlv" parameterType="String">

@@ -2,6 +2,8 @@ package com.jhta.allchwi.controller.login;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.login.MemberLoginService;
+import com.jhta.allchwi.vo.login.MemberInfoVO;
 import com.jhta.allchwi.vo.login.MemberLoginVO;
 
 @Controller
@@ -26,12 +29,14 @@ public class LoginJoinController {
 	}
 	//회원가입정보 포스트 방식으로 받기 
 	@PostMapping("/login/join")
-	public String signUp(MemberLoginVO mlv, @RequestParam("name")String name) {
-		//hashmap에 파라미터로 넘어온 회원정보 담기
-		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("mlv", mlv);
-		hm.put("name", name);
+	public String signUp(MemberLoginVO mlv, MemberInfoVO miv) {		
+		//세션에서 업로드 경로 구해오기.
+		//파라미터 넘어오는거 확인
+		System.out.println("파라미터 이름 : " + miv.getMb_name());
+		System.out.println("파라미터 아이디 : " + mlv.getId());
+		System.out.println("파라미터 비밀번호 : " + mlv.getPwd());
 		//트랜잭션 처리한 service 메소드 필요
+		int result = mls.joinMember(mlv, miv);
 		return "redirect:/login/main";
 	}
 	
