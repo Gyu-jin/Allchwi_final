@@ -29,7 +29,9 @@
 	<delete id="del_bcate" parameterType="int">
 		delete from big_category where bcategory_num=#{bcategory_num}
 	</delete>
-
+	<select id="scate_list" parameterType="int" resultType="small_category">
+		select scategory_num,bcategory_num,scategory_name from small_category where bcategory_num=#{bcategory_num}
+	</select>
 
 
 

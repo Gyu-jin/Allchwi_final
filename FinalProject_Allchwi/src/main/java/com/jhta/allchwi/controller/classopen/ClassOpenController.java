@@ -15,16 +15,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhta.allchwi.service.admin.categoryService;
 import com.jhta.allchwi.service.classopen.CertificateService;
 import com.jhta.allchwi.service.classopen.ClassImgService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.profileImg.ProfileImgService;
+import com.jhta.allchwi.vo.admin.BigCategoryVO;
+import com.jhta.allchwi.vo.admin.SmallCategoryVO;
 import com.jhta.allchwi.vo.classopen.CertificateVO;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
@@ -40,11 +45,24 @@ public class ClassOpenController {
 	private ClassImgService classimg_service;
 	@Autowired
 	private ProfileImgService proimg_service;
-	
+	@Autowired
+	private categoryService category_service;
 	
 	@GetMapping("/class/enrollment")
-	public String goEnrollement() {
+	public String goEnrollement(Model model) {
+		List<BigCategoryVO> bcate_list = category_service.bcate_list();
+		
+		model.addAttribute("bcate_list", bcate_list);
+
 		return ".classOpen.ClassEnrollment";
+	}
+	
+	// 작은카테고리 전송 컨트롤러
+	@PostMapping("/class/category")
+	@ResponseBody
+	public List<SmallCategoryVO> getScate(int bcategory_num){
+		List<SmallCategoryVO> list = category_service.scate_list(bcategory_num);
+		return list;
 	}
 	
 	@PostMapping("/class/enrollmentInsert")

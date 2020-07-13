@@ -42,6 +42,9 @@ public class categoryService {
 		return dao.del_bcate(bcategory_num);
 	}
 	
+	public List<SmallCategoryVO> scate_list(int bcategory_num){
+		return dao.scate_list(bcategory_num);
+	}
 	
 	
 }

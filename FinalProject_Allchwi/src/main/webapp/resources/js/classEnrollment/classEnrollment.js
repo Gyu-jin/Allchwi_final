@@ -655,7 +655,29 @@ $(function(){
 		});
 		
 	});
+	
+	// Small_Category change
+	$('#CateMain').on('change',function(){
+		var bcategory_num = $(this).val();
+		var cp = $('#cp').attr('data-contextPath');
+		$.ajax({
+		    type: "post",
+		    dataType: "json",
+		    url: cp+"/class/category",
+		    data: {bcategory_num: bcategory_num},
+		    success: function(data) {
+		    	$("#CateSub").empty();
+		    	$("#CateSub").append("<option value='0'>수업 대표 카테고리를 선택해주세요</option>");		
+		    	$(data).each(function(i,scate){				
+					$("#CateSub").append("<option value='"+scate.scategory_num+"'>"+scate.scategory_name+"</option>");		
+				});
+		    }
+		});
+	});
+	
 });
+
+
 
 
 

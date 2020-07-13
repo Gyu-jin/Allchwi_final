@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <link rel="stylesheet" href="${cp}/resources/css/classEnrollment/classEnrollment.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=472c28df1aaa1946fb26fe353232eace&libraries=services"></script>
@@ -141,11 +142,13 @@
 		<div class="box">
 			<div class="title">수업카테고리<b class="pink">*</b></div>
 			<div class="cont row">
-				<select class="custom-select col-3" id="CateMain" name="cateMain" onchange="addSelect2(this.value)">
-					<option value="1">수업 대표 카테고리를 선택해주세요</option>
+				<select class="custom-select col-3" id="CateMain" name="cateMain">
+					<option value="0">수업 대표 카테고리를 선택해주세요</option>
+					<c:forEach var="vo" items="${bcate_list }">
+						<option value="${vo.bcategory_num }">${vo.bcategory_name }</option>
+					</c:forEach>
 				</select>
 				<select class="custom-select col-3" id="CateSub" name="scategory_num">				
-					<option value="1">수업 대표 카테고리를 선택해주세요</option>
 				</select>
 			</div>
 		</div>
