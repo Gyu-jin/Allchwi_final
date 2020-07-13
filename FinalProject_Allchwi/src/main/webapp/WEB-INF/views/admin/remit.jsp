@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <div class="container-fluid">
 	<div class="breadcrumb">
-		<h2>회원결제내역</h2>
+		<h2>송금승인신청</h2>
 		<div style="margin-left: 860px;">
 			<select class="form-control col-2"
 				style="display: inline-block; width: 550px;">
@@ -46,4 +45,3 @@
 	</table>
 
 </div>
-

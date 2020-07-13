@@ -2,10 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<div class="container-fluid">
+	<div id="content-wrapper" class="d-flex flex-column">
+		<div class="breadcrumb">
+			<h2>회원관리</h2>
+			<div style="margin-left: 860px;">
+				<form action="${cp }/admin/manageClass" class="form-inline"
+					style="display: inline-block">
+					<select class="form-control col-2" name="field"
+						style="display: inline-block; width: 550px;">
+						<option value="num">번호</option>
+						<option value="name">이름</option>
+						<option value="pwd">비밀번호</option>
+					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
+					<button class="btn btn-primary my-2 my-sm-0" type="submit">
+						검색</button>
+				</form>
+			</div>
+		</div>
 
-<div id="content-wrapper" class="d-flex flex-column">
-	<h1>회원관리</h1>
-	<div class="container-fluid">
+
+
+
 		<table class="table table-bordered table-hover">
 			<thead class="thead-dark">
 				<tr>
@@ -25,26 +43,40 @@
 			</tbody>
 		</table>
 		<div>
-			<c:if test="${pu.startPageNum>1 }">
-				<a href="${cp }/admin/manageClass?pageNum=${pu.startPageNum-1 }">[이전]</a>
-			</c:if>
-			<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
-				<a href="${cp }/admin/manageClass?pageNum=${i }">${i }</a>
-			</c:forEach>
-			<c:if test="${pu.totalPageCount>pu.endPageNum }">
-				<a href="${cp }/admin/manageClass?pageNum=${pu.endPageNum+1 }">[다음]</a>
-			</c:if>
+			<ul class="pagination justify-content-center" style="margin:20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/admin/manageClass?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+
+
+		
+				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
+					<li class="page-item"><a class="page-link" href="${cp }/admin/manageClass?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+				</c:forEach>
+
+
+
+
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/admin/manageClass?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>					
+				</c:choose>
+			</ul>
 		</div>
 
-		<div>
-			<form method="get" action="${cp }/admin/manageClass">
-				<select name="field">
-					<option value="num">번호</option>
-					<option value="name">이름</option>
-					<option value="pwd">비밀번호</option>
-				</select> <input type="text" name="keyword"> <input type="submit"
-					value="검색">
-			</form>
-		</div>
+	
+
+
 	</div>
 </div>

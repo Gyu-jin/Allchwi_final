@@ -30,7 +30,7 @@
 
 		<div class="breadcrumb">
 			<h2>수업목록</h2>
-			<div style="margin-left: 600px;">
+			<div style="margin-left: 860px;">
 				<select class="form-control col-2"
 					style="display: inline-block; width: 550px;">
 					<option>11</option>
