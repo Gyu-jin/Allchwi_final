@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,28 +29,28 @@ import com.jhta.allchwi.service.admin.categoryService;
 import com.jhta.allchwi.service.classopen.CertificateService;
 import com.jhta.allchwi.service.classopen.ClassImgService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
+import com.jhta.allchwi.service.location.BigLocationService;
+import com.jhta.allchwi.service.location.SmallLocationService;
 import com.jhta.allchwi.service.profileImg.ProfileImgService;
 import com.jhta.allchwi.vo.admin.BigCategoryVO;
 import com.jhta.allchwi.vo.admin.SmallCategoryVO;
 import com.jhta.allchwi.vo.classopen.CertificateVO;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.vo.classopen.CurriculumVO;
+import com.jhta.allchwi.vo.location.BigLocationVO;
+import com.jhta.allchwi.vo.location.SmallLocationVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 
 @Controller
 public class ClassOpenController {
 	@Autowired
-	private CertificateService cert_service;
-	@Autowired
 	private ClassInfoService classinfo_service;
 	@Autowired
-	private ClassImgService classimg_service;
-	@Autowired
-	private ProfileImgService proimg_service;
-	@Autowired
 	private categoryService category_service;
+
 	
-	@GetMapping("/class/enrollment")
+	@RequestMapping("/class/enrollment")
 	public String goEnrollement(Model model) {
 		List<BigCategoryVO> bcate_list = category_service.bcate_list();
 		
@@ -65,7 +67,9 @@ public class ClassOpenController {
 		return list;
 	}
 	
-	@PostMapping("/class/enrollmentInsert")
+	@RequestMapping(value="/class/enrollmentInsert",produces ="application/text; charset=utf8",
+			method = RequestMethod.POST)
+	@ResponseBody
 	public String classInsert(
 			HttpSession session,
 			ClassInfoVO vo,
@@ -75,6 +79,22 @@ public class ClassOpenController {
 			@RequestParam("images")List<MultipartFile> images,
 			@RequestParam("curriculum[]")List<String> curriculum) {
 		
+		
+		String[] addr = vo.getClass_address().split(" ");
+		
+		// 도/특별시
+		String state = addr[0];
+		// 도/구
+		String city = addr[1];
+		
+		//큰 테이블 중복여주 체크 후 insert
+		BigLocationVO blocVo = new BigLocationVO(0, state);		
+		
+		//작은 카테고리 중복후 insert
+		SmallLocationVO slocVo = new SmallLocationVO(0, 0, city);
+		
+		// 승인여부 init
+		vo.setClass_auth(1);
 		
 		// 프로필 이미지 업로드.
 		String proImgName = picture.getOriginalFilename(); //프로필이미지 파일명
@@ -87,10 +107,8 @@ public class ClassOpenController {
 		
 		// 프로필이미지 VO 생성
 		ProfileImgVO proVo = new ProfileImgVO(0, proImgFile, proImgName,null);
-		proimg_service.insert(proVo);
 		
 		// 자격증 데이터 가져오기.
-		
 		ArrayList<CertificateVO> certList = new ArrayList<CertificateVO>(); // 여러개 일경우 받을 List
 		for (int i = 0; i < certes.size(); i++) {
 			MultipartFile cert = certes.get(i);	//list로 들어온 자격지 File 얻어오기
@@ -101,11 +119,8 @@ public class ClassOpenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(certName[i]);
 			CertificateVO certVo = new CertificateVO(0, 12, originalName,certFile, certName[i], null);
 			certList.add(certVo);
-
-			cert_service.insert(certVo);
 		}
 			
 		// 커버이미지 받아오기.
@@ -120,16 +135,24 @@ public class ClassOpenController {
 			}
 			ClassImgVO imgVo = new ClassImgVO(0, 1, originalNames, imgFile, null);
 			coverList.add(imgVo);
-			classimg_service.insert(imgVo);
 			
 		}
-		vo.setClass_auth(1);
-		classinfo_service.insert(vo);
 		
-		for (int i = 0; i < curriculum.size(); i++) {
-			System.out.println("curriculum"+i+"  :" + curriculum.get(i)  );
+		//커리큘럼 vo 생성
+		ArrayList<CurriculumVO> curriList = new ArrayList<CurriculumVO>();
+		for (int i = 0; i < vo.getClass_count(); i++) {
+			CurriculumVO curriVo = new CurriculumVO(0, 0, i+1, curriculum.get(i), null);
+			curriList.add(curriVo);
 		}
 		
-		return ".classOpen.ClassEnrollment";
+		try {
+			classinfo_service.insert(vo, blocVo, slocVo, proVo, certList, coverList, curriList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		
+		System.out.println("asdjasklhjasdfkl;asdfghaklsdfgj;");
+		return "success";
 	}
 }

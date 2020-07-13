@@ -20,7 +20,14 @@
 		<!-- ClassInfo 테이블 alias -->		
 		<typeAlias type="com.jhta.allchwi.vo.classopen.ClassInfoVO" alias="classInfo"/>	
 		<!-- 커버이비지 테이블 alias -->	
-		<typeAlias type="com.jhta.allchwi.vo.classopen.ClassImgVO" alias="classImg"/>	
+		<typeAlias type="com.jhta.allchwi.vo.classopen.ClassImgVO" alias="classImg"/>
+		<!-- 수업 Curriculum 테이블 alias -->	
+		<typeAlias type="com.jhta.allchwi.vo.classopen.CurriculumVO" alias="classCurri"/>			
+		<!-- big_location 테이블 alias -->	
+		<typeAlias type="com.jhta.allchwi.vo.location.BigLocationVO" alias="bloc"/>	
+		<!-- small_location 테이블 alias -->	
+		<typeAlias type="com.jhta.allchwi.vo.location.SmallLocationVO" alias="sloc"/>	
+		
 	</typeAliases>
 
 	<mappers>
@@ -44,6 +51,14 @@
 		
 		<!-- Class Apply Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassApplyMapper.xml"/>
+		
+		<!-- Location 등록 -->
+		<mapper resource="com/jhta/mybatis/mapper/BigLocationMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/SmallLocationMapper.xml"/>
+		
+		<!-- Curriculum mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/CuriiculumMapper.xml"/>
+		
 	</mappers>
 </configuration>
 

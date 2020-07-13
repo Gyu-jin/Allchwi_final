@@ -616,10 +616,11 @@ $(function(){
 			return false;
 		}
 		$('#frm-class').submit();
-		return false;
+		return true;
 	});
 	
 	$('#frm-class').submit(function (e) {
+		e.preventDefault();
 		var cp = $('#cp').attr('data-contextPath');
 		var formData = new FormData(this);
 
@@ -648,10 +649,17 @@ $(function(){
 			url: cp +'/class/enrollmentInsert',
 			contentType: false,
 			data: formData,
+			dataType : 'text',
 			processData: false,
-			success: function (response) {
-				alert("완료");
-			},
+			success: function (data) {
+				
+				alert("return success");
+				if(data=='success'){
+					location.href =cp+"/";
+				}else{
+					location.href=cp+"/error";
+				}
+			}
 		});
 		
 	});

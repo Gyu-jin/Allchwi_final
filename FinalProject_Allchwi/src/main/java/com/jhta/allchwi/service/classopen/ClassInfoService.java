@@ -1,32 +1,110 @@
 package com.jhta.allchwi.service.classopen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.jhta.allchwi.dao.classopen.CertificateDAO;
+import com.jhta.allchwi.dao.classopen.ClassImgDAO;
 import com.jhta.allchwi.dao.classopen.ClassInfoDAO;
+import com.jhta.allchwi.dao.classopen.CurriculumDAO;
+import com.jhta.allchwi.dao.location.BigLocationDAO;
+import com.jhta.allchwi.dao.location.SmallLocationDAO;
+import com.jhta.allchwi.dao.profileImg.ProfileImgDAO;
+import com.jhta.allchwi.vo.classopen.CertificateVO;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.vo.classopen.CurriculumVO;
+import com.jhta.allchwi.vo.location.BigLocationVO;
+import com.jhta.allchwi.vo.location.SmallLocationVO;
+import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 
 @Service
 public class ClassInfoService {
 	@Autowired
-	private ClassInfoDAO dao;
+	private ClassInfoDAO infoDao;
+	@Autowired
+	private CertificateDAO certDao;
+	@Autowired
+	private ProfileImgDAO proImgDao;
+	@Autowired
+	private CurriculumDAO curriDao;
+	@Autowired
+	private ClassImgDAO coverDao;
+	@Autowired
+	private BigLocationDAO bigDao;
+	@Autowired
+	private SmallLocationDAO smallDao;
 	
 	public int insert(ClassInfoVO vo) {
-		return dao.insert(vo);
+		return infoDao.insert(vo);
 	}
 	//keyword 검색
 	public List<ClassInfoVO> keyword_list(String keyword){
-		return dao.keyword_list(keyword);
+		return infoDao.keyword_list(keyword);
 	}
 	
 	//category 검색
 	public List<ClassInfoVO> list(HashMap<String, Object> map){
-		return dao.list(map);
+		return infoDao.list(map);
 	}
 	public int count(HashMap<String, Object> map) {
-		return dao.count(map);
+		return infoDao.count(map);
+	}
+	
+	@Transactional
+	public boolean insert(ClassInfoVO vo, 
+			BigLocationVO blocVo, 
+			SmallLocationVO slocVo,
+			ProfileImgVO proVo,
+			ArrayList<CertificateVO> certList, 
+			ArrayList<ClassImgVO> coverList, 
+			ArrayList<CurriculumVO> curriList) throws Exception{
+		
+		
+		//큰 지역 (도/특별시) insert
+		bigDao.insert(blocVo);
+		
+		//작은지역의 큰지역 key 넣기
+		slocVo.setBloc_num(blocVo.getBloc_num());
+		
+		//작은 지역 (시/구) 
+		smallDao.insert(slocVo);
+		
+		//튜터프로필 넣기
+		proImgDao.insert(proVo);
+		
+		// 수업정보에 작은 지역 넗기
+		vo.setSloc_num(slocVo.getSloc_num());
+		// 수업정보에 프로필번호 넣기
+		vo.setPro_num(proVo.getPro_num());
+		
+		// 수업정보 insert
+		int infoNum =  infoDao.insert(vo);
+
+		// 수업 번호 가져 오기.
+		int class_num = vo.getClass_num();
+		
+		// 자격증 insert
+		for(CertificateVO cert:certList) {
+			cert.setClass_num(class_num);
+			certDao.insert(cert);
+		}
+		
+		for(ClassImgVO cover:coverList) {
+			cover.setClass_num(class_num);
+			coverDao.insert(cover);
+		}
+		
+		for(CurriculumVO curri:curriList) {
+			curri.setClass_num(class_num);
+			curriDao.insert(curri);
+		}
+		
+		return true;
 	}
 }
