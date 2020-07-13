@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.login.MemberLoginService;
@@ -27,17 +26,21 @@ public class LoginJoinController {
 	public String goJoin() {
 		return ".login.join";
 	}
-	//회원가입정보 포스트 방식으로 받기 
+	//a 회원가입정보 포스트 방식으로 받기 / session => 실제경로 구해오기 위해 필요 / mlv => 아이디, 비밀번호  / miv => 이름
 	@PostMapping("/login/join")
-	public String signUp(MemberLoginVO mlv, MemberInfoVO miv) {		
-		//세션에서 업로드 경로 구해오기.
-		//파라미터 넘어오는거 확인
-		System.out.println("파라미터 이름 : " + miv.getMb_name());
-		System.out.println("파라미터 아이디 : " + mlv.getId());
-		System.out.println("파라미터 비밀번호 : " + mlv.getPwd());
+	public String signUp(HttpSession session, MemberLoginVO mlv, MemberInfoVO miv) {		
 		//트랜잭션 처리한 service 메소드 필요
-		int result = mls.joinMember(mlv, miv);
-		return "redirect:/login/main";
+		try {
+			int result = mls.joinMember(session, mlv, miv);
+			if(result == 4) {
+				return "redirect:/login/main";						
+			}
+			return ".error.error";
+		} catch (Exception e) {
+			//exception 발생시 에러페이지로 이동
+			e.printStackTrace();
+			return ".error.error";
+		}
 	}
 	
 	//ajax로 아이디 중복확인
