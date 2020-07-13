@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.allchwi.service.admin.memberListService;
 import com.jhta.allchwi.vo.admin.MemberListVO;
@@ -21,4 +22,14 @@ public class MemberListController {
 		model.addAttribute("list", list);
 		return ".admin.memberlist";
 	}
+
+
+	@GetMapping("/admin/member_list/delete")
+	public String memDel(@RequestParam("id")String id) {
+		System.out.println(id);
+		
+		return ".admin.memberlist";
+	}
+
+
 }

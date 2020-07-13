@@ -145,15 +145,15 @@
 			$("div [class='modal-footer']").empty();
 			$("#modal-body").text( id + "님 을 추방하시겠습니까?");
 			$("div [class='modal-footer']")
-			.append("<button type='button' class='btn btn-success' data-dismiss='modal'>삭제</button>");	
+			.append("<button type='button' class='btn btn-success' data-dismiss='modal' onclick=del('"+id+"')>네</button>");	
+			
+			$("div [class='modal-footer']")
+			.append("<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")	
 		}
 		
-		function asda(){
-			
-			
+		function del(id){
+			location.href="${cp}/admin/memberlist/delete?id="+id;
 		}
-		
-		
 		
 
 </script>
