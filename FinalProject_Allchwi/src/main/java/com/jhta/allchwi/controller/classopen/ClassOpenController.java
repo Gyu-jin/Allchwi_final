@@ -83,6 +83,7 @@ public class ClassOpenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			System.out.println(certName[i]);
 			CertificateVO certVo = new CertificateVO(0, 12, originalName,certFile, certName[i], null);
 			certList.add(certVo);
 
