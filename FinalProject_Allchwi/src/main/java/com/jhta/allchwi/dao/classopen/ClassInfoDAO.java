@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.classopen;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,8 +18,16 @@ public class ClassInfoDAO {
 	public int insert(ClassInfoVO vo) {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
+	//keyword 검색
+	public List<ClassInfoVO> keyword_list(String keyword){
+		return session.selectList(NAMESPACE+".keyword_list", keyword);
+	}
 	
-	public List<ClassInfoVO> list(int bcategory_num){
-		return session.selectList(NAMESPACE+".list",bcategory_num);
+	//category 검색 
+	public List<ClassInfoVO> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".list",map);
+	}
+	public int count(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".count",map);
 	}
 }

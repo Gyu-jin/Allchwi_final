@@ -12,12 +12,71 @@
 	    </selectKey>
 	</insert>
 	
-	<select id="list" parameterType="int" resultType="classinfo">
-		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name 
+	<!-- keyword 검색 sql -->
+	<sql id="keyword">
+		<if test="keyword!=null and keyword!=''">
+			select class_num, class_title, tutor_nickname from class_info where class_title like CONCAT('%',#{keyword},'%')
+		</if>	
+	</sql>
+	
+	
+	<select id="keyword_list" parameterType="string" resultType="classinfo">
+		<include refid="keyword"></include>
+	</select>
+	
+	
+	<!-- category 검색 sql -->
+	
+	<sql id="smallcategory">
+		<if test="scategory_num>0">
+			and scategory_num=#{scategory_num}
+		</if>
+	</sql>
+	<sql id="bigcategory">
+		<if test="bcategory_num>0">
+			and b.bcategory_num=#{bcategory_num}
+		</if>
+	</sql>
+
+	
+	<select id="list" parameterType="hashmap" resultType="classinfo">
+		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name
 		from (select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
 				from small_category s, big_category b
-				where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num})a, class_info c
+				where s.bcategory_num=b.bcategory_num 				
+					<include refid="smallcategory"/>								
+					<include refid="bigcategory"/>				
+				)a, class_info c
 		where a.scategory_num=c.scategory_num
+		limit #{startRow},6
 	</select>
+	
+	<sql id="small_count">	
+		<if test="scategory_num>0">	
+			class_info where scategory_num=#{scategory_num}	
+		</if>
+	</sql>
+	
+	<sql id="big_count">
+		<if test="bcategory_num>0">
+			(
+				select class_num, c.scategory_num from
+					(
+						select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+						from small_category s, big_category b
+						where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}
+					) x , class_info c
+			        where x.scategory_num=c.scategory_num
+			) a
+		</if>
+	</sql>
+	
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from			
+			<include refid="small_count"/>
+			<include refid="big_count"/>	
+			<include refid="keyword"/>	
+	</select>
+
 </mapper>
 

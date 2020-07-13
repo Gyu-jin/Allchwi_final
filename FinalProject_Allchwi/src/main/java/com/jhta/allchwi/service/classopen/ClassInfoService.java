@@ -1,5 +1,6 @@
 package com.jhta.allchwi.service.classopen;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,16 @@ public class ClassInfoService {
 	public int insert(ClassInfoVO vo) {
 		return dao.insert(vo);
 	}
+	//keyword 검색
+	public List<ClassInfoVO> keyword_list(String keyword){
+		return dao.keyword_list(keyword);
+	}
 	
-	public List<ClassInfoVO> list(int bcategory_num){
-		return dao.list(bcategory_num);
+	//category 검색
+	public List<ClassInfoVO> list(HashMap<String, Object> map){
+		return dao.list(map);
+	}
+	public int count(HashMap<String, Object> map) {
+		return dao.count(map);
 	}
 }

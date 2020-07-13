@@ -97,29 +97,29 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=1" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	실무역량
-        </a><!-- BigCategoryController : ${cp}/bigcate/?bcate_num=1 (서브쿼리) -->
+        </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">엑셀</a><!-- SmallCategoryController : ${cp}/smallcate/?scate_num=1 -->
+          <a class="dropdown-item" href="${cp}/category/search?scategory_num=101">엑셀</a>
           <a class="dropdown-item" href="#">파워포인트</a>
           <a class="dropdown-item" href="#">프로그래밍</a>
         </div>
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=2" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	디자인
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">포토샵</a>
+          <a class="dropdown-item" href="${cp}/category/search?scategory_num=201">포토샵</a>
           <a class="dropdown-item" href="#">일러스트</a>
           <a class="dropdown-item" href="#">애니메이션</a>
         </div>
       </li>      
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=3" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	뷰티
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -130,7 +130,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=4" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	영상
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -141,7 +141,7 @@
       </li>     
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=5" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	음악
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -152,7 +152,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=6" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	언어
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -163,7 +163,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=7" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	라이프스타일
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -207,15 +207,17 @@
 						<c:if test="${!empty keyword }">
 							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
 						</c:if>
-						<div class="label-1">
-							상세검색어
-						</div> 
-						<div class="input-search">
-				            <div class="input-group">
-				              <input type="text" name="keyword" class="form-control bg-light border-0 small" 
-				              	placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-				            </div>	            
-				       </div>
+						<c:if test="${empty keyword }">
+							<div class="label-1">
+								상세검색어
+							</div> 
+							<div class="input-search">
+					            <div class="input-group">
+					              <input type="text" name="keyword" class="form-control bg-light border-0 small" 
+					              	placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+					            </div>	            
+					       </div>
+						</c:if>
 						<div class="label-1">
 							카테고리
 						</div> 
@@ -404,9 +406,9 @@
 
 	<div class="row" id="searchList">
 
-		<!-- 이부분 나중에 :  select 된 자료를 동적으로 생성하기 (제이쿼리,json)-->
-		<c:if test="${!empty list }">
-			<c:forEach var="vo" items="${list }" varStatus="status">
+		<c:choose>
+			<c:when test="${!empty list }">
+				<c:forEach var="vo" items="${list }" varStatus="status">
 				<div class='col-md-4'>
 					<div class='card mb-4 shadow-sm'>
 						<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
@@ -429,9 +431,33 @@
 					</div>
 				</div>
 			</c:forEach>
-		</c:if>
+			</c:when>
+			<c:otherwise>
+				<div class="col-md-12" style="text-align:center;padding:20%">
+					<h3>검색 결과가 없습니다..</h3>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
-
+<div>
+	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+		<c:choose>
+			<c:when test="${i==pu.pageNum}">
+				<a href="${cp }/category/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}" 
+				style="text-decoration: none;font-weight: bold;">
+				<span style="color:red">[${i }]</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/category/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}" 
+				style="text-decoration: none">
+				<span style="color:gray">[${i }]</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+		
+	</c:forEach>
+</div>
 <input type="hidden" id="keyword" value="${keyword }">
 </div>
 
