@@ -1,7 +1,5 @@
 package com.jhta.allchwi.controller.login;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;

@@ -33,4 +33,8 @@ public class MemberLoginDAO {
 	public int changePwd(HashMap<String, Object> hm) {
 		return session.update(NAMESPACE + ".changePwd", hm);
 	}
+	//5 로그인정보와 일치하는지 확인
+	public MemberLoginVO loginCheck(MemberLoginVO mlv) {
+		return session.selectOne(NAMESPACE + ".loginCheck", mlv);
+	}
 }

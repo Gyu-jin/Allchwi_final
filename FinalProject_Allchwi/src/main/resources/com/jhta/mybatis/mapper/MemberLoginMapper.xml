@@ -26,6 +26,10 @@
 	<update id="changePwd" parameterType="hashmap">
 		update member_login set pwd = #{pwd} where id = #{id} and pwd = #{prevPwd}
 	</update>
+	<!--5 로그인정보 일치여부 확인 -->
+	<select id="loginCheck" resultType="mlv" parameterType="mlv">
+		select * from member_login where id = #{id} and pwd = #{pwd}
+	</select>
 </mapper>
 
 

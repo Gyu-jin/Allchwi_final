@@ -88,5 +88,24 @@ public class MemberLoginService{
 		int result = a + a1 + a2 + a3;
 		return result;
 	}
+	//a 현재 비밀번호 일치 여부 확인
+	public int loginCheck(MemberLoginVO mlv) {
+		MemberLoginVO result = mld.loginCheck(mlv);
+		//a 아이디 비밀번호 일치시
+		if(result != null) {
+			//a 회원탈퇴 여부 확인
+			int loginAuth = result.getLogin_auth();
+			if(loginAuth == 0) {
+				//a 로그인 성공
+				return 1;
+			} else {
+				//a 탈퇴처리된 아이디 
+				return 2;
+			}
+		} else {
+			//a 아이디 및 비밀번호 불일치
+			return 3;
+		}
+	}
 	
 }
