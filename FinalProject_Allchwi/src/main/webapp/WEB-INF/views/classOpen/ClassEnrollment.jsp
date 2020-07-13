@@ -9,11 +9,6 @@
 <link id="cp" data-contextPath="${cp}"/>
 
 <div class="classOpen">
-<form action="${cp}/class/enrollmentInsert" method="POST" enctype="multipart/form-data">
-        리포트 파일 : <input type="file" name="cert" /><br/>
-   <input type="submit" />
-</form>
-
 <div class="title_box">
 	<!-- Nav 부트스트랩 목록 -->
 	<h3>튜터 등록</h3>
