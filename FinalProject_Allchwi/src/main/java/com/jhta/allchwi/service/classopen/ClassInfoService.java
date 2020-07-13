@@ -107,4 +107,9 @@ public class ClassInfoService {
 		
 		return true;
 	}
+
+	public ClassInfoVO getInfo(int class_num) {
+		return infoDao.getInfo(class_num);
+	}
+
 }

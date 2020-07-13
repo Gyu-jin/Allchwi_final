@@ -30,4 +30,7 @@ public class ClassInfoDAO {
 	public int count(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
+	public ClassInfoVO getInfo(int class_num) {
+		return session.selectOne(NAMESPACE+".getInfo",class_num);
+	}
 }

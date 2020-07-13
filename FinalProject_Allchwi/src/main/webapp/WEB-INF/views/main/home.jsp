@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- home.jsp -->
 <style>
 .carousel-inner {
@@ -144,11 +145,12 @@ mark {
 	
 	<!-- 이번주 시작 -->
 	<h1 class="h3 mb-0 text-gray-800">이번주 시작</h1>
-	<div class="container">
+	<div class="container col-md-12">
 		<div class="row">
+		<c:forEach var="index" begin="1" end="4">
 			<div class="col-3">
 				<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail">
+					<a href="${cp}/classDetail/detail?class_num=4">
 						<div class="card-body">
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">
@@ -168,71 +170,7 @@ mark {
 					</a>
 				</div>
 			</div>
-			<div class="col-3">
-				<div class="card shadow mb-4">
-						<a href="${cp}/classDetail/detail">
-							<div class="card-body">
-								<p>
-									<img src="${cp}/resources/img/it.jpg" alt="">
-								</p>
-								<p class="t1 tov2">모찌의 실무산책</p>
-								<div class="t2">
-									<span class="profile">
-										<img class="roundImg"
-										src="${cp}/resources/img/it.jpg"
-										alt="">
-									</span>	
-									<span class="name">정모찌</span> 
-									<span class="d_day">07월07일 </span> 
-									<span>목동</span>
-								</div>
-							</div>
-						</a>
-					</div>
-			</div>
-			<div class="col-3">
-				<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail">
-						<div class="card-body">
-							<p>
-								<img src="${cp}/resources/img/it.jpg" alt="">
-							</p>
-							<p class="t1 tov2">모찌의 실무산책</p>
-							<div class="t2">
-								<span class="profile">
-									<img class="roundImg"
-									src="${cp}/resources/img/it.jpg"
-									alt="">
-								</span>	
-								<span class="name">정모찌</span> 
-								<span class="d_day">07월07일 </span> 
-								<span>목동</span>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-3">
-			<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail">
-						<div class="card-body">
-							<p>
-								<img src="${cp}/resources/img/it.jpg" alt="">
-							</p>
-							<p class="t1 tov2">모찌의 실무산책</p>
-							<div class="t2">
-								<span class="profile">
-									<img class="roundImg"
-									src="${cp}/resources/img/it.jpg"
-									alt="">
-								</span>	
-								<span class="name">정모찌</span> 
-								<span class="d_day">07월07일 </span> 
-								<span>목동</span>
-							</div>
-						</div>
-					</a>
-				</div>
+		</c:forEach>
 		</div>
 	</div>
 

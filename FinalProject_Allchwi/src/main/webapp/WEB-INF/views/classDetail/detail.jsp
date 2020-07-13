@@ -89,6 +89,7 @@
 
 .class_navi.active {
 	position: fixed;
+	width: 51.15%;
 }
 
 #container_detail .class_wrap .class_detail {
@@ -362,13 +363,12 @@ li {
 									<img alt="tutorprofile" class="roundImg"
 										src="${cp}/resources/img/모찌.jpg" />
 								</div>
-								<div class="name">정모찌</div>
+								<div class="name">${cvo.tutor_nickname }</div>
 							</div>
 							<div class="class_title">
 								<!-- 수업명 -->
 								<div class="title">
-									<h3>정모찌의 실전산책</h3>
-									<h3>모찌에게 배우는 진짜 산책</h3>
+									<h3>${cvo.class_title }</h3>
 								</div>
 
 								<!-- 별점 -->
@@ -398,11 +398,18 @@ li {
 								<!-- 기본정보 -->
 								<div class="info">
 									<ul>
-										<li class="ar" id="regionAll">온라인</li>
-										<li class="hu"><font color="#ff936f">3</font>시간/회</li>
-										<li class="gr">최대인원:<font color="#ff936f">2~50</font>명
+										<li class="ar" id="regionAll">
+											<c:if test="${cvo.class_form==0}">
+												온라인
+											</c:if>
+											<c:if test="${cvo.class_form==1}">
+												지역
+											</c:if>
 										</li>
-										<li class="ohu"><font color="#ff936f">￦10,000</font>/시간</li>
+										<li class="hu"><font color="#ff936f">${cvo.class_hour}</font>시간/회</li>
+										<li class="gr">최대인원:<font color="#ff936f">${cvo.class_min}~${cvo.class_max}</font>명
+										</li>
+										<li class="ohu"><font color="#ff936f">${cvo.class_price}</font>/시간</li>
 									</ul>
 								</div>
 							</div>
@@ -414,22 +421,13 @@ li {
 								<h1>튜터정보</h1>
 								<div class="cert">
 									<ul>
-										<li class="com">숙명여자대학교 미디어학부</li>
-										<li class="com">신분 인증 됨</li>
+										<li class="com">자격증</li>
+										<li class="com">들어갈자리</li>
 									</ul>
 								</div>
 								<div class="d_info04">
 
-									안녕하세요! 빈피디입니다.<br> 저는 MCN 회사 비디오빌리지에서 빈피디로 활약하며<br>
-									3만 구독자 채널이었던 &lt;걸스빌리지&gt; 채널을 50만 구독자 채널로 키워내고,<br> 신규
-									채널이었던 &lt;스튜디오V&gt;를 3달 만에 10만 구독자 채널로 성장시켰습니다.<br> 또한
-									여행박사에서는 다양한 트렌지션을 활용한 여행 콘텐츠를 제작하였습니다.<br> <br> 그간의
-									노하우를 바탕으로 여러분들에게<br> 3시간 동안 쉽고 친절하게 프리미어 속성 과외를 해드리겠습니다!<br>
-									소규모로 진행할 예정이기 때문에 궁금해 하시는 모든 것들을 옆에서 바로바로 알려드릴게요.<br> ★★최대
-									2인 과외로 진행★★<br> <br> &lt;경력&gt;<br> - 2015~2018
-									비디오빌리지 걸스빌리지, 스튜디오V PD<br> - 2018~2020 여행박사 영상 콘텐츠 제작 감독<br>
-									- 2020~ 현재 브랜드사 유튜브 채널 담당 <br> <br> *2019 시청자미디어재단
-									인천센터 &lt;크리에이터 되기&gt;, &lt;미디어로 바로 보는 세상&gt; 강연
+									${cvo.tutor_about}
 								</div>
 							</div>
 						</div>
@@ -439,14 +437,10 @@ li {
 							<div class="sec01">
 								<h1>수업소개</h1>
 								<div class="d_info04">
-									♥ ♥ 프리미어 초보들에게 3시간만에 마법을 선사해드립니다.♥ ♥ <br> <br> 처음에
-									켜자마자 잔뜩 겁을 먹게 되는 프리미어 패널들<br> 3시간 수업을 들은 이후에는 프리미어 작업환경이
-									재밌게만 느껴지실 거예요.<br> <br> 3시간 동안 영상가져오기, 컷편집, 자막 삽입, 자막
-									효과, 화면 전환, 효과음 삽입, BGM삽입, 영상 뽑는 방법 모두 알려드립니다.<br> 처음 프리미어를
-									접하는 기초생분들에게 딱인 수업이죠. <br> 예능에서만 보던 효과들 이제 나도 할 수 있다! <br>
-									실전으로 영상을 편집할 때 꼭 필요한 것부터 쏙쏙 알려드릴테니<br> 부담갖지 말고 신청해주세요!
+									${cvo.class_about}
 								</div>
 								<h1>수업대상</h1>
+									${cvo.class_target}
 								<h1>커리큘럼</h1>
 								회차만큼 출력
 							</div>
@@ -590,27 +584,20 @@ li {
 						<div class="class_type">
 							<h3>클래스유형</h3>
 						</div>
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse"
-									data-parent="#accordion" href="#card-element-1">
-									07.08(수)14:00~16:00 강남</a>
+						<c:forEach var="index" begin="1" end="3">
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-header">
+										<a class="collapsed card-link" data-toggle="collapse"
+											data-parent="#accordionExample" href="#card-element-${index}">
+											07.08(수)14:00~16:00 강남</a>
+									</div>
+									<div id="card-element-${index}" class="collapse">
+										<div class="card-body">상세장소 : 강사 공방</div>
+									</div>
+								</div>
 							</div>
-							<div id="card-element-1" class="collapse">
-								<div class="card-body">상세장소 : 강사 공방</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse"
-									data-parent="#accordion" href="#card-element-2">
-									07.08(수)14:00~16:00 강남</a>
-							</div>
-							<div id="card-element-2" class="collapse">
-								<div class="card-body">상세장소 : 강사 공방</div>
-							</div>
-						</div>
-
+						</c:forEach>
 						<div class="tutor_t">
 							<dl class="tutor_txt">
 								<dt>
