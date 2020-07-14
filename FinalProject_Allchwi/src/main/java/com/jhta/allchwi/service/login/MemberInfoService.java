@@ -41,17 +41,13 @@ public class MemberInfoService {
 		hm.put("mb_about", pfv.getMb_about());
 		//a 별명, 소개 업데이트
 		int ui = mid.UpdateInfo(hm);
-		System.out.println(ui + "인포업뎃");
 		//a 이미지 파일이 있을 경우 
 		if(piv != null) {
 			//a 이미지 번호 검색
 			int pro_num = mid.selectProNum(pfv.getMl_num());
-			System.out.println(pfv.getMl_num() + "회원번호");
-			System.out.println(pro_num+"이미지번호");
 			//a 이미지번호 piv에 담기
 			piv.setPro_num(pro_num);
 			ui2 = pid.updateImg(piv);
-			System.out.println(ui2+"이미지업뎃");
 			//a 한번에 업데이트 된 경우
 			if(ui + ui2 >= 2) {
 				return true;			

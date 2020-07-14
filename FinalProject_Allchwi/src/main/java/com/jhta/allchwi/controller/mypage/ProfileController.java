@@ -35,19 +35,17 @@ public class ProfileController {
 	@PostMapping("/mypage/mypageForm")
 	public String updateMypage(HttpSession session, 
 			@RequestParam("pro_img")MultipartFile img, ProfileVO pfv) {
+		//a 이미지 파일 넣어줄 vo 객체 생성
 		ProfileImgVO piv = null;
 		boolean b;
 		//a 세션에 저장되어있는 회원번호 가져오기
 		int ml_num = (int)session.getAttribute("ml_num");
-		System.out.println("회원번호" + ml_num);
 		//a 회원번호 pfv에 담아주기
 		pfv.setMl_num(ml_num);
-		//a 프로필 이미지 업로드
-		System.out.println(img + "이미지값");
+		//a 프로필 이미지 업로드 파일이 담겨있을 경우
 		if(!img.isEmpty()) {
 			//a 프로필이미지 파일명
 			String proImgName = img.getOriginalFilename();
-			System.out.println(proImgName + "이미지 파일이름");
 			//a vo에 담을 바이트 이미지 파일
 			byte[] proImgFile = null; 
 			try {
@@ -61,14 +59,12 @@ public class ProfileController {
 		}
 		try {
 			b = mis.updateInfo(piv, pfv);
-			System.out.println(b + "너 뭐냐");
 			if(b) {
 				return "redirect:/";			
 			} else {
 				return ".error.error";
 			}
 		} catch (Exception e) {
-			System.out.println("무슨에러");
 			e.printStackTrace();
 			return ".error.error";
 		}
