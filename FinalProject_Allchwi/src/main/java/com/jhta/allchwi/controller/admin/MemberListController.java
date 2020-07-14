@@ -24,11 +24,18 @@ public class MemberListController {
 	}
 
 
-	@GetMapping("/admin/member_list/delete")
-	public String memDel(@RequestParam("id")String id) {
-		System.out.println(id);
-		
-		return ".admin.memberlist";
+	@GetMapping("/admin/memberlist/delete")
+	public String member_del(@RequestParam("ml_num") int ml_num, Model model) {
+		try {
+			service.update_mlnum(ml_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ".admin.error";
+		}
+	
+		List<MemberListVO> list =service.member_list();
+		model.addAttribute("list", list);
+		return ".admin.memberlist";	
 	}
 
 

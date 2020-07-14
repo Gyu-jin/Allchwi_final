@@ -15,13 +15,15 @@ public class manageClassDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.AdminManageClassMapper";	
 	
-	public List<ManageClassVO> manage_list(HashMap<String,Object > map){
-		return session.selectList(NAMESPACE+".manage_list",map);
+	public List<ManageClassVO> manage_list(){
+		return session.selectList(NAMESPACE+".manage_list");
 	}
 	
+	/*
 	public int count(HashMap<String, Object> map ) {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
+	*/
 	
 	
 }

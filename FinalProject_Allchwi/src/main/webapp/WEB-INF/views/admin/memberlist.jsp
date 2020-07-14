@@ -65,21 +65,33 @@
 										<th>이름</th>
 										<th>아이디</th>
 										<th>등록일</th>
+										<th>수강중인 클래스</th>
+										<th>전체 클래스</th>
 										<th>추방</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="vo" items="${list }">
 										<tr>
-											<td>${vo.mb_num}</td>
+											<td>${vo.ml_num}</td>
 											<td>${vo.mb_name}</td>
 											<td>${vo.id}</td>
 											<td>${vo.mb_regdate}</td>
-											<td>
-												<button type="button" class="btn btn-danger"
-													onclick="getModal('${vo.id}')" data-toggle="modal"
-													data-target="#myModal">추방</button>
-											</td>
+											<td>${vo.nowclass }개</td>
+											<td>${vo.totclass }개</td>
+											<td><c:choose>
+													<c:when test="${vo.mb_auth == 1}">
+														<button type="button" class="btn btn-dark"
+															onclick="getModal('${vo.id}','${vo.ml_num }')"
+															data-toggle="modal" data-target="#myModal" disabled>추방된
+															회원</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn btn-danger"
+															onclick="getModal('${vo.id}','${vo.ml_num }')"
+															data-toggle="modal" data-target="#myModal">추방</button>
+													</c:otherwise>
+												</c:choose></td>
 
 
 										</tr>
@@ -122,13 +134,10 @@
 			</div>
 
 			<!-- Modal body -->
-			<div class="modal-body" id="modal-body">
-			
-			
-			</div>
+			<div class="modal-body" id="modal-body"></div>
 
 			<!-- Modal footer -->
-			
+
 			<div class="modal-footer">
 				<!-- 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -141,21 +150,44 @@
 
 
 <script type="text/javascript">
-		function getModal(id){
-			$("div [class='modal-footer']").empty();
-			$("#modal-body").text( id + "님 을 추방하시겠습니까?");
-			$("div [class='modal-footer']")
-			.append("<button type='button' class='btn btn-success' data-dismiss='modal' onclick=del('"+id+"')>네</button>");	
-			
-			$("div [class='modal-footer']")
-			.append("<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")	
-		}
-		
-		function del(id){
-			location.href="${cp}/admin/memberlist/delete?id="+id;
-		}
-		
+	function getModal(id, ml_num) {
+		$("div [class='modal-footer']").empty();
+		$("#modal-body").text(id + ml_num + "님 을 추방하시겠습니까?");
 
+		$("div [class='modal-footer']")
+				.append(
+						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=del('"
+								+ ml_num + "')>네</button>");
+
+		$("div [class='modal-footer']")
+				.append(
+						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")
+	}
+
+	function del(ml_num) {
+		location.href = "${cp}/admin/memberlist/delete?ml_num=" + ml_num;
+	}
+
+	$(document).ready(function() {
+		$('#dataTable').dataTable({
+			"language" : {
+				"info" : "전체  _PAGES_ 페이지 중 _PAGE_  ",
+				"sSearch": "검색:",
+				"sZeroRecords": "검색 결과가 없습니다.",
+				"sLengthMenu": "_MENU_ 개씩 보여주기",
+				
+				
+				"paginate": {
+					 "previous": "이전",
+					 "next": "다음"
+				}				
+				
+			}
+		});
+
+				
+
+	});
 </script>
 
 

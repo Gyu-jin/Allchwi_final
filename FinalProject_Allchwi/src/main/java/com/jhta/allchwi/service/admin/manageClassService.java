@@ -14,13 +14,14 @@ public class manageClassService {
 	@Autowired
 	private manageClassDAO dao;
 	
-	public List<ManageClassVO> manage_list(HashMap<String, Object> map){
-		return dao.manage_list(map);
+	public List<ManageClassVO> manage_list(){
+		return dao.manage_list();
 	}
 	
+	/*
 	public int count(HashMap<String, Object> map) {
 		return dao.count(map);
 	}
-	
+	*/
 	
 }

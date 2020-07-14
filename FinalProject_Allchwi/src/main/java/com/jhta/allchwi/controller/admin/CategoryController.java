@@ -36,7 +36,7 @@ public class CategoryController {
 	
 	@RequestMapping(value="/admin/big_category/insert",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<BigsmallCategoryVO> big_category(BigCategoryVO vo,Model model) {
+	public List<BigsmallCategoryVO> big_category(BigCategoryVO vo) {
 		service.bcate_insert(vo);
 		List<BigsmallCategoryVO> list = service.list();
 		
@@ -46,7 +46,7 @@ public class CategoryController {
 	
 	@RequestMapping(value="/admin/big_category_list",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<BigCategoryVO> big_category_list(Model model) {
+	public List<BigCategoryVO> big_category_list() {
 		List<BigCategoryVO> bcate_list = service.bcate_list();
 		return bcate_list;
 	}
@@ -55,7 +55,7 @@ public class CategoryController {
 	
 	@RequestMapping(value="/admin/small_category",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<BigsmallCategoryVO> small_category(SmallCategoryVO vo,Model model) {
+	public List<BigsmallCategoryVO> small_category(SmallCategoryVO vo) {
 		
 		service.scate_insert(vo);	
 		List<BigsmallCategoryVO> list = service.list();

@@ -5,7 +5,7 @@
 <div class="container-fluid">
 	<div id="content-wrapper" class="d-flex flex-column">
 		<div class="breadcrumb">
-			<h2>회원관리</h2>
+			<h2>수업관리</h2>
 			<div style="margin-left: 860px;">
 				<form action="${cp }/admin/manageClass" class="form-inline"
 					style="display: inline-block">
@@ -27,17 +27,21 @@
 		<table class="table table-bordered table-hover">
 			<thead class="thead-dark">
 				<tr>
-					<th>num</th>
-					<th>name</th>
-					<th>pwd</th>
+					<th>회원번호</th>
+					<th>이름</th>
+					<th>수업제목</th>
+					<th>수업형태</th>
+					<th>카테고리</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${list }">
 					<tr>
-						<td>${vo.num}</td>
-						<td>${vo.name }</td>
-						<td>${vo.pwd }</td>
+						<td>${vo.ml_num}</td>
+						<td>${vo.tutor_nickname }</td>
+						<td>${vo.class_title }</td>
+						<td>${vo.class_form }</td>
+						<td>${vo.scategory_name }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
