@@ -4,7 +4,7 @@
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="/allchwi/resources/css/mypage/mypageForm.css">
 <div class="container">
-	<form method="POST" action="#" enctype="multipart/form-data">
+	<form method="POST" action="${cp}/mypage/mypageForm" enctype="multipart/form-data">
 		<!--profile head-->
 		<div class="profileHead">
 			<h1>내 프로필</h1>
@@ -18,7 +18,7 @@
 					id="picture-cover">
 					<!-- a 카메라 이미지를 버튼처럼 사용  -->
 					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png">
-					<input type="file" id="picture" name="img">
+					<input type="file" id="picture" name="pro_img">
 				</div>
 			</div>
 			<div class="inner-cont">

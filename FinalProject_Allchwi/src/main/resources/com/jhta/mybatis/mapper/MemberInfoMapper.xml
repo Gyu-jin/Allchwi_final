@@ -16,9 +16,17 @@
 		select info.*, p.pro_img
 		from
 		(select l.ml_num, l.id, i.mb_name, i.mb_nickname, i.mb_about, i.pro_num 
-		from allchwi.member_login l, allchwi.member_info i
-		where l.ml_num = i.ml_num) info, allchwi.profile_img p 
+		from member_login l, member_info i
+		where l.ml_num = i.ml_num) info, profile_img p 
 		where info.pro_num = p.pro_num and ml_num = #{ml_num};
+	</select>
+	<!--4 회원번호로 info테이블 업데이트  -->
+	<update id="updateInfo" parameterType="hashmap">
+		update member_info set mb_nickname = #{mb_nickname}, mb_about = #{mb_about} where ml_num = #{ml_num}
+	</update>
+	<!-- 5 회원번호로 profile테이블 이미지번호 검색 -->
+	<select id="selectProNum" parameterType="int" resultType="int">
+		select pro_num from member_info where ml_num = #{ml_num};
 	</select>
 </mapper>
 
