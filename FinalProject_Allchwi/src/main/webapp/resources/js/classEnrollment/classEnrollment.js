@@ -73,20 +73,20 @@ $(function(){
     		$('#Description').focus();
     		return false;
     	}
-    	
+    	var chk = true;
+    	 $("input[name='certName[]']").each(function(){
+    		 if($(this).val() == ""){
+    			 $(this).focus();
+    			chk = false;
+    		 }
+    	 });
+    	 
+    	 if(!chk){
+    		 alert('자격증 명을 입력해주세요.');
+    		 return;
+    	 }
+    	 
 
-/*        //미리 생성해 놓은 값 중에서 값이 없는 건 disabled
-        $("input[type=text]").each(function() {
-            if($(this).val() == "") {
-                $(this).attr("disabled",true);
-            }
-        });
-        $("input[type=file]").each(function() {
-            if($(this).val() == "") {
-                $(this).attr("disabled",true);
-            }
-        });
-        */
         // 입력 완료후 페이지 이동
         nextClassPage(num);
         return true;
@@ -621,6 +621,19 @@ $(function(){
 	
 	$('#frm-class').submit(function (e) {
 		e.preventDefault();
+		
+		//미리 생성해 놓은 값 중에서 값이 없는 건 disabled
+        $("input[type=text]").each(function() {
+            if($(this).val() == "") {
+                $(this).attr("disabled",true);
+            }
+        });
+        $("input[type=file]").each(function() {
+            if($(this).val() == "") {
+                $(this).attr("disabled",true);
+            }
+        });
+		
 		var cp = $('#cp').attr('data-contextPath');
 		var formData = new FormData(this);
 

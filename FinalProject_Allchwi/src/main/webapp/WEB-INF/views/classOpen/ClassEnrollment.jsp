@@ -101,7 +101,7 @@
                     <input type="hidden" name="deleteCert" id="deleteCert" value="">
                     <div id="certs">
 	                    <div class="certificate" style="position: relative;">
-	                    	<input type="text" class="form-control col-8" name="certName[]" placeholder="예) 토익900,HSK 6급,GTQ1급, 임상경력 등" style="display: inline;">
+	                    	<input type="text"  class="form-control col-8" name="certName[]" placeholder="예) 토익900,HSK 6급,GTQ1급, 임상경력 등" style="display: inline;">
 	                        <div class="verify left10" style="position: absolute;">업로드</div>
 	                        <input type="file" input-file="img-Cert0" name="cert[]" style="width:80px;height:50px;position:absolute;top:0;opacity:0;cursor:pointer; z-index: 2">
 	                        <div style="padding-top:10px;" class="col-4">

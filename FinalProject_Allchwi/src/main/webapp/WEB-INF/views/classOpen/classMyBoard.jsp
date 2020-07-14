@@ -25,7 +25,7 @@
 				<div>
 					<span class="date">최종업데이트 : 2020.06.24</span>
 					<div class="button_gray cursor"onClick="fnStatusChange('CS01','26923');" style="float:right;">심사요청하기</div>
-					<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
+					<a href="${cp}/class/classDate"><div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 				</div>
 				<div style="margin-top: 56px">
 					<div class="button-box">
