@@ -1,5 +1,6 @@
 package com.jhta.allchwi.controller.classdetail;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,11 +11,14 @@ import com.jhta.allchwi.vo.classqna.ClassQnaVO;
 
 @Controller
 public class ClassQnaController {
+	@Autowired
+	private ClassQnaService service;
+	
 	@PostMapping("/classDetail/qna")
 	@ResponseBody
 	public String insertQna(ClassQnaVO qvo) {
 		try {
-			ClassQnaService.insertQna(qvo);
+			service.insertQna(qvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "fail";
@@ -25,7 +29,7 @@ public class ClassQnaController {
 	@ResponseBody
 	public String insertRelply(ClassQnaVO qvo) {
 		try {
-			ClassQnaService.insertReply(qvo);
+			service.insertReply(qvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "fail";

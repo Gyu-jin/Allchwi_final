@@ -559,13 +559,13 @@ li {
 								<c:choose>
 										<c:when test="${empty id}">
 											<div class="btn_write">
-												<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main" class="btn_write_qna">
+												<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
 												문의하기</a>
 											</div>
 										</c:when>
 										<c:otherwise>
 											<div class="btn_write">
-												<a href="${cp }/class/qna" class="btn_write_qna">문의하기</a>
+												<a href="javascript:void(0);" id="btn_write_qna">문의하기</a>
 											</div>
 										</c:otherwise>
 								</c:choose>
@@ -736,18 +736,20 @@ li {
 		});
 	});
 	//qna작성
-	$(document).on('click', '.btn_write_qna', function () {
+	$(document).on('click', '#btn_write_qna', function () {
 		qna_content = document.getElementById('qna_content').value;
-		if (id == '') {
+		id='test';
+		class_num='4';
+		ml_num='1';
+		if (id!='test') {
 			alert('로그인이 필요합니다');
-		}
-		else {
-			$.post('/classDetail/qna', {
-				class_num: ${class_num},
-				ml_num: '1',
+		}else {
+			$.post('${cp}/classDetail/qna', {
+				class_num: class_num,
+				ml_num: ml_num,
 				qna_content:qna_content,
 				qna_lev: '0'
-			}, function (res) {
+			}, function (data,res) {
 				if (res=='success') {
 					alert('문의등록 성공');
 				} else {				
@@ -756,23 +758,30 @@ li {
 			});
 		}
 	});
-	$('#reply-send').click(function () {			
-		id = document.getElementById('id').value;
-		
-		if (id == '') {
+	//qna 답변
+	$(document).on('click', '#reply_send', function () {
+		reply_content = document.getElementById('reply_content').value;
+		id='test';
+		class_num='4';
+		ml_num='1';
+		if (id!='test') {
 			alert('로그인이 필요합니다');
-		}
-		else {
-			$.post('/class/classReview/23827', {}, function (res) {
+		}else {
+			$.post('${cp}/classDetail/qnareply', {
+				class_num: class_num,
+				ml_num: ml_num,
+				qna_content:reply_content,
+				qna_lev: '1',
+				qna_num: '9'
+			}, function (data,res) {
 				if (res=='success') {
-					$('#popup-write-review').show();
+					alert('답변등록 성공');
 				} else {				
-					alert('수업을 수강한 아이디만 리뷰를 작성할 수 있습니다. 아이디를 확인해주세요!');
+					alert('답변실패');
 				}
-			});		
+			});
 		}
-	});		
-
-
+	});
+	
 
 </script>

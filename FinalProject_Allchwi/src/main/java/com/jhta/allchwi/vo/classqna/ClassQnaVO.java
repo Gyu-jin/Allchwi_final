@@ -11,6 +11,13 @@ public class ClassQnaVO {
 	private int qna_lev;
 	private Timestamp qna_regdate;
 	public ClassQnaVO() {}
+	public ClassQnaVO(int class_num, int ml_num, String qna_content,int qna_lev) {
+		super();
+		this.class_num = class_num;
+		this.ml_num = ml_num;
+		this.qna_content = qna_content;
+		this.qna_lev = qna_lev;
+	}
 	public ClassQnaVO(int qna_num, int class_num, int ml_num, String qna_content, int qna_ref, int qna_lev,
 			Timestamp qna_regdate) {
 		super();
