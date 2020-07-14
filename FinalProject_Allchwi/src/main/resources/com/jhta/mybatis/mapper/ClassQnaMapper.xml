@@ -7,7 +7,7 @@
 		insert into class_qna values(null,#{class_num},#{ml_num},#{qna_content},(select ifnull(max(qna_ref)+1,1) from class_qna q),#{qna_lev},now())
 	</insert>
 	<insert id="insertReply" parameterType="classQna">
-		insert into class_qna values(null,#{class_num},#{ml_num},#{qna_content},(SELECT qna_ref FROM class_qna q where qna_num=#{qna_num),#{qna_lev},now())
+		insert into class_qna values(null,#{class_num},#{ml_num},#{qna_content},(select qna_ref from class_qna q where qna_num=#{qna_num}),#{qna_lev},now())
 	</insert>
 </mapper>
 
