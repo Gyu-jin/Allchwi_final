@@ -111,4 +111,9 @@ public class MemberLoginService{
 	public MemberLoginVO sessionInfo(MemberLoginVO mlv) {
 		return mld.loginCheck(mlv);
 	}
+	//a 로그아웃
+	public void logout(HttpSession session) {
+		//a 세션무효화 -> 세션에 담긴 값들을 모두 초기화
+		session.invalidate();
+	}
 }

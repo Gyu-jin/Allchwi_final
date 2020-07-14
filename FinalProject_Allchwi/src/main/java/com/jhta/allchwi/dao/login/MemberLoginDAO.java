@@ -2,6 +2,8 @@ package com.jhta.allchwi.dao.login;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,4 +39,6 @@ public class MemberLoginDAO {
 	public MemberLoginVO loginCheck(MemberLoginVO mlv) {
 		return session.selectOne(NAMESPACE + ".loginCheck", mlv);
 	}
+	//6 로그아웃 -> session.invalidate
+	public void logout(HttpSession session) {}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .topbar {
     height: 8rem;
@@ -48,12 +49,6 @@
          <!-- 연습용메뉴 -->
 		 <div class="practice-group">
            	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
-			<a href="${cp}/login/main">로그인 연습</a>&nbsp&nbsp
-			<!-- 연습추가/영호 -->
-			<a href="${cp}/mypage/mypageForm">프로필</a>&nbsp&nbsp
-			<a href="${cp}/mypage/changePwd">비밀번호변경</a>&nbsp&nbsp	
-			<a href="${cp}/mypage/signout">회원탈퇴</a>&nbsp&nbsp		
-			<a href="${cp}/mypage/pointForm">내 포인트</a>	
 		 </div>
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->
@@ -108,7 +103,16 @@
             	</a>
                 
             </li>
-				
+            <!-- a 로그인 링크 -->
+            <c:choose>
+            <c:when test="${sessionScope.ml_num == null}">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="${cp}/login/main" id="classApply" role="button">
+               		<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인</span>
+            	</a>
+            </li>
+			</c:when>
+			<c:otherwise>
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,26 +121,32 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="${cp}/mypage/mypageForm">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	마이페이지
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   	내 프로필
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	내 수업
+                <a class="dropdown-item" href="${cp}/mypage/pointForm">
+                  <i class="fas fa-database fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	내 포인트
+                </a>
+                <a class="dropdown-item" href="${cp}/mypage/changePwd">
+                  <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	비밀번호 변경
+                </a>
+                <a class="dropdown-item" href="${cp}/mypage/signout">
+                  <i class="fas fa-times fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	회원탈퇴
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <!-- a태그에 원래 있던 내용  href 다음 data-toggle="modal" data-target="#logoutModal" -->
+                <a class="dropdown-item" href="${cp}/login/logout" >
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
               </div>
             </li>
-
+            </c:otherwise>
+			</c:choose>
           </ul>
           </div>
  
