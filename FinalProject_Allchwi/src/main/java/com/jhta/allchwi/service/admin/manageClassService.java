@@ -18,6 +18,11 @@ public class manageClassService {
 		return dao.manage_list();
 	}
 	
+	public int countPeople(int class_num) {
+		return dao.countPeople(class_num);
+	}
+	
+	
 	/*
 	public int count(HashMap<String, Object> map) {
 		return dao.count(map);

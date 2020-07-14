@@ -32,18 +32,23 @@
 					<th>수업제목</th>
 					<th>수업형태</th>
 					<th>카테고리</th>
+					<th>클래스넘버</th>
+					<th>수강인원	</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="vo" items="${list }">
+			<tbody>			
+				<c:forEach var="vo" items="${list }" varStatus="i">
 					<tr>
 						<td>${vo.ml_num}</td>
 						<td>${vo.tutor_nickname }</td>
 						<td>${vo.class_title }</td>
 						<td>${vo.class_form }</td>
 						<td>${vo.scategory_name }</td>
-					</tr>
+						<td>${vo.class_num }</td>
+						<td>${list2[i.index]}</td>
+					<tr>
 				</c:forEach>
+
 			</tbody>
 		</table>
 		<div>

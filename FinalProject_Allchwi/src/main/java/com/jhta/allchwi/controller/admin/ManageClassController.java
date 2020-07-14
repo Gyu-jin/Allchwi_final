@@ -1,5 +1,6 @@
 package com.jhta.allchwi.controller.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,9 +34,20 @@ public class ManageClassController {
 		map.put("endRow", pu.getEndRow());
 		
 		*/
+		
+		
+		List<Integer> list2 = new ArrayList<Integer>();
+		int aa;
 		List<ManageClassVO> list = service.manage_list();
-
+		for (ManageClassVO vo : list) {
+			int class_num = vo.getClass_num();			
+			aa =service.countPeople(class_num);
+			list2.add(aa);
+		}
+		
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
+		//model.addAttribute("list2", list2);
 		//model.addAttribute("pu", pu);
 		//model.addAttribute("keyword",keyword);
 		//model.addAttribute("field", field);
