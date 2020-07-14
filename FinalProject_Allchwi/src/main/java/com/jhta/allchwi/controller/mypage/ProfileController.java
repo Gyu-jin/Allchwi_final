@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.jhta.allchwi.service.login.MemberInfoService;
-import com.jhta.allchwi.vo.login.MemberInfoVO;
+import com.jhta.allchwi.vo.login.ProfileVO;
 
 @Controller
 public class ProfileController {
@@ -20,9 +20,9 @@ public class ProfileController {
 		//a 세션에 저장되어있는 회원번호 가져오기
 		int ml_num = (int)session.getAttribute("ml_num");
 		//a 서비스 메소드 가져와 vo 값 받기
-		MemberInfoVO miv = mis.selectInfo(ml_num);
+		ProfileVO pfv = mis.selectInfo(ml_num);
 		//a 모델 객체에 값 담아주기
-		model.addAttribute("result", miv);
+		model.addAttribute("result", pfv);
 		return ".mypage.profile";
 	}
 }

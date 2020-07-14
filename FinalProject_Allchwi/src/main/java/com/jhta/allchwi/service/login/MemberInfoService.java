@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.login.MemberInfoDAO;
 import com.jhta.allchwi.vo.login.MemberInfoVO;
+import com.jhta.allchwi.vo.login.ProfileVO;
 
 @Service
 public class MemberInfoService {
@@ -18,7 +19,7 @@ public class MemberInfoService {
 		return mid.UpdateSignout(hm);
 	}
 	//2회원정보 조회
-	public MemberInfoVO selectInfo(int ml_num) {
+	public ProfileVO selectInfo(int ml_num) {
 		return mid.selectInfo(ml_num);
 	}
 }

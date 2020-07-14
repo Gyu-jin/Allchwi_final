@@ -12,26 +12,27 @@
 		<!--profile body-->
 		<div class="container">
 			<div class="inner-cont" style="padding-top: 0">
+				<!--a 기본 프로필 이미지  읽어와서 이미지에 넣어야함-->
 				<div class="pf"
 					style="background-image: url(/allchwi/resources/img/profile-defaultImg.jpg)"
 					id="picture-cover">
-					<!-- a 카메라 이미지를 버튼처럼 사용 -->
+					<!-- a 카메라 이미지를 버튼처럼 사용  -->
 					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png">
 					<input type="file" id="picture" name="img">
 				</div>
 			</div>
 			<div class="inner-cont">
 				<div class="label-title">ID</div>
-				<div class="contents">alfkwl1239@naver.com</div>
+				<div class="contents">${result.id}</div>
 			</div>
 			<div class="inner-cont">
 				<div class="label-title">이름</div>
-				<div class="contents">조영호</div>
+				<div class="contents">${result.mb_name}</div>
 			</div>
 			<div class="inner-cont">
 				<div class="label-title">닉네임</div>
 				<div class="contents">
-					<input type="text" placeholder="닉네임을 입력해주세요" id="nickname" name="mb_nickname" class="form-control" value="">
+					<input type="text" placeholder="닉네임을 입력해주세요" id="nickname" name="mb_nickname" class="form-control" value="${result.mb_nickname}">
 					<p class="regintxt01 clearbt redtxt">ex) 열정만수르, 요조숙녀, 열혈남 (8자
 						이내)</p>
 					<div class="count_char">
@@ -42,7 +43,7 @@
 			<div class="inner-cont">
 				<div class="label-title">내소개</div>
 				<div class="contents">
-					<textarea class="form-control" id="introduction" placeholder="자기 소개 입력"	name="mb_about"></textarea>
+					<textarea class="form-control" id="introduction" placeholder="자기 소개 입력"	name="mb_about">${result.mb_about}</textarea>
 					<div class="count_char">
 						<font id="introduction-count">0</font>/300
 					</div>

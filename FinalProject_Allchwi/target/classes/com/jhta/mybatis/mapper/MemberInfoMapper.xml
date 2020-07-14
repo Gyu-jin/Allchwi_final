@@ -11,14 +11,14 @@
 	<update id="updateSignout" parameterType="hashmap">
 		update member_info set mb_auth = #{mb_auth}, mb_reason = #{mb_reason} where mb_num = #{mb_num}
 	</update>
-	<!--3 회원번호로 회원정보 조회 -->
-	<select id="selectInfo" parameterType="int" resultType="miv">
+	<!--3 회원번호로 login, info, profileImg 테이블 조인하여 회원정보 조회 -->
+	<select id="selectInfo" parameterType="int" resultType="pfv">
 		select info.*, p.pro_img
 		from
 		(select l.ml_num, l.id, i.mb_name, i.mb_nickname, i.mb_about, i.pro_num 
 		from allchwi.member_login l, allchwi.member_info i
-		where l.ml_num = #{ml_num}) info, allchwi.profile_img p 
-		where info.pro_num = p.pro_num;
+		where l.ml_num = i.ml_num) info, allchwi.profile_img p 
+		where info.pro_num = p.pro_num and ml_num = #{ml_num};
 	</select>
 </mapper>
 

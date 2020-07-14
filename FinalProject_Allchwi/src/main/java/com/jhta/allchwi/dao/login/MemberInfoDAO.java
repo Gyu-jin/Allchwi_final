@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.login.MemberInfoVO;
+import com.jhta.allchwi.vo.login.ProfileVO;
 
 
 @Repository
@@ -24,7 +25,7 @@ public class MemberInfoDAO {
 		return session.insert(NAMESPACE + ".addInfo", miv);
 	}
 	//3 세션에 담긴 회원번호로 회원정보 조회
-	public MemberInfoVO selectInfo(int ml_num) {
+	public ProfileVO selectInfo(int ml_num) {
 		return session.selectOne(NAMESPACE + ".selectInfo", ml_num);
 	}
 }
