@@ -107,5 +107,8 @@ public class MemberLoginService{
 			return 3;
 		}
 	}
-	
+	//a 로그인정보 - vo로 리턴
+	public MemberLoginVO sessionInfo(MemberLoginVO mlv) {
+		return mld.loginCheck(mlv);
+	}
 }
