@@ -103,37 +103,37 @@ mark {
 						<img src="${cp}/resources/img/popular.png" alt="">
 					</div> <mark>인기수업</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=1">
+			<li><a href="${cp }/list/search?bcategory_num=1">
 					<div class="icon design">
 						<img src="${cp}/resources/img/work.png" alt="">
 					</div> <mark>실무역량</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=2">
+			<li><a href="${cp }/list/search?bcategory_num=2">
 					<div class="icon work">
 						<img src="${cp}/resources/img/design.png" alt="">
 					</div> <mark>디자인</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=3">
+			<li><a href="${cp }/list/search?bcategory_num=3">
 					<div class="icon beauty">
 						<img src="${cp}/resources/img/beauty.png" alt="">
 					</div> <mark>뷰티</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=4">
+			<li><a href="${cp }/list/search?bcategory_num=4">
 					<div class="icon video">
 						<img src="${cp}/resources/img/video.png" alt="">
 					</div> <mark>영상</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=5">
+			<li><a href="${cp }/list/search?bcategory_num=5">
 					<div class="icon language">
 						<img src="${cp}/resources/img/music.png" alt="">
 					</div> <mark>음악</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=6">
+			<li><a href="${cp }/list/search?bcategory_num=6">
 					<div class="icon language">
 						<img src="${cp}/resources/img/language.png" alt="">
 					</div> <mark>언어</mark>
 			</a></li>
-			<li><a href="${cp }/category/search?bcategory_num=7">
+			<li><a href="${cp }/list/search?bcategory_num=7">
 					<div class="icon language">
 						<img src="${cp}/resources/img/cook.png" alt="">
 					</div> <mark>라이프스타일</mark>

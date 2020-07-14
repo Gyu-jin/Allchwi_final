@@ -44,8 +44,8 @@ public class ClassInfoService {
 		return infoDao.insert(vo);
 	}
 	//keyword 검색
-	public List<ClassInfoVO> keyword_list(String keyword){
-		return infoDao.keyword_list(keyword);
+	public List<ClassInfoVO> keyword_list(HashMap<String, Object> map){
+		return infoDao.keyword_list(map);
 	}
 	
 	//category 검색

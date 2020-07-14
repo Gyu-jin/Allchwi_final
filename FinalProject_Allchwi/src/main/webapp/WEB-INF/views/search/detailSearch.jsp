@@ -97,29 +97,29 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=1" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=1" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	실무역량
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${cp}/category/search?scategory_num=101">엑셀</a>
+          <a class="dropdown-item" href="${cp}/list/search?scategory_num=101">엑셀</a>
           <a class="dropdown-item" href="#">파워포인트</a>
           <a class="dropdown-item" href="#">프로그래밍</a>
         </div>
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=2" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=2" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	디자인
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${cp}/category/search?scategory_num=201">포토샵</a>
+          <a class="dropdown-item" href="${cp}/list/search?scategory_num=201">포토샵</a>
           <a class="dropdown-item" href="#">일러스트</a>
           <a class="dropdown-item" href="#">애니메이션</a>
         </div>
       </li>      
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=3" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=3" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	뷰티
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -130,7 +130,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=4" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=4" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	영상
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -141,7 +141,7 @@
       </li>     
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=5" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=5" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	음악
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -152,7 +152,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=6" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=6" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	언어
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -163,7 +163,7 @@
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/category/search?bcategory_num=7" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=7" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           	라이프스타일
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -443,13 +443,13 @@
 	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 			<c:when test="${i==pu.pageNum}">
-				<a href="${cp }/category/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}" 
+				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}"
 				style="text-decoration: none;font-weight: bold;">
 				<span style="color:red">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/category/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}" 
+				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}" 
 				style="text-decoration: none">
 				<span style="color:gray">[${i }]</span>
 				</a>

@@ -19,8 +19,8 @@ public class ClassInfoDAO {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
 	//keyword 검색
-	public List<ClassInfoVO> keyword_list(String keyword){
-		return session.selectList(NAMESPACE+".keyword_list", keyword);
+	public List<ClassInfoVO> keyword_list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".keyword_list", map);
 	}
 	
 	//category 검색 
