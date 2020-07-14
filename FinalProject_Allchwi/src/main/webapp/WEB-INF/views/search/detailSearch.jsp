@@ -90,96 +90,35 @@
 <script>
 
 
-
 </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
  
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=1" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	실무역량
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${cp}/list/search?scategory_num=101">엑셀</a>
-          <a class="dropdown-item" href="#">파워포인트</a>
-          <a class="dropdown-item" href="#">프로그래밍</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=2" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	디자인
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${cp}/list/search?scategory_num=201">포토샵</a>
-          <a class="dropdown-item" href="#">일러스트</a>
-          <a class="dropdown-item" href="#">애니메이션</a>
-        </div>
-      </li>      
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=3" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	뷰티
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">메이크업</a>
-          <a class="dropdown-item" href="#">패션</a>
-          <a class="dropdown-item" href="#">헤어</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=4" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	영상
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">프리미어</a>
-          <a class="dropdown-item" href="#">여행영상</a>
-          <a class="dropdown-item" href="#">에프터이펙트</a>
-        </div>
-      </li>     
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=5" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	음악
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">보컬</a>
-          <a class="dropdown-item" href="#">피아노</a>
-          <a class="dropdown-item" href="#">기타</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=6" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	언어
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">영어</a>
-          <a class="dropdown-item" href="#">중국어</a>
-          <a class="dropdown-item" href="#">베트남어</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="${cp }/list/search?bcategory_num=7" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          	라이프스타일
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">요리</a>
-          <a class="dropdown-item" href="#">반려동물</a>
-          <a class="dropdown-item" href="#">플라워</a>
-        </div>
-      </li>
-      
+    <ul class="navbar-nav"> 
+    <!-- big_category -->
+      <c:forEach var="blist" items="${bigcalte_list }"> 
+     	 <li class="nav-item dropdown">
+      		<a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          	${blist.bcategory_name }
+	       	</a>
+	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <!-- 선택한 big_category에 해당하는 small_category -->
+      		<c:forEach var="slist" items="${smallcate_list }"> 
+	      		<c:if test="${blist.bcategory_num == slist.bcategory_num }">
+					<a class="dropdown-item" href="${cp}/list/search?scategory_num=${slist.scategory_num}">${slist.scategory_name}</a>	        			
+				</c:if>
+	     	</c:forEach>
+	      </div>
+	    </li>		
+      </c:forEach>
     </ul>
+    
 	    <p>
 		  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 		    	상세검색
 		  </a>
 		</p>
-	
+		
 	  </div>
 </nav>
 
@@ -201,86 +140,28 @@
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
-					<form class="form-inline">
-					
-					<!-- header 검색창을 통해 검색했을 때만 keyword가 나타나도록 .. -->
+					<form class="form-inline" action="${cp }/list/search">
+					<!-- header 검색창을 통해 검색했을 때만 keyword가 나타나도록 ..-->
 						<c:if test="${!empty keyword }">
 							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
+							<input type="hidden" name="keyword" value="${keyword }">
+						</c:if> 
+						<c:if test="${!empty scategory_num }">
+							<input type="hidden" name="scategory_num" value="${scategory_num }">
 						</c:if>
-						<c:if test="${empty keyword }">
-							<div class="label-1">
-								상세검색어
-							</div> 
-							<div class="input-search">
-					            <div class="input-group">
-					              <input type="text" name="keyword" class="form-control bg-light border-0 small" 
-					              	placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-					            </div>	            
-					       </div>
-						</c:if>
-						<div class="label-1">
-							카테고리
-						</div> 
-					
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="1"> 실무역량
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="2"> 디자인
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="3"> 뷰티
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="4"> 요리
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="5"> 영상
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="6"> 음악
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="offcate" value="7"> 외국어
-							</label>
-						</div>
-				
-						<br> 
+						<br>
 						<div class="label-1">
 							지역
 						</div> 
 						<select class="custom-select my-1 mr-sm-2"
-							id="inlineFormCustomSelectPref">
-							<option selected value="1">서울</option>
-							<option value="2">경기</option>
-							<option value="3">강원</option>
-							<option value="4">충남</option>
-							<option value="5">충북</option>
-							<option value="6">경남</option>
-							<option value="7">경북</option>
-							<option value="8">충남</option>
-							<option value="9">충북</option>
-							<option value="10">전남</option>
-							<option value="11">전북</option>
-							<option value="12">제주</option>
+							id="BigLoc">
+							<option selected value="0">선택</option>
+								<c:forEach var="vo" items="${bloc_list }">
+									<option value="${vo.bloc_num }">${vo.bloc_name }</option>
+								</c:forEach>
 						</select> 
-						<select class="custom-select my-1 mr-sm-2">
-							
-							<!-- inlineFormCustomSelectPref의 option value에 따라 동적으로 생성 -->
-						
+						<select class="custom-select my-1 mr-sm-2" id="SmallLoc" name="sloc_num">
+							<option value='0'>세부 지역 선택</option>
 						</select> <br>
 						<div class="label-1">
 							기간
@@ -290,7 +171,7 @@
 								<div class="input-group date" id="datetimepicker7"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker7" name="startDate" />
+										data-target="#datetimepicker7" /><!-- name="startDate" /> -->
 									<div class="input-group-append" data-target="#datetimepicker7"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -306,7 +187,7 @@
 								<div class="input-group date" id="datetimepicker8"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker8" name="endDate"/>
+										data-target="#datetimepicker8" /><!-- name="endDate" /> -->
 									<div class="input-group-append" data-target="#datetimepicker8"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -318,7 +199,8 @@
 						</div>
 		
 						<br>
-						<button type="button" class="btn btn-primary my-1"
+						
+						<button type="submit" class="btn btn-primary my-1"
 							id="detailSearchBtnOffline">수업찾기</button>
 					</form>
 		
@@ -327,64 +209,47 @@
 				<!-- @@@@@온라인 검색탭@@@@@@ -->
 				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 					aria-labelledby="nav-profile-tab">
-					<form class="form-inline">
-		
-						<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
+					<form class="form-inline" action="${cp }/list/search">
+						<c:if test="${!empty keyword }">
+							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
+						</c:if> 
+						<br>
 						<div class="label-1">
-							카테고리
+							시작 날짜
 						</div> 
-						<div class="btn-group-toggle" data-toggle="buttons" id="category1">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 실무역량
-							</label>
+						<div class='col-md-3'>
+							<div class="form-group">
+								<div class="input-group date" id="datetimepicker9"
+									data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input"
+										data-target="#datetimepicker9" /><!-- name="startDate" /> -->
+									<div class="input-group-append" data-target="#datetimepicker9"
+										data-toggle="datetimepicker">
+										<div class="input-group-text">
+											<i class="fa fa-calendar"></i>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category2">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 디자인
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category3">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 뷰티
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category4">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 요리
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category5">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 영상
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category6">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 음악
-							</label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons" id="category7">
-							<label class="btn btn-secondary active"> 
-							<input type="checkbox" name="oncate"> 외국어
-							</label>
-						</div>
-		
 						<br>
 						<div class="label-1">
 							수업형태
 						</div> 
 						<div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline-flex;">
-							<label class="btn btn-secondary active"> <input
-								type="radio" name="options" id="option1" checked> 1개월
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option2"> 2개월
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option3"> 3개월
-							</label>
+							<label class="btn btn-secondary active"> 
+								<input type="radio" name="month" value="0" checked> 1개월
+							</label> 
+							<label class="btn btn-secondary"> 
+								<input type="radio" name="month" value="1"> 2개월
+							</label> 
+							<label class="btn btn-secondary"> 
+								<input type="radio" name="month" value="2"> 3개월
+							</label> 
 						</div>
 		
 						<br><br>
-						<button type="button" class="btn btn-primary my-1"
+						<button type="submit" class="btn btn-primary my-1"
 							id="detailSearchBtnOnline">수업찾기</button>
 					</form>
 		
@@ -397,6 +262,8 @@
 
 
 <div class="jumbotron">
+<h1>${bcategory_name }</h1>
+<h5>${scategory_name }</h5>
 	<select class="custom-select my-1 mr-sm-2"
 		id="inlineFormCustomSelectPref2">
 		<option selected value="1">정확도순</option>
@@ -417,7 +284,7 @@
 					   	<rect width='100%' height='100%' fill='#55595c'></rect>
 					   	<text x='50%' y='50%' fill='#eceeef' dy='.3em'>
 					   	
-					   	${vo.getClass_title() }</text></svg>
+					   	${vo.getClass_title() } 번호 :${vo.getClass_num() } </text></svg>
 						<div class='card-body'>
 							<p class='card-text'>튜터: ${vo.getTutor_nickname() }</p>
 							<div class='d-flex justify-content-between align-items-center'>
@@ -470,56 +337,29 @@
 	$('#datetimepicker8').datetimepicker({
 		format : 'L'
 	});
+	$('#datetimepicker9').datetimepicker({
+		format : 'L'
+	});
 	
 	
 	
 	//Big Location Select-Option
-	$("#inlineFormCustomSelectPref").click(function() {
-		if ($("#inlineFormCustomSelectPref option:selected").val() == 1) {
-			console.log("1-서울 선택됨");
-			// small_location table 에서 bloc_num 이 1인 sloc_name 가져오기
-		} else if ($("#inlineFormCustomSelectPref option:selected").val() == 2) {
-			console.log("2-경기 선택됨");
-			// small_location table 에서 bloc_num 이 2인 sloc_name 가져오기
-		}
+	$('#BigLoc').on('change',function(){
+		var bloc_num = $(this).val();
+		$.ajax({
+		    type: "post",
+		    dataType: "json",
+		    url: "${cp}/locatrion/search",
+		    data: {bloc_num: bloc_num},
+		    success: function(data) {
+		    	$("#SmallLoc").empty();
+		    	$("#SmallLoc").append("<option value='0'>세부 지역 선택</option>");		
+		    	$(data).each(function(i,sloc){				
+					$("#SmallLoc").append("<option value='"+sloc.sloc_num+"'>"+sloc.sloc_name+"</option>");		
+				});
+		    }
+		});
 	});
-	
 			
 	
-	// OffLine tap - 상세검색 버튼
-	$("#detailSearchBtnOffline").click(function() {
-		
-		let cates = [];
-		$("#searchList").empty();
-		
-		$("input[name=offcate]:checked").each(function(i){		
-			console.log("체크된 카테고리번호 :"+ $(this).val());	
-			cates[i]=($(this).val());
-		});	
-		
-		var keyword=$("#keyword").val();
-		var startDate=$("input[name=startDate]").val();
-		var endDate=$("input[name=endDate]").val();
-		console.log(cates.length);		
-		$.post("${cp}/class/detailSearch",{"keyword":keyword,"startDate":startDate,"endDate":endDate,"cccc":cates} ,function(data, textStatus, req) {
-			$(data).each(function(i,searchClass){
-				var html = "<div class='col-md-4'>"
-					+ "<div class='card mb-4 shadow-sm'>"
-					+ "<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title>"
-					+ "<rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>"+searchClass.class_title +"</text></svg>"
-					+ "<div class='card-body'>"
-					+ "<p class='card-text'>튜터:"+searchClass.tutor_nickname+"</p>"
-					+ "<div class='d-flex justify-content-between align-items-center'>"
-					+ "<div class='btn-group'>"
-					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>"
-					+ "<button type='button' class='btn btn-sm btn-outline-secondary'>"+searchClass.startDate+"</button>"
-					+ "</div>"
-					+ "<small class='text-muted'>"+(i+1)+"번째 수업</small>"
-					+ "</div>" + "</div>" + "</div>" + "</div>";
-					
-			$("#searchList").append(html);
-			});
-			
-		}, "json");
-	});
 </script>

@@ -17,7 +17,7 @@ public class DetailSearchController {
 
 	@RequestMapping(value = "/class/detailSearch", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String goList(String keyword, String startDate, String endDate, @RequestParam(value = "cccc[]") List<String> cccc) {
+	public String goList(String keyword, String startDate, String endDate, @RequestParam(value = "cates[]") List<String> cates) {
 
 		ArrayList<ClassInfoVO> list = new ArrayList<ClassInfoVO>();
 		list.add(new ClassInfoVO(1, 1, 1, 1, 1, "다은", "01047990968", "강남", 1, 1, 1, "다은이의 쉐킷마카롱", 76000, 1, 1, 1,
@@ -29,7 +29,7 @@ public class DetailSearchController {
 		
 		System.out.println("keyword : "+keyword);
 		
-		 for(String cate:cccc) {
+		 for(String cate:cates) {
 			 System.out.println("선택된 카테고리 번호 : " +cate);
 		 }
 		

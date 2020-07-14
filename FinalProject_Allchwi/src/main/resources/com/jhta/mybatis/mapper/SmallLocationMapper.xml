@@ -11,5 +11,9 @@
 	       	select sloc_num from small_location where sloc_name=#{sloc_name}
 	    </selectKey>
 	</insert>
+	
+	<select id="sloc_list" parameterType="int" resultType="sloc">
+		select sloc_num, sloc_name, bloc_num from small_location where bloc_num=#{bloc_num}
+	</select>
 </mapper>
 

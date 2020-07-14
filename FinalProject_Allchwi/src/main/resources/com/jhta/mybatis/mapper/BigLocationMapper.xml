@@ -14,5 +14,9 @@
 	<select id="bigComfirm" parameterType="string" resultType="bloc">
 		select bloc_num,bloc_name from big_location where bloc_name=#{state}
 	</select>
+	
+	<select id="list" resultType="bloc">
+		select bloc_num,bloc_name from big_location
+	</select>
 </mapper>
 

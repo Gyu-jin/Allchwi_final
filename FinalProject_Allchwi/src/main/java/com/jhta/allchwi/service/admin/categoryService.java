@@ -45,6 +45,14 @@ public class categoryService {
 	public List<SmallCategoryVO> scate_list(int bcategory_num){
 		return dao.scate_list(bcategory_num);
 	}
+	public List<SmallCategoryVO> allscate_list(){
+		return dao.allscate_list();
+	}
 	
-	
+	public String scatename(int scategory_num) {
+		return dao.scatename(scategory_num);
+	}
+	public String bcatename(int bcategory_num) {
+		return dao.bcatename(bcategory_num);
+	}
 }

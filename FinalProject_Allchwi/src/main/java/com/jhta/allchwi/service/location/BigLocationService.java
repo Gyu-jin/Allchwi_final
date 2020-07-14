@@ -1,5 +1,7 @@
 package com.jhta.allchwi.service.location;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ public class BigLocationService {
 	
 	public int insert(BigLocationVO vo) {
 		return dao.insert(vo);
+	}
+	
+	public List<BigLocationVO> blocList(){
+		return dao.blocList();
 	}
   
 }

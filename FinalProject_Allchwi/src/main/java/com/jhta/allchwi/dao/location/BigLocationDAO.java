@@ -1,5 +1,7 @@
 package com.jhta.allchwi.dao.location;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,8 @@ public class BigLocationDAO {
 	public int insert(BigLocationVO vo) {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
-
+	
+	public List<BigLocationVO> blocList(){
+		return session.selectList(NAMESPACE + ".list");
+	}
 }

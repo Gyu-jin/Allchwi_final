@@ -32,6 +32,16 @@
 	<select id="scate_list" parameterType="int" resultType="small_category">
 		select scategory_num,bcategory_num,scategory_name from small_category where bcategory_num=#{bcategory_num}
 	</select>
+	<select id="scatename" parameterType="int" resultType="String">
+		select scategory_name from small_category where scategory_num=#{scategory_num}
+	</select>
+	<select id="bcatename" parameterType="int" resultType="String">
+		select bcategory_name from big_category where bcategory_num=#{bcategory_num}
+	</select>
+	<select id="allscate_list" resultType="small_category">
+		select scategory_num,s.bcategory_num,scategory_name, bcategory_name from small_category s, big_category b
+		where s.bcategory_num=b.bcategory_num
+	</select>
 
 
 

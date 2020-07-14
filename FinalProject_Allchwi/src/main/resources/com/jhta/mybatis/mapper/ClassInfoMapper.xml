@@ -11,13 +11,31 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
+	<!-- keyword & small location 검색 sql -->
+	<sql id="sloc">
+		<if test="sloc_num>0 and scategory_num==-1">
+			<where>
+				sloc_num=#{sloc_num}
+			</where>
+			
+		</if>	
+	</sql>
+	<sql id="key">
+		<if test="keyword!=null and keyword!='' and sloc_num==-1">
+			<where>
+				class_title like '%${keyword}%'
+			</where>
+		</if>	
+	</sql>
 	
 	<!-- keyword 검색 sql -->
 	<sql id="keyword">
 		<if test="keyword!=null and keyword!=''">
 			(select class_num 
 			from class_info 
-			where class_title like '%${keyword}%') a
+			<include refid="key"/>
+			<include refid="sloc"/>
+			) a
 		</if>	
 	</sql>
 	
@@ -25,18 +43,35 @@
 	<select id="keyword_list" parameterType="hashmap" resultType="classinfo">
 		select class_num, class_title, tutor_nickname 
 		from class_info 
-		where class_title like '%${keyword}%'
+		<include refid="key"/>
+		<include refid="sloc"/>
 		order by class_num desc
-		limit #{startRow},6;
+		limit #{startRow},6
+	</select>
+	
+	<select id="key_sloc_list" parameterType="hashmap" resultType="classinfo">
+		select class_num, class_title, tutor_nickname 
+		from class_info 
+		where class_title like '%${keyword}%'
+		and sloc_num=#{sloc_num}
+		order by class_num desc
+		limit #{startRow},6
 	</select>
 	
 	
 	<!-- category 검색 sql -->
 	
 	<sql id="smallcategory">
-		<if test="scategory_num>0">
+	<choose>
+		<when test="scategory_num>0 and sloc_num==-1">
 			and scategory_num=#{scategory_num}
-		</if>
+		</when>
+			<when test="scategory_num>0 and sloc_num>0">
+			and scategory_num=#{scategory_num}
+			and sloc_num=#{sloc_num}
+		</when>
+	</choose>
+		
 	</sql>
 	<sql id="bigcategory">
 		<if test="bcategory_num>0">
@@ -46,21 +81,30 @@
 
 	
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name
+		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num
 		from (select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
 				from small_category s, big_category b
 				where s.bcategory_num=b.bcategory_num 				
 					<include refid="smallcategory"/>								
-					<include refid="bigcategory"/>				
+					<include refid="bigcategory"/>		
 				)a, class_info c
 		where a.scategory_num=c.scategory_num
+		order by class_num desc
 		limit #{startRow},6
 	</select>
 	
 	<sql id="small_count">	
-		<if test="scategory_num>0">	
-			class_info where scategory_num=#{scategory_num}	
-		</if>
+		<choose>
+			<when test="scategory_num>0 and sloc_num==-1">
+				class_info where scategory_num=#{scategory_num}	
+			</when>
+			<when test="scategory_num>0 and sloc_num>0">
+				class_info where scategory_num=#{scategory_num}	
+				and sloc_num=#{sloc_num}
+			</when>
+				
+		</choose>
+		
 	</sql>
 	
 	<sql id="big_count">
@@ -78,8 +122,8 @@
 	</sql>
 	
 	<select id="count" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from			
-			<include refid="small_count"/>
+		select NVL(count(*),0) from
+		    <include refid="small_count"/>
 			<include refid="big_count"/>	
 			<include refid="keyword"/>	
 	</select>

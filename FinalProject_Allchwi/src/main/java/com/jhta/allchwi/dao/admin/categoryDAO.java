@@ -46,7 +46,15 @@ public class categoryDAO {
 		
 		return session.selectList(NAMESPACE + ".scate_list",bcategory_num);
 	}
-	
+	public List<SmallCategoryVO> allscate_list() {
+		return session.selectList(NAMESPACE + ".allscate_list");
+	}
+	public String scatename(int scategory_num) {
+		return session.selectOne(NAMESPACE+".scatename",scategory_num);
+	}
+	public String bcatename(int bcategory_num) {
+		return session.selectOne(NAMESPACE+".bcatename",bcategory_num);
+	}
 	
 	
 	
