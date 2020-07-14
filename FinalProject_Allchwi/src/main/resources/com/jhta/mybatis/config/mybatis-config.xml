@@ -27,6 +27,7 @@
 		<typeAlias type="com.jhta.allchwi.vo.location.BigLocationVO" alias="bloc"/>	
 		<!-- small_location 테이블 alias -->	
 		<typeAlias type="com.jhta.allchwi.vo.location.SmallLocationVO" alias="sloc"/>	
+		<typeAlias type="com.jhta.allchwi.vo.classqna.ClassQnaVO" alias="classQna"/>	
 		
 	</typeAliases>
 
@@ -52,6 +53,8 @@
 		
 		<!-- Class Apply Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassApplyMapper.xml"/>
+		<!-- Class detail 관련 Mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/ClassQnaMapper.xml"/>
 		
 		<!-- Location 등록 -->
 		<mapper resource="com/jhta/mybatis/mapper/BigLocationMapper.xml"/>

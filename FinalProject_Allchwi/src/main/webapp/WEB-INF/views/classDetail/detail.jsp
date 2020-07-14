@@ -92,17 +92,17 @@
 	width: 51.15%;
 }
 
-#container_detail .class_wrap .class_detail {
+.class_wrap .class_detail {
 	background: #ececec;
 	width: 100%
 }
 
-#container_detail .class_wrap .class_detail .info {
+.class_wrap .class_detail .info {
 	line-height: 150%;
 	margin-top: 20px;
 }
 
-#container_detail .class_wrap .class_detail .tutor_profile {
+.class_wrap .class_detail .tutor_profile {
 	width: 180px;
 	float: left;
 	color: #000;
@@ -116,31 +116,31 @@
 	line-height: 200%;
 }
 
-#container_detail .class_wrap .class_detail .class_title {
+.class_wrap .class_detail .class_title {
 	float: right;
 	padding-top: 40px;
 	margin: 50px 50px 50px 0;
 }
 
-#container_detail .class_wrap .detail_sec_bor {
+.class_wrap .detail_sec_bor {
 	border-top: 1px solid #e3e3e3;
 	overflow: hidden;
 	padding: 0px 80px 80px 80px;
 }
 
-#container_detail .class_wrap .class_detail .sec01 {
+.class_wrap .class_detail .sec01 {
 	padding-top: 125px;
 	position: relative;
 }
 
-#container_detail .class_navi ul li a.on {
+.class_navi ul li a.on {
 	color: #ff936f;
 	font-weight: bold;
 	font-size: 20px;
 	border-bottom: 2px solid #ff936f;
 }
 
-#container_detail .class_navi ul li {
+.class_navi ul li {
 	width: 180px;
 	display: inline-block;
 	text-align: center;
@@ -219,7 +219,7 @@
 	line-height: 100%;
 }
 
-#container_detail .tutor_t {
+.tutor_t {
 	margin: 30px;
 }
 
@@ -229,7 +229,7 @@
 	cursor: default;
 }
 
-#container_detail .tutor_t dl.tutor_txt dt {
+.tutor_t dl.tutor_txt dt {
 	width: 80px;
 	height: 80px;
 	background: none;
@@ -238,7 +238,7 @@
 	overflow: hidden;
 }
 
-#container_detail .tutor_t dl.tutor_txt dd {
+.tutor_t dl.tutor_txt dd {
 	width: 300px;
 	left: 100px;
 	top: -80px;
@@ -250,7 +250,7 @@
 	letter-spacing: 0;
 }
 
-#container_detail .tutor_t dl.tutor_txt dd:after {
+.tutor_t dl.tutor_txt dd:after {
 	right: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -300,6 +300,12 @@ li {
 
 .reply_box {
 	margin-top: 20px;
+}
+#reply_send{
+	width: 100px;
+    height: 85px;
+    margin-top: -15px;
+    margin-left: 24px;
 }
 </style>
 
@@ -548,12 +554,23 @@ li {
 						<div class="class_detail detail_sec_bor" id="qna">
 							<div class="sec01">
 								<h1>Q&A</h1>
-								<textarea type="text" id="form8"
+								<textarea type="text" id="qna_content"
 									class="md-textarea form-control" rows="4"></textarea>
-
-								<div class="btn_write">
-									<a href="#" class="btn_write_qna">문의하기</a>
-								</div>
+								<c:choose>
+										<c:when test="${empty id}">
+											<div class="btn_write">
+												<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main" class="btn_write_qna">
+												문의하기</a>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="btn_write">
+												<a href="${cp }/class/qna" class="btn_write_qna">문의하기</a>
+											</div>
+										</c:otherwise>
+								</c:choose>
+									
+									
 								<div class="qna_list" id="bookmarkqna">
 									<ul>
 										<c:forEach var="index" begin="1" end="1">
@@ -565,11 +582,55 @@ li {
 													</dt>
 													<dd>어쩌구 저쩌구가 궁금합니다</dd>
 													<dd class="date">2020-06-27 00:16:41</dd>
-												</dl></li>
-											<div class="reply_box">
-												^댓글 (collapse로 접히게) <input type="text" id="reply_content">
-												<input type="submit" id="reply_send" value="등록">
-											</div>
+												</dl>
+												<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
+													<a href="#">[수정]</a>
+													<a href="#">[삭제]</a>
+												</c:if>
+												</li>
+												<a data-toggle="collapse" data-target="#reply">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+													</svg>
+													댓글
+												</a>
+												<div class="reply_box"  id="reply" class="collapse"><!-- 튜터만 댓글달수 있게 ml_num == sessionScope.id-->
+													<table>
+														<tr>
+															<td>
+																<form>
+																  <div class="form-group">
+																    <textarea class="form-control" id="reply_content" cols="60" rows="3"></textarea>
+																  </div>
+																</form>
+															</td>
+															<td>
+																<input type="submit" id="reply_send" class="btn btn-primary" value="등록">
+															</td>
+														</tr>
+													</table>
+													<div class="reply_list">
+														<ul>
+															<c:forEach var="index" begin="1" end="1">
+																<li><dl>
+																		<dt>
+																			<p class="profile_img"
+																				style="width:26px; height: 26px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+																			<p class="name">임다은</p>
+																		</dt>
+																		<dd>그거슨 이것입니다</dd>
+																		<dd class="date">2020-06-27 00:16:41</dd>
+																	</dl>
+																	<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
+																		<a href="#">[수정]</a>
+																		<a href="#">[삭제]</a>
+																	</c:if>
+																</li>
+															</c:forEach>
+														</ul>
+													</div>
+												</div>
+											
 										</c:forEach>
 									</ul>
 								</div>
@@ -674,8 +735,28 @@ li {
 			}
 		});
 	});
-
-	$('#btn-write-review').click(function () {			
+	//qna작성
+	$(document).on('click', '.btn_write_qna', function () {
+		qna_content = document.getElementById('qna_content').value;
+		if (id == '') {
+			alert('로그인이 필요합니다');
+		}
+		else {
+			$.post('/classDetail/qna', {
+				class_num: ${class_num},
+				ml_num: '1',
+				qna_content:qna_content,
+				qna_lev: '0'
+			}, function (res) {
+				if (res=='success') {
+					alert('문의등록 성공');
+				} else {				
+					alert('문의실패');
+				}
+			});
+		}
+	});
+	$('#reply-send').click(function () {			
 		id = document.getElementById('id').value;
 		
 		if (id == '') {
