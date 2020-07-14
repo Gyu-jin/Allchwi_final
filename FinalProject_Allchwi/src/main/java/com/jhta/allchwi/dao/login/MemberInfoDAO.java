@@ -23,5 +23,8 @@ public class MemberInfoDAO {
 	public int SignIn(MemberInfoVO miv) {
 		return session.insert(NAMESPACE + ".addInfo", miv);
 	}
-	
+	//3 세션에 담긴 회원번호로 회원정보 조회
+	public MemberInfoVO selectInfo(int ml_num) {
+		return session.selectOne(NAMESPACE + ".selectInfo", ml_num);
+	}
 }
