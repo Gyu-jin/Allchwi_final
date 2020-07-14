@@ -21,36 +21,23 @@ public class ManageClassController {
 
 	@GetMapping("/admin/manageClass")
 	public String manageClass(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String keyword) {
-		/*
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword", keyword);
 	
-		
 		int totalRowCount = service.count(map);
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
 
 		map.put("startRow", pu.getStartRow() - 1);
 		map.put("endRow", pu.getEndRow());
 		
-		*/
-		
-		
-		List<Integer> list2 = new ArrayList<Integer>();
-		int aa;
-		List<ManageClassVO> list = service.manage_list();
-		for (ManageClassVO vo : list) {
-			int class_num = vo.getClass_num();			
-			aa =service.countPeople(class_num);
-			list2.add(aa);
-		}
-		
+		List<ManageClassVO> list = service.manage_list(map);
+				
 		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
-		//model.addAttribute("list2", list2);
-		//model.addAttribute("pu", pu);
-		//model.addAttribute("keyword",keyword);
-		//model.addAttribute("field", field);
+		model.addAttribute("pu", pu);
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("field", field);
 		
 		
 

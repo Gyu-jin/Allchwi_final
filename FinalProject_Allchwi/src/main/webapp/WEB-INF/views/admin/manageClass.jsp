@@ -6,14 +6,15 @@
 	<div id="content-wrapper" class="d-flex flex-column">
 		<div class="breadcrumb">
 			<h2>수업관리</h2>
-			<div style="margin-left: 860px;">
+			<div style="margin-left: 660px;">
 				<form action="${cp }/admin/manageClass" class="form-inline"
 					style="display: inline-block">
 					<select class="form-control col-2" name="field"
 						style="display: inline-block; width: 550px;">
-						<option value="num">번호</option>
-						<option value="name">이름</option>
-						<option value="pwd">비밀번호</option>
+						<option value="ml_num" <c:if test="${field == 'ml_num'}">selected</c:if>>회원번호</option>
+						<option value="tutor_nickname" <c:if test="${field == 'tutor_nickname'}">selected</c:if>>강사이름</option>
+						<option value="class_title" <c:if test="${field == 'class_title'}">selected</c:if>>수업제목</option>
+						<option value="scategory_name" <c:if test="${field == 'scategory_name'}">selected</c:if>>카테고리</option>						
 					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
 					<button class="btn btn-primary my-2 my-sm-0" type="submit">
 						검색</button>
@@ -32,20 +33,20 @@
 					<th>수업제목</th>
 					<th>수업형태</th>
 					<th>카테고리</th>
-					<th>클래스넘버</th>
 					<th>수강인원	</th>
+					<th>상세페이지</th>
 				</tr>
 			</thead>
 			<tbody>			
-				<c:forEach var="vo" items="${list }" varStatus="i">
+				<c:forEach var="vo" items="${list }" >
 					<tr>
 						<td>${vo.ml_num}</td>
 						<td>${vo.tutor_nickname }</td>
 						<td>${vo.class_title }</td>
 						<td>${vo.class_form }</td>
 						<td>${vo.scategory_name }</td>
-						<td>${vo.class_num }</td>
-						<td>${list2[i.index]}</td>
+						<td>${vo.people}명</td>
+						<td><a href="${cp }/classDetail/detail?class_num=4">수업 상세정보</a></td>
 					<tr>
 				</c:forEach>
 
@@ -63,14 +64,21 @@
 					</c:otherwise>
 				</c:choose>
 
-
-		
+				
+				
 				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
-					<li class="page-item"><a class="page-link" href="${cp }/admin/manageClass?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+					<c:choose>
+						<c:when test="${pu.pageNum==i}">
+							<li class="page-item active" ><a class="page-link" href="${cp }/admin/manageClass?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${cp }/admin/manageClass?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+						</c:otherwise>
+					</c:choose>						
 				</c:forEach>
-
-
-
+				
+				
+				
 
 				<c:choose>
 					<c:when test="${pu.totalPageCount>pu.endPageNum }">
