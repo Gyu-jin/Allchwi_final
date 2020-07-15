@@ -263,25 +263,27 @@
 											</div>
 										</c:otherwise>
 								</c:choose>
-									
-									
-								<div class="qna_list" id="bookmarkqna">
-									<ul>
-										<c:forEach var="index" begin="1" end="1">
+								
+								<!-- qna 리스트 시작 -->
+								<c:forEach var="qlist" items="${qlist }">
+									<c:if test="${qlist.qna_lev == 0 }">
+									<div class="qna_list">
+										<ul>
 											<li><dl>
 													<dt>
 														<p class="profile_img"
 															style="width: 50px; height: 50px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-														<p class="name">임다은</p>
+														<p class="name">${qlist.miv.mb_name }</p>
 													</dt>
-													<dd>어쩌구 저쩌구가 궁금합니다</dd>
-													<dd class="date">2020-06-27 00:16:41</dd>
+													<dd>${qlist.qna_content }</dd>
+													<dd class="date">${qlist.qna_regdate }</dd>
 												</dl>
 												<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
 													<a href="#">[수정]</a>
 													<a href="#">[삭제]</a>
 												</c:if>
 												</li>
+											
 												<a data-toggle="collapse" data-target="#reply">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 													  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
@@ -303,30 +305,32 @@
 															</td>
 														</tr>
 													</table>
+											
+													</ul>
+												</div>
+											</c:if>
+										
+													<c:if test="${qlist.qna_lev == 1 }">
 													<div class="reply_list">
 														<ul>
-															<c:forEach var="index" begin="1" end="1">
 																<li><dl>
 																		<dt>
 																			<p class="profile_img"
 																				style="width:26px; height: 26px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-																			<p class="name">임다은</p>
+																			<p class="name">${qlist.miv.mb_name }</p>
 																		</dt>
-																		<dd>그거슨 이것입니다</dd>
-																		<dd class="date">2020-06-27 00:16:41</dd>
+																		<dd>${qlist.qna_content }</dd>
+																		<dd class="date">${qlist.qna_regdate }</dd>
 																	</dl>
 																	<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
 																		<a href="#">[수정]</a>
 																		<a href="#">[삭제]</a>
 																	</c:if>
-																</li>
-															</c:forEach>  
+																</li>  
 														</ul>
 													</div>
-												</div>
-											
-										</c:forEach>
-									</ul>
+										</c:if>
+									</c:forEach>
 								</div>
 							</div>
 						</div>

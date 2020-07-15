@@ -39,7 +39,7 @@
 		join profile_img p
 		on m.pro_num = p.pro_num
 		where class_num=#{class_num}
-		order by qna_ref desc
+		order by qna_ref desc,qna_num asc
 	</select>
 </mapper>
 
