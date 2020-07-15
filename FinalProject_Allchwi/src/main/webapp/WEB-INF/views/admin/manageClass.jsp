@@ -8,8 +8,7 @@
 		<div class="breadcrumb">
 			<h2>수업관리</h2>
 			<div style="margin-left: 65%;">
-				<form action="${cp }/admin/manageClass" class="form-inline"
-					style="display: inline-block">
+				<form action="${cp }/admin/manageClass" class="form-inline" style="display: inline-block">
 					<select class="form-control col-2" name="field"
 						style="display: inline-block; width: 700px;">
 						<option value="ml_num"
@@ -43,26 +42,34 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="vo" items="${list }">
-					<tr>
-						<td>${vo.ml_num}</td>
-						<td>${vo.tutor_nickname }</td>
-						<td>${vo.class_title }</td>
-						<c:choose>
-							<c:when test="${vo.class_form == 0}">
-								<td>오프라인</td>
-							</c:when>
-							<c:otherwise>
-								<td>온라인</td>
-							</c:otherwise>
-						</c:choose>
-						<td>${vo.scategory_name }</td>
-						<td>${vo.people}명</td>
-						<td><a href="#" style="color:blue" data-toggle="modal" data-target="#myModal" onclick="getModal()">수업
+				<c:choose>
+					<c:when test="${list.size()>0 }">
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td>${vo.ml_num}</td>
+							<td>${vo.tutor_nickname }</td>
+							<td>${vo.class_title }</td>
+							<c:choose>
+								<c:when test="${vo.class_form == 0}">
+									<td>오프라인</td>
+								</c:when>
+								<c:otherwise>
+									<td>온라인</td>
+								</c:otherwise>
+							</c:choose>
+							<td>${vo.scategory_name }</td>
+							<td>${vo.people}명</td>
+							<td><a href="#" style="color:blue" data-toggle="modal" data-target="#myModal" onclick="getModal()">수업
 								상세정보</a></td>
-					<tr>
-				</c:forEach>
-
+						<tr>
+					</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="7" style="text-align: center;">검색결과가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 		</table>
 		<div>
@@ -146,13 +153,7 @@
 				$("#modal-body").html(data);
 			}
 		});
-		
 	}
-		
-		
-		
-		
-	
 </script>
 
 

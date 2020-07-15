@@ -28,7 +28,7 @@
 	</select>
 
 
-	<select id="count" resultType="int" > 
+	<select id="count" resultType="int" parameterType="hashmap"> 
 		select NVL(count(*),0) cnt 
 		from (select ci.ml_num, ci.class_num class_num, ci.tutor_nickname, ci.class_title,
 		ci.class_form, sc.scategory_name
