@@ -7,6 +7,15 @@
 	<insert id="addPoint" parameterType="pv">
 		insert into point values (0, #{ml_num}, #{point}, #{point_name}, now(), #{point_type})
 	</insert>
+		
+	<select id="selectPoint" parameterType="hashmap">
+		select l.ml_num, i.mb_name, l.id, p.point_num, p.point, p.point_type, p.point_name, p.point_regdate
+		from member_login l, member_info i, point p  
+		where l.ml_num = i.ml_num and l.ml_num = p.login_num and l.ml_num = 1
+		<if test="point_type != null and point_type != ''">
+			and point_type = #{point_type}
+		</if>
+	</select>
 </mapper>
 
 

@@ -11,6 +11,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>
 		<!-- point 관련 Mapper vo alias -->	
 		<typeAlias type="com.jhta.allchwi.vo.point.PointVO" alias="pv"/>		
+		<!-- pointList 관련 Mapper vo alias -->	
+		<typeAlias type="com.jhta.allchwi.vo.point.PointListVO" alias="plv"/>		
 		<!-- 이미지 파일 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.profileImg.ProfileImgVO" alias="piv"/>
 		<!-- profile 관련 Mapper vo alias -->
