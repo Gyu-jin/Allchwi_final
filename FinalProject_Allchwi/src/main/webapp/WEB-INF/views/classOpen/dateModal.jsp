@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,21 @@
 			var globalChkStatus = true;
 
 			$(function(){		
+				var classCount = $('#classCount').val();
+				
+				 $.datepicker.setDefaults({
+				        dateFormat: 'yy-mm-dd',
+				        prevText: '이전 달',
+				        nextText: '다음 달',
+				        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				        showMonthAfterYear: true,
+				        yearSuffix: '년'
+				    });
+				 
 				 // 일정 등록 방식 tab
 				 $('.option','.radio').click(function(){
 					if(!$(this).hasClass('on')){
@@ -33,19 +49,73 @@
 						}
 					}
 				});
-
-				$('#startDate').change(function(){				
-					var dayOfWeek = week[new Date($('#startDate').val()).getDay()];
-					$('#dayOfWeek').html(dayOfWeek);
-					$('#startDay').val(new Date($('#startDate').val()).getDay());
-					$('#curriDate').show();
-					$('#dayWeek').text(dayOfWeek);
-					$('#oneDayStr').text($('#startDate').val().substring(5,7) +"월"+$('#startDate').val().substring(8,10)+"일 원데이");
-					
+				
+				for (let i = 2; i <= classCount; i++) {	
+					 $('#type').append("<div class='grp'>"+
+								"<div class='head1'>"+
+								"<div class='title'>"+i+"회차</div>"+
+							"</div>"+
+							"<div class='formbox'>"+
+								"<div class='formbox border cal'>"+
+									"<input type='text' id='startDate"+ i +"' name='startDate[]' readonly='readonly' class='cal hasDat' placeholder='수업 일자 선택' value=''>"+
+								"</div>"+
+								"<div style='width:100%;overflow:hidden;'>"+
+									"<div id='classTime"+ i +"' class='formbox border calendar'>수업 시작 시간</div>	"+
+									"<input type='hidden' id='startTime"+ i +"'class='cal' name='startTime[]' value=''>"+
+									"<input type='hidden' id='endTime"+ i +"' class='cal' name='endTime[]' value=''>"	+
+								"</div>"+
+							"</div>"+
+						"</div>");
+				}
+				 
+				//시작일 선택
+				for (let i = 1; i <= classCount; i++) {								
+					dateCalpickerSet(i);
+					classTimeClick(i);
+				}
+				
+				$('.option','.formbox').click(function(){
+					let classCount = $('#classCount').val();
+					if($(this).attr('value')=='3'){
+						$(this).addClass('on');
+						$(this).siblings('.option').removeClass('on');
+						$('#oneday').show();
+						$('#type').hide();
+						//매주반복 선택시 - 주차별 detail 장소 시간 정보 초기화
+						$('#type').find('input[name="startDate[]"]').val('');
+						var oldDate = new Date($("#startDate1").val());
+						for(let i = 2;i<=classCount;i++){	
+							oldDate.setDate(oldDate.getDate()+7);
+							$('#type').find('#startDate'+i).val($.datepicker.formatDate('yy-mm-dd',oldDate));
+							$('#type').find('#classTime'+i).text($('#classTime1').text());
+							$('#type').find('#startTime'+i).val($('#startTime1').val());
+							$('#type').find('#endTime'+i).val($('#endTime1').val());
+						}
+					}
+					else if($(this).attr('value')=='4'){
+						$(this).addClass('on');
+						$(this).siblings('.option').removeClass('on');
+						for(let i = 2;i<=classCount;i++){	
+							$('#type').find('#startDate'+i).val("");
+							$('#type').find('#classTime'+i).text('수업 시작 시간');
+							$('#type').find('#startTime'+i).val("");
+							$('#type').find('#endTime'+i).val("");
+						}
+						$('#type').show();
+					}
 				});
 				
-				//시작일 선택
-				$("#startDate").datepicker({
+				$('.moption','.formbox').click(function(){		
+					$(this).addClass('on');
+					$(this).siblings('.moption').removeClass('on');
+					$('#monthDate').val($(this).val());
+				});
+				
+			});
+			
+			// jquery Ui datepicker set
+			function dateCalpickerSet(index){
+				$("#startDate"+index).datepicker({
 					changeMonth: true,
 					changeYear: true,
 					dateFormat: "yy-mm-dd",
@@ -54,43 +124,34 @@
 					buttonImageOnly: true,
 					buttonText: "등록일 선택",
 					onClose: function(e){
-						var date = new Date($("#startDate").datepicker({ dateFormat: 'yy-mm-dd' }).val()),
+						var date = new Date($("#startDate"+index).datepicker({ dateFormat: 'yy-mm-dd' }).val()),
 						week = new Array('일', '월', '화', '수', '목', '금', '토');
 						if (week[date.getDay()]!= undefined){
-							$("#startDate").val($("#startDate").val()+"("+week[date.getDay()] +")"  ); 
+							$('#dayWeek').text(week[date.getDay()]);
 						}
 					}
-				});						
-				
-				$('#classTime1').click(function(){
+				});	
+			}
+			
+			// 시간 선택 popUp창 클릭이벤트
+			function classTimeClick(index){
+				$('#classTime'+index).click(function(){
 					var height = $(window).scrollTop()+50;
+					if(index==1){								
+						$('#curriDate').show();
+					}
 					$('#back').show();
 					$('#popClassTime').css('top',height);
 					$('#popClassTime').show();
-					$('#popClassTimes').val('1');
+					$('#popClassTimes').val(index);
 				});
-
-				$('#regi_details').show();
-
-			});
-
+			}
+			
 			function clspop(){
 				$('#back').hide();
 				$('#popClassTime').hide();
 			}
 			
-			function checkLayer2(val, num){
-				
-				locationLayer = document.getElementById('locationLayer'+num);
-				if(val == 2)
-				{
-					locationLayer.style.display="";
-				}
-				else
-				{
-					locationLayer.style.display="none";
-				}
-			}
 
 			function setMode(val)
 				{
@@ -151,376 +212,207 @@
 					});
 					return false;
 				});
+				
+				function calClose() {
+					$('#popClassTime').hide();
+				}
+
+				//시간표시
+				function selectTime(val) {
+
+					var classTime = parseInt() * 10; //회당 학습시간
+					var startTime = val; //시작시간
+					var endTime = val + classTime; //종료시간 
+					var popClassTimes = $('#popClassTimes').val(); //회차
+					var startDateStr = ""; //시작 시간대 (오전,오후,저녁) 
+					var endDateStr = ""; //종료 시간대 (오전,오후,저녁)
+					var minuteStr = ""; //시분 표시
+					var timeText = ""; //시간 표시					
+
+					if (startTime < 120) {
+						startDateStr = "오전 "
+					} else if (startTime >= 120 && startTime < 180) {
+						startDateStr = "오후 "
+					} else if (startTime >= 180) {
+						startDateStr = "저녁 "
+					}
+
+					// 12시 넘을시에 1시로 숫자 초기화
+					if (startTime < 130) {
+						startDateStr = startDateStr
+								+ parseInt(startTime / 10);
+					} else {
+						startDateStr = startDateStr
+								+ parseInt((startTime - 120) / 10);
+					}
+
+					if (endTime < 120) {
+						endDateStr = "오전 "
+					} else if (endTime >= 120 && endTime < 180) {
+						endDateStr = "오후 "
+					} else if (endTime >= 180) {
+						endDateStr = "저녁 "
+					}
+
+					// 12시 넘을시에 1시로 숫자 초기화
+					if (endTime < 130) {
+						endDateStr = endDateStr
+								+ parseInt(endTime / 10);
+					} else {
+						endDateStr = endDateStr
+								+ parseInt((endTime - 120) / 10);
+					}
+
+					if (startTime % 10 == 5) {
+						minuteStr = ":30";
+					} else {
+						minuteStr = ":00";
+					}
+
+					timeText = startDateStr + minuteStr + " ~ "
+							+ endDateStr + minuteStr;
+
+					$('#startTime' + popClassTimes).val(startTime);
+					$('#endTime' + popClassTimes).val(endTime);
+					$('#classTime' + popClassTimes).text(timeText);
+					$('#back').hide()
+					$('#popClassTime').hide();
+				}
 			</script>
 </head>
-
 <body style="margin: 8px; background: transparent;">
 <form method="POST" id="frm-register-detail" enctype="multipart/form-data">
-<input type="hidden" id="dateId" name="dateId" value="">
-<input type="hidden" id="talentId" name="talentId" value="">
-<div class="tutor_cont">
-	<div class="phone_box region_box" id="class_box" style="top:50px">
-		<div class="head">
-			수업일정
-			<span class="button">
-				<img src="https://front-img.taling.me/Content/Images/cont/cls_w.png" onclick="parent.cls_date()">
-			</span>
-		</div>
-		<div class="box">
-			<div class="gray5 title">일정을 등록하세요</div>
-			 <div class="formbox">
-				<div class="formbox radio" style="height:46px;">
-					<div class="option on" value="0" id="DetailTab1"> 수업 시작일 설정 </div>	
-					<div class="option" value="1" id="DetailTab2"> 협의 후 결정  </div>
-				</div>
-				<!--수업 시작일  선택시 화면 시작-->
-				<div id="dateInuptDiv" style="margin-top:10px">
-				<!-- 수업시작일 시작 -->
-				<div class="formbox border cal">
-					<input type="text" id="startDate" class="cal hasDat" name="startDate1" placeholder="수업 시작일을 입력하요"  readonly="readonly">
-					<input type="hidden" id="startDay" name="startDay" value="">	
-				</div>
-
-				<!--수업 시간 선택 시작 -->
-				<div style="width:100%;overflow:hidden;">
-					<div id="classTime1" class="formbox border calendar">수업 시작 시간</div>
-					<input type="hidden" id="startTime1" class="cal" name="startTime1" value="">			
-					<input type="hidden" id="endTime1"class="cal" name="endTime1" value="">	
-				</div>
-
-				<div style="margin-top:20px"></div>
-				<div id="curriDate" style="display:none">
-					<span id="oneDayStr" style="display:none"></span>
-					<div class="infobox" style="margin-bottom:10px">
-						<span class="pink">회차</span> 수업으로 등록해주셨네요!<br>이후 <span class="pink">회차</span>까지의 수업일정을 알려주세요.
+	<input type="hidden" id="dateId" name="dateId" value="">
+	<input type="hidden" id="talentId" name="talentId" value="">
+	<input type="hidden" id="monthDate" class="cal"  name="monthDate">
+	<input type="hidden" id="classCount" class="cal" name="classCount" value="4">			
+	<div class="tutor_cont">
+		<div class="phone_box region_box" id="class_box" style="top:50px">
+			<div class="head">
+				수업일정
+				<span class="button">
+					<img src="${cp}/resources/img/cls_w.png" onclick="parent.cls_date()">
+				</span>
+			</div>
+			<div class="box">
+				<div class="gray5 title">일정을 등록하세요</div>
+				 <div class="formbox">
+					<div class="formbox radio" style="height:46px;">
+						<div class="option on" value="0" id="DetailTab1"> 수업 시작일 설정 </div>	
 					</div>
-					<div class="formbox" id="radios2" style="overflow:hidden">
-						<div class="option on" value="3">매주 <font id="dayWeek"></font>요일 반복</div>
-						<div class="option " value="4">직접입력</div>
+					<!--수업 시작일  선택시 화면 시작-->
+					<div id="dateInuptDiv" style="margin-top:10px">
+					<!-- 수업시작일 시작 -->
+					<div class="formbox border cal">
+						<input type="text" id="startDate1" class="cal hasDat" name="startDate[]" placeholder="수업 시작일을 입력하요"  readonly="readonly">
 					</div>
-					
-					<div id="oneday">
-						<div style="padding-top:30px"></div>
-					</div>
-					<div class="multisc" id="type" style="">
-											</div>
-					<script>
-						$(function(){
-							$('.option','.formbox').click(function(){
-								if($(this).attr('value')=='3'){
-									$(this).addClass('on');
-									$(this).siblings('.option').removeClass('on');
-									$('#oneday').show();
-									$('#type').hide();
-									//매주반복 선택시 - 주차별 detail 장소 시간 정보 초기화
-									$('#type').find('input[name="startDate[]"]').val('');
-									var i = 2;
-									for(i;i<+1;i++){
-										console.log(i);
-										$('#type').find('#classTime'+i).text('수업 시작 시간');
-										$('#type').find('#startTime'+i).val('');
-										$('#type').find('#endTime'+i).val('');
-									}
-								}
-								else if($(this).attr('value')=='4'){
-									$(this).addClass('on');
-									$(this).siblings('.option').removeClass('on');
-									$('#oneday').hide();
-									$('#type').show();
-								}
-							});
-						});
-					</script>
-				</div>
-				<!--다회차 종료-->
-
-				<div id="back" onclick="clspop()"></div>
-				<!--시간 입력 팝업 시작 -->
-				<div class="popcont calendar" id="popClassTime" style="display:none">
-					<img src="https://front-img.taling.me/Content/Images/cls_g.png" id="calCls" onclick="calClose()">
-					<div class="inbox">
-						<div class="title">
-							<img src="https://front-img.taling.me/Content/Images/schedule_clock.png" class="clock" style="width:21px;margin-top:2px;position:absolute;margin-left:-23px;">시작 시간 선택
+					<c:if test="true">
+						<!--수업 시간 선택 시작 -->
+						<div style="width:100%;overflow:hidden;">
+							<div id="classTime1" class="formbox border calendar">수업 시작 시간</div>
+							<input type="hidden" id="startTime1" class="cal" name="startTime1" value="">			
+							<input type="hidden" id="endTime1"class="cal" name="endTime1" value="">	
 						</div>
-						<div class="subinfo">
-							튜터님께서 설정하신<br>1회당 수업시간은 <font class="pink">시간</font> 입니다.
-						</div>
-						<div class="title2">
+					</c:if>			
+					<c:choose>
+						<c:when test="true">
+							<div id="curriDate" style="display:none">
+								<div class="formbox" id="radios2" style="overflow:hidden">
+									<div class="option" value="3">매주 <font id="dayWeek"></font>요일 반복</div>
+									<div class="option " value="4">직접입력</div>
+								</div>
+								<div class="multisc" id="type" style="display: none;"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div id="curriDate">
+								<div class="formbox" id="radios3" style="overflow:hidden">
+									<div class="moption" value="3">3개월</div>
+									<div class="moption " value="6">6개월</div>
+									<div class="moption " value="1">1년</div>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<!--다회차 종료-->
+					<div id="back" onclick="clspop()"></div>
+					<!--시간 입력 팝업 시작 -->
+					<div class="popcont calendar" id="popClassTime" style="display:none;">
+						<img src="${cp}/resources/img/cls_g.png" id="calCls" onclick="calClose()">
+						<div class="inbox">
+							<div class="title">
+								<img src="${cp}/resources/img/schedule_clock.png" class="clock" style="width:21px;margin-top:2px;position:absolute;margin-left:-23px;">시작 시간 선택
+							</div>
+							<div class="subinfo">
+								튜터님께서 설정하신<br>1회당 수업시간은 <font class="pink">시간</font> 입니다.
+							</div>
+							<div class="title2">
 							오전
+							</div>
+							<div class="time_cont">
+									<div class="time_box" onclick="selectTime(60)">06:00</div>
+									<div class="time_box" onclick="selectTime(65)">06:30</div>
+									<div class="time_box" onclick="selectTime(70)">07:00</div>
+									<div class="time_box" onclick="selectTime(75)">07:30</div>
+									<div class="time_box" onclick="selectTime(80)">08:00</div>
+									<div class="time_box" onclick="selectTime(85)">08:30</div>
+									<div class="time_box" onclick="selectTime(90)">09:00</div>
+									<div class="time_box" onclick="selectTime(95)">09:30</div>
+									<div class="time_box" onclick="selectTime(100)">10:00</div>
+									<div class="time_box" onclick="selectTime(105)">10:30</div>
+									<div class="time_box" onclick="selectTime(110)">11:00</div>
+									<div class="time_box" onclick="selectTime(115)">11:30</div>
+							</div>
+							<div class="title2">
+								오후
+							</div>
+								<div class="time_cont">
+									<div class="time_box" onclick="selectTime(120)">12:00</div>
+									<div class="time_box" onclick="selectTime(125)">12:30</div>
+									<div class="time_box" onclick="selectTime(130)">13:00</div>
+									<div class="time_box" onclick="selectTime(135)">13:30</div>
+									<div class="time_box" onclick="selectTime(140)">14:00</div>
+									<div class="time_box" onclick="selectTime(145)">14:30</div>
+									<div class="time_box" onclick="selectTime(150)">15:00</div>
+									<div class="time_box" onclick="selectTime(155)">15:30</div>
+									<div class="time_box" onclick="selectTime(160)">16:00</div>
+									<div class="time_box" onclick="selectTime(165)">16:30</div>
+									<div class="time_box" onclick="selectTime(170)">17:00</div>
+									<div class="time_box" onclick="selectTime(175)">17:30</div>
+								</div>
+							<div class="title2">
+								저녁
+							</div>
+							<div class="time_cont">
+								<div class="time_box" onclick="selectTime(180)">18:00</div>
+								<div class="time_box" onclick="selectTime(185)">18:30</div>
+								<div class="time_box" onclick="selectTime(190)">19:00</div>
+								<div class="time_box" onclick="selectTime(195)">19:30</div>
+								<div class="time_box" onclick="selectTime(200)">20:00</div>
+								<div class="time_box" onclick="selectTime(205)">20:30</div>
+								<div class="time_box" onclick="selectTime(210)">21:00</div>
+								<div class="time_box" onclick="selectTime(215)">21:30</div>
+								<div class="time_box" onclick="selectTime(220)">22:00</div>
+							</div>
+							<input type="hidden" id="popClassTimes">
 						</div>
-						<div class="time_cont">
-								<div class="time_box" onclick="selectTime(60)">
-								06:00</div>
-								<div class="time_box" onclick="selectTime(65)">
-								06:30								</div>
-															<div class="time_box" onclick="selectTime(70)">
-								07:00								</div>
-															<div class="time_box" onclick="selectTime(75)">
-								07:30								</div>
-															<div class="time_box" onclick="selectTime(80)">
-								08:00								</div>
-															<div class="time_box" onclick="selectTime(85)">
-								08:30								</div>
-															<div class="time_box" onclick="selectTime(90)">
-								09:00								</div>
-															<div class="time_box" onclick="selectTime(95)">
-								09:30								</div>
-																						<div class="time_box" onclick="selectTime(100)">
-								10:00								</div>
-															<div class="time_box" onclick="selectTime(105)">
-								10:30								</div>
-															<div class="time_box" onclick="selectTime(110)">
-								11:00								</div>
-															<div class="time_box" onclick="selectTime(115)">
-								11:30								</div>
-													</div>
-						<div class="title2">
-							오후
-						</div>
-						<div class="time_cont">
-															<div class="time_box" onclick="selectTime(120)">
-								12:00								</div>
-															<div class="time_box" onclick="selectTime(125)">
-								12:30								</div>
-															<div class="time_box" onclick="selectTime(130)">
-								13:00								</div>
-															<div class="time_box" onclick="selectTime(135)">
-								13:30								</div>
-															<div class="time_box" onclick="selectTime(140)">
-								14:00								</div>
-															<div class="time_box" onclick="selectTime(145)">
-								14:30								</div>
-															<div class="time_box" onclick="selectTime(150)">
-								15:00								</div>
-															<div class="time_box" onclick="selectTime(155)">
-								15:30								</div>
-															<div class="time_box" onclick="selectTime(160)">
-								16:00								</div>
-															<div class="time_box" onclick="selectTime(165)">
-								16:30								</div>
-															<div class="time_box" onclick="selectTime(170)">
-								17:00								</div>
-															<div class="time_box" onclick="selectTime(175)">
-								17:30								</div>
-													</div>
-						<div class="title2">
-							저녁
-						</div>
-						<div class="time_cont">
-															<div class="time_box" onclick="selectTime(180)">
-								18:00								</div>
-															<div class="time_box" onclick="selectTime(185)">
-								18:30								</div>
-															<div class="time_box" onclick="selectTime(190)">
-								19:00								</div>
-															<div class="time_box" onclick="selectTime(195)">
-								19:30								</div>
-															<div class="time_box" onclick="selectTime(200)">
-								20:00								</div>
-															<div class="time_box" onclick="selectTime(205)">
-								20:30								</div>
-															<div class="time_box" onclick="selectTime(210)">
-								21:00								</div>
-															<div class="time_box" onclick="selectTime(215)">
-								21:30								</div>
-															<div class="time_box" onclick="selectTime(220)">
-								22:00								</div>
-													</div>
-						<input type="hidden" id="popClassTimes">
-					</div>
-					<script type="text/javascript">
-					 function calClose(){
-						$('#popClassTime').hide();
-					}
-					
-					//시간표시
-					function selectTime(val){
-
-						var classTime = parseInt()  * 10; //회당 학습시간
-						var startTime = val; //시작시간
-						var endTime = val + classTime;  //종료시간 
-						var popClassTimes = $('#popClassTimes').val(); //회차
-						var startDateStr = ""; //시작 시간대 (오전,오후,저녁) 
-						var endDateStr = "";  //종료 시간대 (오전,오후,저녁)
-						var minuteStr = ""; //시분 표시
-						var timeText = "";  //시간 표시					
-						
-						if(startTime < 120){
-							startDateStr = "오전 "  
-						}else if (startTime >=120 && startTime < 180){
-							startDateStr = "오후 "  
-						}else if(startTime >= 180){
-							startDateStr = "저녁 "  
-						}
-						
-						// 12시 넘을시에 1시로 숫자 초기화
-						if(startTime < 130){
-							startDateStr = startDateStr + parseInt(startTime /10); 
-						}else{
-							startDateStr = startDateStr + parseInt((startTime -120) /10);
-						}
-						
-						if(endTime < 120){
-							endDateStr = "오전 "  
-						}else if (endTime >=120 && endTime < 180){
-							endDateStr = "오후 "  
-						}else if(endTime >= 180){
-							endDateStr = "저녁 "  
-						}
-
-						// 12시 넘을시에 1시로 숫자 초기화
-						if(endTime < 130){
-							endDateStr = endDateStr + parseInt(endTime /10); 
-						}else{
-							endDateStr = endDateStr + parseInt((endTime -120) /10);
-						}
-						 
-						if(startTime % 10 == 5){
-							minuteStr = ":30";
-						}else{
-							minuteStr = ":00";
-						}
-
-						timeText = startDateStr + minuteStr + " ~ " + endDateStr + minuteStr;
-						
-						$('#startTime'+popClassTimes).val(startTime);
-						$('#endTime'+popClassTimes).val(endTime);
-
-						$('#classTime'+popClassTimes).text(timeText);
-						$('#back').hide()
-						$('#popClassTime').hide();
-					}	
-					</script>
-				</div>		
-				<!--시간 입력 팝업 끝 -->
-			</div>
-			<!--수업 시작일  선택시 화면 끝-->
-
-			<!--협의 후 결정 선택시 화면 시작-->
-			<div class="info_msg" id="negoMessageDiv" style="display:none;margin-top:10px;" onclick="infoPop()">
-				시작일을 설정하셔야 노출도가 상승합니다.<img style="width:18px;position:absolute;margin-left:6px" src="https://front-img.taling.me/Content/Images/Tutor/icon_tip_info.png">
-			</div>
-			<!--협의 후 결정 선택시 화면 끝-->
-
-			<script>
-			// 수업정보 팝업 닫기
-			function clspop2(){
-				$('#back2').hide()
-				$('#infoPop').hide();
-			}
-			//노출도 안내 메시지 팝업
-			function infoPop(){
-				var height = $(window).scrollTop()+50;
-						
-				$('#infoPop').css('top',height).show();
-				$('#back2').show();
-			}
-			</script>
-
-			<!--장소 등록 시작 -->
-			<script type="text/javascript">
-			function fnSelectRegion(regionMain, regionSub, regionDetail,elm){
- 
-				$(elm).siblings('.location_tab').removeClass('on');
-				$(elm).addClass('on');
-				$('#selectRegion').val(regionMain);
-
-				if(regionMain =='0'){
-					$('#Region').val('0') ;		
-					$('#Region1').css('display', 'none');   
-					checkLayer2(0, 1);	
-					$('#Region1Option').val("0").attr("selected","selected");
-					$('#regionDetail').val("");
-					return;
-				}else{
-					//$('#Region').val(regionMain) ;
-					$('#Region1').val(regionSub) ;
-					addSelect(1, regionMain, regionSub, regionDetail)
-				}
-
-			}
-
-			function addSelect(val, select, regionSub,regionDetail){			
-				
-				var regionMain  = select;
-				if(select == 0)
-				{
-					var Region = "Region"+val;
-					document.getElementById(Region).value = '';		
-					document.getElementById(Region).style.display = "none";
-					return;
-				}
-
-				var p = [];	
-				p.push('select='+select);
-				var pars = p.join('&');
-				var Ajax = new Ajax2();
-				Ajax.init('/tutor/getRegion2.php', {
-					method: 'post'
-					, parameters: pars
-					, idTarget: 'innerdiv'
-					, oSelf: this
-					, onCreate: function()
-					{										
-					}
-					, onComplete: function(oXHR)
-					{
-						 
-						var Region = "Region"+val;										
-						
-						$("#"+Region).show();									
-						
-						var num = $("#"+Region+" option").size();										
-						for(i=0; i < num; i++)
-						{
-							$("#"+Region+" option:last").remove();
-						}
-																										
-						var ret = eval('(' + oXHR.responseText + ')');
-						 
-						for(var i = 0, t = ret.length; i < t; i++)
-						{	
-							sel = "";
-							if(ret[i]['Name']==name)
-							{
-								sel = "selected";
-							}										
-							$("#"+Region).append("<option value='"+ret[i]['Id']+"' "+sel+">"+ret[i]['Name']+"</option>");										
-						}
-						 
-						if(regionSub != ""){
-							$('#Region').val(regionMain).attr("selected","selected");
-							$('#Region1').val(regionSub).attr("selected","selected");
-							
-							if(regionDetail  == "협의 후 결정"){
-								checkLayer2(0, 1);	
-								$('#Region1Option').val("0").attr("selected","selected");
-							}else{
-								checkLayer2(2, 1);
-								$('#Region1Option').val("2").attr("selected","selected");
-								$('#regionDetail').val(regionDetail);
-							}
-
-						}
-
-					}
-				});
-			}
-			</script>
-			<div style="padding-top:30px"></div>
-			<div style="padding-top:80px"></div>
-			<div class="final_box">
-				<div class="next button prev" onclick="parent.cls_date()">
+					</div>		
+					<!--시간 입력 팝업 끝 -->
+				</div>
+				<!--수업 시작일  선택시 화면 끝-->
+	
+				<div class="final_box">
+					<div class="next button prev" onclick="parent.cls_date()">
 					취소
-				</div>
-				<div class="next button on" onclick="setMode(0);">
+					</div>
+					<div class="next button on" onclick="setMode(0);">
 					저장
+					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
-</div>
-</div>
 </form>
 </body>
 </html>

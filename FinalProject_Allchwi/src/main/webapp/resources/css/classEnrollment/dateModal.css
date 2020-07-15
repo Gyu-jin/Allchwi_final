@@ -243,3 +243,20 @@ b {
 .region_box input.cal {
     padding: 0;
 }
+.formbox .moption {
+    cursor: pointer;
+    box-sizing: border-box;
+    float: left;
+    width: 33%;
+    background: #e6e6e6;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #e6e6e6;
+}
+.formbox .moption.on {
+    border: 1px solid #ff005a;
+    color: #ff005a;
+    background: #fff;
+}
