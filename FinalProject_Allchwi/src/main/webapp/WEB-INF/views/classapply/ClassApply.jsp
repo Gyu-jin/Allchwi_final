@@ -106,7 +106,6 @@
 div {
 	margin: 0;
 	padding: 0;
-	font-size: 14px;
 	color: #111;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 400;

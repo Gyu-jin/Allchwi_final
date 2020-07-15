@@ -1,6 +1,7 @@
 package com.jhta.allchwi.controller.classapply;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.allchwi.service.classapply.ClassApplyService;
+
 
 @Controller
 public class ClassApplyController {
+	@Autowired private ClassApplyService service;
 	
 	//class_num에 해당하는 수업 신청서 페이지로 이동
 	@GetMapping("/class/apply")

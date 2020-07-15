@@ -7,5 +7,9 @@
 		insert into class_apply values(#{apply_num},#{date_num},#{ml_num},
 						#{stu_lev},#{stu_msg},#{sut_phone},#{apply_auth},now(),#{class_finish})
 	</insert>
+	<select id="list" parameterType="int" resultType="classApply">
+		select date_num, class_num, class_date, class_startTime, class_endDate, class_comment, class_msg, class_regdate
+		from class_date
+	</select>
 </mapper>
 
