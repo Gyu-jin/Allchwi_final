@@ -140,7 +140,7 @@
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
-					<form class="form-inline" action="${cp }/list/search" method="POST">
+					<form class="form-inline" action="${cp }/list/search">
 					<!-- header 검색창을 통해 검색했을 때만 keyword가 나타나도록 ..-->
 						<c:if test="${!empty keyword }">
 							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
@@ -149,6 +149,7 @@
 						<br>
 						<input type="hidden" name="keyword" value="${keyword }">
 						<input type="hidden" name="scategory_num" value="${scategory_num }">
+						<input type="hidden" name="bcategory_num" value="${bcategory_num }">
 						<div class="label-1">
 							지역
 						</div> 
@@ -170,7 +171,7 @@
 								<div class="input-group date" id="datetimepicker7"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker7" /><!-- name="startDate" /> -->
+										data-target="#datetimepicker7" name="startDate" />
 									<div class="input-group-append" data-target="#datetimepicker7"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -186,7 +187,7 @@
 								<div class="input-group date" id="datetimepicker8"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker8" /><!-- name="endDate" /> -->
+										data-target="#datetimepicker8"  name="endDate" /> 
 									<div class="input-group-append" data-target="#datetimepicker8"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -221,7 +222,7 @@
 								<div class="input-group date" id="datetimepicker9"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker9" /><!-- name="startDate" /> -->
+										data-target="#datetimepicker9"  name="startDate" />
 									<div class="input-group-append" data-target="#datetimepicker9"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -263,6 +264,7 @@
 <div class="jumbotron">
 <h1>${bcategory_name }</h1>
 <h5>${scategory_name }</h5>
+<h5>${sloc_num }</h5>
 	<select class="custom-select my-1 mr-sm-2"
 		id="inlineFormCustomSelectPref2">
 		<option selected value="1">정확도순</option>

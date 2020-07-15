@@ -21,6 +21,21 @@
 	</sql>
 	
 	
+	<sql id="keyword">
+		<if test="keyword!=null and keyword!=''">
+			and class_title like '%${keyword}%'
+		</if>
+	</sql>
+	
+	<sql id="date">
+		<if test="start_Date!=null and start_Date!='' and end_Date!=null and end_Date!=''">
+			and class_date between date('${start_Date}') and date('${end_Date}')+1
+		</if>
+	</sql>
+	
+
+	
+	
 	<!-- keyword & small location 검색 sql -->
 	<sql id="key">
 	<choose>
@@ -39,7 +54,7 @@
 	
 	
 	<!-- keyword 검색 sql -->
-	<sql id="keyword">
+	<sql id="keyword_count">
 		<if test="keyword!=null and keyword!=''">
 			(select class_num 
 			from class_info 
@@ -47,15 +62,7 @@
 			) a
 		</if>	
 	</sql>
-	
-	
-	<select id="keyword_list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname 
-		from class_info 
-		<include refid="key"/>
-		order by class_num desc
-		limit #{startRow},6
-	</select>
+
 	
 
 	
@@ -74,21 +81,53 @@
 		</if>
 	</sql>
 
+		
 	
+	<select id="keyword_list" parameterType="hashmap" resultType="classinfo">
+		select class_num, class_title, tutor_nickname 
+		from class_info 
+		<include refid="key"/>
+		order by class_num desc
+		limit #{startRow},6
+	</select>
+	
+
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num from 
-		(
-			select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
-			from small_category s, big_category b
-			where s.bcategory_num=b.bcategory_num 				
-			<include refid="smallcategory"/>								
-			<include refid="bigcategory"/>		
-		)a, class_info c
+		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num
+		from 
+				(
+					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+					from small_category s, big_category b
+					where s.bcategory_num=b.bcategory_num 				
+					<include refid="smallcategory"/>								
+					<include refid="bigcategory"/>	
+				)a, class_info c 
 		where a.scategory_num=c.scategory_num 
 		<include refid="sloc"/>		
 		order by class_num desc
 		limit #{startRow},6
 	</select>
+
+	<select id="date_list" parameterType="hashmap" resultType="classinfo">
+		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num, 
+		date_num, class_date, class_startTime, class_endDate 
+		from 
+				(
+					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+					from small_category s, big_category b
+					where s.bcategory_num=b.bcategory_num 				
+					<include refid="smallcategory"/>								
+					<include refid="bigcategory"/>	
+				)a, class_info c , class_date cd
+		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+		<include refid="sloc"/>		
+		<include refid="date"/>
+		order by class_num desc
+		limit #{startRow},6
+	</select>
+	
+	
+	
 	
 	<sql id="small_count">	
 		<choose>
@@ -122,7 +161,7 @@
 		select NVL(count(*),0) from
 		    <include refid="small_count"/>
 			<include refid="big_count"/>	
-			<include refid="keyword"/>	
+			<include refid="keyword_count"/>	
 	</select>
 	
 	<select id="getInfo" parameterType="int" resultType="classinfo">

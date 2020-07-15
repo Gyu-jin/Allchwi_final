@@ -27,6 +27,10 @@ public class ClassInfoDAO {
 	public List<ClassInfoVO> list(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".list",map);
 	}
+	//date 포함 검색
+	public List<ClassInfoVO> date_list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".date_list",map);
+	}
 	public int count(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
