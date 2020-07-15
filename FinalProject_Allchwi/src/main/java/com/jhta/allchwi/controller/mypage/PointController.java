@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.allchwi.page.util.PageUtil;
@@ -20,10 +21,13 @@ public class PointController {
 	@Autowired
 	private PointService ps;
 	
-	@GetMapping("/mypage/pointForm")
-	public String goPoint(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, HttpSession session, Model model, HashMap<String, Object> hm) {
+	@RequestMapping("/mypage/pointForm")
+	public String goPoint(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String pointType, HttpSession session, Model model, HashMap<String, Object> hm) {
 		//회원번호 map에 담기
 		hm.put("ml_num", session.getAttribute("ml_num"));
+		if(pointType != null || pointType != "") {
+			hm.put("point_type", pointType);			
+		}
 		//총 포인트 계산 
 		int total = ps.getTotal(hm);
 		//총 포인트 사용/적립 횟수 계산

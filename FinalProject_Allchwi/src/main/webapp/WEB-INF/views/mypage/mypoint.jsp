@@ -24,7 +24,7 @@
 		<div class="inner-cont">
 			<div>
 				<!-- 버튼클릭시 ajax 처리 -->
-				<button class="btn btn-outline-secondary" name='sortBtn'>전체 내역</button>
+				<button class="btn btn-outline-secondary" name='sortBtn' value="null">전체 내역</button>
 				<button class="btn btn-outline-secondary" name='sortBtn' value="u">사용 내역</button>
 				<button class="btn btn-outline-secondary" name='sortBtn' value="s">적립 내역</button>
 			</div>
@@ -109,8 +109,33 @@
 	</div>
 </div>
 <script type="text/javascript">
-	//버튼 클릭시 정렬
+	//a 버튼 클릭시 this를 통해 현재 버튼의 value 값을 pointType에 담아줌
 	$("button[name='sortBtn']").on('click',function(){
-		alert($(this).val());
+		var pointType = $(this).val();
+		//a 동적으로 form을 생성하여 파라미터 값을 보내줌.
+		var form = document.createElement("form");
+		form.setAttribute("charset", "utf-8");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "${cp}/mypage/pointForm");
+		//a 파라미터 값이 null이 아닌 경우 히든 input을 생성하여 값을 넣음.
+		if(pointType != 'null'){
+		var hiddenPointType = document.createElement("input");
+		hiddenPointType.setAttribute("type", "hidden");
+		hiddenPointType.setAttribute("name", "pointType");
+		hiddenPointType.setAttribute("value", pointType);
+		//a 폼에 히든 input 추가 
+		form.appendChild(hiddenPointType);
+		}
+		//a body부분에 폼을 붙이고 페이지 이동
+		document.body.appendChild(form);
+		form.submit();
+		
+		/* get방식
+		if(pointType == 'null'){
+			location.href = "${cp}/mypage/pointForm";
+		} else {
+			location.href = "${cp}/mypage/pointForm?pointType=" + pointType;		
+		}
+		*/
 	});
 </script>
