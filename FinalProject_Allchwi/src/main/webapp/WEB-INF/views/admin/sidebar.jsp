@@ -70,8 +70,8 @@
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">리스트:</h6>
-						<a class="collapse-item" href="${cp }/admin/classlist">수업목록</a> <a
-							class="collapse-item" href="${cp }/admin/manageClass">수업관리</a>
+						<a class="collapse-item" href="${cp }/admin/confirmClass">미등록 수업 심사</a> <a
+							class="collapse-item" href="${cp }/admin/manageClass">수업 리스트</a>
 					</div>
 				</div></li>
 

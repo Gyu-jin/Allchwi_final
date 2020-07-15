@@ -48,7 +48,14 @@
 						<td>${vo.ml_num}</td>
 						<td>${vo.tutor_nickname }</td>
 						<td>${vo.class_title }</td>
-						<td>${vo.class_form }</td>
+						<c:choose>
+							<c:when test="${vo.class_form == 0}">
+								<td>오프라인</td>
+							</c:when>
+							<c:otherwise>
+								<td>온라인</td>
+							</c:otherwise>
+						</c:choose>
 						<td>${vo.scategory_name }</td>
 						<td>${vo.people}명</td>
 						<td><a href="#" style="color:blue" data-toggle="modal" data-target="#myModal" onclick="getModal()">수업
@@ -109,8 +116,8 @@
 				<div class="modal-content">
 
 					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title">Modal Heading</h4>
+					<div class="modal-header" >
+						<h4 class="modal-title">수업 상세정보</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -118,10 +125,11 @@
 					<div class="modal-body" id="modal-body">Modal body..</div>
 
 					<!-- Modal footer -->
+					<!-- 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 					</div>
-
+					 -->
 				</div>
 			</div>
 		</div>

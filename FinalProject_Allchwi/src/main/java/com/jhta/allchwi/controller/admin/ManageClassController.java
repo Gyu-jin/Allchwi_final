@@ -40,7 +40,6 @@ public class ManageClassController {
 		model.addAttribute("field", field);
 		
 		
-
 		return ".admin.manageClass";
 	}
 

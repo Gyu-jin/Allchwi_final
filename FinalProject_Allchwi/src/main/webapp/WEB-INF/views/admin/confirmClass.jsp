@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>	
 
 <head>
@@ -39,72 +40,32 @@
 				<form class="form-inline" style="display: inline-block">
 					<input class="form-control mr-sm-2" type="text" />
 					<button class="btn btn-primary my-2 my-sm-0" type="submit">
-						Search</button>
+						Search
+					</button>
 				</form>
 			</div>
 		</div>
 
-
-
-
+	
 		<!-- Begin Page Content -->
-
-
-		<div class="row" style="width: 565px;" data-toggle="modal" data-target="#myModal" onclick="dataSetting()">
-		<script>
-			function dataSetting(){
-				$.ajax({
-					url:"${cp}/admin/category",
-					dataType: "text",
-					success: function(data){	
-						alert(data);
-						/*
-						$(data).each(function(i,arr){
-							var bcategory_num= arr.bcategory_num;
-							var bcategory_name= arr.bcategory_name;
-							var scategory_name = arr.scategory_name;
-							var scategory_num = arr.scategory_num;
-							
-							if(scategory_num == null || scategory_num ==""){
-								scategory_num=0;
-							}
-							
-							$("#tb").append("<tr>");
-								$("#tb").append("<td>"+bcategory_num+"</td>");
-								$("#tb").append("<td>"+bcategory_name+"</td>");
-								if(scategory_name==undefined){
-									$("#tb").append("<td> </td>");
-								}else{
-									$("#tb").append("<td>"+scategory_name+"</td>");
-								}
-								$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num+")'>삭제</button></td>");
-							$("#tb").append("</tr>");
-						});	
-						
-						*/
-					},
-					error:function(request,status,error){
-						alert(request);
-					}
-				});
-			}
-		</script>
+		<c:forEach var="vo" items="${list }">
+		<div class="row" style="width: 565px;">
 			<div class="col-md-12">
 				<div class="card">
 					<h5 class="card-header" style="text-align: center;">
-						수업제목
+						${vo.class_title }
 						<button type="button" class="btn btn-danger" style="float: right">삭제</button>
 					</h5>
 
-					<div class="card-body" style="height: 140px;">
+					<div class="card-body" style="height: 188px;">
 						<div style="display: inline-block;">
 							<img src="${cp }/resources/img/모찌.jpg"
-								style="width: 130px; height: 130px; margin-top: -100px;">
+								style="width: 160px; height: 173px; margin-top: -130px;">
 						</div>
 						<div style="display: inline-block; margin-left: 60px;">
-							<p>심사상태</p>
-
-							<p>신청인원:0명 / 위시인원:0명</p>
+							<p>강사명: ${vo.tutor_nickname }</p>
+							<p>장소: ${vo.class_address }	</p>
+							<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>
 							<a href="#" class="btn btn-success btn-icon-split"> <span
 								class="icon text-white-50"> <i class="fas fa-check"></i>
 							</span> <span class="text">심사완료</span>
@@ -117,44 +78,10 @@
 				</div>
 			</div>
 		</div>
+		</c:forEach>
 	</div>
 
-
-	<!-- Button to Open the Modal -->
-	<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#myModal">Open modal</button> -->
-
-	<!-- The Modal -->
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">수업상세페이지</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body" id="modal-body">Modal body..
-					
-					
-					
-						
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-
-
+	
 </div>
 <!-- End of Page Wrapper -->
 

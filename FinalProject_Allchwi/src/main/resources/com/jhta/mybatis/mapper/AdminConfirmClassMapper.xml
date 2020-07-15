@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.AdminConfirmClassMapper">
+	<select id="confirm_list" resultType="com.jhta.allchwi.vo.admin.ConfirmClassVO">
+		select aa.*,
+		(select NVL(count(*),0) from class_info ci, class_date cd, class_apply ca
+		where ci.class_num = cd.class_num and cd.date_num =ca.date_num and
+		ca.apply_auth=1 and cd.class_num =aa.class_num) people, 
+        (select nvl(count(*),0) from wishlist where class_num=aa.class_num) wish_count
+
+		from 
+		(select ci.class_num, ci.tutor_nickname, ci.class_title, ci.class_auth, ci.class_address, pi.pro_img 
+		from class_info ci, profile_img pi
+		where ci.pro_num = pi.pro_num and ci.class_auth=1) aa;
+	</select>
+	
+</mapper>
