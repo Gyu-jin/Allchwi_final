@@ -68,8 +68,7 @@
 									<p>강사명: ${vo.tutor_nickname }</p>
 									<p>장소: ${vo.class_address }</p>
 									<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>  
-									<a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#myModal1"
-									onclick="getModal()"> <span
+									<a href="#" class="btn btn-success btn-icon-split"  onclick="getModal('${vo.class_num}')" data-toggle="modal" data-target="#myModal1"> <span
 										class="icon text-white-50"> <i class="fas fa-check"></i>
 									</span> 
 									<span class="text">심사완료</span>
@@ -169,7 +168,6 @@
 
 <script>
 	function getModal(class_num){
-		
 		$("div [class='modal-footer']").empty();
 		$("#modal-body").text("승인?");
 
@@ -183,7 +181,7 @@
 		
 	}
 	function accept(class_num) {
-		location.href = "${cp}/admin/acceptClass?class_num=" + class_num;
+		location.href = "${cp}/admin/acceptClass?class_num="+class_num;
 	}
 	
 

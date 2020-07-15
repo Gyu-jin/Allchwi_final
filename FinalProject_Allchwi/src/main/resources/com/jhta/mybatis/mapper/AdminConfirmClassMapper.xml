@@ -34,7 +34,7 @@
 	</select> 
 	
 	
-	<update id="accept" parameterType="int">
+	<update id="acceptClass" parameterType="int">
 		update class_info set class_auth=0 where class_num=#{class_num}
 	</update>
 	
