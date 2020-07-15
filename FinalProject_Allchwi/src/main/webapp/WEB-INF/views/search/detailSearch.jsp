@@ -140,16 +140,15 @@
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
-					<form class="form-inline" action="${cp }/list/search">
+					<form class="form-inline" action="${cp }/list/search" method="POST">
 					<!-- header 검색창을 통해 검색했을 때만 keyword가 나타나도록 ..-->
 						<c:if test="${!empty keyword }">
 							<p><h5>" ${keyword } " 키워드로 상세 검색하기</h5></p>
-							<input type="hidden" name="keyword" value="${keyword }">
 						</c:if> 
-						<c:if test="${!empty scategory_num }">
-							<input type="hidden" name="scategory_num" value="${scategory_num }">
-						</c:if>
+				
 						<br>
+						<input type="hidden" name="keyword" value="${keyword }">
+						<input type="hidden" name="scategory_num" value="${scategory_num }">
 						<div class="label-1">
 							지역
 						</div> 
@@ -310,13 +309,13 @@
 	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 			<c:when test="${i==pu.pageNum}">
-				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}"
+				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}"
 				style="text-decoration: none;font-weight: bold;">
 				<span style="color:red">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}" 
+				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}" 
 				style="text-decoration: none">
 				<span style="color:gray">[${i }]</span>
 				</a>

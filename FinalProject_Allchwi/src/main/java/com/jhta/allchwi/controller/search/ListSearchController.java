@@ -31,7 +31,7 @@ public class ListSearchController {
 	@Autowired private BigLocationService bloc_service;
 	@Autowired private SmallLocationService sloc_service;
 	
-	@RequestMapping(value="/list/search",method = RequestMethod.GET)
+	@RequestMapping(value="/list/search",method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView goSearchList(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
 										@RequestParam(value="bcategory_num",defaultValue="-1")int bcategory_num, 
 										@RequestParam(value="scategory_num",defaultValue="-1")int scategory_num,
@@ -50,6 +50,8 @@ public class ListSearchController {
 		int totalRowCount=0;
 		List<ClassInfoVO> list=null;
 		PageUtil pu=null;
+	
+		
 		// bcategory_num 값이 넘어왔을 경우 
 		if(bcategory_num>0) {			
 			// bcategory_num 값 ModelAndView에 담아 detailSearcj.jsp로 전달
@@ -63,6 +65,8 @@ public class ListSearchController {
 			map.put("startRow", startRow);		
 			// map에 담긴 #{bcategory_num}, ${keyword}값으로 해당하는 list 값 산출
 			list=service.list(map);
+			System.out.println("1 큰 카테고리만 들어왔을 때");
+			
 			
 		}else if(scategory_num>0 && sloc_num==-1) {			
 			mv.addObject("scategory_num",scategory_num);
@@ -71,7 +75,9 @@ public class ListSearchController {
 			int startRow=pu.getStartRow()-1;
 			map.put("startRow", startRow);		
 			list=service.list(map);
-
+			System.out.println("2 작은 카테고리만 들어왔을 때");
+			
+			
 		}else if(keyword!=null && keyword!="" && sloc_num==-1 ) {		
 			totalRowCount=service.count(map);
 			pu=new PageUtil(pageNum, totalRowCount, 6, 5);
@@ -79,8 +85,23 @@ public class ListSearchController {
 			map.put("startRow", startRow);	
 			list=service.keyword_list(map);
 			mv.addObject("keyword",keyword);
+			System.out.println("3 키워드만 들어왔을 때");
+			
+			
+		}else if(scategory_num>0 && sloc_num>0) {
+			
+			totalRowCount=service.count(map);
+			pu=new PageUtil(pageNum, totalRowCount, 6, 5);
+			int startRow=pu.getStartRow()-1;
+			map.put("startRow", startRow);		
+			list=service.list(map);
+			mv.addObject("scategory_num",scategory_num);
+			System.out.println("4 작은카테고리랑 작은지역 둘다 들어왔을 때");
+			
 			
 		}else if(sloc_num>0 && keyword!=null && keyword!="") {			
+			System.out.println("키워드 : " + keyword);
+			System.out.println("작은지역 : " + sloc_num);
 			totalRowCount=service.count(map);
 			pu=new PageUtil(pageNum, totalRowCount, 6, 5);
 			int startRow=pu.getStartRow()-1;
@@ -88,15 +109,10 @@ public class ListSearchController {
 			list=service.keyword_list(map);
 			mv.addObject("keyword",keyword);
 			mv.addObject("sloc_num",sloc_num);
-		}else if(scategory_num>0 && sloc_num>0) {
-			totalRowCount=service.count(map);
-			pu=new PageUtil(pageNum, totalRowCount, 6, 5);
-			int startRow=pu.getStartRow()-1;
-			map.put("startRow", startRow);		
-			list=service.list(map);
-			mv.addObject("scategory_num",scategory_num);
+			System.out.println("5 키워드랑 작은지역 둘다 들어왔을 때");
 		}
 		
+	
 		List<BigCategoryVO> bigcalte_list=category_service.bcate_list();
 		List<SmallCategoryVO> smallcate_list = category_service.allscate_list();
 		List<BigLocationVO> bloc_list=bloc_service.blocList();

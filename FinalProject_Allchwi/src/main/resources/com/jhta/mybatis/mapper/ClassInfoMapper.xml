@@ -11,22 +11,32 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
-	<!-- keyword & small location 검색 sql -->
+	
+	
+	<!-- only small location 검색 sql -->
 	<sql id="sloc">
-		<if test="sloc_num>0 and scategory_num==-1">
-			<where>
-				sloc_num=#{sloc_num}
-			</where>
-			
+		<if test="sloc_num>0 ">
+			and sloc_num=#{sloc_num}
 		</if>	
 	</sql>
+	
+	
+	<!-- keyword & small location 검색 sql -->
 	<sql id="key">
-		<if test="keyword!=null and keyword!='' and sloc_num==-1">
+	<choose>
+		<when test="keyword!=null and keyword!='' and sloc_num==-1">
 			<where>
 				class_title like '%${keyword}%'
 			</where>
-		</if>	
+		</when>
+		<when test="keyword!=null and keyword!='' and sloc_num>0">
+			<where>
+				class_title like '%${keyword}%' and sloc_num=#{sloc_num}
+			</where>
+		</when>
+	</choose>
 	</sql>
+	
 	
 	<!-- keyword 검색 sql -->
 	<sql id="keyword">
@@ -34,7 +44,6 @@
 			(select class_num 
 			from class_info 
 			<include refid="key"/>
-			<include refid="sloc"/>
 			) a
 		</if>	
 	</sql>
@@ -44,34 +53,20 @@
 		select class_num, class_title, tutor_nickname 
 		from class_info 
 		<include refid="key"/>
-		<include refid="sloc"/>
 		order by class_num desc
 		limit #{startRow},6
 	</select>
 	
-	<select id="key_sloc_list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname 
-		from class_info 
-		where class_title like '%${keyword}%'
-		and sloc_num=#{sloc_num}
-		order by class_num desc
-		limit #{startRow},6
-	</select>
-	
+
 	
 	<!-- category 검색 sql -->
 	
 	<sql id="smallcategory">
-	<choose>
-		<when test="scategory_num>0 and sloc_num==-1">
-			and scategory_num=#{scategory_num}
-		</when>
-			<when test="scategory_num>0 and sloc_num>0">
-			and scategory_num=#{scategory_num}
-			and sloc_num=#{sloc_num}
-		</when>
-	</choose>
-		
+		<choose>
+			<when test="scategory_num>0 ">
+				and scategory_num=#{scategory_num}
+			</when>
+		</choose>
 	</sql>
 	<sql id="bigcategory">
 		<if test="bcategory_num>0">
@@ -81,14 +76,16 @@
 
 	
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num
-		from (select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
-				from small_category s, big_category b
-				where s.bcategory_num=b.bcategory_num 				
-					<include refid="smallcategory"/>								
-					<include refid="bigcategory"/>		
-				)a, class_info c
-		where a.scategory_num=c.scategory_num
+		select class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num from 
+		(
+			select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+			from small_category s, big_category b
+			where s.bcategory_num=b.bcategory_num 				
+			<include refid="smallcategory"/>								
+			<include refid="bigcategory"/>		
+		)a, class_info c
+		where a.scategory_num=c.scategory_num 
+		<include refid="sloc"/>		
 		order by class_num desc
 		limit #{startRow},6
 	</select>
