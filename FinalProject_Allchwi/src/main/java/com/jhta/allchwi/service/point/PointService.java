@@ -16,15 +16,15 @@ public class PointService {
 	@Autowired
 	private PointDAO pd;
 	//회원번호 받아 포인트 리스트 출력
-	public List<PointListVO> pointList(HttpSession session, HashMap<String, Object> hm){
-		//세션에서 회원번호를 받아 회원번호를 hashmap에 저장
-		hm.put("ml_num", session.getAttribute("ml_num"));
+	public List<PointListVO> pointList(HashMap<String, Object> hm){
 		return pd.pointList(hm);
 	}
 	//현재 보유포인트 계산
-	public int getTotal(HttpSession session, HashMap<String, Object> hm){
-		//세션에서 회원번호를 받아 회원번호를 hashmap에 저장
-		hm.put("ml_num", session.getAttribute("ml_num"));
+	public int getTotal(HashMap<String, Object> hm){
 		return pd.getTotal(hm);
+	}
+	//포인트 사용/적립 횟수 계산
+	public int count(HashMap<String, Object> hm) {
+		return pd.count(hm);
 	}
 }

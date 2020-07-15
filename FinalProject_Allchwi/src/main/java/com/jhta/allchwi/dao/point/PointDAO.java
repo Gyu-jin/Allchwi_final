@@ -29,4 +29,8 @@ public class PointDAO {
 	public int getTotal(HashMap<String, Object> hm){
 		return session.selectOne(NAMESPACE + ".getTotal", hm);
 	}
+	//페이징 처리를 위해 포인트 적립/사용 횟수 계산
+	public int count(HashMap<String, Object> hm) {
+		return session.selectOne(NAMESPACE + ".count", hm);
+	}
 }
