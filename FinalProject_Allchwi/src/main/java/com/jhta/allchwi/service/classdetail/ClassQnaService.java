@@ -1,5 +1,7 @@
 package com.jhta.allchwi.service.classdetail;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class ClassQnaService {
 	}
 	public int insertReply(ClassQnaVO vo) {
 		return dao.insertReply(vo);
+	}
+	public List<ClassQnaVO> qnaList(int class_num) {
+		return dao.qnaList(class_num);
 	}
 }
 

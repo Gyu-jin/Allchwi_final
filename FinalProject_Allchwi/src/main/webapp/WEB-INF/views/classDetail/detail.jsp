@@ -1,313 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-#container_detail {
-	width: 100%;
-	padding: 50px 0 50px 0;
-	letter-spacing: 0;
-}
-
-.card {
-	width: 440px;
-	background: white;
-}
-
-.remote {
-	width: 100%;
-	background: whitesmoke;
-	position: sticky;
-	left: 63%;
-}
-
-.remote.active {
-	position: fixed;
-	top: 0px;
-}
-
-.roundImg {
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-}
-
-.info {
-	line-height: 150%;
-	margin-top: 20px;
-}
-
-.info ul li {
-	width: 140px;
-	text-align: center;
-	float: left;
-	padding-top: 50px;
-	list-style: none;
-}
-
-.btn_wishlist img {
-	width: 20px;
-}
-
-.info ul li.ar {
-	background:
-		url(https://user-images.githubusercontent.com/65140754/86689111-a9a82e00-c041-11ea-8aea-c02eb0d1bfd2.png)
-		center top no-repeat;
-}
-
-.info ul li.hu {
-	background:
-		url(https://user-images.githubusercontent.com/65140754/86689750-3fdc5400-c042-11ea-87f2-fe8364438ff3.png)
-		center top no-repeat;
-}
-
-.info ul li.gr {
-	background:
-		url(https://user-images.githubusercontent.com/65140754/86689737-3c48cd00-c042-11ea-95b3-593fb577963b.png)
-		center top no-repeat;
-}
-
-.info ul li.ohu {
-	background:
-		url(https://user-images.githubusercontent.com/65140754/86689728-3b17a000-c042-11ea-9861-55fe8f7cd520.png)
-		center top no-repeat;
-}
-
-.class_wrap {
-	background: #ececec;
-	
-}
-
-.class_navi {
-	background: white;
-	color: gray;
-	border-bottom: 1px solid #999;
-	padding: 10px 0px;
-	position: sticky;
-	top: 0px;
-	z-index: 1;
-}
-
-.class_navi.active {
-	position: fixed;
-	width: 51.15%;
-}
-
-.class_wrap .class_detail {
-	background: #ececec;
-	width: 100%
-}
-
-.class_wrap .class_detail .info {
-	line-height: 150%;
-	margin-top: 20px;
-}
-
-.class_wrap .class_detail .tutor_profile {
-	width: 180px;
-	float: left;
-	color: #000;
-	text-align: center;
-	margin: 100px 0 50px 100px;
-}
-
-#container_detail .class_wrap .class_detail .tutor_profile .name {
-	width: 180px;
-	font-size: 20px;
-	line-height: 200%;
-}
-
-.class_wrap .class_detail .class_title {
-	float: right;
-	padding-top: 40px;
-	margin: 50px 50px 50px 0;
-}
-
-.class_wrap .detail_sec_bor {
-	border-top: 1px solid #e3e3e3;
-	overflow: hidden;
-	padding: 0px 80px 80px 80px;
-}
-
-.class_wrap .class_detail .sec01 {
-	padding-top: 125px;
-	position: relative;
-}
-
-.class_navi ul li a.on {
-	color: #ff936f;
-	font-weight: bold;
-	font-size: 20px;
-	border-bottom: 2px solid #ff936f;
-}
-
-.class_navi ul li {
-	width: 180px;
-	display: inline-block;
-	text-align: center;
-	font-size: 20px;
-	padding: 20px 0 20px 0;
-}
-
-.btn_wishlist {
-	padding: 10px 18px;
-	border-radius: 10px;
-	background-color: #ff936f;
-	float: right;
-	color: white;
-	margin-top: 9px;
-}
-
-.btn_write {
-	padding: 10px 20px;
-	border-radius: 10px;
-	background-color: #ff936f;
-	float: right;
-	color: white;
-	margin-top: 10px;
-}
-
-.modal-footer {
-	background-color: #ff936f;
-}
-
-.btn_send {
-	color: white;
-	font-weight: bold;
-}
-
-.review_box {
-	text-align: center;
-	padding: 30px;
-	background: #cacaca54;
-	font-size: 20px;
-	font-weight: bold;
-	color: #000;
-	vertical-align: middle;
-	margin-top: 85px;
-}
-
-.sec01 .review_count01 {
-	margin-top: 30px;
-	border-bottom: 1px solid #e5e5e5;
-	padding-bottom: 150px;
-}
-
-.sec01 .review_count01 ul li {
-	width: 50%;
-	height: 60px;
-	float: left;
-	text-align: center;
-	color: #000;
-	cursor: default;
-}
-
-.sec01 .review_list dd {
-	margin-left: 130px;
-}
-
-.sec01 .review_list {
-	position: relative;
-}
-
-.sec01 .review_list dl dt {
-	width: 86px;
-	float: left;
-	text-align: center;
-	font-size: 16px;
-	color: #000;
-	cursor: default;
-	line-height: 100%;
-}
-
-.tutor_t {
-	margin: 30px;
-}
-
-.sec01 .review_list ul li {
-	border-bottom: 1px solid #e5e5e5;
-	padding: 30px 0;
-	cursor: default;
-}
-
-.tutor_t dl.tutor_txt dt {
-	width: 80px;
-	height: 80px;
-	background: none;
-	padding: 0;
-	border-radius: 100px;
-	overflow: hidden;
-}
-
-.tutor_t dl.tutor_txt dd {
-	width: 300px;
-	left: 100px;
-	top: -80px;
-	border-radius: 5px;
-	padding: 10px;
-	position: relative;
-	background: lightgray;
-	color: #666;
-	letter-spacing: 0;
-}
-
-.tutor_t dl.tutor_txt dd:after {
-	right: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	position: absolute;
-	border-right-color: lightgray;
-	border-width: 10px;
-	margin-top: -10px;
-}
-
-.btn_pay {
-	display: inline-block;
-	padding: 10px 0 10px 0;
-	width: 407px;
-	text-align: center;
-	border-radius: 10px;
-	background-color: #7185bb;
-	font-size: 30px;
-	color: white;
-}
-
-a, span {
-	color: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	text-decoration: none;
-}
-a:hover {
-   color: inherit;
-   text-decoration: none;
-}
-li {
-	list-style: none;
-}
-
-.qna_list ul li {
-	border-bottom: 1px solid #e5e5e5;
-	padding: 10px 0;
-	cursor: default;
-}
-
-.qna_list {
-	border: 1px solid #d4cdcd;
-	margin-top: 65px;
-}
-
-.reply_box {
-	margin-top: 20px;
-}
-#reply_send{
-	width: 100px;
-    height: 85px;
-    margin-top: -15px;
-    margin-left: 24px;
-}
-</style>
+<link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
 
 <div class="container-fluid" id="container_detail">
 	<div class="row">
@@ -626,7 +320,7 @@ li {
 																		<a href="#">[삭제]</a>
 																	</c:if>
 																</li>
-															</c:forEach>
+															</c:forEach>  
 														</ul>
 													</div>
 												</div>
@@ -684,104 +378,107 @@ li {
 	</div>
 </div>
 <script>
-	var navOffset = $('.class_navi').offset();
-	$(window).scroll(function() {
-		if ($(document).scrollTop() > navOffset.top) {
-			$('.class_navi').addClass('active');
-			
+var navOffset = $('.class_navi').offset();
+$(window).scroll(function() {
+	if ($(document).scrollTop() > navOffset.top) {
+		$('.class_navi').addClass('active');
+		
+	} else {
+		$('.class_navi').removeClass('active');
+	}
+});
+var remoteOffset = $('.remote').offset();
+$(window).scroll(function() {
+	if ($(document).scrollTop() > remoteOffset.top) {
+		$('.remote').addClass('active');
+	} else {
+		$('.remote').removeClass('active');
+	}
+});
+$("#class_navi a").click(function() {
+	$(this).addClass('on');
+	$("#class_navi a").not(this).removeClass('on');
+});
+$("#card-header collapse").click(function() {
+	$(this).addClass('show');
+});
+
+//위시전
+ $(document).on('click', '#btn_before_wish', function () {
+	var btn = $(this);
+	$.post('${cp}/class/addWish', {}, function (res) {
+		if (res=='success') {
+			btn.attr('id', 'btn_after_wish');
+			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
+			alert('위시리스트 등록 성공');
 		} else {
-			$('.class_navi').removeClass('active');
+			alert('위시리스트 등록 오류');
 		}
 	});
-	var remoteOffset = $('.remote').offset();
-	$(window).scroll(function() {
-		if ($(document).scrollTop() > remoteOffset.top) {
-			$('.remote').addClass('active');
+});
+//위시후
+$(document).on('click', '#btn_after_wish', function () {
+	var btn = $(this);
+	$.post('${cp}/class/removeWish', {}, function (res) {
+		if (res=='success') {
+			btn.attr('id', 'btn_before_wish');
+			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
+			alert('위시리스트 삭제 성공');
 		} else {
-			$('.remote').removeClass('active');
+			alert('위시리스트 삭제 오류');
 		}
 	});
-	$("#class_navi a").click(function() {
-		$(this).addClass('on');
-		$("#class_navi a").not(this).removeClass('on');
-	});
-	$("#card-header collapse").click(function() {
-		$(this).addClass('show');
-	});
-	
-	//위시전
-	 $(document).on('click', '#btn_before_wish', function () {
-		var btn = $(this);
-		$.post('${cp}/class/addWish', {}, function (res) {
+});
+//qna작성
+$(document).on('click', '#btn_write_qna', function () {
+	qna_content = document.getElementById('qna_content').value;
+	if(qna_content==''){
+		alert('내용을 작성해주세요');
+	}
+	id='test';
+	class_num='4';
+	ml_num='1';
+	if (id!='test') {
+		alert('로그인이 필요합니다');
+	}else {
+		$.post('${cp}/classDetail/qna', {
+			class_num: class_num,
+			ml_num: ml_num,
+			qna_content:qna_content,
+			qna_lev: '0'
+		}, function (data,res) {
 			if (res=='success') {
-				btn.attr('id', 'btn_after_wish');
-				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
-				alert('위시리스트 등록 성공');
-			} else {
-				alert('위시리스트 등록 오류');
+				alert('문의등록 성공');
+			} else {				
+				alert('문의실패');
 			}
 		});
-	});
-	//위시후
-	$(document).on('click', '#btn_after_wish', function () {
-		var btn = $(this);
-		$.post('${cp}/class/removeWish', {}, function (res) {
+	}
+});
+//qna 답변
+$(document).on('click', '#reply_send', function () {
+	reply_content = document.getElementById('reply_content').value;
+	id='test';
+	class_num='4';
+	ml_num='1';
+	if (id!='test') {
+		alert('로그인이 필요합니다');
+	}else {
+		$.post('${cp}/classDetail/qnareply', {
+			class_num: class_num,
+			ml_num: ml_num,
+			qna_content:reply_content,
+			qna_lev: '1',
+			qna_num: '28'
+		}, function (data,res) {
 			if (res=='success') {
-				btn.attr('id', 'btn_before_wish');
-				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
-				alert('위시리스트 삭제 성공');
-			} else {
-				alert('위시리스트 삭제 오류');
+				alert('답변등록 성공');
+			} else {				
+				alert('답변실패');
 			}
 		});
-	});
-	//qna작성
-	$(document).on('click', '#btn_write_qna', function () {
-		qna_content = document.getElementById('qna_content').value;
-		id='test';
-		class_num='4';
-		ml_num='1';
-		if (id!='test') {
-			alert('로그인이 필요합니다');
-		}else {
-			$.post('${cp}/classDetail/qna', {
-				class_num: class_num,
-				ml_num: ml_num,
-				qna_content:qna_content,
-				qna_lev: '0'
-			}, function (data,res) {
-				if (res=='success') {
-					alert('문의등록 성공');
-				} else {				
-					alert('문의실패');
-				}
-			});
-		}
-	});
-	//qna 답변
-	$(document).on('click', '#reply_send', function () {
-		reply_content = document.getElementById('reply_content').value;
-		id='test';
-		class_num='4';
-		ml_num='1';
-		if (id!='test') {
-			alert('로그인이 필요합니다');
-		}else {
-			$.post('${cp}/classDetail/qnareply', {
-				class_num: class_num,
-				ml_num: ml_num,
-				qna_content:reply_content,
-				qna_lev: '1',
-				qna_num: '9'
-			}, function (data,res) {
-				if (res=='success') {
-					alert('답변등록 성공');
-				} else {				
-					alert('답변실패');
-				}
-			});
-		}
-	});
-	
+	}
+});
+
 
 </script>

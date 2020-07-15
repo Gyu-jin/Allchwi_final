@@ -1,5 +1,7 @@
 package com.jhta.allchwi.dao.classdetail;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,9 @@ public class ClassQnaDAO {
 	}
 	public int insertReply(ClassQnaVO vo) {
 		return session.insert(NAMESPACE+".insertReply", vo);
+	}
+	public List<ClassQnaVO> qnaList(int class_num) {
+		return session.selectList(NAMESPACE+".qnalist", class_num);
 	}
 	
 }

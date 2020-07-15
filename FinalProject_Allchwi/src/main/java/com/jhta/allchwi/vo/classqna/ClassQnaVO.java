@@ -2,6 +2,9 @@ package com.jhta.allchwi.vo.classqna;
 
 import java.sql.Timestamp;
 
+import com.jhta.allchwi.vo.login.MemberInfoVO;
+import com.jhta.allchwi.vo.login.ProfileVO;
+
 public class ClassQnaVO {
 	private int qna_num;
 	private int class_num;
@@ -9,8 +12,24 @@ public class ClassQnaVO {
 	private String qna_content;
 	private int qna_ref;
 	private int qna_lev;
+	private ProfileVO pfv;
+	private MemberInfoVO miv;
 	private Timestamp qna_regdate;
-	public ClassQnaVO() {}
+	public ClassQnaVO() {};
+	public ClassQnaVO(int qna_num, int class_num, int ml_num, String qna_content, int qna_ref, int qna_lev,
+			ProfileVO pfv, MemberInfoVO miv, Timestamp qna_regdate) {
+		super();
+		this.qna_num = qna_num;
+		this.class_num = class_num;
+		this.ml_num = ml_num;
+		this.qna_content = qna_content;
+		this.qna_ref = qna_ref;
+		this.qna_lev = qna_lev;
+		this.pfv = pfv;
+		this.miv = miv;
+		this.qna_regdate = qna_regdate;
+	}
+
 	public ClassQnaVO(int class_num, int ml_num, String qna_content,int qna_lev) {
 		super();
 		this.class_num = class_num;
@@ -64,6 +83,18 @@ public class ClassQnaVO {
 	}
 	public void setQna_lev(int qna_lev) {
 		this.qna_lev = qna_lev;
+	}
+	public ProfileVO getpfv() {
+		return pfv;
+	}
+	public void setpfv(ProfileVO pfv) {
+		this.pfv = pfv;
+	}
+	public MemberInfoVO getMiv() {
+		return miv;
+	}
+	public void setMiv(MemberInfoVO miv) {
+		this.miv = miv;
 	}
 	public Timestamp getQna_regdate() {
 		return qna_regdate;
