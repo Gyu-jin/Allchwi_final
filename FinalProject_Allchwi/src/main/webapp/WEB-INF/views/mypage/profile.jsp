@@ -70,13 +70,15 @@ $('#picture').change(function (e) {
 //a 별명 및 소개 글 글자수 체크 기능 위한 변수 선언
 var oldNickVal;
 var oldIntroVal;
-/*
+
 $(function(){
 	//a 초기 글자수 값
 	$('#nick-count').text($('#nickname').val().length);
 	oldValNick = $('#nickname').val();
+	$('#introduction-count').text($('#introduction').val().length);
+	oldValNick = $('#introduction').val();
 });
-*/
+
 //a propertychange change keyup paste -> 텍스트 변경 실시간감지하여 함수 발생 처리
 $("#nickname").on("propertychange change keyup paste", function() {
 	//currentVal -> 현재 변경된 데이터 셋팅
