@@ -5,8 +5,10 @@
 <mapper
 	namespace="com.jhta.mybatis.mapper.AdminManageClassMapper">
 
-	<!-- <sql id="search"> <if test="field!=null and field!=''"> where ${field} 
-		like '%#{keyword}%' </if> </sql> -->
+	<!-- <sql id="search"> 
+			<if test="field!=null and field!=''"> where ${field} like '%#{keyword}%' 
+			</if> 
+		</sql> -->
 
 	<select id="manage_list" resultType="com.jhta.allchwi.vo.admin.ManageClassVO" parameterType="hashmap">
 		select aa.*,(select NVL(count(*),0) from class_info ci, class_date cd, class_apply ca
@@ -17,7 +19,7 @@
 		(select ci.ml_num, ci.class_num class_num, ci.tutor_nickname, ci.class_title,
 		ci.class_form, sc.scategory_name
 		from class_info ci, small_category sc
-		where ci.scategory_num = sc.scategory_num)aa
+		where ci.scategory_num = sc.scategory_num and ci.class_auth=1)aa
 		
 		<if test="field!=null and field!=''"> 
 			where ${field} like CONCAT('%',#{keyword},'%') 	

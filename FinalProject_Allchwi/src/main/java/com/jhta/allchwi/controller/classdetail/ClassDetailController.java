@@ -24,4 +24,20 @@ public class ClassDetailController {
 		mv.addObject("class_num", class_num);
 		return mv;
 	}
+
+	// 인표 상세페이지 이동 detail2
+	@GetMapping("/classDetail/detail2")
+	public ModelAndView detail2(int class_num) {
+		ModelAndView mv=new ModelAndView("classDetail/detail");
+		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
+		String id="test";
+		mv.addObject("id", id);
+		mv.addObject("cvo", cvo);
+		mv.addObject("class_num", class_num);
+		return mv;
+	}
+
+
+
+
 }
