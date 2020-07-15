@@ -13,11 +13,13 @@
 	<div class="container">
 		<div class="inner-cont" style="padding-top: 0">
 					<div class="label-title">이름 [ID]</div>
-					<div class="contents">홍길동 [test111@naver.com]</div>
+					<div class="contents">
+						${list[0].mb_name} [ ${list[0].id} ]
+					</div>
 		</div>
 		<div class="inner-cont" style="padding-top: 0">	
-					<div class="label-title">현재포인트</div>
-					<div class="contents"><b>1000</b>point</div>
+					<div class="label-title">현재 보유 포인트</div>
+					<div class="contents"><b>${total}</b> point</div>
 		</div>
 		<div class="inner-cont">
 			<div>
@@ -37,6 +39,25 @@
 						</tr>
 					</thead>
 					<tbody id="tb">
+						<c:forEach var="vo" items="${list}">
+						<tr>
+							<td>${vo.point_regdate }</td>
+							<td>${vo.point_name }</td>
+							<c:choose>
+								<!-- char형식 비교 -->
+								<c:when test="${vo.point_type eq 'u'.charAt(0)}">
+									<td style="color: red">
+										-${vo.point }
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td style="color: blue">
+										+${vo.point }
+									</td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

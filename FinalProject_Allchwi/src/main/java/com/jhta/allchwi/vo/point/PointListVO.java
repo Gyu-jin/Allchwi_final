@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class PointListVO {
 	private int ml_num;
 	private String mb_name;
+	private String id;
 	private int point_num;
 	private int point;
 	private String point_name;
@@ -13,11 +14,12 @@ public class PointListVO {
 	
 	public PointListVO() {}
 
-	public PointListVO(int ml_num, String mb_name, int point_num, int point, String point_name, Timestamp point_regdate,
-			char point_type) {
+	public PointListVO(int ml_num, String mb_name, String id, int point_num, int point, String point_name,
+			Timestamp point_regdate, char point_type) {
 		super();
 		this.ml_num = ml_num;
 		this.mb_name = mb_name;
+		this.id = id;
 		this.point_num = point_num;
 		this.point = point;
 		this.point_name = point_name;
@@ -39,6 +41,14 @@ public class PointListVO {
 
 	public void setMb_name(String mb_name) {
 		this.mb_name = mb_name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getPoint_num() {
