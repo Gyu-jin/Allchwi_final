@@ -98,7 +98,7 @@
             <!-- 수업신청서 링크 -->
             <li class="nav-item dropdown no-arrow mx-1">
             	
-                <a class="nav-link dropdown-toggle" href="${cp}/class/apply" id="classApply" role="button">
+                <a class="nav-link dropdown-toggle" href="${cp}/class/apply?class_num=54" id="classApply" role="button">
                		<span class="mr-2 d-none d-lg-inline text-gray-600 small">수업신청서</span>
             	</a>
                 

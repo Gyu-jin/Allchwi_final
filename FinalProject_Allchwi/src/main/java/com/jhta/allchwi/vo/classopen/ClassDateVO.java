@@ -11,6 +11,7 @@ public class ClassDateVO {
 	private String class_comment;
 	private String class_msg;
 	private Timestamp date_regdate;
+	private String class_title; // 추가 (class_info)
 	
 	public ClassDateVO() {}
 
@@ -89,6 +90,14 @@ public class ClassDateVO {
 
 	public void setDate_regdate(Timestamp date_regdate) {
 		this.date_regdate = date_regdate;
+	}
+
+	public String getClass_title() {
+		return class_title;
+	}
+
+	public void setClass_title(String class_title) {
+		this.class_title = class_title;
 	}
 
 	

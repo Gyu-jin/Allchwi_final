@@ -9,7 +9,7 @@ import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 @Repository
 public class ClassApplyDAO {
 	@Autowired private SqlSession session;
-	private String NAMESPACE="";
+	private String NAMESPACE="com.jhta.mybatis.mapper.ClassApplyMapper";
 	
 	public int insert(ClassApplyVO vo) {
 		return session.insert(NAMESPACE+".insert",vo);

@@ -8,22 +8,22 @@ public class ClassApplyVO {
 	private int ml_num;
 	private int stu_lev;
 	private String stu_msg;
-	private String sut_phone;
+	private String stu_phone;
 	private int apply_auth;
 	private Timestamp apply_regdate;
 	private int class_finish; 
 	
 	public ClassApplyVO() {}
 
-	public ClassApplyVO(int apply_num, int date_num, int ml_num, int stu_lev, String stu_msg, String sut_phone,
-			int apply_auth, Timestamp apply_regdate, int class_finish) {
+	public ClassApplyVO(int apply_num, int date_num, int ml_num, int stu_lev, String stu_msg, String stu_phone,
+			int apply_auth,  int class_finish, Timestamp apply_regdate) {
 		super();
 		this.apply_num = apply_num;
 		this.date_num = date_num;
 		this.ml_num = ml_num;
 		this.stu_lev = stu_lev;
 		this.stu_msg = stu_msg;
-		this.sut_phone = sut_phone;
+		this.stu_phone = stu_phone;
 		this.apply_auth = apply_auth;
 		this.apply_regdate = apply_regdate;
 		this.class_finish = class_finish;
@@ -69,12 +69,12 @@ public class ClassApplyVO {
 		this.stu_msg = stu_msg;
 	}
 
-	public String getSut_phone() {
-		return sut_phone;
+	public String getStu_phone() {
+		return stu_phone;
 	}
 
-	public void setSut_phone(String sut_phone) {
-		this.sut_phone = sut_phone;
+	public void setStu_phone(String stu_phone) {
+		this.stu_phone = stu_phone;
 	}
 
 	public int getApply_auth() {

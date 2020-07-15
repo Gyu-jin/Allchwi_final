@@ -4,5 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.ClassDateMapper">
 	
+
+
+	<select id="list" parameterType="int" resultType="classDate">
+		select date_num, cd.class_num, class_title, class_date, class_startTime, class_endDate, class_comment, class_msg, date_regdate
+		from class_date cd, class_info ci
+		where cd.class_num=ci.class_num and cd.class_num=#{class_num}
+	</select>
 </mapper>
 

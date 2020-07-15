@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 @font-face {
 	font-family: 'CookieRunOTF-Bold';
@@ -221,6 +222,15 @@ textarea.len980 {
 	color: #fff;
 	background-color: #7185bb;
 }
+.tutor_img{
+	background: #000; 
+	z-index: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-size: cover; 
+	background-position: center; 
+	background-image: url('/allchwi/resources/img/모찌.jpg');
+}
 </style>
 <div class="classApply">
 
@@ -240,208 +250,197 @@ textarea.len980 {
 			</ul>
 		</div>
 	</div>
-
-	<div class="tab-content" id="pills-tabContent">
-		<!-- 01 클래스 일정 선택 탭-->
-		<div class="tab-pane fade show active" id="pills-info" role="tabpanel"
-			data-num="1">
-
-
-			<div class="info1">
-				<span class="orange">모찌의 실전 산책!</span>
-			</div>
-			<div class="box">
-				<div class="col-md-6">
-					<div class="title">
-						수업일정선택<b class="pink">*</b>
-						<div class="col-3">
-							<div class="tutor_t">
-								<dl class="tutor_txt">
-									<dt>
-										<div
-											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
-										</div>
-									</dt>
-									<dd>
-										신촌,홍대 부근의 모임공간에서<br> 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅
-										비용에 포함되어 있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
-									</dd>
-								</dl>
+	<form action="${cp}/class/applyOk" method="post">
+		<input type="hidden" name="ml_num" value="1">
+		<div class="tab-content" id="pills-tabContent">
+			<!-- 01 클래스 일정 선택 탭-->
+			<div class="tab-pane fade show active" id="pills-info" role="tabpanel"
+				data-num="1">
+			
+			<c:forEach var="vo" items="${classDate_list }">
+			
+				<div class="info1">
+					<span class="orange">${vo.class_title }</span>
+				</div>
+				<div class="box">
+					<div class="col-md-6">
+						<div class="title">
+							수업일정선택<b class="pink">*</b>
+							<div class="col-3">
+								<div class="tutor_t">
+									<dl class="tutor_txt">
+										<dt>
+											<div class="tutor_img"></div>
+										</dt>
+										<dd>
+											${vo.class_comment }
+											<br>
+											${vo.class_msg }
+										</dd>
+									</dl>
+								</div>
 							</div>
 						</div>
+					</div>
+	
+					<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
+					<div class="col-md-6">
+					
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio"
+										aria-label="Radio button for following text input"
+										name="date_num" value="${vo.date_num }">
+								</div>
+							</div>
+	
+							<input type="text" class="form-control" disabled="disabled"
+								aria-label="Text input with radio button" 
+								value="시작 날짜 : ${vo.class_date } / 시작 시간 : ${vo.class_startTime}">
+						</div>
+					</div>
+	
+				</div>
+			</c:forEach>
+				
+	
+	
+				<div class="button_box">
+					<button type="button" class="btn btn-outline-danger" id="wirteBtn"
+						data-num='2'>수업 신청서 작성하기</button>
+				</div>
+	
+	
+			</div>
+	
+			<!-- 02 수업신청서 작성 탭 -->
+			<div class="tab-pane fade" id="pills-title" role="tabpanel"
+				data-num='2'>
+	
+				<div class="info1">
+					<span class="orange">모찌의 실전 산책!</span>
+				</div>
+				<div class="box">
+					<div class="col-md-5">
+						<div class="title">
+							수업신청서<b class="pink">*</b>
+							<div class="col-3">
+								<div class="tutor_t">
+									<dl class="tutor_txt">
+										<dt>
+											<div class="tutor_img">
+											</div>
+										</dt>
+										<dd>
+											수업준비를 위해 <br> 아래항목들에 대해 미리 말씀해주세요.<br> 감사합니다 :)
+										</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="label-1">나의 스킬 레벨</div>
+						<div class="label-1">튜터에게 전할말</div>
+						<div class="label-12">연락 가능한 번호</div>
+					</div>
+	
+					<div class="col-md-5">
+	
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active"> 
+							<input type="radio" name="stu_lev" value="1" checked> 입문자
+							</label> <label class="btn btn-secondary"> 
+							<input type="radio" name="stu_lev" value="2"> 초/중급자
+							</label> <label class="btn btn-secondary"> 
+							<input type="radio"	name="stu_lev" value="3"> 상급자
+							</label>
+						</div>
+						<br>
+	
+	
+						<div class="cont">
+							<div class="inner1">
+								<textarea class="basic len980 form-control"
+									placeholder="튜터에게 회원님에 대해 알려주세요. 수업을 듣는 목적은 무엇인가요? 튜터의 어떤 점이 마음에 들어 신청하셨나요?"
+									id="Introduction" name="stu_msg"></textarea>
+							</div>
+						</div>
+	
+						<input type="text" id="phone" name="stu_phone" class="form-control"
+							style="width: 300px; margin-top: 20px;"
+							placeholder="개인연락처를 - 없이 입력해주세요.">
+	
+					</div>
+	
+				</div>
+				<div class="button_box">
+					<button type="button" class="btn btn-outline-danger" id="payBtn">결제하기</button>
+				</div>
+	
+			</div>
+	
+			<!-- 03 결제 탭  -->
+			<div class="tab-pane fade" id="pills-price" role="tabpanel"
+				data-num='3'>
+				<div class="info1">
+					<span class="orange">모찌의 실전 산책!</span>
+				</div>
+				<div class="box">
+					<div class="col-md-5">
+						<div class="title">
+							결제하기<b class="pink">*</b>
+							<div class="col-3">
+								<div class="tutor_t">
+									<dl class="tutor_txt">
+										<dt>
+											<div class="tutor_img">
+											</div>
+										</dt>
+										<dd>
+											결제 후에 신청이 완료됩니다.<br> 수업이 조기 마감될 수 있으니<br> 서둘러주세요 :)
+										</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="label-1">전체수업료</div>
+						<div class="label-1">보유적립금</div>
+						<div class="label-1">사용하기</div>
+						<div class="label-1">결제금액</div>
+						<div class="label-1">결제수단</div>
+					</div>
+	
+					<div class="col-md-5">
+	
+						<div class="label-1-content">
+							<span style="color: red">76,000원</span>
+						</div>
+						<div class="label-1-content">3000 포인트</div>
+						<div class="label-1-content">
+							<input type="text" name="point" style="width: 88px">
+							포인트
+						</div>
+						<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
+							값</div>
+						<div class="label-1-content">
+							<div class="button_box2">
+								<button type="submit" class="btn btn-outline-danger">신용카드/체크카드</button>
+							</div>
+	
+						</div>
+	
+	
+	
+	
 					</div>
 				</div>
-
-				<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
-				<div class="col-md-6">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio"
-									aria-label="Radio button for following text input"
-									name="classdate" value="1" checked>
-							</div>
-						</div>
-
-						<input type="text" class="form-control" disabled="disabled"
-							aria-label="Text input with radio button"
-							value="일시 : 2020년 06월 06일 / 장소 : 홍대 모찌 스터디카페">
-					</div>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio"
-									aria-label="Radio button for following text input"
-									name="classdate" value="2">
-							</div>
-						</div>
-
-						<input type="text" class="form-control" disabled="disabled"
-							aria-label="Text input with radio button" 
-							value="일시 : 2020년 07월 05일 / 장소 :  신촌 모찌 스터디카페">
-					</div>
-				</div>
-
 			</div>
-
-
-			<div class="button_box">
-				<button type="button" class="btn btn-outline-danger" id="wirteBtn"
-					data-num='2'>수업 신청서 작성하기</button>
-			</div>
-
-
 		</div>
-
-		<!-- 02 수업신청서 작성 탭 -->
-		<div class="tab-pane fade" id="pills-title" role="tabpanel"
-			data-num='2'>
-
-			<div class="info1">
-				<span class="orange">모찌의 실전 산책!</span>
-			</div>
-			<div class="box">
-				<div class="col-md-5">
-					<div class="title">
-						수업신청서<b class="pink">*</b>
-						<div class="col-3">
-							<div class="tutor_t">
-								<dl class="tutor_txt">
-									<dt>
-										<div
-											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
-										</div>
-									</dt>
-									<dd>
-										수업준비를 위해 <br> 아래항목들에 대해 미리 말씀해주세요.<br> 감사합니다 :)
-									</dd>
-								</dl>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="label-1">나의 스킬 레벨</div>
-					<div class="label-1">튜터에게 전할말</div>
-					<div class="label-12">연락 가능한 번호</div>
-				</div>
-
-				<div class="col-md-5">
-
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-secondary active"> 
-						<input type="radio" name="levels" value="lev-1" checked> 입문자
-						</label> <label class="btn btn-secondary"> 
-						<input type="radio" name="levels" value="lev-2"> 초/중급자
-						</label> <label class="btn btn-secondary"> 
-						<input type="radio"	name="levels" value="lev-3"> 상급자
-						</label>
-					</div>
-					<br>
-
-
-					<div class="cont">
-						<div class="inner1">
-							<textarea class="basic len980 form-control"
-								placeholder="튜터에게 회원님에 대해 알려주세요. 수업을 듣는 목적은 무엇인가요? 튜터의 어떤 점이 마음에 들어 신청하셨나요?"
-								id="Introduction" name="Introduction"></textarea>
-						</div>
-					</div>
-
-					<input type="text" id="phone" name="phone" class="form-control"
-						style="width: 300px; margin-top: 20px;"
-						placeholder="개인연락처를 - 없이 입력해주세요.">
-
-				</div>
-
-			</div>
-			<div class="button_box">
-				<button type="button" class="btn btn-outline-danger" id="payBtn">결제하기</button>
-			</div>
-
-		</div>
-
-		<!-- 03 결제 탭  -->
-		<div class="tab-pane fade" id="pills-price" role="tabpanel"
-			data-num='3'>
-			<div class="info1">
-				<span class="orange">모찌의 실전 산책!</span>
-			</div>
-			<div class="box">
-				<div class="col-md-5">
-					<div class="title">
-						결제하기<b class="pink">*</b>
-						<div class="col-3">
-							<div class="tutor_t">
-								<dl class="tutor_txt">
-									<dt>
-										<div
-											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('/allchwi/resources/img/모찌.jpg');">
-										</div>
-									</dt>
-									<dd>
-										결제 후에 신청이 완료됩니다.<br> 수업이 조기 마감될 수 있으니<br> 서둘러주세요 :)
-									</dd>
-								</dl>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="label-1">전체수업료</div>
-					<div class="label-1">보유적립금</div>
-					<div class="label-1">사용하기</div>
-					<div class="label-1">결제금액</div>
-					<div class="label-1">결제수단</div>
-				</div>
-
-				<div class="col-md-5">
-
-					<div class="label-1-content">
-						<span style="color: red">76,000원</span>
-					</div>
-					<div class="label-1-content">3000 포인트</div>
-					<div class="label-1-content">
-						<input type="text" name="usePoint" style="width: 88px">
-						포인트
-					</div>
-					<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
-						값</div>
-					<div class="label-1-content">
-						<div class="button_box2">
-							<button type="button" class="btn btn-outline-danger" id="cardPay">신용카드/체크카드</button>
-						</div>
-
-					</div>
-
-
-
-
-				</div>
-			</div>
-
-		</div>
-	</div>
+	</form>
 </div>
 <script>
 	// [수업신청서 작성하기 ] 버튼 클릭 시, 다음 탭으로 이동
