@@ -12,10 +12,10 @@
 			<form action="${cp}/mypage/changePwd" method="POST" id="changePwd" onsubmit="return buttonUp()">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
-					<input type="hidden" id="mb_num" name="mb_num"
-						class="form-control" value="#">
+					<input type="hidden" id="ml_num" name="ml_num"
+						class="form-control" value="${mlv.ml_num}">
 					<input type="hidden" id="id" name="id"
-						class="form-control" value="test111@naver.com">
+						class="form-control" value="${mlv.id}">
 					<div class="input_box">
 						<div class="left_box">
 							<b>·</b>&nbsp;현재 비밀번호
@@ -65,7 +65,9 @@ function checkPwd(){
 	//검색을 위한 조건 값을 받아옴
 	let id = $("#id").val();
 	let pwd = $("#currPwd").val();
+	//현재비밀번호관련 메세지 출력창
 	let cpMsg = $("#cpMsg");
+	//비밀번호가 일치할 경우 입력할 수 있게 활성화하려고 값을 가져옴 
 	let inPwd = $("#inPwd");
 	let cfmPwd = $("#cfmPwd");
 	$.getJSON("${cp}/CheckPWD.do",
@@ -93,10 +95,10 @@ function pwdValidation() {
 	let prevPwd = $("#currPwd").val();
 	let ipMsg = $("#ipMsg");
 	// 특문 + 숫자 + 영문
-	var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+	var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]/;
 	if(!regExpPwd.test(pwd)) {
 		ipMsg.css('color','red');
-		ipMsg.html("영문+숫자+특수문자를 조합해주세요.");
+		ipMsg.html("영문 + 숫자 + 특수문자를 조합해주세요.");
 		inBl = false;
 	} else if (pwd.length < 8) {
 		ipMsg.css('color','red');

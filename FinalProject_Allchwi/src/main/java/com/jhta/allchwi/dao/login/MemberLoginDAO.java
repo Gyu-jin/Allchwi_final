@@ -41,4 +41,8 @@ public class MemberLoginDAO {
 	}
 	//6 로그아웃 -> session.invalidate
 	public void logout(HttpSession session) {}
+	//7 회원번호 사용하여 회원정보 출력
+	public MemberLoginVO loginInfo(HashMap<String, Object> hm) {
+		return session.selectOne(NAMESPACE + ".loginInfo", hm);
+	}
 }
