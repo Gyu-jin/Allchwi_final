@@ -132,7 +132,9 @@
 		let pwdMsg = $("#pwdMsg");
 		console.log(pwd);
 		// 특문 + 숫자 + 영문
-		var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+		//var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+		//(?=.*\d) -> 임의의 모든 문자중 (0~9)숫자대응
+		var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]/;
 		if (!regExpPwd.test(pwd)) {
 			pwdMsg.html("영문 + 숫자 + 특수문자를 조합해주세요.");
 			pwdBl = false;

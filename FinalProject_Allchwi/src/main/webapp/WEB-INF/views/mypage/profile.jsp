@@ -9,6 +9,9 @@
 		<div class="profileHead">
 			<h1>내 프로필</h1>
 		</div>
+		<!-- 
+		<c:out value="${result.pro_img}"/>
+		 -->
 		<!--profile body-->
 		<div class="container">
 			<div class="inner-cont" style="padding-top: 0">

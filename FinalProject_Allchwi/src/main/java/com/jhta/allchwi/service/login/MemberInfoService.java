@@ -2,7 +2,6 @@ package com.jhta.allchwi.service.login;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.login.MemberInfoDAO;
 import com.jhta.allchwi.dao.profileImg.ProfileImgDAO;
-import com.jhta.allchwi.vo.login.MemberInfoVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 

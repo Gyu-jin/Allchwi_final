@@ -36,9 +36,9 @@ public class MailSenderService {
 		StringBuffer sb = new StringBuffer();
 		int num = 0;
 		do {
-			num = rd.nextInt(89) + 33;
-			if ((num >= 33 && num <= 39)||(num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
-				//아스키코드로 변환 특문, 숫자, 대문자, 소문자
+			num = rd.nextInt(90) + 33;
+			if ((num == 33)||(num >= 35 && num <= 38)|| (num >= 40 && num <= 42) || (num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num == 94) ||(num >= 97 && num <= 122)) {
+				//아스키코드로 변환 특문[!@#$%^&*()], 숫자[0-9], 대문자[A-Z], 소문자[a-z]
 				sb.append((char) num);
 			} else {
 				continue;
