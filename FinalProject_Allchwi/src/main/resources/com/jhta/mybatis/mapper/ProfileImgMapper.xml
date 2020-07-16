@@ -14,9 +14,9 @@
 	<insert id="addProfile" parameterType="piv">
 		insert into profile_img values(0, #{pro_img},#{pro_filename},now())
 	</insert>
-	<!--a 회원정보의 pro_num으로 이미지 업데이트 -->
+	<!--a 회원정보의 pro_num으로 이미지, 이미지 파일이름, 수정일자 업데이트 -->
 	<update id="updateImg" parameterType="piv">
-		update profile_img set pro_img = #{pro_img}, pro_filename = #{pro_filename} where pro_num = #{pro_num}
+		update profile_img set pro_img = #{pro_img}, pro_filename = #{pro_filename}, pro_regdate = now() where pro_num = #{pro_num}
 	</update>
 </mapper>
 
