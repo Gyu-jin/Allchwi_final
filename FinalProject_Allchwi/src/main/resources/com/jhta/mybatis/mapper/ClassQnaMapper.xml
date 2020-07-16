@@ -29,7 +29,7 @@
 		<collection property="miv" resultMap="miv"/>
 		<collection property="pfv" resultMap="pfv"/>
 	</resultMap>
-
+	
 	<select id="qnalist" parameterType="int" resultMap="classQna">
 		select
 		q.qna_num,q.qna_ref,q.qna_lev,q.qna_content,q.qna_regdate,
@@ -38,8 +38,20 @@
 		on q.ml_num = m.ml_num
 		join profile_img p
 		on m.pro_num = p.pro_num
-		where class_num=#{class_num}
+		where class_num=#{class_num} and qna_lev=0
 		order by qna_ref desc,qna_num asc
 	</select>
+	<select id="commlist" parameterType="hashmap" resultMap="classQna">
+		select
+		q.qna_num,q.qna_ref,q.qna_lev,q.qna_content,q.qna_regdate,
+		m.mb_name,p.pro_num
+		from class_qna q join member_info m
+		on q.ml_num = m.ml_num
+		join profile_img p
+		on m.pro_num = p.pro_num
+		where class_num=#{class_num} and qna_lev=1 and qna_ref=#{qna_ref}
+		order by qna_ref desc,qna_num asc
+	</select>
+
 </mapper>
 

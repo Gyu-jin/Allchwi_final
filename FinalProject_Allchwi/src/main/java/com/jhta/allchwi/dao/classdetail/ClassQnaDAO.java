@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.classdetail;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,9 @@ public class ClassQnaDAO {
 	}
 	public List<ClassQnaVO> qnaList(int class_num) {
 		return session.selectList(NAMESPACE+".qnalist", class_num);
+	}
+	public List<ClassQnaVO> commList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".commlist", map);
 	}
 	
 }

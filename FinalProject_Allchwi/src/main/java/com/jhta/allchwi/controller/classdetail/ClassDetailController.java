@@ -25,11 +25,11 @@ public class ClassDetailController {
 	public ModelAndView detail(int class_num) {
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
-		List<ClassQnaVO> qlist=classqna_service.qnaList(class_num);
+		//List<ClassQnaVO> qlist=classqna_service.qnaList(class_num);
 		String id="test";
 		mv.addObject("id", id);
 		mv.addObject("cvo", cvo);
-		mv.addObject("qlist", qlist);
+		//mv.addObject("qlist", qlist);
 		mv.addObject("class_num", class_num);
 		return mv;
 	}

@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
+<script src="${cp}/resources/js/classDetail/classDetail.js"></script>
 
 <div class="container-fluid" id="container_detail">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
+				<!-- 왼쪽수업정보 -->
 				<div class="col-md-8">
 					<!-- carousel -->
 					<div class="carousel slide" id="carousel">
@@ -41,6 +43,7 @@
 						<!-- //carousel-control -->
 						<!-- //carousel -->
 					</div>
+					<!-- class wrap -->
 					<!-- class_navi -->
 					<div class="class_wrap ">
 						<div id="class_navi" class="class_navi">
@@ -52,8 +55,6 @@
 								<li><a href="#qna" id="li5" class="">문의</a></li>
 							</ul>
 						</div>
-						<!-- class wrap -->
-
 						<!--class_navi 내용  -->
 						<!-- 1.요약 -->
 						<div class="class_detail" id="sumary">
@@ -265,78 +266,18 @@
 								</c:choose>
 								
 								<!-- qna 리스트 시작 -->
-								<c:forEach var="qlist" items="${qlist }">
-									<c:if test="${qlist.qna_lev == 0 }">
-									<div class="qna_list">
-										<ul>
-											<li><dl>
-													<dt>
-														<p class="profile_img"
-															style="width: 50px; height: 50px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-														<p class="name">${qlist.miv.mb_name }</p>
-													</dt>
-													<dd>${qlist.qna_content }</dd>
-													<dd class="date">${qlist.qna_regdate }</dd>
-												</dl>
-												<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
-													<a href="#">[수정]</a>
-													<a href="#">[삭제]</a>
-												</c:if>
-												</li>
-											
-												<a data-toggle="collapse" data-target="#reply">
-													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-													  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-													</svg>
-													댓글
-												</a>
-												<div class="reply_box"  id="reply" class="collapse"><!-- 튜터만 댓글달수 있게 ml_num == sessionScope.id-->
-													<table>
-														<tr>
-															<td>
-																<form>
-																  <div class="form-group">
-																    <textarea class="form-control" id="reply_content" cols="60" rows="3"></textarea>
-																  </div>
-																</form>
-															</td>
-															<td>
-																<input type="submit" id="reply_send" class="btn btn-primary" value="등록">
-															</td>
-														</tr>
-													</table>
-											
-													</ul>
-												</div>
-											</c:if>
-										
-													<c:if test="${qlist.qna_lev == 1 }">
-													<div class="reply_list">
-														<ul>
-																<li><dl>
-																		<dt>
-																			<p class="profile_img"
-																				style="width:26px; height: 26px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-																			<p class="name">${qlist.miv.mb_name }</p>
-																		</dt>
-																		<dd>${qlist.qna_content }</dd>
-																		<dd class="date">${qlist.qna_regdate }</dd>
-																	</dl>
-																	<c:if test="${!empty id }"> <!-- id == sessionScope.id로 바꾸기-->
-																		<a href="#">[수정]</a>
-																		<a href="#">[삭제]</a>
-																	</c:if>
-																</li>  
-														</ul>
-													</div>
-										</c:if>
-									</c:forEach>
+								<div class="qna_list">
+									<ul>
+									</ul>
+								</div>
 								</div>
 							</div>
+							<!-- qna wrap -->
 						</div>
+						<!--// class wrap -->
 					</div>
-				</div>
-				<!--// class wrap -->
+					<!-- 왼쪽수업정보끝 -->
+				
 				<!-- 시간&날짜/ 결제창 -->
 				<div class="col-md-4 remote">
 					<div class="remote_wrap">
@@ -453,32 +394,10 @@ $(document).on('click', '#btn_write_qna', function () {
 		}, function (data,res) {
 			if (res=='success') {
 				alert('문의등록 성공');
+				qnaList();
+				$("#qna_content").val("");
 			} else {				
 				alert('문의실패');
-			}
-		});
-	}
-});
-//qna 답변
-$(document).on('click', '#reply_send', function () {
-	reply_content = document.getElementById('reply_content').value;
-	id='test';
-	class_num='4';
-	ml_num='1';
-	if (id!='test') {
-		alert('로그인이 필요합니다');
-	}else {
-		$.post('${cp}/classDetail/qnareply', {
-			class_num: class_num,
-			ml_num: ml_num,
-			qna_content:reply_content,
-			qna_lev: '1',
-			qna_num: '28'
-		}, function (data,res) {
-			if (res=='success') {
-				alert('답변등록 성공');
-			} else {				
-				alert('답변실패');
 			}
 		});
 	}

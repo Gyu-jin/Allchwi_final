@@ -1,8 +1,13 @@
 package com.jhta.allchwi.controller.classdetail;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.classdetail.ClassQnaService;
@@ -35,5 +40,18 @@ public class ClassQnaController {
 			return "fail";
 		}
 		return "success";
+	}
+	@GetMapping("/classDetail/qnalist")
+	@ResponseBody
+	public List<ClassQnaVO> qnaList(ClassQnaVO qvo) {
+		List<ClassQnaVO> qlist=service.qnaList(qvo.getClass_num());
+		return qlist;
+	}
+	@GetMapping("/classDetail/commlist")
+	@ResponseBody
+	public List<ClassQnaVO> commList(@RequestParam HashMap<String, Object> map){
+		System.out.println(map.toString());
+		List<ClassQnaVO> commlist=service.commList(map);
+		return commlist;
 	}
 }
