@@ -98,6 +98,7 @@
     background-image: url(https://front-img.taling.me/Content/Images/Tutor/my_pf_img.png);
     border-radius: 50%;
     overflow: visible;
+    padding: 0;
 }
 .container .container .inner-cont .pf input {
     position: absolute;
@@ -108,7 +109,7 @@
     opacity: 0;
 }
 .container .container .inner-cont .pf .camera {
-    margin-left: 96px;
+    margin-left: -30px;
     margin-top: 96px;
 }
 img {
