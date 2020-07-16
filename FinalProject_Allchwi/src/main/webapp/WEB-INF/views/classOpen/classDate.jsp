@@ -14,9 +14,9 @@
 		<form id="frm-data">
 			<input type="hidden" name="class_num" value="1">  
 			<input type="hidden" name="class_count" value="4">  
-			<input type="hidden" name="class_form" value="0">  
+			<input type="hidden" name="class_form" value="1">  
 			<div class="box">
-			<div class="title">수업시작일</div>
+			<div class="title">수업시작일</div>  
 			<div class="cont">
 				<div class="inner1">
 					<div class="gray5 title">수업 시작일을 알려주세요</div>
