@@ -15,4 +15,9 @@ public class ClassDateService {
 	public List<ClassDateVO> list(int class_num){
 		return dao.list(class_num);
 	}
+
+	public int insert(ClassDateVO vo) {
+		
+		return dao.insert(vo);
+	}
 }

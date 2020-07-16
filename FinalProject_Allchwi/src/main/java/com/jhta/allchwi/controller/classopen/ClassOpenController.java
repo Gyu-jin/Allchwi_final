@@ -152,7 +152,6 @@ public class ClassOpenController {
 			return "fail";
 		}
 		
-		System.out.println("asdjasklhjasdfkl;asdfghaklsdfgj;");
 		return "success";
 	}
 }

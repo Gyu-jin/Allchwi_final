@@ -16,4 +16,8 @@ public class ClassDateDAO {
 	public List<ClassDateVO> list(int class_num){
 		return session.selectList(NAMESPACE+".list",class_num);
 	}
+
+	public int insert(ClassDateVO vo) {
+		return session.insert(NAMESPACE + ".insert",vo);
+	}
 }

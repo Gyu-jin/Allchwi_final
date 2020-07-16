@@ -6,25 +6,32 @@ public class ClassDateVO {
 	private int date_num;
 	private int class_num;
 	private Timestamp class_date;
-	private Timestamp class_startTime;
-	private Timestamp class_endDate;
+	private String class_startTime;
+	private String class_endTime;
 	private String class_comment;
 	private String class_msg;
+	private int class_month;
+	private int time_ref;
+	private int time_cnt;
 	private Timestamp date_regdate;
 	private String class_title; // 추가 (class_info)
 	
 	public ClassDateVO() {}
 
-	public ClassDateVO(int date_num, int class_num, Timestamp class_date, Timestamp class_startTime,
-			Timestamp class_endDate, String class_comment, String class_msg, Timestamp date_regdate) {
+	public ClassDateVO(int date_num, int class_num, Timestamp class_date, String class_startTime, String class_endTime,
+			String class_comment, String class_msg, int class_month, int time_ref, int time_cnt,
+			Timestamp date_regdate) {
 		super();
 		this.date_num = date_num;
 		this.class_num = class_num;
 		this.class_date = class_date;
 		this.class_startTime = class_startTime;
-		this.class_endDate = class_endDate;
+		this.class_endTime = class_endTime;
 		this.class_comment = class_comment;
 		this.class_msg = class_msg;
+		this.class_month = class_month;
+		this.time_ref = time_ref;
+		this.time_cnt = time_cnt;
 		this.date_regdate = date_regdate;
 	}
 
@@ -52,20 +59,20 @@ public class ClassDateVO {
 		this.class_date = class_date;
 	}
 
-	public Timestamp getClass_startTime() {
+	public String getClass_startTime() {
 		return class_startTime;
 	}
 
-	public void setClass_startTime(Timestamp class_startTime) {
+	public void setClass_startTime(String class_startTime) {
 		this.class_startTime = class_startTime;
 	}
 
-	public Timestamp getClass_endDate() {
-		return class_endDate;
+	public String getClass_endTime() {
+		return class_endTime;
 	}
 
-	public void setClass_endDate(Timestamp class_endDate) {
-		this.class_endDate = class_endDate;
+	public void setClass_endTime(String class_endTime) {
+		this.class_endTime = class_endTime;
 	}
 
 	public String getClass_comment() {
@@ -84,6 +91,30 @@ public class ClassDateVO {
 		this.class_msg = class_msg;
 	}
 
+	public int getClass_month() {
+		return class_month;
+	}
+
+	public void setClass_month(int class_month) {
+		this.class_month = class_month;
+	}
+
+	public int getTime_ref() {
+		return time_ref;
+	}
+
+	public void setTime_ref(int time_ref) {
+		this.time_ref = time_ref;
+	}
+
+	public int getTime_cnt() {
+		return time_cnt;
+	}
+
+	public void setTime_cnt(int time_cnt) {
+		this.time_cnt = time_cnt;
+	}
+
 	public Timestamp getDate_regdate() {
 		return date_regdate;
 	}
@@ -100,8 +131,5 @@ public class ClassDateVO {
 		this.class_title = class_title;
 	}
 
-	
-	
-	
 	
 }

@@ -105,11 +105,12 @@
 					}
 				});
 				
-				$('.moption','.formbox').click(function(){		
+				$('.moption').click(function(){		
 					$(this).addClass('on');
 					$(this).siblings('.moption').removeClass('on');
-					$('#monthDate').val($(this).val());
+					$('#monthDate').val($(this).attr('value'));
 				});
+				
 				
 			});
 			
@@ -153,70 +154,16 @@
 			}
 			
 
-			function setMode(val)
-				{
-					Mode = val;
-					$('#frm-register-detail').submit();
-				}
-
-				$('#frm-register-detail').submit(function (e) {
-					e.preventDefault();
-					var TotalTimes = "";
-					var data = $('#selectRegion').val();
-					if($('#selectRegion').val() == '' || $('#selectRegion').val() == null ){ alert('장소를 선택하세요');$('#selectRegion').focus();return false;}		
-					if($('#Region').val() == '0' || $('#selectRegion').val() == null ){ alert('장소를 선택하세요');$('#Region').focus();return false;}			
-					
-					if(globalChkStatus == true){
-						if($('#startDate').val() == "" ){
-							alert('수업 시작 일을 입력하세요');
-							return false;
-						}
-
-						if($('#startTime1').val() == "" ){
-							alert('수업 시작 시간을 입력하세요');
-							return false;
-						}
-					
-
-					//만약 다회차 - ''직접입력''을 선택했다면 
-					//각 회차에 대해 시작 일시와 시간을 넣었는지 확인
-					if($('#curriDate').is(':visible')&&$('#radios2').find('.option').eq(1).hasClass('on')){
-						
-						var i = 2;
-						for(i; i < parseInt(TotalTimes) +1;i++){
-							if($('#startDate'+i).val()==''){alert(i+'회차의 수업일자를 선택해주세요');return;}
-							if($('#startTime'+i).val()==''||$('#endTime'+i).val()==''){
-								alert(i+'회차의 수업 시작시간을 선택해주세요');
-								return;
-							}
-						}
-
-					}
-				}
-				
-					var formData = new FormData(this);
-					 
-					isUploading = true;
-					$.ajax({
-						type: 'POST',
-						url: '/tutor/registerRegionDetail/Proc',
-						contentType: false,
-						data: formData,
-						processData: false,
-						success: function (response) {
-							parent.cls_date();
-						},
-						error: function(response) {
-							isUploading = false;
-						}
-					});
-					return false;
-				});
 				
 				function calClose() {
 					$('#popClassTime').hide();
 				}
-
+				
+				function getClassDate(){
+					
+					
+					
+				}
 				//시간표시
 				function selectTime(val) {
 
@@ -272,8 +219,8 @@
 					timeText = startDateStr + minuteStr + " ~ "
 							+ endDateStr + minuteStr;
 
-					$('#startTime' + popClassTimes).val(startTime);
-					$('#endTime' + popClassTimes).val(endTime);
+					$('#startTime' + popClassTimes).val(startDateStr + minuteStr);
+					$('#endTime' + popClassTimes).val(endDateStr + minuteStr);
 					$('#classTime' + popClassTimes).text(timeText);
 					$('#back').hide()
 					$('#popClassTime').hide();
@@ -281,9 +228,7 @@
 			</script>
 </head>
 <body style="margin: 8px; background: transparent;">
-<form method="POST" id="frm-register-detail" enctype="multipart/form-data">
-	<input type="hidden" id="dateId" name="dateId" value="">
-	<input type="hidden" id="talentId" name="talentId" value="">
+<form id="frm" enctype="multipart/form-data">
 	<input type="hidden" id="monthDate" class="cal"  name="monthDate">
 	<input type="hidden" id="classCount" class="cal" name="classCount" value="4">			
 	<div class="tutor_cont">
@@ -305,17 +250,15 @@
 					<!-- 수업시작일 시작 -->
 					<div class="formbox border cal">
 						<input type="text" id="startDate1" class="cal hasDat" name="startDate[]" placeholder="수업 시작일을 입력하요"  readonly="readonly">
-					</div>
-					<c:if test="true">
-						<!--수업 시간 선택 시작 -->
-						<div style="width:100%;overflow:hidden;">
-							<div id="classTime1" class="formbox border calendar">수업 시작 시간</div>
-							<input type="hidden" id="startTime1" class="cal" name="startTime1" value="">			
-							<input type="hidden" id="endTime1"class="cal" name="endTime1" value="">	
-						</div>
-					</c:if>			
+					</div>	
 					<c:choose>
-						<c:when test="true">
+						<c:when test="false">
+							<!--수업 시간 선택 시작 -->
+							<div style="width:100%;overflow:hidden;">
+								<div id="classTime1" class="formbox border calendar">수업 시작 시간</div>
+								<input type="hidden" id="startTime1" class="cal" name="startTime[]" value="">			
+								<input type="hidden" id="endTime1"class="cal" name="endTime[]" value="">	
+							</div>
 							<div id="curriDate" style="display:none">
 								<div class="formbox" id="radios2" style="overflow:hidden">
 									<div class="option" value="3">매주 <font id="dayWeek"></font>요일 반복</div>
@@ -329,7 +272,7 @@
 								<div class="formbox" id="radios3" style="overflow:hidden">
 									<div class="moption" value="3">3개월</div>
 									<div class="moption " value="6">6개월</div>
-									<div class="moption " value="1">1년</div>
+									<div class="moption " value="12">12개월</div>
 								</div>
 							</div>
 						</c:otherwise>
@@ -405,7 +348,7 @@
 					<div class="next button prev" onclick="parent.cls_date()">
 					취소
 					</div>
-					<div class="next button on" onclick="setMode(0);">
+					<div class="next button on" onclick="parent.getClassDate(1)">
 					저장
 					</div>
 				</div>

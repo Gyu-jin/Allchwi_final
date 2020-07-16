@@ -134,3 +134,68 @@ body {
     display: block;
     margin: 8px;
 }
+.class {
+    color: #888;
+    font-size: 16px;
+    border-bottom: 1px solid #d8d9db;
+    margin: 0;
+    padding: 10px 0;
+    cursor: pointer;
+}
+ .class .intext {
+    width: 650px;
+    display: inline-block;
+    font-size: 16px;
+}
+.class .intext .dwn {
+    display: block;
+}
+.class .intext img {
+    float: right;
+    margin-right: 30px;
+    margin-top: 6px;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: top;
+}
+.class .intext .up {
+    display: none;
+}
+.class.on .intext .up {
+    display: block;
+}
+.verify {
+    display: inline-block;
+    font-size: 14px;
+    color: #444;
+    border-radius: 4px;
+    padding: 12px 20px;
+    border: solid 1px #aaa;
+    cursor: pointer;
+}
+.verify img {
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+.class .subtext {
+    width: 100%;
+    font-size: 14px;
+    display: none;
+}
+.class .subtext .ch {
+    font-size: 15px;
+    line-height: 1.4;
+}
+.class .subtext .ch font {
+    color: #000;
+    font-weight: 300;
+    margin-right: 5px;
+}
+.class.on .intext .dwn {
+    display: none;
+}
+.left10 {
+    margin-left: 10px;
+}
