@@ -3,11 +3,17 @@ package com.jhta.allchwi.controller.admin;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +27,15 @@ import com.jhta.allchwi.vo.admin.ConfirmClassVO;
 public class ConfirmClassController {
 	@Autowired
 	private confirmClassService service;
-	private MailSenderService mailService;
+	@Autowired
+	private MailSenderService mailSender;
 	
 	@RequestMapping(value= {"/admin/confirmClass","/admin/acceptClass","/admin/denyClass"})
-	public String classlist(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String keyword,
-			@RequestParam(value = "class_num",defaultValue = "0") int class_num, @RequestParam(value = "msg",defaultValue = "0")String msg) {
+	public String classlist(HttpServletRequest request, Model model,String field, String keyword,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(value = "class_num",defaultValue = "0") int class_num,
+			@RequestParam(value="id",defaultValue = "아이디없음") String id,
+			@RequestParam(value = "msg",defaultValue = "0")String msg) {
 		// 수업승인 
 		if(request.getServletPath().equals("/admin/acceptClass")) {
 			service.acceptClass(class_num);
@@ -34,12 +44,11 @@ public class ConfirmClassController {
 		if(request.getServletPath().equals("/admin/denyClass")) {
 			//수업 반려상태로 update
 			//service.denyClass(class_num);
-			System.out.println(msg);
-			
+		
 			//반려사유 메일보내기
-		
-		
-		
+			mailSender.sendMsg(msg,id);
+			
+			
 		}
 		
 		

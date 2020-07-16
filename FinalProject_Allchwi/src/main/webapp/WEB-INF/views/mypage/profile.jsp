@@ -19,8 +19,11 @@
 				<div class="pf"
 					style="background-image: url(/allchwi/resources/img/profile-defaultImg.jpg)"
 					id="picture-cover">
+					<img class="pf" id="proImg" src="/allchwi/resources/img/profile-defaultImg.jpg" 
+					style="margin: 0; z-index: 4;">
 					<!-- a 카메라 이미지를 버튼처럼 사용  -->
-					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png">
+					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png"
+					style="position: absolute;">
 					<input type="file" id="picture" name="pro_img">
 				</div>
 			</div>
@@ -66,7 +69,9 @@ $('#picture').change(function (e) {
 
 	var reader = new FileReader();
 	reader.onload = function() {
-		$('#picture-cover').css("background-image", "url('"+reader.result+"')");			
+		//$('#picture-cover').css("background-image", "url('"+reader.result+"')");			
+		$('#picture-cover').css("background-image", "url('"+reader.result+"')");
+		$('#proImg').css("opacity",0);
 	}
 	reader.readAsDataURL(file);
 });

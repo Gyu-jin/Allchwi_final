@@ -22,6 +22,12 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<style type="text/css">
+.btnRight {
+	float: right;
+	margin-left: 10px;
+}
+</style>
 </head>
 
 
@@ -55,16 +61,20 @@
 						<div class="card">
 							<h5 class="card-header" style="text-align: center;">
 								${vo.class_title }
-								<button type="button" class="btn btn-danger"
-									style="float: right">삭제</button>
+								<button type="button" class="btn btn-primary" onclick="getDetail()" data-toggle="modal" data-target="#myModal3">상세정보</button>
 							</h5>
+
 
 							<div class="card-body" style="height: 188px;">
 								<div style="display: inline-block;">
 									<img src="${cp }/resources/img/모찌.jpg"
 										style="width: 160px; height: 173px; margin-top: -130px;">
+										<!--  width: 85%; height: 37%; margin-top: -5%; -->    
+										<!-- style="width: 160px; height: 173px; margin-top: -130px;"> -->
 								</div>
-								<div style="display: inline-block; margin-left: 60px;">
+								<div style="display: inline-block; margin-left:60px;">
+								<!-- margin-left: 58%; margin-top: -31%; -->
+								<!-- <div style="display: inline-block; margin-left: 60px;">  -->	
 									<p>강사명: ${vo.tutor_nickname }</p>
 									<p>장소: ${vo.class_address }</p>
 									<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>
@@ -73,10 +83,9 @@
 										data-target="#myModal"> <span class="icon text-white-50">
 											<i class="fas fa-check"></i>
 									</span> <span class="text">심사완료</span>
-
 									</a> <a href="#" class="btn btn-danger btn-icon-split"
-										onclick="getModal2('${vo.class_num}')" data-toggle="modal"
-										data-target="#myModal"> <span
+										onclick="getModal2('${vo.class_num}','${vo.id }')"
+										data-toggle="modal" data-target="#myModal2"> <span
 										class="icon text-white-50"> <i
 											class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
 									</a>
@@ -151,58 +160,116 @@
 				<h4 class="modal-title">Modal Heading</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			
-			<form>
+
 			<!-- Modal body -->
-			<div class="modal-body" id="modal-body"></div>
+			<div class="modal-body" id="modal-body">승인</div>
 
 			<!-- Modal footer -->
-			<div class="modal-footer">
+			<div class="modal-footer" id="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			</div>
-			</form>
 		</div>
 	</div>
 </div>
 
 
-<script>
-	function getModal(class_num) {
-		$("div [class='modal-footer']").empty();
-		$("div[class='modal-body']").text(class_num + "승인");
+<!-- 수업 거절 모달-->
+<div class="modal" id="myModal2">
+	<div class="modal-dialog">
+		<div class="modal-content">
 
-		$("div [class='modal-footer']")
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">수업 반려</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body" id="modal-body2">거절</div>
+		</div>
+	</div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal3">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Modal Heading</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body" id="modal-body3">Modal body..</div>
+
+			
+
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	function getDetail() {
+		$.ajax({
+			url : "${cp}/classDetail/detail2?class_num=4",
+			dataType : "text",
+			success : function(data) {
+				$("#modal-body3").html(data);
+				$(".card-body").find("img").css("margin-top","0px")
+				$(".card-body").css("height","230px")
+				
+			}
+		});
+		
+	}
+
+	function getModal(class_num) {
+		$("#modal-footer").empty();
+
+		$("#modal-footer")
 				.append(
 						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=accept('"
 								+ class_num + "')>네</button>");
 
-		$("div [class='modal-footer']")
+		$("#modal-footer")
 				.append(
-						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>");
+						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")
 
 	}
 	function accept(class_num) {
 		location.href = "${cp}/admin/acceptClass?class_num=" + class_num;
 	}
 
-	function getModal2(class_num) {		
-		$("div [class='modal-body']").empty();
-		$("div [class='modal-footer']").empty();
-		
-	//	var form = $("<form action='${cp }/admin/denyClass'>").appendTo("div [class='modal-body']");
-		$("div [class='modal-body']")
-				.append("<form action='${cp }/admin/denyClass'><textarea rows='5' cols='10' name='msg'></textarea><input type='submit' value='제출'>");
-		
-		
-		
-		
+	function getModal2(class_num, id) {
+
+		$("#modal-body2").empty();
+
+		var modalForm = $("<form action='${cp}/admin/denyClass'/>").appendTo(
+				"#modal-body2");
+		$(modalForm)
+				.append(
+						"<textarea rows='5' cols='50' name='msg' placeholder='거절 사유를 입력해주세요. 메일로 전송됩니다.' style='outline:none; border:none; resize:none'></textarea>");
+		$(modalForm).append("<input type='hidden' name='id' value='"+id+"'>");
+		$(modalForm).append("<hr>");
+		$(modalForm)
+				.append(
+						"<button type='button' class='btn btn-danger btnRight' data-dismiss='modal'>닫기</button>");
+		$(modalForm)
+				.append(
+						"<input type='submit' class='btn btn-success btnRight' value='심사 반려'>");
+
 	}
-	function deny(aa) {
-		alert(123);
+	function deny(class_num) {
 		//location.href = "${cp}/admin/denyClass?class_num="+class_num;
 	}
+	
 </script>
 
-</body>
+
+
 
 
