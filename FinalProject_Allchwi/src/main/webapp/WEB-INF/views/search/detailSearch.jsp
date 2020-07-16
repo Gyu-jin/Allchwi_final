@@ -98,9 +98,9 @@
     <!-- big_category -->
       <c:forEach var="blist" items="${bigcalte_list }"> 
      	 <li class="nav-item dropdown">
-      		<a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          	${blist.bcategory_name }
-	       	</a>
+      		<div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+	          	<a href="${cp }/list/search?bcategory_num=${blist.bcategory_num}">${blist.bcategory_name }</a>
+	       	</div>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
     <!-- 선택한 big_category에 해당하는 small_category -->
       		<c:forEach var="slist" items="${smallcate_list }"> 
@@ -205,6 +205,10 @@
 					</form>
 		
 				</div>
+		
+		
+		
+		
 		
 				<!-- @@@@@온라인 검색탭@@@@@@ -->
 				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
@@ -333,13 +337,13 @@
 <script>
 	// date 형식에서 시간 삭제 
 	$('#datetimepicker7').datetimepicker({
-		format : 'L'
+		format : 'YYYY-MM-DD'
 	});
 	$('#datetimepicker8').datetimepicker({
-		format : 'L'
+		format : 'YYYY-MM-DD'
 	});
 	$('#datetimepicker9').datetimepicker({
-		format : 'L'
+		format : 'YYYY-MM-DD'
 	});
 	
 	

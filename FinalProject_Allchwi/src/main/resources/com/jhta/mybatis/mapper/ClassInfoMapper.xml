@@ -28,8 +28,8 @@
 	</sql>
 	
 	<sql id="date">
-		<if test="start_Date!=null and start_Date!='' and end_Date!=null and end_Date!=''">
-			and class_date between date('${start_Date}') and date('${end_Date}')+1
+		<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+			and class_date between date('${startDate}') and date('${endDate}')+1
 		</if>
 	</sql>
 	
@@ -42,11 +42,13 @@
 		<when test="keyword!=null and keyword!='' and sloc_num==-1">
 			<where>
 				class_title like '%${keyword}%'
+				<include refid="date"/>
 			</where>
 		</when>
 		<when test="keyword!=null and keyword!='' and sloc_num>0">
 			<where>
 				class_title like '%${keyword}%' and sloc_num=#{sloc_num}
+				<include refid="date"/>
 			</where>
 		</when>
 	</choose>
@@ -120,6 +122,7 @@
 					<include refid="bigcategory"/>	
 				)a, class_info c , class_date cd
 		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+		<include refid="keyword"/>		
 		<include refid="sloc"/>		
 		<include refid="date"/>
 		order by class_num desc
@@ -157,12 +160,89 @@
 		</if>
 	</sql>
 	
+	
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) from
+		    <choose>
+				<when test="startDate!=null and startDate!='' and endDate!=null and endDate!='' and bcategory_num>0">
+					(
+						select cd.class_num, sloc_num from
+						(
+							select class_num, class_title, sloc_num from
+							(
+								select s.bcategory_num, bcategory_name, scategory_num, scategory_name          
+								from small_category s, big_category b         
+								where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}    
+							) x , class_info c
+							where x.scategory_num=c.scategory_num
+						) a, class_date cd
+						where a.class_num=cd.class_num
+						and class_date between date('${startDate}') and date('${endDate}')+1
+						<if test="sloc_num>0">
+							and sloc_num=#{sloc_num}
+						</if>
+					) cnt
+				
+				</when>
+				<when test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+					class_info c, class_date cd
+					where c.class_num=cd.class_num 
+					and class_date between date('${startDate}') and date('${endDate}')+1
+						<if test="keyword!=null and keyword!=''">
+							and class_title like '%${keyword}%'
+						</if>
+						<if test="scategory_num>0 and sloc_num==-1">
+							and scategory_num=#{scategory_num}
+						</if>
+						<if test="scategory_num>0 and sloc_num>0">
+							and scategory_num=#{scategory_num}	
+							and sloc_num=#{sloc_num}
+						</if>
+				</when>
+		    	<when test="keyword!=null and keyword!=''">
+					(select class_num 
+					from class_info where class_title like '%${keyword}%'
+					<choose>
+						<when test="keyword!=null and keyword!='' and sloc_num>0">
+							and sloc_num=#{sloc_num}
+						</when>
+					</choose>
+					) a
+				</when>
+		    	<when test="scategory_num>0 and sloc_num==-1">
+					class_info where scategory_num=#{scategory_num}
+
+				</when>
+				<when test="scategory_num>0 and sloc_num>0">
+					class_info where scategory_num=#{scategory_num}	
+					and sloc_num=#{sloc_num}
+				</when>
+		    	<when test="bcategory_num>0">
+					(
+						select class_num, c.scategory_num from
+							(
+								select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+								from small_category s, big_category b
+								where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}
+							) x , class_info c
+					        where x.scategory_num=c.scategory_num
+					) a
+				</when>
+		    </choose>	
+			
+	</select>
+	
+<!--  
+
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from
 		    <include refid="small_count"/>
 			<include refid="big_count"/>	
 			<include refid="keyword_count"/>	
+			
 	</select>
+	-->	
+	
 	
 	<select id="getInfo" parameterType="int" resultType="classinfo">
 		select * from class_info where class_num=#{class_num}
