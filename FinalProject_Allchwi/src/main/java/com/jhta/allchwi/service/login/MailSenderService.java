@@ -36,9 +36,9 @@ public class MailSenderService {
 		StringBuffer sb = new StringBuffer();
 		int num = 0;
 		do {
-			num = rd.nextInt(90) + 33;
-			if ((num == 33)||(num >= 35 && num <= 38)|| (num >= 40 && num <= 42) || (num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num == 94) ||(num >= 97 && num <= 122)) {
-				//아스키코드로 변환 특문[!@#$%^&*()], 숫자[0-9], 대문자[A-Z], 소문자[a-z]
+			num = rd.nextInt(89) + 33;
+			if ((num >= 33 && num <= 39)||(num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+				//아스키코드로 변환 특문, 숫자, 대문자, 소문자
 				sb.append((char) num);
 			} else {
 				continue;
@@ -92,4 +92,27 @@ public class MailSenderService {
 			}
 		}
 	}
+	
+	
+	public void sendMsg(String msg,String id) {
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = msg +"의 사유로 수업 거절되었습니다.";
+		
+		try {
+			//제목
+			mail.setSubject("[수업신청결과 입니다]","utf-8");
+			//내용
+			mail.setText(htmlStr,"utf-8","html");
+			//인력한 메일주소로 이메일 보낼 주소 지정
+			mail.addRecipient(RecipientType.TO, new InternetAddress(id));
+			//메일보내기
+			mailSender.send(mail);
+			
+			
+		}catch(MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

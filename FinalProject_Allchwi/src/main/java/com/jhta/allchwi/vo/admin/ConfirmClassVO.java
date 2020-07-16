@@ -9,11 +9,12 @@ public class ConfirmClassVO {
 	private int people;
 	private int wish_count;
 	private String tutor_nickname;
+	private String id;
 	
 	public ConfirmClassVO() {}
 
 	public ConfirmClassVO(int class_num, String class_title, int class_auth, String class_address, Object pro_img,
-			int people, int wish_count, String tutor_nickname) {
+			int people, int wish_count, String tutor_nickname, String id) {
 		super();
 		this.class_num = class_num;
 		this.class_title = class_title;
@@ -23,6 +24,7 @@ public class ConfirmClassVO {
 		this.people = people;
 		this.wish_count = wish_count;
 		this.tutor_nickname = tutor_nickname;
+		this.id = id;
 	}
 
 	public int getClass_num() {
@@ -88,6 +90,16 @@ public class ConfirmClassVO {
 	public void setTutor_nickname(String tutor_nickname) {
 		this.tutor_nickname = tutor_nickname;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 	
 	
 }
