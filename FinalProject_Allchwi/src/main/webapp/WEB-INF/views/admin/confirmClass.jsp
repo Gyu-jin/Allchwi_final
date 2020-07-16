@@ -209,11 +209,8 @@
 	function getModal2(class_num){
 		$("div [class='modal-footer']").empty();
 		
-		$("div [class='modal-body']").append("<form action='${cp}/admin/denyClass'>");
 		$("div [class='modal-body']").append("<textarea rows='5' cols='10' name='msg'></textarea>");
-		$("div [class='modal-body']").append("<input type='submit' value='등록'>");
 		
-		$("div [class='modal-body']").append("</form>");
 		
 		
 		$("div [class='modal-footer']")
