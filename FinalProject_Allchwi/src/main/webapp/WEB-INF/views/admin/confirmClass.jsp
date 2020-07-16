@@ -68,12 +68,12 @@
 									<p>강사명: ${vo.tutor_nickname }</p>
 									<p>장소: ${vo.class_address }</p>
 									<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>  
-									<a href="#" class="btn btn-success btn-icon-split"  onclick="getModal('${vo.class_num}')" data-toggle="modal" data-target="#myModal1"> <span
+									<a href="#" class="btn btn-success btn-icon-split"  onclick="getModal('${vo.class_num}')" data-toggle="modal" data-target="#myModal"> <span
 										class="icon text-white-50"> <i class="fas fa-check"></i>
 									</span> 
 									<span class="text">심사완료</span>
 									</a> <a href="#" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#myModal2"
-										onclick="getModal('${vo.class_num}')"> <span
+										onclick="getModal2('${vo.class_num}')"> <span
 										class="icon text-white-50"> <i
 											class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
 									</a>
@@ -139,7 +139,7 @@
 </a>
 
 <!-- The Modal -->
-<div class="modal" id="myModal1">
+<div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -150,26 +150,47 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-      		승인
+      <div class="modal-body" id="modal-body">
+      		
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
 
 
+<!-- 수업 거절 모달-->
+<div class="modal" id="myModal2">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="modal-body">
+   			
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 	function getModal(class_num){
 		$("div [class='modal-footer']").empty();
-		$("#modal-body").text("승인?");
+		$("div[class='modal-body']").text(class_num + "승인");
 
 		$("div [class='modal-footer']")
 				.append(
@@ -183,6 +204,31 @@
 	function accept(class_num) {
 		location.href = "${cp}/admin/acceptClass?class_num="+class_num;
 	}
+	
+	
+	function getModal2(class_num){
+		$("div [class='modal-footer']").empty();
+		
+		$("div [class='modal-body']").append("<form action='${cp}/admin/denyClass'>");
+		$("div [class='modal-body']").append("<textarea rows='5' cols='10' name='msg'></textarea>");
+		$("div [class='modal-body']").append("<input type='submit' value='등록'>");
+		
+		$("div [class='modal-body']").append("</form>");
+		
+		
+		$("div [class='modal-footer']")
+				.append(
+						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=deny('"+class_num+"')>네</button>");
+
+		$("div [class='modal-footer']")
+				.append(
+						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")
+		
+	}
+	function deny(class_num) {
+		location.href = "${cp}/admin/denyClass?class_num="+class_num;
+	}
+	
 	
 
 </script>

@@ -26,5 +26,9 @@ public class confirmClassService {
 		return dao.acceptClass(class_num);
 	}
 	
+	public int denyClass(int class_num) {
+		return dao.denyClass(class_num);
+	}
+	
 	
 }

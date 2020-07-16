@@ -24,7 +24,7 @@
 		<if test="field!=null and field!=''"> 
 			where ${field} like CONCAT('%',#{keyword},'%') 	
 		</if> 
-		limit #{startRow},5
+		limit #{startRow},10
 	</select>
 
 
@@ -33,7 +33,7 @@
 		from (select ci.ml_num, ci.class_num class_num, ci.tutor_nickname, ci.class_title,
 		ci.class_form, sc.scategory_name
 		from class_info ci, small_category sc
-		where ci.scategory_num = sc.scategory_num)aa
+		where ci.scategory_num = sc.scategory_num and ci.class_auth=1)aa
 		<if test="field!=null and field!=''"> 
 			where ${field} like CONCAT('%',#{keyword},'%') 
 		</if> 

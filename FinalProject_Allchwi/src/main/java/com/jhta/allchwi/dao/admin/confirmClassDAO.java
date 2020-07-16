@@ -29,5 +29,10 @@ public class confirmClassDAO {
 		return session.update(NAMESPACE+".acceptClass", class_num);
 	}
 	
+	public int denyClass(int class_num) {
+		return session.update(NAMESPACE+".denyClass", class_num);
+	}
+	
+	
 	
 }

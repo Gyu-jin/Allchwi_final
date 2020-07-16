@@ -14,20 +14,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.confirmClassService;
+import com.jhta.allchwi.service.login.MailSenderService;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
 
 @Controller
 public class ConfirmClassController {
 	@Autowired
 	private confirmClassService service;
+	private MailSenderService mailService;
 	
-	//@GetMapping("/admin/confirmClass")
-	@RequestMapping(value= {"/admin/confirmClass","/admin/acceptClass"})
+	@RequestMapping(value= {"/admin/confirmClass","/admin/acceptClass","/admin/denyClass"})
 	public String classlist(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,String field, String keyword,
-			@RequestParam(value = "class_num",defaultValue = "1") int class_num) {
+			@RequestParam(value = "class_num",defaultValue = "0") int class_num, @RequestParam(value = "msg",defaultValue = "0")String msg) {
+		// 수업승인 
 		if(request.getServletPath().equals("/admin/acceptClass")) {
 			service.acceptClass(class_num);
 		}
+		// 반려
+		if(request.getServletPath().equals("/admin/denyClass")) {
+			//수업 반려상태로 update
+			//service.denyClass(class_num);
+			System.out.println(msg);
+			
+			//반려사유 메일보내기
+		
+		
+		
+		}
+		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("field", field);
@@ -48,14 +62,5 @@ public class ConfirmClassController {
 		
 		return ".admin.confirmClass";
 	}
-	/*
-	@GetMapping("/admin/acceptClass")
-	public String acceptClass(@RequestParam("class_num") int class_num) {
-		
-		service.acceptClass(class_num);
-		
-		return ".admin.confirmClass";
 	
-	}
-	*/
 }
