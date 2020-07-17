@@ -145,27 +145,28 @@
 				<div class="inner1">
 					<div class="gray5 title">수업 시작일을 알려주세요</div>
 					<div id="certifiArr">
-						<div id="certifi" class="certificate class" onclick="fold(this)">
-							<div class="intext">
-								07.16 (목) 9:00 ~ 10:00
-								<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
-								<img src="${cp}/resources/img/icon_up.png" class="up">
-							</div>
-							<div class="verify left10" onclick="$(this).parent().remove();">
-								<img src="${cp}/resources/img/icon_del_bk.png">삭제
-							</div>
-							<div class="subtext">
-								<div class="ch">
-									<font>2회</font> : 07.23 (목) 9:00~10:00
+						<c:forEach var="date" items="${list}">
+						
+							<div id="certifi" class="certificate class" onclick="fold(this)">
+								<div class="intext">
+									<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/> ${date.class_startTime } ~ ${date.class_endTime }
+									<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
+									<img src="${cp}/resources/img/icon_up.png" class="up">
 								</div>
-								<div class="ch">
-									<font>3회</font> : 07.30 (목) 9:00~10:00
+								<div class="verify left10" onclick="$(this).parent().remove();">
+									<img src="${cp}/resources/img/icon_del_bk.png">삭제
 								</div>
-								<div class="ch">
-									<font>4회</font> : 08.06 (목) 9:00~10:00
+								<div class="subtext">
+								<c:forEach var="vo" items="${date.list}">
+									<div class="ch">
+										<font>${vo.time_cnt}회</font> : 
+										<fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> ${vo.class_startTime } ~ ${vo.class_endTime }
+									</div>
+								</c:forEach>
 								</div>
 							</div>
-						</div>
+							
+						</c:forEach>
 					</div>
 					<div class="plus button" style="margin-top:20px" onclick="add_date(1)">
 						<img src="${cp}/resources/img/icon_add_wh.png"> 수업일정 추가
@@ -177,13 +178,13 @@
 			<div class="title"><b class="pink">*</b> 장소 및 추가비용 코멘트<br>
 			</div>
 			<div class="cont">
-				<textarea class="basic len980 hei190" placeholder="스터디룸, 준비물 등 추가 비용이 있는 경우 반드시 적어주세요." id="RegionContent" name="class_comment"></textarea>
+				<textarea class="basic len980 hei190" placeholder="스터디룸, 준비물 등 추가 비용이 있는 경우 반드시 적어주세요." id="class_comment" name="class_comment"></textarea>
 			</div>
 		</div>
 		<div class="box">
 			<div class="title"><b class="pink">*</b> 신청 학생에게 보낼 메시지</div>
 			<div class="cont">
-				<textarea class="basic len980 hei190" placeholder="수강생과 수업 연결 시에 메시지가 전달됩니다." id="Message" name="class_msg"></textarea>
+				<textarea class="basic len980 hei190" placeholder="수강생과 수업 연결 시에 메시지가 전달됩니다." id="class_msg" name="class_msg"></textarea>
 			</div>
 		</div>
 		<div class="box">

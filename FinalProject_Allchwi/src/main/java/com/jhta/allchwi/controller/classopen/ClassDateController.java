@@ -42,11 +42,7 @@ public class ClassDateController {
 		
 		List<ClassDateVO> list = service.select(class_num);
 		
-		for(ClassDateVO vo1 : list) {
-			System.out.println(vo1.getDate_num());
-			
-			System.out.println(vo1.getList().get(0).getTime_cnt());
-		}
+		model.addAttribute("list", list);
 		
 		return ".classOpen.classDate";
 	}
