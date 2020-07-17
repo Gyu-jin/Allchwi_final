@@ -1,5 +1,7 @@
 package com.jhta.allchwi.controller.classopen;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,7 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ClassMyBoardController {
 	
 	@GetMapping("/class/classBoard")
-	public String goClassMyboard() {
+	public String goClassMyboard(HttpSession session) {
+		int ml_num = (int)session.getAttribute("ml_num");
+		
+		
+		
+		
 		return ".classOpen.classMyBoard";
 	}
 }

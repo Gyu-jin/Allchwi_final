@@ -25,8 +25,4 @@ public class memberListDAO {
 	public int update_mlnum_mi(int ml_num) {
 		return session.update(NAMESPACE+".update_mlnum_mi",ml_num);
 	}
-	
-	
-	
-	
 }

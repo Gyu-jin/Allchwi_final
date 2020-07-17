@@ -23,13 +23,14 @@ public class ClassInfoVO {
 	private String class_target;
 	private int class_auth;
 	private Timestamp class_regdate;
+	private int class_status;
 	
 	public ClassInfoVO() {}
 
 	public ClassInfoVO(int class_num, int ml_num, int scategory_num, int sloc_num, int pro_num, String tutor_nickname,
 			String tutor_phone, String class_address, int class_form, int class_max, int class_min, String class_title,
-			int class_price, int class_hour, int class_auth, int class_count, String tutor_about, String class_about,
-			String class_target, Timestamp class_regdate) {
+			int class_price, int class_hour, int class_count, String tutor_about, String class_about,
+			String class_target, int class_auth, Timestamp class_regdate, int class_status) {
 		super();
 		this.class_num = class_num;
 		this.ml_num = ml_num;
@@ -45,12 +46,13 @@ public class ClassInfoVO {
 		this.class_title = class_title;
 		this.class_price = class_price;
 		this.class_hour = class_hour;
-		this.class_auth = class_auth;
 		this.class_count = class_count;
 		this.tutor_about = tutor_about;
 		this.class_about = class_about;
 		this.class_target = class_target;
+		this.class_auth = class_auth;
 		this.class_regdate = class_regdate;
+		this.class_status = class_status;
 	}
 
 	public int getClass_num() {
@@ -165,14 +167,6 @@ public class ClassInfoVO {
 		this.class_hour = class_hour;
 	}
 
-	public int getClass_auth() {
-		return class_auth;
-	}
-
-	public void setClass_auth(int class_auth) {
-		this.class_auth = class_auth;
-	}
-
 	public int getClass_count() {
 		return class_count;
 	}
@@ -205,6 +199,14 @@ public class ClassInfoVO {
 		this.class_target = class_target;
 	}
 
+	public int getClass_auth() {
+		return class_auth;
+	}
+
+	public void setClass_auth(int class_auth) {
+		this.class_auth = class_auth;
+	}
+
 	public Timestamp getClass_regdate() {
 		return class_regdate;
 	}
@@ -213,4 +215,13 @@ public class ClassInfoVO {
 		this.class_regdate = class_regdate;
 	}
 
+	public int getClass_status() {
+		return class_status;
+	}
+
+	public void setClass_status(int class_status) {
+		this.class_status = class_status;
+	}
+
+	
 }
