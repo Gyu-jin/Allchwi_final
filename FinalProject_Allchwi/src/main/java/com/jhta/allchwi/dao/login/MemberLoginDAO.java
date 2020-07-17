@@ -45,4 +45,8 @@ public class MemberLoginDAO {
 	public MemberLoginVO loginInfo(HashMap<String, Object> hm) {
 		return session.selectOne(NAMESPACE + ".loginInfo", hm);
 	}
+	//8 회원번호 사용하여 탈퇴여부 업데이트
+	public int signout(HashMap<String, Object> hm) {
+		return session.update(NAMESPACE + ".signout", hm);
+	}
 }

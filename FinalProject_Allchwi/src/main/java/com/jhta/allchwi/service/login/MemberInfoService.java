@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.login.MemberInfoDAO;
+import com.jhta.allchwi.dao.login.MemberLoginDAO;
 import com.jhta.allchwi.dao.profileImg.ProfileImgDAO;
 import com.jhta.allchwi.vo.login.ProfileVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
@@ -20,14 +21,23 @@ public class MemberInfoService {
 	@Autowired
 	private ProfileImgDAO pid;
 	
-	//1회원탈퇴정보 업데이트
-	public int UpdateSignout(HashMap<String, Object> hm){
-		return mid.UpdateSignout(hm);
+	@Autowired
+	private MemberLoginDAO mld;
+	
+	//1회원탈퇴정보 업데이트 트랜잭션 처리 필요
+	@Transactional
+	public int UpdateSignout(HashMap<String, Object> hm) throws Exception{
+		//a 회원정보에 탈퇴사유, 탈퇴 승인번호 업데이트
+		int n = mid.UpdateSignout(hm);
+		//a 로그인정보에 탈퇴 승인번호 업데이트
+		int n1 = mld.signout(hm);
+		return n+n1;
 	}
 	//2회원정보 조회
 	public ProfileVO selectInfo(int ml_num) {
 		return mid.selectInfo(ml_num);
 	}
+	//3프로필 업데이트
 	@Transactional
 	public boolean updateInfo(ProfileImgVO piv, ProfileVO pfv) throws Exception{
 		HashMap<String, Object> hm = new HashMap<String, Object>();

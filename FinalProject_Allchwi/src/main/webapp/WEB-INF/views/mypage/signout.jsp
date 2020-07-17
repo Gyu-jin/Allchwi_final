@@ -12,18 +12,18 @@
 			<form action="${cp}/mypage/signout" method="POST" id="signout" onsubmit="return buttonUp()">
 				<div class="main_box">
 					<!--1 회원정보중 회원 번호를 넘겨서 업데이트 시켜줘야함 -->
-					<input type="hidden" id="mb_num" name="mb_num"
-						class="form-control" value="1">
-					<!-- id value값은 나중에 받아올수 있도록 변경 -->
+					<input type="hidden" id="ml_num" name="ml_num"
+						class="form-control" value="${mlv.ml_num}">
+					<!-- ajax 처리시  id value값 넘겨줘야함 -->
 					<input type="hidden" id="id" name="id"
-						class="form-control" value="test111@naver.com">
+						class="form-control" value="${mlv.id}">
 					<div class="input_box">
 						<div class="left_box">
 							<b>·</b>&nbsp;아이디
 						</div>
 						<!-- 나중에 값 받아서 넣기 -->
 						<div class="right_box" id="maildiv">
-									test111@naver.com	
+							${mlv.id}	
 						</div>
 					</div>
 					<div class="input_box">
@@ -82,7 +82,7 @@ function checkPwd(){
 function feedValidation() {
 	let feed = $("#feedback").val();
 	let fdMsg = $("#fdMsg");
-	// 특문 + 숫자 + 영문
+	//a 공백일 경우 
 	if(feed === "") {
 		fdMsg.css('color','red');
 		fdMsg.html("사유를 작성해 주세요.");

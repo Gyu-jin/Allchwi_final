@@ -9,7 +9,7 @@
 	</insert>
 	<!--2 회원탈퇴 사유 업데이트, 나중에 id 회원번호로 변경할 것 -->
 	<update id="updateSignout" parameterType="hashmap">
-		update member_info set mb_auth = #{mb_auth}, mb_reason = #{mb_reason} where mb_num = #{mb_num}
+		update member_info set mb_auth = #{mb_auth}, mb_reason = #{mb_reason} where ml_num = #{ml_num}
 	</update>
 	<!--3 회원번호로 login, info, profileImg 테이블 조인하여 회원정보 조회 -->
 	<select id="selectInfo" parameterType="int" resultType="pfv">

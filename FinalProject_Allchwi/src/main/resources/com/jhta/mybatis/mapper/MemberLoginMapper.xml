@@ -34,6 +34,10 @@
 	<select id="loginInfo" resultType="mlv" parameterType="int">
 		select * from member_login where ml_num = #{ml_num}
 	</select>
+	<!-- 7회원번호로 탈퇴여부 업데이트 -->
+	<update id="signout" parameterType="hashmap">
+		update member_login set login_auth = #{login_auth} where ml_num = #{ml_num}
+	</update>
 </mapper>
 
 
