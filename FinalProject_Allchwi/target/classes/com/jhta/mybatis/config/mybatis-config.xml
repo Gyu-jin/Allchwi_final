@@ -36,6 +36,7 @@
 		<!-- class detail alias -->	
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassQnaVO" alias="classQna"/>	
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassReviewVO" alias="classReview"/>	
+		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListVO" alias="wish"/>	
 		
 	</typeAliases>
 
@@ -64,9 +65,11 @@
 		
 		<!-- Class Apply Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassApplyMapper.xml"/>
+		
 		<!-- Class detail 관련 Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassQnaMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/ClassReviewMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/WishListMapper.xml"/>
 		
 		<!-- Location 등록 -->
 		<mapper resource="com/jhta/mybatis/mapper/BigLocationMapper.xml"/>

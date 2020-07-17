@@ -1,6 +1,62 @@
 $(function(){
+	var navOffset = $('.class_navi').offset();
+	$(window).scroll(function() {
+		if ($(document).scrollTop() > navOffset.top) {
+			$('.class_navi').addClass('active');
+
+		} else {
+			$('.class_navi').removeClass('active');
+		}
+	});
+	var remoteOffset = $('.remote').offset();
+	$(window).scroll(function() {
+		if ($(document).scrollTop() > remoteOffset.top) {
+			$('.remote').addClass('active');
+		} else {
+			$('.remote').removeClass('active');
+		}
+	});
+	$("#class_navi a").click(function() {
+		$(this).addClass('on');
+		$("#class_navi a").not(this).removeClass('on');
+	});
+	$("#card-header collapse").click(function() {
+		$(this).addClass('show');
+	});
 	qnaList();
 });
+///////////////////////////qna /////////////////////////////////
+//qna작성
+var qna_content = null;
+$(document).on('click', '#btn_write_qna', function () {
+	qna_content = document.getElementById('qna_content').value;
+	if(qna_content== '' ){
+		alert('내용을 작성해주세요');
+	}else{
+		id='test';
+		class_num='4';
+		ml_num='1';
+		if (id!='test') {
+			alert('로그인이 필요합니다');
+		}else {
+			$.post('/allchwi/classDetail/qna', {
+				class_num: class_num,
+				ml_num: ml_num,
+				qna_content:qna_content,
+				qna_lev: '0'
+			}, function (data,res) {
+				if (res=='success') {
+					alert('문의등록 성공');
+					qnaList();
+					$("#qna_content").val("");
+				} else {				
+					alert('문의실패');
+				}
+			});
+		}
+	}
+});
+//qna목록
 function qnaList(){
 	 var class_num = 4;
 	 $.getJSON("/allchwi/classDetail/qnalist" + "?class_num=" + class_num, function(data){
@@ -10,7 +66,9 @@ function qnaList(){
 	   var qna_regdate = new Date(this.qna_regdate);
 	   qna_regdate = qna_regdate.toLocaleDateString("ko-US")
 	   var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
-	   str += "<li>"
+	   str += "<div class='qna_list'>" 
+		 + "<ul>"
+		 + "<li>"
 		 + "<input type='hidden' id='qna_ref' value='"+this.qna_ref+"'>"
 	     + "<dl>"
 	     + "<dt>"
@@ -47,13 +105,15 @@ function qnaList(){
 		 +"</ul>"
 		 +"</div>"
 		 +"</div>"
+		 +"</ul>"
+		 +"</div>"
 		 ;           
 	  
 	  });
-	  $(".qna_list ul").html(str);
+	  $(".qna_wrap").html(str);
 	 });
 }
-//qna 답변작성
+//qna답변 작성
 function sendReply(qna_ref) {
 	var reply_content=$("#reply_content"+qna_ref).val();
 	id='test';
@@ -111,3 +171,41 @@ function replyList(qna_ref) {
 	  $("#reply"+qna_ref+" ul").html(str);
 	 });
 }
+///////////////////위시리스트////////////////////////////////////
+//위시전
+$(document).on('click', '#btn_before_wish', function () {
+	var btn = $(this);
+	var class_num = '4';
+	var ml_num = '1';
+	$.post('/allchwi/class/addWish', {
+		class_num: class_num,
+		ml_num: ml_num
+		
+	}, function (data,res) {
+		if (res=='success') {
+			btn.attr('id', 'btn_after_wish');
+			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
+			alert('위시리스트 등록 성공');
+		} else {
+			alert('위시리스트 등록 오류');
+		}
+	});
+});
+//위시후
+$(document).on('click', '#btn_after_wish', function () {
+	var btn = $(this);
+	var class_num = '4';
+	var ml_num = '1';
+	$.post('/allchwi/class/removeWish', {
+		class_num: class_num,
+		ml_num: ml_num
+	}, function (data,res) {
+		if (res=='success') {
+			btn.attr('id', 'btn_before_wish');
+			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
+			alert('위시리스트 삭제 성공');
+		} else {
+			alert('위시리스트 삭제 오류');
+		}
+	});
+});

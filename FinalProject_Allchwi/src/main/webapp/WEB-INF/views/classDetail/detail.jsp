@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
+<link rel="stylesheet"
+	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
 
 <div class="container-fluid" id="container_detail">
@@ -83,30 +84,33 @@
 									<!-- 찜하기 -->
 									<c:choose>
 										<c:when test="${empty id}">
-											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main" id="btn_wishlist" class="btn_wishlist">
-											<img id="wishsrc" src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png"> 
-											찜하기</a>
+											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
+												id="btn_wishlist" class="btn_wishlist"> <img
+												id="wishsrc"
+												src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+												찜하기
+											</a>
 										</c:when>
 										<c:otherwise>
-											<a href="javascript:void(0);" class="btn_wishlist" id="btn_before_wish"> 
-												<img id="wishsrc" src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
-											찜하기</a>
+											<a href="javascript:void(0);" class="btn_wishlist"
+												id="btn_before_wish"> <img id="wishsrc"
+												src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+												찜하기
+											</a>
 										</c:otherwise>
 									</c:choose>
 									<!-- ///찜하기 -->
-									
+
 								</div>
 								<!-- 기본정보 -->
 								<div class="info">
 									<ul>
-										<li class="ar" id="regionAll">
-											<c:if test="${cvo.class_form==0}">
+										<li class="ar" id="regionAll"><c:if
+												test="${cvo.class_form==0}">
 												온라인
-											</c:if>
-											<c:if test="${cvo.class_form==1}">
+											</c:if> <c:if test="${cvo.class_form==1}">
 												지역
-											</c:if>
-										</li>
+											</c:if></li>
 										<li class="hu"><font color="#ff936f">${cvo.class_hour}</font>시간/회</li>
 										<li class="gr">최대인원:<font color="#ff936f">${cvo.class_min}~${cvo.class_max}</font>명
 										</li>
@@ -126,10 +130,7 @@
 										<li class="com">들어갈자리</li>
 									</ul>
 								</div>
-								<div class="d_info04">
-
-									${cvo.tutor_about}
-								</div>
+								<div class="d_info04">${cvo.tutor_about}</div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
@@ -137,11 +138,9 @@
 						<div class="class_detail detail_sec_bor" id="intro">
 							<div class="sec01">
 								<h1>수업소개</h1>
-								<div class="d_info04">
-									${cvo.class_about}
-								</div>
+								<div class="d_info04">${cvo.class_about}</div>
 								<h1>수업대상</h1>
-									${cvo.class_target}
+								${cvo.class_target}
 								<h1>커리큘럼</h1>
 								회차만큼 출력
 							</div>
@@ -149,42 +148,42 @@
 						<!-- //3.수업소개 -->
 						<!-- 4.리뷰 -->
 						<div class="class_detail detail_sec_bor" id="review">
-							<!-- 리뷰작성 모달 -->
-							<div class="modal fade" id="modalContactForm" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header text-center">
-											<h4 class="modal-title w-100 font-weight-bold">review</h4>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body mx-3">
-											<div class="md-form mb-5">
-												<label data-error="wrong" data-success="right" for="form34">Your
-													name</label> <input type="text" id="form34"
-													class="form-control validate">
+							<div class="sec01">
+								<h1>리뷰(2)</h1>
+								<!-- 리뷰작성 모달 -->
+								<div class="modal fade" id="modalContactForm" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header text-center">
+												<h4 class="modal-title w-100 font-weight-bold">review</h4>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body mx-3">
+												<div class="md-form mb-5">
+													<label data-error="wrong" data-success="right" for="form34">Your
+														name</label> <input type="text" id="form34"
+														class="form-control validate">
+
+												</div>
+												<div class="md-form">
+													<label data-error="wrong" data-success="right" for="form8">content</label>
+													<textarea type="text" id="form8"
+														class="md-textarea form-control" rows="4"></textarea>
+
+												</div>
 
 											</div>
-											<div class="md-form">
-												<label data-error="wrong" data-success="right" for="form8">content</label>
-												<textarea type="text" id="form8"
-													class="md-textarea form-control" rows="4"></textarea>
-
+											<div class="modal-footer d-flex justify-content-center">
+												<a href="#" class="btn_send">작성완료</a>
 											</div>
-
-										</div>
-										<div class="modal-footer d-flex justify-content-center">
-											<a href="#" class="btn_send">작성완료</a>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- 리뷰작성 모달 -->
-							<div class="sec01">
-								<h1>리뷰(2)</h1>
+								<!-- 리뷰작성 모달 -->
 								<div class="btn_write">
 									<a href="#" class="btn_write_review" data-toggle="modal"
 										data-target="#modalContactForm">리뷰쓰기</a>
@@ -227,7 +226,7 @@
 								<div class="review_list" id="bookmarkReview">
 									<ul>
 										<div id="innerReviewDiv">
-											 <c:forEach var="rlist" items="${rlist }"> 
+											<c:forEach var="rlist" items="${rlist }">
 												<li><dl>
 														<dt>
 															<p class="profile_img"
@@ -251,32 +250,29 @@
 								<textarea type="text" id="qna_content"
 									class="md-textarea form-control" rows="4"></textarea>
 								<c:choose>
-										<c:when test="${empty id}">
-											<div class="btn_write">
-												<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
+									<c:when test="${empty id}">
+										<div class="btn_write">
+											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
 												문의하기</a>
-											</div>
-										</c:when>
-										<c:otherwise>
-											<div class="btn_write">
-												<a href="javascript:void(0);" id="btn_write_qna">문의하기</a>
-											</div>
-										</c:otherwise>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="btn_write">
+											<a href="javascript:void(0);" id="btn_write_qna">문의하기</a>
+										</div>
+									</c:otherwise>
 								</c:choose>
-								
+
 								<!-- qna 리스트 시작 -->
-								<div class="qna_list">
-									<ul>
-									</ul>
-								</div>
-								</div>
+								<div class="qna_wrap"></div>
 							</div>
-							<!-- qna wrap -->
 						</div>
-						<!--// class wrap -->
+						<!-- qna wrap -->
 					</div>
-					<!-- 왼쪽수업정보끝 -->
-				
+					<!--// class wrap -->
+				</div>
+				<!-- 왼쪽수업정보끝 -->
+
 				<!-- 시간&날짜/ 결제창 -->
 				<div class="col-md-4 remote">
 					<div class="remote_wrap">
@@ -310,10 +306,21 @@
 								</dd>
 							</dl>
 						</div>
-						<div class="button_pay">
-							<a href="${cp }/class/apply" class="btn_pay">수업신청하기</a>
+						<c:choose>
+							<c:when test="${empty id}">
+								<div class="button_pay">
+									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
+										수업신청하기</a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="button_pay">
+									<a href="${cp }/class/apply?class_num=${class_num }" class="btn_pay">수업신청하기</a>
 
-						</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
 				</div>
 				<!-- //시간&날짜/ 결제창 -->
@@ -322,87 +329,5 @@
 	</div>
 </div>
 <script>
-var navOffset = $('.class_navi').offset();
-$(window).scroll(function() {
-	if ($(document).scrollTop() > navOffset.top) {
-		$('.class_navi').addClass('active');
-		
-	} else {
-		$('.class_navi').removeClass('active');
-	}
-});
-var remoteOffset = $('.remote').offset();
-$(window).scroll(function() {
-	if ($(document).scrollTop() > remoteOffset.top) {
-		$('.remote').addClass('active');
-	} else {
-		$('.remote').removeClass('active');
-	}
-});
-$("#class_navi a").click(function() {
-	$(this).addClass('on');
-	$("#class_navi a").not(this).removeClass('on');
-});
-$("#card-header collapse").click(function() {
-	$(this).addClass('show');
-});
-
-//위시전
- $(document).on('click', '#btn_before_wish', function () {
-	var btn = $(this);
-	$.post('${cp}/class/addWish', {}, function (res) {
-		if (res=='success') {
-			btn.attr('id', 'btn_after_wish');
-			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
-			alert('위시리스트 등록 성공');
-		} else {
-			alert('위시리스트 등록 오류');
-		}
-	});
-});
-//위시후
-$(document).on('click', '#btn_after_wish', function () {
-	var btn = $(this);
-	$.post('${cp}/class/removeWish', {}, function (res) {
-		if (res=='success') {
-			btn.attr('id', 'btn_before_wish');
-			$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
-			alert('위시리스트 삭제 성공');
-		} else {
-			alert('위시리스트 삭제 오류');
-		}
-	});
-});
-//qna작성
-var qna_content = null;
-$(document).on('click', '#btn_write_qna', function () {
-	qna_content = document.getElementById('qna_content').value;
-	if(qna_content== '' ){
-		alert('내용을 작성해주세요');
-	}else{
-		id='test';
-		class_num='4';
-		ml_num='1';
-		if (id!='test') {
-			alert('로그인이 필요합니다');
-		}else {
-			$.post('${cp}/classDetail/qna', {
-				class_num: class_num,
-				ml_num: ml_num,
-				qna_content:qna_content,
-				qna_lev: '0'
-			}, function (data,res) {
-				if (res=='success') {
-					alert('문의등록 성공');
-					qnaList();
-					$("#qna_content").val("");
-				} else {				
-					alert('문의실패');
-				}
-			});
-		}
-	}
-});
-
-
+	
 </script>
