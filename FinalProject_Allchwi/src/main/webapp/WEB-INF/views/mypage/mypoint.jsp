@@ -47,7 +47,7 @@
 						<c:forEach var="vo" items="${list}">
 							<tr>
 								<td>${vo.point_regdate }</td>
-								<td>${vo.point_name }</td>
+								<td>${vo.point_name }</td> 
 								<c:choose>
 									<c:when test="${vo.point_type eq 'u'.charAt(0)}">
 										<td style="color: red">-${vo.point }</td>
