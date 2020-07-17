@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
 <link rel="stylesheet"
 	href="/allchwi/resources/css/mypage/mypointForm.css">
@@ -34,7 +35,7 @@
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">일자  </th>
+							<th scope="col">일자</th>
 							<th scope="col">포인트 적립/사용 내역</th>
 							<th scope="col">포인트</th>
 						</tr>
@@ -44,9 +45,10 @@
 						<c:choose>
 						<c:when test="${list.size() > 0 }">
 						<!-- test="${vo.point_type eq 'u'.charAt(0)}" char형식 비교 s: 적립포인트 / u: 사용포인트-->
+						<!-- fmt 사용하여 날짜 출력 형식 변경 -->
 						<c:forEach var="vo" items="${list}">
 							<tr>
-								<td>${vo.point_regdate }</td>
+								<td><fmt:formatDate value="${vo.point_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${vo.point_name }</td> 
 								<c:choose>
 									<c:when test="${vo.point_type eq 'u'.charAt(0)}">
@@ -120,7 +122,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-	//a 버튼 클릭시 this를 통해 현재 버튼의 value 값을 pointType에 담아줌
+	//a 버튼 클릭시 this를 통해 현재 버튼의 value 값을 pointType에 담아줌 / 포인트 전체출력, 사용포인트 출력, 적립포인트 출력
 	$("button[name='sortBtn']").on('click',function(){
 		var pointType = $(this).val();
 		//a 동적으로 form을 생성하여 파라미터 값을 보내줌.
