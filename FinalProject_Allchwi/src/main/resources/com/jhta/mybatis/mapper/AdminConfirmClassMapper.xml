@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.mapper.AdminConfirmClassMapper">
 	<select id="confirm_list" resultType="com.jhta.allchwi.vo.admin.ConfirmClassVO" parameterType="hashmap">
 		select aa.*,
-		(select NVL(count(*),0) from class_info ci, class_date cd, class_apply ca
+		(select NVL(count(*),0) from class_info ci, class_date cd, class_apply ca 
 		where ci.class_num = cd.class_num and cd.date_num =ca.date_num and
 		ca.apply_auth=1 and cd.class_num =aa.class_num) people, 
         (select nvl(count(*),0) from wishlist where class_num=aa.class_num) wish_count

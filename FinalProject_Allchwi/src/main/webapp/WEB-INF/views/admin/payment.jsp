@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
 <div class="container-fluid">
 	<div class="breadcrumb">
@@ -27,21 +29,13 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="vo" items="${list }">
 			<tr>
-				<td>John</td>
-				<td>Doe</td>
-				<td>john@example.com</td>
+				<td>${vo.num }</td>
+				<td>${vo.name }</td>
+				<td>${vo.pwd }</td>
 			</tr>
-			<tr>
-				<td>Mary</td>
-				<td>Moe</td>
-				<td>mary@example.com</td>
-			</tr>
-			<tr>
-				<td>July</td>
-				<td>Dooley</td>
-				<td>july@example.com</td>
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 

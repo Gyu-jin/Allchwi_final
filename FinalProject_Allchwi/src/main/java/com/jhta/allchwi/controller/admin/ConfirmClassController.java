@@ -36,6 +36,7 @@ public class ConfirmClassController {
 			@RequestParam(value = "class_num",defaultValue = "0") int class_num,
 			@RequestParam(value="id",defaultValue = "아이디없음") String id,
 			@RequestParam(value = "msg",defaultValue = "0")String msg) {
+		
 		// 수업승인 
 		if(request.getServletPath().equals("/admin/acceptClass")) {
 			service.acceptClass(class_num);
@@ -43,12 +44,15 @@ public class ConfirmClassController {
 		// 반려
 		if(request.getServletPath().equals("/admin/denyClass")) {
 			//수업 반려상태로 update
-			//service.denyClass(class_num);
-		
-			//반려사유 메일보내기
-			mailSender.sendMsg(msg,id);
-			
-			
+			try {
+			int n =service.denyClass(class_num);
+				if(n>0) {
+				//반려사유 메일보내기
+				mailSender.sendMsg(msg,id);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}	
 		}
 		
 		
