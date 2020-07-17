@@ -23,7 +23,7 @@
 		</div>
 		<div class="inner-cont">
 			<div>
-				<!-- 버튼클릭시 ajax 처리 -->
+				<!-- 버튼클릭시 post방식으로 이동하여 결과 가져오도록 처리 -->
 				<button class="btn btn-outline-secondary" name='sortBtn' value="null">전체 내역</button>
 				<button class="btn btn-outline-secondary" name='sortBtn' value="u">사용 내역</button>
 				<button class="btn btn-outline-secondary" name='sortBtn' value="s">적립 내역</button>
@@ -34,18 +34,20 @@
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">일자</th>
+							<th scope="col">일자  </th>
 							<th scope="col">포인트 적립/사용 내역</th>
 							<th scope="col">포인트</th>
 						</tr>
 					</thead>
 					<tbody id="tb">
 						<!-- 회원의 포인트 적립 사용리스트 foreach로 출력 -->
+						<c:choose>
+						<c:when test="${list.size() > 0 }">
 						<!-- test="${vo.point_type eq 'u'.charAt(0)}" char형식 비교 s: 적립포인트 / u: 사용포인트-->
 						<c:forEach var="vo" items="${list}">
 							<tr>
 								<td>${vo.point_regdate }</td>
-								<td>${vo.point_name }</td>
+								<td>${vo.point_name }</td> 
 								<c:choose>
 									<c:when test="${vo.point_type eq 'u'.charAt(0)}">
 										<td style="color: red">-${vo.point }</td>
@@ -56,6 +58,15 @@
 								</c:choose>
 							</tr>
 						</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="3" style="text-align: center">
+									검색된 결과가 없습니다.
+								</td>
+							</tr>
+						</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

@@ -2,9 +2,12 @@ package com.jhta.allchwi.controller.mypage;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +24,17 @@ public class ChangePwdController {
 	
 	//비밀번호 변경 페이지로 이동
 	@GetMapping("/mypage/changePwd")
-	public String goPage() {
+	public String goPage(HttpSession session, Model model) {
+		//객체를 담아줄 hashmap 선언
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		//세션에 저장된 회원번호 가져오기
+		int ml_num = (int)session.getAttribute("ml_num");
+		//hashmap에 회원번호 담기
+		hm.put("ml_num", ml_num);
+		//회원번호 사용하여 로그인 정보 출력
+		MemberLoginVO mlv = mls.loginInfo(hm);
+		//모델 객체에 로그인정보를 담은 vo를 넣어서 비밀번호 변경 페이지로 이동
+		model.addAttribute("mlv", mlv);
 		return ".mypage.changePwd";
 	}
 	//현재 비밀번호 확인 ajax

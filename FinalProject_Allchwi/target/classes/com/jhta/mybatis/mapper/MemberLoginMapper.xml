@@ -30,6 +30,10 @@
 	<select id="loginCheck" resultType="mlv" parameterType="mlv">
 		select * from member_login where id = #{id} and pwd = #{pwd}
 	</select>
+	<!--6 회원번호로 로그인정보 VO 출력 -->
+	<select id="loginInfo" resultType="mlv" parameterType="int">
+		select * from member_login where ml_num = #{ml_num}
+	</select>
 </mapper>
 
 
