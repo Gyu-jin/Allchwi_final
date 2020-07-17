@@ -36,17 +36,22 @@
 	<div id="content" class="container-fluid">
 
 		<div class="breadcrumb">
-			<h2>수업목록</h2>
-			<div style="margin-left: 860px;">
-				<select class="form-control col-2"
-					style="display: inline-block; width: 550px;">
-					<option>11</option>
-					<option>22</option>
-				</select>
-				<form class="form-inline" style="display: inline-block">
-					<input class="form-control mr-sm-2" type="text" />
-					<button class="btn btn-primary my-2 my-sm-0" type="submit">
-						Search</button>
+			<h2>
+				<a href="${cp }/admin/confirmClass">수업목록</a>
+			</h2>
+			<div style="margin-left: 65%;">
+				<form action="${cp }/admin/confirmClass" class="form-inline"
+					style="display: inline-block">
+					<select class="form-control col-2" name="field"
+						style="display: inline-block; width: 700px;">
+						<option value="class_title"
+							<c:if test="${field == 'class_title'}">selected</c:if>>수업제목</option>
+						<option value="tutor_nickname"
+							<c:if test="${field == 'tutor_nickname'}">selected</c:if>>강사이름</option>
+						<option value="class_address"
+							<c:if test="${field == 'class_address'}">selected</c:if>>장소</option>
+					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
+					<button class="btn btn-primary my-2 my-sm-0" type="submit">검색</button>
 				</form>
 			</div>
 		</div>
@@ -54,51 +59,63 @@
 
 		<!-- Begin Page Content -->
 		<div style="float: center;">
-			<c:forEach var="vo" items="${list }">
-				<div class="row"
-					style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
-					<div class="col-md-12">
-						<div class="card">
-							<h5 class="card-header" style="text-align: center;">
-								${vo.class_title }
-								<button type="button" class="btn btn-primary" onclick="getDetail()" data-toggle="modal" data-target="#myModal3">상세정보</button>
-							</h5>
+			<c:choose>
+				<c:when test="${list.size()>0 }">
 
 
-							<div class="card-body" style="height: 188px;">
-								<div style="display: inline-block;">
-									<img src="${cp }/resources/img/모찌.jpg"
-										style="width: 160px; height: 173px; margin-top: -130px;">
-										<!--  width: 85%; height: 37%; margin-top: -5%; -->    
-										<!-- style="width: 160px; height: 173px; margin-top: -130px;"> -->
-								</div>
-								<div style="display: inline-block; margin-left:60px;">
-								<!-- margin-left: 58%; margin-top: -31%; -->
-								<!-- <div style="display: inline-block; margin-left: 60px;">  -->	
-									<p>강사명: ${vo.tutor_nickname }</p>
-									<p>장소: ${vo.class_address }</p>
-									<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>
-									<a href="#" class="btn btn-success btn-icon-split"
-										onclick="getModal('${vo.class_num}')" data-toggle="modal"
-										data-target="#myModal"> <span class="icon text-white-50">
-											<i class="fas fa-check"></i>
-									</span> <span class="text">심사완료</span>
-									</a> <a href="#" class="btn btn-danger btn-icon-split"
-										onclick="getModal2('${vo.class_num}','${vo.id }')"
-										data-toggle="modal" data-target="#myModal2"> <span
-										class="icon text-white-50"> <i
-											class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
-									</a>
+					<c:forEach var="vo" items="${list }">
+						<div class="row"
+							style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
+							<div class="col-md-12">
+								<div class="card">
+									<h5 class="card-header" style="text-align: center;">
+										${vo.class_title }
+										<button type="button" class="btn btn-primary"
+											onclick="getDetail()" data-toggle="modal"
+											data-target="#myModal3">상세정보</button>
+									</h5>
+
+
+									<div class="card-body" style="height: 188px;">
+										<div style="display: inline-block;">
+											<img src="${cp }/resources/img/모찌.jpg"
+												style="width: 160px; height: 173px; margin-top: -130px;">
+											<!--  width: 85%; height: 37%; margin-top: -5%; -->
+											<!-- style="width: 160px; height: 173px; margin-top: -130px;"> -->
+										</div>
+										<div style="display: inline-block; margin-left: 60px;">
+											<!-- margin-left: 58%; margin-top: -31%; -->
+											<!-- <div style="display: inline-block; margin-left: 60px;">  -->
+											<p>강사명: ${vo.tutor_nickname }</p>
+											<p>장소: ${vo.class_address }</p>
+											<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>
+											<a href="#" class="btn btn-success btn-icon-split"
+												onclick="getModal('${vo.class_num}')" data-toggle="modal"
+												data-target="#myModal"> <span class="icon text-white-50">
+													<i class="fas fa-check"></i>
+											</span> <span class="text">심사완료</span>
+											</a> <a href="#" class="btn btn-danger btn-icon-split"
+												onclick="getModal2('${vo.class_num}','${vo.id }')"
+												data-toggle="modal" data-target="#myModal2"> <span
+												class="icon text-white-50"> <i
+													class="fas fa-exclamation-triangle"></i></span> <span class="text">심사반려</span>
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</c:forEach>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div style="text-align: center">검색 결과가 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
-	</div>
 
+
+	</div>
 	<div>
 		<ul class="pagination justify-content-center" style="margin: 20px 0">
 			<c:choose>
@@ -204,7 +221,7 @@
 			<!-- Modal body -->
 			<div class="modal-body" id="modal-body3">Modal body..</div>
 
-			
+
 
 		</div>
 	</div>
@@ -219,12 +236,11 @@
 			dataType : "text",
 			success : function(data) {
 				$("#modal-body3").html(data);
-				$(".card-body").find("img").css("margin-top","0px")
-				$(".card-body").css("height","230px")
-				
+				$(".card-body").find("img").css("margin-top", "-130px");
+				$(".card-body").css("height", "188px");
+				$(".card").css("width", "100%");
 			}
 		});
-		
 	}
 
 	function getModal(class_num) {
@@ -258,15 +274,14 @@
 		$(modalForm)
 				.append(
 						"<button type='button' class='btn btn-danger btnRight' data-dismiss='modal'>닫기</button>");
-		$(modalForm)
-				.append(
-						"<input type='submit' class='btn btn-success btnRight' value='심사 반려'>");
+		$(modalForm).append(
+				"<input type='submit' class='btn btn-success btnRight' onclick=deny('"
+						+ class_num + "') value='심사 반려'>");
 
 	}
 	function deny(class_num) {
-		//location.href = "${cp}/admin/denyClass?class_num="+class_num;
+		location.href = "${cp}/admin/denyClass?class_num=" + class_num;
 	}
-	
 </script>
 
 
