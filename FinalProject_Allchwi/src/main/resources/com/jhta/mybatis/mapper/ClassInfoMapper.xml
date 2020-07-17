@@ -12,6 +12,35 @@
 	    </selectKey>
 	</insert>
 	
+	<sql id="class_num">
+		<if test="class_num !=null and class_num !=0">
+			and aa.class_num=#{class_num}
+		</if>
+	</sql>
+	
+	<select id="select" parameterType="int" resultType="classinfo">
+		select * from class_info where class_num=#{class_num}
+	</select>
+	
+	<select id="myBoard_list" parameterType="hashmap" resultType="hashmap">
+		SELECT aa.class_title,aa.class_num,aa.class_status,aa.class_regdate,
+		aa.class_auth,cover.cover_name,cover.cover_file 
+		FROM class_info aa,
+		( 
+			SELECT  class_num , cover_name , cover_file , 
+			ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
+			FROM class_img 
+		) cover
+		where cover.class_num=aa.class_num and cnt=1 and aa.ml_num=#{ml_num} 
+		<include refid="class_num"/>
+		order by class_regdate desc limit 1
+	</select>
+	
+	<select id="title_list" parameterType="int" resultType="classinfo">
+		select class_title,class_num from class_info where ml_num=#{ml_num};
+	</select>
+	
+	
 	
 	<!-- '작은 지역' 검색 sql -->
 	<sql id="sloc">

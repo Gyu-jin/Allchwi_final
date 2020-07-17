@@ -1,6 +1,7 @@
 package com.jhta.allchwi.vo.classopen;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ClassDateVO {
 	private int date_num;
@@ -19,6 +20,7 @@ public class ClassDateVO {
 	private int class_hour; // 추가 (class_info)
 	private int class_count; // 추가 (class_info)
 	
+	private List<ClassDateVO> list;
 	
 	public ClassDateVO() {}
 
@@ -159,6 +161,14 @@ public class ClassDateVO {
 
 	public void setClass_count(int class_count) {
 		this.class_count = class_count;
+	}
+
+	public List<ClassDateVO> getList() {
+		return list;
+	}
+
+	public void setList(List<ClassDateVO> list) {
+		this.list = list;
 	}
 	
 	

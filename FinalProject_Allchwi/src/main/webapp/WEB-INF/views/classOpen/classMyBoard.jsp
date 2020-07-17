@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${cp}/resources/css/classMyboard/classMyboard.css">
+<script type="text/javascript">
+	function selectTitle(val){
+		var v = $(val).val();
+		location.href = "${cp}/class/classBoard?class_num="+v;
+	}
+</script>
 <div class="container">
 	<div class="title-box">
 		<h1>내 수업</h1>
-		<select class="class-option" onchange="fnSelectTitle(this);">
-			<option value="1">제목1</option>
-			<option value="2">제목2</option>
-			<option value="3">제목3</option>
+		<select class="class-option" onchange="selectTitle(this);">
+			<c:forEach var="vo" items="${title}">
+				<option value="${vo.class_num}" <c:if test="${list.class_num==vo.class_num}">selected</c:if>>${vo.class_title }</option>
+			</c:forEach>
 		</select>
 	</div>  
 	<div class="static-container">  
@@ -20,16 +28,17 @@
 			<div class="info-box">
 				<img src="https://front-img.taling.me/Content/Images/icon_img_area.png" class="more-text cursor" onclick="location.href='/My/TutorGuidea';">
 				<div>
-					<h3 onclick="location.href='/Talent/Detail/26923'" style="cursor: pointer">누구나 배울수 있는 기타수업</h3>
+					<h3 onclick="location.href='/Talent/Detail/26923'" style="cursor: pointer">${list.class_title }</h3>
 				</div>
 				<div>
-					<span class="date">최종업데이트 : 2020.06.24</span>
-					<div class="button_gray cursor"onClick="fnStatusChange('CS01','26923');" style="float:right;">심사요청하기</div>
-					<a href="${cp}/class/classDate"><div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
+					<span class="date">업데이트 : <fmt:formatDate value="${list.class_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+					<div class="button_gray cursor" onClick="fnStatusChange('CS01','26923');" style="float:right;">심사요청하기</div>
+					<a href="${cp}/class/classDate?class_num=${list.class_num}">
+					<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 				</div>
 				<div style="margin-top: 56px">
 					<div class="button-box">
-						<div class="button_gray cursor"onClick="fnStatusChange('CS01','26923');">수업수정</div>
+						<div class="button_gray cursor"onClick="fnStatusChange();">수업수정</div>
 						<a href="/tutor/registerRegionMessage/26923" target="_blank">
 						<div class="button_gray" style="margin-left: 10px;">selling</div></a> 
 						<a href="/Talent/Detail/26923" target="_blank">

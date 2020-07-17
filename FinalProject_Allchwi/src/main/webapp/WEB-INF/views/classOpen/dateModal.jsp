@@ -229,7 +229,7 @@
 </head>
 <body style="margin: 8px; background: transparent;">
 <form id="frm" enctype="multipart/form-data">
-	<input type="hidden" id="monthDate" class="cal"  name="monthDate">
+	<input type="hidden" id="monthDate" class="cal"  name="monthDate" value="0">
 	<input type="hidden" id="classCount" class="cal" name="classCount" value="4">			
 	<div class="tutor_cont">
 		<div class="phone_box region_box" id="class_box" style="top:50px">
@@ -252,7 +252,7 @@
 						<input type="text" id="startDate1" class="cal hasDat" name="startDate[]" placeholder="수업 시작일을 입력하요"  readonly="readonly">
 					</div>	
 					<c:choose>
-						<c:when test="false">
+						<c:when test="${class_form==0}">
 							<!--수업 시간 선택 시작 -->
 							<div style="width:100%;overflow:hidden;">
 								<div id="classTime1" class="formbox border calendar">수업 시작 시간</div>
@@ -348,7 +348,7 @@
 					<div class="next button prev" onclick="parent.cls_date()">
 					취소
 					</div>
-					<div class="next button on" onclick="parent.getClassDate(1)">
+					<div class="next button on" onclick="parent.getClassDate(0)">
 					저장
 					</div>
 				</div>

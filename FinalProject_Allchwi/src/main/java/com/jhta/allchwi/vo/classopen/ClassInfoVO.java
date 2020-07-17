@@ -25,6 +25,9 @@ public class ClassInfoVO {
 	private Timestamp class_regdate;
 	private int class_status;
 	
+	// 커버이미지 join
+		private ClassImgVO classImgVo;
+	
 	public ClassInfoVO() {}
 
 	public ClassInfoVO(int class_num, int ml_num, int scategory_num, int sloc_num, int pro_num, String tutor_nickname,
@@ -223,5 +226,14 @@ public class ClassInfoVO {
 		this.class_status = class_status;
 	}
 
+	public ClassImgVO getClassImgVo() {
+		return classImgVo;
+	}
+
+	public void setClassImgVo(ClassImgVO classImgVo) {
+		this.classImgVo = classImgVo;
+	}
+
+	
 	
 }

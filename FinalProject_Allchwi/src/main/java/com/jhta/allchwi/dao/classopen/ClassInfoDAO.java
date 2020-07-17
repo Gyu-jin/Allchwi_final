@@ -30,4 +30,17 @@ public class ClassInfoDAO {
 	public ClassInfoVO getInfo(int class_num) {
 		return session.selectOne(NAMESPACE+".getInfo",class_num);
 	}
+	
+	// 내수업 목록 하나 가져오기.
+	public HashMap<String, Object> getMyBoardInfo(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".myBoard_list", map);
+	}
+
+	public List<ClassInfoVO> getClassTitle(int ml_num) {
+		return session.selectList(NAMESPACE + ".title_list", ml_num);
+	}
+
+	public ClassInfoVO select(int class_num) {
+		return session.selectOne(NAMESPACE + ".select", class_num);
+	}
 }

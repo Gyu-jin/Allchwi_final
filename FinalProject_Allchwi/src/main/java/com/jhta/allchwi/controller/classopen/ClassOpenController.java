@@ -79,6 +79,8 @@ public class ClassOpenController {
 			@RequestParam("images")List<MultipartFile> images,
 			@RequestParam("curriculum[]")List<String> curriculum) {
 		
+		int ml_num = (int)session.getAttribute("ml_num");
+		vo.setMl_num(ml_num);
 		
 		String[] addr = vo.getClass_address().split(" ");
 		

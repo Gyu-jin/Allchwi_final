@@ -3,29 +3,50 @@ package com.jhta.allchwi.controller.classopen;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.classopen.ClassDateService;
+import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
 @Controller
 public class ClassDateController {
 	
 	@Autowired
 	private ClassDateService service;
+	@Autowired
+	private ClassInfoService infoService;
 	
 	@GetMapping("/class/classDate")
-	public String goClassDate() {
+	public String goClassDate(HttpSession session,int class_num,Model model) {
+		
+		ClassInfoVO vo = infoService.select(class_num);
+		
+		session.setAttribute("class_num", vo.getClass_num());
+		session.setAttribute("class_count", vo.getClass_count());
+		session.setAttribute("class_form", vo.getClass_form());
+		
+		List<ClassDateVO> list = service.select(class_num);
+		
+		for(ClassDateVO vo1 : list) {
+			System.out.println(vo1.getDate_num());
+			
+			System.out.println(vo1.getList().get(0).getTime_cnt());
+		}
 		
 		return ".classOpen.classDate";
 	}
@@ -45,13 +66,12 @@ public class ClassDateController {
 		int class_count =  Integer.parseInt((String)formdata.get("class_count"));
 		int class_form =  Integer.parseInt((String)formdata.get("class_form"));
 		int class_num =  Integer.parseInt((String)formdata.get("class_num"));
-		int class_month =  Integer.parseInt((String)formdata.get("monthDate"));
 		
 		String class_comment = (String)formdata.get("class_comment");
 		String class_msg = (String)formdata.get("class_msg");
-		System.out.println(class_form);
 		if(class_form == 0) {
-				
+			
+			ArrayList<ClassDateVO> list = new ArrayList<ClassDateVO>();	
 			for(int i = 0; i< class_count; i++) {
 				String startD = startDate.get(i);
 				String class_startTime = startTime.get(i);
@@ -61,30 +81,27 @@ public class ClassDateController {
 				try {
 					date = format.parse(startD);
 					Timestamp class_date = new Timestamp(date.getTime());
-					ClassDateVO vo = new ClassDateVO(0, 110, class_date, class_startTime, class_endTime, class_comment, class_msg, 0, 0, i+1, null);
-					System.out.println("--------- "+i+"번째 ---------");
-					System.out.println("class_num  : " + vo.getClass_num());
-					System.out.println("class_date : " + vo.getClass_date());
-					System.out.println("class_startTime : " + vo.getClass_endTime());
-					System.out.println("class_endTime : " + vo.getClass_endTime());
-					System.out.println("class_comment : " + vo.getClass_comment());
-					System.out.println("class_msg : " + vo.getClass_msg());
-					int n = service.insert(vo);
+					ClassDateVO vo = new ClassDateVO(0, class_num, class_date, class_startTime, class_endTime, class_comment, class_msg, 0, 0, i+1, null);
+					list.add(vo);
 				} catch (ParseException e) {
 					e.printStackTrace();
+					return  "fail";
 				}
 			}
+			int n = service.insert(list);
 		}else {
+			int class_month =  Integer.parseInt((String)formdata.get("monthDate"));
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			try {
 				String startD = startDate.get(0);
 				date = format.parse(startD);
 				Timestamp class_date = new Timestamp(date.getTime());
-				ClassDateVO vo = new ClassDateVO(0, 110, class_date, null, null, class_comment, class_msg, class_month, 0, 1, null);
+				ClassDateVO vo = new ClassDateVO(0, class_num, class_date, null, null, class_comment, class_msg, class_month, 0, 1, null);
 				int n = service.insert(vo);
 			} catch (ParseException e) {
 				e.printStackTrace();
+				return  "fail";
 			}
 		}	
 		

@@ -106,5 +106,15 @@ public class ClassInfoService {
 	public ClassInfoVO getInfo(int class_num) {
 		return infoDao.getInfo(class_num);
 	}
+	
+	public HashMap<String, Object> getMyBoardInfo(HashMap<String, Object> map) {
+		return infoDao.getMyBoardInfo(map);
+	}
+	public List<ClassInfoVO> getClassTitle(int ml_num) {
+		return infoDao.getClassTitle(ml_num);
+	}
+	public ClassInfoVO select(int class_num) {
+		return infoDao.select(class_num);
+	}
 
 }

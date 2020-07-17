@@ -1,12 +1,15 @@
 package com.jhta.allchwi.service.classopen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.classopen.ClassDateDAO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 
 @Service
 public class ClassDateService {
@@ -15,9 +18,37 @@ public class ClassDateService {
 	public List<ClassDateVO> list(int class_num){
 		return dao.list(class_num);
 	}
-
+	
+	@Transactional
+	public int insert(ArrayList<ClassDateVO> list) {
+		
+		int n = 0;
+		int ref = 0;
+		for(ClassDateVO vo:list) {
+			vo.setTime_ref(ref);
+			dao.insert(vo);
+			if(vo.getTime_cnt() == 1) {
+				ref = vo.getDate_num();
+				dao.update(ref);
+			}
+		}
+		
+		return n;
+	}
 	public int insert(ClassDateVO vo) {
 		
-		return dao.insert(vo);
+		int n = 0;
+		int ref = 0;
+		vo.setTime_ref(ref);
+		n += dao.insert(vo);
+		if(vo.getTime_cnt() == 1) {
+			ref = vo.getTime_ref();
+			dao.update(ref);
+		}
+		return n;
+	}
+
+	public List<ClassDateVO> select(int class_num) {
+		return dao.select(class_num);
 	}
 }

@@ -20,4 +20,12 @@ public class ClassDateDAO {
 	public int insert(ClassDateVO vo) {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
+
+	public int update(int ref) {
+		return session.update(NAMESPACE+".refUpdate",ref);
+	}
+
+	public List<ClassDateVO> select(int class_num) {
+		return session.selectList(NAMESPACE+".dateArray",class_num);
+	}
 }
