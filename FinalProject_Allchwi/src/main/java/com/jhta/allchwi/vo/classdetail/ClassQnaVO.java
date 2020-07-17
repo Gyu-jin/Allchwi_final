@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.classqna;
+package com.jhta.allchwi.vo.classdetail;
 
 import java.sql.Timestamp;
 
@@ -12,6 +12,7 @@ public class ClassQnaVO {
 	private String qna_content;
 	private int qna_ref;
 	private int qna_lev;
+	private int qna_status;
 	private ProfileVO pfv;
 	private MemberInfoVO miv;
 	private Timestamp qna_regdate;
@@ -101,6 +102,12 @@ public class ClassQnaVO {
 	}
 	public void setQna_regdate(Timestamp qna_regdate) {
 		this.qna_regdate = qna_regdate;
+	}
+	public int getQna_status() {
+		return qna_status;
+	}
+	public void setQna_status(int qna_status) {
+		this.qna_status = qna_status;
 	}
 	
 }

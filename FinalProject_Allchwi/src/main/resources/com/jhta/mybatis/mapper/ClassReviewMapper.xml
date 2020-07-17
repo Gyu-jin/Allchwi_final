@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.ClassReviewMapper">
+	<insert id="insertReview" parameterType="classReview">
+		insert into class_review
+		values(null,#{class_num},#{ml_num},#{curr_rating},#{ready_rating},#{kind_rating},
+		#{time_rating},#{review_content},0)
+	</insert>
+	<resultMap type="miv" id="miv">
+		<result column="mb_name" property="mb_name"/>
+	</resultMap>
+	<resultMap type="pfv" id="pfv">
+		<result column="pro_num" property="pro_num"/>
+	</resultMap>
+	<resultMap type="classReview" id="classReview">
+		<result column="review_num" property="review_num"/>
+		<result column="curr_rating" property="curr_rating"/>
+		<result column="ready_rating" property="ready_rating"/>
+		<result column="kind_rating" property="kind_rating"/>
+		<result column="time_rating" property="time_rating"/>
+		<result column="review_content" property="review_content"/>
+		<result column="review_status" property="review_status"/>
+		<result column="review_regdate" property="review_regdate"/>
+		<collection property="miv" resultMap="miv"/>
+		<collection property="pfv" resultMap="pfv"/>
+	</resultMap>
+	
+	<select id="reviewList" parameterType="int" resultMap="classReview">
+		select
+		r.review_num,r.curr_rating,r.ready_rating,r.kind_rating,r.time_rating,
+		r.review_content,r.review_regdate,
+		m.mb_name,p.pro_num
+		from class_review r join member_info m
+		on r.ml_num = m.ml_num
+		join profile_img p
+		on m.pro_num = p.pro_num
+		where class_num=#{class_num} and review_status=0
+		order by review_num desc
+	</select>
+
+</mapper>
+
+	

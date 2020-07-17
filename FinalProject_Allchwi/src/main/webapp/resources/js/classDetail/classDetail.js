@@ -59,7 +59,7 @@ function sendReply(qna_ref) {
 	id='test';
 	class_num='4';
 	ml_num='1';
-	if(qna_content== '' ){
+	if(reply_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
 		if (id!='test') {
@@ -94,7 +94,6 @@ function replyList(qna_ref) {
 	  $(data).each(function(){
 	    var qna_regdate = new Date(this.qna_regdate);
 	    qna_regdate = qna_regdate.toLocaleDateString("ko-US");
-	    alert(qna_regdate);
 	   str +="<li>"
 		   	+"<dl>"
 			+"<dt>"				

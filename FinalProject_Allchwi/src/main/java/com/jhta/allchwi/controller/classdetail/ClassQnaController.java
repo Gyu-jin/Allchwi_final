@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.classdetail.ClassQnaService;
-import com.jhta.allchwi.vo.classqna.ClassQnaVO;
+import com.jhta.allchwi.vo.classdetail.ClassQnaVO;
 
 
 @Controller

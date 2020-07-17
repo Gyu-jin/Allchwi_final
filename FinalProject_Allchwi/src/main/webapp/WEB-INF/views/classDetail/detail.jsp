@@ -227,16 +227,15 @@
 								<div class="review_list" id="bookmarkReview">
 									<ul>
 										<div id="innerReviewDiv">
-											<c:forEach var="index" begin="1" end="3">
+											 <c:forEach var="rlist" items="${rlist }"> 
 												<li><dl>
 														<dt>
 															<p class="profile_img"
 																style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-															<p class="name">임다은</p>
+															<p class="name">${rlist.miv.mb_name }</p>
 														</dt>
-														<dd>산책이란 무엇인가에 대해 제대로 배울 수 있는 시간이였습니다. 모찌짱짱 최고귀염둥이
-															옴쫍쫍 ㅠㅠ</dd>
-														<dd class="date">2020-06-27 00:16:41</dd>
+														<dd>${rlist.review_content }</dd>
+														<dd class="date">${rlist.review_regdate}</dd>
 													</dl></li>
 											</c:forEach>
 										</div>

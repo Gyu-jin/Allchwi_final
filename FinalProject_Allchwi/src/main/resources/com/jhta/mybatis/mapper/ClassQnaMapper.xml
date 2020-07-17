@@ -6,11 +6,11 @@
 	<insert id="insertQna" parameterType="classQna">
 		insert into class_qna
 		values(null,#{ml_num},#{class_num},#{qna_content},(select
-		ifnull(max(qna_ref)+1,1) from class_qna q),#{qna_lev},now())
+		ifnull(max(qna_ref)+1,1) from class_qna q),#{qna_lev},now(),0)
 	</insert>
 	<insert id="insertReply" parameterType="classQna">
 		insert into class_qna
-		values(null,#{ml_num},#{class_num},#{qna_content},#{qna_ref},#{qna_lev},now())
+		values(null,#{ml_num},#{class_num},#{qna_content},#{qna_ref},#{qna_lev},now(),0)
 	</insert>
 	
 	<resultMap type="miv" id="miv">
@@ -25,6 +25,7 @@
 		<result column="qna_lev" property="qna_lev"/>
 		<result column="qna_content" property="qna_content"/>
 		<result column="qna_regdate" property="qna_regdate"/>
+		<result column="qna_status" property="qna_status"/>
 		<collection property="miv" resultMap="miv"/>
 		<collection property="pfv" resultMap="pfv"/>
 	</resultMap>
@@ -37,7 +38,7 @@
 		on q.ml_num = m.ml_num
 		join profile_img p
 		on m.pro_num = p.pro_num
-		where class_num=#{class_num} and qna_lev=0
+		where class_num=#{class_num} and qna_lev=0 and qna_status=0
 		order by qna_ref desc,qna_num asc
 	</select>
 	<select id="commlist" parameterType="hashmap" resultMap="classQna">
@@ -49,6 +50,7 @@
 		join profile_img p
 		on m.pro_num = p.pro_num
 		where class_num=#{class_num} and qna_lev=1 and qna_ref=#{qna_ref}
+		and qna_status=0
 		order by qna_ref desc,qna_num asc
 	</select>
 

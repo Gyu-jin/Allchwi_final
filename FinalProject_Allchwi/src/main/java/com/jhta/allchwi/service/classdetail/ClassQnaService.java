@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.classdetail.ClassQnaDAO;
-import com.jhta.allchwi.vo.classqna.ClassQnaVO;
+import com.jhta.allchwi.vo.classdetail.ClassQnaVO;
 
 @Service
 public class ClassQnaService {
