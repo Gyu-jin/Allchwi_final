@@ -2,17 +2,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhta.mybatis.mapper.AdminPaymentClassMapper">
-	<select id="payment_list" resultType="com.jhta.allchwi.vo.admin.AdminPaymentVO">
-		select * from payment
+<mapper namespace="com.jhta.mybatis.mapper.AdminPaymentMapper">
+	
+	<select id="payment_list" resultType="com.jhta.allchwi.vo.admin.AdminPaymentVO" parameterType="hashmap">
+		select * from practice
+		
+		<if test="field!=null and field!=''">
+			where ${field} like CONCAT('%',#{keyword},'%')
+		</if>
+		 		  
+		limit #{startRow},4
 	</select>
-	
 
-	<select id="count" resultType="int" parameterType="hashmap"> 
-		select nvl(count(*),0) cnt from payment
-		<if test="field!=null and field!=''"> 
-			where ${field} like CONCAT('%',#{keyword},'%') 
-		</if> 
-	</select> 
-	
+
+	<select id="count" resultType="int" parameterType="hashmap">
+		select nvl(count(*),0) cnt from practice
+		<if test="field!=null and field!=''">
+			where ${field} like CONCAT('%',#{keyword},'%')
+		</if>
+	</select>
+
 </mapper>

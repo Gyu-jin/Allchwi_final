@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +16,12 @@ public class AdminPaymentDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.AdminPaymentMapper";	
 	
-	public List<AdminPaymentVO> payment_list(){
-		return session.selectList(NAMESPACE+".payment_list");
+	public List<AdminPaymentVO> payment_list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".payment_list", map);
+	}
+	
+	public int count(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".count",map);
 	}
 	
 	
