@@ -34,7 +34,7 @@
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">일자</th>
+							<th scope="col">일자  </th>
 							<th scope="col">포인트 적립/사용 내역</th>
 							<th scope="col">포인트</th>
 						</tr>
