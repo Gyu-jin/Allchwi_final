@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.AdminConfirmClassMapper">
+	<select id="payment_list" resultType="com.jhta.allchwi.vo.admin.AdminPaymentVO">
+		select * from payment
+	</select>
+	
+
+	<select id="count" resultType="int" parameterType="hashmap"> 
+		select nvl(count(*),0) cnt from payment
+		<if test="field!=null and field!=''"> 
+			where ${field} like CONCAT('%',#{keyword},'%') 
+		</if> 
+	</select> 
+	
+
+	
+</mapper>

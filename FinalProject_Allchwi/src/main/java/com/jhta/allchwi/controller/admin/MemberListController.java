@@ -22,8 +22,7 @@ public class MemberListController {
 		model.addAttribute("list", list);
 		return ".admin.memberlist";
 	}
-
-
+	
 	@GetMapping("/admin/memberlist/delete")
 	public String member_del(@RequestParam("ml_num") int ml_num, Model model) {
 		try {

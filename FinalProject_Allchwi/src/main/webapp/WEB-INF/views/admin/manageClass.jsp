@@ -9,8 +9,7 @@
 			<h2>수업관리</h2>
 			<div style="margin-left: 65%;">
 				<form action="${cp }/admin/manageClass" class="form-inline" style="display: inline-block">
-					<select class="form-control col-2" name="field"
-						style="display: inline-block; width: 700px;">
+					<select class="form-control col-2" name="field" style="display: inline-block; width: 700px;">
 						<option value="ml_num"
 							<c:if test="${field == 'ml_num'}">selected</c:if>>회원번호</option>
 						<option value="tutor_nickname"

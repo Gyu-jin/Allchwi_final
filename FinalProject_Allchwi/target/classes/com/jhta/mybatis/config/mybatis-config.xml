@@ -43,6 +43,8 @@
 		<mapper resource="com/jhta/mybatis/mapper/AdminManageClassMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminMemberListMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminConfirmClassMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/AdminPaymentMapper.xml"/>
+		
 		
 		<!-- Login관련 Mapper 경로 -->
 		<mapper resource="com/jhta/mybatis/mapper/MemberLoginMapper.xml"/>
