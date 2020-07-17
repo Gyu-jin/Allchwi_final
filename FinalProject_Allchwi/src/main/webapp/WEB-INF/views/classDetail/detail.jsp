@@ -310,7 +310,7 @@
 							<c:when test="${empty id}">
 								<div class="button_pay">
 									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
-										수업신청하기</a>
+										수업 신청하기</a>
 								</div>
 							</c:when>
 							<c:otherwise>
