@@ -4,8 +4,8 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
 <div id="content-wrapper" class="d-flex flex-column">
-<div class="container-fluid">
-	<div class="breadcrumb">
+	<div class="container-fluid">
+		<div class="breadcrumb">
 			<h2>
 				<a href="${cp }/admin/payment">회원결제내역</a>
 			</h2>
@@ -14,80 +14,92 @@
 					style="display: inline-block">
 					<select class="form-control col-2" name="field"
 						style="display: inline-block; width: 700px;">
-						<option value="num"
-							<c:if test="${field == 'num'}">selected</c:if>>번호</option>
+						<option value="num" <c:if test="${field == 'num'}">selected</c:if>>번호</option>
 						<option value="name"
 							<c:if test="${field == 'name'}">selected</c:if>>이름</option>
-						<option value="pwd"
-							<c:if test="${field == 'pwd'}">selected</c:if>>비밀번호</option>
+						<option value="pwd" <c:if test="${field == 'pwd'}">selected</c:if>>비밀번호</option>
 					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
 					<button class="btn btn-primary my-2 my-sm-0" type="submit">검색</button>
 				</form>
 			</div>
 		</div>
 
-	<table class="table table-hover">
-		<thead class="thead-dark">
-			<tr>
-				<th>번호</th>
-				<th>이름</th>
-				<th>비밀번호</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="vo" items="${list }">
+		<table class="table table-hover">
+			<thead class="thead-dark">
 				<tr>
-					<td>${vo.num }</td>
-					<td>${vo.name }</td>
-					<td>${vo.pwd }</td>
+					<th>번호</th>
+					<th>이름</th>
+					<th>비밀번호</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
-	
-	<div>
-		<ul class="pagination justify-content-center" style="margin: 20px 0">
-			<c:choose>
-				<c:when test="${pu.startPageNum>1 }">
-					<li class="page-item"><a class="page-link"
-						href="${cp }/admin/payment?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-				</c:otherwise>
-			</c:choose>
+			</thead>
+			<tbody id="tb">
+				<c:forEach var="vo" items="${list }">
+					<tr>
+						<td>${vo.num }</td>
+						<td>${vo.name }</td>
+						<td>${vo.pwd }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 
 
-
-			<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
+		<div>
+			<ul class="pagination justify-content-center" style="margin: 20px 0">
 				<c:choose>
-					<c:when test="${pu.pageNum==i}">
-						<li class="page-item active"><a class="page-link"
-							href="${cp }/admin/payment?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/admin/payment?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="${cp }/admin/payment?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
 
 
+				<!-- 중간 숫자번호 -->
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
+					<li class="page-item1"><a class="page-link"
+						onclick="pagination('${i }')"
+						href="${cp }/admin/payment?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a>
+					</li>
+				</c:forEach>
 
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/admin/payment?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 
-			<c:choose>
-				<c:when test="${pu.totalPageCount>pu.endPageNum }">
-					<li class="page-item"><a class="page-link"
-						href="${cp }/admin/payment?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
 	</div>
- 	
-</div>
 </div>
 
+<script>
+	function pagination(pageNum) {
+		$.getJSON({
+			url : "${cp}/admin/payment2",
+			data : {pageNum : pageNum},
+			success : fsunction(data) {
+				$(data).each(function(i, arr) {
+					var name = arr.name;						
+					var num = arr.num;
+					
+					$("#tb").append("<tr>");
+					$("#tb").append("<td>"+num+"</td>");
+					$("#tb").append("<td>"+name+"</td>");
+					$("#tb").append("</tr>");
+					
+					
+				});
+			}
+		});
+
+	}
+</script>

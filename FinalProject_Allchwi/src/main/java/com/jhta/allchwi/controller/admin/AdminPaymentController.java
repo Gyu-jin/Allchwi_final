@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.AdminPaymentService;
@@ -45,6 +47,29 @@ public class AdminPaymentController {
 		model.addAttribute("field", field);
 		
 		return ".admin.payment";
+	}
+	
+
+	@RequestMapping(value = "/admin/payment2", produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public List<AdminPaymentVO> goPayment2(Model model,String field,String keyword,
+			@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		
+		HashMap<String,Object> map = new HashMap<String, Object>();
+		map.put("field",field);
+		map.put("keyword", keyword);
+		
+		int totalRowCount = service.count(map);
+		PageUtil pu= new PageUtil(pageNum, totalRowCount, 5, 5);
+		
+		map.put("startRow", pu.getStartRow()-1);
+		map.put("endRow", pu.getEndRow());
+		
+		
+		List<AdminPaymentVO> list = service.payment_list(map);
+		
+		
+		return list;
 	}
 	
 	
