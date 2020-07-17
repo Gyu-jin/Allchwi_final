@@ -428,7 +428,7 @@ textarea.len980 {
 						<div class="col-md-5">
 		
 							<div class="label-1-content">
-								<span style="color: red">${vo.class_price } x ${vo.class_hour } x ${vo.class_count }</span>
+								<span style="color: red">${vo.class_price*vo.class_hour*vo.class_count }</span>
 							</div>
 							<div class="label-1-content">${point } 포인트</div>
 							<div class="label-1-content">
