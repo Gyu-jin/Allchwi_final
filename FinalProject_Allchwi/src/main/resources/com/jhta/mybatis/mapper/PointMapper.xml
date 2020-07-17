@@ -34,11 +34,11 @@
 	<select id="getTotal" resultType="int" parameterType="hashmap">
 		select 
 		(
-			select sum(point) from point where login_num = #{ml_num} and point_type = 's'
+			select NVL(sum(point),0) from point where login_num = #{ml_num} and point_type = 's'
 		)
 			+
 		(
-			select sum(point*-1) from point where login_num = #{ml_num} and point_type = 'u'
+			select NVL(sum(point*-1),0) from point where login_num = #{ml_num} and point_type = 'u'
 		) total
 		from dual
 	</select>

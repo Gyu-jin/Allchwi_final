@@ -14,7 +14,17 @@
 	<div class="container">
 		<div class="inner-cont" style="padding-top: 0">
 			<div class="label-title">이름 [ID]</div>
-			<div class="contents">${list[0].mb_name} [ ${list[0].id} ]</div>
+			<div class="contents">
+			<!-- a사용되거나 적립된 목록이 없을 경우 session에 저장된 mem 값을 꺼내서 출력 -->
+			<c:choose>
+				<c:when test="${list.size() > 0 }">
+					${list[0].mb_name} [ ${list[0].id} ]
+				</c:when>
+				<c:otherwise>
+					${mem.mb_name} [ ${mem.id} ]
+				</c:otherwise>
+			</c:choose>
+			</div>
 		</div>
 		<div class="inner-cont" style="padding-top: 0">
 			<div class="label-title">현재 보유 포인트</div>
