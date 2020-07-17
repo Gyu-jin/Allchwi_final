@@ -23,7 +23,7 @@ public class DetailSearchController {
 		
 		System.out.println("keyword : "+keyword);
 		
-		 for(String cate:cates) {
+		 for(String cate:cates) { 
 			 System.out.println("선택된 카테고리 번호 : " +cate);
 		 }
 		
