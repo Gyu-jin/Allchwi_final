@@ -44,62 +44,125 @@
 		</table>
 
 
-		<div>
+		<div id="pagination">
 			<ul class="pagination justify-content-center" style="margin: 20px 0">
-				<c:choose>
-					<c:when test="${pu.startPageNum>1 }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/admin/payment?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-					</c:otherwise>
-				</c:choose>
 
+				<li id="prev" class="page-item disabled"><a class="page-link"
+					href="#">이전</a></li>
 
 				<!-- 중간 숫자번호 -->
 				<c:forEach var="i" begin="${pu.startPageNum}"
 					end="${pu.endPageNum }">
-					<li class="page-item1"><a class="page-link"
-						onclick="pagination('${i }')"
-						href="${cp }/admin/payment?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a>
-					</li>
+					<li class="page-item1" name="aa"><a class="page-link">${i }</a></li>
 				</c:forEach>
 
-				<c:choose>
-					<c:when test="${pu.totalPageCount>pu.endPageNum }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/admin/payment?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-					</c:otherwise>
-				</c:choose>
+
+				<li id="next" class="page-item disabled"><a class="page-link"
+					href="#">다음</a></li>
+
 			</ul>
 		</div>
+
+
+		<input type="text" value="${pu.pageNum}" id="pageNum">
+
+		<button id="next"
+			style="border: none; outline: none; background: none">
+
+			<i class="fas fa-forward"></i>
+
+		</button>
 
 	</div>
 </div>
 
 <script>
-	function pagination(pageNum) {
+	$("li[name='aa']").click(function() {
+		var pageNum = $(this).text();
+
+		$("#tb").empty();
 		$.getJSON({
 			url : "${cp}/admin/payment2",
-			data : {pageNum : pageNum},
-			success : fsunction(data) {
+			data : {
+				pageNum : pageNum
+			},
+			success : function(data) {
 				$(data).each(function(i, arr) {
-					var name = arr.name;						
+					var name = arr.name;
 					var num = arr.num;
-					
+					var pwd = arr.pwd;
+
 					$("#tb").append("<tr>");
-					$("#tb").append("<td>"+num+"</td>");
-					$("#tb").append("<td>"+name+"</td>");
+					$("#tb").append("<td>" + num + "</td>");
+					$("#tb").append("<td>" + name + "</td>");
+					$("#tb").append("<td>" + pwd + "</td>");
 					$("#tb").append("</tr>");
-					
-					
 				});
 			}
 		});
+	});
 
+	
+
+	$("#next").click(function() {
+		var pageNum = $("li[name='aa']").text();//여기
+		alert(pageNum);
+		
+		$("#pagination").empty();
+		$("#pagination").append("<h1>씨발 </h1>");
+
+		$.ajax({
+			url : "${cp}/admin/payment2",
+			dataType : "json",
+			data : {pageNum : pageNum},
+			success : function(data) {
+				
+				
+				$(data).each(function(i, arr) {
+					var name = arr.name;
+					var num = arr.num;
+					var pwd = arr.pwd;
+					$("#tb").append("<tr>");
+					$("#tb").append("<td>" + num + "</td>");
+					$("#tb").append("<td>" + name + "</td>");
+					$("#tb").append("<td>" + pwd + "</td>");
+					$("#tb").append("</tr>");
+
+				});
+			}
+		})
+	});
+	
+	
+
+	var pageNumber = function(key, value) {
+		if (key == "pu") {
+			$("#pagingborder").empty();
+			for (var i = value.startPageNum; i <= value.endPageNum; i++) {
+				if (value.pageNum == i) {
+					if (i == value.startPageNum) {
+						$("#pagingborder").append(
+								"<a href='#'><span style='color : red;' onclick='pageclick("
+										+ i + ")'>[" + i + "]</span></a>");
+					} else {
+						$("#pagingborder").append(
+								"<a href='#'><span style='color : red; margin-left: 6px;' onclick='pageclick("
+										+ i + ")'>[" + i + "]</span></a>");
+					}
+				} else {
+					if (i == value.startPageNum) {
+						$("#pagingborder").append(
+								"<a href='#'><span onclick='pageclick(" + i
+										+ ")'>[" + i + "]</span></a>");
+					} else {
+						$("#pagingborder").append(
+								"<a href='#'><span style='margin-left: 6px;' onclick='pageclick("
+										+ i + ")'>[" + i + "]</span></a>");
+					}
+				}
+			}
+			$("#pageNum").val(value.pageNum);
+			paging(value.pageNum, value.totalPageCount);
+		}
 	}
 </script>

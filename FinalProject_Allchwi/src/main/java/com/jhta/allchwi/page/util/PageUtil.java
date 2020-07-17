@@ -11,8 +11,7 @@ public class PageUtil {
 	private int pageBlockCount;
 	private int totalRowCount;
 	public PageUtil() {}
-	public PageUtil(int pageNum,int totalRowCount,
-			int rowBlockCount,int pageBlockCount) {
+	public PageUtil(int pageNum,int totalRowCount, int rowBlockCount,int pageBlockCount) {
 		this.pageNum=pageNum;
 		this.totalRowCount=totalRowCount;
 		this.rowBlockCount=rowBlockCount;

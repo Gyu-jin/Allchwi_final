@@ -52,12 +52,9 @@ public class AdminPaymentController {
 
 	@RequestMapping(value = "/admin/payment2", produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<AdminPaymentVO> goPayment2(Model model,String field,String keyword,
-			@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+	public List<AdminPaymentVO> goPayment2(@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		
 		HashMap<String,Object> map = new HashMap<String, Object>();
-		map.put("field",field);
-		map.put("keyword", keyword);
 		
 		int totalRowCount = service.count(map);
 		PageUtil pu= new PageUtil(pageNum, totalRowCount, 5, 5);
