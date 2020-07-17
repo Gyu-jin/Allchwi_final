@@ -117,16 +117,17 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                <!-- a별명이 없을 경우 이름 출력 -->
-                <c:choose>
-               	<c:when test="${list.mb_nickname == null}">
-                	${list.mb_name}
-                </c:when>
-                <c:otherwise>
-                	${list.mb_nickname}                
-                </c:otherwise>
-                </c:choose>
+                <!-- a 세션 로그인넘버가 있을 때 vo에서 값을 가져온 뒤 별명이 없을 경우 이름 출력 -->
+	                <c:choose>
+	               		<c:when test="${mem.mb_nickname == null}">
+	                		${mem.mb_name}
+	                	</c:when>
+		                <c:otherwise>
+		                	${mem.mb_nickname}                
+		                </c:otherwise>
+		            </c:choose>
                 </span>
+                
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->

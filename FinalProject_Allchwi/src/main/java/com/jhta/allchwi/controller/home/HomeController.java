@@ -22,7 +22,7 @@ public class HomeController {
 	private MemberInfoService mis;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale,HttpServletRequest req, Model model) {
+	public String home(Locale locale,HttpServletRequest req) {
 		ServletContext sc=req.getSession().getServletContext();
 		sc.setAttribute("cp", req.getContextPath());
 		//a 로그인하여 세션에 회원번호가 저장되었을때 
@@ -31,9 +31,8 @@ public class HomeController {
 			int ml_num = (int)req.getSession().getAttribute("ml_num");
 			//a 회원번호 사용하여 vo에 이미지 및 이름, 닉네임 담기
 			ProfileVO pfv = mis.selectInfo(ml_num);
-			System.out.println(pfv + "vo라네");
 			//model에 vo 객체 담아 보내기
-			model.addAttribute("list", pfv);
+			sc.setAttribute("mem", pfv);
 		}
 		return ".main";
 	}
