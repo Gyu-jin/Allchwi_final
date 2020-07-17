@@ -49,8 +49,7 @@ public class ClassQnaController {
 	}
 	@GetMapping("/classDetail/commlist")
 	@ResponseBody
-	public List<ClassQnaVO> commList(@RequestParam HashMap<String, Object> map){
-		System.out.println(map.toString());
+	public List<ClassQnaVO> commList(@RequestParam HashMap<String, Object> map){;
 		List<ClassQnaVO> commlist=service.commList(map);
 		return commlist;
 	}

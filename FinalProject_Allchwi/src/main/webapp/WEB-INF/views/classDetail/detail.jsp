@@ -375,31 +375,33 @@ $(document).on('click', '#btn_after_wish', function () {
 	});
 });
 //qna작성
+var qna_content = null;
 $(document).on('click', '#btn_write_qna', function () {
 	qna_content = document.getElementById('qna_content').value;
-	if(qna_content==''){
+	if(qna_content== '' ){
 		alert('내용을 작성해주세요');
-	}
-	id='test';
-	class_num='4';
-	ml_num='1';
-	if (id!='test') {
-		alert('로그인이 필요합니다');
-	}else {
-		$.post('${cp}/classDetail/qna', {
-			class_num: class_num,
-			ml_num: ml_num,
-			qna_content:qna_content,
-			qna_lev: '0'
-		}, function (data,res) {
-			if (res=='success') {
-				alert('문의등록 성공');
-				qnaList();
-				$("#qna_content").val("");
-			} else {				
-				alert('문의실패');
-			}
-		});
+	}else{
+		id='test';
+		class_num='4';
+		ml_num='1';
+		if (id!='test') {
+			alert('로그인이 필요합니다');
+		}else {
+			$.post('${cp}/classDetail/qna', {
+				class_num: class_num,
+				ml_num: ml_num,
+				qna_content:qna_content,
+				qna_lev: '0'
+			}, function (data,res) {
+				if (res=='success') {
+					alert('문의등록 성공');
+					qnaList();
+					$("#qna_content").val("");
+				} else {				
+					alert('문의실패');
+				}
+			});
+		}
 	}
 });
 

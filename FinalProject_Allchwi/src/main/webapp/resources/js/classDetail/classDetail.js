@@ -33,11 +33,11 @@ function qnaList(){
 		 +"<td>"
 		 +"<form>"
 		 +"<div class='form-group'>"
-		 +"<textarea class='form-control' name='reply_content' cols='60' rows='3'></textarea>"
+		 +"<textarea class='form-control reply_content' id='reply_content"+this.qna_ref+"' cols='60' rows='3'></textarea>"
 		 +"</form>"
 		 +"</td>"
 		 +"<td>"
-		 +"<input type='submit' id='reply_send' onclick='sendReply("+this.qna_ref+")' class='btn btn-primary' value='등록'>"
+		 +"<input type='button' id='reply_send' onclick='sendReply("+this.qna_ref+")' class='btn btn-primary' value='등록'>"
 		 +"</td>"
 		 +"</tr>"
 		 +"</table>"
@@ -53,34 +53,38 @@ function qnaList(){
 	  $(".qna_list ul").html(str);
 	 });
 }
-//qna 답변
+//qna 답변작성
 function sendReply(qna_ref) {
-	reply_content = document.getElementsByName('reply_content').value;
+	var reply_content=$("#reply_content"+qna_ref).val();
 	id='test';
 	class_num='4';
 	ml_num='1';
-	if (id!='test') {
-		alert('로그인이 필요합니다');
-	}else {
-		$.post('/allchwi/classDetail/qnareply', {
-			class_num: class_num,
-			ml_num: ml_num,
-			qna_content:reply_content,
-			qna_lev: '1',
-			qna_ref: qna_ref
-		}, function (data,res) {
-			if (res=='success') {
-				alert('답변등록 성공');
-				replyList();
-				$("#reply_content").val("");
-			} else {				
-				alert('답변실패');
-			}
-		});
+	if(qna_content== '' ){
+		alert('내용을 작성해주세요');
+	}else{
+		if (id!='test') {
+			alert('로그인이 필요합니다');
+		}else {
+			$.post('/allchwi/classDetail/qnareply', {
+				class_num: class_num,
+				ml_num: ml_num,
+				qna_content: reply_content,
+				qna_lev: '1',
+				qna_ref: qna_ref
+			}, function (data,res) {
+				if (res=='success') {
+					alert('답변등록 성공');
+					$("#reply_content"+qna_ref).val("");
+					replyList(qna_ref);
+				} else {				
+					alert('답변실패');
+				}
+			});
+		}
 	}
 }
 
-//onclick으로
+//qna댓글목록불러오기
 function replyList(qna_ref) {
 	 var class_num = 4;
 	 $.getJSON("/allchwi/classDetail/commlist" + "?class_num=" + class_num + "&qna_ref=" + qna_ref
@@ -88,8 +92,9 @@ function replyList(qna_ref) {
 	  var str = "";
 	  var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
 	  $(data).each(function(){
-	   var qna_regdate = new Date(this.qna_regdate);
-	   qna_regdate = qna_regdate.toLocaleDateString("ko-US")
+	    var qna_regdate = new Date(this.qna_regdate);
+	    qna_regdate = qna_regdate.toLocaleDateString("ko-US");
+	    alert(qna_regdate);
 	   str +="<li>"
 		   	+"<dl>"
 			+"<dt>"				
@@ -97,8 +102,8 @@ function replyList(qna_ref) {
 			+ "background-image: url("+ img +")'>"
 			+"<p class='name'>"+ this.miv.mb_name +"</p>"
 			+"</dt>"					
-			+"<dd>"+this.qna_content+"</dd>" +
-			+"<dd class='date'>"+qna_regdate+"</dd>"
+			+"<dd>"+this.qna_content+"</dd>"
+			+"<dd class='date'>"+ qna_regdate+ "</dd>"
 			+"</dl>"		
 			+"</li>"  
 			+"</ul>"

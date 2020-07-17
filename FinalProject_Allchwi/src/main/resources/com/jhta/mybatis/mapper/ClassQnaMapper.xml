@@ -10,8 +10,7 @@
 	</insert>
 	<insert id="insertReply" parameterType="classQna">
 		insert into class_qna
-		values(null,#{ml_num},#{class_num},#{qna_content},(select qna_ref from
-		class_qna q where qna_num=#{qna_num}),#{qna_lev},now())
+		values(null,#{ml_num},#{class_num},#{qna_content},#{qna_ref},#{qna_lev},now())
 	</insert>
 	
 	<resultMap type="miv" id="miv">
