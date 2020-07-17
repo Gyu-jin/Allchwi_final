@@ -10,7 +10,8 @@
 	</insert>
 
 	<select id="list" parameterType="int" resultType="classDate">
-		select date_num, cd.class_num, class_title, class_date, class_startTime, class_endDate, class_comment, class_msg, date_regdate
+		select date_num, cd.class_num, class_title, class_price, class_hour, class_count,
+		class_date, class_startTime, class_endTime, class_comment, class_msg, date_regdate
 		from class_date cd, class_info ci
 		where cd.class_num=ci.class_num and cd.class_num=#{class_num}
 	</select>

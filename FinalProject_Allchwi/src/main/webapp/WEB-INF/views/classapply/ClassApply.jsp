@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 @font-face {
 	font-family: 'CookieRunOTF-Bold';
@@ -238,31 +239,34 @@ textarea.len980 {
 		<h3>클래스 신청서</h3>
 		<div class="steps">
 			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-				<li class="nav-item" role="presentation"><a
-					class="nav-link active" id="pills-home-tab" data-toggle="pill"
-					href="#pills-info" role="tab" aria-selected="true">01클래스 일정</a></li>
-				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="pills-profile-tab" data-toggle="pill" href="#pills-title"
-					role="tab" aria-selected="false">02클래스신청</a></li>
-				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="pills-contact-tab" data-toggle="pill" href="#pills-price"
-					role="tab" aria-selected="false">03결제</a></li>
+				<li class="nav-item" role="presentation">
+					<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-info" 
+					role="tab" aria-selected="true" style="pointer-events: none; ">01클래스 일정</a></li>
+				<li class="nav-item" role="presentation">
+					<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-title"
+					role="tab" aria-selected="false" style="pointer-events: none; ">02클래스신청</a></li>
+				<li class="nav-item" role="presentation">
+					<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-price"
+					role="tab" aria-selected="false" style="pointer-events: none; ">03결제</a></li>
 			</ul>
 		</div>
 	</div>
 	<form action="${cp}/class/applyOk" method="post">
-		<input type="hidden" name="ml_num" value="1">
+		<input type="hidden" name="ml_num" value="${ml_num }">
 		<div class="tab-content" id="pills-tabContent">
 			<!-- 01 클래스 일정 선택 탭-->
 			<div class="tab-pane fade show active" id="pills-info" role="tabpanel"
 				data-num="1">
 			
-			<c:forEach var="vo" items="${classDate_list }">
+			<c:forEach var="vo" items="${classDate_list }" begin="0" end="0">
 			
 				<div class="info1">
 					<span class="orange">${vo.class_title }</span>
 				</div>
+			</c:forEach>
+					
 				<div class="box">
+				<c:forEach var="vo" items="${classDate_list }" begin="0" end="0">
 					<div class="col-md-6">
 						<div class="title">
 							수업일정선택<b class="pink">*</b>
@@ -282,27 +286,31 @@ textarea.len980 {
 							</div>
 						</div>
 					</div>
-	
+				</c:forEach>
 					<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
 					<div class="col-md-6">
+						<c:forEach var="vo" items="${classDate_list }">
 					
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<input type="radio"
-										aria-label="Radio button for following text input"
-										name="date_num" value="${vo.date_num }">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+									
+										<input type="radio"
+											aria-label="Radio button for following text input"
+											name="date_num" value="${vo.date_num }" checked>
+									</div>
 								</div>
+		
+								<input type="text" class="form-control" disabled="disabled"
+									aria-label="Text input with radio button" 
+									value="시작 날짜 : <fmt:formatDate value="${vo.class_date }" pattern="yyyy-MM-dd"/> / 시작 시간 : ${vo.class_startTime}">
+									
 							</div>
-	
-							<input type="text" class="form-control" disabled="disabled"
-								aria-label="Text input with radio button" 
-								value="시작 날짜 : ${vo.class_date } / 시작 시간 : ${vo.class_startTime}">
-						</div>
+						</c:forEach>
 					</div>
 	
 				</div>
-			</c:forEach>
+			
 				
 	
 	
@@ -317,10 +325,11 @@ textarea.len980 {
 			<!-- 02 수업신청서 작성 탭 -->
 			<div class="tab-pane fade" id="pills-title" role="tabpanel"
 				data-num='2'>
-	
+			<c:forEach var="vo" items="${classDate_list }"  begin="0" end="0">
 				<div class="info1">
-					<span class="orange">모찌의 실전 산책!</span>
+					<span class="orange">${vo.class_title }</span>
 				</div>
+			</c:forEach>
 				<div class="box">
 					<div class="col-md-5">
 						<div class="title">
@@ -384,60 +393,63 @@ textarea.len980 {
 			<!-- 03 결제 탭  -->
 			<div class="tab-pane fade" id="pills-price" role="tabpanel"
 				data-num='3'>
-				<div class="info1">
-					<span class="orange">모찌의 실전 산책!</span>
-				</div>
-				<div class="box">
-					<div class="col-md-5">
-						<div class="title">
-							결제하기<b class="pink">*</b>
-							<div class="col-3">
-								<div class="tutor_t">
-									<dl class="tutor_txt">
-										<dt>
-											<div class="tutor_img">
-											</div>
-										</dt>
-										<dd>
-											결제 후에 신청이 완료됩니다.<br> 수업이 조기 마감될 수 있으니<br> 서둘러주세요 :)
-										</dd>
-									</dl>
+				<c:forEach var="vo" items="${classDate_list }"  begin="0" end="0">
+					<div class="info1">
+						<span class="orange">${vo.class_title }</span>
+					</div>
+				
+					<div class="box">
+						<div class="col-md-5">
+							<div class="title">
+								결제하기<b class="pink">*</b>
+								<div class="col-3">
+									<div class="tutor_t">
+										<dl class="tutor_txt">
+											<dt>
+												<div class="tutor_img">
+												</div>
+											</dt>
+											<dd>
+												결제 후에 신청이 완료됩니다.<br> 수업이 조기 마감될 수 있으니<br> 서둘러주세요 :)
+											</dd>
+										</dl>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="label-1">전체수업료</div>
-						<div class="label-1">보유적립금</div>
-						<div class="label-1">사용하기</div>
-						<div class="label-1">결제금액</div>
-						<div class="label-1">결제수단</div>
-					</div>
-	
-					<div class="col-md-5">
-	
-						<div class="label-1-content">
-							<span style="color: red">76,000원</span>
+						<div class="col-md-2">
+							<div class="label-1">전체수업료</div>
+							<div class="label-1">보유적립금</div>
+							<div class="label-1">사용하기</div>
+							<div class="label-1">결제금액</div>
+							<div class="label-1">결제수단</div>
 						</div>
-						<div class="label-1-content">3000 포인트</div>
-						<div class="label-1-content">
-							<input type="text" name="point" style="width: 88px">
-							포인트
-						</div>
-						<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
-							값</div>
-						<div class="label-1-content">
-							<div class="button_box2">
-								<button type="submit" class="btn btn-outline-danger">신용카드/체크카드</button>
+		
+						<div class="col-md-5">
+		
+							<div class="label-1-content">
+								<span style="color: red">${vo.class_price } x ${vo.class_hour } x ${vo.class_count }</span>
 							</div>
-	
+							<div class="label-1-content">${point } 포인트</div>
+							<div class="label-1-content">
+								<input type="text" name="point" style="width: 88px">
+								포인트
+							</div>
+							<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
+								값</div>
+							<div class="label-1-content">
+								<div class="button_box2">
+									<button type="submit" class="btn btn-outline-danger">신용카드/체크카드</button>
+								</div>
+		
+							</div>
+		
+		
+		
+		
 						</div>
-	
-	
-	
-	
 					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</form>
@@ -449,15 +461,26 @@ textarea.len980 {
 	});
 	// [결제하기] 버튼 클릭 시, 다음  탭으로 이동
 	$("#payBtn").click(function() {
-		$('#pills-tab li:nth-child(3) a').tab('show');
+		if($("#Introduction").val().length!=0 && $("#phone").val().length!=0){
+			$('#pills-tab li:nth-child(3) a').tab('show');
+		}else if($("#Introduction").val().length==0){
+			alert("튜터에게 보내는 소개 글을 작성해주세요!");
+			$("#Introduction").focus();
+		}else if($("#phone").val().length==0){
+			alert("휴대폰 번호를 입력해주세요!");
+			$("#phone").focus();
+		}
+		
 	});
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
 	$("#cardPay").click(function() {
+		
 		var date_num=$("input[name=classdate]:checked").val();
 		var stu_lev=$("input[name=levels]:checked").val();
 		console.log(date_num+","+stu_lev);
 		$.post("${cp}/class/applyOk", {"date_num":date_num,"stu_lev":stu_lev}, function(data) {
 			console.log("콜백" + data);
+			alert("수업을 신청하시겠습니까?");
 			if(data=="success"){
 				location.href="${cp}/class/success?date_num="+date_num;
 			}else{

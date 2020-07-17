@@ -15,6 +15,10 @@ public class ClassDateVO {
 	private int time_cnt;
 	private Timestamp date_regdate;
 	private String class_title; // 추가 (class_info)
+	private int class_price; // 추가 (class_info)
+	private int class_hour; // 추가 (class_info)
+	private int class_count; // 추가 (class_info)
+	
 	
 	public ClassDateVO() {}
 
@@ -123,6 +127,8 @@ public class ClassDateVO {
 		this.date_regdate = date_regdate;
 	}
 
+	// 추가 (class_info)
+	
 	public String getClass_title() {
 		return class_title;
 	}
@@ -131,5 +137,30 @@ public class ClassDateVO {
 		this.class_title = class_title;
 	}
 
+	public int getClass_price() {
+		return class_price;
+	}
+
+	public void setClass_price(int class_price) {
+		this.class_price = class_price;
+	}
+
+	public int getClass_hour() {
+		return class_hour;
+	}
+
+	public void setClass_hour(int class_hour) {
+		this.class_hour = class_hour;
+	}
+
+	public int getClass_count() {
+		return class_count;
+	}
+
+	public void setClass_count(int class_count) {
+		this.class_count = class_count;
+	}
+	
+	
 	
 }

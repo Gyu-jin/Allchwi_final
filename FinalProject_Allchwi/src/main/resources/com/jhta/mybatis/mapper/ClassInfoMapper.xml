@@ -13,106 +13,45 @@
 	</insert>
 	
 	
-	<!-- only small location 검색 sql -->
+	<!-- '작은 지역' 검색 sql -->
 	<sql id="sloc">
 		<if test="sloc_num>0 ">
 			and sloc_num=#{sloc_num}
 		</if>	
 	</sql>
 	
-	
+	<!-- '키워드' 검색 sql -->
 	<sql id="keyword">
 		<if test="keyword!=null and keyword!=''">
 			and class_title like '%${keyword}%'
 		</if>
 	</sql>
 	
+	<!-- '날짜' 검색 sql -->
 	<sql id="date">
 		<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
 			and class_date between date('${startDate}') and date('${endDate}')+1
 		</if>
 	</sql>
 	
-
-	
-	
-	<!-- keyword & small location 검색 sql -->
-	<sql id="key">
-	<choose>
-		<when test="keyword!=null and keyword!='' and sloc_num==-1">
-			<where>
-				class_title like '%${keyword}%'
-				<include refid="date"/>
-			</where>
-		</when>
-		<when test="keyword!=null and keyword!='' and sloc_num>0">
-			<where>
-				class_title like '%${keyword}%' and sloc_num=#{sloc_num}
-				<include refid="date"/>
-			</where>
-		</when>
-	</choose>
-	</sql>
-	
-	
-	<!-- keyword 검색 sql -->
-	<sql id="keyword_count">
-		<if test="keyword!=null and keyword!=''">
-			(select class_num 
-			from class_info 
-			<include refid="key"/>
-			) a
-		</if>	
-	</sql>
-
-	
-
-	
-	<!-- category 검색 sql -->
-	
+	<!-- '작은 카테고리' 검색 sql -->
 	<sql id="smallcategory">
-		<choose>
-			<when test="scategory_num>0 ">
-				and scategory_num=#{scategory_num}
-			</when>
-		</choose>
+		<if test="scategory_num>0 ">
+			and scategory_num=#{scategory_num}
+		</if>
 	</sql>
+	
+	<!-- '큰 카테고리' 검색 sql -->
 	<sql id="bigcategory">
 		<if test="bcategory_num>0">
 			and b.bcategory_num=#{bcategory_num}
 		</if>
 	</sql>
-
-		
 	
-	<select id="keyword_list" parameterType="hashmap" resultType="classinfo">
-		select class_num, class_title, tutor_nickname 
-		from class_info 
-		<include refid="key"/>
-		order by class_num desc
-		limit #{startRow},6
-	</select>
-	
-
+	<!-- 검색 조건에 맞는 전체 글 정보 가져오는 sql -->
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num
-		from 
-				(
-					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
-					from small_category s, big_category b
-					where s.bcategory_num=b.bcategory_num 				
-					<include refid="smallcategory"/>								
-					<include refid="bigcategory"/>	
-				)a, class_info c 
-		where a.scategory_num=c.scategory_num 
-		<include refid="sloc"/>		
-		order by class_num desc
-		limit #{startRow},6
-	</select>
-
-	<select id="date_list" parameterType="hashmap" resultType="classinfo">
 		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num, 
-		date_num, class_date, class_startTime, class_endDate 
+		date_num, class_date
 		from 
 				(
 					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
@@ -122,6 +61,7 @@
 					<include refid="bigcategory"/>	
 				)a, class_info c , class_date cd
 		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+		and class_auth=2 and class_status=0
 		<include refid="keyword"/>		
 		<include refid="sloc"/>		
 		<include refid="date"/>
@@ -129,120 +69,29 @@
 		limit #{startRow},6
 	</select>
 	
-	
-	
-	
-	<sql id="small_count">	
-		<choose>
-			<when test="scategory_num>0 and sloc_num==-1">
-				class_info where scategory_num=#{scategory_num}	
-			</when>
-			<when test="scategory_num>0 and sloc_num>0">
-				class_info where scategory_num=#{scategory_num}	
-				and sloc_num=#{sloc_num}
-			</when>
-				
-		</choose>
-		
-	</sql>
-	
-	<sql id="big_count">
-		<if test="bcategory_num>0">
-			(
-				select class_num, c.scategory_num from
-					(
-						select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
-						from small_category s, big_category b
-						where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}
-					) x , class_info c
-			        where x.scategory_num=c.scategory_num
-			) a
-		</if>
-	</sql>
-	
-	
+	<!-- totalRowCount : 검색 조건에 맞는 총 글 갯수 구하는 sql -->
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from
-		    <choose>
-				<when test="startDate!=null and startDate!='' and endDate!=null and endDate!='' and bcategory_num>0">
-					(
-						select cd.class_num, sloc_num from
+		   (
+			   	select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num, 
+				date_num, class_date
+				from 
 						(
-							select class_num, class_title, sloc_num from
-							(
-								select s.bcategory_num, bcategory_name, scategory_num, scategory_name          
-								from small_category s, big_category b         
-								where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}    
-							) x , class_info c
-							where x.scategory_num=c.scategory_num
-						) a, class_date cd
-						where a.class_num=cd.class_num
-						and class_date between date('${startDate}') and date('${endDate}')+1
-						<if test="sloc_num>0">
-							and sloc_num=#{sloc_num}
-						</if>
-					) cnt
-				
-				</when>
-				<when test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
-					class_info c, class_date cd
-					where c.class_num=cd.class_num 
-					and class_date between date('${startDate}') and date('${endDate}')+1
-						<if test="keyword!=null and keyword!=''">
-							and class_title like '%${keyword}%'
-						</if>
-						<if test="scategory_num>0 and sloc_num==-1">
-							and scategory_num=#{scategory_num}
-						</if>
-						<if test="scategory_num>0 and sloc_num>0">
-							and scategory_num=#{scategory_num}	
-							and sloc_num=#{sloc_num}
-						</if>
-				</when>
-		    	<when test="keyword!=null and keyword!=''">
-					(select class_num 
-					from class_info where class_title like '%${keyword}%'
-					<choose>
-						<when test="keyword!=null and keyword!='' and sloc_num>0">
-							and sloc_num=#{sloc_num}
-						</when>
-					</choose>
-					) a
-				</when>
-		    	<when test="scategory_num>0 and sloc_num==-1">
-					class_info where scategory_num=#{scategory_num}
-
-				</when>
-				<when test="scategory_num>0 and sloc_num>0">
-					class_info where scategory_num=#{scategory_num}	
-					and sloc_num=#{sloc_num}
-				</when>
-		    	<when test="bcategory_num>0">
-					(
-						select class_num, c.scategory_num from
-							(
-								select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
-								from small_category s, big_category b
-								where s.bcategory_num=b.bcategory_num and s.bcategory_num=#{bcategory_num}
-							) x , class_info c
-					        where x.scategory_num=c.scategory_num
-					) a
-				</when>
-		    </choose>	
-			
+							select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
+							from small_category s, big_category b
+							where s.bcategory_num=b.bcategory_num 				
+							<include refid="smallcategory"/>								
+							<include refid="bigcategory"/>	
+						)a, class_info c , class_date cd
+				where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+				and class_auth=2 and class_status=0
+				<include refid="keyword"/>		
+				<include refid="sloc"/>		
+				<include refid="date"/>
+				order by class_num desc			   
+		   )z		   			
 	</select>
-	
-<!--  
 
-	<select id="count" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) from
-		    <include refid="small_count"/>
-			<include refid="big_count"/>	
-			<include refid="keyword_count"/>	
-			
-	</select>
-	-->	
-	
 	
 	<select id="getInfo" parameterType="int" resultType="classinfo">
 		select * from class_info where class_num=#{class_num}

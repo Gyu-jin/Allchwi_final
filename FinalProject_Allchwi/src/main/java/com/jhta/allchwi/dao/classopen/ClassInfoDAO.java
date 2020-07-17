@@ -18,22 +18,15 @@ public class ClassInfoDAO {
 	public int insert(ClassInfoVO vo) {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
-	//keyword 검색
-	public List<ClassInfoVO> keyword_list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".keyword_list", map);
-	}
-	
-	//category 검색 
+	// 검색 조건에 맞는 전체 글 list
 	public List<ClassInfoVO> list(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".list",map);
 	}
-	//date 포함 검색
-	public List<ClassInfoVO> date_list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".date_list",map);
-	}
+	// 검색 조건에 맞는 전체 글 갯수
 	public int count(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
+	
 	public ClassInfoVO getInfo(int class_num) {
 		return session.selectOne(NAMESPACE+".getInfo",class_num);
 	}

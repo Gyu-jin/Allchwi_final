@@ -43,15 +43,7 @@ public class ClassInfoService {
 	public int insert(ClassInfoVO vo) {
 		return infoDao.insert(vo);
 	}
-	//keyword 검색
-	public List<ClassInfoVO> keyword_list(HashMap<String, Object> map){
-		return infoDao.keyword_list(map);
-	}
-	//date 포함 검색
-	public List<ClassInfoVO> date_list(HashMap<String, Object> map){
-		return infoDao.date_list(map);
-	}
-	//category 검색
+	
 	public List<ClassInfoVO> list(HashMap<String, Object> map){
 		return infoDao.list(map);
 	}

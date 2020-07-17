@@ -64,11 +64,11 @@ public class ListSearchController {
 			System.out.println(startDate + "," + endDate);
 			int totalRowCount=service.count(map);
 			PageUtil pu=new PageUtil(pageNum, totalRowCount, 6, 5);
-			System.out.println("4번 경우 endPageNUm : "+pu.getEndPageNum());
-			System.out.println("4번 경우 총 글의 갯수 : " +totalRowCount);
+			System.out.println("endPageNUm : "+pu.getEndPageNum());
+			System.out.println("총 글의 갯수 : " +totalRowCount);
 			int startRow=pu.getStartRow()-1;
 			map.put("startRow", startRow);	
-			List<ClassInfoVO> list=service.date_list(map);
+			List<ClassInfoVO> list=service.list(map);
 
 		
 		

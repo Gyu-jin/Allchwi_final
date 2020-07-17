@@ -12,6 +12,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
 <style>
+@font-face {
+	font-family: 'CookieRunOTF-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+h1,h3{
+	font-family: 'CookieRunOTF-Bold';
+}
 .form-inline {
 	display: block;
 	flex-flow: row wrap;
@@ -267,8 +278,8 @@
 
 <div class="jumbotron">
 <h1>${bcategory_name }</h1>
-<h5>${scategory_name }</h5>
-<h5>${sloc_num }</h5>
+<h3>${scategory_name }</h3>
+
 	<select class="custom-select my-1 mr-sm-2"
 		id="inlineFormCustomSelectPref2">
 		<option selected value="1">정확도순</option>
@@ -295,7 +306,8 @@
 							<div class='d-flex justify-content-between align-items-center'>
 							<div class='btn-group'>
 								<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>
-								<button type='button' class='btn btn-sm btn-outline-secondary'>위시리스트</button>
+								<button type='button' class='btn btn-sm btn-outline-secondary'>
+								<a href="${cp }/class/apply?class_num=${vo.getClass_num()}&ml_num=${sessionScope.ml_num}">수업신청</a></button>
 							</div>
 							<small class='text-muted'>${status.count }번째 수업</small>
 							</div>
