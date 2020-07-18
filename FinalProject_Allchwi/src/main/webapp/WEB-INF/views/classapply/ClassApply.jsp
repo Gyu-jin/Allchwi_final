@@ -428,15 +428,19 @@ textarea.len980 {
 						<div class="col-md-5">
 		
 							<div class="label-1-content">
-								<span style="color: red">${vo.class_price*vo.class_hour*vo.class_count }</span>
+								${vo.class_price*vo.class_hour*vo.class_count }
+								<input type="hidden" id="classPay" value="${vo.class_price*vo.class_hour*vo.class_count }">
 							</div>
-							<div class="label-1-content">${point } 포인트</div>
+							<div class="label-1-content">${point } 포인트
+								<input type="hidden" id="ppoint" value="${point }">
+							</div>
 							<div class="label-1-content">
-								<input type="text" name="point" style="width: 88px">
+								<input type="text" id="point" name="point" style="width: 88px">
 								포인트
 							</div>
-							<div class="label-1-content" style="width: 200px">수업료 - 사용포인트
-								값</div>
+							<div class="label-1-content" style="width: 200px" id="pointDiv">
+								
+							</div>
 							<div class="label-1-content">
 								<div class="button_box2">
 									<button type="submit" class="btn btn-outline-danger">신용카드/체크카드</button>
@@ -472,6 +476,24 @@ textarea.len980 {
 		}
 		
 	});
+	//포인트 
+	$("#point").on("change", function() {
+		$("#pointDiv").empty();
+	    var usePoint = $(this).val();
+	    var classPay= $("#classPay").val();
+	    var ppoint= $("#ppoint").val();
+	    console.log(classPay );
+	    console.log(ppoint );
+	    console.log(usePoint );
+	    if(usePoint>ppoint){
+	    	alert("보유하신 포인트보다 작은 금액만 입력 가능합니다!");
+	    	$("#pointDiv").focus();
+	    }else{
+	    	$("#pointDiv").append("<span style='color: red'>"+ (classPay - usePoint)	+"</span>");
+	    }
+	   
+	});
+	
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
 	$("#cardPay").click(function() {
 		
