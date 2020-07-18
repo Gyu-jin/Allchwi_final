@@ -35,20 +35,28 @@ public class ClassDateService {
 		
 		return n;
 	}
+	
 	public int insert(ClassDateVO vo) {
 		
 		int n = 0;
 		int ref = 0;
-		vo.setTime_ref(ref);
+		
 		n += dao.insert(vo);
-		if(vo.getTime_cnt() == 1) {
-			ref = vo.getTime_ref();
-			dao.update(ref);
-		}
+		ref = vo.getTime_ref();
+		dao.update(ref);
+		
 		return n;
 	}
 
 	public List<ClassDateVO> select(int class_num) {
 		return dao.select(class_num);
+	}
+	@Transactional
+	public void deleteDate(List<Integer> delDate) {
+		
+		for (int i = 0; i < delDate.size(); i++) {
+			dao.deleteDate(delDate.get(i));
+		}
+		
 	}
 }

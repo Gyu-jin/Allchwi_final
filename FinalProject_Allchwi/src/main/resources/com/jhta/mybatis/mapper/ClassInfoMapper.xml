@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="myBoard_list" parameterType="hashmap" resultType="hashmap">
-		SELECT aa.class_title,aa.class_num,aa.class_status,aa.class_regdate,
+		SELECT aa.class_title,aa.class_num,aa.class_status,aa.class_regdate,aa.class_hour,
 		aa.class_auth,cover.cover_num 
 		FROM class_info aa,
 		( 

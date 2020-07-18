@@ -28,4 +28,8 @@ public class ClassDateDAO {
 	public List<ClassDateVO> select(int class_num) {
 		return session.selectList(NAMESPACE+".dateArray",class_num);
 	}
+
+	public int deleteDate(Integer date_num) {
+		return session.delete(NAMESPACE+".delDate",date_num);
+	}
 }

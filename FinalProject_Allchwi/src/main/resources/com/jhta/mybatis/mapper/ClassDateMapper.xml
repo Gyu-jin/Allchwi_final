@@ -51,5 +51,10 @@
 	<update id="refUpdate" parameterType="int">
 		update class_date set time_ref=#{ref} where date_num=#{ref}
 	</update>
+	
+	<delete id="delDate" parameterType="int">
+		delete from class_date where time_ref=#{date_num}
+	</delete>
+	
 </mapper>
 

@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="${cp}/resources/css/classEnrollment/classDate.css">
 <link id="cp" data-contextPath="${cp}"/>
 <script>
-	function add_date(val){
+	var updateCnt = 0;
+	function add_date(){
 		url = "${cp}/class/dateModal";
 		$('#regiDate').attr('src', url);
 		
@@ -22,16 +23,6 @@
 		$('#dim2').hide();
 	}
 		
-	function add_date2(val, val2){
-		url = "/tutor/registerRegionDetail.php?dateId="+val+"&id="+val2;
-		$('#regiDate').attr('src', url);	
-		setTimeout(
-			function() 
-			{
-				$('#dim').show();
-				$('#dim2').show();
-			}, 300);
-		}
 	
 	function fold(elm){
 		if($(elm).children('.subtext').css('display')=='none'){
@@ -42,6 +33,7 @@
 			$(elm).removeClass('on').find('.subtext').hide();
 		}
 	}
+	
 	function getClassDate(val){
 		
 		var startDate1 = $("#regiDate").contents().find('#startDate1').val();
@@ -64,9 +56,9 @@
 					"<img src='${cp}/resources/img/icon_del_bk.png'>삭제"+
 				"</div>");
 			
-			div.append("<input type='hidden' id='startDate1' class='cal' name='startDate[]' value='"+ startDate1 +"'>");
-			div.append("<input type='hidden' id='startTime1' class='cal' name='startTime[]' value='"+ startTime1 +"'>");
-			div.append("<input type='hidden' id='endTime1' class='cal' name='endTime[]' value='"+ endTime1 +"'>");
+			div.append("<input type='hidden' class='cal' name='startDate[]' value='"+ startDate1 +"'>");
+			div.append("<input type='hidden' class='cal' name='startTime[]' value='"+ startTime1 +"'>");
+			div.append("<input type='hidden'  class='cal' name='endTime[]' value='"+ endTime1 +"'>");
 			let subtext = $("<div class='subtext'></div>").appendTo(div);
 			
 			var classCount = $("#regiDate").contents().find('#classCount').val();
@@ -80,9 +72,9 @@
 					"<font>"+i+"회</font> : "+ startDate + classTime +
 				"</div>")
 				
-				subtext.append("<input type='hidden' id='startDate"+ i +"' class='cal' name='startDate[]' value='"+ startDate +"'>");
-				subtext.append("<input type='hidden' id='startTime"+ i +"' class='cal' name='startTime[]' value='"+ startTime +"'>");
-				subtext.append("<input type='hidden' id='endTime"+ i +"' class='cal' name='endTime[]' value='"+ endTime +"'>");
+				subtext.append("<input type='hidden' class='cal' name='startDate[]' value='"+ startDate +"'>");
+				subtext.append("<input type='hidden' class='cal' name='startTime[]' value='"+ startTime +"'>");
+				subtext.append("<input type='hidden' class='cal' name='endTime[]' value='"+ endTime +"'>");
 			}
 		}else{
 			var monthDate = $("#regiDate").contents().find('#monthDate').val();
@@ -92,11 +84,20 @@
 				"<div class='verify left10' onclick='$(this).parent().remove();'>"+
 					"<img src='${cp}/resources/img/icon_del_bk.png'>삭제"+
 				"</div>");
-			div.append("<input type='hidden' id='startDate1' class='cal' name='startDate[]' value='"+ startDate1 +"'>");
-			div.append("<input type='hidden' id='monthDate' class='cal' name='monthDate' value='"+ monthDate +"'>");
+			div.append("<input type='hidden' class='cal' name='startDate[]' value='"+ startDate1 +"'>");
+			div.append("<input type='hidden' class='cal' name='monthDate[]' value='"+ monthDate +"'>");
 		}
-		
+		updateCnt++;
 		cls_date();
+	}
+	
+	function del_cal(dateNum){
+		
+		let delInput = document.createElement("input");
+		$(delInput).attr('type','hidden');
+		$(delInput).attr('name','delDate');
+		$(delInput).val(dateNum);
+		$('#certifiArr').append(delInput);
 	}
 	
 	$(function(){
@@ -106,9 +107,10 @@
 			e.preventDefault();
 			
 			var formData = new FormData(this);
+			formData.append('updateCnt',updateCnt);
 			$.ajax({
 				type: 'POST',
-				url: cp +'/class/classModal',
+				url: cp +'/class/classInsert',
 				data: formData,
 				contentType: false,
 				processData: false,
@@ -125,7 +127,8 @@
 		});
 		
 	});
-					</script>
+	
+</script>
 <div class="tutor_cont">	
 	<div class="dim" id="dim" style="display: none;"></div>
 	<div class="dim2" id="dim2" style="display: none;">
@@ -149,11 +152,18 @@
 						
 							<div id="certifi" class="certificate class" onclick="fold(this)">
 								<div class="intext">
-									<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/> ${date.class_startTime } ~ ${date.class_endTime }
-									<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
-									<img src="${cp}/resources/img/icon_up.png" class="up">
+									<c:choose>
+										<c:when test="${class_form==0}">
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${date.class_startTime } ~ ${date.class_endTime }
+											<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
+											<img src="${cp}/resources/img/icon_up.png" class="up">
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; #{class_month }개월										
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="verify left10" onclick="$(this).parent().remove();">
+								<div class="verify left10" onclick="del_cal(${date.date_num});$(this).parent().remove();">
 									<img src="${cp}/resources/img/icon_del_bk.png">삭제
 								</div>
 								<div class="subtext">
@@ -168,7 +178,7 @@
 							
 						</c:forEach>
 					</div>
-					<div class="plus button" style="margin-top:20px" onclick="add_date(1)">
+					<div class="plus button" style="margin-top:20px" onclick="add_date()">
 						<img src="${cp}/resources/img/icon_add_wh.png"> 수업일정 추가
 					</div>
 				</div>

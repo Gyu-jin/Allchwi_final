@@ -159,15 +159,10 @@
 					$('#popClassTime').hide();
 				}
 				
-				function getClassDate(){
-					
-					
-					
-				}
 				//시간표시
 				function selectTime(val) {
 
-					var classTime = parseInt() * 10; //회당 학습시간
+					var classTime = parseInt('${class_hour}') * 10; //회당 학습시간
 					var startTime = val; //시작시간
 					var endTime = val + classTime; //종료시간 
 					var popClassTimes = $('#popClassTimes').val(); //회차
@@ -230,7 +225,7 @@
 <body style="margin: 8px; background: transparent;">
 <form id="frm" enctype="multipart/form-data">
 	<input type="hidden" id="monthDate" class="cal"  name="monthDate" value="0">
-	<input type="hidden" id="classCount" class="cal" name="classCount" value="4">			
+	<input type="hidden" id="classCount" class="cal" name="classCount" value="${class_count}">			
 	<div class="tutor_cont">
 		<div class="phone_box region_box" id="class_box" style="top:50px">
 			<div class="head">
