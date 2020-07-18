@@ -21,4 +21,9 @@ public class ProfileImgDAO {
 	public int updateImg(ProfileImgVO piv) {
 		return session.update(NAMESPACE + ".updateImg", piv);
 	}
+	
+	//이미지 출력
+	public ProfileImgVO getImg(int pro_num) {
+		return session.selectOne(NAMESPACE+".imgSelect", pro_num);
+	}
 }

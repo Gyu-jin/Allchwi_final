@@ -6,5 +6,9 @@
 	<insert id="insert" parameterType="classImg">
 		insert into class_img values(null, #{class_num}, #{cover_name}, #{cover_file},now())
 	</insert>
+	
+	<select id="imgSelect" parameterType="int" resultType="classImg">
+		select cover_name,cover_file from class_img where cover_num=#{cover_num}
+	</select>
 </mapper>
 

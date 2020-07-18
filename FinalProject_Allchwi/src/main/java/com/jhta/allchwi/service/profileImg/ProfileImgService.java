@@ -14,4 +14,8 @@ public class ProfileImgService {
 	public int insert(ProfileImgVO vo) {
 		return dao.insert(vo);
 	}
+	
+	public ProfileImgVO getImg(int pro_num) {
+		return dao.getImg(pro_num);
+	}
 }

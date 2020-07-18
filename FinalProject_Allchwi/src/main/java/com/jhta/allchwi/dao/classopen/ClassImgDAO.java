@@ -15,6 +15,10 @@ public class ClassImgDAO {
 	public int insert(ClassImgVO vo) {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
+
+	public ClassImgVO getImg(int cover_num) {
+		return session.selectOne(NAMESPACE + ".imgSelect", cover_num);
+	}
 	
 	
 }

@@ -24,10 +24,10 @@
 	
 	<select id="myBoard_list" parameterType="hashmap" resultType="hashmap">
 		SELECT aa.class_title,aa.class_num,aa.class_status,aa.class_regdate,
-		aa.class_auth,cover.cover_name,cover.cover_file 
+		aa.class_auth,cover.cover_num 
 		FROM class_info aa,
 		( 
-			SELECT  class_num , cover_name , cover_file , 
+			SELECT  class_num , cover_num , 
 			ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
 			FROM class_img 
 		) cover

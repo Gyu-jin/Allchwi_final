@@ -22,11 +22,9 @@
 		<h3>수업상태</h3>
 		<div class="static-box">
 			<div class="image"
-				style="background-image: url(//s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/s_139514f9729f8ab233882a8bb5ab5844a5a9b461.png);"
-				onclick="location.href='/Talent/Detail/26923'"
-				style="cursor:pointer;"></div>
+				style="background-image: url(${cp}/class/getimg?cover_num=${list.cover_num });"></div>
 			<div class="info-box">
-				<img src="https://front-img.taling.me/Content/Images/icon_img_area.png" class="more-text cursor" onclick="location.href='/My/TutorGuidea';">
+				<img src="https://front-img.taling.me/Content/Images/icon_img_area.png" class="more-text cursor">
 				<div>
 					<h3 onclick="location.href='/Talent/Detail/26923'" style="cursor: pointer">${list.class_title }</h3>
 				</div>

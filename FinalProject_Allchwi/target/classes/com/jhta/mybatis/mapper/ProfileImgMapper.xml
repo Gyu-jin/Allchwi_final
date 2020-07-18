@@ -18,6 +18,10 @@
 	<update id="updateImg" parameterType="piv">
 		update profile_img set pro_img = #{pro_img}, pro_filename = #{pro_filename}, pro_regdate = now() where pro_num = #{pro_num}
 	</update>
+	
+	<select id="imgSelect" parameterType="int" resultType="piv">
+		select pro_filename,pro_img from profiles_img where pro_num=#{pro_num}
+	</select>
 </mapper>
 
 

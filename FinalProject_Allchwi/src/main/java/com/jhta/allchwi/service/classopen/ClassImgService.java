@@ -14,4 +14,8 @@ public class ClassImgService {
 	public int insert(ClassImgVO vo) {
 		return dao.insert(vo);
 	}
+	
+	public ClassImgVO getImg(int cover_num) {
+		return dao.getImg(cover_num);
+	}
 }
