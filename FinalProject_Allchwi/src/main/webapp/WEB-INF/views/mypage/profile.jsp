@@ -19,7 +19,8 @@
 				<div class="pf"
 					style="background-image: url(/allchwi/resources/img/profile-defaultImg.jpg)"
 					id="picture-cover">
-					<img class="pf" id="proImg" src="/allchwi/resources/img/profile-defaultImg.jpg" 
+					<!-- 이미지 번호를 통해 이미지 출력 -->
+					<img class="pf" id="proImg" src="${cp}/mypage/getimg?pro_num=${result.pro_num}" 
 					style="margin: 0; z-index: 4;">
 					<!-- a 카메라 이미지를 버튼처럼 사용  -->
 					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png"
