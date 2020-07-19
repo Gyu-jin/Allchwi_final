@@ -94,6 +94,12 @@
            		</a>
                 
             </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="${cp}/mypage/myClassList" id="tutorEnroll" role="button">
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">수강목록</span>
+           		</a>
+                
+            </li>
 
             <!-- 수업신청서 링크 -->
             <li class="nav-item dropdown no-arrow mx-1">
