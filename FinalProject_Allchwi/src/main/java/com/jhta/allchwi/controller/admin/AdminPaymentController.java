@@ -34,6 +34,8 @@ public class AdminPaymentController {
 		int totalRowCount = service.count(map);
 		PageUtil pu= new PageUtil(pageNum, totalRowCount, 5, 5);
 		
+		
+		
 		map.put("startRow", pu.getStartRow()-1);
 		map.put("endRow", pu.getEndRow());
 		
