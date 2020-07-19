@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.classdetail.ClassQnaService;
 import com.jhta.allchwi.vo.classdetail.ClassQnaVO;
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
 
 @Controller
@@ -42,10 +45,22 @@ public class ClassQnaController {
 		return "success";
 	}
 	@GetMapping("/classDetail/qnalist")
-	@ResponseBody
-	public List<ClassQnaVO> qnaList(ClassQnaVO qvo) {
-		List<ClassQnaVO> qlist=service.qnaList(qvo.getClass_num());
-		return qlist;
+	public ModelAndView qnaList(int class_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+		ModelAndView mv=new ModelAndView();
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("class_num", class_num);
+		int totalRowCount=service.count(map);
+		PageUtil pu=new PageUtil(1, totalRowCount, 4, 5);
+		
+		System.out.println("endPageNUm : "+pu.getEndPageNum());
+		System.out.println("총 글의 갯수 : " +totalRowCount);
+		
+		int startRow=pu.getStartRow()-1;
+		map.put("startRow", startRow);	
+		List<ClassQnaVO> qlist=service.qnaList(map);
+		mv.addObject("pu",pu);
+		mv.addObject("qlist",qlist);
+		return mv;
 	}
 	@GetMapping("/classDetail/commlist")
 	@ResponseBody

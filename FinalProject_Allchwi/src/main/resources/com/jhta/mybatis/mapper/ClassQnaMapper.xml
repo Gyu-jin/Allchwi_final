@@ -30,8 +30,8 @@
 		<collection property="pfv" resultMap="pfv"/>
 	</resultMap>
 	
-	<select id="qnalist" parameterType="int" resultMap="classQna">
-		select
+	<select id="qnalist" parameterType="hashmap" resultMap="classQna">
+		select SQL_CALC_FOUND_ROWS
 		q.qna_num,q.qna_ref,q.qna_lev,q.qna_content,q.qna_regdate,
 		m.mb_name,p.pro_num
 		from class_qna q join member_info m
@@ -40,6 +40,7 @@
 		on m.pro_num = p.pro_num
 		where class_num=#{class_num} and qna_lev=0 and qna_status=0
 		order by qna_ref desc,qna_num asc
+		limit #{startRow},4
 	</select>
 	<select id="commlist" parameterType="hashmap" resultMap="classQna">
 		select
@@ -53,6 +54,8 @@
 		and qna_status=0
 		order by qna_ref desc,qna_num asc
 	</select>
-
+	<select id="count" resultType="int" parameterType="hashmap">
+		select found_rows();  	   			
+	</select>
 </mapper>
 

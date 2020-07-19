@@ -30,13 +30,14 @@ $(function(){
 var qna_content = null;
 $(document).on('click', '#btn_write_qna', function () {
 	qna_content = document.getElementById('qna_content').value;
+	var class_num = $('#class_num').val();
+	var ml_num = $('#ml_num').val();
 	if(qna_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
-		id='test';
-		class_num='4';
-		ml_num='1';
-		if (id!='test') {
+		class_num=class_num;
+		ml_num=ml_num;
+		if (ml_num=='') {
 			alert('로그인이 필요합니다');
 		}else {
 			$.post('/allchwi/classDetail/qna', {
@@ -58,8 +59,8 @@ $(document).on('click', '#btn_write_qna', function () {
 });
 //qna목록
 function qnaList(){
-	 var class_num = 4;
-	 $.getJSON("/allchwi/classDetail/qnalist" + "?class_num=" + class_num, function(data){
+	var class_num = $('#class_num').val();
+	 $.getJSON("/allchwi/classDetail/qnalist" + "?class_num=" + class_num , function(data){
 	  var str = "";
 	  
 	  $(data).each(function(){
@@ -107,7 +108,23 @@ function qnaList(){
 		 +"</div>"
 		 +"</ul>"
 		 +"</div>"
-		 ;           
+		 +"<div>"
+		 +"<c:forEach var='i' begin='${pu.startPageNum }' end='${pu.endPageNum }'>"
+		 +"<c:choose>"		
+		 +"<c:when test='${i==pu.pageNum}'>"			
+		 +"<a href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}' style='text-decoration: none; font-weight: bold;'>"
+		 +"<span style='color: red'>[${i }]</span>"
+		 +"</a>"
+		 +"</c:when>"
+		 +"<c:otherwise>"
+		 +"<a href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}' style='text-decoration: none;'>"		
+		 +"<span style='color:  gray'>[${i }]</span>"
+		 +"</a>"
+		 +"</c:otherwise>"
+		 +"</c:choose>"	
+		 +"</c:forEach>"
+		 +"</div>"
+		 ;
 	  
 	  });
 	  $(".qna_wrap").html(str);
@@ -116,13 +133,12 @@ function qnaList(){
 //qna답변 작성
 function sendReply(qna_ref) {
 	var reply_content=$("#reply_content"+qna_ref).val();
-	id='test';
-	class_num='4';
-	ml_num='1';
+	var class_num = $('#class_num').val();
+	var ml_num = $('#ml_num').val();
 	if(reply_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
-		if (id!='test') {
+		if (ml_num=='') {
 			alert('로그인이 필요합니다');
 		}else {
 			$.post('/allchwi/classDetail/qnareply', {
@@ -146,7 +162,7 @@ function sendReply(qna_ref) {
 
 //qna댓글목록불러오기
 function replyList(qna_ref) {
-	 var class_num = 4;
+	 var class_num = $('#class_num').val();
 	 $.getJSON("/allchwi/classDetail/commlist" + "?class_num=" + class_num + "&qna_ref=" + qna_ref
 			 , function(data){
 	  var str = "";
@@ -175,8 +191,8 @@ function replyList(qna_ref) {
 //위시전
 $(document).on('click', '#btn_before_wish', function () {
 	var btn = $(this);
-	var class_num = '4';
-	var ml_num = '1';
+	var class_num = $('#class_num').val();
+	var ml_num = $('#ml_num').val();
 	$.post('/allchwi/class/addWish', {
 		class_num: class_num,
 		ml_num: ml_num
@@ -194,8 +210,8 @@ $(document).on('click', '#btn_before_wish', function () {
 //위시후
 $(document).on('click', '#btn_after_wish', function () {
 	var btn = $(this);
-	var class_num = '4';
-	var ml_num = '1';
+	var class_num = $('#class_num').val();
+	var ml_num = $('#ml_num').val();
 	$.post('/allchwi/class/removeWish', {
 		class_num: class_num,
 		ml_num: ml_num

@@ -14,10 +14,13 @@ import com.jhta.allchwi.service.classdetail.ClassQnaService;
 import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.login.MemberInfoService;
+import com.jhta.allchwi.service.wishlist.WishListService;
 import com.jhta.allchwi.vo.classdetail.ClassQnaVO;
 import com.jhta.allchwi.vo.classdetail.ClassReviewVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.vo.login.MemberInfoVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
+import com.jhta.allchwi.vo.wishlist.WishListVO;
 
 
 
@@ -27,23 +30,33 @@ public class ClassDetailController {
 	private ClassInfoService classinfo_service;
 	@Autowired
 	private ClassReviewService classreview_service;
+	@Autowired
 	private MemberInfoService mis;
+	@Autowired
+	private WishListService wls;
+	
 	@GetMapping("/classDetail/detail")
 	public ModelAndView detail(int class_num,HttpServletRequest req) {
 		ServletContext sc=req.getSession().getServletContext();
 		if(req.getSession().getAttribute("ml_num") != null ) {
 			int ml_num = (int)req.getSession().getAttribute("ml_num");
-			ProfileVO pfv = mis.selectInfo(ml_num);
-			sc.setAttribute("mem", pfv);
+			if(wls.getWish(ml_num) != null) {
+				sc.setAttribute("wstatus", true);
+			}
+			if(mis.selectInfo(ml_num) != null) {
+				ProfileVO pfv = mis.selectInfo(ml_num);
+				sc.setAttribute("mem", pfv);
+			}else {
+				sc.setAttribute("mem", ml_num);
+			}
 		}
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
+
 		List<ClassReviewVO> rlist=classreview_service.reviewList(class_num);
-		String id="test";
-		mv.addObject("id", id);
 		mv.addObject("rlist", rlist);
 		mv.addObject("cvo", cvo);
-		mv.addObject("class_num", class_num);
+	    mv.addObject("class_num", class_num);
 		return mv;
 	}
 

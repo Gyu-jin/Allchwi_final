@@ -19,11 +19,14 @@ public class ClassQnaService {
 	public int insertReply(ClassQnaVO vo) {
 		return dao.insertReply(vo);
 	}
-	public List<ClassQnaVO> qnaList(int class_num) {
-		return dao.qnaList(class_num);
+	public List<ClassQnaVO> qnaList(HashMap<String, Object> map) {
+		return dao.qnaList(map);
 	}
 	public List<ClassQnaVO> commList(HashMap<String, Object> map) {
 		return dao.commList(map);
+	}
+	public int count(HashMap<String, Object> map) {
+		return dao.count(map);
 	}
 }
 

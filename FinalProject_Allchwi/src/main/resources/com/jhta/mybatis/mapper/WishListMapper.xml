@@ -9,5 +9,7 @@
 	<delete id="deleteWish">
 		delete from wishlist where class_num=#{class_num} and ml_num=#{ml_num}
 	</delete>
-	
+	<select id="getWish" parameterType="int" resultType="wish">
+		select * from wishlist where ml_num=#{ml_num}
+	</select>
 </mapper>

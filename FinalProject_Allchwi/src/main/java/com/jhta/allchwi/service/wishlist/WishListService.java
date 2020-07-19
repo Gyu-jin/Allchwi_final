@@ -14,4 +14,7 @@ public class WishListService {
 	public int deleteWish(WishListVO vo) {
 		return dao.deleteWish(vo);
 	}
+	public WishListVO getWish(int ml_num) {
+		return dao.getWish(ml_num);
+	}
 }

@@ -21,11 +21,14 @@ public class ClassQnaDAO {
 	public int insertReply(ClassQnaVO vo) {
 		return session.insert(NAMESPACE+".insertReply", vo);
 	}
-	public List<ClassQnaVO> qnaList(int class_num) {
-		return session.selectList(NAMESPACE+".qnalist", class_num);
+	public List<ClassQnaVO> qnaList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".qnalist", map);
 	}
 	public List<ClassQnaVO> commList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE+".commlist", map);
+	}
+	public int count(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".count",map);
 	}
 	
 }

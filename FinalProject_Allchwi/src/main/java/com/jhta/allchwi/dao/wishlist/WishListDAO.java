@@ -16,4 +16,7 @@ public class WishListDAO {
 	public int deleteWish(WishListVO vo) {
 		return session.delete(NAMESPACE+".deleteWish", vo);
 	}
+	public WishListVO getWish(int ml_num) {
+		return session.selectOne(NAMESPACE+".getWish", ml_num);
+	}
 }

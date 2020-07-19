@@ -4,7 +4,8 @@
 <link rel="stylesheet"
 	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
-
+<input type="hidden" id="ml_num" value="${mem.ml_num }">
+<input type="hidden" id="class_num" value="${class_num }">
 <div class="container-fluid" id="container_detail">
 	<div class="row">
 		<div class="col-md-12">
@@ -83,7 +84,7 @@
 									</a>
 									<!-- 찜하기 -->
 									<c:choose>
-										<c:when test="${empty id}">
+										<c:when test="${empty mem}">
 											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
 												id="btn_wishlist" class="btn_wishlist"> <img
 												id="wishsrc"
@@ -92,11 +93,22 @@
 											</a>
 										</c:when>
 										<c:otherwise>
-											<a href="javascript:void(0);" class="btn_wishlist"
-												id="btn_before_wish"> <img id="wishsrc"
-												src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
-												찜하기
-											</a>
+											<c:choose>
+												<c:when test="${wstatus eq true}">
+													<a href="javascript:void(0);" class="btn_wishlist"
+														id="btn_after_wish"> <img id="wishsrc"
+														src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
+														찜하기
+													</a>
+												</c:when>
+												<c:otherwise>
+													<a href="javascript:void(0);" class="btn_wishlist"
+														id="btn_before_wish"> <img id="wishsrc"
+														src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+														찜하기
+													</a>
+												</c:otherwise>
+											</c:choose>
 										</c:otherwise>
 									</c:choose>
 									<!-- ///찜하기 -->
@@ -184,13 +196,20 @@
 									</div>
 								</div>
 								<!-- 리뷰작성 모달 -->
-								<div class="btn_write">
-									<a href="#" class="btn_write_review" data-toggle="modal"
-										data-target="#modalContactForm">리뷰쓰기</a>
-									<!-- 로그아웃상태 > 로그인 페이지로 이동
-									     로그인상태 > 수강했으면 리뷰작성 모달 띄우기 / 수강안했으면 작성할수x
-									 -->
-								</div>
+								<c:choose>
+									<c:when test="${empty mem }">
+										<div class="btn_write">
+											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">리뷰쓰기</a>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="btn_write">
+											<a href="#" class="btn_write_review" data-toggle="modal"
+												data-target="#modalContactForm">리뷰쓰기</a>
+										</div>
+									</c:otherwise>
+								</c:choose>
+
 								<div class="review_box">
 									<c:forEach var="index" begin="1" end="5">
 										<img
@@ -250,7 +269,7 @@
 								<textarea type="text" id="qna_content"
 									class="md-textarea form-control" rows="4"></textarea>
 								<c:choose>
-									<c:when test="${empty id}">
+									<c:when test="${empty mem}">
 										<div class="btn_write">
 											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
 												문의하기</a>
@@ -267,66 +286,68 @@
 								<div class="qna_wrap"></div>
 							</div>
 						</div>
-						<!-- qna wrap -->
 					</div>
-					<!--// class wrap -->
+					<!-- qna wrap -->
 				</div>
-				<!-- 왼쪽수업정보끝 -->
+				<!--// class wrap -->
+			</div>
+			<!-- 왼쪽수업정보끝 -->
 
-				<!-- 시간&날짜/ 결제창 -->
-				<div class="col-md-4 remote">
-					<div class="remote_wrap">
-						<div class="class_type">
-							<h3>클래스유형</h3>
-						</div>
-						<c:forEach var="index" begin="1" end="3">
-							<div class="accordion" id="accordionExample">
-								<div class="card">
-									<div class="card-header">
-										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#accordionExample" href="#card-element-${index}">
-											07.08(수)14:00~16:00 강남</a>
-									</div>
-									<div id="card-element-${index}" class="collapse">
-										<div class="card-body">상세장소 : 강사 공방</div>
-									</div>
+			<!-- 시간&날짜/ 결제창 -->
+			<div class="col-md-4 remote">
+				<div class="remote_wrap">
+					<div class="class_type">
+						<h3>클래스유형</h3>
+					</div>
+					<c:forEach var="index" begin="1" end="3">
+						<div class="accordion" id="accordionExample">
+							<div class="card">
+								<div class="card-header">
+									<a class="collapsed card-link" data-toggle="collapse"
+										data-parent="#accordionExample" href="#card-element-${index}">
+										07.08(수)14:00~16:00 강남</a>
+								</div>
+								<div id="card-element-${index}" class="collapse">
+									<div class="card-body">상세장소 : 강사 공방</div>
 								</div>
 							</div>
-						</c:forEach>
-						<div class="tutor_t">
-							<dl class="tutor_txt">
-								<dt>
-									<div
-										style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
-									</div>
-								</dt>
-								<dd>
-									신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어
-									있으나 공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
-								</dd>
-							</dl>
 						</div>
-						<c:choose>
-							<c:when test="${empty id}">
-								<div class="button_pay">
-									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
-										수업 신청하기</a>
+					</c:forEach>
+					<div class="tutor_t">
+						<dl class="tutor_txt">
+							<dt>
+								<div
+									style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
 								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="button_pay">
-									<a href="${cp }/class/apply?class_num=${class_num }" class="btn_pay">수업신청하기</a>
-
-								</div>
-							</c:otherwise>
-						</c:choose>
-
+							</dt>
+							<dd>
+								신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어 있으나
+								공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
+							</dd>
+						</dl>
 					</div>
+					<c:choose>
+						<c:when test="${empty mem}">
+							<div class="button_pay">
+								<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
+									수업 신청하기</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="button_pay">
+								<a href="${cp }/class/apply?class_num=${class_num }"
+									class="btn_pay">수업신청하기</a>
+
+							</div>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
-				<!-- //시간&날짜/ 결제창 -->
 			</div>
+			<!-- //시간&날짜/ 결제창 -->
 		</div>
 	</div>
+</div>
 </div>
 <script>
 	
