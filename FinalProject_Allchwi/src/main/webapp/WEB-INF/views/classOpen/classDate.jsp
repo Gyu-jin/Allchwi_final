@@ -153,13 +153,13 @@
 							<div id="certifi" class="certificate class" onclick="fold(this)">
 								<div class="intext">
 									<c:choose>
-										<c:when test="${class_form==0}">
+										<c:when test="${class_form=='0'}">
 											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${date.class_startTime } ~ ${date.class_endTime }
 											<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
 											<img src="${cp}/resources/img/icon_up.png" class="up">
 										</c:when>
 										<c:otherwise>
-											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; #{class_month }개월										
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${class_month }개월										
 										</c:otherwise>
 									</c:choose>
 								</div>
