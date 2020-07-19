@@ -2,8 +2,8 @@ package com.jhta.allchwi.page.util;
 
 public class PageUtil {
 	private int pageNum;
-	private int startRow;		//
-	private int endRow;			//
+	private int startRow;		
+	private int endRow;			
 	private int totalPageCount;
 	private int startPageNum;
 	private int endPageNum;

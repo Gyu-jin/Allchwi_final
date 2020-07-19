@@ -34,8 +34,6 @@ public class AdminPaymentController {
 		int totalRowCount = service.count(map);
 		PageUtil pu= new PageUtil(pageNum, totalRowCount, 5, 5);
 		
-		
-		
 		map.put("startRow", pu.getStartRow()-1);
 		map.put("endRow", pu.getEndRow());
 		
@@ -43,6 +41,7 @@ public class AdminPaymentController {
 		//System.out.println(pu.getEndRow());
 		
 		List<AdminPaymentVO> list = service.payment_list(map);
+		
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
 		model.addAttribute("keyword",keyword);
@@ -54,7 +53,7 @@ public class AdminPaymentController {
 
 	@RequestMapping(value = "/admin/payment2", produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<AdminPaymentVO> goPayment2(@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+	public HashMap<String, Object> goPayment2(@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		
 		HashMap<String,Object> map = new HashMap<String, Object>();
 		
@@ -67,8 +66,11 @@ public class AdminPaymentController {
 		
 		List<AdminPaymentVO> list = service.payment_list(map);
 		
+		HashMap<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("list",list);
+		map2.put("pu",pu);
 		
-		return list;
+		return map2;
 	}
 	
 	

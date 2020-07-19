@@ -123,10 +123,9 @@ label {
 
 		</div>
 
-		<input type="hidden" value="${pu.pageNum}" id="pageNum"> 
-		<input type="hidden" id="fieldcopy"> 
-		<input type="hidden"
-id="keywordcopy">
+		<input type="hidden" value="${pu.pageNum}" id="pageNum"> <input
+			type="hidden" id="fieldcopy"> <input type="hidden"
+			id="keywordcopy">
 
 		<button id="next"
 			style="border: none; outline: none; background: none">
