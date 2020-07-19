@@ -21,6 +21,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.classopen.CertificateVO" alias="cert"/>		
 		<!-- classApply : 수업신청서 테이블 alias -->		
 		<typeAlias type="com.jhta.allchwi.vo.classapply.ClassApplyVO" alias="classApply"/>
+		<!-- payment 테이블 alias -->
+		<typeAlias type="com.jhta.allchwi.vo.classapply.PaymentVO" alias="pay"/>
 		<!-- ClassInfo 테이블 alias -->		
 		<typeAlias type="com.jhta.allchwi.vo.classopen.ClassInfoVO" alias="classInfo"/>	
 		<!-- 커버이미지 테이블 alias -->	
@@ -36,7 +38,7 @@
 		<!-- class detail alias -->	
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassQnaVO" alias="classQna"/>	
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassReviewVO" alias="classReview"/>	
-		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListVO" alias="wish"/>	
+		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListVO" alias="wish"/>
 		
 	</typeAliases>
 
@@ -65,6 +67,7 @@
 		
 		<!-- Class Apply Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassApplyMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/PaymentMapper.xml"/>
 		
 		<!-- Class detail 관련 Mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/ClassQnaMapper.xml"/>
