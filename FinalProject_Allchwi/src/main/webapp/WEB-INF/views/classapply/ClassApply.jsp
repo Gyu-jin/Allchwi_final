@@ -251,8 +251,9 @@ textarea.len980 {
 			</ul>
 		</div>
 	</div>
-	<form action="${cp}/class/applyOk" method="post">
+	<form action="${cp}/class/applyOk" method="post" id="applyForm">
 		<input type="hidden" name="ml_num" value="${ml_num }">
+		<input type="hidden" name="class_num" value="${class_num }">
 		<div class="tab-content" id="pills-tabContent">
 			<!-- 01 클래스 일정 선택 탭-->
 			<div class="tab-pane fade show active" id="pills-info" role="tabpanel"
@@ -429,13 +430,13 @@ textarea.len980 {
 		
 							<div class="label-1-content">
 								${vo.class_price*vo.class_hour*vo.class_count }
-								<input type="hidden" id="classPay" value="${vo.class_price*vo.class_hour*vo.class_count }">
+								<input type="hidden" name ="class_fee" id="class_fee" value="${vo.class_price*vo.class_hour*vo.class_count }">
 							</div>
 							<div class="label-1-content">${point } 포인트
 								<input type="hidden" id="ppoint" value="${point }">
 							</div>
 							<div class="label-1-content">
-								<input type="text" id="point" name="point" style="width: 88px">
+								<input type="text" id="point" name="pay_point" style="width: 88px">
 								포인트
 							</div>
 							<div class="label-1-content" style="width: 200px" id="pointDiv">
@@ -443,7 +444,8 @@ textarea.len980 {
 							</div>
 							<div class="label-1-content">
 								<div class="button_box2">
-									<button type="submit" class="btn btn-outline-danger">신용카드/체크카드</button>
+									<input type="hidden" name="pay_way" value="card">
+									<button type="button" class="btn btn-outline-danger" id="cardPay">신용카드/체크카드</button>
 								</div>
 		
 							</div>
@@ -478,9 +480,10 @@ textarea.len980 {
 	});
 	//포인트 
 	$("#point").on("change", function() {
+		
 		$("#pointDiv").empty();
 	    var usePoint = $(this).val();
-	    var classPay= $("#classPay").val();
+	    var classPay= $("#class_fee").val();
 	    var ppoint= $("#ppoint").val();
 	    console.log(classPay );
 	    console.log(ppoint );
@@ -490,20 +493,25 @@ textarea.len980 {
 	    	$("#pointDiv").focus();
 	    }else{
 	    	$("#pointDiv").append("<span style='color: red'>"+ (classPay - usePoint)	+"</span>");
+	    	$("#pointDiv").append("<input type='hidden' name='final_price' value='"+ (classPay - usePoint)	+"'/>");
 	    }
 	   
 	});
 	
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
-	$("#cardPay").click(function() {
+	$("#cardPay").click(function(e) {
+		e.preventDefault();
 		
+		var formData = $("#applyForm").serialize();
+
 		var date_num=$("input[name=classdate]:checked").val();
-		var stu_lev=$("input[name=levels]:checked").val();
-		console.log(date_num+","+stu_lev);
-		$.post("${cp}/class/applyOk", {"date_num":date_num,"stu_lev":stu_lev}, function(data) {
+		
+		
+		$.post("${cp}/class/applyOk",formData , function(data) {
 			console.log("콜백" + data);
-			alert("수업을 신청하시겠습니까?");
+			
 			if(data=="success"){
+				alert("수업을 신청하시겠습니까?");
 				location.href="${cp}/class/success?date_num="+date_num;
 			}else{
 				alert("수업 신청 오류;");
