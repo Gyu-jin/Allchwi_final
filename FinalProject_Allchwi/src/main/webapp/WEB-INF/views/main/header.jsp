@@ -133,8 +133,11 @@
 		                </c:otherwise>
 		            </c:choose>
                 </span>
-                
+                <!-- 
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                 -->
+                 <!-- 이미지 출력 수정 -->
+                <img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${mem.pro_num}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

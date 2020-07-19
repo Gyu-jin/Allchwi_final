@@ -22,6 +22,7 @@ import com.jhta.allchwi.service.classopen.ClassDateService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.point.PointService;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
+import com.jhta.allchwi.vo.classapply.PaymentVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
 
 
@@ -43,22 +44,26 @@ public class ClassApplyController {
 		int point=point_service.getTotal(map);
 		mv.addObject("classDate_list",classDate_list);
 		mv.addObject("point",point);
+		mv.addObject("class_num",class_num);
 		return mv;
 	}
 	
-	// 수업신청 테이블에 필요한 데이터 받아서 insert할 예정.. , ajax callback함수에 success 문자열 전송
-	@RequestMapping(value="/class/applyOk", method = RequestMethod.POST)
-	public ModelAndView classApplyOk(int date_num, int ml_num, int stu_lev, String stu_msg, String stu_phone,String point) {
-		System.out.println("apply post mapping.. 포인트 값 : " + point);
-		ClassApplyVO vo=new ClassApplyVO(0, date_num, ml_num, stu_lev, stu_msg, stu_phone, 0, 0, null);
-		ModelAndView mv=new ModelAndView(".classapply.success");
-		int n=classApply_service.insert(vo);
-		if(n>0) {
-			mv.addObject("code","success");			
-		}else {
-			mv.addObject("code","fail");	
+	// ClassApply & Payment table insert, ajax callback함수에 success 문자열 전송
+	@RequestMapping(value="/class/applyOk", produces ="application/text; charset=utf8",
+			method = RequestMethod.POST)
+	@ResponseBody
+	public String classApplyOk(HttpSession session, ClassApplyVO vo, PaymentVO pvo, String pay_point) {
+		System.out.println("apply post mapping.. 포인트 값 : " + pay_point);
+
+	
+		try {
+			classApply_service.insert(vo,pvo);
+			return "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
 		}
-		return mv;
+		
 
 	}
 	

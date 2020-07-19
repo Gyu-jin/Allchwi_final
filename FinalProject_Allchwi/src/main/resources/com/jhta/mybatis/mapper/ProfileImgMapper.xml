@@ -19,8 +19,9 @@
 		update profile_img set pro_img = #{pro_img}, pro_filename = #{pro_filename}, pro_regdate = now() where pro_num = #{pro_num}
 	</update>
 	
+	<!-- 이미지 출력 위해 이미지번호 받아 파일이름, 이미지 출력 / 0719 -sql 수정  -->
 	<select id="imgSelect" parameterType="int" resultType="piv">
-		select pro_filename,pro_img from profiles_img where pro_num=#{pro_num}
+		select pro_filename,pro_img from profile_img where pro_num=#{pro_num}
 	</select>
 </mapper>
 
