@@ -3,32 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
-<body>
-	<div id="content-wrapper" class="d-flex flex-column">
-		<div class="container-fluid">
-			<div class="breadcrumb">
-				<h2>
-					<a href="${cp }/admin/payment">회원결제내역</a>
-				</h2>
-				<div style="margin-left: 65%;">
-					<form action="${cp }/admin/payment" class="form-inline"
-						style="display: inline-block">
-						<select class="form-control col-2" name="field"
-							style="display: inline-block; width: 700px;">
-							<option value="num"
-								<c:if test="${field == 'num'}">selected</c:if>>번호</option>
-							<option value="name"
-								<c:if test="${field == 'name'}">selected</c:if>>이름</option>
-							<option value="pwd"
-								<c:if test="${field == 'pwd'}">selected</c:if>>비밀번호</option>
-						</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
-						<button class="btn btn-primary my-2 my-sm-0" type="submit">검색</button>
-					</form>
-				</div>
+<div id="content-wrapper" class="d-flex flex-column">
+	<div class="container-fluid">
+		<div class="breadcrumb">
+			<h2>
+				<a href="${cp }/admin/payment">회원결제내역</a>
+			</h2>
+			<div style="margin-left: 65%;">
+				<form action="${cp }/admin/payment" class="form-inline"
+					style="display: inline-block">
+					<select class="form-control col-2" name="field"
+						style="display: inline-block; width: 700px;">
+						<option value="num" <c:if test="${field == 'num'}">selected</c:if>>번호</option>
+						<option value="name"
+							<c:if test="${field == 'name'}">selected</c:if>>이름</option>
+						<option value="pwd" <c:if test="${field == 'pwd'}">selected</c:if>>비밀번호</option>
+					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
+					<button class="btn btn-primary my-2 my-sm-0" type="submit">검색</button>
+				</form>
 			</div>
-
+		</div>
+		<div>
 			<table class="table table-hover">
-				<thead class="thead-dark">
+				<thead id="th" class="thead-dark">
 					<tr>
 						<th>번호</th>
 						<th>이름</th>
@@ -45,11 +42,20 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+
+		<div>
+			<c:choose>
+				<c:when test="${pu.startPageNum>1 }">
+					<button type="button" id="prev" class="btn btn-outline-primary" >이전</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="prev" class="btn btn-outline-primary" disabled>이전</button>
+				</c:otherwise>
+			</c:choose>
 
 
-
-
-			<button type="button" id="prev" class="btn btn-outline-primary">이전</button>
+			
 
 			<div id="pagination" style="display: inline-block;">
 				<ul class="pagination justify-content-center" style="margin: 20px 0">
@@ -66,16 +72,32 @@
 
 
 			<button type="button" id="next" class="btn btn-outline-primary">다음</button>
-			<input type="text" value="${pu.pageNum}" id="pageNum">
-
+			
 
 		</div>
+
+			<input type="hidden" value="${pu.pageNum}" id="pageNum">
 	</div>
-</body>
+		
+
+</div>
+
+
+
+
 
 <script>
 	function content(key, value) {
+		$("#th").empty();
+		$("#tb").empty();
+
 		if (key == "list") {
+			$("#th").append("<tr>");
+			$("#th").append("<th>번호</th>");
+			$("#th").append("<th>이름</th>");
+			$("#th").append("<th>비번</th>");
+			$("#th").append("</tr>");
+
 			for (var i = 0; i < value.length; i++) {
 				var name = value[i].name;
 				var num = value[i].num;
@@ -91,7 +113,7 @@
 	}
 
 	function pageClick(pageNum) {
-		$("#tb").empty();
+
 		//$("#pagination").empty();
 		$.getJSON({
 			url : "${cp}/admin/payment2",
