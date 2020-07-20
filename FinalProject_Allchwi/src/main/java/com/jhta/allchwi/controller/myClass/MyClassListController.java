@@ -47,7 +47,7 @@ public class MyClassListController {
 		
 		return ".myClass.myClassList";
 	}
-	
+	  
 	@PostMapping("/mypage/finishUpdate")
 	public String classFinishUpdate(HttpSession session,int apply_num) {
 		
