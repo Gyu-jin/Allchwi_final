@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	function selectTitle(val){
 		var v = $(val).val();
-		location.href = "${cp}/class/classBoard?class_num="+v;
+		location.href = "${cp}/class/classBoard?class_num="+v;  
 	}
 </script>
 <div class="container">

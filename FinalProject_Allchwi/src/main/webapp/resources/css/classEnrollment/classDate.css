@@ -130,10 +130,7 @@
 iframe {
     border: 0 none;
 }
-body {
-    display: block;
-    margin: 8px;
-}
+
 .class {
     color: #888;
     font-size: 16px;
