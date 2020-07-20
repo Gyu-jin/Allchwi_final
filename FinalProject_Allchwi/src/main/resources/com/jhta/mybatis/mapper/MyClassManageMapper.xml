@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.MyClassManageMapper">
+	<!-- a 클래스 신청한 회원 목록조회  -->
 	<select id="MyClassManage" parameterType="hashmap" resultType="mcm">
 		select aa.*, bb.apply_num, bb.ml_num, bb.pro_num, bb.mb_name, bb.mb_nickname, bb.apply_auth, bb.final_price, bb.apply_regdate 
 		from 
