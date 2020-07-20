@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.myclassmanage.MyClassManageVO;
 
 @Repository
@@ -21,4 +22,9 @@ public class MyClassManageDAO {
 	public List<MyClassManageVO> searchApply(HashMap<String, Object> hm) {
 		return session.selectList(NAMESPACE + ".MyClassManage", hm);
 	}
+	//a 개설한 강좌번호 및 타이틀 가져오기
+	public List<ClassInfoVO> searchMyClass(int ml_num) {
+		return session.selectList(NAMESPACE + ".myClass", ml_num);
+	}
+	
 }

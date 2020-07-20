@@ -30,6 +30,7 @@
 .container .class-box .class-info {
     padding-bottom: 30px;
     display: flex;
+    padding-left: 8%;
 }
 a, span {
     color: inherit;
@@ -37,6 +38,11 @@ a, span {
     font-weight: inherit;
     line-height: inherit;
     text-decoration: none;
+}
+#member{
+	display: inline-block; 
+	vertical-align: bottom; 
+	text-align: center;
 }
 .container .class-box .class-info .information-box {
     width: 690px;
@@ -47,6 +53,7 @@ a, span {
     font-size: 14px;
     color: #888;
     letter-spacing: -0.35px;
+    padding-top: 5%;
 }
 .container .class-box .class-info .information-box h3 {
     color: #333;
@@ -56,28 +63,13 @@ a, span {
     line-height: 2;
     height: 40px;
     overflow: hidden;
-    cursor: pointer;
+    margin-bottom: 10px;
 }
-.container .class-box .stars-box .class-type {
-    color: #888;
-    letter-spacing: -0.35px;
-    font-size: 14px;
-}
-.container .class-box .stars-box .class-stars img {
-    width: 15px;
-    margin-left: -2px;
-    margin-bottom: 3px;
-    vertical-align: middle;
-}
+
 img {
     max-width: 100%;
     max-height: 100%;
     vertical-align: top;
-}
-.container .class-box .stars-box span {
-    font-size: 14px;
-    color: #888;
-    letter-spacing: -0.35px;
 }
 .container .class-box .class-info .information-box .start-date {
     margin-top: 10px;
@@ -85,31 +77,8 @@ img {
     font-size: 14px;
     letter-spacing: -0.35px;
 }
-.container .class-box .class-info .information-box .review-fold.on {
-    color: #ff005a;
-}
-.container .class-box .class-info .information-box .review-fold {
-    font-size: 14px;
-    color: #888;
-    letter-spacing: -0.35px;
-    line-height: 2.36;
-    margin-top: 10px;
-}
-.container .cursor {
-    cursor: pointer;
-}
-.container .class-box .class-info .information-box .review-fold .arrw-box {
-    overflow: hidden;
-    display: inline-block;
-}
-.container .class-box .class-info .information-box .review-fold .arrw {
-    margin-top: -13px;
-    margin-left: 5px;
-    position: absolute;
-    width: 16px;
-}
-.container .class-box .class-info .information-box .review-fold .arrw.up {
-    display: none;
+.container .class-box .class-info .information-box .start-date > button{
+	float: right;
 }
 .container .class-box .class-info .information-box .price {
     font-size: 24px;
@@ -117,84 +86,16 @@ img {
     color: #ff005a;
     font-weight: 500;
     text-align: right;
-    margin-top: -25px;
+    margin-top: -14%;
+    margin-bottom: 2%;
+    margin-right: 2%;
 }
 .container .class-box .class-info .information-box .price font {
     font-size: 14px;
 }
-.container .class-box .review-info.textarea {
-    padding: 0;
-    height: initial;
-}
-.container .class-box .review-info {
-    border: 1px solid #cccfd3;
-    padding: 30px;
-    box-sizing: border-box;
-    display: none;
-    margin-bottom: 30px;
-}
-.container .class-box .review-info.textarea > div {
-    overflow: hidden;
-}
-.container .class-box .review-info textarea {
-    width: 100%;
-    height: 110px;
-    border: none;
-    color: #333;
-    font-size: 14px;
-    line-height: 1.57;
-    padding: 20px;
-    background: #fff;
-    box-sizing: border-box;
-    resize: none;
-}
-button, input, optgroup, select, textarea {
+
+input, optgroup, select {
     margin: 0;
     font: inherit;
     color: inherit;
-}
-.container .class-box .review-info.textarea .stars-box {
-    height: 41px;
-    border-top: 1px solid #cccfd3;
-}
-.container .class-box .review-info.textarea > div {
-    overflow: hidden;
-}
-.container .class-box .review-info.textarea .stars {
-    padding: 10px;
-    display: inline-block;
-    color: #888;
-}
-.container .class-box .review-info .glyphicon.glyphicon-star.active {
-    color: #ffc600;
-}
-.glyphicon {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.container .class-box .review-info.textarea .stars font {
-    color: #888;
-    font-size: 14px;
-    line-height: 1.57;
-    margin-left: 5px;
-}
-.container .class-box .review-info.textarea .regi-button {
-    border-left: 1px solid #cccfd3;
-    padding: 9px;
-    width: 68px;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-    float: right;
-}
-.glyphicon-star:before {
-    content: "☆";
 }

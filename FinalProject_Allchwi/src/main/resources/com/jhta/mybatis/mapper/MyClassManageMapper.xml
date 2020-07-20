@@ -29,6 +29,10 @@
 			where class_num = #{class_num}
 		</if>
 	</sql>
+	<!-- a 회원번호로 개설한 강좌번호 및 타이틀 가져오기 -->
+	<select id="myClass" parameterType="int" resultType="classInfo">
+		select class_num, class_title from class_info where ml_num = #{ml_num};
+	</select>
 </mapper>
 
 
