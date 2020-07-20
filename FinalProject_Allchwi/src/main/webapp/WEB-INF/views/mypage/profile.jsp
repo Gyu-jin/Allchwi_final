@@ -19,9 +19,9 @@
 				<div class="pf"
 					style="background-image: url(/allchwi/resources/img/profile-defaultImg.jpg)"
 					id="picture-cover">
-					<!-- 이미지 번호를 통해 이미지 출력 -->
+					<!--a 이미지 번호를 통해 이미지 출력 / png 출력시 inner-cont의 배경이 보이지 않도록 background color 처리 -->
 					<img class="pf" id="proImg" src="${cp}/mypage/getimg?pro_num=${result.pro_num}" 
-					style="margin: 0; z-index: 4;">
+					style="margin: 0; z-index: 4; background-color: #f8f9fc">
 					<!-- a 카메라 이미지를 버튼처럼 사용  -->
 					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png"
 					style="position: absolute;">
