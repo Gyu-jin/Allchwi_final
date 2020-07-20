@@ -22,42 +22,44 @@
 						<p>신청일시: ${vo.apply_regdate }</p>
 						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
 						<div class="stars-box">
-							<font class="class-type">원데이 1:1 </font>&nbsp;|&nbsp; &nbsp;
+							<font class="class-type">
+							<c:choose>
+								<c:when test="${vo.class_form=='0' }">
+								오프라인
+								</c:when>
+								<c:otherwise>
+								온라인
+								</c:otherwise>
+							</c:choose>
+							</font>&nbsp;|&nbsp; &nbsp;
 							<font class="class-stars">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">								 
-															</font>
-							<span>	(${vo.class_rating })</span>						</div>
+							</font>
+							<span>	(${vo.class_rating })</span>						
+						</div>
 						<div class="start-date">
 							<font>결제일 : ${vo.pay_regdate }</font>&nbsp;|&nbsp;
-							<font>수업 시작일 : <fmt:formatDate value="${vo.class_date }" pattern="yy-MM-dd"/> &nbsp;&nbsp;17:00</font>&nbsp;|&nbsp; 
-							<font>온라인</font>
+							<font>수업 시작일 : <fmt:formatDate value="${vo.class_date }" pattern="yyyy-MM-dd"/> &nbsp;&nbsp;${vo.class_startTime }</font>&nbsp;|&nbsp; 
+							<font>${vo.scategory_name} </font>
 						</div>
-						<div class="review-fold cursor on" onclick="review(this)">리뷰작성
-						<div class="arrw-box"><img src="https://front-img.taling.me/Content/Images/class/icon_btn_down.png" class="arrw down"><img src="https://front-img.taling.me/Content/Images/class/icon_btn_up.png" class="arrw up"></div></div>
-						<div class="price"><font>￦</font>${vo.class_fee }</div>
+						<jsp:useBean id="today" class="java.util.Date" />
+						<fmt:formatDate var="now" value="${today}" pattern="yyyy-MM-dd" />
+						<fmt:formatDate var="startDate" value="${vo.class_date }" pattern="yyyy-MM-dd" />
+						<c:if test="${startDate >= now && vo.class_finish == '0'}">
+							<div class="review-fold cursor on" onclick="classFinish('${vo.apply_num'})" style="display: inline-block; float: left; margin-right: 20px;">수강완료
+							</div>
+						</c:if>
+						<c:if test="${vo.class_finish=='1'}">
+							<div class="review-fold cursor on" onclick="review()">리뷰작성
+							</div>
+						</c:if>
+						<div class="price"><font>￦</font><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.class_fee }" /></div>
 					</div>
 				</div>
-				<!-- <div class="review-info textarea">
-					<div><textarea placeholder="리뷰를 작성해주세요" name="Content" id="reviewContent19154"></textarea></div>
-					<div class="stars-box">
-						<div class="stars">
-							<i class="glyphicon glyphicon-star active" data-value="1"></i>
-							<i class="glyphicon glyphicon-star active" data-value="2"></i>
-							<i class="glyphicon glyphicon-star active" data-value="3"></i>
-							<i class="glyphicon glyphicon-star active" data-value="4"></i>
-							<i class="glyphicon glyphicon-star active" data-value="5"></i>
-							<input type="hidden" name="priceScore" id="priceScore19154" value="5">
-							<font>5.0</font> (커리큘럼, 전달력, 준비성, 친절도, 시간준수)
-						</div>
-						<div class="regi-button cursor" onclick="reviewRegi(19154,0)">
-							등록
-						</div>
-					</div>
-				</div> -->
 			</div>
 			</c:forEach>
 			
@@ -83,6 +85,32 @@
 				}
 			});
 		});
+		
+		function classFinish(apply_num){
+
+			if (confirm("첫수업 완료시 수업완료를 해주세요.\n정말 완료하시겠습니까?") == true){    
+
+				$.ajax({
+				    type: "post",
+				    dataType: "text",
+				    url: "${cp}/mypage/finishUpdate",
+				    data: {apply_num: apply_num},
+				    success: function(data) {
+				    	if(data == 'success'){
+				    		alert('수업완료신청 되었습니다.');
+				    	}else{				    		
+				    		alert('다시 신청해주세요!');
+				    	}
+				    }
+				});
+
+			}else{   //취소
+
+			    return;
+
+			}
+		}
+		
 		function reviewRegi(Id,status){
 			// 수업 id 넘버 받아오기. ajax 로 던지기
 			// status ( 0:등록,1:수정,2:삭제);
@@ -186,8 +214,4 @@ $('.stars i').click(function () {
 	$(parent.children('input')).val(val);
 	$(parent.children('font')).text(val+'.0');
 });
-
- 
-
-
-	</script>
+</script>

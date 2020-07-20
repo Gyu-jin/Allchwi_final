@@ -14,12 +14,16 @@ public class MyClassListVO {
 	private int class_rating;
 	private Timestamp apply_regdate;
 	private Timestamp pay_regdate;
+	private String class_startTime;
+	private int class_form;
+	private int class_finish;
+	private int apply_num;
 	
 	public MyClassListVO() {}
 
 	public MyClassListVO(int class_num, int date_num, Timestamp class_date, String class_title, String scategory_name,
 			int cover_num, int class_fee, int apply_auth, int class_rating, Timestamp apply_regdate,
-			Timestamp pay_regdate) {
+			Timestamp pay_regdate, String class_startTime, int class_form, int class_finish, int apply_num) {
 		super();
 		this.class_num = class_num;
 		this.date_num = date_num;
@@ -32,6 +36,10 @@ public class MyClassListVO {
 		this.class_rating = class_rating;
 		this.apply_regdate = apply_regdate;
 		this.pay_regdate = pay_regdate;
+		this.class_startTime = class_startTime;
+		this.class_form = class_form;
+		this.class_finish = class_finish;
+		this.apply_num = apply_num;
 	}
 
 	public int getClass_num() {
@@ -121,7 +129,39 @@ public class MyClassListVO {
 	public void setPay_regdate(Timestamp pay_regdate) {
 		this.pay_regdate = pay_regdate;
 	}
-	
+
+	public String getClass_startTime() {
+		return class_startTime;
+	}
+
+	public void setClass_startTime(String class_startTime) {
+		this.class_startTime = class_startTime;
+	}
+
+	public int getClass_form() {
+		return class_form;
+	}
+
+	public void setClass_form(int class_form) {
+		this.class_form = class_form;
+	}
+
+	public int getClass_finish() {
+		return class_finish;
+	}
+
+	public void setClass_finish(int class_finish) {
+		this.class_finish = class_finish;
+	}
+
+	public int getApply_num() {
+		return apply_num;
+	}
+
+	public void setApply_num(int apply_num) {
+		this.apply_num = apply_num;
+	}
+
 	
 	
 }
