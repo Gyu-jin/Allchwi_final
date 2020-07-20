@@ -10,16 +10,14 @@
 				<a href="${cp }/admin/payment">회원결제내역</a>
 			</h2>
 			<div style="margin-left: 65%;">
-				<form action="${cp }/admin/payment" class="form-inline"
-					style="display: inline-block">
-					<select class="form-control col-2" name="field"
-						style="display: inline-block; width: 700px;">
-						<option value="num" <c:if test="${field == 'num'}">selected</c:if>>번호</option>
-						<option value="name"
-							<c:if test="${field == 'name'}">selected</c:if>>이름</option>
-						<option value="pwd" <c:if test="${field == 'pwd'}">selected</c:if>>비밀번호</option>
-					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
-					<button class="btn btn-primary my-2 my-sm-0" type="submit">검색</button>
+				<form class="form-inline" style="display: inline-block">
+					<select class="form-control col-2" name="field" style="display: inline-block; width: 700px;">
+						<option value="id" selected="selected">아이디</option>
+						<option value="class_title" >수업제목</option>
+						<option value="ml_num">회원번호</option>
+					</select> 
+					<input class="form-control mr-sm-2" type="text" name="keywords"/>
+					<button class="btn btn-primary my-2 my-sm-0" id="searchBtn">검색</button>
 				</form>
 			</div>
 		</div>
@@ -50,7 +48,7 @@
 			</table>
 		</div>
 
-		<div>
+		<div style="text-align: center">
 			<c:choose>
 				<c:when test="${pu.startPageNum>1 }">
 					<button type="button" id="prev" class="btn btn-outline-primary" >이전</button>
@@ -65,14 +63,16 @@
 
 			<div id="pagination" style="display: inline-block;">
 				<ul class="pagination justify-content-center" style="margin: 20px 0">
-
-					<c:forEach var="i" begin="${pu.startPageNum}"
-						end="${pu.endPageNum }">
-						<li class="page-items" id="pages" onclick="pageClick('${i }')"><a
-							class="page-link">${i }</a></li>
+					<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
+						<c:choose>
+							<c:when test="${pu.pageNum==i}">
+								<li class="page-item active" id="pages" onclick="pageClick('${i }')"><a class="page-link">${i }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item" id="pages" onclick="pageClick('${i }')"><a class="page-link">${i }</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
-
-
 				</ul>
 			</div>
 
@@ -88,6 +88,10 @@
 		</div>
 
 			<input type="hidden" value="${pu.pageNum}" id="pageNum">
+			<input type="hidden" id="fieldCopy">
+			<input type="hidden" id="keywordCopy">
+	
+	
 	</div>
 		
 
@@ -98,6 +102,35 @@
 
 
 <script>
+	$("#searchBtn").click(function(e){
+		e.preventDefault();
+		var field= $("select[name='field']").val();
+		var keywords= $("input[name='keywords']").val();
+				
+		$("#fieldCopy").val(field);
+		$("#keywordCopy").val(keywords);
+		
+		$.ajax({
+			url : "${cp}/admin/payment2",
+			dataType : "json",
+			data : {
+				"keyword" : keywords,
+				"field" : field
+			},
+
+			success : function(data) {
+				$.each(data, function(key, value) {					
+					content(key,value);
+					pageNumber(key, value);
+				})
+			}
+		})
+	});
+
+
+
+
+
 	function content(key, value) {
 		$("#th").empty();
 		$("#tb").empty();
@@ -121,8 +154,6 @@
 				var pay_way  = value[i].pay_way;
 				var final_price  = value[i].final_price;
 
-				
-				
 				$("#tb").append("<tr>");
 				$("#tb").append("<td>" + ml_num + "</td>");
 				$("#tb").append("<td>" + id + "</td>");
@@ -136,17 +167,40 @@
 		}
 	}
 
-	function pageClick(pageNum) {
-
+	function pageClick(pageNum,keyword,field) {
 		//$("#pagination").empty();
 		$.getJSON({
 			url : "${cp}/admin/payment2",
 			data : {
-				pageNum : pageNum
+				pageNum : pageNum,
+				keyword : $("#keywordCopy").val(),
+				field : $("#fieldCopy").val()
 			},
 			success : function(data) {
 				$.each(data, function(key, value) {
 					content(key, value);
+					if (key == "pu") {
+
+						$("#pagination").empty();
+						var pageUl = $(
+								"<ul class='pagination justify-content-center' style='margin: 20px 0'></ul>")
+								.appendTo("#pagination");
+						//$(pageUl).append("<li class='page-item'><a class='page-link' onclick='prev()' href='#'>이전</a></li>");
+						for (var i = value.startPageNum; i <= value.endPageNum; i++) {
+							if (value.pageNum == i) {
+								$(pageUl).append(
+										"<li class='page-item active' onclick='pageClick(" + i
+												+ ")'><a class='page-link'>" + i
+												+ "</a></li>");
+
+							} else {
+								$(pageUl).append(
+										"<li class='page-item' onclick='pageClick(" + i
+												+ ")'><a class='page-link'>" + i
+												+ "</a></li>");
+							}
+						}
+					}
 				});
 			}
 		});
@@ -164,7 +218,7 @@
 			for (var i = value.startPageNum; i <= value.endPageNum; i++) {
 				if (value.pageNum == i) {
 					$(pageUl).append(
-							"<li class='page-item' onclick='pageClick(" + i
+							"<li class='page-item active' onclick='pageClick(" + i
 									+ ")'><a class='page-link'>" + i
 									+ "</a></li>");
 
@@ -188,27 +242,16 @@
 	var paging = function(pagenum, totalpage, endPageNum) {
 
 		if (pagenum == 1) {
-
 			$("#prev").attr('disabled', true);
-
 		} else {
-
 			$("#prev").attr('disabled', false);
-
 		}
-		;
 
 		if (totalpage > endPageNum) {
-
 			$("#next").attr('disabled', false);
-
-		} else {
-
+		}else{
 			$("#next").attr('disabled', true);
-
 		}
-		;
-
 	}
 
 	$("#next").click(function() {
@@ -217,6 +260,8 @@
 			dataType : "json",
 			data : {
 				"pageNum" : Number($("#pageNum").val()) + 5,
+				keyword : $("#keywordCopy").val(),
+				field : $("#fieldCopy").val()
 			},
 
 			success : function(data) {
@@ -235,6 +280,8 @@
 			dataType : "json",
 			data : {
 				"pageNum" : Number($("#pageNum").val()) - 5,
+				keyword : $("#keywordCopy").val(),
+				field : $("#fieldCopy").val()
 			},
 
 			success : function(data) {

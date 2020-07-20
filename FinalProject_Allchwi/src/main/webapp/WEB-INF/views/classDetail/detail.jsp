@@ -182,9 +182,18 @@
 
 												</div>
 												<div class="md-form">
+													
+															<i class="glyphicon glyphicon-star active" data-value="1"></i>
+															<i class="glyphicon glyphicon-star " data-value="2"></i>
+															<i class="glyphicon glyphicon-star " data-value="3"></i> 
+															<i class="glyphicon glyphicon-star" data-value="4"></i> 
+															<i class="glyphicon glyphicon-star" data-value="5"></i> 
+												
 													<label data-error="wrong" data-success="right" for="form8">content</label>
+													
 													<textarea type="text" id="form8"
-														class="md-textarea form-control" rows="4"></textarea>
+														class="md-textarea form-control" rows="4">
+													</textarea>
 
 												</div>
 

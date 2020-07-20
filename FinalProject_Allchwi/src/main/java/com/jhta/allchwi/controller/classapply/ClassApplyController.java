@@ -24,6 +24,7 @@ import com.jhta.allchwi.service.point.PointService;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classapply.PaymentVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
+import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
 
 @Controller
@@ -40,11 +41,13 @@ public class ClassApplyController {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		int ml_num = (int)req.getSession().getAttribute("ml_num");
 		map.put("ml_num",ml_num);
-		List<ClassDateVO> classDate_list=classDate_service.list(class_num);
+		List<ClassDateVO> classDate_list=classDate_service.select(class_num);
 		int point=point_service.getTotal(map);
 		mv.addObject("classDate_list",classDate_list);
 		mv.addObject("point",point);
 		mv.addObject("class_num",class_num);
+		ClassInfoVO vo = classInfo_service.select(class_num);
+		req.setAttribute("class_form", vo.getClass_form());
 		return mv;
 	}
 	

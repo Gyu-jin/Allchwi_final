@@ -23,7 +23,7 @@ $(function(){
 	$("#card-header collapse").click(function() {
 		$(this).addClass('show');
 	});
-	qnaList();
+	qnaList(1);
 });
 ///////////////////////////qna /////////////////////////////////
 //qna작성
@@ -58,77 +58,90 @@ $(document).on('click', '#btn_write_qna', function () {
 	}
 });
 //qna목록
-function qnaList(){
+function qnaList(pageNum){
 	var class_num = $('#class_num').val();
-	 $.getJSON("/allchwi/classDetail/qnalist" + "?class_num=" + class_num , function(data){
+	 $.getJSON("/allchwi/classDetail/qnalist?class_num="+ class_num+"&pageNum="+pageNum, function(data){
 	  var str = "";
-	  
-	  $(data).each(function(){
-	   var qna_regdate = new Date(this.qna_regdate);
+	  var qlist=data.qlist;
+	  var pu=data.pu;
+	  $(qlist).each(function(i){
+	   var qna_regdate = new Date(qlist[i].qna_regdate);
 	   qna_regdate = qna_regdate.toLocaleDateString("ko-US")
 	   var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
 	   str += "<div class='qna_list'>" 
 		 + "<ul>"
 		 + "<li>"
-		 + "<input type='hidden' id='qna_ref' value='"+this.qna_ref+"'>"
+		 + "<input type='hidden' id='qna_ref' value='"+qlist[i].qna_ref+"'>"
 	     + "<dl>"
 	     + "<dt>"
 	     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center; background-image: url("+ img +")'>"
 	     + "</p>"
-	     + "<p class='name'>"+this.miv.mb_name+"</p>"
+	     + "<p class='name'>"+qlist[i].miv.mb_name+"</p>"
 	     + "</dt>"
-	     + "<dd>" + this.qna_content  + "</dd>"
+	     + "<dd>" + qlist[i].qna_content  + "</dd>"
 	     + "<dd class='date'>" + qna_regdate + "</dd>"
 	     + "</dl>"
 	     + "</li>"
-	     + "<a type='button' class='showreply' onclick='replyList("+this.qna_ref+")' data-toggle='collapse' data-target='#reply"+this.qna_ref +"'>"
+	     + "<a type='button' class='showreply' onclick='replyList("+qlist[i].qna_ref+")' data-toggle='collapse' data-target='#reply"+this.qna_ref +"'>"
 		 + "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-chevron-down'"
 		 + "fill='currentColor' xmlns='http://www.w3.org/2000/svg'"
 		 + "path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/>"
 		 + "</svg>" +"댓글"+ "</a>"
-		 +"<div class='reply_box collapse' id='reply"+this.qna_ref+"'>"
+		 +"<div class='reply_box collapse' id='reply"+qlist[i].qna_ref+"'>"
 		 +"<table>"
 		 +"<tr>"
 		 +"<td>"
 		 +"<form>"
 		 +"<div class='form-group'>"
-		 +"<textarea class='form-control reply_content' id='reply_content"+this.qna_ref+"' cols='60' rows='3'></textarea>"
+		 +"<textarea class='form-control reply_content' id='reply_content"+qlist[i].qna_ref+"' cols='60' rows='3'></textarea>"
 		 +"</form>"
 		 +"</td>"
 		 +"<td>"
-		 +"<input type='button' id='reply_send' onclick='sendReply("+this.qna_ref+")' class='btn btn-primary' value='등록'>"
+		 +"<input type='button' id='reply_send' onclick='sendReply("+data.qlist.qna_ref+")' class='btn btn-primary' value='등록'>"
 		 +"</td>"
 		 +"</tr>"
 		 +"</table>"
 		 +"</div>"
-		 +"<div class='reply_list' id='reply"+this.qna_ref+"'>"
+		 +"<div class='reply_list' id='reply"+qlist[i].qna_ref+"'>"
 		 +"<ul>"
 		 +"</ul>"
 		 +"</div>"
 		 +"</div>"
 		 +"</ul>"
-		 +"</div>"
-		 
-		 /*+"<div>"
-		 +"<c:forEach var='i' begin='${pu.startPageNum }' end='${pu.endPageNum }'>"
-		 +"<c:choose>"		
-		 +"<c:when test='${i==pu.pageNum}'>"			
-		 +"<a href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}' style='text-decoration: none; font-weight: bold;'>"
-		 +"<span style='color: red'>[${i }]</span>"
-		 +"</a>"
-		 +"</c:when>"
-		 +"<c:otherwise>"
-		 +"<a href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}' style='text-decoration: none;'>"		
-		 +"<span style='color:gray'>[${i }]</span>"
-		 +"</a>"
-		 +"</c:otherwise>"
-		 +"</c:choose>"	
-		 +"</c:forEach>"
-		 +"</div>"*/;
-	  
+		 +"</div>";
+		
 	  });
+	  str+="<div id='paging'>"
+		  +"<ul>";
+	  
+	  for (var j = pu.startPageNum; j <= pu.endPageNum; j++) {                                    
+	      if(j == pageNum) {
+	         str += "<li class='selected'>["+j+"]</a>";
+	      } else {
+	         str += "<li onclick='currPage("+j+")'>"
+	         	 +"["+j+"]" 
+	         	 +"</li>"
+	         
+	      }
+      }       
+	  str+="</ul>"
+	  +"</div>";
+//	  // 이전페이지 버튼
+//	  str += "<ul>"
+//      if(pu.pageNum > pu.startPageNum){
+//    	  str += "<a class='first' onclick='/allchwi/classDetail/qnalist?pageNum="+i+"'>처음</li >"
+//    	  str += "<li class='previous' onclick='/allchwi/classDetail/qnalist?pageNum="+ (pu.pageNum- 1) + "'>이전</li>"    
+//      }
+//	  str += "</ul>"
+
+
+
 	  $(".qna_wrap").html(str);
 	 });
+}
+function currPage(pageNum){
+	qnaList(pageNum);
+	alert(pageNum);
 }
 //qna답변 작성
 function sendReply(qna_ref) {

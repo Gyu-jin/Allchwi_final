@@ -26,7 +26,12 @@ public class ClassInfoVO {
 	private int class_status;
 	
 	// 커버이미지 join
-		private ClassImgVO classImgVo;
+		private int cover_num;
+	// 지역 join
+		private String sloc_name;
+		private String bloc_name;
+	// class_date join
+		private Timestamp class_date;
 	
 	public ClassInfoVO() {}
 
@@ -226,13 +231,42 @@ public class ClassInfoVO {
 		this.class_status = class_status;
 	}
 
-	public ClassImgVO getClassImgVo() {
-		return classImgVo;
+	
+	//지역
+	
+	public String getSloc_name() {
+		return sloc_name;
 	}
 
-	public void setClassImgVo(ClassImgVO classImgVo) {
-		this.classImgVo = classImgVo;
+	public void setSloc_name(String sloc_name) {
+		this.sloc_name = sloc_name;
 	}
+
+	public String getBloc_name() {
+		return bloc_name;
+	}
+
+	public void setBloc_name(String bloc_name) {
+		this.bloc_name = bloc_name;
+	}
+	
+	// class_date
+	public Timestamp getClass_date() {
+		return class_date;
+	}
+
+	public void setClass_date(Timestamp class_date) {
+		this.class_date = class_date;
+	}
+	// cover
+	public int getCover_num() {
+		return cover_num;
+	}
+
+	public void setCover_num(int cover_num) {
+		this.cover_num = cover_num;
+	}
+
 
 	
 	

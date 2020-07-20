@@ -99,8 +99,8 @@
 	
 	<!-- 검색 조건에 맞는 전체 글 정보 가져오는 sql -->
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num, 
-		date_num, class_date
+		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, loc.sloc_num, pro_num,
+		date_num, class_date, loc.*, cover.cover_num, class_regdate
 		from 
 				(
 					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
@@ -108,12 +108,23 @@
 					where s.bcategory_num=b.bcategory_num 				
 					<include refid="smallcategory"/>								
 					<include refid="bigcategory"/>	
-				)a, class_info c , class_date cd
-		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+				)a, class_info c , class_date cd, 
+				(
+					select sloc_num, sloc_name, bloc_name from  small_location s, big_location b where s.bloc_num=s.bloc_num
+				)loc,
+				( 
+					SELECT  class_num , cover_num , 
+					ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
+					FROM class_img 
+				) cover
+					
+		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num and loc.sloc_num=c.sloc_num and cover.class_num=c.class_num 
+		and cd.time_cnt=1
 		and class_auth=2 and class_status=0
 		<include refid="keyword"/>		
 		<include refid="sloc"/>		
 		<include refid="date"/>
+		group by class_num
 		order by class_num desc
 		limit #{startRow},6
 	</select>
@@ -137,6 +148,7 @@
 				<include refid="keyword"/>		
 				<include refid="sloc"/>		
 				<include refid="date"/>
+				group by class_num
 				order by class_num desc			   
 		   )z		   			
 	</select>

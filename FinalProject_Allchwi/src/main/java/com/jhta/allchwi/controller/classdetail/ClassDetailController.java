@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jhta.allchwi.page.util.PageUtil;
-import com.jhta.allchwi.service.classdetail.ClassQnaService;
 import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.login.MemberInfoService;
 import com.jhta.allchwi.service.wishlist.WishListService;
-import com.jhta.allchwi.vo.classdetail.ClassQnaVO;
 import com.jhta.allchwi.vo.classdetail.ClassReviewVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
-import com.jhta.allchwi.vo.login.MemberInfoVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
-import com.jhta.allchwi.vo.wishlist.WishListVO;
 
 
 
@@ -56,7 +52,7 @@ public class ClassDetailController {
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
 
-		
+		//페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
 		int totalRowCount=classreview_service.rcount(map);
@@ -97,13 +93,11 @@ public class ClassDetailController {
 		int totalRowCount=classreview_service.rcount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
 		int startRow=pu.getStartRow()-1;
-		System.out.println("endPageNUm : "+pu.getEndPageNum());
-	    System.out.println("총 글의 갯수 : " +totalRowCount);
 		map.put("startRow", startRow);	
 		List<ClassReviewVO> rlist=classreview_service.reviewList(map);
 
 		mv.addObject("rlist", rlist);
-		mv.addObject("pu",pu);
+		mv.addObject("rpu",pu);
 		mv.addObject("cvo", cvo);
 	    mv.addObject("class_num", class_num);
 		return mv;
