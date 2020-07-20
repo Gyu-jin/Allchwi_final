@@ -473,7 +473,7 @@ textarea.len980 {
 			alert("튜터에게 보내는 소개 글을 작성해주세요!");
 			$("#Introduction").focus();
 		}else if($("#phone").val().length==0){
-			alert("휴대폰 번호를 입력해주세요!");
+			alert("휴대폰 번호를 입력해주세요! ");
 			$("#phone").focus();
 		}
 		
