@@ -22,15 +22,11 @@ label {
 
 	<div style="float: right; margin-bottom: 10px;">
 
-		<select name="field" class="form-control"
-			style="width: 120px; display: inline-block;">
-
+		<select name="field" class="form-control" style="width: 120px; display: inline-block;">
 			<option value="id">아이디</option>
-
 			<option value="email">이메일</option>
-
-		</select> <input type="text" name="keyword" class="form-control form-control"
-			style="width: 200px; display: inline-block;">
+		</select> 
+		<input type="text" name="keyword" class="form-control form-control" style="width: 200px; display: inline-block;">
 
 	</div>
 
@@ -123,9 +119,9 @@ label {
 
 		</div>
 
-		<input type="hidden" value="${pu.pageNum}" id="pageNum"> <input
-			type="hidden" id="fieldcopy"> <input type="hidden"
-			id="keywordcopy">
+		<input type="hidden" value="${pu.pageNum}" id="pageNum"> 
+		<input type="hidden" id="fieldcopy"> 
+		<input type="hidden" id="keywordcopy">
 
 		<button id="next"
 			style="border: none; outline: none; background: none">
