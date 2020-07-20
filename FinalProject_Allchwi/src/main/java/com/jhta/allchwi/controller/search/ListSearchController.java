@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,8 @@ import com.jhta.allchwi.service.classopen.ClassDateService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.location.BigLocationService;
 import com.jhta.allchwi.service.location.SmallLocationService;
+import com.jhta.allchwi.service.login.MemberInfoService;
+import com.jhta.allchwi.service.wishlist.WishListService;
 import com.jhta.allchwi.vo.admin.BigCategoryVO;
 import com.jhta.allchwi.vo.admin.SmallCategoryVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
@@ -30,6 +35,7 @@ import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.location.BigLocationVO;
 import com.jhta.allchwi.vo.location.SmallLocationVO;
+import com.jhta.allchwi.vo.login.ProfileVO;
 
 @Controller
 public class ListSearchController {
@@ -38,9 +44,10 @@ public class ListSearchController {
 	@Autowired private BigLocationService bloc_service;
 	@Autowired private SmallLocationService sloc_service;
 	@Autowired private ClassDateService date_service;
-	
+	@Autowired private WishListService wls;
+	@Autowired private MemberInfoService mis;
 	@RequestMapping(value="/list/search",method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView goSearchList(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
+	public ModelAndView goSearchList(HttpServletRequest req,@RequestParam(value="pageNum",defaultValue="1")int pageNum,
 										@RequestParam(value="bcategory_num",defaultValue="-1")int bcategory_num, 
 										@RequestParam(value="scategory_num",defaultValue="-1")int scategory_num,
 										@RequestParam(value="keyword",defaultValue="")String keyword,
@@ -48,6 +55,19 @@ public class ListSearchController {
 										@RequestParam(value="endDate",defaultValue="")String endDate,
 										@RequestParam(value="sloc_num",defaultValue="-1")int sloc_num) {
 		
+		ServletContext sc=req.getSession().getServletContext();
+		if(req.getSession().getAttribute("ml_num") != null ) {
+			int ml_num = (int)req.getSession().getAttribute("ml_num");
+			if(wls.getWish(ml_num) != null) {
+				sc.setAttribute("wstatus", true);
+			}
+			if(mis.selectInfo(ml_num) != null) {
+				ProfileVO pfv = mis.selectInfo(ml_num);
+				sc.setAttribute("mem", pfv);
+			}else {
+				sc.setAttribute("mem", ml_num);
+			}
+		}
 		ModelAndView mv=new ModelAndView(".search.detailSearch");
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		

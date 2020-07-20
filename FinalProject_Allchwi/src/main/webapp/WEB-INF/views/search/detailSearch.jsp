@@ -135,6 +135,9 @@ text{
     
  
 }
+.btn_wishlist {
+	
+}
 
 </style>
 <script>
@@ -349,7 +352,36 @@ text{
 							<p class='card-text'> ${vo.getClass_date() } 시작!</p>
 							<div class='d-flex justify-content-between align-items-center'>
 							<div class='btn-group'>
-								<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>
+								<!-- 찜하기 -->
+									<c:choose>
+										<c:when test="${empty mem}">
+											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
+												id="btn_wishlist" class="btn_wishlist"> <img
+												id="wishsrc"
+												src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+												찜하기
+											</a>
+										</c:when>
+										<c:otherwise>
+											<c:choose>
+												<c:when test="${wstatus eq true}">
+													<a href="javascript:void(0);" class="btn_wishlist"
+														id="btn_after_wish"> <img id="wishsrc"
+														src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
+														찜하기
+													</a>
+												</c:when>
+												<c:otherwise>
+													<a href="javascript:void(0);" class="btn_wishlist"
+														id="btn_before_wish"> <img id="wishsrc"
+														src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
+														찜하기
+													</a>
+												</c:otherwise>
+											</c:choose>
+										</c:otherwise>
+									</c:choose>
+									<!-- ///찜하기 -->
 								<button type='button' class='btn btn-sm btn-outline-secondary'>
 								<a href="${cp }/class/apply?class_num=${vo.getClass_num()}&ml_num=${sessionScope.ml_num}">수업신청</a></button>
 							</div>
@@ -419,6 +451,43 @@ text{
 					$("#SmallLoc").append("<option value='"+sloc.sloc_num+"'>"+sloc.sloc_name+"</option>");		
 				});
 		    }
+		});
+	});
+	//위시전
+	$(document).on('click', '#btn_before_wish', function () {
+		var btn = $(this);
+		var class_num = $('#class_num').val();
+		var ml_num = $('#ml_num').val();
+		$.post('/allchwi/class/addWish', {
+			class_num: class_num,
+			ml_num: ml_num
+			
+		}, function (data,res) {
+			if (res=='success') {
+				btn.attr('id', 'btn_after_wish');
+				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
+				alert('위시리스트 등록 성공');
+			} else {
+				alert('위시리스트 등록 오류');
+			}
+		});
+	});
+	//위시후
+	$(document).on('click', '#btn_after_wish', function () {
+		var btn = $(this);
+		var class_num = $('#class_num').val();
+		var ml_num = $('#ml_num').val();
+		$.post('/allchwi/class/removeWish', {
+			class_num: class_num,
+			ml_num: ml_num
+		}, function (data,res) {
+			if (res=='success') {
+				btn.attr('id', 'btn_before_wish');
+				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
+				alert('위시리스트 삭제 성공');
+			} else {
+				alert('위시리스트 삭제 오류');
+			}
 		});
 	});
 			

@@ -52,7 +52,7 @@ public class ClassDetailController {
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
 
-		
+		//페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
 		int totalRowCount=classreview_service.rcount(map);
