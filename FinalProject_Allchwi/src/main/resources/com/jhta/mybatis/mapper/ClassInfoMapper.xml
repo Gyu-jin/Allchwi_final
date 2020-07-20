@@ -99,7 +99,7 @@
 	
 	<!-- 검색 조건에 맞는 전체 글 정보 가져오는 sql -->
 	<select id="list" parameterType="hashmap" resultType="classinfo">
-		select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, loc.sloc_num, pro_num,
+		select c.class_num, class_title, tutor_nickname, class_price, class_hour, class_count, bcategory_num, bcategory_name,scategory_name, loc.sloc_num, pro_num,
 		date_num, class_date, loc.*, cover.cover_num, class_regdate
 		from 
 				(
