@@ -9,6 +9,12 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
-
+	<select id="list" parameterType="int" resultType="adi">
+		select c.*, apply_auth from (
+			select cd.class_num, date_num, class_date, class_title, tutor_nickname, pro_num from class_date cd, class_info ci
+		    where cd.class_num=ci.class_num
+		) c, class_apply a
+		where c.date_num=a.date_num and ml_num=#{ml_num}
+	</select>
 </mapper>
 

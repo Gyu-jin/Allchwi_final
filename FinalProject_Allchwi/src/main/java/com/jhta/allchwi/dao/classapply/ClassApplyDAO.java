@@ -1,9 +1,12 @@
 package com.jhta.allchwi.dao.classapply;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.classapply.ClassApplyDateInfoVO;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 
 @Repository
@@ -13,5 +16,9 @@ public class ClassApplyDAO {
 	
 	public int insert(ClassApplyVO vo) {
 		return session.insert(NAMESPACE+".insert",vo);
+	}
+	
+	public List<ClassApplyDateInfoVO> list(int ml_num){
+		return session.selectList(NAMESPACE+".list",ml_num);
 	}
 }

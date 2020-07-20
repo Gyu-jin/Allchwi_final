@@ -1,12 +1,15 @@
 package com.jhta.allchwi.service.classapply;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.classapply.ClassApplyDAO;
 import com.jhta.allchwi.dao.classapply.PaymentDAO;
+import com.jhta.allchwi.vo.classapply.ClassApplyDateInfoVO;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classapply.PaymentVO;
 
@@ -29,5 +32,7 @@ public class ClassApplyService {
 	
 		return true;
 	}
-		
+	public List<ClassApplyDateInfoVO> list(int ml_num){
+		return apply_dao.list(ml_num);
+	}	
 }

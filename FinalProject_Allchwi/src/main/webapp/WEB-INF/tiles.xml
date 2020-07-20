@@ -8,6 +8,11 @@
 	 	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
+	
+	<definition name=".*.*" extends=".main">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
  <!-- ///////////////////////////////admin 타일즈  시작  //////////////////////////////////////////////////////// -->
 	
 	<!-- 
@@ -32,9 +37,6 @@
 <!-- ////////////////////////////////admin 타일즈  끝 ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->	
 	
 
-	<definition name=".*.*" extends=".main">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
-	</definition>
 	
 
 
