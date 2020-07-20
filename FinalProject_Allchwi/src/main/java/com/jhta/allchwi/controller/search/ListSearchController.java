@@ -26,6 +26,7 @@ import com.jhta.allchwi.service.location.SmallLocationService;
 import com.jhta.allchwi.vo.admin.BigCategoryVO;
 import com.jhta.allchwi.vo.admin.SmallCategoryVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.location.BigLocationVO;
 import com.jhta.allchwi.vo.location.SmallLocationVO;
@@ -59,17 +60,22 @@ public class ListSearchController {
 		map.put("endDate", endDate);
 		
 	
+		System.out.println("bcategory_num : " + bcategory_num);
+		System.out.println("scategory_num : " +scategory_num);
+		System.out.println("keyword : "+ keyword);
+		System.out.println("sloc_num : "+ sloc_num);
+		System.out.println(startDate + "~" + endDate);
 		
-			
-			System.out.println(startDate + "," + endDate);
-			int totalRowCount=service.count(map);
-			PageUtil pu=new PageUtil(pageNum, totalRowCount, 6, 5);
-			System.out.println("endPageNUm : "+pu.getEndPageNum());
-			System.out.println("총 글의 갯수 : " +totalRowCount);
-			int startRow=pu.getStartRow()-1;
-			map.put("startRow", startRow);	
-			List<ClassInfoVO> list=service.list(map);
-
+		
+		int totalRowCount=service.count(map);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 6, 5);
+		System.out.println("endPageNUm : "+pu.getEndPageNum());
+		System.out.println("총 글의 갯수 : " +totalRowCount);
+		int startRow=pu.getStartRow()-1;
+		map.put("startRow", startRow);	
+		List<ClassInfoVO> list=service.list(map);
+		
+		
 		
 		
 		List<BigCategoryVO> bigcalte_list=category_service.bcate_list();

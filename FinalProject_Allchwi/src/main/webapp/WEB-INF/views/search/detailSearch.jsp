@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -97,6 +98,44 @@ h1,h3{
 .input-search {
 	width: 35%;
 }
+.profile_box {
+    box-sizing: border-box;
+    width: 80px;
+    float: right;
+    margin-left: 75%;
+    position: absolute;
+    height: 100px;
+    margin-top: -12%;
+    text-align: center;
+}
+.profile_box .name {
+    width: 100%;
+
+    overflow: hidden;
+}
+.profile img{
+	width: 70%;
+	height: 70%;
+	margin-top: 10%;
+}
+.profile{
+	background-color: white;
+	border-radius: 100%;
+	height: 70%;
+    width: 90%;
+}
+.img-cover{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+text{
+
+    text-align: center;
+    
+ 
+}
+
 </style>
 <script>
 
@@ -294,22 +333,27 @@ h1,h3{
 				<c:forEach var="vo" items="${list }" varStatus="status">
 				<div class='col-md-4'>
 					<div class='card mb-4 shadow-sm'>
-						<svg class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
-						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'>
-						<title>	${vo.getClass_title() }</title>
-					   	<rect width='100%' height='100%' fill='#55595c'></rect>
-					   	<text x='50%' y='50%' fill='#eceeef' dy='.3em'>
-					   	
-					   	${vo.getClass_title() } 번호 :${vo.getClass_num() } </text></svg>
+						<img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
+						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'
+						src="${cp}/class/getimg?cover_num=${vo.cover_num}">
+						<title>	${vo.getClass_title() }</title></img>
 						<div class='card-body'>
-							<p class='card-text'>튜터: ${vo.getTutor_nickname() }</p>
+							<text>${vo.getClass_title() } 번호 :${vo.getClass_num() } </text>
+						<div class="profile_box">
+                                            <div class="profile">
+                                           		<img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${vo.pro_num}">
+                                            </div>
+                                            <div class="name">${vo.getTutor_nickname() }</div>
+                                            
+                                        </div>
+							<p class='card-text'> ${vo.getClass_date() } 시작!</p>
 							<div class='d-flex justify-content-between align-items-center'>
 							<div class='btn-group'>
 								<button type='button' class='btn btn-sm btn-outline-secondary'>♡</button>
 								<button type='button' class='btn btn-sm btn-outline-secondary'>
 								<a href="${cp }/class/apply?class_num=${vo.getClass_num()}&ml_num=${sessionScope.ml_num}">수업신청</a></button>
 							</div>
-							<small class='text-muted'>${status.count }번째 수업</small>
+							<small class='text-muted'>${vo.getBloc_name() } ${vo.getSloc_name() }</small>
 							</div>
 						</div>
 					</div>

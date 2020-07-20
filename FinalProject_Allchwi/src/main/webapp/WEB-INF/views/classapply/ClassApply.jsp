@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <style>
 @font-face {
 	font-family: 'CookieRunOTF-Bold';
@@ -232,6 +233,61 @@ textarea.len980 {
 	background-position: center; 
 	background-image: url('/allchwi/resources/img/모찌.jpg');
 }
+.class {
+    color: #888;
+    font-size: 16px;
+    border-bottom: 1px solid #d8d9db;
+    margin: 0;
+    padding: 10px 0;
+    cursor: pointer;
+}
+ .class .intext {
+    width: 650px;
+    display: inline-block;
+    font-size: 16px;
+}
+.class .intext .dwn {
+    display: block;
+}
+.class .intext img {
+    float: right;
+    margin-right: 30px;
+    margin-top: 6px;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+
+}
+.class .intext .up {
+    display: none;
+}
+.class.on .intext .up {
+    display: block;
+}
+.class .subtext {
+    width: 100%;
+    font-size: 14px;
+    display: none;
+}
+.class .subtext .ch {
+    font-size: 15px;
+    line-height: 1.4;
+}
+.class .subtext .ch font {
+    color: #000;
+    font-weight: 300;
+    margin-right: 5px;
+}
+.class.on .intext .dwn {
+    display: none;
+}
+.class .intext .up {
+    display: none;
+}
+.class.on .intext .up {
+    display: block;
+}
 </style>
 <div class="classApply">
 
@@ -290,23 +346,33 @@ textarea.len980 {
 				</c:forEach>
 					<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
 					<div class="col-md-6">
-						<c:forEach var="vo" items="${classDate_list }">
-					
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-									
-										<input type="radio"
-											aria-label="Radio button for following text input"
-											name="date_num" value="${vo.date_num }" checked>
-									</div>
+						<c:forEach var="date" items="${classDate_list}">
+						
+							<div id="certifi" class="certificate class" onclick="fold(this)">
+								<div class="intext">
+									<c:choose>
+										<c:when test="${class_form=='0'}">
+										<input type="radio" aria-label="Radio button for following text input" name="date_num" value="${date.date_num }" checked>
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${date.class_startTime } ~ ${date.class_endTime }
+											<img src="${cp}/resources/img/icon_down.png" class="dwn"> 
+											<img src="${cp}/resources/img/icon_up.png" class="up">
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${class_month }개월										
+										</c:otherwise>
+									</c:choose>
 								</div>
-		
-								<input type="text" class="form-control" disabled="disabled"
-									aria-label="Text input with radio button" 
-									value="시작 날짜 : <fmt:formatDate value="${vo.class_date }" pattern="yyyy-MM-dd"/> / 시작 시간 : ${vo.class_startTime}">
-									
+							
+								<div class="subtext">
+								<c:forEach var="vo" items="${date.list}">
+									<div class="ch">
+										<font>${vo.time_cnt}회</font> : 
+										<fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> ${vo.class_startTime } ~ ${vo.class_endTime }
+									</div>
+								</c:forEach>
+								</div>
 							</div>
+							
 						</c:forEach>
 					</div>
 	
@@ -524,4 +590,15 @@ textarea.len980 {
 			}
 		});
 	});
+	
+
+	function fold(elm){
+		if($(elm).children('.subtext').css('display')=='none'){
+				$(elm).siblings('.certificate.class').removeClass('on').find('.subtext').hide();
+				$(elm).children('.subtext').toggle("slow");
+				$(elm).addClass('on');
+		}else{
+			$(elm).removeClass('on').find('.subtext').hide();
+		}
+	}
 </script>
