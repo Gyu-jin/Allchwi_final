@@ -23,7 +23,7 @@
 						<div class="carousel-inner">
 							<div class="carousel-item">
 								<img class="d-block w-100" alt="Carousel1"
-									src="${cp}/resources/img/수업소개이미지_1.png" />
+									src="${cp}/class/getimg/cover_num?"${cover_num} />
 							</div>
 							<div class="carousel-item">
 								<img class="d-block w-100" alt="Carousel2"

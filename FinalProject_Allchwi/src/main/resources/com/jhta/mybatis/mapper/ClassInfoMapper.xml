@@ -153,10 +153,6 @@
 		   )z		   			
 	</select>
 
-	
-	<select id="getInfo" parameterType="int" resultType="classinfo">
-		select * from class_info where class_num=#{class_num}
-	</select> 
 
 </mapper>
 
