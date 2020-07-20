@@ -46,22 +46,18 @@ public class ClassQnaController {
 	}
 	@GetMapping("/classDetail/qnalist")
 	@ResponseBody
-	public List<ClassQnaVO> qnaList(int class_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+	public HashMap<String, Object> qnaList(int class_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
-		map.put("startRow", 1);
-//		int totalRowCount=service.count(map);
-//		PageUtil pu=new PageUtil(1, totalRowCount, 4, 5);
-//		
-//		System.out.println("endPageNUm : "+pu.getEndPageNum());
-//		System.out.println("총 글의 갯수 : " +totalRowCount);
-//		
-//		int startRow=pu.getStartRow()-1;
-//		map.put("startRow", startRow);	
+		int totalRowCount=service.count(map);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
+		int startRow=pu.getStartRow()-1;
+		map.put("startRow", startRow);	
 		List<ClassQnaVO> qlist=service.qnaList(map);
-//		mv.addObject("pu",pu);
-//		mv.addObject("qlist",qlist);
-		return qlist;
+		HashMap<String, Object> map1=new HashMap<String, Object>();
+		map1.put("pu",pu);
+		map1.put("qlist",qlist);
+		return map1;
 	}
 	@GetMapping("/classDetail/commlist")
 	@ResponseBody

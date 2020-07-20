@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 #container_detail {
 	width: 100%;
 	padding: 50px 0 50px 0;
@@ -71,7 +72,6 @@
 
 .class_wrap {
 	background: #ececec;
-	
 }
 
 .class_navi {
@@ -225,7 +225,8 @@
 	padding: 35px 0;
 	cursor: default;
 }
-.sec01 .review_list ul li dl{
+
+.sec01 .review_list ul li dl {
 	margin-bottom: 3rem;
 }
 
@@ -279,10 +280,12 @@ a, span {
 	line-height: inherit;
 	text-decoration: none;
 }
+
 a:hover {
-   color: inherit;
-   text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
+
 li {
 	list-style: none;
 }
@@ -301,9 +304,35 @@ li {
 .reply_box {
 	margin-top: 20px;
 }
-#reply_send{
+
+#reply_send {
 	width: 100px;
-    height: 85px;
-    margin-top: -15px;
-    margin-left: 24px;
+	height: 85px;
+	margin-top: -15px;
+	margin-left: 24px;
+}
+/*페이징 css*/
+#paging>ul {
+	list-style-type: none;
+}
+
+#paging>ul li {
+	font-size: 1.1em;
+	display: inline-block;
+	float: left;
+	cursor: pointer;
+	padding: 0 3px;
+}
+
+#paging>ul>li:hover {
+	/*background: #fbfbfb;*/
+	/*font-weight:bold;*/
+	color: #0080ff;
+}
+
+#paging>ul>li.selected {
+	color: #0080ff;
+	font-size: 1.2em;
+	font-weight: bold;
+	cursor: default;
 }
