@@ -102,7 +102,7 @@ h1,h3{
     box-sizing: border-box;
     width: 80px;
     float: right;
-    margin-left: 75%;
+    margin-left: 70%;
     position: absolute;
     height: 100px;
     margin-top: -12%;
@@ -139,6 +139,15 @@ text{
 .btn_wishlist img{
 	width:20px;
 	height: 20px;
+}
+.class_price{
+	position: absolute;
+	color: #ff936f;
+	font-weight:bold;
+	font-size: 1.5rem;
+	width: 200px;
+ 	height: 50px;
+	margin-left: 65%;
 }
 
 </style>
@@ -337,65 +346,40 @@ text{
 			<c:when test="${!empty list }">
 				<c:forEach var="vo" items="${list }" varStatus="status">
 				<div class='col-md-4'>
+				<a href="${cp }/classDetail/detail/?class_num=${vo.class_num }">
 					<div class='card mb-4 shadow-sm'>
 						<img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
 						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'
 						src="${cp}/class/getimg?cover_num=${vo.cover_num}">
-						<title>	${vo.getClass_title() }</title></img>
+						<title>	${vo.class_title }</title></img>
 						<div class='card-body'>
-							<text>${vo.getClass_title() } ( ${vo.getClass_num() } ) </text>
+							<text>${vo.class_title } ( ${vo.class_num } ) </text>
+						
 						<div class="profile_box">
                                             <div class="profile">
                                            		<img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${vo.pro_num}">
                                             </div>
-                                            <div class="name">${vo.getTutor_nickname() }</div>
+                                            <div class="name">${vo.tutor_nickname }</div>
                                             
                                         </div>
 							<p class='card-text'><fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> 시작!</p>
-							<div></div>
+							<a href="${cp }/class/apply?class_num=${vo.class_num}&ml_num=${sessionScope.ml_num}">수업신청</a>
+							
 							<div class='d-flex justify-content-between align-items-center'>
 							<div class='btn-group'>
-								<!-- 찜하기 -->
+								
+								
 								<button type='button' class='btn btn-sm btn-outline-secondary'>
-									<c:choose>
-										<c:when test="${empty mem}">
-											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main" id="btn_wishlist" class="btn_wishlist"> 
-												<img id="wishsrc"
-												src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
-												찜하기
-											</a>
-										</c:when>
-										<c:otherwise>
-											<c:choose>
-												<c:when test="${wstatus eq true}">
-													<a href="javascript:void(0);" class="btn_wishlist" id="btn_after_wish"> 
-														<img id="wishsrc"
-														src="https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png">
-				
-													</a>
-												</c:when>
-												<c:otherwise>
-													<a href="javascript:void(0);" class="btn_wishlist" id="btn_before_wish"> 
-														<img id="wishsrc"
-														src="https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png">
-
-													</a>
-												</c:otherwise>
-											</c:choose>
-										</c:otherwise>
-									</c:choose>
-									</button>
-									<!-- ///찜하기 -->
-								<button type='button' class='btn btn-sm btn-outline-secondary'>
-								<a href="${cp }/class/apply?class_num=${vo.getClass_num()}&ml_num=${sessionScope.ml_num}">수업신청</a></button>
+									${vo.bloc_name } ${vo.sloc_name }
+								</button>
 							</div>
-							<small class='text-muted'>${vo.getBloc_name() } ${vo.getSloc_name() }</small>
+							<div class="class_price"> &#8361 ${vo.class_price }</div>
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
-				<input type="hidden" id="class_num" value="${vo.class_num }">
-				<input type="hidden" id="ml_num" value="${mem.ml_num }">
+				
 			</c:forEach>
 			</c:when>
 			<c:otherwise>

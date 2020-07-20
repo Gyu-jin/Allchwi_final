@@ -55,19 +55,7 @@ public class ListSearchController {
 										@RequestParam(value="endDate",defaultValue="")String endDate,
 										@RequestParam(value="sloc_num",defaultValue="-1")int sloc_num) {
 		
-		ServletContext sc=req.getSession().getServletContext();
-		if(req.getSession().getAttribute("ml_num") != null ) {
-			int ml_num = (int)req.getSession().getAttribute("ml_num");
-			if(wls.getWish(ml_num) != null) {
-				sc.setAttribute("wstatus", true);
-			}
-			if(mis.selectInfo(ml_num) != null) {
-				ProfileVO pfv = mis.selectInfo(ml_num);
-				sc.setAttribute("mem", pfv);
-			}else {
-				sc.setAttribute("mem", ml_num);
-			}
-		}
+	
 		ModelAndView mv=new ModelAndView(".search.detailSearch");
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
