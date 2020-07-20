@@ -5,7 +5,7 @@ public class ConfirmClassVO {
 	private String class_title;
 	private int class_auth;
 	private String class_address;
-	private Object pro_img;
+	private int cover_num;
 	private int people;
 	private int wish_count;
 	private String tutor_nickname;
@@ -13,14 +13,14 @@ public class ConfirmClassVO {
 	
 	public ConfirmClassVO() {}
 
-	public ConfirmClassVO(int class_num, String class_title, int class_auth, String class_address, Object pro_img,
+	public ConfirmClassVO(int class_num, String class_title, int class_auth, String class_address, int cover_num,
 			int people, int wish_count, String tutor_nickname, String id) {
 		super();
 		this.class_num = class_num;
 		this.class_title = class_title;
 		this.class_auth = class_auth;
 		this.class_address = class_address;
-		this.pro_img = pro_img;
+		this.cover_num = cover_num;
 		this.people = people;
 		this.wish_count = wish_count;
 		this.tutor_nickname = tutor_nickname;
@@ -59,12 +59,12 @@ public class ConfirmClassVO {
 		this.class_address = class_address;
 	}
 
-	public Object getPro_img() {
-		return pro_img;
+	public int getCover_num() {
+		return cover_num;
 	}
 
-	public void setPro_img(Object pro_img) {
-		this.pro_img = pro_img;
+	public void setCover_num(int cover_num) {
+		this.cover_num = cover_num;
 	}
 
 	public int getPeople() {

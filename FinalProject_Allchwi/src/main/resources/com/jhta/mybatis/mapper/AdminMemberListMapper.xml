@@ -7,7 +7,7 @@
 	<!-- 전체회원에 대한 정보를 뽑아오는 select문 -->
 	<select id="member_list" resultType="com.jhta.allchwi.vo.admin.MemberListVO">
 		select l.id, l.ml_num, i.mb_num, i.mb_name, i.mb_regdate, i.mb_auth, 
-		(select nvl(count(*),0) cnt from class_apply where ml_num=l.ml_num and class_finish='n') nowclass,
+		(select nvl(count(*),0) cnt from class_apply where ml_num=l.ml_num and apply_auth=1) nowclass,
 		(select nvl(count(*),0) cnt from class_apply where ml_num=l.ml_num) totclass
 		from member_login l,member_info i
 		where  i.ml_num = l.ml_num;

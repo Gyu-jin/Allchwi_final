@@ -78,7 +78,7 @@
 
 									<div class="card-body" style="height: 188px;">
 										<div style="display: inline-block;">
-											<img src="${cp }/resources/img/모찌.jpg"
+											<img src="${cp }/class/getimg?cover_num=${vo.cover_num }"
 												style="width: 160px; height: 173px; margin-top: -130px;">
 											<!--  width: 85%; height: 37%; margin-top: -5%; -->
 											<!-- style="width: 160px; height: 173px; margin-top: -130px;"> -->

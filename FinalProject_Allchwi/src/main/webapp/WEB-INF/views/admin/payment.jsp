@@ -27,17 +27,23 @@
 			<table class="table table-hover">
 				<thead id="th" class="thead-dark">
 					<tr>
-						<th>번호</th>
-						<th>이름</th>
-						<th>비밀번호</th>
+						<th>회원번호</th>
+						<th>회원 아이디</th>
+						<th>결제날짜</th>
+						<th>수업제목</th>
+						<th>결제방법</th>
+						<th>결제금액</th>
 					</tr>
 				</thead>
 				<tbody id="tb">
 					<c:forEach var="vo" items="${list }">
 						<tr>
-							<td>${vo.num }</td>
-							<td>${vo.name }</td>
-							<td>${vo.pwd }</td>
+							<td>${vo.ml_num }</td>
+							<td>${vo.id }</td>
+							<td>${vo.pay_regdate }</td>
+							<td>${vo.class_title }</td>
+							<td>${vo.pay_way }</td>
+							<td>${vo.final_price }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -70,10 +76,15 @@
 				</ul>
 			</div>
 
-
-			<button type="button" id="next" class="btn btn-outline-primary">다음</button>
+			<c:choose>
+				<c:when test="${pu.totalPageCount>pu.endPageNum }">
+					<button type="button" id="next" class="btn btn-outline-primary">다음</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="next" class="btn btn-outline-primary" disabled>다음</button>
+				</c:otherwise>
 			
-
+			</c:choose>
 		</div>
 
 			<input type="hidden" value="${pu.pageNum}" id="pageNum">
@@ -93,21 +104,34 @@
 
 		if (key == "list") {
 			$("#th").append("<tr>");
-			$("#th").append("<th>번호</th>");
-			$("#th").append("<th>이름</th>");
-			$("#th").append("<th>비번</th>");
+			$("#th").append("<th>회원번호</th>");
+			$("#th").append("<th>회원 아이디</th>");
+			$("#th").append("<th>결제날짜</th>");
+			$("#th").append("<th>수업제목</th>");
+			$("#th").append("<th>결제방법</th>");
+			$("#th").append("<th>결제금액</th>");
 			$("#th").append("</tr>");
 
+		
 			for (var i = 0; i < value.length; i++) {
-				var name = value[i].name;
-				var num = value[i].num;
-				var pwd = value[i].pwd;
+				var ml_num = value[i].ml_num;
+				var id = value[i].id;
+				var pay_regdate = value[i].pay_regdate;
+				var class_title = value[i].class_title;
+				var pay_way  = value[i].pay_way;
+				var final_price  = value[i].final_price;
 
+				
+				
 				$("#tb").append("<tr>");
-				$("#tb").append("<td>" + num + "</td>");
-				$("#tb").append("<td>" + name + "</td>");
-				$("#tb").append("<td>" + pwd + "</td>");
+				$("#tb").append("<td>" + ml_num + "</td>");
+				$("#tb").append("<td>" + id + "</td>");
+				$("#tb").append("<td>" + pay_regdate + "</td>");
+				$("#tb").append("<td>" + class_title + "</td>");
+				$("#tb").append("<td>" + pay_way + "</td>");
+				$("#tb").append("<td>" + final_price + "</td>");
 				$("#tb").append("</tr>");
+			
 			}
 		}
 	}

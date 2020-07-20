@@ -11,9 +11,9 @@
         (select nvl(count(*),0) from wishlist where class_num=aa.class_num) wish_count
 
 		from 
-		(select ci.class_num, ci.tutor_nickname, ci.class_title, ci.class_auth, ci.class_address, pi.pro_img, ml.id
-		from class_info ci, profile_img pi, member_login ml
-		where ci.pro_num = pi.pro_num and ci.ml_num=ml.ml_num and ci.class_auth=0) aa
+		(select ci.class_num, ci.tutor_nickname, ci.class_title, ci.class_auth, ci.class_address, img.cover_num, ml.id
+		from class_info ci, class_img img, member_login ml
+		where ci.pro_num = img.class_num and ci.ml_num=ml.ml_num and ci.class_auth=1) aa
 		
 		<if test="field!=null and field!=''"> 
 			where ${field} like CONCAT('%',#{keyword},'%') 	
@@ -26,7 +26,7 @@
 	<select id="count" resultType="int" parameterType="hashmap"> 
 		select nvl(count(*),0) cnt from (select ci.class_num, ci.tutor_nickname, ci.class_title, ci.class_auth, ci.class_address, pi.pro_img, ml.id
 		from class_info ci, profile_img pi, member_login ml
-		where ci.pro_num = pi.pro_num and ci.ml_num=ml.ml_num and ci.class_auth=0) aa
+		where ci.pro_num = pi.pro_num and ci.ml_num=ml.ml_num and ci.class_auth=1) aa
 		
 		<if test="field!=null and field!=''"> 
 			where ${field} like CONCAT('%',#{keyword},'%') 
@@ -35,11 +35,11 @@
 	
 	
 	<update id="acceptClass" parameterType="int">
-		update class_info set class_auth=1 where class_num=#{class_num}
+		update class_info set class_auth=2 where class_num=#{class_num}
 	</update>
 	
 	<update id="denyClass" parameterType="int">
-		update class_info set class_auth=2 where class_num=#{class_num}
+		update class_info set class_auth=3 where class_num=#{class_num}
 	</update>
 	
 	
