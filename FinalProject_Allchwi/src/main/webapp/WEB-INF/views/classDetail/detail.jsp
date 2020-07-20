@@ -66,12 +66,12 @@
 									<img alt="tutorprofile" class="roundImg"
 										src="${cp}/resources/img/모찌.jpg" />
 								</div>
-								<div class="name">${cvo.tutor_nickname }</div>
+								<div class="name">${dlist.classinfo.tutor_nickname }</div>
 							</div>
 							<div class="class_title">
 								<!-- 수업명 -->
 								<div class="title">
-									<h3>${cvo.class_title }</h3>
+									<h3>${dlist.classinfo.class_title }</h3>
 								</div>
 
 								<!-- 별점 -->
@@ -118,15 +118,15 @@
 								<div class="info">
 									<ul>
 										<li class="ar" id="regionAll"><c:if
-												test="${cvo.class_form==0}">
+												test="${dlist.classinfo.class_form==0}">
 												온라인
-											</c:if> <c:if test="${cvo.class_form==1}">
+											</c:if> <c:if test="${dlist.classinfo.class_form==1}">
 												지역
 											</c:if></li>
-										<li class="hu"><font color="#ff936f">${cvo.class_hour}</font>시간/회</li>
-										<li class="gr">최대인원:<font color="#ff936f">${cvo.class_min}~${cvo.class_max}</font>명
+										<li class="hu"><font color="#ff936f">${dlist.classinfo.class_hour}</font>시간/회</li>
+										<li class="gr">최대인원:<font color="#ff936f">${dlist.classinfo.class_min}~${dlist.classinfo.class_max}</font>명
 										</li>
-										<li class="ohu"><font color="#ff936f">${cvo.class_price}</font>/시간</li>
+										<li class="ohu"><font color="#ff936f">${dlist.classinfo.class_price}</font>/시간</li>
 									</ul>
 								</div>
 							</div>
@@ -142,7 +142,7 @@
 										<li class="com">들어갈자리</li>
 									</ul>
 								</div>
-								<div class="d_info04">${cvo.tutor_about}</div>
+								<div class="d_info04">${dlist.classinfo.tutor_about}</div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
@@ -150,9 +150,9 @@
 						<div class="class_detail detail_sec_bor" id="intro">
 							<div class="sec01">
 								<h1>수업소개</h1>
-								<div class="d_info04">${cvo.class_about}</div>
+								<div class="d_info04">${dlist.classinfo.class_about}</div>
 								<h1>수업대상</h1>
-								${cvo.class_target}
+								${dlist.classinfo.class_target}
 								<h1>커리큘럼</h1>
 								회차만큼 출력
 							</div>

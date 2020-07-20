@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jhta.allchwi.page.util.PageUtil;
+import com.jhta.allchwi.service.classdetail.ClassDetailService;
 import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.login.MemberInfoService;
 import com.jhta.allchwi.service.wishlist.WishListService;
+import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
 import com.jhta.allchwi.vo.classdetail.ClassReviewVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
@@ -26,9 +28,9 @@ import com.jhta.allchwi.vo.login.ProfileVO;
 @Controller
 public class ClassDetailController {
 	@Autowired
-	private ClassInfoService classinfo_service;
+	private ClassDetailService cd_service;
 	@Autowired
-	private ClassReviewService classreview_service;
+	private ClassReviewService cr_service;
 	@Autowired
 	private MemberInfoService mis;
 	@Autowired
@@ -50,20 +52,22 @@ public class ClassDetailController {
 			}
 		}
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
-		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
+		HashMap<String, Object> map2=new HashMap<String, Object>();
+		map2.put("class_num", class_num);
+		List<ClassDetailVO> dlist=cd_service.getDetail(map2);
 
-		//페이징
+		//리뷰페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
-		int totalRowCount=classreview_service.rcount(map);
+		int totalRowCount=cr_service.rcount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
 		int startRow=pu.getStartRow()-1;
 		map.put("startRow", startRow);	
-		List<ClassReviewVO> rlist=classreview_service.reviewList(map);
+		List<ClassReviewVO> rlist=cr_service.reviewList(map);
 
 		mv.addObject("rlist", rlist);
 		mv.addObject("rpu",pu);
-		mv.addObject("cvo", cvo);
+		mv.addObject("dlist", dlist);
 	    mv.addObject("class_num", class_num);
 		return mv;
 	}
@@ -85,20 +89,22 @@ public class ClassDetailController {
 			}
 		}
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
-		ClassInfoVO cvo=classinfo_service.getInfo(class_num);
+		HashMap<String, Object> map2=new HashMap<String, Object>();
+		map2.put("class_num", class_num);
+		List<ClassDetailVO> dlist=cd_service.getDetail(map2);
 
-		
+		//리뷰페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
-		int totalRowCount=classreview_service.rcount(map);
+		int totalRowCount=cr_service.rcount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
 		int startRow=pu.getStartRow()-1;
 		map.put("startRow", startRow);	
-		List<ClassReviewVO> rlist=classreview_service.reviewList(map);
+		List<ClassReviewVO> rlist=cr_service.reviewList(map);
 
 		mv.addObject("rlist", rlist);
 		mv.addObject("rpu",pu);
-		mv.addObject("cvo", cvo);
+		mv.addObject("dlist", dlist);
 	    mv.addObject("class_num", class_num);
 		return mv;
 	}
