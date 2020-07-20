@@ -482,7 +482,7 @@ textarea.len980 {
 	$("#point").on("change", function() {
 		
 		$("#pointDiv").empty();
-	    var usePoint = $(this).val();
+	    var usePoint =parseInt( $(this).val());
 	    var classPay= $("#class_fee").val();
 	    var ppoint= $("#ppoint").val();
 	    console.log(classPay );
@@ -490,6 +490,11 @@ textarea.len980 {
 	    console.log(usePoint );
 	    if(usePoint>ppoint){
 	    	alert("보유하신 포인트보다 작은 금액만 입력 가능합니다!");
+	    	$("#pointDiv").focus();
+	    }else if(usePoint==null && usePoint==""){
+	    	$("#pointDiv").append("<span style='color: red'>"+ classPay +"</span>");
+	    }else if(usePoint.keyCode<48 || usePoint.keyCode>57){
+	    	alert("숫자만 입력해주세요!");
 	    	$("#pointDiv").focus();
 	    }else{
 	    	$("#pointDiv").append("<span style='color: red'>"+ (classPay - usePoint)	+"</span>");

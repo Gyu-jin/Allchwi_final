@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.mapper.ClassApplyMapper">
 	<insert id="insert" parameterType="classapply">
 		insert into class_apply values(0,#{date_num},#{ml_num},
-						#{stu_lev},#{stu_msg},#{stu_phone},0,0,now())
+						#{stu_lev},#{stu_msg},#{stu_phone},0,now())
 		<selectKey keyProperty="apply_num" resultType="int">
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>

@@ -23,8 +23,9 @@ public class ClassApplyService {
 		pvo.setApply_num(vo.getApply_num());
 		System.out.println("apply service : apply_num="+vo.getApply_num());
 		// Payment 테이블 insert
-		pay_dao.insert(pvo);
+
 		
+		pay_dao.insert(pvo);
 	
 		return true;
 	}
