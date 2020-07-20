@@ -12,7 +12,7 @@
 	<select id="getWish" parameterType="int" resultType="wish">
 		select * from wishlist where ml_num=#{ml_num}
 	</select>
-	<select id="myWishList" parameterType="hashmap" resultType="wishList">
+	<select id="myWishList" parameterType="hashmap" resultType="wish">
 		select i.class_num,i.class_title,i.class_form,i.class_price,s.sloc_name,c.cover_num,IFNULL(
 		(
 					select round(sum(curr_rating +ready_rating+kind_rating+time_rating)/4,1) class_rating 
