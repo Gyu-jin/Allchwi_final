@@ -27,7 +27,7 @@
 		<collection property="pfv" resultMap="pfv"/>
 	</resultMap>
 	
-	<select id="reviewList" parameterType="int" resultMap="classReview">
+	<select id="reviewList" parameterType="hashmap" resultMap="classReview">
 		select
 		r.review_num,r.curr_rating,r.ready_rating,r.kind_rating,r.time_rating,
 		r.review_content,r.review_regdate,
@@ -38,6 +38,11 @@
 		on m.pro_num = p.pro_num
 		where class_num=#{class_num} and review_status=0
 		order by review_num desc
+		limit #{startRow},4
+	</select>
+	<select id="rcount" parameterType="hashmap" resultType="int">
+		select NVL(count(*),0) from	class_review
+		where class_num=#{class_num} and review_status=0
 	</select>
 
 </mapper>

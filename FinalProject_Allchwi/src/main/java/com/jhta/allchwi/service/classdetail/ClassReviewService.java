@@ -1,5 +1,6 @@
 package com.jhta.allchwi.service.classdetail;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ public class ClassReviewService {
 	public int insertReview(ClassReviewVO vo) {
 		return dao.insertReview(vo);
 	}
-	public List<ClassReviewVO> reviewList(int class_num) {
-		return dao.reviewList(class_num);
+	public List<ClassReviewVO> reviewList(HashMap<String, Object> map) {
+		return dao.reviewList(map);
+	}
+	public int rcount(HashMap<String, Object> map) {
+		return dao.rcount(map);
 	}
 }

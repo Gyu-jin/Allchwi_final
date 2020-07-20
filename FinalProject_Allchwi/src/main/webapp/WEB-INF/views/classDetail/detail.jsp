@@ -161,7 +161,7 @@
 						<!-- 4.리뷰 -->
 						<div class="class_detail detail_sec_bor" id="review">
 							<div class="sec01">
-								<h1>리뷰(2)</h1>
+								<h1>리뷰(${rpu.totalRowCount })</h1>
 								<!-- 리뷰작성 모달 -->
 								<div class="modal fade" id="modalContactForm" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -259,6 +259,28 @@
 										</div>
 									</ul>
 								</div>
+								<!-- 리뷰페이징 -->
+								<div>
+									<c:forEach var='i' begin='${rpu.startPageNum }'
+										end='${rpu.endPageNum }'>
+										<c:choose>
+											<c:when test='${i==rpu.pageNum}'>
+												<a
+													href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
+													style='text-decoration: none; font-weight: bold;'> <span
+													style='color: red'>[${i }]</span>
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
+													style='text-decoration: none;'> <span
+													style='color: gray'>[${i }]</span>
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 						<!-- //4.리뷰 -->
@@ -285,14 +307,34 @@
 								<!-- qna 리스트 시작 -->
 								<div class="qna_wrap"></div>
 							</div>
+							<%-- <div>
+								<c:forEach var='i' begin='${pu.startPageNum }'
+									end='${pu.endPageNum }'>
+									 <c:choose>
+										<c:when test='${i==pu.pageNum}'>
+											<a
+												href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}'
+												style='text-decoration: none; font-weight: bold;'> <span
+												style='color: red'>[${i }]</span>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}'
+												style='text-decoration: none;'> <span
+												style='color: gray'>[${i }]</span>
+											</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</div> --%>
 						</div>
+						<!-- ///qna -->
 					</div>
-					<!-- qna wrap -->
+					<!--// class wrap -->
 				</div>
-				<!--// class wrap -->
+				<!-- 왼쪽수업정보끝 -->
 			</div>
-			<!-- 왼쪽수업정보끝 -->
-
 			<!-- 시간&날짜/ 결제창 -->
 			<div class="col-md-4 remote">
 				<div class="remote_wrap">
@@ -329,8 +371,8 @@
 					<c:choose>
 						<c:when test="${empty mem}">
 							<div class="button_pay">
-								<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
-									수업 신청하기</a>
+								<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
+									class="btn_pay"> 수업 신청하기</a>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -348,7 +390,5 @@
 		</div>
 	</div>
 </div>
-</div>
-<script>
-	
-</script>
+
+

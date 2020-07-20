@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.classdetail;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,10 @@ public class ClassReviewDAO {
 	public int insertReview(ClassReviewVO vo) {
 		return session.insert(NAMESPACE+".insertReview", vo);
 	}
-	public List<ClassReviewVO> reviewList(int class_num) {
-		return session.selectList(NAMESPACE+".reviewList", class_num);
+	public List<ClassReviewVO> reviewList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".reviewList", map);
+	}
+	public int rcount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".rcount", map);
 	}
 }

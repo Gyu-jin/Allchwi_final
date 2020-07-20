@@ -108,7 +108,8 @@ function qnaList(){
 		 +"</div>"
 		 +"</ul>"
 		 +"</div>"
-		 +"<div>"
+		 
+		 /*+"<div>"
 		 +"<c:forEach var='i' begin='${pu.startPageNum }' end='${pu.endPageNum }'>"
 		 +"<c:choose>"		
 		 +"<c:when test='${i==pu.pageNum}'>"			
@@ -118,13 +119,12 @@ function qnaList(){
 		 +"</c:when>"
 		 +"<c:otherwise>"
 		 +"<a href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}' style='text-decoration: none;'>"		
-		 +"<span style='color:  gray'>[${i }]</span>"
+		 +"<span style='color:gray'>[${i }]</span>"
 		 +"</a>"
 		 +"</c:otherwise>"
 		 +"</c:choose>"	
 		 +"</c:forEach>"
-		 +"</div>"
-		 ;
+		 +"</div>"*/;
 	  
 	  });
 	  $(".qna_wrap").html(str);

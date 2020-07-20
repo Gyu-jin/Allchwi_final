@@ -45,22 +45,23 @@ public class ClassQnaController {
 		return "success";
 	}
 	@GetMapping("/classDetail/qnalist")
-	public ModelAndView qnaList(int class_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
-		ModelAndView mv=new ModelAndView();
+	@ResponseBody
+	public List<ClassQnaVO> qnaList(int class_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
-		int totalRowCount=service.count(map);
-		PageUtil pu=new PageUtil(1, totalRowCount, 4, 5);
-		
-		System.out.println("endPageNUm : "+pu.getEndPageNum());
-		System.out.println("총 글의 갯수 : " +totalRowCount);
-		
-		int startRow=pu.getStartRow()-1;
-		map.put("startRow", startRow);	
+		map.put("startRow", 1);
+//		int totalRowCount=service.count(map);
+//		PageUtil pu=new PageUtil(1, totalRowCount, 4, 5);
+//		
+//		System.out.println("endPageNUm : "+pu.getEndPageNum());
+//		System.out.println("총 글의 갯수 : " +totalRowCount);
+//		
+//		int startRow=pu.getStartRow()-1;
+//		map.put("startRow", startRow);	
 		List<ClassQnaVO> qlist=service.qnaList(map);
-		mv.addObject("pu",pu);
-		mv.addObject("qlist",qlist);
-		return mv;
+//		mv.addObject("pu",pu);
+//		mv.addObject("qlist",qlist);
+		return qlist;
 	}
 	@GetMapping("/classDetail/commlist")
 	@ResponseBody
