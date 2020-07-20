@@ -29,6 +29,10 @@ public class LoginMainController {
 			//a 일치하는 회원정보 중 로그인번호만 뽑아 세션에 저장
 			MemberLoginVO get = mls.sessionInfo(mlv);
 			session.setAttribute("ml_num", get.getMl_num());
+			if(get.getTutor_auth() != 0) {
+				//a 튜터인증 여부 저장 - 나중에 등록 시 필요 
+				session.setAttribute("tutor_auth", get.getTutor_auth());
+			}
 			return "redirect:/";
 		//a 회원탈퇴 처리된 회원일 경우
 		} else if(result == 2) {
