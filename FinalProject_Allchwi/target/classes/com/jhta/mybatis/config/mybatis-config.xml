@@ -41,7 +41,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListVO" alias="wish"/>
 		<!-- myClassList alias -->
 		<typeAlias type="com.jhta.allchwi.vo.myclasslist.MyClassListVO" alias="myclassList"/>
-		
+		<!-- myClassManage alias -->
+		<typeAlias type="com.jhta.allchwi.vo.myclassmanage.MyClassManageVO" alias="mcm"/>
 	</typeAliases>
 
 	<mappers>
@@ -82,6 +83,9 @@
 		
 		<!-- Curriculum mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/CuriiculumMapper.xml"/>
+		
+		<!-- MyClassManage mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/MyClassManageMapper.xml"/>
 		
 	</mappers>
 </configuration>
