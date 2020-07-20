@@ -21,6 +21,7 @@ import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.classopen.CurriculumVO;
 import com.jhta.allchwi.vo.location.BigLocationVO;
 import com.jhta.allchwi.vo.location.SmallLocationVO;
+import com.jhta.allchwi.vo.myclasslist.MyClassListVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 
 @Service
@@ -115,6 +116,10 @@ public class ClassInfoService {
 	}
 	public ClassInfoVO select(int class_num) {
 		return infoDao.select(class_num);
+	}
+
+	public List<MyClassListVO> getMyList(int ml_num) {
+		return infoDao.getMyList(ml_num);
 	}
 
 }

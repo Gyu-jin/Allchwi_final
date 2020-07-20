@@ -1,43 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${cp}/resources/css/myClass/myClassList.css">
+
 <div class="container">
 		<!--MyTItleBox head-->
 		<div class="title-box">
-    <h1>나의 탈잉</h1>
-    <ul>
-        <li class="cursor on"><a href="/My/MyTuteeClassList/">오프라인</a></li>
-        <li class="cursor"><a href="/My/MyTuteeVodList/">브오디<div class="title-tab-cir">0</div></a></li>
-    </ul>
-</div>		<!--MyTItleBox head 마무리-->
+		    <h1>나의 탈잉</h1>
+		    <ul>
+		        <li class="cursor on"><a href="/My/MyTuteeClassList/">오프라인</a></li>
+		        <li class="cursor"><a href="/My/MyTuteeVodList/">온라인<div class="title-tab-cir">0</div></a></li>
+		    </ul>
+		</div>		
 		<div class="my-class-list">
-					<div class="class-box">
+			<c:forEach var="vo" items="${list}">
+			<div class="class-box">
 				<div class="class-info"> 
-					<a href="/Talent/Detail/19154"><div class="image" style="background-image: url(//s3.ap-northeast-2.amazonaws.com/taling.me/Content/Uploads/Cover/s_8ff4dc58b8016c3dcb963680486ffcfe11f7d256.png);"></div></a>
+					<div class="image" style="background-image: url(${cp}/class/getimg?cover_num=${vo.cover_num });"></div>
 					<div class="information-box">
-						<p>신청일시: 2020-07-19 16:49:49</p>
-						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[온라인 / 1:1 수업] 손 그림 그리는 프로그램을 활용해 얼굴없이 유튜브 시작하기!</h3>
+						<p>신청일시: ${vo.apply_regdate }</p>
+						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
 						<div class="stars-box">
 							<font class="class-type">원데이 1:1 </font>&nbsp;|&nbsp; &nbsp;
 							<font class="class-stars">
-																	<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
+									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">								 
 															</font>
-							<span>	(21)</span>						</div>
+							<span>	(${vo.class_rating })</span>						</div>
 						<div class="start-date">
-							<font>결제일 : 2020-07-19 16:53:52</font>&nbsp;|&nbsp;
-							<font>수업 시작일 : 2020-07-26&nbsp;&nbsp;17:00</font>&nbsp;|&nbsp; 
+							<font>결제일 : ${vo.pay_regdate }</font>&nbsp;|&nbsp;
+							<font>수업 시작일 : <fmt:formatDate value="${vo.class_date }" pattern="yy-MM-dd"/> &nbsp;&nbsp;17:00</font>&nbsp;|&nbsp; 
 							<font>온라인</font>
 						</div>
 						<div class="review-fold cursor on" onclick="review(this)">리뷰작성
 						<div class="arrw-box"><img src="https://front-img.taling.me/Content/Images/class/icon_btn_down.png" class="arrw down"><img src="https://front-img.taling.me/Content/Images/class/icon_btn_up.png" class="arrw up"></div></div>
-						<div class="price"><font>￦</font>19,000원</div>
+						<div class="price"><font>￦</font>${vo.class_fee }</div>
 					</div>
 				</div>
-								<div class="review-info textarea">
+				<!-- <div class="review-info textarea">
 					<div><textarea placeholder="리뷰를 작성해주세요" name="Content" id="reviewContent19154"></textarea></div>
 					<div class="stars-box">
 						<div class="stars">
@@ -53,8 +57,9 @@
 							등록
 						</div>
 					</div>
-				</div>
-	</div>
+				</div> -->
+			</div>
+			</c:forEach>
 			
 			<div style="padding-top:100px"></div>
 		</div>

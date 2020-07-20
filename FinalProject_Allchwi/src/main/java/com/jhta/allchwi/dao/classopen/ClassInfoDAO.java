@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
+import com.jhta.allchwi.vo.myclasslist.MyClassListVO;
 
 @Repository
 public class ClassInfoDAO {
@@ -42,5 +43,8 @@ public class ClassInfoDAO {
 
 	public ClassInfoVO select(int class_num) {
 		return session.selectOne(NAMESPACE + ".select", class_num);
+	}
+	public List<MyClassListVO> getMyList(int ml_num) {
+		return session.selectList(NAMESPACE+".myClassList", ml_num);
 	}
 }

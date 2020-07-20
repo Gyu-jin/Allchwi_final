@@ -39,6 +39,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassQnaVO" alias="classQna"/>	
 		<typeAlias type="com.jhta.allchwi.vo.classdetail.ClassReviewVO" alias="classReview"/>	
 		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListVO" alias="wish"/>
+		<!-- myClassList alias -->
+		<typeAlias type="com.jhta.allchwi.vo.myclasslist.MyClassListVO" alias="myclassList"/>
 		
 	</typeAliases>
 

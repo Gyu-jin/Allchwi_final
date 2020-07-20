@@ -40,7 +40,27 @@
 		select class_title,class_num from class_info where ml_num=#{ml_num};
 	</select>
 	
-	
+	<select id="myClassList" parameterType="int" resultType="myclassList">
+		select aa.apply_regdate,aa.apply_auth,aa.date_num,aa.class_fee,aa.pay_regdate,aa.class_date,aa.class_num,
+		bb.class_title,bb.scategory_name,bb.cover_num,
+		(
+			select IFNULL(round(sum(curr_rating +ready_rating+kind_rating+time_rating)/4,1),0) class_rating 
+			from class_review group by class_num  having class_num=aa.class_num
+		) rating from
+		(
+			select a.apply_regdate,a.apply_auth,a.date_num,p.class_fee,p.pay_regdate,d.class_date,d.class_num  
+			from class_apply a, payment p,class_date d 
+			where a.ml_num=14 and a.apply_num=p.apply_num and a.date_num=d.date_num
+		) aa,
+		(
+			select i.class_title,s.scategory_name,c.cover_num, i.class_num from class_info i,small_category s,
+			(
+			SELECT  class_num , cover_num ,	ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
+			FROM class_img 
+			) c where c.class_num=i.class_num and i.scategory_num=s.scategory_num and cnt=1
+		) bb
+		where aa.class_num=bb.class_num;
+	</select>
 	
 	<!-- '작은 지역' 검색 sql -->
 	<sql id="sloc">
