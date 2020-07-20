@@ -89,6 +89,10 @@
 		<!-- MyClassManage mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/MyClassManageMapper.xml"/>
 		
+			<!-- 튜터 수업료 받기 -->
+		<mapper resource="com/jhta/mybatis/mapper/ReceiptMapper.xml"/>
+		
+		
 	</mappers>
 </configuration>
 

@@ -48,7 +48,9 @@
           </div>
          <!-- 연습용메뉴 -->
 		 <div class="practice-group">
-           	<a href="${cp}/admin/main">관리자 연습</a>&nbsp&nbsp
+           	
+           	<a href="${cp}/receipt/main">튜-수업료받기</a>
+           	<a href="${cp}/admin/main">관리자 연습</a> 
            	<a href="${cp}/myClass/myClassManage">튜-신청서관리</a>
 		 </div>
 		 
