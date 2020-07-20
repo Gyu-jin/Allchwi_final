@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${cp}/resources/css/wishList/wishList.css">
     
 <div class="container">
@@ -12,18 +14,25 @@
 	</div>
 	<!-- WishList BoxList -->
 	<div class="class-box">
-	
+		<c:forEach var="vo" items="${list}">
+		
 		<div class="class-info">
 			<div class="image">
-				<img src="${cp}/resources/img/defaultCoverImg.jpeg">
+				<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
 			</div>
 			<div class="information-box">
-				<p>참여인원 : <font class="pink">5888명</font></p>
 				<h3 onclick="location.href ='/Talent/Detail/874'">
-					[1:1_청담샵 경력] #할.인.이.벤.트 #자존감이 두배 올라가는 메이크업배우기! 
+					${vo.class_title }
 				</h3>
 				<div class="stars-box">
-					<font class="class-type">그룹 수업  </font>&nbsp;|&nbsp; &nbsp;
+					<c:choose>
+						<c:when test="${vo.class_form=='0' }">
+							<font class="class-type">오프라인 </font>&nbsp;|&nbsp; &nbsp;												
+						</c:when>
+						<c:otherwise>
+							<font class="class-type">온라인  </font>&nbsp;|&nbsp; &nbsp;												
+						</c:otherwise>
+					</c:choose>
 					<font class="class-stars">
 						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
@@ -31,15 +40,53 @@
 						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
 					</font>
-					<span>(659)</span>
+					<span>(${vo.class_rating })</span>
 				</div>
 				<div class="start-date">
-					<font>수업 시작일 :  2020-07-19</font>&nbsp;|&nbsp; 
-					<font>강남</font>
+					&nbsp;|&nbsp; 
+					<font>${vo.sloc_name }</font>
 				</div>
-				<div class="price"><font>￦</font>38,000</div>
+				<div class="price"><font>￦</font><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.class_price }" /></div>
 			</div>
 		</div>
-		
+		</c:forEach>
+		<div>
+			<ul class="pagination justify-content-center" style="margin: 20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/class/wishList?pageNum=${pu.startPageNum-1 }">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+
+
+
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${pu.pageNum==i}">
+							<li class="page-item active"><a class="page-link"
+								href="${cp }/class/wishList?pageNum=${i }">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="${cp }/class/wishList?pageNum=${i }">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/class/wishList?pageNum=${pu.endPageNum+1 }">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 	</div>
 </div>

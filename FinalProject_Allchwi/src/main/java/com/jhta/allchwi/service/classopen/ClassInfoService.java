@@ -118,8 +118,12 @@ public class ClassInfoService {
 		return infoDao.select(class_num);
 	}
 
-	public List<MyClassListVO> getMyList(int ml_num) {
-		return infoDao.getMyList(ml_num);
+	public List<MyClassListVO> getMyList(HashMap<String, Object> map) {
+		return infoDao.getMyList(map);
+	}
+
+	public int count(int ml_num) {
+		return infoDao.count(ml_num);
 	}
 
 }

@@ -43,6 +43,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.myclasslist.MyClassListVO" alias="myclassList"/>
 		<!-- myClassManage alias -->
 		<typeAlias type="com.jhta.allchwi.vo.myclassmanage.MyClassManageVO" alias="mcm"/>
+		<!-- myWishList alias -->
+		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListJoinVO" alias="wishList"/>
 	</typeAliases>
 
 	<mappers>

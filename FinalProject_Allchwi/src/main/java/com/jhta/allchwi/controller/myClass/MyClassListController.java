@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.classapply.PaymentService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.vo.myclasslist.MyClassListVO;
@@ -24,31 +27,28 @@ public class MyClassListController {
 	
 	
 	@GetMapping("/mypage/myClassList")
-	public String goMyClassList(HttpSession session,Model model) {
+	public String goMyClassList(HttpSession session,Model model,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum) {
 		
 		int ml_num = (int)session.getAttribute("ml_num");
 		
-		// 내 수업 목록 가져오기
-		List<MyClassListVO> list = service.getMyList(ml_num);
+		//페이징 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totalRowCount = service.count(ml_num);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 2, 5);
+		map.put("ml_num",ml_num);
+		map.put("startRow", pu.getStartRow() - 1);
 		
-		for(MyClassListVO vo : list) {
-			System.out.println(vo.getClass_num());
-			System.out.println(vo.getDate_num());
-			System.out.println(vo.getApply_auth());
-			System.out.println(vo.getClass_fee());
-			System.out.println(vo.getClass_rating());
-			System.out.println(vo.getClass_title());
-			System.out.println(vo.getCover_num());
-			System.out.println(vo.getScategory_name());
-			System.out.println(vo.getApply_regdate());
-		}
+		// 내 수업 목록 가져오기
+		List<MyClassListVO> list = service.getMyList(map);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pu",pu);
 		
 		return ".myClass.myClassList";
 	}
 	  
 	@PostMapping("/mypage/finishUpdate")
+	@ResponseBody
 	public String classFinishUpdate(HttpSession session,int apply_num) {
 		
 		int ml_num = (int)session.getAttribute("ml_num");
@@ -58,11 +58,16 @@ public class MyClassListController {
 		map.put("apply_num", apply_num);
 		
 		if(apply_num != 0) {
-			//payService.finishUpdate(map);
+			try {
+				payService.finishUpdate(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "fail";
+			}
 		}else {
 			return "fail";
 		}
 		
-		return null;
+		return "success";
 	}
 }

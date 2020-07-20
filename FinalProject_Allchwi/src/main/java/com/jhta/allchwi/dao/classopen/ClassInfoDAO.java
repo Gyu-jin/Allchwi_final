@@ -44,7 +44,10 @@ public class ClassInfoDAO {
 	public ClassInfoVO select(int class_num) {
 		return session.selectOne(NAMESPACE + ".select", class_num);
 	}
-	public List<MyClassListVO> getMyList(int ml_num) {
-		return session.selectList(NAMESPACE+".myClassList", ml_num);
+	public List<MyClassListVO> getMyList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".myClassList", map);
+	}
+	public int count(int ml_num) {
+		return session.selectOne(NAMESPACE + ".countFinish", ml_num);
 	}
 }

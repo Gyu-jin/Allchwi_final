@@ -1,9 +1,13 @@
 package com.jhta.allchwi.service.wishlist;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.wishlist.WishListDAO;
+import com.jhta.allchwi.vo.wishlist.WishListJoinVO;
 import com.jhta.allchwi.vo.wishlist.WishListVO;
 @Service
 public class WishListService {
@@ -16,5 +20,11 @@ public class WishListService {
 	}
 	public WishListVO getWish(int ml_num) {
 		return dao.getWish(ml_num);
+	}
+	public List<WishListJoinVO> getWishList(HashMap<String, Object> map) {
+		return dao.getWishList(map);
+	}
+	public int count(int ml_num) {
+		return dao.count(ml_num);
 	}
 }

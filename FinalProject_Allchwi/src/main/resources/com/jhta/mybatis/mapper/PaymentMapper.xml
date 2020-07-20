@@ -8,6 +8,9 @@
 		values(0,#{class_num},#{ml_num},#{apply_num},
 		#{pay_way},#{final_price},#{pay_point},#{class_fee},0,0,now())
 	</insert>
+	<update id="finishUpdate" parameterType="hashmap">
+		update payment set class_finish=1 where ml_num=#{ml_num} and apply_num=#{apply_num}
+	</update>
 </mapper>
 
 

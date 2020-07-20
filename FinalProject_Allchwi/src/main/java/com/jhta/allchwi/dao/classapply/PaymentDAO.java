@@ -1,5 +1,7 @@
 package com.jhta.allchwi.dao.classapply;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,5 +15,9 @@ public class PaymentDAO {
 	
 	public int insert(PaymentVO vo) {
 		return session.insert(NAMESPACE+".insert",vo);
+	}
+
+	public int finishUpdate(HashMap<String, Object> map) {
+		return session.update(NAMESPACE + ".finishUpdate", map);
 	}
 }

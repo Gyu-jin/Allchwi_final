@@ -17,7 +17,9 @@
 			<c:forEach var="vo" items="${list}">
 			<div class="class-box">
 				<div class="class-info"> 
-					<div class="image" style="background-image: url(${cp}/class/getimg?cover_num=${vo.cover_num });"></div>
+					<div class="image" style="text-align: center;">
+						<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
+					</div>
 					<div class="information-box">
 						<p>신청일시: ${vo.apply_regdate }</p>
 						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
@@ -50,7 +52,7 @@
 						<fmt:formatDate var="now" value="${today}" pattern="yyyy-MM-dd" />
 						<fmt:formatDate var="startDate" value="${vo.class_date }" pattern="yyyy-MM-dd" />
 						<c:if test="${startDate >= now && vo.class_finish == '0'}">
-							<div class="review-fold cursor on" onclick="classFinish('${vo.apply_num'})" style="display: inline-block; float: left; margin-right: 20px;">수강완료
+							<div class="review-fold cursor on" onclick="classFinish('${vo.apply_num}')" style="display: inline-block; float: left; margin-right: 20px;">수강완료
 							</div>
 						</c:if>
 						<c:if test="${vo.class_finish=='1'}">
@@ -63,10 +65,50 @@
 			</div>
 			</c:forEach>
 			
-			<div style="padding-top:100px"></div>
+			<div style="padding-top:100px">
+				<ul class="pagination justify-content-center" style="margin: 20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/mypage/myClassList?pageNum=${pu.startPageNum-1 }">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+
+
+
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${pu.pageNum==i}">
+							<li class="page-item active"><a class="page-link"
+								href="${cp }/mypage/myClassList?pageNum=${i }">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="${cp }/mypage/myClassList?pageNum=${i }">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/mypage/myClassList?pageNum=${pu.endPageNum+1 }">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+			</div>
 		</div>
 </div>
 <script type="text/javascript"> 
+		var pageNum = 1;
+		
+		
 		$(function(){
 			$('#more-button').click(function(){
 				if($('#more-button').attr('value')=='0'){
@@ -84,8 +126,10 @@
 					$('#more-button').find('.up').hide();
 				}
 			});
-		});
 		
+
+		
+		});
 		function classFinish(apply_num){
 
 			if (confirm("첫수업 완료시 수업완료를 해주세요.\n정말 완료하시겠습니까?") == true){    
@@ -98,6 +142,7 @@
 				    success: function(data) {
 				    	if(data == 'success'){
 				    		alert('수업완료신청 되었습니다.');
+				    		location.href = "${cp}/mypage/myClassList";
 				    	}else{				    		
 				    		alert('다시 신청해주세요!');
 				    	}

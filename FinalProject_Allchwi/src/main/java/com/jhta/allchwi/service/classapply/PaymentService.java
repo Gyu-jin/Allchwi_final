@@ -16,7 +16,7 @@ public class PaymentService {
 		return dao.insert(vo);
 	}
 
-	public void finishUpdate(HashMap<String, Object> map) {
-
+	public int finishUpdate(HashMap<String, Object> map)throws Exception {
+		return dao.finishUpdate(map);
 	}
 }
