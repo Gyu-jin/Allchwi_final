@@ -17,13 +17,16 @@
 			<c:forEach var="vo" items="${list}">
 			<div class="class-box">
 				<div class="class-info"> 
-					<div class="image" style="background-image: url(${cp}/class/getimg?cover_num=${vo.cover_num });"></div>
+					<div class="image" style="text-align: center;">
+						<img src="${cp}/class/getimg?pro_num=${vo.pro_num }">
+					</div>					
+					
 					<div class="information-box">
 						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
 						<div class="stars-box">
 							<font class="class-type">원데이 1:1 </font>&nbsp;|&nbsp; &nbsp;
 							
-							<span>	(${vo.tutor_nickname })</span>						
+							<span>	(${vo.id }), ${vo.mb_nickname }</span>						
 						</div>
 						<div class="start-date">
 							<font>결제일 : ${vo.pay_regdate }</font>&nbsp;|&nbsp;
