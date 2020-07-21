@@ -356,6 +356,17 @@ function onImage(val, num)
 	selectIndex = num;
 }
 
+function indexIncrement(){
+	fileIndex++;
+}
+
+function onImageupdate(val, num)
+{
+	$('#dropZone').css({'background':"url('/allchwi/class/getimg?cover_num="+ val +"')", 'background-repeat' : 'no-repeat', 'background-position':'center' , 'background-size':'cover' , 'box-sizing':'border-box'});
+	$('#dragInfo').hide();
+	selectIndex = num;
+}
+
 function deleteImage(){
 	// 전체 파일 사이즈 수정
 	totalFileSize -= fileSizeList[selectIndex];
@@ -367,7 +378,14 @@ function deleteImage(){
 	delete fileSizeList[selectIndex];
 	
 	// 업로드 파일 테이블 목록에서 삭제
+	var val = $("#img-cover" + selectIndex).attr("data-value")
+	
+	if(val != null){	
+		$('#fileList').append("<input type='hidden' value="+val+" name='delCoverImg'>");
+	}
+	
 	$("#img-cover" + selectIndex).remove();
+	
 	$('#dragInfo').show();
 
 	$('#dropZone').css({'background':'url()', 'background-color':'#edf0f4', 'background-repeat' : 'no-repeat', 'background-position':'center' , 'background-size':'cover' , 'box-sizing':'border-box'});
@@ -485,29 +503,29 @@ function formatMoney(val) {
 	return formatMoney(val.substring(0, val.length - 3)) + ',' + val.substring(val.length - 3, val.length);
 }
 
+function updateCalculation() { 		
+	var unitPrice = Number($('#UnitPrice').val());
+	var time = Number($('#Time').val());
+	var totalTimes = Number($('#TotalTimes').val());
+
+	var x = $('#TotalTimes').val();
+	if(x && x.length > 0) {
+		if(!$.isNumeric(x)) {
+			x = x.replace(/[^0-9]/g,"");
+		}
+		$('#TotalTimes').val(x);
+	}
+	
+	$('#calc-unit-price').text(formatMoney(unitPrice.toString()));
+	$('#calc-time').text(time);
+	$('#calc-total-times').text(totalTimes);
+
+	$('#calc-result').text(formatMoney((unitPrice * time * totalTimes).toString()));
+	$('#calc-fee').text(formatMoney(unitPrice.toString()));
+
+}
 
 $(function(){
-	function updateCalculation() { 		
-		var unitPrice = Number($('#UnitPrice').val());
-		var time = Number($('#Time').val());
-		var totalTimes = Number($('#TotalTimes').val());
-
-		var x = $('#TotalTimes').val();
-		if(x && x.length > 0) {
-			if(!$.isNumeric(x)) {
-				x = x.replace(/[^0-9]/g,"");
-			}
-			$('#TotalTimes').val(x);
-		}
-		
-		$('#calc-unit-price').text(formatMoney(unitPrice.toString()));
-		$('#calc-time').text(time);
-		$('#calc-total-times').text(totalTimes);
-
-		$('#calc-result').text(formatMoney((unitPrice * time * totalTimes).toString()));
-		$('#calc-fee').text(formatMoney(unitPrice.toString()));
-
-	}
 	
 	$('#UnitPrice').on('change',function(){updateCalculation()});
 	$('#Time').on('change',function(){updateCalculation()});

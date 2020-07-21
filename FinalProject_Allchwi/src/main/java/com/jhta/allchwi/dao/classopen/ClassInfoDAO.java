@@ -50,4 +50,7 @@ public class ClassInfoDAO {
 	public int countMy(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".countFinish", map);
 	}
+	public int statusUpdate(HashMap<String, Object> map) {
+		return session.update(NAMESPACE + ".statusUpdate",map);
+	}
 }

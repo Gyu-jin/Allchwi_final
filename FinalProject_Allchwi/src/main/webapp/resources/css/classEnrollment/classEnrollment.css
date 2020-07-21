@@ -251,3 +251,13 @@ textarea.len980 {
     font-size: 24px;
     margin-right: 3px;
 }
+.verified {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 4px;
+    padding: 12px 20px;
+    border: solid 1px #ff936f;
+    background-color: #ff936f;
+    display: none;
+}

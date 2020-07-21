@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
@@ -47,12 +49,24 @@ public class ClassMyBoardController {
 		return ".classOpen.classMyBoard";
 	}
 	
-	@GetMapping("/class/classStatusUpdate")
-	public String fnStatusUpdate(HttpSession session,int class_num) {
+	@PostMapping("/class/classStatusUpdate")
+	@ResponseBody
+	public String fnStatusUpdate(HttpSession session, String class_num, String class_auth) {
 		
 		int ml_num = (int)session.getAttribute("ml_num");
 		
-		return null;
+		
+		if(Integer.parseInt(class_auth) == 0) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ml_num",ml_num);
+			map.put("class_num",Integer.parseInt(class_num));
+			service.statusUpdate(map);
+		}else {
+			return "fail";
+		}
+		
+		
+		return "success";
 	}
 	
 }

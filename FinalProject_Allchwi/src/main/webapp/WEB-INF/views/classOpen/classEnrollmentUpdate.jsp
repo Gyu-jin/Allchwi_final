@@ -7,7 +7,71 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="${cp}/resources/js/classEnrollment/classEnrollment.js"></script>
 <link id="cp" data-contextPath="${cp}"/>
+<script>
 
+	function deleteCert(val)
+	{
+	    $('#certs').append("<input type='hidden' value="+val+" name='deleteCert[]'>");
+	}
+
+	$(function(){
+		$.ajax({
+		    type: "post",
+		    dataType: "json",
+		    url: "/allchwi/class/classUpdate",
+		    data: {class_num: '${list.class_num}'},
+		    success: function(data) {
+		    	alert(data);
+		    	$(data.coverList).each(function(i,vo){
+		    		alert(vo.cover_num);
+		    		var oImg = ($('<div>').attr('id', 'img-cover'+i)
+		    				.addClass('cover_img')
+		    				.css({'background-image':"url('/allchwi/class/getimg?cover_num="+ vo.cover_num+"')"})
+		    				.attr('data-value',vo.cover_num)
+		    			).on({
+		    				'click': function() { onImageupdate(vo.cover_num , i) }
+		    			});
+
+		    			oImg.append($('<img>').attr('src',"/allchwi/class/getimg?cover_num="+ vo.cover_num)
+		    				.css({'width':'0','height':'0'})										
+		    			);
+
+		    			$('#fileList').append(oImg);
+		    			indexIncrement();
+		    	});
+		    	$(data.curriList).each(function(i,vo){
+		    		
+		    		$('#curries').append("<div class='curri inner1' id='Curri"+ (i+1) +"'>" +
+    						"<div class='index'>" +
+    						"<b>"+ (i+1)  +"</b>회차" +
+    						"</div>" +
+    						"<div class='box'>" +
+    						"<textarea class='basic len980 form-control' placeholder='커리큘럼을 입력해 주세요.'  " +
+    						"id='Curriculum"+ (i+1)  +"' name='curriculum[]'>"+ vo.curri_content +"</textarea>"+
+    						"</div></div>" 
+    						);
+		    		
+		    	});
+		    	
+		    	if(data.class_form == 0){
+		    		rd(0,0);		    		
+		    	}else{
+		    		
+		    	}
+		    	
+		    	if(data.class_min >=1 && data.class_max > 1){
+		    		rd(1,1);
+		    	}else{
+		    		rd(1,0);
+		    	}
+		    	
+		    }
+		});
+		
+		updateCalculation();
+	});
+
+</script>
 <div class="classOpen">
 <div class="title_box">
 	<!-- Nav 부트스트랩 목록 -->
@@ -16,19 +80,19 @@
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			<li class="nav-item" role="presentation">
 				<a class="nav-link active" id="pills-home-tab" data-toggle="pill" 
-					href="#pills-info" role="tab" aria-selected="true" style="pointer-events: none; ">01기본정보</a>
+					href="#pills-info" role="tab" aria-selected="true">01기본정보</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-title"
-					role="tab" aria-selected="false" style="pointer-events: none; ">02제목/이미지</a>
+					role="tab" aria-selected="false" ">02제목/이미지</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-price"
-					role="tab" aria-selected="false" style="pointer-events: none; ">03가격</a>
+					role="tab" aria-selected="false">03가격</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link"	id="pills-contact-tab" data-toggle="pill" href="#pills-class"
-					role="tab" aria-selected="false" style="pointer-events: none; ">04수업</a>
+					role="tab" aria-selected="false">04수업</a>
 			</li>
 		</ul>
 	</div>
@@ -47,7 +111,7 @@
 				튜터전화번호<b class="pink">*</b>
 			</div>
 			<div class="cont input-group col-5">
-				<input type="text" id="phone" name="tutor_phone" class="form-control" placeholder="개인연락처를 - 없이 입력해주세요."> 
+				<input type="text" id="phone" name="tutor_phone" class="form-control" placeholder="개인연락처를 - 없이 입력해주세요." value="${list.tutor_phone }"> 
 			</div>
 		</div>
 
@@ -63,7 +127,7 @@
 			<div style="margin: 30px 0">
 				<img class="upf_b" src="${cp}/resources/img/btn_pfimg.png">
 				<div class="upf" id="picture-cover"
-					style="background-image:url('${cp}/resources/img/profile-defaultImg.jpg')">
+					style="background-image:url('${cp}/mypage/getimg?pro_num="+${list.pro_num }+"')">
 					<input type="hidden" id="ProfileImg" value="${cp}/resources/img/profile-defaultImg.jpg"> 
 					<input type="file" id="picture" name="picture" style="width: 150px; height: 130px; opacity: 0;">
 				</div>
@@ -75,7 +139,7 @@
 			별명<b class="pink">*</b>
 		</div>
         <div class="input-group col-5">
-        	<input type="text" class="form-control" id="nickname" name="tutor_nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요.">
+        	<input type="text" class="form-control" id="nickname" name="tutor_nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요." value="${list.class_title }">
         </div>
     </div>
 	<div class="box">
@@ -98,7 +162,13 @@
 	                   		 날짜/자격증/주관사 공인 확인 가능한 자격증 사본
 	                    </font>
                     </div>
-                    <input type="hidden" name="deleteCert" id="deleteCert" value="">
+                    <c:forEach var="cert" items="${list.certList}">
+	                    <div class="certs" style="position:relative;">
+	                       <input type="text" class="form-control col-8" placeholder="예) 토익900,HSK 6급,GTQ1급, 임상경력 등" value="${cert.certif_name }" style="display: inline-block;">
+	                       <span class="verified left10" id="img-cover3-verified" style="display: inline-block;">인증대기중</span>
+	                       <div class="verify left10" onclick="deleteCert('${cert.certif_num}');$(this).parent().remove();"><img src="https://front-img.taling.me/Content/Images/tutor/Images/icon_del_bk.png"> 삭제</div>
+	                    </div>
+                    </c:forEach>
                     <div id="certs">
 	                    <div class="certificate" style="position: relative;">
 	                    	<input type="text"  class="form-control col-8" name="certName[]" placeholder="예) 토익900,HSK 6급,GTQ1급, 임상경력 등" style="display: inline;">
@@ -129,7 +199,7 @@
         <div class="box">
         	<div class="title">수업등록지역<b class="pink">*</b></div>
         	<div class="cont">
-        		<input type="text" class="form-control col-4" id="address" name="class_address" placeholder="수업 대표지역을 검색해주세요." readonly="readonly">
+        		<input type="text" class="form-control col-4" id="address" name="class_address" placeholder="수업 대표지역을 검색해주세요." readonly="readonly" value="${list.class_address}">
 				<div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div>
         	</div>
         </div>
@@ -177,53 +247,16 @@
 				<div class="inner2" style="display: block;" id="minmax">
 					<select class="custom-select col-3" id="MinPerson" name="class_min">
 						<option value="1">최소인원수</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
-						<option value="50">50</option>
+						<c:forEach var="i" begin="1" end="30" step="1">
+							<option value="${i}" <c:if test="${list.class_min==i }">selected</c:if>>${i }</option>
+						</c:forEach>
 					</select>
 					 명 ~ 
 					<select class="custom-select col-3" id="MaxPerson" name="class_max">
 						<option value="1">최대인원수</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
-						<option value="50">50</option>
+						<c:forEach var="i" begin="2" end="50" step="1">
+							<option value="${i}" <c:if test="${list.class_min==i }">selected</c:if>>${i }</option>
+						</c:forEach>
 					</select>
 					
 					<div class="inner3">
@@ -238,7 +271,7 @@
 			<div class="title">수업제목<b class="pink">*</b></div>
 			<div class="cont">
 				<div class="inner1">
-					<input type="text" class="form-control col-7" id="Title" name="class_title"  placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요.">
+					<input type="text" class="form-control col-7" id="Title" name="class_title"  placeholder="수강생을 끌어당길 수 있는 개성넘치는 제목을 만들어 보세요." value="${list.class_title }">
 				</div>
 			</div>
 		</div>
@@ -291,18 +324,15 @@
 			<div class="cont">
 				<div class="inner1" style="margin:0">
 					<div class="gray5 title">시간당 가격</div>
-					<input type="text" id="UnitPrice" name="class_price" class="form-control col-4" placeholder="시간당 가격을 입력하세요" style="display: inline-block;">원
+					<input type="text" id="UnitPrice" name="class_price" class="form-control col-4" placeholder="시간당 가격을 입력하세요" style="display: inline-block;" value="${list.class_price}">원
 				</div>
 				<div class="inner1">
 					<div class="gray5 title">1회당 수업시간</div>
 					<select class="custom-select col-4" id="Time" name="class_hour">
 						<option value="0">1회당 수업시간을 선택하세요</option>
-						<option value="1" >1시간</option>
-						<option value="2">2시간</option>
-						<option value="3">3시간</option>
-						<option value="4">4시간</option>
-						<option value="5">5시간</option>
-						<option value="6">6시간</option>
+						<c:forEach var="i" begin="1" end="6" step="1">
+							<option value="${i}" <c:if test="${list.class_hour eq i }">selected</c:if>>${i}시간</option>
+						</c:forEach>
 					</select>
 					시간
 				</div>
@@ -311,12 +341,9 @@
 									
 						<select id="TotalTimes" name="class_count" class="custom-select col-4">
 							<option value="0">총 수업횟수를 선택하세요</option>
-							<option value="1">1회</option>
-							<option value="2">2회</option>
-							<option value="3">3회</option>
-							<option value="4">4회</option>
-							<option value="5">5회</option>
-							<option value="6">6회</option>
+							<c:forEach var="i" begin="1" end="12" step="1">
+								<option value="${i}" <c:if test="${list.class_count eq i }">selected</c:if>>${i}회</option>
+							</c:forEach>
 						</select>회
 				</div>
 
@@ -354,7 +381,7 @@
 			<div class="title">튜터소개<b class="pink">*</b></div>
 			<div class="cont" style="padding-top:15px">
 				<div class="inner1">
-					<textarea class="basic len980 form-control" placeholder="수강생은 튜터님에 대해 많은 관심을 가지고 있습니다. TIP을 참고하여 최대한 자세히 소개를 해주세요." id="TutorInfo" name="tutor_about"></textarea>
+					<textarea class="basic len980 form-control" placeholder="수강생은 튜터님에 대해 많은 관심을 가지고 있습니다. TIP을 참고하여 최대한 자세히 소개를 해주세요." id="TutorInfo" name="tutor_about">${list.tutor_about }</textarea>
 				</div>
 			</div>
 		</div>	
@@ -362,7 +389,7 @@
 			<div class="title">수업소개<b class="pink">*</b></div>
 				<div class="cont">
 					<div class="inner1">
-						<textarea class="basic len980 form-control" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="Introduction" name="class_about"></textarea>
+						<textarea class="basic len980 form-control" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="Introduction" name="class_about">${list.class_about }</textarea>
 					</div>
 				</div>
 		</div>
@@ -370,7 +397,7 @@
 			<div class="title">수업대상<b class="pink">*</b></div>
 			<div class="cont">
 				<div class="inner1">
-					<textarea class="basic len980 form-control" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="Target" name="class_target"></textarea>
+					<textarea class="basic len980 form-control" placeholder="TIP의 내용을 참고하여 튜터님의 수업을 수강하기에 적합한 수업대상에 대해 알려주세요. " id="Target" name="class_target">${list.class_target}</textarea>
 				</div>
 			</div>
 		</div>

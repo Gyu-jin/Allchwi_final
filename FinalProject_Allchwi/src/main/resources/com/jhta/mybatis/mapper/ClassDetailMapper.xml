@@ -20,6 +20,7 @@
 		<result column="tutor_about" property="tutor_about"/>
 		<result column="class_about" property="class_about"/>
 		<result column="class_target" property="class_target"/>
+		<result column="tutor_phone" property="tutor_phone"/>
 		<result column="cover_num" property="cover_num"/>
 		<result column="sloc_name" property="sloc_name"/>
 		<result column="bloc_name" property="bloc_name"/>
@@ -31,7 +32,7 @@
 	<select id="getDetail" parameterType="hashmap" resultMap="classDetail">
 		select ci.class_num,ci.ml_num,ci.pro_num,ci.tutor_nickname,ci.class_address,ci.class_form,
 		ci.class_max,ci.class_min,ci.class_title,ci.class_price,ci.class_hour,ci.class_count,
-		ci.class_target,ci.class_about,ci.tutor_about,
+		ci.class_target,ci.class_about,ci.tutor_about,ci.tutor_phone,
 		loc.sloc_name,loc.bloc_name
 		FROM class_info ci,
 		(

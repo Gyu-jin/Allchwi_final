@@ -65,8 +65,8 @@ public class ClassDateController {
 									@RequestParam HashMap<String, Object> formdata
 									,HttpSession session) {
 		int class_count =  Integer.parseInt((String)formdata.get("class_count"));
-		int class_form =  Integer.parseInt((String)formdata.get("class_form"));
 		int class_num =  Integer.parseInt((String)formdata.get("class_num"));
+		int class_form =  Integer.parseInt((String)formdata.get("class_form"));
 		int updateCnt =  Integer.parseInt((String)formdata.get("updateCnt"));
 		
 		String class_comment = (String)formdata.get("class_comment");

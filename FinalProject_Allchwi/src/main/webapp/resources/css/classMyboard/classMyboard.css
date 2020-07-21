@@ -183,3 +183,6 @@ img {
     max-height: 100%;
     vertical-align: top;
 }
+.cursor{
+	cursor: pointer;
+}

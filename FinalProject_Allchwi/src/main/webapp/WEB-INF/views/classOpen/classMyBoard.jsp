@@ -9,22 +9,30 @@
 		location.href = "${cp}/class/classBoard?class_num="+v;  
 	}
 	
-	function fnStatusChange(val){
+	function fnStatusChange(){
 		
-		$.ajax({
-		    type: "post",
-		    dataType: "text",
-		    url: "${cp}/class/classStatusUpdate",
-		    data: {class_num: val},
-		    success: function(data) {
-		    	if(data == 'success'){
-		    		alert('수업완료신청 되었습니다.');
-		    		location.href = "${cp}/class/classBoard?class_num="+val; 
-		    	}else{				    		
-		    		alert('다시 신청해주세요!');
-		    	}
-		    }
-		});
+		if('${list.class_auth}'=='0'){
+			$.ajax({
+			    type: "post",
+			    dataType: "text",
+			    url: "${cp}/class/classStatusUpdate",
+			    data: {class_num : '${list.class_num}' ,class_auth: '${list.class_auth}'},
+			    success: function(data) {
+			    	if(data == 'success'){
+			    		alert('심사신청이 되었습니다.');
+			    		location.href = "${cp}/class/classBoard?class_num=${list.class_num}"; 
+			    	}else{				    		
+			    		alert('다시 신청해주세요!');
+			    	}
+			    }
+			});
+		}else{
+			alert("심사요청을 할수 없습니다.");
+		}
+	}
+	
+	function salesStatus(val){
+		
 	}
 	
 </script>
@@ -51,17 +59,26 @@
 					</div>
 					<div>
 						<span class="date">업데이트 : <fmt:formatDate value="${list.class_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-						<div class="button_gray cursor" onClick="fnStatusChange(${list.class_num});" style="float:right;">심사요청하기</div>
+						<c:choose>
+							<c:when test="${list.class_auth== '0' }">
+								<div class="button_gray cursor" onclick="fnStatusChange(${list.class_num});" style="float:right;">심사요청하기</div>
+							</c:when>
+							<c:when test="${list.class_auth == '1'}">
+								<div class="button_gray" style="float:right;">심사대기중</div>
+							</c:when>
+							<c:when test="${list.class_auth == '2'}">
+								<div class="button_gray" style="float:right;">심사완료</div>
+							</c:when>																																														
+						</c:choose>
 						<a href="${cp}/class/classDate?class_num=${list.class_num}">
 						<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 					</div>
 					<div style="margin-top: 56px">
 						<div class="button-box">
-							<div class="button_gray cursor"onClick="fnStatusChange();">수업수정</div>
-							<a href="/tutor/registerRegionMessage/26923" target="_blank">
-							<div class="button_gray" style="margin-left: 10px;">selling</div></a> 
-							<a href="/Talent/Detail/26923" target="_blank">
-							<div class="button_white cursor" style="margin-left: 10px;">Soldout</div></a>
+							<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
+							<div class="button_gray cursor">수업수정</div></a>
+							<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(0)">selling</div></a> 
+							<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(1)">Soldout</div>
 						</div>
 					</div>
 				</div>

@@ -216,6 +216,10 @@
 				order by class_num desc			   
 		   )z		   			
 	</select>
+	
+	<update id="statusUpdate" parameterType="hashmap">
+		update class_info set class_auth=1 where ml_num=#{ml_num} and class_num=#{class_num}
+	</update>
 
 
 </mapper>

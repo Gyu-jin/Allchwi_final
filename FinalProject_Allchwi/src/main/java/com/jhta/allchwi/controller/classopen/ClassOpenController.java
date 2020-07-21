@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.allchwi.service.admin.categoryService;
+import com.jhta.allchwi.service.classdetail.ClassDetailService;
 import com.jhta.allchwi.service.classopen.CertificateService;
 import com.jhta.allchwi.service.classopen.ClassImgService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
@@ -34,6 +36,7 @@ import com.jhta.allchwi.service.location.SmallLocationService;
 import com.jhta.allchwi.service.profileImg.ProfileImgService;
 import com.jhta.allchwi.vo.admin.BigCategoryVO;
 import com.jhta.allchwi.vo.admin.SmallCategoryVO;
+import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
 import com.jhta.allchwi.vo.classopen.CertificateVO;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
@@ -48,7 +51,9 @@ public class ClassOpenController {
 	private ClassInfoService classinfo_service;
 	@Autowired
 	private categoryService category_service;
-
+	@Autowired
+	private ClassDetailService detail_service;
+	
 	
 	@RequestMapping("/class/enrollment")
 	public String goEnrollement(Model model) {
@@ -156,4 +161,33 @@ public class ClassOpenController {
 		
 		return "success";
 	}
+	
+	@GetMapping("/class/classInfoUpdate")
+	public String setClassUpdate(HttpSession session,Model model,int class_num) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("class_num",class_num);
+		ClassDetailVO vo = detail_service.getDetail(map);
+		
+		List<BigCategoryVO> bcate_list = category_service.bcate_list();
+		
+		model.addAttribute("bcate_list", bcate_list);
+		
+		model.addAttribute("list", vo);
+		
+		return ".classOpen.classEnrollmentUpdate";
+	}
+	
+	@PostMapping("/class/classUpdate")
+	@ResponseBody
+	public ClassDetailVO classUpdate(HttpSession session,int class_num) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("class_num",class_num);
+		ClassDetailVO vo = detail_service.getDetail(map);
+		
+		System.out.println("num" + vo.getCoverList().get(0).getCover_num());
+		return vo;
+	}
+	
 }

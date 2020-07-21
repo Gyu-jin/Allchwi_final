@@ -126,4 +126,8 @@ public class ClassInfoService {
 		return infoDao.countMy(map);
 	}
 
+	public int statusUpdate(HashMap<String, Object> map) {
+		return infoDao.statusUpdate(map);
+	}
+
 }
