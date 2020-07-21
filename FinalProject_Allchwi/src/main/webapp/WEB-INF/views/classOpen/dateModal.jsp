@@ -343,7 +343,7 @@
 					<div class="next button prev" onclick="parent.cls_date()">
 					취소
 					</div>
-					<div class="next button on" onclick="parent.getClassDate(0)">
+					<div class="next button on" onclick="parent.getClassDate(${class_form})">
 					저장
 					</div>
 				</div>

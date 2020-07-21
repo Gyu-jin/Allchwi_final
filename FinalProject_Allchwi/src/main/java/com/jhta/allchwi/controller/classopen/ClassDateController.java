@@ -60,7 +60,7 @@ public class ClassDateController {
 	public String ClassDateInsert(@RequestParam(value = "startDate[]",defaultValue = "")List<String> startDate,
 									@RequestParam(value = "startTime[]",defaultValue = "")List<String> startTime,
 									@RequestParam(value = "endTime[]",defaultValue = "")List<String> endTime,
-									@RequestParam(value = "monthDate[]",defaultValue = "")List<Integer> monthDate,
+									@RequestParam(value = "monthDate[]",defaultValue = "")List<String> monthDate,
 									@RequestParam(value="delDate",defaultValue="")List<Integer> delDate,
 									@RequestParam HashMap<String, Object> formdata
 									,HttpSession session) {
@@ -72,12 +72,10 @@ public class ClassDateController {
 		String class_comment = (String)formdata.get("class_comment");
 		String class_msg = (String)formdata.get("class_msg");		
 		System.out.println(startDate);
+		System.out.println(class_form);
 		if(startDate.size() > 0) {
-			
-		
 			if(class_form == 0) {
-				
-				for (int c = 1; c <= updateCnt; c++) {
+				for (int c = 1; c <= updateCnt; c++) { 
 					System.out.println(updateCnt);
 					ArrayList<ClassDateVO> list = new ArrayList<ClassDateVO>();
 						
@@ -102,7 +100,8 @@ public class ClassDateController {
 				}
 			}else {
 				for (int i = 0; i < monthDate.size(); i++) {
-					int class_month =  monthDate.get(i);
+					System.out.println("Asda");
+					int class_month =  Integer.parseInt(monthDate.get(i));
 					SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 					Date date;
 					try {
