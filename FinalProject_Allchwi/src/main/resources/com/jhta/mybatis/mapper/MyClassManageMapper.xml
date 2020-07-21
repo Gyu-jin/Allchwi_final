@@ -58,6 +58,10 @@
 		order by bb.apply_regdate desc, bb.apply_auth asc
 		) cc
 	</select>
+	<!-- 신청서 번호로 회원정보 출력 -->
+	<select id="getApply" parameterType="int" resultType="classApply">
+		select * from class_apply where apply_num = #{apply_num}
+	</select>
 </mapper>
 
 

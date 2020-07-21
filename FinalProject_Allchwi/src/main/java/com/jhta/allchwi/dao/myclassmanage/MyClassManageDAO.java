@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.myclassmanage.MyClassManageVO;
 
@@ -29,5 +30,9 @@ public class MyClassManageDAO {
 	//a 신청서 카운팅
 	public int applyCounting(HashMap<String, Object> hm) {
 		return session.selectOne(NAMESPACE + ".MyClassCounting", hm);
+	}
+	//신청서 넘버로 신청한 회원정보 가져오기
+	public ClassApplyVO getApply(int apply_num) {
+		return session.selectOne(NAMESPACE + ".getApply", apply_num);
 	}
 }
