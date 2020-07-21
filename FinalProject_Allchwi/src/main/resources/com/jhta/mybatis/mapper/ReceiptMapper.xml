@@ -18,4 +18,10 @@
 		from class_info ci, payment p, member_login ml, member_info mi, profile_img img
 		where ci.class_num = p.class_num and ml.ml_num=p.ml_num and ml.ml_num = mi.ml_num and mi.pro_num=img.pro_num and class_finish=0)aa
 	</select> 
+	
+	
+	<insert id="insertRemit" parameterType="com.jhta.allchwi.vo.receiveTuition.InsertRemitVO">
+		insert into remit values(null,#{pay_num},#{rem_pay},#{rem_bank},#{rem_account},now(),0);
+	</insert>
+	
 </mapper>

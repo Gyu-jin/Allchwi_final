@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.receiveTuition.ReceiptDAO;
+import com.jhta.allchwi.vo.receiveTuition.InsertRemitVO;
 import com.jhta.allchwi.vo.receiveTuition.ReceiptVO;
 
 @Service
@@ -20,6 +21,10 @@ public class ReceiptService {
 	
 	public int count() {
 		return dao.count();
+	}
+	
+	public int insertRemit(InsertRemitVO vo) {
+		return dao.insertRemit(vo);
 	}
 
 }

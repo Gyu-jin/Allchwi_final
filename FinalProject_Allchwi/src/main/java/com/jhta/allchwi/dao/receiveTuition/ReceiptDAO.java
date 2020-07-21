@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.receiveTuition.InsertRemitVO;
 import com.jhta.allchwi.vo.receiveTuition.ReceiptVO;
 
 @Repository
@@ -21,6 +22,10 @@ public class ReceiptDAO {
 	
 	public int count() {
 		return session.selectOne(NAMESPACE+".count");
+	}
+	
+	public int insertRemit(InsertRemitVO vo) {
+		return session.insert(NAMESPACE+".insertRemit", vo);
 	}
 	
 	

@@ -357,10 +357,7 @@ button, input, optgroup, select, textarea {
 	</div>
 </div>
 
-		<form method="post" action="addr">
-		<input type="hidden" name="" value=""> 
-		<input type="hidden" name="" value="">
- 		</form>
+		
 
 <script type="text/javascript">
 	//post 방식으로 보내기

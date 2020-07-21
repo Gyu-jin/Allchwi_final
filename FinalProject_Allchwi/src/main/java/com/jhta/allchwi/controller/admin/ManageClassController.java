@@ -27,7 +27,7 @@ public class ManageClassController {
 		map.put("keyword", keyword);
 	
 		int totalRowCount = service.count(map);
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 5);
 
 		map.put("startRow", pu.getStartRow() - 1);
 		map.put("endRow", pu.getEndRow());
