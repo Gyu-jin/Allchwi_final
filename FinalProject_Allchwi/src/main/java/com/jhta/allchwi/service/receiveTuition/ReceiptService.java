@@ -1,5 +1,6 @@
 package com.jhta.allchwi.service.receiveTuition;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,12 @@ public class ReceiptService {
 	@Autowired
 	private ReceiptDAO dao;
 	
-	public List<ReceiptVO> receipt_list(){
-		return dao.receipt_list();
+	public List<ReceiptVO> receipt_list(HashMap<String, Object>map){
+		return dao.receipt_list(map);
 	}
 	
+	public int count() {
+		return dao.count();
+	}
 
 }

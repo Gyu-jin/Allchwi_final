@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.receiveTuition;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +15,14 @@ public class ReceiptDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.ReceiptMapper";	
 	
-	public List<ReceiptVO> receipt_list(){
-		return session.selectList(NAMESPACE+".receipt_list");
+	public List<ReceiptVO> receipt_list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".receipt_list",map);
 	}
+	
+	public int count() {
+		return session.selectOne(NAMESPACE+".count");
+	}
+	
 	
 	
 }

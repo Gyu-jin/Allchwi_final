@@ -16,6 +16,7 @@ public class PageUtil {
 		this.totalRowCount=totalRowCount;
 		this.rowBlockCount=rowBlockCount;
 		this.pageBlockCount=pageBlockCount;
+		
 		startRow=(pageNum-1)*rowBlockCount+1;
 		endRow=startRow+rowBlockCount-1;
 		
