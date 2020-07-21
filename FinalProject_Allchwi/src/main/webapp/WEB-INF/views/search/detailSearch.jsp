@@ -263,9 +263,9 @@ text{
 						</div>
 		
 						<br>
-						
+						<input type="hidden" name="class_form" value="0">
 						<button type="submit" class="btn btn-primary my-1"
-							id="detailSearchBtnOffline">수업찾기</button>
+							id="detailSearchBtnOffline">오프라인 수업찾기</button>
 					</form>
 		
 				</div>
@@ -283,14 +283,14 @@ text{
 						</c:if> 
 						<br>
 						<div class="label-1">
-							시작 날짜
+							기간
 						</div> 
 						<div class='col-md-3'>
 							<div class="form-group">
 								<div class="input-group date" id="datetimepicker9"
 									data-target-input="nearest">
 									<input type="text" class="form-control datetimepicker-input"
-										data-target="#datetimepicker9"  name="startDate" />
+										data-target="#datetimepicker9" name="startDate" />
 									<div class="input-group-append" data-target="#datetimepicker9"
 										data-toggle="datetimepicker">
 										<div class="input-group-text">
@@ -300,25 +300,43 @@ text{
 								</div>
 							</div>
 						</div>
+						<div class="text-div"><span class="text-1">~</span></div>
+						<div class='col-md-3'>
+							<div class="form-group">
+								<div class="input-group date" id="datetimepicker10"
+									data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input"
+										data-target="#datetimepicker10"  name="endDate" /> 
+									<div class="input-group-append" data-target="#datetimepicker10"
+										data-toggle="datetimepicker">
+										<div class="input-group-text">
+											<i class="fa fa-calendar"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+		
 						<br>
 						<div class="label-1">
 							수업형태
 						</div> 
 						<div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline-flex;">
 							<label class="btn btn-secondary active"> 
-								<input type="radio" name="month" value="0" checked> 1개월
+								<input type="radio" name="class_month" value="3" checked> 3개월
 							</label> 
 							<label class="btn btn-secondary"> 
-								<input type="radio" name="month" value="1"> 2개월
+								<input type="radio" name="class_month" value="6"> 6개월
 							</label> 
 							<label class="btn btn-secondary"> 
-								<input type="radio" name="month" value="2"> 3개월
+								<input type="radio" name="class_month" value="12"> 12개월
 							</label> 
 						</div>
 		
 						<br><br>
+						<input type="hidden" name="class_form" value="1">
 						<button type="submit" class="btn btn-primary my-1"
-							id="detailSearchBtnOnline">수업찾기</button>
+							id="detailSearchBtnOnline">온라인 수업찾기</button>
 					</form>
 		
 				</div>
@@ -389,25 +407,51 @@ text{
 			</c:otherwise>
 		</c:choose>
 	</div>
-<div>
-	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-		<c:choose>
-			<c:when test="${i==pu.pageNum}">
-				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}"
-				style="text-decoration: none;font-weight: bold;">
-				<span style="color:red">[${i }]</span>
-				</a>
-			</c:when>
-			<c:otherwise>
-				<a href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}" 
-				style="text-decoration: none">
-				<span style="color:gray">[${i }]</span>
-				</a>
-			</c:otherwise>
-		</c:choose>
-		
-	</c:forEach>
-</div>
+
+	<div style="padding-top:100px">
+			<ul class="pagination justify-content-center" style="margin: 20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/list/search?pageNum=${pu.startPageNum-1 }">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${i==pu.pageNum}">
+							<li class="page-item active">
+							<a class="page-link"
+								href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}&class_form=${class_form}&class_month=${class_month}">
+							${i }
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+							<a class="page-link"
+								href="${cp }/list/search?pageNum=${i}&scategory_num=${scategory_num}&bcategory_num=${bcategory_num}&keyword=${keyword}&sloc_num=${sloc_num}&class_form=${class_form}&class_month=${class_month}">
+							${i }
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/list/search?pageNum=${pu.endPageNum+1 }">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+
 <input type="hidden" id="keyword" value="${keyword }">
 </div>
 
@@ -421,6 +465,10 @@ text{
 		format : 'YYYY-MM-DD'
 	});
 	$('#datetimepicker9').datetimepicker({
+		format : 'YYYY-MM-DD'
+	});
+	
+	$('#datetimepicker10').datetimepicker({
 		format : 'YYYY-MM-DD'
 	});
 	
@@ -443,43 +491,7 @@ text{
 		    }
 		});
 	});
-	//위시전
-	$(document).on('click', '#btn_before_wish', function () {
-		var btn = $(this);
-		var class_num = $('#class_num').val();
-		var ml_num = $('#ml_num').val();
-		$.post('/allchwi/class/addWish', {
-			class_num: class_num,
-			ml_num: ml_num
-			
-		}, function (data,res) {
-			if (res=='success') {
-				btn.attr('id', 'btn_after_wish');
-				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86716818-8474e900-c05c-11ea-8c48-5764f4d57b28.png");
-				alert('위시리스트 등록 성공');
-			} else {
-				alert('위시리스트 등록 오류');
-			}
-		});
-	});
-	//위시후
-	$(document).on('click', '#btn_after_wish', function () {
-		var btn = $(this);
-		var class_num = $('#class_num').val();
-		var ml_num = $('#ml_num').val();
-		$.post('/allchwi/class/removeWish', {
-			class_num: class_num,
-			ml_num: ml_num
-		}, function (data,res) {
-			if (res=='success') {
-				btn.attr('id', 'btn_before_wish');
-				$("#wishsrc").attr("src","https://user-images.githubusercontent.com/65140754/86717485-2e547580-c05d-11ea-9dcf-27e47ad3f8e2.png");
-				alert('위시리스트 삭제 성공');
-			} else {
-				alert('위시리스트 삭제 오류');
-			}
-		});
-	});
+
 			
 	
 </script>

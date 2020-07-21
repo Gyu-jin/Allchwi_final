@@ -53,7 +53,9 @@ public class ListSearchController {
 										@RequestParam(value="keyword",defaultValue="")String keyword,
 										@RequestParam(value="startDate",defaultValue="")String startDate,
 										@RequestParam(value="endDate",defaultValue="")String endDate,
-										@RequestParam(value="sloc_num",defaultValue="-1")int sloc_num) {
+										@RequestParam(value="sloc_num",defaultValue="-1")int sloc_num,
+										@RequestParam(value="class_month",defaultValue="-1")int class_month,
+										@RequestParam(value="class_form",defaultValue="-1")int class_form) {
 		
 	
 		ModelAndView mv=new ModelAndView(".search.detailSearch");
@@ -66,17 +68,21 @@ public class ListSearchController {
 		map.put("sloc_num", sloc_num);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
+		map.put("class_month", class_month);
+		map.put("class_form", class_form);
 		
 	
 		System.out.println("bcategory_num : " + bcategory_num);
 		System.out.println("scategory_num : " +scategory_num);
 		System.out.println("keyword : "+ keyword);
 		System.out.println("sloc_num : "+ sloc_num);
+		System.out.println("class_month : "+ class_month);
+		System.out.println("class_form : "+ class_form);
 		System.out.println(startDate + "~" + endDate);
 		
 		
 		int totalRowCount=service.count(map);
-		PageUtil pu=new PageUtil(pageNum, totalRowCount, 6, 5);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 3, 5);
 		System.out.println("endPageNUm : "+pu.getEndPageNum());
 		System.out.println("총 글의 갯수 : " +totalRowCount);
 		int startRow=pu.getStartRow()-1;
@@ -99,6 +105,8 @@ public class ListSearchController {
 		mv.addObject("list", list);
 		mv.addObject("keyword",keyword);
 		mv.addObject("sloc_num",sloc_num);
+		mv.addObject("class_month",class_month);
+		mv.addObject("class_form",class_form);
 		mv.addObject("bcategory_num",bcategory_num);
 		mv.addObject("scategory_num",scategory_num);
 
