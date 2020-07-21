@@ -3,6 +3,8 @@ package com.jhta.allchwi.controller.receiveTuition;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +24,23 @@ public class ReceiptController {
 	@Autowired
 	private ReceiptService service;
 	
-	@GetMapping("/receipt/main")
-	public String adminMain(Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+	@RequestMapping(value= {"/receipt/main","/receipt/insert"})
+	public String adminMain(HttpServletRequest request, Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+			@RequestParam(value="rem_pay",defaultValue = "1")int rem_pay, String rem_bank, String rem_account, 
+			@RequestParam(value="pay_num",defaultValue = "1")int pay_num) {
+		
+		
+		
+		if(request.getServletPath().equals("/receipt/insert")) {
+			InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
+			try {
+				service.insertUpdateRecipt(vo, pay_num);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
@@ -49,20 +66,19 @@ public class ReceiptController {
 	}
 	
 	
-	@RequestMapping(value="/receipt/insert", method = RequestMethod.POST)
+	/*
 	public String insert(int rem_pay, String rem_bank, String rem_account, int pay_num) {
-		//System.out.println(rem_pay);
-		//System.out.println(rem_bank);
-		//System.out.println(rem_account);
-		//System.out.println(pay_num);
 		
 		InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
 		int n  = service.insertRemit(vo);
+				
+		
+		
 		
 		
 		
 		return ".receipt.receiveTuition";
 	}
-	
+	*/
 	
 }

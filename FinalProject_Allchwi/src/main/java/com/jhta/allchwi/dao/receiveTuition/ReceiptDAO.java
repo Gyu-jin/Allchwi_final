@@ -28,6 +28,11 @@ public class ReceiptDAO {
 		return session.insert(NAMESPACE+".insertRemit", vo);
 	}
 	
+	public int updateRemit(int pay_num) {
+		return session.update(NAMESPACE+".updateRemit", pay_num);
+	}
+	
+	
 	
 	
 }

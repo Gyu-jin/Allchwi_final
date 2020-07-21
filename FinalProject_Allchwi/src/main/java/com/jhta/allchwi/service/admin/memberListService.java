@@ -20,8 +20,8 @@ public class memberListService {
 
 	@Transactional
 	public int update_mlnum (int ml_num) throws Exception {
-		dao.update_mlnum_ml(ml_num);
-		dao.update_mlnum_mi(ml_num);
+		dao.update_mlnum_ml(ml_num);	//member_login 테이블 탈퇴처리
+		dao.update_mlnum_mi(ml_num);	//member_info 테이블 탈퇴처리
 		return 1;
 	}
 	

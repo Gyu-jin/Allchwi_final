@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.receiveTuition.ReceiptDAO;
 import com.jhta.allchwi.vo.receiveTuition.InsertRemitVO;
@@ -23,8 +24,15 @@ public class ReceiptService {
 		return dao.count();
 	}
 	
-	public int insertRemit(InsertRemitVO vo) {
-		return dao.insertRemit(vo);
+	@Transactional
+	public int insertUpdateRecipt(InsertRemitVO vo,int pay_num) {
+		dao.insertRemit(vo);			//remit테이블에 insert
+		dao.updateRemit(pay_num);		//payment테이블 class_finish=2로 update
+	
+		return 1;
 	}
+	
+
+
 
 }

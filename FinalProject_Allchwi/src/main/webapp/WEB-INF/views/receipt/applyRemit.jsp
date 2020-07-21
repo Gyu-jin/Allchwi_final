@@ -54,11 +54,11 @@
 					</div>
 				</div>
 				
-				<input type="text" name="pay_num" value="${pay_num }">
+				<input type="hidden" name="pay_num" value="${pay_num }">
 				
 				<div class="button_box">
-					<input type="submit" id="firstNext" class="btn btn-outline-danger"
-						data-num='2'>올취 송금요청
+					<button type="submit" id="firstNext" class="btn btn-outline-danger"
+						data-num='2'>올취 송금요청 </button>
 				</div>
 			</div>
 		</div>

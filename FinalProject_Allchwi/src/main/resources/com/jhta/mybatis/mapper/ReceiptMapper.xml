@@ -24,4 +24,10 @@
 		insert into remit values(null,#{pay_num},#{rem_pay},#{rem_bank},#{rem_account},now(),0);
 	</insert>
 	
+	<update id="updateRemit" parameterType="int">
+		update payment set class_finish=2 where paynum=#{paynum}	
+	</update>
+	
+	
+	
 </mapper>
