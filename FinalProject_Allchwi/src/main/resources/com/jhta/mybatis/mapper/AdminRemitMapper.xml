@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.AdminRemitMapper">
+	
+	<select id="remit_list" resultType="com.jhta.allchwi.vo.admin.AdminRemitVO" parameterType="hashmap">
+		select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
+		from payment p, remit r, class_info ci
+		where p.pay_num= r.pay_num and p.class_num= ci.class_num
+		
+		limit #{startRow},5
+	</select>
+	
+	
+	<select id="count" resultType="int" >
+		select nvl(count(*),0) cnt from (select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
+		from payment p, remit r, class_info ci
+		where p.pay_num= r.pay_num and p.class_num= ci.class_num) aa
+		
+	</select>
+
+</mapper>

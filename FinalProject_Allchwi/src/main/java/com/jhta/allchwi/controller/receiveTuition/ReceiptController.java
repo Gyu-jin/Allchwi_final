@@ -29,8 +29,6 @@ public class ReceiptController {
 			@RequestParam(value="rem_pay",defaultValue = "1")int rem_pay, String rem_bank, String rem_account, 
 			@RequestParam(value="pay_num",defaultValue = "1")int pay_num) {
 		
-		
-		
 		if(request.getServletPath().equals("/receipt/insert")) {
 			InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
 			try {
@@ -41,9 +39,7 @@ public class ReceiptController {
 		}
 		
 		
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
 		
 		int totalRowCount = service.count();
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
