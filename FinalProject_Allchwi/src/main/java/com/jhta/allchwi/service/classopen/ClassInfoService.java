@@ -122,8 +122,8 @@ public class ClassInfoService {
 		return infoDao.getMyList(map);
 	}
 
-	public int count(int ml_num) {
-		return infoDao.count(ml_num);
+	public int countMy(HashMap<String, Object> map) {
+		return infoDao.countMy(map);
 	}
 
 }

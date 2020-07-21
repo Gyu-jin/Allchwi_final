@@ -27,15 +27,19 @@ public class MyClassListController {
 	
 	
 	@GetMapping("/mypage/myClassList")
-	public String goMyClassList(HttpSession session,Model model,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum) {
+	public String goMyClassList(HttpSession session,Model model,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
+					@RequestParam(value = "class_form",defaultValue = "0")int class_form) {
 		
 		int ml_num = (int)session.getAttribute("ml_num");
 		
 		//페이징 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int totalRowCount = service.count(ml_num);
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 2, 5);
 		map.put("ml_num",ml_num);
+		map.put("class_form", class_form);
+		
+		int totalRowCount = service.countMy(map);
+		
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 2, 5);
 		map.put("startRow", pu.getStartRow() - 1);
 		
 		// 내 수업 목록 가져오기
@@ -43,6 +47,7 @@ public class MyClassListController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pu",pu);
+		model.addAttribute("class_form", class_form);
 		
 		return ".myClass.myClassList";
 	}

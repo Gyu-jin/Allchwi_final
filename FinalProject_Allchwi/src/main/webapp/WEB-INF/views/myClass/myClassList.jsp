@@ -9,8 +9,8 @@
 		<div class="title-box">
 		    <h1>나의 탈잉</h1>
 		    <ul>
-		        <li class="cursor on"><a href="/My/MyTuteeClassList/">오프라인</a></li>
-		        <li class="cursor"><a href="/My/MyTuteeVodList/">온라인<div class="title-tab-cir">0</div></a></li>
+		        <li id="offline" class="cursor"><a href="${cp}/mypage/myClassList">오프라인</a></li>
+		        <li id="online" class="cursor"><a href="${cp}/mypage/myClassList?class_form=1">온라인</a></li>
 		    </ul>
 		</div>		
 		<div class="my-class-list">
@@ -119,6 +119,16 @@
 		
 		
 		$(function(){
+			
+			if('${class_form}'==1){
+				$('#offline').removeClass('on');
+				$('#online').addClass('on');
+			}else if('${class_form}'==1){
+				$('#online').removeClass('on');
+				$('#offline').addClass('on');
+			}
+			
+			
 			$('#more-button').click(function(){
 				if($('#more-button').attr('value')=='0'){
 					$('#more-button').attr('value','1');
@@ -139,6 +149,11 @@
 
 		
 		});
+		
+		function apply_detail(){
+			
+		}
+		
 		function classFinish(apply_num){
 
 			if (confirm("첫수업 완료시 수업완료를 해주세요.\n정말 완료하시겠습니까?") == true){    
