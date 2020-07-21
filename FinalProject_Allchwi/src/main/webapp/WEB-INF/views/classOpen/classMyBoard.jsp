@@ -42,7 +42,7 @@
 		<select class="class-option" onchange="selectTitle(this);">
 			<c:forEach var="vo" items="${title}">
 				<option value="${vo.class_num}" <c:if test="${list.class_num==vo.class_num}">selected</c:if>>${vo.class_title }</option>
-			</c:forEach>
+			</c:forEach>  
 		</select>
 	</div>  
 	<c:choose>
