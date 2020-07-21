@@ -36,7 +36,6 @@ public class ClassMyBoardController {
 		
 		// 내수업 첫화면 정보 가져오기
 		HashMap<String, Object> list = service.getMyBoardInfo(map);
-		System.out.println(list.get("cover_num"));
 		//내수업 전체 목록 제목,번호가져오기
 		List<ClassInfoVO> title = service.getClassTitle(ml_num);
 		

@@ -222,3 +222,22 @@ button, input, optgroup, select, textarea {
 .glyphicon-star:before {
     content: "☆";
 }
+.apply-auth{
+	
+	float:right;
+	cursor: pointer;
+}
+
+.button_gray{
+	padding: 9px;
+    box-sizing: border-box;
+    background: #555;
+    text-align: center;
+    font-size: 14px;
+    line-height:15px;
+    color: #fff;
+    border-radius: 4px;
+    letter-spacing: -0.35px;
+    width: 100px;
+    height: 30px;
+}

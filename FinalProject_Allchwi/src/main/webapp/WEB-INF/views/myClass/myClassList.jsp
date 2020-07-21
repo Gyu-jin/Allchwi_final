@@ -21,7 +21,16 @@
 						<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
 					</div>
 					<div class="information-box">
-						<p>신청일시: ${vo.apply_regdate }</p>
+						<div>신청일시: ${vo.apply_regdate }
+						<c:choose>
+						<c:when test="${vo.apply_auth==0 }">
+							<div class="apply-auth button_gray">승인대기</div>
+						</c:when>
+						<c:otherwise>						
+							<div class="apply-auth button_gray">승인완료</div>
+						</c:otherwise>
+						</c:choose>
+						</div>
 						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
 						<div class="stars-box">
 							<font class="class-type">
