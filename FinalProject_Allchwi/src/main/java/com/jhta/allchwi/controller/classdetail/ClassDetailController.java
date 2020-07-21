@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jhta.allchwi.page.util.PageUtil;
+import com.jhta.allchwi.service.classapply.PaymentService;
 import com.jhta.allchwi.service.classdetail.ClassDetailService;
 import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.classopen.ClassDateService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.login.MemberInfoService;
 import com.jhta.allchwi.service.wishlist.WishListService;
+import com.jhta.allchwi.vo.classapply.PaymentVO;
 import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
 import com.jhta.allchwi.vo.classdetail.ClassReviewVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
@@ -39,10 +41,13 @@ public class ClassDetailController {
 	private MemberInfoService mis;
 	@Autowired
 	private WishListService wls;
+	@Autowired
+	private PaymentService ps;
 	
 	@GetMapping("/classDetail/detail")
 	public ModelAndView detail(int class_num,HttpServletRequest req,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
 		ServletContext sc=req.getSession().getServletContext();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		//member정보, wish_status
 		if(req.getSession().getAttribute("ml_num") != null ) {
 			int ml_num = (int)req.getSession().getAttribute("ml_num");
@@ -55,19 +60,19 @@ public class ClassDetailController {
 			}else {
 				sc.setAttribute("mem", ml_num);
 			}
+			map.put("ml_num",ml_num);
+			int finished=ps.getFinished(map);
+			sc.setAttribute("finished", finished);
 		}
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		
 		//getdetail
-		HashMap<String, Object> map2=new HashMap<String, Object>();
-		map2.put("class_num", class_num);
-		ClassDetailVO cdv=cds.getDetail(map2);
-		
+		map.put("class_num", class_num);
+		ClassDetailVO cdv=cds.getDetail(map);
 		//날짜시간
 		List<ClassDateVO> dlist = dates.list(class_num);
 		
 		//리뷰리스트,페이징
-		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
 		int totalRowCount=crs.rcount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);

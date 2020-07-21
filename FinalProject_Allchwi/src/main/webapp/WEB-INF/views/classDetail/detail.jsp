@@ -190,7 +190,9 @@
 											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">리뷰쓰기</a>
 										</div>
 									</c:when>
-									<c:otherwise>
+									<c:otherwise>		
+										<c:if test="${finished ne 0}">
+										</c:if>
 										<div class="btn_write">
 											<a href="${cp}/mypage/myClassList" class="btn_write_review">리뷰쓰기</a>
 										</div>
