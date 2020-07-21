@@ -33,15 +33,22 @@
 	
 <!-- ////////////////////////////////admin 타일즈  끝 ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->	
 	
-	<!-- 이거 아래에 내려주세요!! 제 타일즈랑 겹처서 적용이 안됩니다! -인표- -->
+
+	
+	<definition name=".community" template="/WEB-INF/views/community/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/community/header.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/community/community.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+
+	<definition name=".community.*.*" extends=".community">
+		<put-attribute name="body" value="/WEB-INF/views/community/{1}/{2}.jsp"/>
+	</definition>
+	
+		<!-- 이거 아래에 내려주세요!! 제 타일즈랑 겹처서 적용이 안됩니다! -인표- -->
 	<definition name=".*.*" extends=".main">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
-	
-
-
-
-
 		
 </tiles-definitions>
 
