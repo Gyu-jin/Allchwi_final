@@ -29,10 +29,9 @@ $(function(){
 });
 ///////////////////////////qna /////////////////////////////////
 //qna작성
-var qna_content = null;
 $(document).on('click', '#btn_write_qna', function () {
-	qna_content = document.getElementById('qna_content').value;
-	var class_num = $('#class_num').val();
+	var qna_content = $('#qna_content').val();
+	var class_num = $('#class_num').val( );
 	var ml_num = $('#ml_num').val();
 	if(qna_content== '' ){
 		alert('내용을 작성해주세요');
@@ -49,8 +48,8 @@ $(document).on('click', '#btn_write_qna', function () {
 				qna_lev: '0'
 			}, function (data,res) {
 				if (res=='success') {
+					qnaList(1);
 					alert('문의등록 성공');
-					qnaList();
 					$("#qna_content").val("");
 				} else {				
 					alert('문의실패');
@@ -99,7 +98,7 @@ function qnaList(pageNum){
 		 +"</form>"
 		 +"</td>"
 		 +"<td>"
-		 +"<input type='button' id='reply_send' onclick='sendReply("+data.qlist.qna_ref+")' class='btn btn-primary' value='등록'>"
+		 +"<input type='button' id='reply_send' onclick='sendReply("+qlist[i].qna_ref+")' class='btn btn-primary' value='등록'>"
 		 +"</td>"
 		 +"</tr>"
 		 +"</table>"
@@ -143,7 +142,6 @@ function qnaList(pageNum){
 }
 function currPage(pageNum){
 	qnaList(pageNum);
-	alert(pageNum);
 }
 //qna답변 작성
 function sendReply(qna_ref) {

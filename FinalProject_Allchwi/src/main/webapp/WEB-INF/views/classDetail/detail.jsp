@@ -192,8 +192,7 @@
 									</c:when>
 									<c:otherwise>
 										<div class="btn_write">
-											<a href="#" class="btn_write_review" data-toggle="modal"
-												data-target="#modalContactForm">리뷰쓰기</a>
+											<a href="${cp}/mypage/myClassList" class="btn_write_review">리뷰쓰기</a>
 										</div>
 									</c:otherwise>
 								</c:choose>

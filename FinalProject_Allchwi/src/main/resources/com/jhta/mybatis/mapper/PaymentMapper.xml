@@ -11,6 +11,9 @@
 	<update id="finishUpdate" parameterType="hashmap">
 		update payment set class_finish=1 where ml_num=#{ml_num} and apply_num=#{apply_num}
 	</update>
+	<select id="getFinished" parameterType="hashmap">
+		select class_finish from payment where class_finish>0 and ml_num=#{ml_num} and class_num=#{class_num}
+	</select>
 </mapper>
 
 
