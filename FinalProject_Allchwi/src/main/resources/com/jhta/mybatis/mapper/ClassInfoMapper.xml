@@ -123,6 +123,14 @@
 		</if>
 	</sql>
 	
+	<!-- '온/오프라인 검색 sql -->
+	<sql id="classForm">
+		<if test="class_form>=0">
+			and class_form=#{class_form}
+		</if>
+	</sql>
+	
+	
 	<!-- 검색 조건에 맞는 전체 글 정보 가져오는 sql -->
 	<select id="list" parameterType="hashmap" resultType="classinfo">
 		select c.class_num, class_title, tutor_nickname, class_price, class_hour, class_count, bcategory_num, bcategory_name,scategory_name, loc.sloc_num, pro_num,
@@ -147,6 +155,7 @@
 		where a.scategory_num=c.scategory_num and cd.class_num=c.class_num and loc.sloc_num=c.sloc_num and cover.class_num=c.class_num 
 		and cd.time_cnt=1
 		and class_auth=2 and class_status=0
+		<include refid="classForm"/>
 		<include refid="keyword"/>		
 		<include refid="sloc"/>		
 		<include refid="date"/>
@@ -171,6 +180,7 @@
 						)a, class_info c , class_date cd
 				where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
 				and class_auth=2 and class_status=0
+				<include refid="classForm"/>
 				<include refid="keyword"/>		
 				<include refid="sloc"/>		
 				<include refid="date"/>

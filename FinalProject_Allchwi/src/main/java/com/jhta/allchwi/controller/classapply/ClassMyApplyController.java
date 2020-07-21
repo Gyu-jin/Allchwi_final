@@ -18,9 +18,9 @@ public class ClassMyApplyController {
 	@Autowired private ClassApplyService service;
 	
 	@GetMapping("/class/myapply")
-	public String goClassMyboard(Model model,int ml_num, int class_num) {
+	public String goClassMyboard(Model model,int apply_num, int class_num) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("ml_num",ml_num);
+		map.put("apply_num",apply_num);
 		map.put("class_num",class_num);
 		List<ClassApplyDateInfoVO> list = service.list(map);
 				
