@@ -5,6 +5,34 @@
 <link rel="stylesheet"
 	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
+<style>
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+	text-align: center;
+}
+.star_rating span{
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 20px;
+}
+.star_rating a {
+	font-size: 30px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: #ff936f;
+}
+</style>
 <input type="hidden" id="ml_num" value="${mem.ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
 <div class="container-fluid" id="container_detail">
@@ -197,20 +225,31 @@
 											</div>
 											<div class="modal-body mx-3">
 												<div class="md-form mb-5">
-													<label data-error="wrong" data-success="right" for="form34">Your
-														name</label> <input type="text" id="form34"
-														class="form-control validate">
+													<p class="star_rating" id="curr_rating">
+														<span>커리큘럼</span>
+														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
+														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
+													</p>
+													<p class="star_rating" id="ready_rating">
+														<span>준비성</span>
+														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
+														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
+													</p>
+													<p class="star_rating" id="kind_rating">
+														<span>친절도</span>
+														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
+														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
+													</p>
+													
+													<p class="star_rating" id="time_rating">
+														<span>시간준수</span>
+														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
+														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
+													</p>
 
 												</div>
+												<label>리뷰작성</label>
 												<div class="md-form">
-
-													<i class="glyphicon glyphicon-star active" data-value="1"></i>
-													<i class="glyphicon glyphicon-star " data-value="2"></i> <i
-														class="glyphicon glyphicon-star " data-value="3"></i> <i
-														class="glyphicon glyphicon-star" data-value="4"></i> <i
-														class="glyphicon glyphicon-star" data-value="5"></i> <label
-														data-error="wrong" data-success="right" for="form8">content</label>
-
 													<textarea type="text" id="form8"
 														class="md-textarea form-control" rows="4">
 													</textarea>
@@ -349,21 +388,30 @@
 				<div class="col-md-4 remote">
 					<div class="remote_wrap">
 						<div class="class_type">
-							<h3>클래스유형</h3>
+							<c:if test="${cdv.class_form==0 }">
+								<h3>오프라인수업</h3>
+							</c:if>
+							<c:if test="${cdv.class_form==1 }">
+								<h3>온라인수업</h3>
+							</c:if>
 						</div>
 						<c:forEach var="dlist" items="${dlist }" varStatus="index">
 							<div class="accordion" id="accordionExample">
 								<div class="card">
 									<div class="card-header">
 										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#accordionExample" href="#card-element-${index.count}">
-											<fmt:formatDate value="${dlist.class_date }"
-												pattern="yyyy-MM-dd" />&nbsp&nbsp 
+											data-parent="#accordionExample"
+											href="#card-element-${index.count}"> <fmt:formatDate
+												value="${dlist.class_date }" pattern="yyyy-MM-dd" />&nbsp&nbsp
+											<c:if test="${cdv.class_form==0 }">
 												${dlist.class_startTime}~ ${dlist.class_endTime }
+											</c:if> <c:if test="${cdv.class_form==1 }">
+												${dlist.class_month}개월 과정
+											</c:if>
 										</a>
 									</div>
 									<div id="card-element-${index.count}" class="collapse">
-										<div class="card-body">${cdv.sloc_name }</div>
+										<div class="card-body">장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name }</div>
 									</div>
 								</div>
 							</div>
@@ -373,7 +421,8 @@
 								<div class="tutor_t">
 									<dl class="tutor_txt">
 										<dt>
-											<div style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+											<div
+												style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
 											</div>
 										</dt>
 										<dd>${dlist.class_comment}</dd>
@@ -404,3 +453,40 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(".star_rating a").click(function() {
+		$(this).parent().children("a").removeClass("on");
+		$(this).addClass("on").prevAll("a").addClass("on");
+		return false;
+	});
+	
+	var review_content = null;
+	$(document).on('click', '#btn_write_review', function () {
+		review_content = document.getElementById('review_content').value;
+		var class_num = $('#class_num').val();
+		var ml_num = $('#ml_num').val();
+		if(qna_content== '' ){
+			alert('내용을 작성해주세요');
+		}else{
+			class_num=class_num;
+			ml_num=ml_num;
+			if (ml_num=='') {
+				alert('로그인이 필요합니다');
+			}else {
+				$.post('/allchwi/classDetail/insertreview', {
+					class_num: class_num,
+					ml_num: ml_num,
+					review_content:review_content
+				}, function (data,res) {
+					if (res=='success') {
+						alert('문의등록 성공');
+						qnaList();
+						$("#qna_content").val("");
+					} else {				
+						alert('문의실패');
+					}
+				});
+			}
+		}
+	});
+</script>
