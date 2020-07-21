@@ -5,34 +5,6 @@
 <link rel="stylesheet"
 	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
-<style>
-.star_rating {
-	font-size: 0;
-	letter-spacing: -4px;
-	text-align: center;
-}
-.star_rating span{
-	font-size: 16px;
-	font-weight: bold;
-	margin-right: 20px;
-}
-.star_rating a {
-	font-size: 30px;
-	letter-spacing: 0;
-	display: inline-block;
-	margin-left: 5px;
-	color: #ccc;
-	text-decoration: none;
-}
-
-.star_rating a:first-child {
-	margin-left: 0;
-}
-
-.star_rating a.on {
-	color: #ff936f;
-}
-</style>
 <input type="hidden" id="ml_num" value="${mem.ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
 <div class="container-fluid" id="container_detail">
@@ -211,59 +183,7 @@
 						<div class="class_detail detail_sec_bor" id="review">
 							<div class="sec01">
 								<h1>리뷰(${rpu.totalRowCount })</h1>
-								<!-- 리뷰작성 모달 -->
-								<div class="modal fade" id="modalContactForm" tabindex="-1"
-									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header text-center">
-												<h4 class="modal-title w-100 font-weight-bold">review</h4>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body mx-3">
-												<div class="md-form mb-5">
-													<p class="star_rating" id="curr_rating">
-														<span>커리큘럼</span>
-														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
-														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
-													</p>
-													<p class="star_rating" id="ready_rating">
-														<span>준비성</span>
-														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
-														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
-													</p>
-													<p class="star_rating" id="kind_rating">
-														<span>친절도</span>
-														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
-														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
-													</p>
-													
-													<p class="star_rating" id="time_rating">
-														<span>시간준수</span>
-														<a href="#" class="on">★</a> <a href="#" class="on">★</a>
-														<a href="#" class="on">★</a> <a href="#">★</a> <a href="#">★</a>
-													</p>
-
-												</div>
-												<label>리뷰작성</label>
-												<div class="md-form">
-													<textarea type="text" id="form8"
-														class="md-textarea form-control" rows="4">
-													</textarea>
-
-												</div>
-
-											</div>
-											<div class="modal-footer d-flex justify-content-center">
-												<a href="#" class="btn_send">작성완료</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- 리뷰작성 모달 -->
+								
 								<c:choose>
 									<c:when test="${empty mem }">
 										<div class="btn_write">
@@ -277,7 +197,7 @@
 										</div>
 									</c:otherwise>
 								</c:choose>
-
+								<!-- 별점평균 -->
 								<div class="review_box">
 									<c:forEach var="index" begin="1" end="5">
 										<img
@@ -285,7 +205,7 @@
 									</c:forEach>
 									5.0
 								</div>
-
+								<!-- 상세별점 -->
 								<div class="review_count01">
 									<ul>
 										<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
@@ -310,6 +230,7 @@
 										</li>
 									</ul>
 								</div>
+								<!-- 리뷰 목록 -->
 								<div class="review_list" id="bookmarkReview">
 									<ul>
 										<div id="innerReviewDiv">
@@ -422,7 +343,7 @@
 									<dl class="tutor_txt">
 										<dt>
 											<div
-												style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+												style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/mypage/getimg?pro_num=${cdv.pro_num}');">
 											</div>
 										</dt>
 										<dd>${dlist.class_comment}</dd>
@@ -460,33 +381,5 @@
 		return false;
 	});
 	
-	var review_content = null;
-	$(document).on('click', '#btn_write_review', function () {
-		review_content = document.getElementById('review_content').value;
-		var class_num = $('#class_num').val();
-		var ml_num = $('#ml_num').val();
-		if(qna_content== '' ){
-			alert('내용을 작성해주세요');
-		}else{
-			class_num=class_num;
-			ml_num=ml_num;
-			if (ml_num=='') {
-				alert('로그인이 필요합니다');
-			}else {
-				$.post('/allchwi/classDetail/insertreview', {
-					class_num: class_num,
-					ml_num: ml_num,
-					review_content:review_content
-				}, function (data,res) {
-					if (res=='success') {
-						alert('문의등록 성공');
-						qnaList();
-						$("#qna_content").val("");
-					} else {				
-						alert('문의실패');
-					}
-				});
-			}
-		}
-	});
+	
 </script>

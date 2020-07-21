@@ -6,7 +6,7 @@
 	<insert id="insertReview" parameterType="classReview">
 		insert into class_review
 		values(null,#{class_num},#{ml_num},#{curr_rating},#{ready_rating},#{kind_rating},
-		#{time_rating},#{review_content},0)
+		#{time_rating},#{review_content},0,now())
 	</insert>
 	<resultMap type="miv" id="miv">
 		<result column="mb_name" property="mb_name"/>
