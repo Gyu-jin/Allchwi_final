@@ -23,4 +23,15 @@ public class ConfirmMyClassController {
 		//모달창으로 이동
 		return "myClass/classAccept";
 	}
+	@RequestMapping("/myClass/classAcceptUpdate")
+	public String updateApply(@RequestParam(value = "apply_num") int apply_num) {
+		int result = mcms.updateApply(apply_num);
+		if(result > 0) {
+			System.out.println("어디가니");
+			return "redirect:/myClass/myClassManage";			
+		} else {
+			System.out.println("어디가니2");
+			return "redirect:/";
+		}
+	}
 }

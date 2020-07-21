@@ -33,4 +33,8 @@ public class MyClassManageService {
 	public ClassApplyVO getApply(int apply_num) {
 		return mcmd.getApply(apply_num);
 	}
+	//신청서 넘버로 수업승인 업데이트
+	public int updateApply(int apply_num) {
+		return mcmd.updateApply(apply_num);
+	}
 }

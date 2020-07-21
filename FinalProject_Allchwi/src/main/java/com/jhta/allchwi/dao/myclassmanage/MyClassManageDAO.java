@@ -35,4 +35,8 @@ public class MyClassManageDAO {
 	public ClassApplyVO getApply(int apply_num) {
 		return session.selectOne(NAMESPACE + ".getApply", apply_num);
 	}
+	//신청서 넘버로 수업승인 업데이트
+	public int updateApply(int apply_num) {
+		return session.update(NAMESPACE + ".updateApply", apply_num);
+	}
 }

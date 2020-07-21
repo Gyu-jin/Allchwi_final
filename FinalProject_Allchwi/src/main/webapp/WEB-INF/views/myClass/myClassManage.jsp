@@ -52,7 +52,7 @@
 								<div class="start-date">
 									<!-- 버튼 클릭시 모달창 실행 -->
 									<c:choose>
-										<c:when test="${vo.apply_auth == 0}">
+										<c:when test="${vo.apply_auth == '0'}">
 											<button type="button" class="btn btn-primary" id="confirmClass" data-toggle="modal" id="modellink" onclick="showModal(${vo.apply_num})">수업승인하기</button>
 										</c:when>
 										<c:otherwise>

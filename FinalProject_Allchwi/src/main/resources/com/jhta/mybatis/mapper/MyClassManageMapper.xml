@@ -62,6 +62,10 @@
 	<select id="getApply" parameterType="int" resultType="classApply">
 		select * from class_apply where apply_num = #{apply_num}
 	</select>
+	<!-- 신청서 번호로 수업승인 업데이트 -->
+	<update id="updateApply" parameterType="int">
+		update class_apply set apply_auth = 1 where apply_num = #{apply_num}
+	</update>
 </mapper>
 
 
