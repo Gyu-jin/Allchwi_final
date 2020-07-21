@@ -358,6 +358,7 @@ text{
 		<option value="3">인기순</option>
 	</select> <br>
 
+
 	<div class="row" id="searchList">
 
 		<c:choose>

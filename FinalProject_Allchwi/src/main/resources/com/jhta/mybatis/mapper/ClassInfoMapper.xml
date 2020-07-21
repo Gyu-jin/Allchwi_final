@@ -91,7 +91,7 @@
 	<!-- '작은 지역' 검색 sql -->
 	<sql id="sloc">
 		<if test="sloc_num>0 ">
-			and sloc_num=#{sloc_num}
+			and loc.sloc_num=#{sloc_num}
 		</if>	
 	</sql>
 	
@@ -157,13 +157,15 @@
 				)loc,
 				( 
 					SELECT  class_num , cover_num , ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
-					FROM class_img 
+					FROM class_img group by class_num
 				) cover
 					
 		where a.scategory_num=c.scategory_num 
 		and cd.class_num=c.class_num 
+		and cover.class_num=c.class_num 
 		and loc.sloc_num=c.sloc_num 
 		and cd.time_cnt=1
+		and cnt=1
 		and class_auth=2 and class_status=0
 		<include refid="classForm"/>
 		<include refid="keyword"/>		
@@ -179,7 +181,7 @@
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from
 		   (
-			   	select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, sloc_num, 
+			   	select c.class_num, class_title, tutor_nickname, bcategory_num, bcategory_name,scategory_name, 
 				date_num, class_date
 				from 
 						(
@@ -188,9 +190,22 @@
 							where s.bcategory_num=b.bcategory_num 				
 							<include refid="smallcategory"/>								
 							<include refid="bigcategory"/>	
-						)a, class_info c , class_date cd
-				where a.scategory_num=c.scategory_num and cd.class_num=c.class_num	
+						)a, class_info c , class_date cd, 
+						(
+							select sloc_num, sloc_name, bloc_name 
+							from  small_location s, big_location b 
+							where s.bloc_num=s.bloc_num
+						)loc,
+						( 
+							SELECT  class_num , cover_num , ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
+							FROM class_img group by class_num
+						) cover
+				where a.scategory_num=c.scategory_num 
+				and cd.class_num=c.class_num
+				and cover.class_num=c.class_num 
+				and loc.sloc_num=c.sloc_num 	
 				and cd.time_cnt=1
+				and cnt=1
 				and class_auth=2 and class_status=0
 				<include refid="classForm"/>
 				<include refid="keyword"/>		

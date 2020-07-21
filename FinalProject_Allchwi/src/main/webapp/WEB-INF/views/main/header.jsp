@@ -78,13 +78,45 @@
               </div>
             </li>
 
+
+         
+            <!-- a 로그인 링크 -->
+            <c:choose>
+            <c:when test="${sessionScope.ml_num == null}">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="${cp}/login/main" id="classApply" role="button">
+               		<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인</span>
+            	</a>
+            </li>
+			</c:when>
+			<c:otherwise>
+				
             <!-- 튜터등록 링크 -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/class/enrollment" id="tutorEnroll" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터등록</span>
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터관리</span>
            		</a>
                 
             </li>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/allchwi/mypage/mypageForm">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	튜터등록
+                </a>
+                <a class="dropdown-item" href="${cp}/class/classBoard" id="tutorEnroll">
+                  <i class="fas fa-database fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	튜터 내 수업
+                </a>
+                <a class="dropdown-item" href="/allchwi/mypage/changePwd">
+                  <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	튜터 수업료 정산
+                </a>
+                <a class="dropdown-item" href="/allchwi/mypage/signout">
+                  <i class="fas fa-times fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	튜터 신청서 관리
+                </a>
+               
+              </div>
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/class/classBoard" id="tutorEnroll" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터 내 수업</span>
@@ -99,30 +131,10 @@
             </li>
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/mypage/myClassList" id="tutorEnroll" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">수강목록</span>
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">내 수업목록</span>
            		</a>
                 
             </li>
-
-            <!-- 수업신청서 링크 -->
-            <li class="nav-item dropdown no-arrow mx-1">
-            	
-               
-  				<a class="nav-link dropdown-toggle" href="${cp}/class/myapply?ml_num=${ml_num}" id="classApply" role="button">
-               		<span class="mr-2 d-none d-lg-inline text-gray-600 small">수업신청서</span>
-            	</a>
-                
-            </li>
-            <!-- a 로그인 링크 -->
-            <c:choose>
-            <c:when test="${sessionScope.ml_num == null}">
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="${cp}/login/main" id="classApply" role="button">
-               		<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인</span>
-            	</a>
-            </li>
-			</c:when>
-			<c:otherwise>
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
