@@ -26,5 +26,8 @@ public class MyClassManageDAO {
 	public List<ClassInfoVO> searchMyClass(int ml_num) {
 		return session.selectList(NAMESPACE + ".myClass", ml_num);
 	}
-	
+	//a 신청서 카운팅
+	public int applyCounting(HashMap<String, Object> hm) {
+		return session.selectOne(NAMESPACE + ".MyClassCounting", hm);
+	}
 }

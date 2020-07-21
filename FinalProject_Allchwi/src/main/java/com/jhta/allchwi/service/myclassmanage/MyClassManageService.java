@@ -24,4 +24,8 @@ public class MyClassManageService {
 	public List<ClassInfoVO> searchMyClass(int ml_num) {
 		return mcmd.searchMyClass(ml_num);
 	}
+	//a 클래스 신청서 카운팅
+	public int applyCounting(HashMap<String, Object> hm) {
+		return mcmd.applyCounting(hm);
+	}
 }

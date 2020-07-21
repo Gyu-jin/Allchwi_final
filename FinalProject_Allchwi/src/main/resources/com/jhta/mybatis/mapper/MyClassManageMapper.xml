@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.mapper.MyClassManageMapper">
 	<!-- a 클래스 신청한 회원 목록조회  -->
 	<select id="MyClassManage" parameterType="hashmap" resultType="mcm">
-		select aa.*, bb.apply_num, bb.ml_num, bb.pro_num, bb.mb_name, bb.mb_nickname, bb.apply_auth, bb.final_price, bb.apply_regdate 
+		select aa.*, bb.apply_num, bb.ml_num, bb.pro_num, bb.mb_name, bb.mb_nickname, bb.apply_auth, bb.final_price, bb.class_fee, bb.apply_regdate 
 		from 
 		(
 		select ci.class_num, ci.class_title, cd.date_num
@@ -15,13 +15,14 @@
 		where ml_num = #{ml_num}
 		) aa inner join
 		(
-		select ca.apply_num, ca.date_num, ca.ml_num, mi.pro_num, mi.mb_name, mi.mb_nickname,ca.apply_auth, p.final_price, ca.apply_regdate
+		select ca.apply_num, ca.date_num, ca.ml_num, mi.pro_num, mi.mb_name, mi.mb_nickname,ca.apply_auth, p.final_price, p.class_fee, ca.apply_regdate
 		from allchwi.class_apply ca, allchwi.member_info mi, allchwi.payment p
 		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num 
 		) bb
 		on aa.date_num = bb.date_num
 		<include refid="optionClassNum"/>
-		order by bb.apply_regdate desc, bb.apply_auth asc;
+		order by bb.apply_regdate desc, bb.apply_auth asc
+		limit #{startRow}, 5
 	</select>
 	<!-- a 튜터번호가 있을 경우 아래 조건을 추가함 -->
 	<sql id="optionClassNum">
@@ -31,7 +32,31 @@
 	</sql>
 	<!-- a 회원번호로 개설한 강좌번호 및 타이틀 가져오기 -->
 	<select id="myClass" parameterType="int" resultType="classInfo">
-		select class_num, class_title from class_info where ml_num = #{ml_num};
+		select class_num, class_title from class_info where ml_num = #{ml_num}
+	</select>
+	
+	<!-- a 목록 카운팅 -->
+	<select id="MyClassCounting" parameterType="hashmap" resultType="int">
+		select NVL(count(*),0) cnt from
+		(
+		select aa.*, bb.apply_num, bb.ml_num, bb.pro_num, bb.mb_name, bb.mb_nickname, bb.apply_auth, bb.final_price, bb.class_fee, bb.apply_regdate 
+		from 
+		(
+		select ci.class_num, ci.class_title, cd.date_num
+		from allchwi.class_info ci left join 
+		(select cd.class_num, cd.date_num from allchwi.class_date cd) cd
+		on ci.class_num = cd.class_num 
+		where ml_num = #{ml_num}
+		) aa inner join
+		(
+		select ca.apply_num, ca.date_num, ca.ml_num, mi.pro_num, mi.mb_name, mi.mb_nickname,ca.apply_auth, p.final_price, p.class_fee, ca.apply_regdate
+		from allchwi.class_apply ca, allchwi.member_info mi, allchwi.payment p
+		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num 
+		) bb
+		on aa.date_num = bb.date_num
+		<include refid="optionClassNum"/>
+		order by bb.apply_regdate desc, bb.apply_auth asc
+		) cc
 	</select>
 </mapper>
 

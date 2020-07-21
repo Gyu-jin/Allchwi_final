@@ -13,12 +13,14 @@ public class MyClassManageVO {
 	private String mb_nickname;
 	private int apply_auth;
 	private int final_price;
+	private int class_fee;
 	private Timestamp apply_regdate;
 	
 	public MyClassManageVO() {}
 
 	public MyClassManageVO(int class_num, String class_title, int date_num, int apply_num, int ml_num, int pro_num,
-			String mb_name, String mb_nickname, int apply_auth, int final_price, Timestamp apply_regdate) {
+			String mb_name, String mb_nickname, int apply_auth, int final_price, int class_fee,
+			Timestamp apply_regdate) {
 		super();
 		this.class_num = class_num;
 		this.class_title = class_title;
@@ -30,6 +32,7 @@ public class MyClassManageVO {
 		this.mb_nickname = mb_nickname;
 		this.apply_auth = apply_auth;
 		this.final_price = final_price;
+		this.class_fee = class_fee;
 		this.apply_regdate = apply_regdate;
 	}
 
@@ -113,6 +116,14 @@ public class MyClassManageVO {
 		this.final_price = final_price;
 	}
 
+	public int getClass_fee() {
+		return class_fee;
+	}
+
+	public void setClass_fee(int class_fee) {
+		this.class_fee = class_fee;
+	}
+
 	public Timestamp getApply_regdate() {
 		return apply_regdate;
 	}
@@ -120,5 +131,4 @@ public class MyClassManageVO {
 	public void setApply_regdate(Timestamp apply_regdate) {
 		this.apply_regdate = apply_regdate;
 	}
-	
 }
