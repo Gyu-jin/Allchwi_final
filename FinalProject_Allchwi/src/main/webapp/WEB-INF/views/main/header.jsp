@@ -49,9 +49,9 @@
          <!-- 연습용메뉴 -->
 		 <div class="practice-group">
            	
-           	<a href="${cp}/receipt/main">튜-수업료받기</a>
+    
            	<a href="${cp}/admin/main">관리자 연습</a> 
-           	<a href="${cp}/myClass/myClassManage">튜-신청서관리</a>
+         
 		 </div>
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->
@@ -92,14 +92,14 @@
 			<c:otherwise>
 				
             <!-- 튜터등록 링크 -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="${cp}/class/enrollment" id="tutorEnroll" role="button">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="tutorEnroll" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터관리</span>
            		</a>
                 
-            </li>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/allchwi/mypage/mypageForm">
+            
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="tutorEnroll">
+                <a class="dropdown-item" href="${cp}/class/enrollment" >
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	튜터등록
                 </a>
@@ -107,22 +107,18 @@
                   <i class="fas fa-database fa-sm fa-fw mr-2 text-gray-400"></i>
                   	튜터 내 수업
                 </a>
-                <a class="dropdown-item" href="/allchwi/mypage/changePwd">
+                <a class="dropdown-item" href="${cp}/receipt/main">
                   <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                   	튜터 수업료 정산
                 </a>
-                <a class="dropdown-item" href="/allchwi/mypage/signout">
+                <a class="dropdown-item" href="${cp}/myClass/myClassManage">
                   <i class="fas fa-times fa-sm fa-fw mr-2 text-gray-400"></i>
                   	튜터 신청서 관리
                 </a>
                
               </div>
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="${cp}/class/classBoard" id="tutorEnroll" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터 내 수업</span>
-           		</a>
-                
-            </li>
+             </li>
+           
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/class/wishList" id="tutorEnroll" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">위시리스트</span>
@@ -131,7 +127,7 @@
             </li>
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/mypage/myClassList" id="tutorEnroll" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">내 수업목록</span>
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">내 수강목록</span>
            		</a>
                 
             </li>
