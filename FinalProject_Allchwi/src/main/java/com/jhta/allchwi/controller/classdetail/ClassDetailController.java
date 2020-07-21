@@ -52,10 +52,10 @@ public class ClassDetailController {
 			}
 		}
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
+		//getdetail
 		HashMap<String, Object> map2=new HashMap<String, Object>();
 		map2.put("class_num", class_num);
-		List<ClassDetailVO> dlist=cd_service.getDetail(map2);
-
+		ClassDetailVO cdv=cd_service.getDetail(map2);
 		//리뷰페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
@@ -67,7 +67,7 @@ public class ClassDetailController {
 
 		mv.addObject("rlist", rlist);
 		mv.addObject("rpu",pu);
-		mv.addObject("dlist", dlist);
+		mv.addObject("cdv", cdv);
 	    mv.addObject("class_num", class_num);
 		return mv;
 	}
@@ -91,8 +91,8 @@ public class ClassDetailController {
 		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		HashMap<String, Object> map2=new HashMap<String, Object>();
 		map2.put("class_num", class_num);
-		List<ClassDetailVO> dlist=cd_service.getDetail(map2);
-
+		ClassDetailVO cdv=cd_service.getDetail(map2);
+		System.out.println(cdv.getBloc_name());
 		//리뷰페이징
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("class_num", class_num);
@@ -104,7 +104,7 @@ public class ClassDetailController {
 
 		mv.addObject("rlist", rlist);
 		mv.addObject("rpu",pu);
-		mv.addObject("dlist", dlist);
+		mv.addObject("cdv", cdv);
 	    mv.addObject("class_num", class_num);
 		return mv;
 	}

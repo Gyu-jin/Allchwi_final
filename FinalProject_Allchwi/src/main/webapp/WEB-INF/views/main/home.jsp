@@ -150,7 +150,7 @@ mark {
 		<c:forEach var="index" begin="1" end="4">
 			<div class="col-3">
 				<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail?class_num=4">
+					<a href="${cp}/classDetail/detail?class_num=121">
 						<div class="card-body">
 							<p>
 								<img src="${cp}/resources/img/it.jpg" alt="">

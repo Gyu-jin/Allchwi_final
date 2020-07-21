@@ -14,8 +14,8 @@ public class ClassDetailDAO {
 	@Autowired
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.ClassDetailMapper";	
-	public List<ClassDetailVO> getDetail(HashMap<String, Object> map) {
-		return session.selectList(NAMESPACE+".getDetail", map);
+	public ClassDetailVO getDetail(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getDetail", map);
 	}
 	
 }

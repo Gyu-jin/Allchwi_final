@@ -14,25 +14,18 @@
 				<div class="col-md-8">
 					<!-- carousel -->
 					<div class="carousel slide" id="carousel">
-						<ol class="carousel-indicators">
-							<li data-slide-to="0" data-target="#carousel"></li>
-							<li data-slide-to="1" data-target="#carousel"></li>
-							<li data-slide-to="2" data-target="#carousel" class="active">
-							</li>
+						<c:forEach var="cover" items="${cdv.getCoverList()}">
+							<li data-slide-to="${cover.cnt}" id="slide${cover.cnt}" data-target="#carousel"></li>
+						</c:forEach>
 						</ol>
+						
 						<div class="carousel-inner">
-							<div class="carousel-item">
-								<img class="d-block w-100" alt="Carousel1"
-									src="${cp}/class/getimg/cover_num?"${cover_num} />
+						<c:forEach var="cover" items="${cdv.getCoverList()}">
+							<div class="carousel-item" id="item${cover.cnt}">
+								<img class="d-block w-100" alt="Carousel"
+									src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" alt="Carousel2"
-									src="${cp}/resources/img/수업소개이미지_2.png" />
-							</div>
-							<div class="carousel-item active">
-								<img class="d-block w-100" alt="Carousel3"
-									src="${cp}/resources/img/수업소개이미지_3.png" />
-							</div>
+						</c:forEach>
 						</div>
 						<!-- carousel-control -->
 						<a class="carousel-control-prev" href="#carousel"
@@ -66,12 +59,12 @@
 									<img alt="tutorprofile" class="roundImg"
 										src="${cp}/resources/img/모찌.jpg" />
 								</div>
-								<div class="name">${dlist.classinfo.tutor_nickname }</div>
+								<div class="name">${cdv.tutor_nickname }</div>
 							</div>
 							<div class="class_title">
 								<!-- 수업명 -->
 								<div class="title">
-									<h3>${dlist.classinfo.class_title }</h3>
+									<h3>${cdv.class_title }</h3>
 								</div>
 
 								<!-- 별점 -->
@@ -118,15 +111,15 @@
 								<div class="info">
 									<ul>
 										<li class="ar" id="regionAll"><c:if
-												test="${dlist.classinfo.class_form==0}">
+												test="${cdv.class_form==0}">
 												온라인
-											</c:if> <c:if test="${dlist.classinfo.class_form==1}">
+											</c:if> <c:if test="${cdv.class_form==1}">
 												지역
 											</c:if></li>
-										<li class="hu"><font color="#ff936f">${dlist.classinfo.class_hour}</font>시간/회</li>
-										<li class="gr">최대인원:<font color="#ff936f">${dlist.classinfo.class_min}~${dlist.classinfo.class_max}</font>명
+										<li class="hu"><font color="#ff936f">${cdv.class_hour}</font>시간/회</li>
+										<li class="gr">최대인원:<font color="#ff936f">${cdv.class_min}~${cdv.class_max}</font>명
 										</li>
-										<li class="ohu"><font color="#ff936f">${dlist.classinfo.class_price}</font>/시간</li>
+										<li class="ohu"><font color="#ff936f">${cdv.class_price}</font>/시간</li>
 									</ul>
 								</div>
 							</div>
@@ -138,11 +131,12 @@
 								<h1>튜터정보</h1>
 								<div class="cert">
 									<ul>
-										<li class="com">자격증</li>
-										<li class="com">들어갈자리</li>
+										<c:forEach var="cert" items="${cdv.getCertList()}">
+											<li class="com">${cert.certif_name }</li>
+										</c:forEach>
 									</ul>
 								</div>
-								<div class="d_info04">${dlist.classinfo.tutor_about}</div>
+								<div class="d_info04">${cdv.tutor_about}</div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
@@ -150,9 +144,9 @@
 						<div class="class_detail detail_sec_bor" id="intro">
 							<div class="sec01">
 								<h1>수업소개</h1>
-								<div class="d_info04">${dlist.classinfo.class_about}</div>
+								<div class="d_info04">${cdv.class_about}</div>
 								<h1>수업대상</h1>
-								${dlist.classinfo.class_target}
+								${cdv.class_target}
 								<h1>커리큘럼</h1>
 								회차만큼 출력
 							</div>

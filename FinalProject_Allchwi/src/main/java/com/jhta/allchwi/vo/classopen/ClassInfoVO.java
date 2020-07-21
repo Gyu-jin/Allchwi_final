@@ -27,6 +27,7 @@ public class ClassInfoVO {
 	
 	// 커버이미지 join
 		private int cover_num;
+		private int cnt;
 	// 지역 join
 		private String sloc_name;
 		private String bloc_name;
@@ -267,7 +268,14 @@ public class ClassInfoVO {
 		this.cover_num = cover_num;
 	}
 
+	public int getCnt() {
+		return cnt;
+	}
 
-	
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+
 	
 }

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.ClassDetailMapper">
-	<resultMap type="classInfo" id="classInfo">
+	<resultMap type="classDetail" id="classDetail">
 		<result column="class_num" property="class_num"/>
 		<result column="ml_num" property="ml_num"/>
 		<result column="sloc_num" property="sloc_num"/>
@@ -23,52 +23,41 @@
 		<result column="cover_num" property="cover_num"/>
 		<result column="sloc_name" property="sloc_name"/>
 		<result column="bloc_name" property="bloc_name"/>
-	</resultMap>
-	<resultMap type="cert" id="cert">
-		<result column="certif_num" property="certif_num"/>
-		<result column="certif_name" property="certif_name"/>
-	</resultMap>
-	<resultMap type="classCurri" id="classCurri">
-		<result column="curri_num" property="curri_num"/>
-		<result column="curri_count" property="curri_count"/>
-		<result column="curri_content" property="curri_content"/>
-	</resultMap>
-	<resultMap type="classDetail" id="classDetail">
-		<collection property="classInfo" resultMap="classInfo"/>
-		<collection property="cert" resultMap="cert"/>
-		<collection property="classCurri" resultMap="classCurri"/>
+		<collection property="coverList" column="class_num"  ofType="classInfo" select="coverList"/>
+		<collection property="certList" column="class_num"  ofType="cert" select="certList"/>
+		<collection property="curriList" column="class_num"  ofType="classCurri" select="curriList"/>
 	</resultMap>
 	
 	<select id="getDetail" parameterType="hashmap" resultMap="classDetail">
 		select ci.class_num,ci.ml_num,ci.pro_num,ci.tutor_nickname,ci.class_address,ci.class_form,
 		ci.class_max,ci.class_min,ci.class_title,ci.class_price,ci.class_hour,ci.class_count,
 		ci.class_about,ci.tutor_about,
-		loc.sloc_name,loc.bloc_name,
-		cover.cover_num,
-		cert.cerrtif_name,
-		curr.curri_count, curr.curri_content
+		loc.sloc_name,loc.bloc_name
 		FROM class_info ci,
-		( 
-					SELECT  class_num , cover_num , 
-					ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
-					FROM class_img 
-		) cover,(
-					select sloc_num, sloc_name, bloc_name 
-		            from  small_location s, big_location b 
-		            where s.bloc_num=s.bloc_num
-		)loc,(
-				select certif_num,cerrtif_name
-		        from certificate
-		        where class_num=#{class_num}
-		)cert,(
-				select curri_count,curri_content
-		        from curriculum
-		        where class_num=#{class_num}
-		)curr
-		        where cover.class_num=ci.class_num and
-		loc.sloc_num=ci.sloc_num and cover.class_num=ci.class_num 
-		and ci.class_num=#{class_num}
-		limit 1        
+		(
+				select sloc_num, sloc_name, bloc_name 
+		        from  small_location s, big_location b 
+		        where s.bloc_num=b.bloc_num 
+		)loc
+		where loc.sloc_num=ci.sloc_num and ci.class_num=#{class_num}
+	     
+	</select>
+	
+	<select id="coverList" parameterType="int" resultType="classInfo">
+		SELECT cover.cover_num , 
+		ROW_NUMBER() OVER (PARTITION BY cover.class_num ORDER BY cover_regdate DESC) cnt 
+		FROM class_img cover,class_info ci
+		where cover.class_num=ci.class_num and cover.class_num=#{class_num}
+	</select>
+	<select id="certList" parameterType="int" resultType="cert">
+		select certif_num,certif_name
+		from certificate
+		where class_num=#{class_num}
+	</select>
+	<select id="curriList" parameterType="int" resultType="classCurri">
+		select curri_count,curri_content
+		from curriculum
+		where class_num=#{class_num}
 	</select>
 	
 </mapper>

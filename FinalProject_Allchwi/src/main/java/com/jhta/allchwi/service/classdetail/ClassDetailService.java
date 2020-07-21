@@ -11,7 +11,7 @@ import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
 @Service
 public class ClassDetailService {
 	@Autowired private ClassDetailDAO  dao;
-	public List<ClassDetailVO> getDetail(HashMap<String, Object> map) {
+	public ClassDetailVO getDetail(HashMap<String, Object> map) {
 		return dao.getDetail(map);
 	}
 }
