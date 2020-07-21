@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
@@ -14,18 +15,36 @@
 				<div class="col-md-8">
 					<!-- carousel -->
 					<div class="carousel slide" id="carousel">
-						<c:forEach var="cover" items="${cdv.getCoverList()}">
-							<li data-slide-to="${cover.cnt}" id="slide${cover.cnt}" data-target="#carousel"></li>
-						</c:forEach>
+						<ol class="carousel-indicators">
+							<c:forEach var="cover" items="${cdv.getCoverList()}">
+								<c:choose>
+									<c:when test="${cover.cnt==1}">
+										<li data-slide-to="${cover.cnt}" data-target="#carousel"
+											class="active"></li>
+									</c:when>
+									<c:otherwise>
+										<li data-slide-to="${cover.cnt}" data-target="#carousel"></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</ol>
-						
 						<div class="carousel-inner">
-						<c:forEach var="cover" items="${cdv.getCoverList()}">
-							<div class="carousel-item" id="item${cover.cnt}">
-								<img class="d-block w-100" alt="Carousel"
-									src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
-							</div>
-						</c:forEach>
+							<c:forEach var="cover" items="${cdv.getCoverList()}">
+								<c:choose>
+									<c:when test="${cover.cnt==1}">
+										<div class="carousel-item active">
+											<img class="d-block w-100" alt="Carousel"
+												src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="carousel-item">
+											<img class="d-block w-100" alt="Carousel"
+												src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</div>
 						<!-- carousel-control -->
 						<a class="carousel-control-prev" href="#carousel"
@@ -57,7 +76,7 @@
 							<div class="tutor_profile">
 								<div class="tutor_img">
 									<img alt="tutorprofile" class="roundImg"
-										src="${cp}/resources/img/모찌.jpg" />
+										src="${cp}/mypage/getimg?pro_num=${cdv.pro_num}" />
 								</div>
 								<div class="name">${cdv.tutor_nickname }</div>
 							</div>
@@ -73,7 +92,7 @@
 											end="5">
 											<img
 												src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-										</c:forEach> (리뷰갯수)
+										</c:forEach> (${rpu.totalRowCount })
 									</a>
 									<!-- 찜하기 -->
 									<c:choose>
@@ -112,9 +131,9 @@
 									<ul>
 										<li class="ar" id="regionAll"><c:if
 												test="${cdv.class_form==0}">
-												온라인
+												${cdv.sloc_name }
 											</c:if> <c:if test="${cdv.class_form==1}">
-												지역
+												온라인
 											</c:if></li>
 										<li class="hu"><font color="#ff936f">${cdv.class_hour}</font>시간/회</li>
 										<li class="gr">최대인원:<font color="#ff936f">${cdv.class_min}~${cdv.class_max}</font>명
@@ -132,7 +151,9 @@
 								<div class="cert">
 									<ul>
 										<c:forEach var="cert" items="${cdv.getCertList()}">
-											<li class="com">${cert.certif_name }</li>
+											<li class="com"><img
+												src="https://user-images.githubusercontent.com/65140754/88015559-721aa500-cb5c-11ea-9c7b-4acdb7694eaf.png">
+												${cert.certif_name }</li>
 										</c:forEach>
 									</ul>
 								</div>
@@ -148,7 +169,13 @@
 								<h1>수업대상</h1>
 								${cdv.class_target}
 								<h1>커리큘럼</h1>
-								회차만큼 출력
+								<div class="currbox">
+									<c:forEach var="curr" items="${cdv.getCurriList()}">
+										<h3>${curr.curri_count}회차</h3>
+										${curr.curri_content}
+										<br>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 						<!-- //3.수업소개 -->
@@ -176,15 +203,14 @@
 
 												</div>
 												<div class="md-form">
-													
-															<i class="glyphicon glyphicon-star active" data-value="1"></i>
-															<i class="glyphicon glyphicon-star " data-value="2"></i>
-															<i class="glyphicon glyphicon-star " data-value="3"></i> 
-															<i class="glyphicon glyphicon-star" data-value="4"></i> 
-															<i class="glyphicon glyphicon-star" data-value="5"></i> 
-												
-													<label data-error="wrong" data-success="right" for="form8">content</label>
-													
+
+													<i class="glyphicon glyphicon-star active" data-value="1"></i>
+													<i class="glyphicon glyphicon-star " data-value="2"></i> <i
+														class="glyphicon glyphicon-star " data-value="3"></i> <i
+														class="glyphicon glyphicon-star" data-value="4"></i> <i
+														class="glyphicon glyphicon-star" data-value="5"></i> <label
+														data-error="wrong" data-success="right" for="form8">content</label>
+
 													<textarea type="text" id="form8"
 														class="md-textarea form-control" rows="4">
 													</textarea>
@@ -248,6 +274,9 @@
 								<div class="review_list" id="bookmarkReview">
 									<ul>
 										<div id="innerReviewDiv">
+											<c:if test="${empty rlist}">
+												<h3>작성된 리뷰 없음</h3>
+											</c:if>
 											<c:forEach var="rlist" items="${rlist }">
 												<li><dl>
 														<dt>
@@ -310,88 +339,68 @@
 								<!-- qna 리스트 시작 -->
 								<div class="qna_wrap"></div>
 							</div>
-							<%-- <div>
-								<c:forEach var='i' begin='${pu.startPageNum }'
-									end='${pu.endPageNum }'>
-									 <c:choose>
-										<c:when test='${i==pu.pageNum}'>
-											<a
-												href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}'
-												style='text-decoration: none; font-weight: bold;'> <span
-												style='color: red'>[${i }]</span>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<a
-												href='${cp }/classDetail/qnalist?pageNum=${i}&class_num=${class_num}'
-												style='text-decoration: none;'> <span
-												style='color: gray'>[${i }]</span>
-											</a>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</div> --%>
 						</div>
 						<!-- ///qna -->
 					</div>
 					<!--// class wrap -->
 				</div>
 				<!-- 왼쪽수업정보끝 -->
-			</div>
-			<!-- 시간&날짜/ 결제창 -->
-			<div class="col-md-4 remote">
-				<div class="remote_wrap">
-					<div class="class_type">
-						<h3>클래스유형</h3>
-					</div>
-					<c:forEach var="index" begin="1" end="3">
-						<div class="accordion" id="accordionExample">
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse"
-										data-parent="#accordionExample" href="#card-element-${index}">
-										07.08(수)14:00~16:00 강남</a>
-								</div>
-								<div id="card-element-${index}" class="collapse">
-									<div class="card-body">상세장소 : 강사 공방</div>
-								</div>
-							</div>
+				<!-- 시간&날짜/ 결제창 -->
+				<div class="col-md-4 remote">
+					<div class="remote_wrap">
+						<div class="class_type">
+							<h3>클래스유형</h3>
 						</div>
-					</c:forEach>
-					<div class="tutor_t">
-						<dl class="tutor_txt">
-							<dt>
-								<div
-									style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+						<c:forEach var="dlist" items="${dlist }" varStatus="index">
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-header">
+										<a class="collapsed card-link" data-toggle="collapse"
+											data-parent="#accordionExample" href="#card-element-${index.count}">
+											<fmt:formatDate value="${dlist.class_date }"
+												pattern="yyyy-MM-dd" />&nbsp&nbsp 
+												${dlist.class_startTime}~ ${dlist.class_endTime }
+										</a>
+									</div>
+									<div id="card-element-${index.count}" class="collapse">
+										<div class="card-body">${cdv.sloc_name }</div>
+									</div>
 								</div>
-							</dt>
-							<dd>
-								신촌,홍대 부근의 모임공간에서 컨설팅이 진행됩니다.<br> 공간 대여 비용은 컨설팅 비용에 포함되어 있으나
-								공간에서 드시는 음료는 직접 구매 부탁드립니다. <br> 감사합니다 :)
-							</dd>
-						</dl>
+							</div>
+						</c:forEach>
+						<c:forEach var="dlist" items="${dlist }" varStatus="index">
+							<c:if test="${index.last }">
+								<div class="tutor_t">
+									<dl class="tutor_txt">
+										<dt>
+											<div style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/resources/img/모찌.jpg');">
+											</div>
+										</dt>
+										<dd>${dlist.class_comment}</dd>
+									</dl>
+								</div>
+							</c:if>
+						</c:forEach>
+
+						<c:choose>
+							<c:when test="${empty mem}">
+								<div class="button_pay">
+									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
+										class="btn_pay"> 수업 신청하기</a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="button_pay">
+									<a href="${cp }/class/apply?class_num=${class_num }"
+										class="btn_pay">수업신청하기</a>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
-					<c:choose>
-						<c:when test="${empty mem}">
-							<div class="button_pay">
-								<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
-									class="btn_pay"> 수업 신청하기</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="button_pay">
-								<a href="${cp }/class/apply?class_num=${class_num }"
-									class="btn_pay">수업신청하기</a>
-
-							</div>
-						</c:otherwise>
-					</c:choose>
-
 				</div>
+				<!-- //시간&날짜/ 결제창 -->
 			</div>
-			<!-- //시간&날짜/ 결제창 -->
 		</div>
 	</div>
 </div>
-
-

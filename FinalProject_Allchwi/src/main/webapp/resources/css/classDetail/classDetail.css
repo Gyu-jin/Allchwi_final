@@ -6,8 +6,12 @@
 	letter-spacing: 0;
 }
 .carousel-item img{
-	width: 100%;
-    height: 100%;
+	height: 450px;
+}
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
 }
 .card {
 	width: 440px;
@@ -72,7 +76,9 @@
 		url(https://user-images.githubusercontent.com/65140754/86689728-3b17a000-c042-11ea-9861-55fe8f7cd520.png)
 		center top no-repeat;
 }
-
+.cert ul li img{
+	width: 30px;
+}
 .class_wrap {
 	background: #ececec;
 }

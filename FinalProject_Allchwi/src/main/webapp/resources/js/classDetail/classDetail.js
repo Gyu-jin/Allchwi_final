@@ -24,8 +24,6 @@ $(function(){
 		$(this).addClass('show');
 	});
 	qnaList(1);
-	$('#slide1').addClass('active');
-	$('#item1').addClass('active');
 
 		
 });
