@@ -9,12 +9,18 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
-	<select id="list" parameterType="int" resultType="adi">
-		select c.*, apply_auth from (
-			select cd.class_num, date_num, class_date, class_title, tutor_nickname, pro_num from class_date cd, class_info ci
+	<select id="check" parameterType="hashmap" resultType="int">
+		select  count(*) from class_apply a, payment p 
+		where a.apply_num=p.apply_num
+		and p.class_num=#{class_num} and a.ml_num=#{ml_num} and date_num=#{date_num}
+	</select>
+	<select id="list" parameterType="hashmap" resultType="adi">
+		select c.*, apply_auth, apply_regdate from (
+			select cd.class_num, date_num, class_date, class_title, tutor_nickname, tutor_phone, pro_num 
+			from class_date cd, class_info ci
 		    where cd.class_num=ci.class_num
 		) c, class_apply a
-		where c.date_num=a.date_num and ml_num=#{ml_num}
+		where c.date_num=a.date_num and ml_num=#{ml_num} and class_num=#{class_num}
 	</select>
 </mapper>
 

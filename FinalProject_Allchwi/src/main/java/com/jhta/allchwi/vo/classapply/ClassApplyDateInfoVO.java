@@ -9,12 +9,14 @@ public class ClassApplyDateInfoVO {
 	private Timestamp class_date;
 	private String class_title;
 	private String tutor_nickname;
+	private String tutor_phone;
+	private Timestamp apply_regdate;
 	private int apply_auth;
 	
 	public ClassApplyDateInfoVO() {}
 
 	public ClassApplyDateInfoVO(int class_num, int date_num, int pro_num, Timestamp class_date, String class_title,
-			String tutor_nickname, int apply_auth) {
+			String tutor_nickname, String tutor_phone, Timestamp apply_regdate, int apply_auth) {
 		super();
 		this.class_num = class_num;
 		this.date_num = date_num;
@@ -22,6 +24,8 @@ public class ClassApplyDateInfoVO {
 		this.class_date = class_date;
 		this.class_title = class_title;
 		this.tutor_nickname = tutor_nickname;
+		this.tutor_phone = tutor_phone;
+		this.apply_regdate = apply_regdate;
 		this.apply_auth = apply_auth;
 	}
 
@@ -80,6 +84,23 @@ public class ClassApplyDateInfoVO {
 	public void setApply_auth(int apply_auth) {
 		this.apply_auth = apply_auth;
 	}
+
+	public String getTutor_phone() {
+		return tutor_phone;
+	}
+
+	public void setTutor_phone(String tutor_phone) {
+		this.tutor_phone = tutor_phone;
+	}
+
+	public Timestamp getApply_regdate() {
+		return apply_regdate;
+	}
+
+	public void setApply_regdate(Timestamp apply_regdate) {
+		this.apply_regdate = apply_regdate;
+	}
+	
 	
 	
 }

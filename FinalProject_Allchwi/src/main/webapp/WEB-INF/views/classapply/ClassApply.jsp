@@ -307,7 +307,7 @@ img {
 			</ul>
 		</div>
 	</div>
-	<form action="${cp}/class/applyOk" method="post" id="applyForm">
+	<form method="post" id="applyForm">
 		<input type="hidden" name="ml_num" value="${ml_num }">
 		<input type="hidden" name="class_num" value="${class_num }">
 		<div class="tab-content" id="pills-tabContent">
@@ -502,11 +502,12 @@ img {
 								<input type="hidden" id="ppoint" value="${point }">
 							</div>
 							<div class="label-1-content">
-								<input type="text" id="point" name="pay_point" style="width: 88px">
+								<input type="text" id="point" name="pay_point" style="width: 88px" value="0">
 								포인트
 							</div>
 							<div class="label-1-content" style="width: 200px" id="pointDiv">
-								
+								<span style="color: red">${vo.class_price*vo.class_hour*vo.class_count }</span>
+								<input type="hidden" name="final_price" value="${vo.class_price*vo.class_hour*vo.class_count }"/>
 							</div>
 							<div class="label-1-content">
 								<div class="button_box2">
@@ -571,7 +572,6 @@ img {
 	
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
 	$("#cardPay").click(function(e) {
-		e.preventDefault();
 		
 		var formData = $("#applyForm").serialize();
 
@@ -584,9 +584,12 @@ img {
 			if(data=="success"){
 				alert("수업을 신청하시겠습니까?");
 				location.href="${cp}/class/success?date_num="+date_num;
-			}else{
+			}else if(data=="fail"){
 				alert("수업 신청 오류;");
 				location.href="${cp}/";
+			}else if(data=="already"){
+				alert("이미 신청된 일정입니다. 다른 일정을 선택해주세요.");
+				$('#pills-tab li:nth-child(1) a').tab('show');
 			}
 		});
 	});

@@ -18,10 +18,11 @@ public class ClassMyApplyController {
 	@Autowired private ClassApplyService service;
 	
 	@GetMapping("/class/myapply")
-	public String goClassMyboard(Model model,int ml_num) {
-
-		//내수업신청서 전체 목록 제목,번호가져오기
-		List<ClassApplyDateInfoVO> list = service.list(ml_num);
+	public String goClassMyboard(Model model,int ml_num, int class_num) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("ml_num",ml_num);
+		map.put("class_num",class_num);
+		List<ClassApplyDateInfoVO> list = service.list(map);
 				
 		model.addAttribute("list", list);	
 				

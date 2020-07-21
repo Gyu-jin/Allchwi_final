@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.classapply;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +19,11 @@ public class ClassApplyDAO {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
 	
-	public List<ClassApplyDateInfoVO> list(int ml_num){
-		return session.selectList(NAMESPACE+".list",ml_num);
+	public List<ClassApplyDateInfoVO> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".list",map);
+	}
+	
+	public int check(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".check",map);
 	}
 }

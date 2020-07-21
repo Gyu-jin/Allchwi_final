@@ -1,6 +1,7 @@
 package com.jhta.allchwi.service.classapply;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,11 @@ public class ClassApplyService {
 	
 		return true;
 	}
-	public List<ClassApplyDateInfoVO> list(int ml_num){
-		return apply_dao.list(ml_num);
+	public List<ClassApplyDateInfoVO> list(HashMap<String, Object> map){
+		return apply_dao.list(map);
 	}	
+	
+	public int check(HashMap<String, Object> map) {
+		return apply_dao.check(map);
+	}
 }

@@ -45,7 +45,7 @@ option {
 }
 .static-container {
     margin-bottom: 50px;
-    padding-left: 10%;
+    
 }
 .static-container h3 {
     color: #333;
@@ -56,6 +56,7 @@ option {
 .static-container .static-box {
     display: flex;
     margin-top: 30px;
+    margin-left: 10%;
 }
 .static-container .static-box .image {
     width: 80px;
@@ -211,6 +212,8 @@ img {
 					</div>
 					<div>
 						<span class="date">수업 시작일 : <fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/></span>
+						<span class="date">수업 신청서 제출일 : <fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd"/></span>
+						<span class="date">튜터 연락처 : <fmt:formatDate value="${vo.tutor_phone}" pattern="yyyy-MM-dd"/></span>
 					
 					</div>
 				

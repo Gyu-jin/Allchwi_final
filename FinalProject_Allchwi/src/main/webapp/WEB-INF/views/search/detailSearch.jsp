@@ -355,13 +355,13 @@ text{
 						<div class='card-body'>
 							<text>${vo.class_title } ( ${vo.class_num } ) </text>
 						
-						<div class="profile_box">
-                                            <div class="profile">
-                                           		<img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${vo.pro_num}">
-                                            </div>
-                                            <div class="name">${vo.tutor_nickname }</div>
+							<div class="profile_box">
+                                <div class="profile">
+                          			<img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${vo.pro_num}">
+                                </div>
+                                <div class="name">${vo.tutor_nickname }</div>
                                             
-                                        </div>
+                            </div>
 							<p class='card-text'><fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> 시작!</p>
 							<a href="${cp }/class/apply?class_num=${vo.class_num}&ml_num=${sessionScope.ml_num}">수업신청</a>
 							
