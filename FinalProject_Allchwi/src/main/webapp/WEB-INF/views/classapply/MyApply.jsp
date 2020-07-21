@@ -213,7 +213,7 @@ img {
 					<div>
 						<span class="date">수업 시작일 : <fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/></span>
 						<span class="date">수업 신청서 제출일 : <fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd"/></span>
-						<span class="date">튜터 연락처 : <fmt:formatDate value="${vo.tutor_phone}" pattern="yyyy-MM-dd"/></span>
+						<span class="date">튜터 연락처 : ${vo.tutor_phone}</span>
 					
 					</div>
 				

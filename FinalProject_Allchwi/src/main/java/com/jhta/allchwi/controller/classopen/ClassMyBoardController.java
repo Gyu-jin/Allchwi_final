@@ -46,4 +46,13 @@ public class ClassMyBoardController {
 		
 		return ".classOpen.classMyBoard";
 	}
+	
+	@GetMapping("/class/classStatusUpdate")
+	public String fnStatusUpdate(HttpSession session,int class_num) {
+		
+		int ml_num = (int)session.getAttribute("ml_num");
+		
+		return null;
+	}
+	
 }

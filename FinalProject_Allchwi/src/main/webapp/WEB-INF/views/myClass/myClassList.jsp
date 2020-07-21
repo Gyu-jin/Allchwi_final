@@ -24,10 +24,10 @@
 						<div>신청일시: ${vo.apply_regdate }
 						<c:choose>
 						<c:when test="${vo.apply_auth==0 }">
-							<div class="apply-auth button_gray">승인대기</div>
+							<div class="apply-auth button_gray" onclick="apply_detail(${vo.apply_num},${vo.class_num})">승인대기</div>
 						</c:when>
 						<c:otherwise>						
-							<div class="apply-auth button_gray">승인완료</div>
+							<div class="apply-auth button_gray" onclick="apply_detail(${vo.apply_num},${vo.class_num})">승인완료</div>
 						</c:otherwise>
 						</c:choose>
 						</div>
@@ -85,9 +85,7 @@
 						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					</c:otherwise>
 				</c:choose>
-
-
-
+				
 				<c:forEach var="i" begin="${pu.startPageNum}"
 					end="${pu.endPageNum }">
 					<c:choose>
@@ -101,6 +99,7 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+				
 				<c:choose>
 					<c:when test="${pu.totalPageCount>pu.endPageNum }">
 						<li class="page-item"><a class="page-link"
@@ -150,8 +149,30 @@
 		
 		});
 		
-		function apply_detail(){
+		function apply_detail(apply_num,class_num){
+			var form = document.createElement("form");
+			form.setAttribute("charset", "utf-8");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "${cp}/class/myapply");
 			
+			//a 파라미터 값이 null이 아닌 경우 히든 input을 생성하여 값을 넣음.
+			var hiddenClassNum1 = document.createElement("input");
+			hiddenClassNum1.setAttribute("type", "hidden");
+			hiddenClassNum1.setAttribute("name", "apply_num");
+			hiddenClassNum1.setAttribute("value", apply_num);
+			
+			var hiddenClassNum2 = document.createElement("input");
+			hiddenClassNum2.setAttribute("type", "hidden");
+			hiddenClassNum2.setAttribute("name", "class_num");
+			hiddenClassNum2.setAttribute("value", class_num);
+
+			//a 폼에 히든 input 추가 
+			form.appendChild(hiddenClassNum1);
+			form.appendChild(hiddenClassNum2);
+			
+			//a body부분에 폼을 붙이고 페이지 이동
+			document.body.appendChild(form);
+			form.submit();
 		}
 		
 		function classFinish(apply_num){

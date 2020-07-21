@@ -8,6 +8,25 @@
 		var v = $(val).val();
 		location.href = "${cp}/class/classBoard?class_num="+v;  
 	}
+	
+	function fnStatusChange(val){
+		
+		$.ajax({
+		    type: "post",
+		    dataType: "text",
+		    url: "${cp}/class/classStatusUpdate",
+		    data: {class_num: val},
+		    success: function(data) {
+		    	if(data == 'success'){
+		    		alert('수업완료신청 되었습니다.');
+		    		location.href = "${cp}/class/classBoard?class_num="+val; 
+		    	}else{				    		
+		    		alert('다시 신청해주세요!');
+		    	}
+		    }
+		});
+	}
+	
 </script>
 <div class="container">
 	<div class="title-box">
@@ -32,7 +51,7 @@
 					</div>
 					<div>
 						<span class="date">업데이트 : <fmt:formatDate value="${list.class_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-						<div class="button_gray cursor" onClick="fnStatusChange('CS01','26923');" style="float:right;">심사요청하기</div>
+						<div class="button_gray cursor" onClick="fnStatusChange(${list.class_num});" style="float:right;">심사요청하기</div>
 						<a href="${cp}/class/classDate?class_num=${list.class_num}">
 						<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 					</div>
