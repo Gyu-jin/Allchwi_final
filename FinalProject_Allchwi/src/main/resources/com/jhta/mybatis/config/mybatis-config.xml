@@ -96,6 +96,10 @@
 		<!-- 튜터 수업료 받기 -->
 		<mapper resource="com/jhta/mybatis/mapper/ReceiptMapper.xml"/>
 		
+		<!-- 커뮤니티 mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/CommunityArchiveMapper.xml"/>	
+		
+		
 	</mappers>
 </configuration>
 

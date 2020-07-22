@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -38,7 +39,8 @@
 						<tr>
 							<td>${vo.ml_num }</td>
 							<td>${vo.id }</td>
-							<td>${vo.pay_regdate }</td>
+							<td><fmt:formatDate value="${vo.pay_regdate }"
+									pattern="yyyy-MM-dd" /></td>
 							<td>${vo.class_title }</td>
 							<td>${vo.pay_way }</td>
 							<td>${vo.final_price }</td>

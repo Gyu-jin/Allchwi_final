@@ -44,7 +44,7 @@
       <div class="nav-scroller py-1 mb-2">
 	    <nav class="nav d-flex justify-content-between">
 	      <a class="p-2 text-muted" href="#">공지사항</a>
-	      <a class="p-2 text-muted" href="#">자료실</a>
+	      <a class="p-2 text-muted" href="${cp}/community/archive">자료실</a>
 	      <a class="p-2 text-muted" href="#">강의듣기</a>
 	      <a class="p-2 text-muted" href="${cp}/community/assignment">과제</a>
 	      <a class="p-2 text-muted" href="#">자유게시판</a>

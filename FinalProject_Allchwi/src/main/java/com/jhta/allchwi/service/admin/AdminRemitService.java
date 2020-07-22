@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.admin.AdminRemitDAO;
 import com.jhta.allchwi.vo.admin.AdminRemitVO;
+import com.jhta.allchwi.vo.admin.SalesVO;
 
 @Service
 public class AdminRemitService {
@@ -22,8 +24,11 @@ public class AdminRemitService {
 		return dao.count(map);
 	}
 	
-	public int accept(int pay_num) {
-		return dao.accpet(pay_num);
+	@Transactional
+	public int acceptAndSales(int pay_num,SalesVO vo) throws Exception{
+		dao.accpet(pay_num);	
+		dao.insertSales(vo);
+		return 1;
 	}
 	
 	

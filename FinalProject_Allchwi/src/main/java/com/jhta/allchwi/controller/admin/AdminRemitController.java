@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.AdminRemitService;
 import com.jhta.allchwi.vo.admin.AdminRemitVO;
+import com.jhta.allchwi.vo.admin.SalesVO;
 import com.jhta.allchwi.vo.receiveTuition.InsertRemitVO;
 
 @Controller
@@ -25,10 +26,17 @@ public class AdminRemitController {
 	@RequestMapping(value= {"/admin/remit","/admin/receiptAccept"})
 	public String goPayment(HttpServletRequest request, Model model,String field, String keyword,
 			@RequestParam(value="pageNum", defaultValue = "1") int pageNum,
-			@RequestParam(value="pay_num", defaultValue = "1") int pay_num) {
+			@RequestParam(value="pay_num", defaultValue = "1") int pay_num,
+			@RequestParam(value="rem_pay", defaultValue = "1") int rem_pay,String tutor_nickname,String class_title
+			){
 		
 		if(request.getServletPath().equals("/admin/receiptAccept")) {
-			service.accept(pay_num);	// 송금신청 승인			
+			SalesVO vo = new SalesVO(pay_num, class_title, tutor_nickname, rem_pay);
+			try {
+				service.acceptAndSales(pay_num, vo); //rem_stauts=1과 sales테이블에 insert				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("field",field);

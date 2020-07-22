@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -76,7 +77,8 @@
 											<td>${vo.ml_num}</td>
 											<td>${vo.mb_name}</td>
 											<td>${vo.id}</td>
-											<td>${vo.mb_regdate}</td>
+											<td><fmt:formatDate value="${vo.mb_regdate }"
+									pattern="yyyy-MM-dd" /></td>
 											<td>${vo.nowclass }개</td>
 											<td>${vo.totclass }개</td>
 											<td><c:choose>

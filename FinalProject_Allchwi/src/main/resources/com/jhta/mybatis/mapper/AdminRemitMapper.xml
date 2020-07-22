@@ -34,5 +34,12 @@
 	<update id="accept" parameterType="int">
 		update remit set rem_status=1 where pay_num=#{pay_num}
 	</update>
+	
+	
+	<insert id="insertSales" parameterType="com.jhta.allchwi.vo.admin.SalesVO">
+		insert into sales values(null,#{pay_num},#{class_name},#{tutor_name},#{pay},now())
+	</insert>
+	
+	
 
 </mapper>

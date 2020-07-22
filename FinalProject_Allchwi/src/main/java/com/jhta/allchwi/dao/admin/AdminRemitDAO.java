@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.admin.AdminRemitVO;
+import com.jhta.allchwi.vo.admin.SalesVO;
 
 @Repository
 public class AdminRemitDAO {
@@ -25,6 +26,10 @@ public class AdminRemitDAO {
 	
 	public int accpet(int pay_num) {
 		return session.update(NAMESPACE+".accept", pay_num);
+	}
+	
+	public int insertSales(SalesVO vo) {
+		return session.insert(NAMESPACE+".insertSales",vo );
 	}
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
 <div class="container-fluid">
@@ -46,16 +47,24 @@
 						<td>${vo.class_title}</td>
 						<td>${vo.rem_pay}</td>
 						<td>${vo.rem_bank}/ ${vo.rem_account }</td>
-						<td>${vo.rem_regdate}</td>
-						<td>${vo.rem_status}</td>
+						<td><fmt:formatDate value="${vo.rem_regdate }"
+									pattern="yyyy-MM-dd" /></td>
+						<c:choose>
+							<c:when test="${vo.rem_status == 0}">
+								<td>승인대기 </td>
+							</c:when>
+							<c:otherwise>
+								<td>승인완료 </td>
+							</c:otherwise>
+						</c:choose>
 						<td><c:choose>
 								<c:when test="${vo.rem_status == 0}">
 									<button type="button" class="btn btn-success"
 										data-toggle="modal" data-target="#myModal"
-										onclick="getModal('${vo.pay_num}','${vo.tutor_nickname }','${vo.rem_pay }')">승인</button>
+										onclick="getModal('${vo.pay_num}','${vo.tutor_nickname }','${vo.rem_pay }','${vo.class_title }')">승인</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn btn-dark">승인 완료</button>
+									<button type="button" class="btn btn-dark" disabled>승인 완료</button>
 								</c:otherwise>
 
 							</c:choose></td>
@@ -128,9 +137,6 @@
 			<!-- Modal footer -->
 			<div class="modal-footer">
 
-				<!--  
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      	-->
 
 			</div>
 
@@ -139,22 +145,24 @@
 </div>
 
 <script>
-	function getModal(pay_num, tutor_nickname, rem_pay) {
+	function getModal(pay_num, tutor_nickname, rem_pay,class_title) {	
 		$("div [class='modal-footer']").empty();
 		$("#modal-body").text(
 				tutor_nickname + "님의 " + rem_pay + "원을  송금신청을 수락하시겠습니까?");
 
 		$("div [class='modal-footer']")
 				.append(
-						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=accept('"
-								+ pay_num + "')>네</button>");
+						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=\"accept('"+ pay_num + "','"+tutor_nickname+"','"+rem_pay+"','"+class_title+"')\">네</button>");
+		
 
 		$("div [class='modal-footer']")
 				.append(
 						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")
 	}
 
-	function accept(pay_num2) {
-		location.href = "${cp}/admin/receiptAccept?pay_num=" + pay_num2;
+	function accept(pay_num,tutor_nickname,rem_pay,class_title) {	
+		location.href = "${cp}/admin/receiptAccept?pay_num=" + pay_num+"&tutor_nickname="+tutor_nickname+"&class_title="+class_title+"&rem_pay="+rem_pay;		
+		
+
 	}
 </script>
