@@ -225,5 +225,17 @@
 	<select id="getProNum" parameterType="int" resultType="int">
 		select pro_num from class_info where class_num=#{class_num}
 	</select>
+	
+	<!-- 수업 정보 수정  -->
+	<update id="infoUpdate" parameterType="classinfo">
+		update class_info set
+		scategory_num=#{scategory_num},sloc_num=#{sloc_num},pro_num=#{pro_num},
+		tutor_nickname=#{tutor_nickname},tutor_phone=#{tutor_phone},class_address=#{class_address},class_form=#{class_form},
+		class_max=#{class_max},class_min=#{class_min},
+		class_title = #{class_title},class_price=#{class_price},class_hour=#{class_hour},class_count=#{class_count},
+		tutor_about=#{tutor_about},class_about=#{class_about},class_target=#{class_target},class_regdate=now()
+		where class_num = #{class_num}
+	</update>
+	
 </mapper>
 

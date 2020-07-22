@@ -381,7 +381,7 @@ function deleteImage(){
 	var val = $("#img-cover" + selectIndex).attr("data-value")
 	
 	if(val != null){	
-		$('#fileList').append("<input type='hidden' value="+val+" name='delCoverImg'>");
+		$('#fileList').append("<input type='hidden' value="+val+" name='delCoverImg[]'>");
 	}
 	
 	$("#img-cover" + selectIndex).remove();

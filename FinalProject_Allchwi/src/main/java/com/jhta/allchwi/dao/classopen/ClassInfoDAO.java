@@ -56,4 +56,8 @@ public class ClassInfoDAO {
 	public int statusUpdate(HashMap<String, Object> map) {
 		return session.update(NAMESPACE + ".statusUpdate",map);
 	}
+	public int update(ClassInfoVO vo) {
+		return session.update(NAMESPACE + ".infoUpdate", vo);
+	}
+		
 }

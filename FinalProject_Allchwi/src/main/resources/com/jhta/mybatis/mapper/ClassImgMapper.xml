@@ -10,5 +10,9 @@
 	<select id="imgSelect" parameterType="int" resultType="classImg">
 		select cover_name,cover_file from class_img where cover_num=#{cover_num}
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from class_img where cover_num=#{cover_num}
+	</delete>
 </mapper>
 

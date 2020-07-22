@@ -19,6 +19,10 @@ public class ClassImgDAO {
 	public ClassImgVO getImg(int cover_num) {
 		return session.selectOne(NAMESPACE + ".imgSelect", cover_num);
 	}
+
+	public int delete(int cover_num) {
+		return session.delete(NAMESPACE + ".delete",cover_num);
+	}
 	
 	
 }

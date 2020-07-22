@@ -190,4 +190,97 @@ public class ClassOpenController {
 		return vo;
 	}
 	
+	@RequestMapping(value="/class/enrollmentUpdate",produces ="application/text; charset=utf8",
+			method = RequestMethod.POST)
+	@ResponseBody
+	public String classUpdateInsert(
+			HttpSession session,
+			ClassInfoVO vo,
+			@RequestParam(value="picture",required = false)MultipartFile picture,
+			@RequestParam(value="certName[]",defaultValue = "")String[] certName,
+			@RequestParam(value="cert[]",required = false)List<MultipartFile> certes,
+			@RequestParam(value="images",required = false)List<MultipartFile> images,
+			@RequestParam(value="curriculum[]",defaultValue = "")List<String> curriculum,
+			@RequestParam(value="deleteCert[]",defaultValue = "")List<Integer> deletecert,
+			@RequestParam(value="delCoverImg[]",defaultValue = "")List<Integer> delcoverimg) {
+		
+		int ml_num = (int)session.getAttribute("ml_num");
+		vo.setMl_num(ml_num);
+		
+		String[] addr = vo.getClass_address().split(" ");
+		
+		// 도/특별시
+		String state = addr[0];
+		// 도/구
+		String city = addr[1];
+		
+		//큰 테이블 중복여주 체크 후 insert
+		BigLocationVO blocVo = new BigLocationVO(0, state);		
+		
+		//작은 카테고리 중복후 insert
+		SmallLocationVO slocVo = new SmallLocationVO(0, 0, city);
+		
+		// 승인여부 init
+		vo.setClass_auth(0);
+		ProfileImgVO proVo = null;
+		// 프로필 이미지 업로드.
+		if(picture != null) {
+			String proImgName = picture.getOriginalFilename(); //프로필이미지 파일명
+			byte[] proImgFile = null; //vo에 담을 바이트 이미지 파일
+			try {
+				proImgFile = picture.getBytes(); //multipart로 얻은 File 바이트형식으로 바꿔 저장
+			} catch (IOException e1) {
+				System.out.println(e1.getMessage());
+			}
+			// 프로필이미지 VO 생성
+			proVo = new ProfileImgVO(vo.getPro_num(), proImgFile, proImgName,null);
+			System.out.println("profile"+vo.getPro_num());
+		}
+		
+		// 자격증 데이터 가져오기.
+		ArrayList<CertificateVO> certList = new ArrayList<CertificateVO>(); // 여러개 일경우 받을 List
+		for (int i = 0; i < certes.size(); i++) {
+			MultipartFile cert = certes.get(i);	//list로 들어온 자격지 File 얻어오기
+			String originalName = cert.getOriginalFilename(); // 자격증 파일명
+			byte[] certFile = null;
+			try {
+				certFile = cert.getBytes();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			CertificateVO certVo = new CertificateVO(0, 0, originalName,certFile, certName[i], null);
+			certList.add(certVo);
+		}
+			
+		// 커버이미지 받아오기.
+		ArrayList<ClassImgVO> coverList = new ArrayList<ClassImgVO>();
+		for(MultipartFile img : images) {
+			String originalNames = img.getOriginalFilename();
+			byte[] imgFile = null;
+			try {
+				imgFile = img.getBytes();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ClassImgVO imgVo = new ClassImgVO(0, 1, originalNames, imgFile, null);
+			coverList.add(imgVo);
+			
+		}
+		
+		//커리큘럼 vo 생성
+		ArrayList<CurriculumVO> curriList = new ArrayList<CurriculumVO>();
+		for (int i = 0; i < vo.getClass_count(); i++) {
+			CurriculumVO curriVo = new CurriculumVO(0, 0, i+1, curriculum.get(i), null);
+			curriList.add(curriVo);
+		}
+		
+		try {
+			classinfo_service.update(vo, blocVo, slocVo, proVo, certList, coverList, curriList,delcoverimg,deletecert);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		
+		return "success";
+	}
 }

@@ -24,6 +24,8 @@
 		<result column="cover_num" property="cover_num"/>
 		<result column="sloc_name" property="sloc_name"/>
 		<result column="bloc_name" property="bloc_name"/>
+		<result column="scategory_num" property="scategory_num"/>
+		<result column="bcategory_num" property="bcategory_num"/>
 		<collection property="coverList" column="class_num"  ofType="classInfo" select="coverList"/>
 		<collection property="certList" column="class_num"  ofType="cert" select="certList"/>
 		<collection property="curriList" column="class_num"  ofType="classCurri" select="curriList"/>
@@ -32,7 +34,12 @@
 	<select id="getDetail" parameterType="hashmap" resultMap="classDetail">
 		select ci.class_num,ci.ml_num,ci.pro_num,ci.tutor_nickname,ci.class_address,ci.class_form,
 		ci.class_max,ci.class_min,ci.class_title,ci.class_price,ci.class_hour,ci.class_count,
-		ci.class_target,ci.class_about,ci.tutor_about,ci.tutor_phone,
+		ci.class_target,ci.class_about,ci.tutor_about,ci.tutor_phone,ci.scategory_num,
+		(
+			select b.bcategory_num from 
+			big_category b, small_category s 
+			where b.bcategory_num=s.bcategory_num and s.scategory_num=ci.scategory_num
+		)bcategory_num ,
 		loc.sloc_name,loc.bloc_name
 		FROM class_info ci,
 		(

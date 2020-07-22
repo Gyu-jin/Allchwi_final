@@ -15,4 +15,8 @@ public class CurriculumDAO {
 	public int insert(CurriculumVO vo) {
 		return session.insert(NAMESPACE +".insert",vo);
 	}
+
+	public int delete(int class_num) {
+		return session.insert(NAMESPACE +".delete",class_num);
+	}
 }

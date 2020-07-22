@@ -6,5 +6,8 @@
 	<insert id="insert" parameterType="classCurri">
 		insert into curriculum values(null,#{class_num},#{curri_count},#{curri_content},now())
 	</insert>
+	<delete id="delete" parameterType="int">
+		delete from curriculum where class_num=#{class_num}
+	</delete>
 </mapper>
 

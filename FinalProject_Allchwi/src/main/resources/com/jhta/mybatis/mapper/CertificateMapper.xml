@@ -6,6 +6,8 @@
 	<insert id="insert" parameterType="cert">
 		insert into certificate value(null,#{class_num},#{certif_filename},#{certif_file},#{certif_name},now())
 	</insert>
-
+	<delete id="delete" parameterType="int">
+		delete from certificate where certif_num=#{certif_num}
+	</delete>
 </mapper>
 

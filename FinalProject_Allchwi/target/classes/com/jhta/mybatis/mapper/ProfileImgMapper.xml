@@ -23,6 +23,8 @@
 	<select id="imgSelect" parameterType="int" resultType="piv">
 		select pro_filename,pro_img from profile_img where pro_num=#{pro_num}
 	</select>
+	
+	<!-- 프로필 이미지 수정 -->
 </mapper>
 
 

@@ -26,4 +26,5 @@ public class ProfileImgDAO {
 	public ProfileImgVO getImg(int pro_num) {
 		return session.selectOne(NAMESPACE+".imgSelect", pro_num);
 	}
+
 }

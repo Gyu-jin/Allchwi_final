@@ -21,9 +21,8 @@
 		    url: "/allchwi/class/classUpdate",
 		    data: {class_num: '${list.class_num}'},
 		    success: function(data) {
-		    	alert(data);
+		    	
 		    	$(data.coverList).each(function(i,vo){
-		    		alert(vo.cover_num);
 		    		var oImg = ($('<div>').attr('id', 'img-cover'+i)
 		    				.addClass('cover_img')
 		    				.css({'background-image':"url('/allchwi/class/getimg?cover_num="+ vo.cover_num+"')"})
@@ -39,6 +38,7 @@
 		    			$('#fileList').append(oImg);
 		    			indexIncrement();
 		    	});
+		    	
 		    	$(data.curriList).each(function(i,vo){
 		    		
 		    		$('#curries').append("<div class='curri inner1' id='Curri"+ (i+1) +"'>" +
@@ -50,7 +50,6 @@
     						"id='Curriculum"+ (i+1)  +"' name='curriculum[]'>"+ vo.curri_content +"</textarea>"+
     						"</div></div>" 
     						);
-		    		
 		    	});
 		    	
 		    	if(data.class_form == 0){
@@ -64,13 +63,131 @@
 		    	}else{
 		    		rd(1,0);
 		    	}
+		    		
+		    	var bcategory_num = data.bcategory_num;
+		    	var scategory_num = data.scategory_num;
+				$.ajax({
+				    type: "post",
+				    dataType: "json",
+				    url: "${cp}/class/category",
+				    data: {bcategory_num: bcategory_num},
+				    success: function(data) {
+				    	$("#CateSub").empty();
+				    	$("#CateSub").append("<option value='0'>수업 대표 카테고리를 선택해주세요</option>");		
+				    	$(data).each(function(i,scate){
+				    		if(scategory_num == scate.scategory_num){			    			
+								$("#CateSub").append("<option value='"+scate.scategory_num+"'selected >"+scate.scategory_name+"</option>");		
+				    		}else{		    		
+								$("#CateSub").append("<option value='"+scate.scategory_num+"'>"+scate.scategory_name+"</option>");		
+				    		}
+						});
+				    }
+				});
 		    	
 		    }
 		});
-		
 		updateCalculation();
+		
+		// 등록 완료 버튼 
+		$('#UpdateBtnNext').on('click',function (e) {
+			
+		    e.preventDefault();
+		    // 부족한 내용 체크 후 객체아이디 저장 변수
+			var eventLoc = "";
+			
+			//커리큘럼 횟수
+			var curri = $('#TotalTimes').val();
+			
+			if($('#TutorInfo').val().length<35 ){ 
+				$('#TutorInfo').addClass('on');
+				eventLoc = "#TutorInfo";
+			}else{
+				$('#TutorInfo').removeClass('on');
+			}
+			
+			if($('#Introduction').val().length<35 ){ 
+				$('#Introduction').addClass('on');
+				if(eventLoc == ""){eventLoc = "#Introduction"};
+			}else{
+				$('#Introduction').removeClass('on');
+			}
+			
+			if($('#Target').val().length<35 ){ 
+				$('#Target').addClass('on');
+				if(eventLoc == ""){eventLoc = "#Target"};
+			}else{
+				$('#Target').removeClass('on');
+			}
+			 
+			// 회차별 수업내용 validation
+			for(var i = 1 ; i <= curri ; i++){
+				if($('#Curriculum'+i).val().length < 35){
+					$('#Curriculum'+i).addClass('on');
+					if(eventLoc == ""){eventLoc = "#Curriculum"+i};
+				}else{
+					$('#Curriculum'+i).removeClass('on');
+				}				
+			}
+		
+			if(eventLoc != ""){
+				alert('튜터님 수업에 대해 조금 더 알려주세요.');
+				$(eventLoc).addClass('on').focus();
+				return false;
+			}
+			$('#frm-classUpdate').submit();
+			return true;
+		});
+		
+		$('#frm-classUpdate').submit(function (e) {
+			e.preventDefault();
+			//미리 생성해 놓은 값 중에서 값이 없는 건 disabled
+	        $("input[type=text]").each(function() {
+	            if($(this).val() == "") {
+	                $(this).attr("disabled",true);
+	            }
+	        });
+	        $("input[type=file]").each(function() {
+	            if($(this).val() == "") {
+	                $(this).attr("disabled",true);
+	            }
+	        });
+			
+			var formData = new FormData(this);
+			
+			var images = $('#fileList img');
+			
+			formData.append('ImageCnt', images.length);
+			
+			if(images.length < 1){
+				alert('커버 사진을 업로드 하세요');
+				return false;
+			}
+			for (var i = 0; i < images.length; i++) {
+				if(typeof  $(images[i]).data('fileData') != 'undefined'){
+					formData.append('images', $(images[i]).data('fileData'));				
+				}
+			}
+			
+			$.ajax({
+				type: 'POST',
+				url: '${cp}/class/enrollmentUpdate',
+				contentType: false,
+				data: formData,
+				dataType : 'text',
+				processData: false,
+				success: function (data) {			
+					alert("return success");
+					if(data=='success'){
+						location.href ="${cp}/class/classBoard?class_num=${list.class_num}";
+					}else{
+						location.href="${cp}/error";
+					}
+				}
+			});
+			
+		});		
 	});
-
+	
 </script>
 <div class="classOpen">
 <div class="title_box">
@@ -98,7 +215,8 @@
 	</div>
 </div>
 
-<form method="POST" enctype="multipart/form-data" id="frm-class">
+<form method="POST" enctype="multipart/form-data" id="frm-classUpdate">
+<input type="hidden" name="class_num" value="${list.class_num }">
 <!-- 선택된 페이지 출력 -->
 <div class="tab-content" id="pills-tabContent">
 	<!-- 01튜터 기본정보 입력 페이지 -->
@@ -127,8 +245,9 @@
 			<div style="margin: 30px 0">
 				<img class="upf_b" src="${cp}/resources/img/btn_pfimg.png">
 				<div class="upf" id="picture-cover"
-					style="background-image:url('${cp}/mypage/getimg?pro_num="+${list.pro_num }+"')">
+					style="background-image:url('${cp}/mypage/getimg?pro_num=${list.pro_num }')">
 					<input type="hidden" id="ProfileImg" value="${cp}/resources/img/profile-defaultImg.jpg"> 
+					<input type="hidden" name="pro_num" value="${list.pro_num }"> 
 					<input type="file" id="picture" name="picture" style="width: 150px; height: 130px; opacity: 0;">
 				</div>
 			</div>
@@ -210,7 +329,7 @@
 				<select class="custom-select col-3" id="CateMain" name="cateMain">
 					<option value="0">수업 대표 카테고리를 선택해주세요</option>
 					<c:forEach var="vo" items="${bcate_list }">
-						<option value="${vo.bcategory_num }">${vo.bcategory_name }</option>
+						<option value="${vo.bcategory_num }"<c:if test="${list.bcategory_num == vo.bcategory_num }">selected</c:if>>${vo.bcategory_name }</option>
 					</c:forEach>
 				</select>
 				<select class="custom-select col-3" id="CateSub" name="scategory_num">				
@@ -392,7 +511,7 @@
 						<textarea class="basic len980 form-control" placeholder="수업소개는 수강생이 가장 주의깊게 살펴보는 부분입니다. 수강생들이 수업에 대해 알 수 있도록 TIP의 질문을 반드시 포함하여 작성해주세요." id="Introduction" name="class_about">${list.class_about }</textarea>
 					</div>
 				</div>
-		</div>
+			</div>
 		<div class="box">
 			<div class="title">수업대상<b class="pink">*</b></div>
 			<div class="cont">
@@ -407,7 +526,7 @@
 			</div>
 		</div>
 		<div class="button_box">
-	       	<button type="button" class="btn btn-outline-danger" id="fourthNext">튜터등록 완료</button>
+	       	<button type="button" class="btn btn-outline-danger" id="UpdateBtnNext">튜터등록 완료</button>
 		</div>
 	</div>
 </div>

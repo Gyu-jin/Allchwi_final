@@ -27,16 +27,17 @@ public class ClassDetailVO {
 	private String class_target;
 	private String sloc_name;
 	private String bloc_name;
+	private int bcategory_num;
+	private int scategory_num;
 	private List<ClassInfoVO> coverList;
 	private List<CertificateVO> certList;
 	private List<CurriculumVO> curriList;
 	public ClassDetailVO() {}
-	
 	public ClassDetailVO(int class_num, int ml_num, int sloc_num, int pro_num, String tutor_nickname,
 			String tutor_phone, String class_address, int class_form, int class_max, int class_min, String class_title,
 			int class_price, int class_hour, int class_count, String tutor_about, String class_about,
-			String class_target, String sloc_name, String bloc_name, List<ClassInfoVO> coverList,
-			List<CertificateVO> certList, List<CurriculumVO> curriList) {
+			String class_target, String sloc_name, String bloc_name, int bcategory_num, int scategory_num,
+			List<ClassInfoVO> coverList, List<CertificateVO> certList, List<CurriculumVO> curriList) {
 		super();
 		this.class_num = class_num;
 		this.ml_num = ml_num;
@@ -57,11 +58,12 @@ public class ClassDetailVO {
 		this.class_target = class_target;
 		this.sloc_name = sloc_name;
 		this.bloc_name = bloc_name;
+		this.bcategory_num = bcategory_num;
+		this.scategory_num = scategory_num;
 		this.coverList = coverList;
 		this.certList = certList;
 		this.curriList = curriList;
 	}
-
 	public int getClass_num() {
 		return class_num;
 	}
@@ -176,6 +178,18 @@ public class ClassDetailVO {
 	public void setBloc_name(String bloc_name) {
 		this.bloc_name = bloc_name;
 	}
+	public int getBcategory_num() {
+		return bcategory_num;
+	}
+	public void setBcategory_num(int bcategory_num) {
+		this.bcategory_num = bcategory_num;
+	}
+	public int getScategory_num() {
+		return scategory_num;
+	}
+	public void setScategory_num(int scategory_num) {
+		this.scategory_num = scategory_num;
+	}
 	public List<ClassInfoVO> getCoverList() {
 		return coverList;
 	}
@@ -194,6 +208,5 @@ public class ClassDetailVO {
 	public void setCurriList(List<CurriculumVO> curriList) {
 		this.curriList = curriList;
 	}
-	
-	
+
 }

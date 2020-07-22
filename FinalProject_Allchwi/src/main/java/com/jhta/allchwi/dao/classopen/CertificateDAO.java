@@ -16,4 +16,8 @@ public class CertificateDAO {
 		return session.insert(NAMESPACE + ".insert",vo);
 	}
 
+	public int delete(int cert_num) {
+		return session.delete(NAMESPACE + ".delete", cert_num);
+	}
+
 }

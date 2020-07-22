@@ -132,5 +132,65 @@ public class ClassInfoService {
 	public int statusUpdate(HashMap<String, Object> map) {
 		return infoDao.statusUpdate(map);
 	}
+	
+	@Transactional
+	public boolean update(ClassInfoVO vo, BigLocationVO blocVo, SmallLocationVO slocVo, ProfileImgVO proVo,
+			ArrayList<CertificateVO> certList, 
+			ArrayList<ClassImgVO> coverList, 
+			ArrayList<CurriculumVO> curriList,
+			List<Integer> delcoverimg, 
+			List<Integer> deletecert) throws Exception{
+		
+				//큰 지역 (도/특별시) insert
+				bigDao.insert(blocVo);
+				
+				//작은지역의 큰지역 key 넣기
+				slocVo.setBloc_num(blocVo.getBloc_num());
+				
+				//작은 지역 (시/구) 
+				smallDao.insert(slocVo);
+				
+				if(proVo !=null) {
+					//튜터프로필 넣기
+					proImgDao.updateImg(proVo);
+				}
+				
+				// 수업정보에 작은 지역 넗기
+				vo.setSloc_num(slocVo.getSloc_num());
+				
+				// 수업정보 insert
+				int infoNum =  infoDao.update(vo);
 
+				// 수업 번호 가져 오기.
+				int class_num = vo.getClass_num();
+				
+				// 자격증 insert
+				for(CertificateVO cert:certList) {
+					cert.setClass_num(class_num);
+					certDao.insert(cert);
+				}
+				
+				for(ClassImgVO cover:coverList) {
+					cover.setClass_num(class_num);
+					coverDao.insert(cover);
+				}
+				
+				curriDao.delete(vo.getClass_num());
+				
+				for(CurriculumVO curri:curriList) {
+					curri.setClass_num(class_num);
+					curriDao.insert(curri); //update insert
+				}
+				
+				// 삭제한 커버이미지 
+				for(int cover_num : delcoverimg) {
+					coverDao.delete(cover_num);
+				}
+				
+				// 자격증 삭제
+				for(int cert_num : deletecert) {
+					certDao.delete(cert_num);
+				}
+				return true;
+	}
 }
