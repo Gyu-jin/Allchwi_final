@@ -22,5 +22,9 @@ public class AdminRemitService {
 		return dao.count();
 	}
 	
+	public int accept(int pay_num) {
+		return dao.accpet(pay_num);
+	}
+	
 	
 }

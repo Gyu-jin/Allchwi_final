@@ -17,7 +17,12 @@
 		select nvl(count(*),0) cnt from (select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
 		from payment p, remit r, class_info ci
 		where p.pay_num= r.pay_num and p.class_num= ci.class_num) aa
-		
+
 	</select>
+
+
+	<update id="accept" parameterType="int">
+		update remit set rem_status=1 where pay_num=#{pay_num}
+	</update>
 
 </mapper>

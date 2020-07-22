@@ -23,4 +23,8 @@ public class AdminRemitDAO {
 		return session.selectOne(NAMESPACE+".count");
 	}
 	
+	public int accpet(int pay_num) {
+		return session.update(NAMESPACE+".accept", pay_num);
+	}
+	
 }

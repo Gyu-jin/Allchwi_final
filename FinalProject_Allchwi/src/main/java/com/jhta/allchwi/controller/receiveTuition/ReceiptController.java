@@ -24,12 +24,12 @@ public class ReceiptController {
 	@Autowired
 	private ReceiptService service;
 	
-	@RequestMapping(value= {"/receipt/main","/receipt/insert"})
+	@RequestMapping(value= {"/receipt/main","/receipt/accept"})
 	public String adminMain(HttpServletRequest request, Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
 			@RequestParam(value="rem_pay",defaultValue = "1")int rem_pay, String rem_bank, String rem_account, 
 			@RequestParam(value="pay_num",defaultValue = "1")int pay_num) {
 		
-		if(request.getServletPath().equals("/receipt/insert")) {
+		if(request.getServletPath().equals("/receipt/accept")) {
 			InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
 			try {
 				service.insertUpdateRecipt(vo, pay_num);
