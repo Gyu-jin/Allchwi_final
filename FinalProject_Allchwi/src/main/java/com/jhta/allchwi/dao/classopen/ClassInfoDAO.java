@@ -27,7 +27,10 @@ public class ClassInfoDAO {
 	public int count(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
-	
+	// 해당 수업의 튜터 프로필 번호
+	public int getProNum(int class_num) {
+		return session.selectOne(NAMESPACE+".getProNum",class_num);
+	}
 	public ClassInfoVO getInfo(int class_num) {
 		return session.selectOne(NAMESPACE+".getInfo",class_num);
 	}

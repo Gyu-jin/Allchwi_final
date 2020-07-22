@@ -43,9 +43,11 @@ public class ClassApplyController {
 		int ml_num = (int)req.getSession().getAttribute("ml_num");
 		map.put("ml_num",ml_num);
 		List<ClassDateVO> classDate_list=classDate_service.select(class_num);
+		int pro_num=classInfo_service.getProNum(class_num);
 		int point=point_service.getTotal(map);
 		mv.addObject("classDate_list",classDate_list);
 		mv.addObject("point",point);
+		mv.addObject("pro_num",pro_num);
 		mv.addObject("class_num",class_num);
 		ClassInfoVO vo = classInfo_service.select(class_num);
 		req.setAttribute("class_form", vo.getClass_form());

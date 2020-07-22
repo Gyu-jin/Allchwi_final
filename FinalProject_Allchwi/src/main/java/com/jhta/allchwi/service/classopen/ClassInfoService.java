@@ -52,6 +52,9 @@ public class ClassInfoService {
 		return infoDao.count(map);
 	}
 	
+	public int getProNum(int class_num) {
+		return infoDao.getProNum(class_num);
+	}
 	@Transactional
 	public boolean insert(ClassInfoVO vo, 
 			BigLocationVO blocVo, 

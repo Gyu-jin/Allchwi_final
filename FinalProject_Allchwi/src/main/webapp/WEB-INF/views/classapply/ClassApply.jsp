@@ -225,13 +225,13 @@ textarea.len980 {
 	background-color: #7185bb;
 }
 .tutor_img{
-	background: #000; 
+	background: white; 
 	z-index: 0; 
 	width: 100%; 
 	height: 100%; 
 	background-size: cover; 
 	background-position: center; 
-	background-image: url('/allchwi/resources/img/모찌.jpg');
+
 }
 .class {
     color: #888;
@@ -331,12 +331,13 @@ img {
 								<div class="tutor_t">
 									<dl class="tutor_txt">
 										<dt>
-											<div class="tutor_img"></div>
+											<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
+											</div>
 										</dt>
-										<dd>
-											${vo.class_comment }
+										<dd>										
+											수업 신청을 환영합니다!
 											<br>
-											${vo.class_msg }
+											원하는 일정을 선택해주세요 :)
 										</dd>
 									</dl>
 								</div>
@@ -344,7 +345,7 @@ img {
 						</div>
 					</div>
 				</c:forEach>
-					<!--  수업 일정 선택 라디오 버튼  : class_info테이블의 일정 번호 받아와서 동적생성 할 예정.. -->
+					<!--  수업 일정 선택 라디오 버튼   -->
 					<div class="col-md-6">
 						<c:forEach var="date" items="${classDate_list}">
 						
@@ -358,7 +359,8 @@ img {
 											<img src="${cp}/resources/img/icon_up.png" class="up">
 										</c:when>
 										<c:otherwise>
-											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ${class_month }개월										
+										<input type="radio" aria-label="Radio button for following text input" name="date_num" value="${date.date_num }" checked>
+											<fmt:formatDate value="${date.class_date}" pattern="yyyy-MM-dd"/>&ensp;&ensp; ( ${date.class_month }개월	)									
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -405,7 +407,7 @@ img {
 								<div class="tutor_t">
 									<dl class="tutor_txt">
 										<dt>
-											<div class="tutor_img">
+											<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
 											</div>
 										</dt>
 										<dd>
@@ -473,7 +475,7 @@ img {
 									<div class="tutor_t">
 										<dl class="tutor_txt">
 											<dt>
-												<div class="tutor_img">
+												<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
 												</div>
 											</dt>
 											<dd>

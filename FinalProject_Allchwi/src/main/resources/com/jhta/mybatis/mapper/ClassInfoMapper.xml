@@ -221,6 +221,9 @@
 		update class_info set class_auth=1 where ml_num=#{ml_num} and class_num=#{class_num}
 	</update>
 
-
+	<!-- 튜터 프로필 사진 -->
+	<select id="getProNum" parameterType="int" resultType="int">
+		select pro_num from class_info where class_num=#{class_num}
+	</select>
 </mapper>
 
