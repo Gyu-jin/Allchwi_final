@@ -19,7 +19,7 @@ public class PaymentService {
 	public int finishUpdate(HashMap<String, Object> map)throws Exception {
 		return dao.finishUpdate(map);
 	}
-	public int getFinished(HashMap<String, Object> map) {
+	public PaymentVO getFinished(HashMap<String, Object> map) {
 		return dao.getFinished(map);
 	}
 }

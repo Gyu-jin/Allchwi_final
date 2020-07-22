@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,6 @@ import com.jhta.allchwi.vo.classopen.ClassDateVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
 
-
-
 @Controller
 public class ClassDetailController {
 	@Autowired
@@ -38,90 +37,96 @@ public class ClassDetailController {
 	@Autowired
 	private ClassReviewService crs;
 	@Autowired
-	private MemberInfoService mis;
-	@Autowired
 	private WishListService wls;
 	@Autowired
 	private PaymentService ps;
-	
+
 	@GetMapping("/classDetail/detail")
-	public ModelAndView detail(int class_num,HttpServletRequest req,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
-		ServletContext sc=req.getSession().getServletContext();
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		//member정보, wish_status
-		if(req.getSession().getAttribute("ml_num") != null ) {
-			int ml_num = (int)req.getSession().getAttribute("ml_num");
-			if(wls.getWish(ml_num) != null) {
-				sc.setAttribute("wstatus", true);
+	public ModelAndView detail(int class_num, HttpSession session,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		ModelAndView mv = new ModelAndView(".classDetail.detail");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("class_num", class_num);
+		if(session.getAttribute("ml_num")!=null) {
+			int ml_num = (int) session.getAttribute("ml_num");
+			// 로그인한 아이디의 wish상태
+			map.put("ml_num", ml_num);
+			if (wls.getWish(map) != null) {
+				mv.addObject("wstatus", true);
 			}
-			if(mis.selectInfo(ml_num) != null) {
-				ProfileVO pfv = mis.selectInfo(ml_num);
-				sc.setAttribute("mem", pfv);
-			}else {
-				sc.setAttribute("mem", ml_num);
+			// 수업완료여부(리뷰작성권한)
+			if(ps.getFinished(map) != null) {
+				int finished = ps.getFinished(map).getClass_finish();
+				mv.addObject("finished", finished);
 			}
-			map.put("ml_num",ml_num);
-			int finished=ps.getFinished(map);
-			sc.setAttribute("finished", finished);
+			mv.addObject("ml_num", ml_num);
 		}
-		ModelAndView mv=new ModelAndView(".classDetail.detail");
 		
-		//getdetail
-		map.put("class_num", class_num);
-		ClassDetailVO cdv=cds.getDetail(map);
-		//날짜시간
+	
+		// getdetail
+		ClassDetailVO cdv = cds.getDetail(map);
+		// 날짜시간
 		List<ClassDateVO> dlist = dates.list(class_num);
-		
-		//리뷰리스트,페이징
+
+		// 리뷰리스트,페이징
 		map.put("class_num", class_num);
-		int totalRowCount=crs.rcount(map);
-		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
-		int startRow=pu.getStartRow()-1;
-		map.put("startRow", startRow);	
-		List<ClassReviewVO> rlist=crs.reviewList(map);
+		int totalRowCount = crs.rcount(map);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 4, 5);
+		int startRow = pu.getStartRow() - 1;
+		map.put("startRow", startRow);
+		List<ClassReviewVO> rlist = crs.reviewList(map);
 
 		mv.addObject("cdv", cdv);
 		mv.addObject("dlist", dlist);
 		mv.addObject("rlist", rlist);
-		mv.addObject("rpu",pu);
-	    mv.addObject("class_num", class_num);
+		mv.addObject("rpu", pu);
+		mv.addObject("class_num", class_num);
+		
 		return mv;
 	}
 
 	// 인표 상세페이지 이동 detail2
 	@GetMapping("/classDetail/detail2")
-	public ModelAndView detail2(int class_num,HttpServletRequest req,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
-		ServletContext sc=req.getSession().getServletContext();
-		if(req.getSession().getAttribute("ml_num") != null ) {
-			int ml_num = (int)req.getSession().getAttribute("ml_num");
-			if(wls.getWish(ml_num) != null) {
-				sc.setAttribute("wstatus", true);
-			}
-			if(mis.selectInfo(ml_num) != null) {
-				ProfileVO pfv = mis.selectInfo(ml_num);
-				sc.setAttribute("mem", pfv);
-			}else {
-				sc.setAttribute("mem", ml_num);
-			}
-		}
-		ModelAndView mv=new ModelAndView(".classDetail.detail");
-		HashMap<String, Object> map2=new HashMap<String, Object>();
-		map2.put("class_num", class_num);
-		ClassDetailVO cdv=cds.getDetail(map2);
-		System.out.println(cdv.getBloc_name());
-		//리뷰페이징
-		HashMap<String, Object> map=new HashMap<String, Object>();
+	public ModelAndView detail2(int class_num,HttpSession session,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		ModelAndView mv = new ModelAndView(".classDetail.detail");
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("class_num", class_num);
-		int totalRowCount=crs.rcount(map);
-		PageUtil pu=new PageUtil(pageNum, totalRowCount, 4, 5);
-		int startRow=pu.getStartRow()-1;
-		map.put("startRow", startRow);	
-		List<ClassReviewVO> rlist=crs.reviewList(map);
+		if(session.getAttribute("ml_num")!=null) {
+			int ml_num = (int) session.getAttribute("ml_num");
+			// 로그인한 아이디의 wish상태
+			map.put("ml_num", ml_num);
+			if (wls.getWish(map) != null) {
+				mv.addObject("wstatus", true);
+			}
+			// 수업완료여부(리뷰작성권한)
+			if(ps.getFinished(map) != null) {
+				int finished = ps.getFinished(map).getClass_finish();
+				mv.addObject("finished", finished);
+			}
+			mv.addObject("ml_num", ml_num);
+		}
+		
+	
+		// getdetail
+		ClassDetailVO cdv = cds.getDetail(map);
+		// 날짜시간
+		List<ClassDateVO> dlist = dates.list(class_num);
 
-		mv.addObject("rlist", rlist);
-		mv.addObject("rpu",pu);
+		// 리뷰리스트,페이징
+		map.put("class_num", class_num);
+		int totalRowCount = crs.rcount(map);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 4, 5);
+		int startRow = pu.getStartRow() - 1;
+		map.put("startRow", startRow);
+		List<ClassReviewVO> rlist = crs.reviewList(map);
+
 		mv.addObject("cdv", cdv);
-	    mv.addObject("class_num", class_num);
+		mv.addObject("dlist", dlist);
+		mv.addObject("rlist", rlist);
+		mv.addObject("rpu", pu);
+		mv.addObject("class_num", class_num);
+		
 		return mv;
 	}
 

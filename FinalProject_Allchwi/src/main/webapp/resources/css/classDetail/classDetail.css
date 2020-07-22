@@ -191,7 +191,9 @@
 	vertical-align: middle;
 	margin-top: 85px;
 }
-
+#btn_write_review{
+	cursor: pointer;
+}
 .sec01 .review_count01 {
 	margin-top: 30px;
 	border-bottom: 1px solid #e5e5e5;

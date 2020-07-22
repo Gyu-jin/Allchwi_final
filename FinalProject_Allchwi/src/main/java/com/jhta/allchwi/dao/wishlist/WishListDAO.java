@@ -20,8 +20,8 @@ public class WishListDAO {
 	public int deleteWish(WishListVO vo) {
 		return session.delete(NAMESPACE+".deleteWish", vo);
 	}
-	public WishListVO getWish(int ml_num) {
-		return session.selectOne(NAMESPACE+".getWish", ml_num);
+	public WishListVO getWish(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getWish", map);
 	}
 	public List<WishListJoinVO> getWishList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".myWishList", map);

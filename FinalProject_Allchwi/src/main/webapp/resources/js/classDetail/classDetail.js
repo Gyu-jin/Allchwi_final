@@ -176,7 +176,7 @@ function sendReply(qna_ref) {
 //qna댓글목록불러오기
 function replyList(qna_ref) {
 	 var class_num = $('#class_num').val();
-	 $.getJSON("/allchwi/classDetail/commlist" + "?class_num=" + class_num + "&qna_ref=" + qna_ref
+	 $.getJSON("/allchwi/classDetail/commlist?class_num=" + class_num + "&qna_ref=" + qna_ref
 			 , function(data){
 	  var str = "";
 	  var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
@@ -238,3 +238,25 @@ $(document).on('click', '#btn_after_wish', function () {
 		}
 	});
 });
+
+//리뷰작성버튼
+//$('#btn_write_review').click(function () {	
+$(document).on('click', '#btn_write_review', function () {
+
+	var class_num = $('#class_num').val();
+	var ml_num = $('#ml_num').val();
+	var finished = $('#finished').val();
+	alert(finished);
+	if (!ml_num) {
+		alert('로그인이 필요합니다');
+		location.href="/allchwi/login/main";
+	}
+	else {
+		if (finished>0) {
+			location.href="/allchwi/mypage/myClassList";
+		} else {				
+			alert('수업을 수강한 아이디만 리뷰를 작성할 수 있습니다. 아이디를 확인해주세요!');
+		}
+	}
+});		
+

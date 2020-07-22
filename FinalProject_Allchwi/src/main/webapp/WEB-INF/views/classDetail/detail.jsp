@@ -5,8 +5,9 @@
 <link rel="stylesheet"
 	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
-<input type="hidden" id="ml_num" value="${mem.ml_num }">
+<input type="hidden" id="ml_num" value="${ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
+<input type="hidden" id="finished" value="${finished }">
 <div class="container-fluid" id="container_detail">
 	<div class="row">
 		<div class="col-md-12">
@@ -96,7 +97,7 @@
 									</a>
 									<!-- 찜하기 -->
 									<c:choose>
-										<c:when test="${empty mem}">
+										<c:when test="${empty ml_num}">
 											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
 												id="btn_wishlist" class="btn_wishlist"> <img
 												id="wishsrc"
@@ -183,21 +184,8 @@
 						<div class="class_detail detail_sec_bor" id="review">
 							<div class="sec01">
 								<h1>리뷰(${rpu.totalRowCount })</h1>
-								
-								<c:choose>
-									<c:when test="${empty mem }">
-										<div class="btn_write">
-											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">리뷰쓰기</a>
-										</div>
-									</c:when>
-									<c:otherwise>		
-										<c:if test="${finished ne 0}">
-										</c:if>
-										<div class="btn_write">
-											<a href="${cp}/mypage/myClassList" class="btn_write_review">리뷰쓰기</a>
-										</div>
-									</c:otherwise>
-								</c:choose>
+								<div class="btn_write" id="btn_write_review">리뷰쓰기</div>
+
 								<!-- 별점평균 -->
 								<div class="review_box">
 									<c:forEach var="index" begin="1" end="5">
@@ -284,7 +272,7 @@
 								<textarea type="text" id="qna_content"
 									class="md-textarea form-control" rows="4"></textarea>
 								<c:choose>
-									<c:when test="${empty mem}">
+									<c:when test="${empty ml_num}">
 										<div class="btn_write">
 											<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main">
 												문의하기</a>
@@ -318,25 +306,30 @@
 							</c:if>
 						</div>
 						<c:forEach var="dlist" items="${dlist }" varStatus="index">
-							<div class="accordion" id="accordionExample">
-								<div class="card">
-									<div class="card-header">
-										<a class="collapsed card-link" data-toggle="collapse"
-											data-parent="#accordionExample"
-											href="#card-element-${index.count}"> <fmt:formatDate
-												value="${dlist.class_date }" pattern="yyyy-MM-dd" />&nbsp&nbsp
-											<c:if test="${cdv.class_form==0 }">
-												${dlist.class_startTime}~ ${dlist.class_endTime }
-											</c:if> <c:if test="${cdv.class_form==1 }">
-												${dlist.class_month}개월 과정
-											</c:if>
-										</a>
-									</div>
-									<div id="card-element-${index.count}" class="collapse">
-										<div class="card-body">장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name }</div>
+							<c:set var="today" value="<%=new java.util.Date()%>" />
+							<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:formatDate value="${dlist.class_date }" pattern="yyyy-MM-dd"
+								var="class_date" />
+							<c:if test="${today <= class_date }">
+								<div class="accordion" id="accordionExample">
+									<div class="card">
+										<div class="card-header">
+											<a class="collapsed card-link" data-toggle="collapse"
+												data-parent="#accordionExample"
+												href="#card-element-${index.count}"> ${class_date }&nbsp&nbsp
+												<c:if test="${cdv.class_form==0 }">
+													${dlist.class_startTime}~ ${dlist.class_endTime }
+												</c:if> <c:if test="${cdv.class_form==1 }">
+													${dlist.class_month}개월 과정
+												</c:if>
+											</a>
+										</div>
+										<div id="card-element-${index.count}" class="collapse">
+											<div class="card-body">장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name}</div>
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:if>
 						</c:forEach>
 						<c:forEach var="dlist" items="${dlist }" varStatus="index">
 							<c:if test="${index.last }">
@@ -354,7 +347,7 @@
 						</c:forEach>
 
 						<c:choose>
-							<c:when test="${empty mem}">
+							<c:when test="${empty ml_num}">
 								<div class="button_pay">
 									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
 										class="btn_pay"> 수업 신청하기</a>
@@ -381,6 +374,4 @@
 		$(this).addClass("on").prevAll("a").addClass("on");
 		return false;
 	});
-	
-	
 </script>

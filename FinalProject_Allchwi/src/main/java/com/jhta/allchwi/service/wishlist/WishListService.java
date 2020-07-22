@@ -18,8 +18,8 @@ public class WishListService {
 	public int deleteWish(WishListVO vo) {
 		return dao.deleteWish(vo);
 	}
-	public WishListVO getWish(int ml_num) {
-		return dao.getWish(ml_num);
+	public WishListVO getWish(HashMap<String, Object> map) {
+		return dao.getWish(map);
 	}
 	public List<WishListJoinVO> getWishList(HashMap<String, Object> map) {
 		return dao.getWishList(map);

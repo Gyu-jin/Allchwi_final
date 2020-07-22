@@ -20,7 +20,7 @@ public class PaymentDAO {
 	public int finishUpdate(HashMap<String, Object> map) {
 		return session.update(NAMESPACE + ".finishUpdate", map);
 	}
-	public int getFinished(HashMap<String, Object> map) {
+	public PaymentVO getFinished(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".getFinished", map);
 	}
 }

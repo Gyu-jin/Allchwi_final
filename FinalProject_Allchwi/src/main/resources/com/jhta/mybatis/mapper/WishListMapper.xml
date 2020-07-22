@@ -9,8 +9,8 @@
 	<delete id="deleteWish">
 		delete from wishlist where class_num=#{class_num} and ml_num=#{ml_num}
 	</delete>
-	<select id="getWish" parameterType="int" resultType="wish">
-		select * from wishlist where ml_num=#{ml_num}
+	<select id="getWish" parameterType="hashmap" resultType="wish">
+		select * from wishlist where ml_num=#{ml_num} and class_num=#{class_num}
 	</select>
 	<select id="myWishList" parameterType="hashmap" resultType="wishList">
 		select i.class_num,i.class_title,i.class_form,i.class_price,s.sloc_name,c.cover_num,IFNULL(

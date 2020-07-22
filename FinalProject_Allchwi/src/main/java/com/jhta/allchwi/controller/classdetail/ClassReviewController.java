@@ -27,5 +27,4 @@ public class ClassReviewController {
 		return "success";
 	}
 	
-	
 }
