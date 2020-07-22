@@ -33,37 +33,15 @@
 			<b>or</b>
 		</div>
 		<p>다른 방법으로 로그인</p>
-		<!-- 카카오 로그인 아이콘 -->
+		<!--a 카카오 로그인 아이콘 /  redirect 경로 수정 -->
 		<div class="social-icon">
 			<c:if test="${userId eq null}">
-				<a
-					href=" https://kauth.kakao.com/oauth/authorize?client_id=4f883a7141cac9d993029eba73513c89&redirect_uri=http://localhost:8091/kakaologin/login&response_type=code">
+				<a href=" https://kauth.kakao.com/oauth/authorize?client_id=4f883a7141cac9d993029eba73513c89&redirect_uri=http://localhost:8091/allchwi/login/kakaologin&response_type=code">
 					<img src="${cp}/resources/img/kakao_login_medium_narrow.png">
 				</a>
 			</c:if>
-		</div>
-
+		</div>    
 	</div>
-	<h1>카카오 로그인 결과</h1>
-	<!-- 
-		카카오 서버 주소 : https://kauth.kakao.com
-		파라미터
-		client_id -> rest api
-		redirect_uri -> http://localhost:8091/kakaologin/login
-		주소/ 프로젝트명 / 매핑경로
-		response_type=code -> 코드형식으로 받아오겠다.
-	 -->
-	<c:if test="${userId ne null}">
-		<h1>로그인 성공입니다</h1>
-		<p>${userInfo.get("email")}</p>
-		<p>${userInfo.get("nickname")}</p>
-		<img src="${userInfo.get('img')}">
-		<input type="button" value="로그아웃"
-			onclick="location.href='${pageContext.request.contextPath}/logout'">
-		<!-- 
-        <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-         -->
-	</c:if>
 </div>
 <script type="text/javascript">
 	//로그인 유효성 체크 

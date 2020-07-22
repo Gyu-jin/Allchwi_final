@@ -283,4 +283,22 @@ public class ClassOpenController {
 		
 		return "success";
 	}
+	
+	@PostMapping("/class/classDelete")
+	@ResponseBody
+	public String classDelete(HttpSession session, int class_num) {
+		int ml_num = (int)session.getAttribute("ml_num");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("class_num",class_num);
+		map.put("ml_num",ml_num);
+		
+		try {
+			classinfo_service.classDelete(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		return "success";
+	}
+	
 }

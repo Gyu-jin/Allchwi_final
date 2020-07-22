@@ -27,7 +27,7 @@
 			SELECT  class_num , cover_num ,	ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
 			FROM class_img 
 		) c
-		where wish.class_num=i.class_num and s.sloc_num=i.sloc_num and c.class_num=wish.class_num and cnt = 1;
+		where wish.class_num=i.class_num and s.sloc_num=i.sloc_num and c.class_num=wish.class_num and cnt = 1 and i.class_status!=2
 	</select>
 	<select id="count" parameterType="int" resultType="int">
 	select count(*) from 
@@ -47,8 +47,8 @@
 		SELECT  class_num , cover_num ,	ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
 		FROM class_img 
 	) c
-	where wish.class_num=i.class_num and s.sloc_num=i.sloc_num and c.class_num=wish.class_num and cnt = 1
-	) cc;
+	where wish.class_num=i.class_num and s.sloc_num=i.sloc_num and c.class_num=wish.class_num and cnt = 1 and i.class_status!=2
+	) cc
 	</select>
 	
 </mapper>

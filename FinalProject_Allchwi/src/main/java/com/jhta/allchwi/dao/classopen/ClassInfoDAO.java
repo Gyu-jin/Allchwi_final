@@ -62,5 +62,8 @@ public class ClassInfoDAO {
 	public int salesUpdate(HashMap<String, Object> map) {
 		return session.update(NAMESPACE +".salesUpdate",map);
 	}
+	public int classDelete(HashMap<String, Object> map) {
+		return session.update(NAMESPACE +".classDelete",map);
+	}
 		
 }

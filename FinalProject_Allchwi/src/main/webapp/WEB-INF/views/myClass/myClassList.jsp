@@ -31,7 +31,8 @@
 						</c:otherwise>
 						</c:choose>
 						</div>
-						<h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
+						<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${vo.class_num }'" 
+						style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${vo.class_title }</h3>
 						<div class="stars-box">
 							<font class="class-type">
 							<c:choose>

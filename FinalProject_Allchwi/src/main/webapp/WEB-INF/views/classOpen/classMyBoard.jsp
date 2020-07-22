@@ -56,6 +56,27 @@
 		}
 	}
 	
+	function delClassInfo(){
+		if (confirm("정말 수업을 삭제하시 겠습니까??/n아직 수업을 완료하지 않은 회원이 있으시면 취소하지 마세요.") == true){    
+			$.ajax({
+			    type: "post",
+			    dataType: "text",
+			    url: "${cp}/class/classDelete",
+			    data: {class_num: '${list.class_num}'},
+			    success: function(data) {
+			    	if(data == 'success'){
+			    		alert('정상적으로 수업이 삭제되었습니다.');
+			    		location.href = "${cp}/class/classBoard";
+			    	}else{				    		
+			    		alert('다시 변경해주세요!');
+			    	}
+			    }
+			});
+
+		}else{   //취소
+		    return;
+		}
+	}
 </script>
 <div class="container">
 	<div class="title-box">
@@ -74,9 +95,18 @@
 				<div class="image"
 					style="background-image: url(${cp}/class/getimg?cover_num=${list.cover_num });"></div>
 				<div class="info-box">
-					<img src="https://front-img.taling.me/Content/Images/icon_img_area.png" class="more-text cursor">
+					<div class="dropdown more-text">
+			            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">
+						<svg class="cursor" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		 					 <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+						</svg>
+			            <span class="caret"></span></button>
+			            <ul class="dropdown-menu" role="menu">
+			                <li style="text-align: center;"><a href="#" onclick="delClassInfo()"><font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
+			            </ul>
+			        </div>
 					<div>
-						<h3 onclick="location.href='/Talent/Detail/26923'" style="cursor: pointer">${list.class_title }</h3>
+						<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${list.class_num }'" style="cursor: pointer">${list.class_title }</h3>
 					</div>
 					<div>
 						<span class="date">업데이트 : <fmt:formatDate value="${list.class_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>

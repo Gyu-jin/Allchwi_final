@@ -197,4 +197,8 @@ public class ClassInfoService {
 	public int salesUpdate(HashMap<String, Object> map) throws Exception {
 		return infoDao.salesUpdate(map);
 	}
+
+	public int classDelete(HashMap<String, Object> map) throws Exception{
+		return infoDao.classDelete(map);
+	}
 }
