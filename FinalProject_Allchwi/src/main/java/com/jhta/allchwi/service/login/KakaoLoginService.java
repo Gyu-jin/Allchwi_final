@@ -117,7 +117,7 @@ public class KakaoLoginService {
 	}
 	//a 카카오 계정 및 서비스 로그아웃
 	public void kakaoLogout(String access_Token) {
-		String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=4f883a7141cac9d993029eba73513c89&logout_redirect_uri=http://localhost:8091/allchwi/login/logout&state=?";
+		String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=4f883a7141cac9d993029eba73513c89&logout_redirect_uri=http://localhost:8091/allchwi/login/logout1&state=?";
 		try {
 	        URL url = new URL(reqURL);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -125,7 +125,17 @@ public class KakaoLoginService {
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("responseCode : " + responseCode);
-	    } catch (IOException e) {
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+		} catch (IOException e) {
 	        e.printStackTrace();
 	    }
 	}
