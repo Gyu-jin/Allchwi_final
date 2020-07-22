@@ -36,7 +36,7 @@
 		<!--a 카카오 로그인 아이콘 /  redirect 경로 수정 -->
 		<div class="social-icon">
 			<c:if test="${userId eq null}">
-				<a href=" https://kauth.kakao.com/oauth/authorize?client_id=4f883a7141cac9d993029eba73513c89&redirect_uri=http://localhost:8091/allchwi/login/kakaologin&response_type=code">
+				<a href="${cp}/login/login">
 					<img src="${cp}/resources/img/kakao_login_medium_narrow.png">
 				</a>
 			</c:if>

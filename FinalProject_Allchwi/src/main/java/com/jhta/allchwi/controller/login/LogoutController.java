@@ -14,21 +14,32 @@ import com.jhta.allchwi.service.login.MemberLoginService;
 public class LogoutController {
 	@Autowired
 	private MemberLoginService mls;
-	
-	@Autowired
-	private KakaoLoginService kls;
-	
+	// else문 아래 dead코드 없애기 위해 선언
+	@SuppressWarnings("unused")
+	// 로그인후 드롭바에서 로그아웃 눌렀을경우 호출
 	@RequestMapping(value = "/login/logout")
 	public String logout(HttpSession session) {
-		//a 카카오 회원일 경우
+		//a 카카오 회원일 경우 세션에 담긴 access token 확인 후
 		String access_Token = (String)session.getAttribute("access_Token");
+		//a 토큰 값 존재할 경우 아래 경로로 리다이렉트 이동하여 카카오서버에서 계정 나가기 후 로그아웃 리다이렉트 uri로 이동
 		if(access_Token != null || access_Token != "") {
-			//a 서버 및 올취 계정 로그아웃
-			System.out.println("카카오 회원이니....");
-			kls.kakaoLogout(access_Token);
-			session.removeAttribute("access_Token");
+			String client_id = "4f883a7141cac9d993029eba73513c89";
+			String logout_redirect_uri = "http://localhost:8091/allchwi/login/kakaologout";
+			String path = "https://kauth.kakao.com/oauth/logout?client_id="+ client_id + "&logout_redirect_uri=" + logout_redirect_uri + "&state=?";
+			return "redirect:" + path;
+		} else {
+			//카카오 회원이 아닌경우 
+			mls.logout(session);
+			return "redirect:/";
 		}
-		mls.logout(session);
-		return "redirect:/";
+	}
+	//카카오 서버에서 넘어오는 로그아웃 리다이렉트 uri를 받아서 아래 세션값들을 무효화하여 로그아웃
+	@RequestMapping(value="/login/kakaologout")
+	public String kakaologout(HttpSession session) {
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("ml_num");
+	    session.removeAttribute("tutor_auth");
+	    session.invalidate();
+	    return "redirect:/";
 	}
 }

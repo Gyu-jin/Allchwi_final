@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,15 @@ public class KakaoLoginController {
 	
 	@Autowired
 	private MemberLoginService mls;
+	
+	@RequestMapping(value = "/login/login")
+	//카카오 로그인페이지로 이동
+	public String goLoginPage() {
+		String client_id = "4f883a7141cac9d993029eba73513c89";
+		String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
+		String path = "https://kauth.kakao.com/oauth/authorize?client_id="+ client_id + "&redirect_uri=" + redirect_uri + "&response_type=code";
+		return "redirect:" + path;
+	}
 	
 	@RequestMapping(value = "/login/kakaologin")
 	public String kakaologin(@RequestParam("code") String code, HttpSession session, Model model) {

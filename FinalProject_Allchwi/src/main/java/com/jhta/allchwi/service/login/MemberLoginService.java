@@ -113,6 +113,8 @@ public class MemberLoginService{
 	}
 	//a 로그아웃
 	public void logout(HttpSession session) {
+		session.removeAttribute("ml_num");
+	    session.removeAttribute("tutor_auth");
 		//a 세션무효화 -> 세션에 담긴 값들을 모두 초기화
 		session.invalidate();
 	}
