@@ -43,9 +43,10 @@
 		<select id="myClassList" parameterType="hashmap" resultType="myclassList">
 		select aa.apply_regdate,aa.apply_auth,aa.date_num,aa.class_fee,aa.pay_regdate,aa.class_date,aa.class_num,
 		bb.class_title,bb.scategory_name,bb.cover_num,aa.class_startTime,bb.class_form,aa.class_finish,aa.apply_num,
+		IFNULL(
 		(
-			select IFNULL(round(sum(curr_rating +ready_rating+kind_rating+time_rating)/4,1),0) class_rating 
-			from class_review where class_num=aa.class_num
+			select round((avg(curr_rating) + avg(ready_rating) + avg(kind_rating) + avg(time_rating))/4,1) class_rating
+			from class_review group by class_num having class_num=aa.class_num),0
 		) class_rating from
 		(
 			select a.apply_regdate,a.apply_num,a.apply_auth,a.date_num,p.class_fee,p.pay_regdate,d.class_date,d.class_num,d.class_startTime,p.class_finish  
@@ -68,9 +69,10 @@
 	(
 	select aa.apply_regdate,aa.apply_auth,aa.date_num,aa.class_fee,aa.pay_regdate,aa.class_date,aa.class_num,
 		bb.class_title,bb.scategory_name,bb.cover_num,aa.class_startTime,bb.class_form,aa.class_finish,aa.apply_num,
+		IFNULL(
 		(
-			select IFNULL(round(sum(curr_rating +ready_rating+kind_rating+time_rating)/4,1),0) class_rating 
-			from class_review where class_num=aa.class_num
+			select round((avg(curr_rating) + avg(ready_rating) + avg(kind_rating) + avg(time_rating))/4,1) class_rating
+			from class_review group by class_num having class_num=aa.class_num),0
 		) class_rating from
 		(
 			select a.apply_regdate,a.apply_num,a.apply_auth,a.date_num,p.class_fee,p.pay_regdate,d.class_date,d.class_num,d.class_startTime,p.class_finish  
@@ -219,6 +221,10 @@
 	
 	<update id="statusUpdate" parameterType="hashmap">
 		update class_info set class_auth=1 where ml_num=#{ml_num} and class_num=#{class_num}
+	</update>
+	
+	<update id="salesUpdate" parameterType="hashmap">
+		update class_info set class_status=#{class_status} where ml_num=#{ml_num} and class_num=#{class_num}
 	</update>
 
 	<!-- 튜터 프로필 사진 -->

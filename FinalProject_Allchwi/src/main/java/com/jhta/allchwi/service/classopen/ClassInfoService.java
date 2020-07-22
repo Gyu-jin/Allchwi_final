@@ -193,4 +193,8 @@ public class ClassInfoService {
 				}
 				return true;
 	}
+
+	public int salesUpdate(HashMap<String, Object> map) throws Exception {
+		return infoDao.salesUpdate(map);
+	}
 }

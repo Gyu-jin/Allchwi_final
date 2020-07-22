@@ -68,5 +68,30 @@ public class ClassMyBoardController {
 		
 		return "success";
 	}
+	@PostMapping("/class/classSalesUpdate")
+	@ResponseBody
+	public String fnSalessUpdate(HttpSession session, String class_num, String class_status) {
+		
+		int ml_num = (int)session.getAttribute("ml_num");
+		
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ml_num",ml_num);
+		map.put("class_num",Integer.parseInt(class_num));
+		map.put("class_status",Integer.parseInt(class_status));
+	
+		try {
+			service.salesUpdate(map);			
+		}catch (Exception e) {
+			e.getStackTrace();
+			return "fail";
+		}
+		
+
+		return "success";
+	}
+	
+	
+	
 	
 }

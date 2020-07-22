@@ -33,6 +33,27 @@
 	
 	function salesStatus(val){
 		
+		if (confirm("정말 판매상태를 변경하시겠습니까?") == true){    
+			$.ajax({
+			    type: "post",
+			    dataType: "text",
+			    url: "${cp}/class/classSalesUpdate",
+			    data: {class_num: '${list.class_num}',class_status:val},
+			    success: function(data) {
+			    	if(data == 'success'){
+			    		alert('판매상태가 변경되었습니다.');
+			    		location.href = "${cp}/class/classBoard?class_num=${list.class_num}";
+			    	}else{				    		
+			    		alert('다시 변경해주세요!');
+			    	}
+			    }
+			});
+
+		}else{   //취소
+
+		    return;
+
+		}
 	}
 	
 </script>
@@ -70,46 +91,26 @@
 								<div class="button_gray" style="float:right;">심사완료</div>
 							</c:when>																																														
 						</c:choose>
-						<a href="${cp}/class/classDate?class_num=${list.class_num}">
-						<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
+						<c:if test="${list.class_status == '0' }">
+							<a href="${cp}/class/classDate?class_num=${list.class_num}">
+							<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
+						</c:if>
 					</div>
 					<div style="margin-top: 56px">
 						<div class="button-box">
-							<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
-							<div class="button_gray cursor">수업수정</div></a>
-							<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(0)">selling</div></a> 
-							<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(1)">Soldout</div>
+							<c:if test="${list.class_auth!='1'}">
+								<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
+								<div class="button_gray cursor">수업수정</div></a>
+							</c:if>
+							<c:if test="${list.class_status== '0' }">
+								<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(1)">Selling</div></a> 
+							</c:if>
+							<c:if test="${list.class_status== '1' }">
+								<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(0)">Soldout</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="static-container">
-			<h3>알림판</h3>
-			<div class="box box_blue">
-				<img src="https://front-img.taling.me/Content/Images/icon_img_area.png" class="more-text" onclick="location.href='/My/TutorGuidea';">
-				<h3>수업성과</h3>
-				<table>
-					<tbody>
-						<tr>
-							<td>지난 30일간 조회수</td>
-							<td class="text_right">2</td>
-						</tr>
-						<tr>
-							<td>지난 30일간 신청수</td>
-							<td class="text_right">0</td>
-						</tr>
-						<tr>
-							<td>결제율</td>
-							<td class="text_right">0</td>
-						</tr>
-	
-						<tr>
-							<td>전체 후기 수</td>
-							<td class="text_right">0</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 		</div>
 		</c:when>

@@ -55,7 +55,7 @@
 		    	if(data.class_form == 0){
 		    		rd(0,0);		    		
 		    	}else{
-		    		
+		    		rd(0,1);
 		    	}
 		    	
 		    	if(data.class_min >=1 && data.class_max > 1){

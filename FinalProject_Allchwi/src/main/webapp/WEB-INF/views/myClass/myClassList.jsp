@@ -9,7 +9,7 @@
 		<div class="title-box">
 		    <h1>나의 탈잉</h1>
 		    <ul>
-		        <li id="offline" class="cursor"><a href="${cp}/mypage/myClassList">오프라인</a></li>
+		        <li id="offline" class="cursor on"><a href="${cp}/mypage/myClassList">오프라인</a></li>
 		        <li id="online" class="cursor"><a href="${cp}/mypage/myClassList?class_form=1">온라인</a></li>
 		    </ul>
 		</div>		
@@ -44,11 +44,11 @@
 							</c:choose>
 							</font>&nbsp;|&nbsp; &nbsp;
 							<font class="class-stars">
-									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-									<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">								 
+								<c:set var="rating" value="${vo.class_rating }" />
+								<c:forEach var="num" begin="1" end="5" step="1">
+									<c:if test="${i }"></c:if>
+									<img src="${cp }/resources/img/star.png" width="15px">
+								</c:forEach>
 							</font>
 							<span>	(${vo.class_rating })</span>						
 						</div>
@@ -65,7 +65,7 @@
 							</div>
 						</c:if>
 						<c:if test="${vo.class_finish=='1'}">
-							<div class="review-fold cursor on" onclick="review()">리뷰작성
+							<div class="review-fold cursor on" onclick="showModal(${vo.class_num})">리뷰작성
 							</div>
 						</c:if>
 						<div class="price"><font>￦</font><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.class_fee }" /></div>
@@ -112,8 +112,18 @@
 			</ul>
 			</div>
 		</div>
+		<div class="container">
+			<div class="modal-container"></div>
+		</div>
 </div>
 <script type="text/javascript"> 
+		//회원 신청서 정보 모달 띄우기
+		function showModal(applyNum){
+			var url = "${cp}/receipt/modal?class_num="+applyNum;
+		    $('.modal-container').load(url,function(result){
+				$('#myModal').modal();
+			});
+		}
 		var pageNum = 1;
 		
 		
@@ -195,9 +205,7 @@
 				});
 
 			}else{   //취소
-
 			    return;
-
 			}
 		}
 		
@@ -286,22 +294,22 @@
 		}
 
 		//별 시작
-$('.stars i').click(function () {
-	var val = Number($(this).data('value'));
-
-	var parent = $(this).parent();
-	var children = parent.children('i');
-	var childrenInput = parent.children('input');
+	$('.stars i').click(function () {
+		var val = Number($(this).data('value'));
 	
-	for (var i = 0; i < 5; i++) {
-		$(children[i]).removeClass('active');
-
-		if (i < val) {
-			$(children[i]).addClass('active');
+		var parent = $(this).parent();
+		var children = parent.children('i');
+		var childrenInput = parent.children('input');
+		
+		for (var i = 0; i < 5; i++) {
+			$(children[i]).removeClass('active');
+	
+			if (i < val) {
+				$(children[i]).addClass('active');
+			}
 		}
-	}
-
-	$(parent.children('input')).val(val);
-	$(parent.children('font')).text(val+'.0');
+	
+		$(parent.children('input')).val(val);
+		$(parent.children('font')).text(val+'.0');
 });
 </script>

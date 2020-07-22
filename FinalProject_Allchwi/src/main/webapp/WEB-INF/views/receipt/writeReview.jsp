@@ -29,7 +29,7 @@
 }
 </style>
 <!-- 리뷰작성 모달 -->
-<div class="modal fade" id="modalContactForm" tabindex="-1"
+<div id="myModal" class="modal fade" id="modalContactForm" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -82,8 +82,8 @@
 <script>
 $(document).on('click', '#btn_write_review', function () {
 	var review_content = $('#review_content').val();
-	var class_num = $('#class_num').val();
-	var ml_num = $('#ml_num').val();
+	var class_num = '${class_num}';
+	var ml_num = '${ml_num}';
 	var curr_rating = $("#curr_rating a.on").length;
 	var ready_rating = $("#ready_rating a.on").length;
 	var kind_rating = $("#kind_rating a.on").length;
@@ -106,12 +106,19 @@ $(document).on('click', '#btn_write_review', function () {
 			}, function (data,res) {
 				if (res=='success') {
 					alert('리뷰등록 성공');
+					$('#myModal').modal('hide');
 				} else {				
 					alert('등록실패');
 				}
 			});
 		}
 	}
+	
 });
+	$(".star_rating a").click(function() {
+		$(this).parent().children("a").removeClass("on");
+		$(this).addClass("on").prevAll("a").addClass("on");
+		return false;
+	});
 </script>
 <!-- 리뷰작성 모달 -->

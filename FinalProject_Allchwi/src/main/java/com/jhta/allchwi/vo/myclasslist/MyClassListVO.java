@@ -11,7 +11,7 @@ public class MyClassListVO {
 	private int cover_num;
 	private int class_fee;
 	private int apply_auth;
-	private int class_rating;
+	private double class_rating;
 	private Timestamp apply_regdate;
 	private Timestamp pay_regdate;
 	private String class_startTime;
@@ -22,7 +22,7 @@ public class MyClassListVO {
 	public MyClassListVO() {}
 
 	public MyClassListVO(int class_num, int date_num, Timestamp class_date, String class_title, String scategory_name,
-			int cover_num, int class_fee, int apply_auth, int class_rating, Timestamp apply_regdate,
+			int cover_num, int class_fee, int apply_auth, double class_rating, Timestamp apply_regdate,
 			Timestamp pay_regdate, String class_startTime, int class_form, int class_finish, int apply_num) {
 		super();
 		this.class_num = class_num;
@@ -106,11 +106,11 @@ public class MyClassListVO {
 		this.apply_auth = apply_auth;
 	}
 
-	public int getClass_rating() {
+	public double getClass_rating() {
 		return class_rating;
 	}
 
-	public void setClass_rating(int class_rating) {
+	public void setClass_rating(double class_rating) {
 		this.class_rating = class_rating;
 	}
 
@@ -162,6 +162,7 @@ public class MyClassListVO {
 		this.apply_num = apply_num;
 	}
 
+	
 	
 	
 }
