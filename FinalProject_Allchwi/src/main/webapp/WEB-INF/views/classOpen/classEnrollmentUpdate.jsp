@@ -258,7 +258,7 @@
 			별명<b class="pink">*</b>
 		</div>
         <div class="input-group col-5">
-        	<input type="text" class="form-control" id="nickname" name="tutor_nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요." value="${list.class_title }">
+        	<input type="text" class="form-control" id="nickname" name="tutor_nickname" placeholder="튜터님의 정체성을 가장 잘 드러낼 수 있는 별명을 입력해주세요." value="${list.tutor_nickname }">
         </div>
     </div>
 	<div class="box">
