@@ -44,6 +44,10 @@
 		select NVL(count(*),0) from	class_review
 		where class_num=#{class_num} and review_status=0
 	</select>
+	<select id="rating">
+		select IFNULL(round(sum(curr_rating +ready_rating+kind_rating+time_rating)/4,1),0) class_rating 
+		from class_review where class_num=aa.class_num
+	</select>
 
 </mapper>
 

@@ -129,11 +129,22 @@
 }
 
 .class_wrap .detail_sec_bor {
-	border-top: 1px solid #e3e3e3;
+	border-top: 1px solid #d2d2d2;
 	overflow: hidden;
 	padding: 0px 80px 80px 80px;
 }
-
+.d_info{
+	margin-top: 30px;
+    font-size: 16px;
+    color: #666;
+    line-height: 180%;
+    clear: both;
+    margin-left: 30px;
+}
+.t_info{
+	margin-top: 30px;
+	
+}
 .class_wrap .class_detail .sec01 {
 	padding-top: 125px;
 	position: relative;
@@ -153,7 +164,17 @@
 	font-size: 20px;
 	padding: 20px 0 20px 0;
 }
-
+.currbox h3 {
+    font-size: 24px;
+    color: #ff6f3f;
+    line-height: 100%;
+    padding-left: 50px;
+    margin: 80px 0 30px 0;
+}
+.currbox img {
+	width: 40px;
+    float: left;
+}
 .btn_wishlist {
 	padding: 10px 18px;
 	border-radius: 10px;

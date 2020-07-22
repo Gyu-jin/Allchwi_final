@@ -148,7 +148,7 @@
 						<!-- 2.튜터소개 -->
 						<div class="class_detail detail_sec_bor" id="tutor">
 							<div class="sec01">
-								<h1>튜터정보</h1>
+								<h1 class="t_info">튜터정보</h1>
 								<div class="cert">
 									<ul>
 										<c:forEach var="cert" items="${cdv.getCertList()}">
@@ -158,67 +158,68 @@
 										</c:forEach>
 									</ul>
 								</div>
-								<div class="d_info04">${cdv.tutor_about}</div>
+								<div class="d_info">${cdv.tutor_about}</div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
 						<!-- 3.수업소개 -->
 						<div class="class_detail detail_sec_bor" id="intro">
 							<div class="sec01">
-								<h1>수업소개</h1>
-								<div class="d_info04">${cdv.class_about}</div>
-								<h1>수업대상</h1>
-								${cdv.class_target}
-								<h1>커리큘럼</h1>
-								<div class="currbox">
-									<c:forEach var="curr" items="${cdv.getCurriList()}">
-										<h3>${curr.curri_count}회차</h3>
-										${curr.curri_content}
-										<br>
-									</c:forEach>
-								</div>
+								<h1 class="t_info">수업소개</h1>
+								<div class="d_info">${cdv.class_about}</div>
+								<h1 class="t_info">수업대상</h1>
+								<div class="d_info">${cdv.class_target}</div>
+								<h1 class="t_info">커리큘럼</h1>
+								<c:forEach var="curr" items="${cdv.getCurriList()}">
+									<div class="currbox">
+											<img src="https://user-images.githubusercontent.com/65140754/88137328-482db500-cc26-11ea-8913-a1986a0ba3bf.png">
+											<h3>${curr.curri_count}회차</h3>							
+											<div class="d_info">${curr.curri_content}</div>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 						<!-- //3.수업소개 -->
 						<!-- 4.리뷰 -->
 						<div class="class_detail detail_sec_bor" id="review">
 							<div class="sec01">
-								<h1>리뷰(${rpu.totalRowCount })</h1>
+								<h1 class="t_info">리뷰(${rpu.totalRowCount })</h1>
 								<div class="btn_write" id="btn_write_review">리뷰쓰기</div>
-
-								<!-- 별점평균 -->
-								<div class="review_box">
-									<c:forEach var="index" begin="1" end="5">
-										<img
-											src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-									</c:forEach>
-									5.0
-								</div>
-								<!-- 상세별점 -->
-								<div class="review_count01">
-									<ul>
-										<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
-												<img
-													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach>
-										</li>
-										<li>준비성 <c:forEach var="index" begin="1" end="5">
-												<img
-													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach>
-										</li>
-										<li>친절도 <c:forEach var="index" begin="1" end="5">
-												<img
-													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach>
-										</li>
-										<li>시간준수 <c:forEach var="index" begin="1" end="5">
-												<img
-													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach>
-										</li>
-									</ul>
-								</div>
+								<c:if test="${not empty rlist}">
+									<!-- 별점평균 -->
+									<div class="review_box">
+										<c:forEach var="index" begin="1" end="5">
+											<img
+												src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+										</c:forEach>
+										5.0
+									</div>
+									<!-- 상세별점 -->
+									<div class="review_count01">
+										<ul>
+											<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
+												</c:forEach>
+											</li>
+											<li>준비성 <c:forEach var="index" begin="1" end="5">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach>
+											</li>
+											<li>친절도 <c:forEach var="index" begin="1" end="5">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach>
+											</li>
+											<li>시간준수 <c:forEach var="index" begin="1" end="5">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach>
+											</li>
+										</ul>
+									</div>
+								</c:if>
 								<!-- 리뷰 목록 -->
 								<div class="review_list" id="bookmarkReview">
 									<ul>
@@ -268,7 +269,7 @@
 						<!-- 5.qna -->
 						<div class="class_detail detail_sec_bor" id="qna">
 							<div class="sec01">
-								<h1>Q&A</h1>
+								<h1 class="t_info">Q&A</h1>
 								<textarea type="text" id="qna_content"
 									class="md-textarea form-control" rows="4"></textarea>
 								<c:choose>
@@ -368,10 +369,3 @@
 		</div>
 	</div>
 </div>
-<script>
-	$(".star_rating a").click(function() {
-		$(this).parent().children("a").removeClass("on");
-		$(this).addClass("on").prevAll("a").addClass("on");
-		return false;
-	});
-</script>

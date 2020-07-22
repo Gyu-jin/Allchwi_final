@@ -75,6 +75,7 @@ public class ClassDetailController {
 		int startRow = pu.getStartRow() - 1;
 		map.put("startRow", startRow);
 		List<ClassReviewVO> rlist = crs.reviewList(map);
+		rlist.get(0).getCurr_rating();
 
 		mv.addObject("cdv", cdv);
 		mv.addObject("dlist", dlist);
