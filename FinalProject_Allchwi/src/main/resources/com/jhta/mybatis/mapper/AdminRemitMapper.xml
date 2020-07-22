@@ -5,18 +5,28 @@
 <mapper namespace="com.jhta.mybatis.mapper.AdminRemitMapper">
 	
 	<select id="remit_list" resultType="com.jhta.allchwi.vo.admin.AdminRemitVO" parameterType="hashmap">
-		select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
+		select aa.* from
+		(select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
 		from payment p, remit r, class_info ci
-		where p.pay_num= r.pay_num and p.class_num= ci.class_num
+		where p.pay_num= r.pay_num and p.class_num= ci.class_num) aa
+		
+		<if test="field!=null and field!=''"> 
+			where ${field} like CONCAT('%',#{keyword},'%') 	
+		</if> 
 		
 		limit #{startRow},5
 	</select>
 	
 	
-	<select id="count" resultType="int" >
+	<select id="count" resultType="int" parameterType="hashmap">
 		select nvl(count(*),0) cnt from (select r.rem_regdate, r.rem_bank, r.rem_pay, r.rem_account, r.rem_status, p.pay_num, ci.ml_num, ci.tutor_nickname, ci.class_title
 		from payment p, remit r, class_info ci
 		where p.pay_num= r.pay_num and p.class_num= ci.class_num) aa
+
+		<if test="field!=null and field!=''"> 
+			where ${field} like CONCAT('%',#{keyword},'%') 	
+		</if> 
+
 
 	</select>
 

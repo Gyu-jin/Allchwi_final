@@ -18,8 +18,8 @@ public class AdminRemitService {
 		return dao.remit_list(map);
 	}
 	
-	public int count() {
-		return dao.count();
+	public int count(HashMap<String, Object> map) {
+		return dao.count(map);
 	}
 	
 	public int accept(int pay_num) {

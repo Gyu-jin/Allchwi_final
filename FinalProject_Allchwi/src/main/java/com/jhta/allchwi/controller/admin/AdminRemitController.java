@@ -23,19 +23,18 @@ public class AdminRemitController {
 	private AdminRemitService service;
 	
 	@RequestMapping(value= {"/admin/remit","/admin/receiptAccept"})
-	public String goPayment(HttpServletRequest request, Model model,
+	public String goPayment(HttpServletRequest request, Model model,String field, String keyword,
 			@RequestParam(value="pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value="pay_num", defaultValue = "1") int pay_num) {
 		
 		if(request.getServletPath().equals("/admin/receiptAccept")) {
 			service.accept(pay_num);	// 송금신청 승인			
 		}
-		
-		
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("field",field);
+		map.put("keyword",keyword);
 		
-		int totalRowCount = service.count();
+		int totalRowCount = service.count(map);
 		PageUtil pu= new PageUtil(pageNum, totalRowCount, 5, 5);
 		
 		map.put("startRow", pu.getStartRow()-1);	
@@ -44,6 +43,9 @@ public class AdminRemitController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pu",pu);
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("field", field);
+		
 		
 		return ".admin.remit";
 	}

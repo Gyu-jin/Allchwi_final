@@ -19,8 +19,8 @@ public class AdminRemitDAO {
 		return session.selectList(NAMESPACE+".remit_list",map);
 	}
 	
-	public int count() {
-		return session.selectOne(NAMESPACE+".count");
+	public int count(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".count",map);
 	}
 	
 	public int accpet(int pay_num) {
