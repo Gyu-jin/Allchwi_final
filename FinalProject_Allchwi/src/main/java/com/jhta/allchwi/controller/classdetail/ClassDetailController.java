@@ -75,7 +75,10 @@ public class ClassDetailController {
 		int startRow = pu.getStartRow() - 1;
 		map.put("startRow", startRow);
 		List<ClassReviewVO> rlist = crs.reviewList(map);
-		rlist.get(0).getCurr_rating();
+		if(crs.rate_avg(class_num)!=null) {
+			ClassReviewVO rating= crs.rate_avg(class_num);
+			mv.addObject("rating", rating);
+		}
 
 		mv.addObject("cdv", cdv);
 		mv.addObject("dlist", dlist);
@@ -121,7 +124,10 @@ public class ClassDetailController {
 		int startRow = pu.getStartRow() - 1;
 		map.put("startRow", startRow);
 		List<ClassReviewVO> rlist = crs.reviewList(map);
-
+		if(crs.rate_avg(class_num)!=null) {
+			ClassReviewVO rating= crs.rate_avg(class_num);
+			mv.addObject("rating", rating);
+		}
 		mv.addObject("cdv", cdv);
 		mv.addObject("dlist", dlist);
 		mv.addObject("rlist", rlist);

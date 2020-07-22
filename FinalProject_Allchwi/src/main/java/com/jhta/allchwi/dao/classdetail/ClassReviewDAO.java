@@ -26,4 +26,7 @@ public class ClassReviewDAO {
 	public int writeOk(HashMap<String, Object> map) {
 		return  session.selectOne(NAMESPACE+".writeOk", map);
 	}
+	public ClassReviewVO rate_avg(int class_num) {
+		return session.selectOne(NAMESPACE+".rate_avg",class_num);
+	}
 }

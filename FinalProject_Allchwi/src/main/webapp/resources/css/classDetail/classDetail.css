@@ -261,6 +261,9 @@
 .sec01 .review_list ul li dl {
 	margin-bottom: 3rem;
 }
+.review_box img, .review_count01 img{
+	width:35px;
+}
 
 .tutor_t dl.tutor_txt dt {
 	width: 80px;

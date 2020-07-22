@@ -23,4 +23,7 @@ public class ClassReviewService {
 	public int writeOk(HashMap<String, Object> map) {
 		return dao.writeOk(map);
 	}
+	public ClassReviewVO rate_avg(int class_num) {
+		return dao.rate_avg(class_num);
+	}
 }

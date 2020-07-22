@@ -9,23 +9,34 @@ public class ClassReviewVO {
 	private int review_num;
 	private int class_num;
 	private int ml_num;   
+	private double tot_avg;
+	private int curr_avg;   
+	private int ready_avg;   
+	private int kind_avg;      
+	private int time_avg;
 	private int curr_rating;   
 	private int ready_rating;   
 	private int kind_rating;      
-	private int time_rating;      
+	private int time_rating;
 	private String review_content;
 	private int review_status;
 	private ProfileVO pfv;
 	private MemberInfoVO miv;
 	private Timestamp review_regdate;
-	public ClassReviewVO () {};
-	public ClassReviewVO(int review_num, int class_num, int ml_num, int curr_rating, int ready_rating, int kind_rating,
-			int time_rating, String review_content, int review_status, ProfileVO pfv, MemberInfoVO miv,
-			Timestamp review_regdate) {
+	public ClassReviewVO () {}
+	
+	public ClassReviewVO(int review_num, int class_num, int ml_num, double tot_avg, int curr_avg, int ready_avg,
+			int kind_avg, int time_avg, int curr_rating, int ready_rating, int kind_rating, int time_rating,
+			String review_content, int review_status, ProfileVO pfv, MemberInfoVO miv, Timestamp review_regdate) {
 		super();
 		this.review_num = review_num;
 		this.class_num = class_num;
 		this.ml_num = ml_num;
+		this.tot_avg = tot_avg;
+		this.curr_avg = curr_avg;
+		this.ready_avg = ready_avg;
+		this.kind_avg = kind_avg;
+		this.time_avg = time_avg;
 		this.curr_rating = curr_rating;
 		this.ready_rating = ready_rating;
 		this.kind_rating = kind_rating;
@@ -36,6 +47,7 @@ public class ClassReviewVO {
 		this.miv = miv;
 		this.review_regdate = review_regdate;
 	}
+
 	public int getReview_num() {
 		return review_num;
 	}
@@ -53,6 +65,36 @@ public class ClassReviewVO {
 	}
 	public void setMl_num(int ml_num) {
 		this.ml_num = ml_num;
+	}
+	public double getTot_avg() {
+		return tot_avg;
+	}
+	public void setTot_avg(double tot_avg) {
+		this.tot_avg = tot_avg;
+	}
+	public int getCurr_avg() {
+		return curr_avg;
+	}
+	public void setCurr_avg(int curr_avg) {
+		this.curr_avg = curr_avg;
+	}
+	public int getReady_avg() {
+		return ready_avg;
+	}
+	public void setReady_avg(int ready_avg) {
+		this.ready_avg = ready_avg;
+	}
+	public int getKind_avg() {
+		return kind_avg;
+	}
+	public void setKind_avg(int kind_avg) {
+		this.kind_avg = kind_avg;
+	}
+	public int getTime_avg() {
+		return time_avg;
+	}
+	public void setTime_avg(int time_avg) {
+		this.time_avg = time_avg;
 	}
 	public int getCurr_rating() {
 		return curr_rating;
@@ -107,7 +149,7 @@ public class ClassReviewVO {
 	}
 	public void setReview_regdate(Timestamp review_regdate) {
 		this.review_regdate = review_regdate;
-	}
+	};
 	
 	
 }

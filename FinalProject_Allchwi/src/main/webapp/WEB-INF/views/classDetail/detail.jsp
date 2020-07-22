@@ -172,9 +172,10 @@
 								<h1 class="t_info">커리큘럼</h1>
 								<c:forEach var="curr" items="${cdv.getCurriList()}">
 									<div class="currbox">
-											<img src="https://user-images.githubusercontent.com/65140754/88137328-482db500-cc26-11ea-8913-a1986a0ba3bf.png">
-											<h3>${curr.curri_count}회차</h3>							
-											<div class="d_info">${curr.curri_content}</div>
+										<img
+											src="https://user-images.githubusercontent.com/65140754/88137328-482db500-cc26-11ea-8913-a1986a0ba3bf.png">
+										<h3>${curr.curri_count}회차</h3>
+										<div class="d_info">${curr.curri_content}</div>
 									</div>
 								</c:forEach>
 							</div>
@@ -188,33 +189,59 @@
 								<c:if test="${not empty rlist}">
 									<!-- 별점평균 -->
 									<div class="review_box">
-										<c:forEach var="index" begin="1" end="5">
+										<fmt:formatNumber value="${rating.tot_avg }" pattern="0"
+											type="number" var="tot_avg" />
+										<c:forEach var="index" begin="1" end="${tot_avg }">
 											<img
 												src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
 										</c:forEach>
-										5.0
+										<c:forEach var="index" begin="1" end="${5-tot_avg }">
+											<img
+												src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
+										</c:forEach>
+										${rating.tot_avg }
 									</div>
 									<!-- 상세별점 -->
 									<div class="review_count01">
 										<ul>
-											<li>커리큘럼 <c:forEach var="index" begin="1" end="5">
+											<li>커리큘럼 <c:forEach var="index" begin="1"
+													end="${rating.curr_avg }">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach> <c:forEach var="index" begin="1"
+													end="${5-rating.curr_avg }">
 													<img
 														src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
 												</c:forEach>
 											</li>
-											<li>준비성 <c:forEach var="index" begin="1" end="5">
+											<li>준비성 <c:forEach var="index" begin="1"
+													end="${rating.ready_avg }">
 													<img
 														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach> <c:forEach var="index" begin="1"
+													end="${5-rating.ready_avg }">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
 												</c:forEach>
 											</li>
-											<li>친절도 <c:forEach var="index" begin="1" end="5">
+											<li>친절도 <c:forEach var="index" begin="1"
+													end="${rating.kind_avg }">
 													<img
 														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach> <c:forEach var="index" begin="1"
+													end="${5-rating.kind_avg }">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
 												</c:forEach>
 											</li>
-											<li>시간준수 <c:forEach var="index" begin="1" end="5">
+											<li>시간준수 <c:forEach var="index" begin="1"
+													end="${rating.time_avg }">
 													<img
 														src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												</c:forEach> <c:forEach var="index" begin="1"
+													end="${5-rating.time_avg }">
+													<img
+														src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
 												</c:forEach>
 											</li>
 										</ul>
@@ -235,7 +262,11 @@
 															<p class="name">${rlist.miv.mb_name }</p>
 														</dt>
 														<dd>${rlist.review_content }</dd>
-														<dd class="date">${rlist.review_regdate}</dd>
+														<dd class="date">
+															<fmt:formatDate value="${rlist.review_regdate }"
+																pattern="yyyy-MM-dd" />
+														</dd>
+
 													</dl></li>
 											</c:forEach>
 										</div>
