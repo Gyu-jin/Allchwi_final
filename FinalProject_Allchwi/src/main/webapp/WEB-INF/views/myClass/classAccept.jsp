@@ -19,11 +19,11 @@
 						aria-hidden="true" style="color: #ffffff">&times;</button>
 				</div>
 				<div class="modal-body">
-					<form action="" method="post">
+					<form action="${cp}/myClass/classAcceptUpdate" method="post">
 						<input type="hidden" name="apply_num" value="${cav.apply_num}">
 						<input type="hidden" id="date_num" value="${cav.date_num}">
 						<input type="hidden" id="ml_num" value="${cav.ml_num}">
-						<!-- 신청자 스킬 레벨 choose 사용하여 조건 걸어줌 -->
+						<!--a 신청자 스킬 레벨 choose 사용하여 조건 걸어줌 -->
 						<div class="form-group">
 							<label for="stu_lev" class="control-label">나의 스킬 레벨</label>
 							<c:choose>

@@ -21,7 +21,7 @@
 		) bb
 		on aa.date_num = bb.date_num
 		<include refid="optionClassNum"/>
-		order by bb.apply_regdate desc, bb.apply_auth asc
+		order by bb.apply_auth asc, bb.apply_regdate desc
 		limit #{startRow}, 5
 	</select>
 	<!-- a 튜터번호가 있을 경우 아래 조건을 추가함 -->
@@ -55,7 +55,7 @@
 		) bb
 		on aa.date_num = bb.date_num
 		<include refid="optionClassNum"/>
-		order by bb.apply_regdate desc, bb.apply_auth asc
+		order by bb.apply_auth asc, bb.apply_regdate desc 
 		) cc
 	</select>
 	<!-- 신청서 번호로 회원정보 출력 -->

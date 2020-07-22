@@ -13,7 +13,7 @@
 		<!-- forEach 돌려서 출력하기 / 목록이 존재 할때 select 출력 -->
 		<c:choose>
 			<c:when test="${myClass.size() > 0}">
-				<select name=sortClass onchange="classSort(this.value)">
+				<select name=sortClass onchange="classSort(this.value)" class="custom-select col-3">
 					<option value="0" <c:if test="${'0' eq class_num}"> selected</c:if>>전체</option>
 					<c:forEach var="mc" items="${myClass}">
 						<option value="${mc.class_num}" <c:if test="${mc.class_num eq class_num}"> selected</c:if>>${mc.class_title}</option>
@@ -56,7 +56,7 @@
 											<button type="button" class="btn btn-primary" id="confirmClass" data-toggle="modal" id="modellink" onclick="showModal(${vo.apply_num})">수업승인하기</button>
 										</c:when>
 										<c:otherwise>
-											<button type="button" class="btn btn-primary" disabled="disabled">승인완료</button>
+											<button type="button" class="btn btn-dark" disabled>승인완료</button>
 										</c:otherwise>
 									</c:choose>
 								</div>

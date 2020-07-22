@@ -31,11 +31,11 @@ public class MyClassManageDAO {
 	public int applyCounting(HashMap<String, Object> hm) {
 		return session.selectOne(NAMESPACE + ".MyClassCounting", hm);
 	}
-	//신청서 넘버로 신청한 회원정보 가져오기
+	//a 신청서 넘버로 신청한 회원정보 가져오기
 	public ClassApplyVO getApply(int apply_num) {
 		return session.selectOne(NAMESPACE + ".getApply", apply_num);
 	}
-	//신청서 넘버로 수업승인 업데이트
+	//a 신청서 넘버로 수업승인 업데이트
 	public int updateApply(int apply_num) {
 		return session.update(NAMESPACE + ".updateApply", apply_num);
 	}
