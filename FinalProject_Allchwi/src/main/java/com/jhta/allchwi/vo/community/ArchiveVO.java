@@ -1,4 +1,4 @@
-package com.jhta.allchwi.vo.community.archive;
+package com.jhta.allchwi.vo.community;
 
 import java.sql.Timestamp;
 

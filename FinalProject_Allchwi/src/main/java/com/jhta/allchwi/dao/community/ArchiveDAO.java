@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jhta.allchwi.vo.community.archive.ArchiveVO;
+import com.jhta.allchwi.vo.community.ArchiveVO;
 
 @Repository
 public class ArchiveDAO {

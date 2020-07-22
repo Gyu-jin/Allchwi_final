@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+
 <style>
 .title-box {
 	position: relative;
@@ -49,12 +52,12 @@
 
 	</div>
 	<div class="jumbotron">
-		<p>수업 관련 자료를 확인해주세요.</p>
+		<h4>수업 관련 자료를 확인해주세요.</h4>
 		<hr class="my-4">
-
+		
 
 		<div class="card card-body">
-			<table class="table table-bordered table-hover">
+			<table class="table table-hover" style="text-align: center">
 				<thead class="thead-dark">
 					<tr>
 						<th>번호</th>
@@ -67,15 +70,16 @@
 				<tbody>
 
 					<c:forEach var="vo" items="${list }">
-						<tr>
+						<tr onclick="detail('${vo.room_num}')">
 							<td>${vo.room_num }</td>
 							<td>${vo.horsehead }</td>
 							<td>${vo.room_title}</td>
-							<td>${vo.room_regdate }</td>
+							<td><fmt:formatDate value="${vo.room_regdate }"
+									pattern="yyyy-MM-dd" /></td>
 							<td>${vo.room_view }</td>
 						<tr>
 					</c:forEach>
-
+		
 
 				</tbody>
 			</table>
@@ -126,6 +130,20 @@
 				</c:choose>
 			</ul>
 		</div>
+		
+		<button type="button" class="btn btn-primary" style="float:right">글작성</button>
+		
 
 	</div>
 </div>
+
+<script type="text/javascript">
+	function detail(room_num){
+		
+		location.href="${cp}/community/archiveDetail?room_num"+room_num;
+	
+	}
+	
+
+
+</script>

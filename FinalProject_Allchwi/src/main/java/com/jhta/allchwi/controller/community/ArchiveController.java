@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.community.ArchiveService;
-import com.jhta.allchwi.vo.community.archive.ArchiveVO;
+import com.jhta.allchwi.vo.community.ArchiveVO;
 
 @Controller
 public class ArchiveController {
@@ -26,7 +26,7 @@ public class ArchiveController {
 		int totalRowCount = service.count();
 		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
-		map.put("startRow", pu.getStartRow());
+		map.put("startRow", pu.getStartRow()-1);
 	
 		List<ArchiveVO> list = service.list(map);
 		model.addAttribute("list", list);
@@ -34,4 +34,14 @@ public class ArchiveController {
 		
 		return ".community.board.archive";
 	}
+	
+	
+	@GetMapping("/community/archiveDetail")
+	public String detail(int room_num) {
+		
+		
+		
+		return ".community.board.archiveContent";
+	}
+	
 }
