@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .title-box {
 	position: relative;
@@ -50,31 +51,81 @@
 	<div class="jumbotron">
 		<p>수업 관련 자료를 확인해주세요.</p>
 		<hr class="my-4">
-		
 
-			<div class="card card-body">
-				<div class="content-box">
-			<form class="form-assign">
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">과제 답변 입력하기</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1"
-						rows="3"></textarea>
-				</div>
-				<div class="flex-div">
-					<div class="col-md-6">
-						<label for="exampleFormControlFile1">Example file input</label> <input
-							type="file" class="form-control-file"
-							id="exampleFormControlFile1">
-					</div>
-					<div class="col-md-6">
-						<button type="submit" class="btn btn-outline-warning" id="subBtn">제출하기</button>
-					</div>
-				</div>
-			</form>
 
-			</div>
-			
+		<div class="card card-body">
+			<table class="table table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>번호</th>
+						<th>말머리</th>
+						<th>제목</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td>${vo.room_num }</td>
+							<td>${vo.horsehead }</td>
+							<td>${vo.room_title}</td>
+							<td>${vo.room_regdate }</td>
+							<td>${vo.room_view }</td>
+						<tr>
+					</c:forEach>
+
+
+				</tbody>
+			</table>
 		</div>
-		
+
+
+
+
+		<div>
+			<ul class="pagination justify-content-center" style="margin: 20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/community/archive?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+
+
+
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${pu.pageNum==i}">
+							<li class="page-item active"><a class="page-link"
+								href="${cp }/community/archive?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="${cp }/community/archive?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+
+
+
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/community/archive?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+
 	</div>
-	</div>
+</div>
