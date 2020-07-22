@@ -236,13 +236,12 @@ textarea.len980 {
 .class {
     color: #888;
     font-size: 16px;
-    border-bottom: 1px solid #d8d9db;
     margin: 0;
     padding: 10px 0;
     cursor: pointer;
 }
  .class .intext {
-    width: 650px;
+    width: 450px;
     display: inline-block;
     font-size: 16px;
 }
@@ -289,6 +288,16 @@ img {
     display: block;
 }
 </style>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+	window.onload=function(){
+		if(${code=='tutor'}){
+			alert("튜터 본인의 수업은 신청이 불가능 합니다!");
+			history.back();
+		}
+	}
+</script>
+
 <div class="classApply">
 
 	<div class="title_box">
@@ -573,29 +582,67 @@ img {
 	});
 	
 	// [신용카드/체크카드] 버튼 클릭 시, 결제 창 띄움 and ClassApply table insert
-	$("#cardPay").click(function(e) {
-		
-		var formData = $("#applyForm").serialize();
+	$("#cardPay").click(function() {
+		  var IMP = window.IMP; // 생략가능
+	      IMP.init('imp41758276'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	      var msg;
+	      var final_price=$("input[name='final_price']").val();  
+	      console.log(final_price);
+	        IMP.request_pay({
+	            pg : 'html5_inicis',
+	            pay_method : 'card',
+	            merchant_uid : 'merchant_' + new Date().getTime(),
+	            name : 'AllChwi Pay',
+	            amount : final_price,
+	            buyer_email : 'sa',
+	            buyer_name : 'das',
+	            buyer_tel : '321',
+	            buyer_addr : '123',
+	            buyer_postcode : '123-456',
+	            //m_redirect_url : 'http://www.naver.com'
+	        }, function(rsp) {
+	            if ( rsp.success ) {
 
-		var date_num=$("input[name=classdate]:checked").val();
-		
-		
-		$.post("${cp}/class/applyOk",formData , function(data) {
-			console.log("콜백" + data);
-			
-			if(data=="success"){
-				alert("수업을 신청하시겠습니까?");
-				location.href="${cp}/class/success?date_num="+date_num;
-			}else if(data=="fail"){
-				alert("수업 신청 오류;");
-				location.href="${cp}/";
-			}else if(data=="already"){
-				alert("이미 신청된 일정입니다. 다른 일정을 선택해주세요.");
-				$('#pills-tab li:nth-child(1) a').tab('show');
-			}
-		});
-	});
-	
+	                //성공시 이동할 페이지
+	                var formData = $("#applyForm").serialize();
+
+	        		var date_num=$("input[name=classdate]:checked").val();
+	        		
+	        		
+	        		$.post("${cp}/class/applyOk",formData , function(data) {
+	        			console.log("콜백" + data);
+	        			
+	        			if(data=="success"){
+
+	                        msg = '결제가 완료되었습니다.';
+	                        msg += '\n고유ID : ' + rsp.imp_uid;
+	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	                        msg += '\결제 금액 : ' + rsp.paid_amount;
+	                        msg += '카드 승인번호 : ' + rsp.apply_num;
+	                        
+	                        alert(msg);
+	        				
+	        				location.href="${cp}/class/success?date_num="+date_num+"&data="+data;
+	        			}else if(data=="fail"){
+	        				alert("수업 신청 오류;");
+	        				location.href="${cp}/";
+	        			}else if(data=="already"){
+	        				alert("이미 신청된 일정입니다. 다른 일정을 선택해주세요.");
+	        				$('#pills-tab li:nth-child(1) a').tab('show');
+	        			}
+	        		});
+	            } else {
+	                msg = '결제에 실패하였습니다.';
+	                msg += '에러내용 : ' + rsp.error_msg;
+	                alert(msg);
+	                //실패시 이동할 페이지
+	                location.href="${cp}/";
+	                console.log(final_price);
+	                
+	            }
+	        });
+	        
+	    });
 
 	function fold(elm){
 		if($(elm).children('.subtext').css('display')=='none'){

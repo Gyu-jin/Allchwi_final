@@ -1,6 +1,5 @@
 package com.jhta.allchwi.controller.classapply;
 
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,65 +25,83 @@ import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classapply.PaymentVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
-
+import com.jhta.allchwi.vo.point.PointVO;
 
 @Controller
 public class ClassApplyController {
-	@Autowired private ClassApplyService classApply_service;
-	@Autowired private ClassDateService classDate_service;
-	@Autowired private ClassInfoService classInfo_service;
-	@Autowired private PointService point_service;
-	
-	//class_num에 해당하는 수업 신청서 페이지로 이동
-	@RequestMapping(value="/class/apply", method = RequestMethod.GET)
-	public ModelAndView goClassapply(int class_num,HttpServletRequest req) {
-		ModelAndView mv=new ModelAndView(".classapply.ClassApply");
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		int ml_num = (int)req.getSession().getAttribute("ml_num");
-		map.put("ml_num",ml_num);
-		List<ClassDateVO> classDate_list=classDate_service.select(class_num);
-		int pro_num=classInfo_service.getProNum(class_num);
-		int point=point_service.getTotal(map);
-		mv.addObject("classDate_list",classDate_list);
-		mv.addObject("point",point);
-		mv.addObject("pro_num",pro_num);
-		mv.addObject("class_num",class_num);
-		ClassInfoVO vo = classInfo_service.select(class_num);
-		req.setAttribute("class_form", vo.getClass_form());
-		return mv;
+	@Autowired
+	private ClassApplyService classApply_service;
+	@Autowired
+	private ClassDateService classDate_service;
+	@Autowired
+	private ClassInfoService classInfo_service;
+	@Autowired
+	private PointService point_service;
+
+	// class_num에 해당하는 수업 신청서 페이지로 이동
+	@RequestMapping(value = "/class/apply", method = RequestMethod.GET)
+	public String goClassapply(Model model, int class_num, HttpServletRequest req) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int ml_num = (int) req.getSession().getAttribute("ml_num");
+
+		ClassInfoVO classvo = classInfo_service.getTutorinfo(class_num);
+		int class_ml_num = classvo.getMl_num();
+		if (ml_num == class_ml_num) {
+			model.addAttribute("code", "tutor");
+			return ".classapply.ClassApply";
+		} else {
+			map.put("ml_num", ml_num);
+			List<ClassDateVO> classDate_list = classDate_service.select(class_num);
+			int pro_num = classvo.getPro_num();
+			int point = point_service.getTotal(map);
+			model.addAttribute("classDate_list", classDate_list);
+			model.addAttribute("point", point);
+			model.addAttribute("pro_num", pro_num);
+			model.addAttribute("class_num", class_num);
+
+			ClassInfoVO vo = classInfo_service.select(class_num);
+			req.setAttribute("class_form", vo.getClass_form());
+			
+			return ".classapply.ClassApply";
+		}
+
 	}
-	
+
 	// ClassApply & Payment table insert, ajax callback함수에 success 문자열 전송
-	@RequestMapping(value="/class/applyOk",method = RequestMethod.POST)
+	@RequestMapping(value = "/class/applyOk", method = RequestMethod.POST)
 	@ResponseBody
-	public String classApplyOk(HttpSession session, ClassApplyVO vo, PaymentVO pvo, 
-			@RequestParam(value="pay_point",defaultValue = "0") String pay_point) {
+	public String classApplyOk(HttpSession session, ClassApplyVO vo, PaymentVO payvo,
+			@RequestParam(value = "pay_point", defaultValue = "0") int pay_point) {
 		System.out.println("apply post mapping.. 포인트 값 : " + pay_point);
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("date_num",vo.getDate_num());
-		map.put("class_num",pvo.getClass_num());
-		map.put("ml_num",session.getAttribute("ml_num"));
-		int n=classApply_service.check(map);
-		if(n>0) {
+
+		int ml_num = (int) session.getAttribute("ml_num");
+		int class_num = payvo.getClass_num();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("date_num", vo.getDate_num());
+		map.put("class_num", class_num);
+		map.put("ml_num", session.getAttribute("ml_num"));
+		int n = classApply_service.check(map);
+		if (n > 0) {
 			return "already";
 		}
-		
+
 		try {
-			classApply_service.insert(vo,pvo);
+			PointVO pointvo = new PointVO(0, ml_num, pay_point, "결제차감", null, 'u');
+			classApply_service.insert(vo, payvo, pointvo);
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "fail";
 		}
-		
 
 	}
-	
+
 	// 수업신청 성공 시 페이지 이동하는 메소드
-	@RequestMapping(value="/class/success", method = RequestMethod.GET)
-	public String goSuccess(String date_num,Model model) {
+	@RequestMapping(value = "/class/success", method = RequestMethod.GET)
+	public String goSuccess(String date_num, Model model) {
 		System.out.println("성공!");
-		model.addAttribute("date_num",date_num);
+		model.addAttribute("date_num", date_num);
 		return ".classapply.success";
 	}
 }

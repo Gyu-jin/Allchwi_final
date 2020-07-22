@@ -10,26 +10,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.classapply.ClassApplyDAO;
 import com.jhta.allchwi.dao.classapply.PaymentDAO;
+import com.jhta.allchwi.dao.point.PointDAO;
 import com.jhta.allchwi.vo.classapply.ClassApplyDateInfoVO;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classapply.PaymentVO;
+import com.jhta.allchwi.vo.point.PointVO;
 
 @Service
 public class ClassApplyService {
 	@Autowired private ClassApplyDAO apply_dao;
 	@Autowired private PaymentDAO pay_dao;
+	@Autowired private PointDAO point_dao;
 	
 	@Transactional
-	public boolean insert(ClassApplyVO vo, PaymentVO pvo) throws Exception{
+	public boolean insert(ClassApplyVO vo, PaymentVO payvo, PointVO pointvo) throws Exception{
+		
 		// Class_Apply 테이블 insert
 		apply_dao.insert(vo);
 		
-		pvo.setApply_num(vo.getApply_num());
-		System.out.println("apply service : apply_num="+vo.getApply_num());
 		// Payment 테이블 insert
-
+		payvo.setApply_num(vo.getApply_num());
+		pay_dao.insert(payvo);
 		
-		pay_dao.insert(pvo);
+		// Point 테이블 insert (사용:u)
+		if(pointvo.getPoint()>0) {
+			//사용 point가 0보다 클 때 insert
+			point_dao.insert(pointvo);
+			
+		}
 	
 		return true;
 	}

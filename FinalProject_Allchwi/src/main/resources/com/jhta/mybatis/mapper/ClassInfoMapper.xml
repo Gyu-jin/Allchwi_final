@@ -227,9 +227,9 @@
 		update class_info set class_status=#{class_status} where ml_num=#{ml_num} and class_num=#{class_num}
 	</update>
 
-	<!-- 튜터 프로필 사진 -->
-	<select id="getProNum" parameterType="int" resultType="int">
-		select pro_num from class_info where class_num=#{class_num}
+	<!-- 해당 수업의 튜터 pro_num, ml_num -->
+	<select id="getTutorinfo" parameterType="int" resultType="classinfo">
+		select pro_num, ml_num from class_info where class_num=#{class_num}
 	</select>
 	
 	<!-- 수업 정보 수정  -->
@@ -242,6 +242,7 @@
 		tutor_about=#{tutor_about},class_about=#{class_about},class_target=#{class_target},class_regdate=now()
 		where class_num = #{class_num}
 	</update>
+	
 	
 </mapper>
 
