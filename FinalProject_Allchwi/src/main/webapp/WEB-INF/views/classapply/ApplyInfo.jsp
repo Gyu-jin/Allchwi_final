@@ -21,7 +21,7 @@
 
 
 	<c:forEach var="vo" items="${list}">
-		<span class="date">수업 신청서 제출일 : <fmt:formatDate
+		<span class="date">수업 신청서 제출일  : <fmt:formatDate
 				value="${vo.apply_regdate}" pattern="yyyy-MM-dd" /></span>
 		<div class="static-container">
 			<h3>튜터 정보</h3>
