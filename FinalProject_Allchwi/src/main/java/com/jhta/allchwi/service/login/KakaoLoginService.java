@@ -123,10 +123,8 @@ public class KakaoLoginService {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-	        
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("responseCode : " + responseCode);
-	        
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
