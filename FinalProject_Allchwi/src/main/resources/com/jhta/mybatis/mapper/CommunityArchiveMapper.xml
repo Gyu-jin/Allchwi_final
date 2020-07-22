@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="count" resultType="int">
-		select nvl(count(*),0) cnt from  ref_room
+		select nvl(count(*),0) cnt from ref_room
 	</select>
 	
 	
@@ -18,4 +18,23 @@
 	</select>
 	
 	
+	
+	<!-- 조회수 증가하기 -->
+	<update id="hit" parameterType="int">
+		update ref_room set room_view=room_view+1 where room_num=#{room_num}
+	</update>
+	
+	<!-- 다음글 -->
+	<select id="next" parameterType="int" resultType="com.jhta.allchwi.vo.community.ArchiveVO">
+		select * from(
+		 	  select * from ref_room where room_num>#{room_num}
+		   		order by room_num asc
+		) aa
+		limit 1
+	</select>
+	
+	<!-- 이전글 -->
+	<select id="prev" parameterType="int" resultType="com.jhta.allchwi.vo.community.ArchiveVO">
+	   <![CDATA[  select * from ref_room where room_num<#{room_num} order by room_num desc limit 1 ]]>
+	</select>
 </mapper>

@@ -24,4 +24,22 @@ public class ArchiveDAO {
 		return session.selectOne(NAMESPACE+".count");
 	}
 	
+	public ArchiveVO detail(int room_num){
+		return session.selectOne(NAMESPACE+".detail", room_num);
+	}
+	
+	public int hit(int room_num) {
+		return session.update(NAMESPACE+".hit", room_num);
+	}
+	
+	public ArchiveVO next(int room_num){
+		return session.selectOne(NAMESPACE+".next", room_num);
+	}
+	
+	public ArchiveVO prev(int room_num) {
+		return session.selectOne(NAMESPACE+".prev", room_num);
+	}
+	
+	
+	
 }

@@ -21,8 +21,6 @@ public class ArchiveController {
 	@GetMapping("/community/archive")
 	public String goAssign(Model model,@RequestParam(value="pageNum",defaultValue = "1") int pageNum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		
 		int totalRowCount = service.count();
 		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
@@ -37,11 +35,27 @@ public class ArchiveController {
 	
 	
 	@GetMapping("/community/archiveDetail")
-	public String detail(int room_num) {
+	public String detail(int room_num,Model model) {
+		service.hit(room_num);	//조회수 1증가
+		ArchiveVO vo = service.detail(room_num);
+		ArchiveVO next=service.next(room_num);//다음글
+		ArchiveVO prev=service.prev(room_num);//다음글
 		
-		
-		
+		model.addAttribute("vo", vo);
+		model.addAttribute("next",next);
+		model.addAttribute("prev",prev);	
 		return ".community.board.archiveContent";
 	}
+	
+	
+
+	@GetMapping("/community/writeContent")
+	public String writeContent() {
+		
+		return ".community.board.writeArchiveContent";
+	}
+	
+	
+	
 	
 }

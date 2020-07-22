@@ -47,23 +47,23 @@
 </style>
 <div class="container">
 
-	<div class="title-box">
-		${vo.room_title }
-		${vo.room_regdate} 
-		${vo.room_view}
-		${vo.room_content }
-
-	</div>
+	
 	<div class="jumbotron">
-		<h4>수업 관련 자료를 확인해주세요.</h4>
+		<h4>${vo.room_title }</h4>						
+		<p style="float:right;">${vo.room_regdate} </p>	
+		<br>
+		
 		<hr class="my-4">
-
-
+		<p style="float:right">${vo.room_view}</p>
 		<div class="card card-body">
-			
-			
-			
-			
+		
+		${vo.room_content }
+		
+		
+		<br>	
+		<br>	
+		이전글<a href="${cp }/community/archiveDetail?room_num=${prev.room_num }">${prev.room_title }</a>
+		다음글<a href="${cp}/community/archiveDetail?room_num=${next.room_num }">${next.room_title }</a>
 			
 			
 			

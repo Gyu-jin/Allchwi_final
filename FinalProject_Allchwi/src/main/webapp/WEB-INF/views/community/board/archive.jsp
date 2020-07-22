@@ -100,8 +100,6 @@
 					</c:otherwise>
 				</c:choose>
 
-
-
 				<c:forEach var="i" begin="${pu.startPageNum}"
 					end="${pu.endPageNum }">
 					<c:choose>
@@ -116,9 +114,6 @@
 					</c:choose>
 				</c:forEach>
 
-
-
-
 				<c:choose>
 					<c:when test="${pu.totalPageCount>pu.endPageNum }">
 						<li class="page-item"><a class="page-link"
@@ -131,7 +126,7 @@
 			</ul>
 		</div>
 		
-		<button type="button" class="btn btn-primary" style="float:right">글작성</button>
+		<button type="button" class="btn btn-primary" style="float:right" onclick="location.href='${cp}/community/writeContent'">글작성</button>
 		
 
 	</div>
@@ -139,9 +134,7 @@
 
 <script type="text/javascript">
 	function detail(room_num){
-		
-		location.href="${cp}/community/archiveDetail?room_num"+room_num;
-	
+		location.href="${cp}/community/archiveDetail?room_num="+room_num;
 	}
 	
 

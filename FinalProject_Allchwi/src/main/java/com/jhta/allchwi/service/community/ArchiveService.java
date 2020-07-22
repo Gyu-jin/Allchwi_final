@@ -22,5 +22,20 @@ public class ArchiveService {
 		return dao.count();
 	}
 	
+	public ArchiveVO detail(int room_num){
+		return dao.detail(room_num);
+	}
+	
+	public int hit(int room_num) {
+		return dao.hit(room_num);
+	}
+	
+	public ArchiveVO next(int room_num){
+		return dao.next(room_num);
+	}
+	
+	public ArchiveVO prev(int room_num) {
+		return dao.prev(room_num);
+	}
 	
 }
