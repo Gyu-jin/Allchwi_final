@@ -119,4 +119,39 @@ public class MemberLoginService{
 	public MemberLoginVO loginInfo(HashMap<String, Object> hm) {
 		return mld.loginInfo(hm);
 	}
+	//kakao 로그인 후 미가입 회원 가입시 트랜잭션 처리
+		@Transactional
+		public int kakaoJoinMember(HttpSession session, HashMap<String, Object> kakaoUserInfo) throws Exception{
+			//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
+			MemberLoginVO imlv = new MemberLoginVO(0, (String)kakaoUserInfo.get("email"), null, 0, 0, null, 'n');
+			int a = mld.join(imlv);
+			//a 회원가입시 1000포인트 적립 / s => save[적립]
+			PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');
+			int a1 = pd.insert(pv);
+			
+			//a 실제 업로드 경로를 변수에 담기
+			String realPath = session.getServletContext().getRealPath("/resources/img/profile-defaultImg.jpg");
+			//a 기본 이미지 파일 읽어와 DB에 저장하기
+			File file = new File(realPath);
+//			File file = new File("C:/Users/JHTA/git/Allchwi_final/FinalProject_Allchwi/src/main/webapp/resources/img/profile-defaultImg.jpg");
+			String fileName = file.getName();
+			byte[] imageByte = null;
+			try {
+				//a 파일을 바이트 배열로 저장하기
+				imageByte = Files.readAllBytes(file.toPath());
+			} catch (IOException e) {
+				//a 오류시 
+				e.printStackTrace();
+			}
+			//session을 통해 이미지를 바이트 배열로 받고, 해당 파일 이름을 넣어서 DB에 저장
+			ProfileImgVO piv = new ProfileImgVO(0, imageByte, fileName, null);
+			int a2 = pid.insert(piv);
+			
+			//a 참조키를 받아야하므로 제일 마지막에 저장, 이름을 vo에 넣고 DB에 저장
+			MemberInfoVO imiv = new MemberInfoVO(0, imlv.getMl_num(), piv.getPro_num(), null, null, (String)kakaoUserInfo.get("nickname"), null, 0, null, null);
+			int a3 = mid.SignIn(imiv);
+			
+			int result = a + a1 + a2 + a3;
+			return result;
+		}
 }
