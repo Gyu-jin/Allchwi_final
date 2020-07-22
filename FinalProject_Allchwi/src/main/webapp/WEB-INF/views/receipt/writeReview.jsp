@@ -57,7 +57,7 @@
 							class="on">★</a> <a href="#" class="on">★</a> <a href="#">★</a> <a
 							href="#">★</a>
 					</p>
-
+  
 					<p class="star_rating" id="time_rating">
 						<span>시간준수</span> <a href="#" class="on">★</a> <a href="#"
 							class="on">★</a> <a href="#" class="on">★</a> <a href="#">★</a> <a
