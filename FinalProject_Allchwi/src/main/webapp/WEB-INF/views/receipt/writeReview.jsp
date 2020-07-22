@@ -67,11 +67,8 @@
 				</div>
 				<label>리뷰작성</label>
 				<div class="md-form">
-					<textarea type="text" id="review_content"
-						class="md-textarea form-control" rows="4">
-													</textarea>
+					<textarea type="text" id="review_content" class="md-textarea form-control" rows="4"></textarea>
 				</div>
-
 			</div>
 			<div class="modal-footer d-flex justify-content-center">
 				<a href="javascript:void(0);" id="btn_write_review" class="btn_send">작성완료</a>

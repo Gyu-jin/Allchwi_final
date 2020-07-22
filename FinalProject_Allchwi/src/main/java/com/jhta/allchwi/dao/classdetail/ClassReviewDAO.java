@@ -23,4 +23,7 @@ public class ClassReviewDAO {
 	public int rcount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".rcount", map);
 	}
+	public int writeOk(HashMap<String, Object> map) {
+		return  session.selectOne(NAMESPACE+".writeOk", map);
+	}
 }

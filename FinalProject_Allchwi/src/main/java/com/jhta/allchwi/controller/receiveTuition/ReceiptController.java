@@ -62,13 +62,19 @@ public class ReceiptController {
 	}
 	
 	
-	@GetMapping("/receipt/modal")
-	public String showModal(int class_num,Model model) {
+	/*
+	public String insert(int rem_pay, String rem_bank, String rem_account, int pay_num) {
 		
-		model.addAttribute("class_num", class_num);
+		InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
+		int n  = service.insertRemit(vo);
+				
 		
-		return "receipt/writeReview";
+		
+		
+		
+		
+		return ".receipt.receiveTuition";
 	}
-
+	*/
 	
 }

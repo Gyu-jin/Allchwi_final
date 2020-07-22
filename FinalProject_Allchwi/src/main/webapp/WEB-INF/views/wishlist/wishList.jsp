@@ -34,11 +34,17 @@
 						</c:otherwise>
 					</c:choose>
 					<font class="class-stars">
-						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
-						<img src="https://front-img.taling.me/Content/Images/class/icon_star_new.png" width="15px">
+						<c:set var="grade" value="${vo.class_rating+((vo.class_rating%1>0.5)?(1-(vo.class_rating%1))%1:-(vo.class_rating%1))}" />
+						<c:forEach var="num" begin="1" end="5" step="1">
+							<c:choose>
+								<c:when test="${num  <= grade}">
+									<img src="${cp }/resources/img/star.png" width="15px">
+								</c:when>
+								<c:otherwise>
+									<img src="${cp }/resources/img/star_gray.png" width="15px">
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</font>
 					<span>(${vo.class_rating })</span>
 				</div>

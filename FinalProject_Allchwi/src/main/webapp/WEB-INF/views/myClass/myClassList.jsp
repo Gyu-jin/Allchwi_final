@@ -44,13 +44,19 @@
 							</c:choose>
 							</font>&nbsp;|&nbsp; &nbsp;
 							<font class="class-stars">
-								<c:set var="rating" value="${vo.class_rating }" />
+								<c:set var="grade" value="${vo.class_rating+((vo.class_rating%1>0.5)?(1-(vo.class_rating%1))%1:-(vo.class_rating%1))}" />
 								<c:forEach var="num" begin="1" end="5" step="1">
-									<c:if test="${i }"></c:if>
-									<img src="${cp }/resources/img/star.png" width="15px">
+									<c:choose>
+										<c:when test="${num  <= grade}">
+											<img src="${cp }/resources/img/star.png" width="15px">
+										</c:when>
+										<c:otherwise>
+											<img src="${cp }/resources/img/star_gray.png" width="15px">
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</font>
-							<span>	(${vo.class_rating })</span>						
+							<span>	(${vo.class_rating })${grade }</span>						
 						</div>
 						<div class="start-date">
 							<font>결제일 : ${vo.pay_regdate }</font>&nbsp;|&nbsp;
@@ -117,13 +123,34 @@
 		</div>
 </div>
 <script type="text/javascript"> 
+
 		//회원 신청서 정보 모달 띄우기
-		function showModal(applyNum){
-			var url = "${cp}/receipt/modal?class_num="+applyNum;
-		    $('.modal-container').load(url,function(result){
+		function writeOk(class_num){		
+			var url = "${cp}/review/modal?class_num="+class_num;
+			   $('.modal-container').load(url,function(result){
 				$('#myModal').modal();
-			});
+			});		
 		}
+		
+		// 리뷰작성 여부 체크
+		function showModal(class_num){
+			var check = true;
+			$.ajax({
+			    type: "post",
+			    dataType: "text",
+			    url: "${cp}/review/writeOk",
+			    data: {class_num: class_num},
+			    success: function(data) {
+			    	if(data == 'success'){
+			    		alert('이미 리뷰를 작성하셨습니다.');
+			    	}else{
+			    		writeOk(class_num);
+			    	}
+			    }
+			});
+			return check;
+		}
+		
 		var pageNum = 1;
 		
 		
@@ -186,7 +213,6 @@
 		}
 		
 		function classFinish(apply_num){
-
 			if (confirm("첫수업 완료시 수업완료를 해주세요.\n정말 완료하시겠습니까?") == true){    
 
 				$.ajax({
@@ -208,108 +234,4 @@
 			    return;
 			}
 		}
-		
-		function reviewRegi(Id,status){
-			// 수업 id 넘버 받아오기. ajax 로 던지기
-			// status ( 0:등록,1:수정,2:삭제);
-
-			if ($('#reviewContent'+Id).val() == '')
-			{
-				alert('리뷰 내용을 등록해주세요.');
-				return false;
-
-			}
-
-			if ($('#priceScore'+Id).val() == '')
-			{
-				alert('별점을 선택해주세요.');
-				return false;
-
-			}
-			
-			var p = [];
-            var content_data = $('#reviewContent'+Id).val();
-            content_data = content_data.replace(/&/gi,"%26");
-			p.push('talentId='+Id);	
-			p.push('status='+status);
-			p.push('content='+content_data);
-			p.push('priceScore='+$('#priceScore'+Id).val());
-
-			var pars = p.join('&');
-			
-			var Ajax = new Ajax2();
-			Ajax.init('/My/MyTuteeProc.php', {
-				method: 'post'
-				, parameters: pars
-				, idTarget: ''
-				, oSelf: this
-				, onCreate: function(){}
-				, onComplete: function(oXHR)
-				{	
-					if(oXHR.responseText =='0000')
-					{
-						if(status == 0){ //신규등록 status 0
-							alert('리뷰 작성이 완료 되었습니다');
-							location.reload();
-						}else if(status == 1){ //수정 status 1
-							alert('리뷰 수정이 완료 되었습니다');
-							location.reload();
-						}else if(status == 2){ //삭제 status 2
-							alert('리뷰 삭제가 완료 되었습니다');
- 							location.reload();
-						}
-					}
-					else
-					{
-						alert(oXHR.responseText);
-					}
-				}
-			});			
-		}
-
-		function review(elm){
-			if($(elm).parent().parent().next('.review-info').css('display')!='none')
-			{
-				$(elm).find('.arrw-box').children('img').show();
-				$(elm).find('.arrw-box').find('.up').hide();
-				$(elm).parent().parent().next('.review-info').hide();
-			}else{
-				$(elm).find('.arrw-box').children('img').show();
-				$(elm).find('.arrw-box').find('.down').hide();
-				$(elm).parent().parent().next('.review-info').show();	
-			}
-		}
-		function fixtab(elm){
-			if($(elm).next('.tab').css('display')!='none')
-			{
-				$(elm).next('.tab').hide();
-			}else{
-				$(elm).next('.tab').show();	
-			}
-		}
-		function review_modify(val){
-			var val = val;
-			$('#review'+val).hide();
-			$('#reviewModify'+val).show();
-		}
-
-		//별 시작
-	$('.stars i').click(function () {
-		var val = Number($(this).data('value'));
-	
-		var parent = $(this).parent();
-		var children = parent.children('i');
-		var childrenInput = parent.children('input');
-		
-		for (var i = 0; i < 5; i++) {
-			$(children[i]).removeClass('active');
-	
-			if (i < val) {
-				$(children[i]).addClass('active');
-			}
-		}
-	
-		$(parent.children('input')).val(val);
-		$(parent.children('font')).text(val+'.0');
-});
 </script>

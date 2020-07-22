@@ -20,4 +20,7 @@ public class ClassReviewService {
 	public int rcount(HashMap<String, Object> map) {
 		return dao.rcount(map);
 	}
+	public int writeOk(HashMap<String, Object> map) {
+		return dao.writeOk(map);
+	}
 }
