@@ -77,7 +77,7 @@
 						</c:if>
 						<c:if test="${vo.class_form=='1'}">
 							<a href="${cp}/onclass/community?class_num=${vo.class_num}">
-							<div class="button_gray cursor" style="float: right;">커뮤니티</div></a>
+							<div class="button_gray review-fold cursor on" style="float: left;">커뮤니티</div></a>
 						</c:if>
 						<div class="price"><font>￦</font><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.class_fee }" /></div>
 					</div>
