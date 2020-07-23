@@ -6,23 +6,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.allchwi.vo.community.CommunityVO;
+
 
 @Controller
 public class OnlineClassController {
@@ -37,28 +32,17 @@ public class OnlineClassController {
 		return "community/onlineCampus/fileuploadModal";
 	}
 	
-	@RequestMapping(value = "/community/save-product", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/community/save-product", method = RequestMethod.POST)
 	public void saveFile(
-			MultipartFile multipartFile, 
-			BindingResult bindingResult, Model model,HttpSession session) {
-		
-		System.out.println("aaaa");
-		String fileName = multipartFile.getOriginalFilename();
-		try {
-			System.out.println(session.getServletContext().getRealPath("resources/mediadFold"));
-			File file = new File(session.getServletContext().getRealPath("resources/mediadFold"), fileName);
-			multipartFile.transferTo(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-/*	public String upload(HttpSession session, @RequestParam("file") MultipartFile file) {
+			MultipartFile files, 
+			 Model model,HttpSession session) {
 		String uploadPath = 
-				session.getServletContext().getRealPath("/resources/mediadFold");
+				session.getServletContext().getRealPath("/resources/mediaFold");
 		
 		String commu_title =((CommunityVO)session.getAttribute("commuInfo")).getCommu_title();
+		int commu_num =((CommunityVO)session.getAttribute("commuInfo")).getCommu_num();
 		
-		String path = uploadPath+ File.separator+commu_title;
+		String path = uploadPath+ File.separator+commu_num+"_"+commu_title;
 		
 		File Folder = new File(path);
 
@@ -74,24 +58,27 @@ public class OnlineClassController {
 	         }else {
 		}
 		
-		String orgfileName = file.getOriginalFilename();
+		String orgfileName = files.getOriginalFilename();
 		
 		String savefileName = UUID.randomUUID() + "_" + orgfileName;
 		
-		File targetFile = new File(path + file.getOriginalFilename());
+		File fos = new File(path+File.separator + savefileName);
 		try {
-			InputStream fis = file.getInputStream();
 			
-			FileOutputStream fos = new FileOutputStream(path+File.separator + savefileName);
-			FileCopyUtils.copy(fis, fos);
-			fis.close();
-			fos.close();
+			files.transferTo(fos);
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);
+			FileUtils.deleteQuietly(fos);
 			e.printStackTrace();
 		}
-		return null;
-	}*/
+		/*
+		 * System.out.println("aaaa"); String fileName = files.getOriginalFilename();
+		 * try { System.out.println(session.getServletContext().getRealPath(
+		 * "resources/mediadFold")); File file1 = new
+		 * File(session.getServletContext().getRealPath("resources/mediadFold"),
+		 * fileName); files.transferTo(file1); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
+	}
 	
 	@RequestMapping(value = "/product-input-form")
     public String inputProduct(Model model) {
