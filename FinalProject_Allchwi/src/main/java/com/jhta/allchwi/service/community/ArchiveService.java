@@ -14,6 +14,15 @@ public class ArchiveService {
 	@Autowired
 	private ArchiveDAO dao;
 	
+	public int insert(ArchiveVO vo) {
+		return dao.insert(vo);
+	}
+	
+	public ArchiveVO getInfo(int room_num) {
+		return dao.getInfo(room_num);
+	}
+	
+	
 	public List<ArchiveVO> list(HashMap<String, Object>map){
 		return dao.list(map);
 	}

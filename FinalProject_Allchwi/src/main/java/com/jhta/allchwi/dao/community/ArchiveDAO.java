@@ -15,6 +15,15 @@ public class ArchiveDAO {
 	private SqlSession session;
 	private String NAMESPACE="com.jhta.mybatis.mapper.CommunityArchiveMapper";
 	
+	public int insert(ArchiveVO vo) {
+		return session.insert(NAMESPACE+".insert", vo);
+	}
+	
+	
+	public ArchiveVO getInfo(int room_num) {
+		return session.selectOne(NAMESPACE+".getInfo", room_num);
+	}
+	
 	
 	public List<ArchiveVO> list(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".list",map);

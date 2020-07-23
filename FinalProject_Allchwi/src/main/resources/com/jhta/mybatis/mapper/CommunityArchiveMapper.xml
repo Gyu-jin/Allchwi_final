@@ -3,6 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.CommunityArchiveMapper">
+
+	<insert id="insert" parameterType="com.jhta.allchwi.vo.community.ArchiveVO" useGeneratedKeys="true" keyProperty="room_num">
+		insert into ref_room values(0,#{comu_num},#{room_title},#{room_content},now(),0,#{horsehead},#{org_filename},#{save_filename},#{filesize})
+		<selectKey keyProperty="room_num" resultType="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<select id="getInfo" resultType="com.jhta.allchwi.vo.community.ArchiveVO" parameterType="int">
+		select * from ref_room where room_num=#{room_num}
+	</select>
+	
+	
 	<select id="list" resultType="com.jhta.allchwi.vo.community.ArchiveVO" parameterType="hashmap">
 		select * from ref_room
 		limit #{startRow},6
@@ -37,4 +51,10 @@
 	<select id="prev" parameterType="int" resultType="com.jhta.allchwi.vo.community.ArchiveVO">
 	   <![CDATA[  select * from ref_room where room_num<#{room_num} order by room_num desc limit 1 ]]>
 	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

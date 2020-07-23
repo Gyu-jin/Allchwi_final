@@ -57,7 +57,12 @@
 		<p style="float:right">${vo.room_view}</p>
 		<div class="card card-body">
 		
+		
+		
 		${vo.room_content }
+		${vo.org_filename }
+		${vo.filesize }
+		<a href="${cp }/community/download?room_num=${vo.room_num }">다운로드 </a>
 		
 		
 		<br>	

@@ -19,6 +19,15 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/admin/**" location="/resources/" />
 	
+	<beans:bean id="filedownloadView" class="com.jhta.allchwi.view.DownloadView" />
+	
+	<!-- 뷰이름과 동일한 뷰로 응답하는 뷰리절버 등록 -->
+	<beans:bean
+	 class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+	
 	<!--///////////////////// tile 관련 설정 //////////////////// -->
 	<!-- 설정파일 읽어오는 설정. -->
 	<beans:bean
