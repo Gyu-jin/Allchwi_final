@@ -48,4 +48,8 @@ public class ClassApplyService {
 	public int check(HashMap<String, Object> map) {
 		return apply_dao.check(map);
 	}
+	
+	public List<ClassApplyDateInfoVO> applyinfo(HashMap<String, Object> map){
+		return apply_dao.applyinfo(map);
+	}
 }

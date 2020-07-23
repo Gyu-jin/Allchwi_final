@@ -101,10 +101,15 @@ public class ClassApplyController {
 
 	// 수업신청 성공 시 결과 정보 가져와서 success.jsp로 가져가기..
 	@RequestMapping(value = "/class/success", method = RequestMethod.GET)
-	public String goSuccess(String date_num, Model model) {
-		System.out.println("성공!");
-		model.addAttribute("date_num", date_num);
-	
+	public String goSuccess(HttpSession session, int class_num, Model model) {
+		System.out.println("ClassApplyController : 수업 신청 성공!");
+		int ml_num = (int) session.getAttribute("ml_num");
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("ml_num",ml_num);
+		map.put("class_num",class_num);
+		List<ClassApplyDateInfoVO> list = classApply_service.applyinfo(map);
+				
+		model.addAttribute("list", list);	
 		return ".classapply.success";
 	}
 }

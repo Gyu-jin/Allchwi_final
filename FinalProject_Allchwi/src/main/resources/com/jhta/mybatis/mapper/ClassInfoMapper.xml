@@ -143,7 +143,7 @@
 	<select id="list" parameterType="hashmap" resultType="classinfo">
 		select c.class_num, class_title, tutor_nickname, class_price, class_hour, class_count, 
 		bcategory_num, bcategory_name,scategory_name, loc.sloc_num, pro_num,
-		date_num, class_date, loc.*, cover.cover_num, class_regdate
+		date_num, class_date, loc.bloc_name , loc.sloc_name, cover.cover_num, class_regdate
 		from 
 				(
 					select s.bcategory_num, bcategory_name, scategory_num, scategory_name 
@@ -155,7 +155,7 @@
 				(
 					select sloc_num, sloc_name, bloc_name 
 					from  small_location s, big_location b 
-					where s.bloc_num=s.bloc_num
+					where s.bloc_num=b.bloc_num
 				)loc,
 				( 
 					SELECT  class_num , cover_num , ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
@@ -174,7 +174,7 @@
 		<include refid="sloc"/>		
 		<include refid="date"/>
 		<include refid="month"/>
-		group by class_num
+		
 		order by class_num desc
 		limit #{startRow},3
 	</select>

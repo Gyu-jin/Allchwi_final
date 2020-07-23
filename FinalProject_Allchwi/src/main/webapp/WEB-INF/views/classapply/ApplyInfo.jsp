@@ -142,13 +142,14 @@
 
 		</div>
 		<c:forEach var="vo" items="${list}">
+			
+			<div class="class_title">
+				<h3 onclick="location.href='${cp}/class/classDetail/class_num=${vo.class_num }'"
+				style="cursor: pointer">${vo.class_title }</h3>
+			</div>
 			<div class="date">
 				*수업 신청서 제출일 :
 				<fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd" />
-			</div>
-			<div class="class_title">
-				<h3 onclick="location.href='/Talent/Detail/26923'"
-					style="cursor: pointer">${vo.class_title }</h3>
 			</div>
 			<div class="apply">
 				<div class="pf_box">

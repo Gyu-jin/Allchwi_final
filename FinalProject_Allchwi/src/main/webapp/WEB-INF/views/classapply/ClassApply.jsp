@@ -605,15 +605,15 @@ img {
 
 	                //성공시 이동할 페이지
 	                var formData = $("#applyForm").serialize();
-
-	        		var date_num=$("input[name=classdate]:checked").val();
+	                var class_num=$("input[name='class_num']").val();
+	        		
 	        		
 	        		
 	        		$.post("${cp}/class/applyOk",formData , function(data) {
 	        			console.log("콜백" + data);
 	        			
 	        			if(data=="success"){
-
+	        				
 	                        msg = '결제가 완료되었습니다.';
 	                        msg += '\n고유ID : ' + rsp.imp_uid;
 	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
@@ -622,7 +622,7 @@ img {
 	                        
 	                        alert(msg);
 	        				
-	        				location.href="${cp}/class/success?date_num="+date_num+"&data="+data;
+	        				location.href="${cp}/class/success?class_num="+class_num;
 	        			}else if(data=="fail"){
 	        				alert("수업 신청 오류;");
 	        				location.href="${cp}/";

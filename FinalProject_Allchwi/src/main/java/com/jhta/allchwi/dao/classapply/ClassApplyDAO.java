@@ -26,4 +26,8 @@ public class ClassApplyDAO {
 	public int check(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".check",map);
 	}
+	
+	public List<ClassApplyDateInfoVO> applyinfo(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".applyinfo",map);
+	}
 }

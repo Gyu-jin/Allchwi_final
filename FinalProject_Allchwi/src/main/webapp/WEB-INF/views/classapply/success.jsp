@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 @charset "UTF-8";
 
@@ -120,30 +121,27 @@
 	padding:20px;
 }
 </style>
-<script>
-	$(document).ready(function(){
-		
-	});
-</script>
-<a href="${cp }/">홈으로 돌아가기</a>
+
+
 <div class="container">
 	<div class="tutor_cont">
 		<div class="title-box">
-			<h1>${date_num }번 수업 신청 성공!</h1>
+			<h1>수업 신청 성공!</h1>
 			
 		</div>
-		<c:forEach var="vo" items="${data}">
-			<div class="date">*수업 신청서 제출일 : <fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd" /></div>
+		<c:forEach var="vo" items="${list}">
+			
 			<div class="class_title">
-				<h3 onclick="location.href='/Talent/Detail/26923'"
+				<h3 onclick="location.href='${cp}/class/classDetail/class_num=${vo.class_num }'"
 				style="cursor: pointer">${vo.class_title }</h3>
 			</div>
+			<div class="date">*수업 신청서 제출일 : <fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd" /></div>
 			<div class="apply">
 				<div class="pf_box">
 					<div class="pf"
 						style="background-image: url('${cp}/mypage/getimg?pro_num=${vo.pro_num}')"></div>
 					<p class="triangle-border top gray" style="margin-top: 50px">
-						신청해 주셔서 정말 감사합니다. <br> <br> 결제 후 ${vo.tutor_nickname }님이 수업 신청서를 확인 할
+						신청해 주셔서 정말 감사합니다. <br> <br> 결제 후 " ${vo.tutor_nickname } "님이 수업 신청서를 확인 할
 						때까지 잠시만 기다려주세요. 신청서 확인이 완료되면 회원님께 직접 연락을 드립니다!
 					</p>
 				</div>
@@ -155,7 +153,7 @@
 							</div>
 						</div>
 						<div class="payend">
-							<div class="center5">수업 신청 승인 대기중입니다.</div>
+							<div class="center5">수업 신청이 완료되었습니다.</div>
 						</div>
 						<div class="payend">
 							<div class="center4">신청일로부터 10일 내에 신청승인이 완료됩니다!</div>
