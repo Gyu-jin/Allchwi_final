@@ -38,8 +38,8 @@ public class MemberLoginService{
 	private ProfileImgDAO pid;
 	
 	//아이디 중복확인
-	public MemberLoginVO idCheck(String id) {
-		return mld.idCheck(id);
+	public MemberLoginVO idCheck(HashMap<String, Object> hm) {
+		return mld.idCheck(hm);
 	}
 	//현재 비밀번호 일치 여부 확인
 	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {
@@ -49,7 +49,7 @@ public class MemberLoginService{
 	public int changePwd(HashMap<String, Object> hm) {
 		return mld.changePwd(hm);
 	}
-	//회원가입시 트랜잭션 처리를 위해 인터페이스 상속
+	//a 올취페이지 통해 회원가입시 트랜잭션 처리를 위해 인터페이스 상속
 	@Transactional
 	public int joinMember(HttpSession session, MemberLoginVO mlv, MemberInfoVO miv) throws Exception{
 //		인터페이스로 상속을 받아 진행한 상황에서 발생(캐스팅 오류 발생)
@@ -57,7 +57,7 @@ public class MemberLoginService{
 //		a 방법이 없을 경우 @supresswarning 어노테이션 추가하여 경고창만 없앰(실질적인 해결방법은 아님..)
 //		HashMap<String, Object> hm = (HashMap<String, Object>) data;
 		//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
-		MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), mlv.getPwd(), 0, 0, null, 'n');
+		MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), mlv.getPwd(), 0, 0, null, 'n',0);
 		int a = mld.join(imlv);
 		//a 회원가입시 1000포인트 적립 / s => save[적립]
 		PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');
@@ -125,7 +125,7 @@ public class MemberLoginService{
 		@Transactional
 		public int kakaoJoinMember(HttpSession session, HashMap<String, Object> kakaoUserInfo) throws Exception{
 			//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
-			MemberLoginVO imlv = new MemberLoginVO(0, (String)kakaoUserInfo.get("email"), null, 0, 0, null, 'n');
+			MemberLoginVO imlv = new MemberLoginVO(0, (String)kakaoUserInfo.get("email"), null, 0, 0, null, 'n',1);
 			int a = mld.join(imlv);
 			//a 회원가입시 1000포인트 적립 / s => save[적립]
 			PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');

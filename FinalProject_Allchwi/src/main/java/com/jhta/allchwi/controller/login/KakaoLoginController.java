@@ -33,15 +33,18 @@ public class KakaoLoginController {
 	}
 	
 	@RequestMapping(value = "/login/kakaologin")
-	public String kakaologin(@RequestParam("code") String code, HttpSession session, Model model) {
+	public String kakaologin(@RequestParam("code") String code, HttpSession session, Model model, HashMap<String, Object> map) {
 		//a url에 담겨져 있는  code 값을 통해 
 		String access_Token = kls.getAccessToken(code);
 		HashMap<String, Object> kakaoUserInfo = kls.getUserInfo(access_Token);
 		String kakaoEmail = (String)kakaoUserInfo.get("email");
 		//kakao 이메일 계정이 있을 경우 
 		if(kakaoEmail != "" || kakaoEmail != null) {
+			//kakao 이메일과 카카오 유저번호 map에 담아주기
+			map.put("id",kakaoEmail);
+			map.put("kakaoUser",1);
 			//a 카카오 이메일로 회원정보가 있는지 검색
-			MemberLoginVO infoCheckVo = mls.idCheck(kakaoEmail);
+			MemberLoginVO infoCheckVo = mls.idCheck(map);
 			//a 회원정보 존재 -> 가입된 회원
 			if (infoCheckVo != null) {
 				//a 로그인번호를 세션에 저장
@@ -60,7 +63,7 @@ public class KakaoLoginController {
 					int result = mls.kakaoJoinMember(session, kakaoUserInfo);
 					if(result == 4) {
 						//a 저장된 회원정보 중 로그인테이블에서 구분을 위해  값을 vo에 담기
-						MemberLoginVO getInfoVo = mls.idCheck(kakaoEmail);
+						MemberLoginVO getInfoVo = mls.idCheck(map);
 						//a 로그인번호를 세션에 저장
 						session.setAttribute("ml_num", getInfoVo.getMl_num());
 						//a kakao회원인지 아닌지 구분을 위해 세션에 토큰 저장

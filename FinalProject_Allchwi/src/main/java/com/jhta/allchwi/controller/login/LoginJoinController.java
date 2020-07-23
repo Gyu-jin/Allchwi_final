@@ -1,5 +1,7 @@
 package com.jhta.allchwi.controller.login;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -41,13 +43,14 @@ public class LoginJoinController {
 		}
 	}
 	
-	//ajax로 아이디 중복확인
+	//ajax로 아이디 중복확인(올취에서 회원가입할 경우)
 	@RequestMapping(value = "/CheckID.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String idCheck(String id) {
-		System.out.println(id);
-		//0 아이디 검색 결과를 vo에 넣어줌.
-		MemberLoginVO vo = mls.idCheck(id);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("kakaoUser", 0);
+		MemberLoginVO vo = mls.idCheck(map);
 		System.out.println(vo);
 		JSONObject json = new JSONObject();
 		//0 검색된 아이디가 존재하면

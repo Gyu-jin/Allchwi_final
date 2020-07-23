@@ -19,9 +19,9 @@ public class MemberLoginDAO {
 	public int join(MemberLoginVO mlv) {
 		return session.insert(NAMESPACE + ".member_join", mlv);
 	}
-	//1 id값으로 회원 조회
-	public MemberLoginVO idCheck(String id) {
-		return session.selectOne(NAMESPACE + ".idCheck", id);
+	//1 id, 카카오유저 번호 값으로 회원 조회
+	public MemberLoginVO idCheck(HashMap<String, Object> hm) {
+		return session.selectOne(NAMESPACE + ".idCheck", hm);
 	}
 	//2 id값으로 회원 비밀번호 검색하여 변경
 	public int searchPwd(HashMap<String, Object> hm) {
