@@ -1,5 +1,6 @@
 package com.jhta.allchwi.controller.classapply;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import com.jhta.allchwi.service.classapply.ClassApplyService;
 import com.jhta.allchwi.service.classopen.ClassDateService;
 import com.jhta.allchwi.service.classopen.ClassInfoService;
 import com.jhta.allchwi.service.point.PointService;
+import com.jhta.allchwi.vo.classapply.ClassApplyDateInfoVO;
 import com.jhta.allchwi.vo.classapply.ClassApplyVO;
 import com.jhta.allchwi.vo.classapply.PaymentVO;
 import com.jhta.allchwi.vo.classopen.ClassDateVO;
@@ -97,11 +99,12 @@ public class ClassApplyController {
 
 	}
 
-	// 수업신청 성공 시 페이지 이동하는 메소드
+	// 수업신청 성공 시 결과 정보 가져와서 success.jsp로 가져가기..
 	@RequestMapping(value = "/class/success", method = RequestMethod.GET)
 	public String goSuccess(String date_num, Model model) {
 		System.out.println("성공!");
 		model.addAttribute("date_num", date_num);
+	
 		return ".classapply.success";
 	}
 }

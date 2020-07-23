@@ -120,12 +120,16 @@
 	padding:20px;
 }
 </style>
-
+<script>
+	$(document).ready(function(){
+		
+	});
+</script>
 <a href="${cp }/">홈으로 돌아가기</a>
 <div class="container">
 	<div class="tutor_cont">
 		<div class="title-box">
-			<h1>수업 신청 성공!</h1>
+			<h1>${date_num }번 수업 신청 성공!</h1>
 			
 		</div>
 		<c:forEach var="vo" items="${data}">

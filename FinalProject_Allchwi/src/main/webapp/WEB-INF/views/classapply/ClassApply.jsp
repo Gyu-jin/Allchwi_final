@@ -590,7 +590,7 @@ img {
 	      console.log(final_price);
 	        IMP.request_pay({
 	            pg : 'html5_inicis',
-	            pay_method : 'card',
+	            pay_method : 'vbank',
 	            merchant_uid : 'merchant_' + new Date().getTime(),
 	            name : 'AllChwi Pay',
 	            amount : final_price,
