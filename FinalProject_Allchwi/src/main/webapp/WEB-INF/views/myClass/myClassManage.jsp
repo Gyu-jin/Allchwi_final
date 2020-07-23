@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${cp}/resources/vendor/bootstrap/js/bootstrap.js"></script>
 <link rel="stylesheet"
 	href="/allchwi/resources/css/myClass/myClassManage.css">
@@ -18,6 +17,7 @@
 					<c:forEach var="mc" items="${myClass}">
 						<option value="${mc.class_num}" <c:if test="${mc.class_num eq class_num}"> selected</c:if>>${mc.class_title}</option>
 					</c:forEach>
+						<option value="-1" <c:if test="${'-1' eq class_num}"> selected</c:if>>기타</option>
 				</select>
 			</c:when>
 		</c:choose>

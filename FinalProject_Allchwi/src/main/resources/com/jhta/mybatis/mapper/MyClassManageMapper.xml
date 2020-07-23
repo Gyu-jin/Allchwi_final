@@ -17,7 +17,7 @@
 		(
 		select ca.apply_num, ca.date_num, ca.ml_num, mi.pro_num, mi.mb_name, mi.mb_nickname,ca.apply_auth, p.final_price, p.class_fee, ca.apply_regdate
 		from allchwi.class_apply ca, allchwi.member_info mi, allchwi.payment p
-		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num 
+		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num <include refid="optionApplyAuth"/>
 		) bb
 		on aa.date_num = bb.date_num
 		<include refid="optionClassNum"/>
@@ -25,8 +25,14 @@
 		limit #{startRow}, 5
 	</select>
 	<!-- a 튜터번호가 있을 경우 아래 조건을 추가함 -->
+	<sql id="optionApplyAuth">
+		<if test="class_num == -1">
+			and apply_auth > 1
+		</if>
+	</sql>
+	<!-- a 지난 신청서들을 모두 출력하기 위한 조건-->
 	<sql id="optionClassNum">
-		<if test="class_num != null and class_num != '' and class_num != 0">
+		<if test="class_num != null and class_num != '' and class_num != 0 and class_num != -1">
 			where class_num = #{class_num}
 		</if>
 	</sql>
@@ -51,7 +57,7 @@
 		(
 		select ca.apply_num, ca.date_num, ca.ml_num, mi.pro_num, mi.mb_name, mi.mb_nickname,ca.apply_auth, p.final_price, p.class_fee, ca.apply_regdate
 		from allchwi.class_apply ca, allchwi.member_info mi, allchwi.payment p
-		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num 
+		where ca.ml_num = mi.ml_num and ca.apply_num = p.apply_num <include refid="optionApplyAuth"/>
 		) bb
 		on aa.date_num = bb.date_num
 		<include refid="optionClassNum"/>
