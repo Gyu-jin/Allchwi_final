@@ -32,7 +32,7 @@
         <a class="text-muted" href="#">Subscribe</a>
       </div>
       <div class="col-6 text-center" id="h-title">
-        <a href="${cp }/onclass/community">${vo.subtitle}</a>
+        <a href="${cp }/onclass/community">${vo.commu_title}</a>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-center">
         <a class="text-muted" href="#" aria-label="Search">

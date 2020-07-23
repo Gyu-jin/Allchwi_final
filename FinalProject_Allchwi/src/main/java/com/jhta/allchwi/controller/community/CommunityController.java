@@ -28,13 +28,13 @@ public class CommunityController {
 		int ml_num = (int)session.getAttribute("ml_num");
 		
 		map.put("ml_num", ml_num);
-		System.out.println(class_num);
+		System.out.println(class_num + "  " +ml_num );
 		map.put("class_num", class_num);
 		
 		CommunityVO vo = service.goCommu(map);
 		
 		if(vo!=null) {
-			System.out.println(vo.getCommu_num());
+			System.out.println(vo.getCommu_num() + "  " + vo.getClass_num() + "  " +vo.getCommu_title() );
 			model.addAttribute("vo",vo);
 			session.setAttribute("commu_num", vo.getCommu_num());
 			return ".community";			
