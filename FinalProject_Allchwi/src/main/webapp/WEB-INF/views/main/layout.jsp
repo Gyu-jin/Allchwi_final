@@ -13,7 +13,9 @@
 <meta name="author" content="">
 
 <title>views/main/layout.jsp</title>
-<!-- Bootstrap core JavaScript-->
+<!-- font -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"><!-- Bootstrap core JavaScript-->
 <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
 <script
 	src="${cp}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -33,7 +35,30 @@
 <!-- Custom styles for admin template-->
 <link href="${cp}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
+<style>
+@font-face{
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 10px;
+}
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Do Hyeon', sans-serif;
+}
+mark,p,a,span,ul,li{
+	font-family: 'Nanum Gothic', sans-serif;
+}
+a,span{
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	text-decoration: none;
+}
 
+a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+</style>
 <body id="page-top">
 	<!-- Page Wrapper -->
 	<div id="wrapper">

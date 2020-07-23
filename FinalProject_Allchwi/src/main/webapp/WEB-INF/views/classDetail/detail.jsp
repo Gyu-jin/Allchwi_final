@@ -247,74 +247,74 @@
 											</li>
 										</ul>
 									</div>
-								</c:if>
-								<!-- 리뷰 목록 -->
-								<div class="review_list" id="bookmarkReview">
-									<ul>
-										<div id="innerReviewDiv">
-											<c:if test="${empty rlist}">
-												<h3>작성된 리뷰 없음</h3>
-											</c:if>
-											<c:forEach var="rlist" items="${rlist }">
-												<li><dl>
-														<dt>
-															<p class="profile_img"
-																style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
-															<p class="name">${rlist.miv.mb_name }</p>
-														</dt>
-														<dd>${rlist.review_content }</dd>
-														<dd class="date">
-															<fmt:formatDate value="${rlist.review_regdate }"
-																pattern="yyyy-MM-dd" />
-														</dd>
 
-													</dl></li>
-											</c:forEach>
-										</div>
-									</ul>
-								</div>
-								<!-- 리뷰페이징 -->
-								<div id="paging">
-									<ul class='pagination justify-content-center'
-										style='margin: 20px 0'>
-										<c:choose>
-											<c:when test="${rpu.pageNum > rpu.startPageNum}">
-												<li class="page-item"><a class="page-link"
-													href="${cp }/classDetail/detail?pageNum=${rpu.pageNum-1 }&class_num=${class_num}">이전</a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="page-item disabled"><a class="page-link"
-													href="#">이전</a></li>
-											</c:otherwise>
-										</c:choose>
-										<c:forEach var='i' begin='${rpu.startPageNum }'
-											end='${rpu.endPageNum }'>
+									<!-- 리뷰 목록 -->
+									<div class="review_list" id="bookmarkReview">
+										<ul>
+											<div id="innerReviewDiv">
+												<c:forEach var="rlist" items="${rlist }">
+													<li><dl>
+															<dt>
+																<p class="profile_img"
+																	style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+																<p class="name">${rlist.miv.mb_name }</p>
+															</dt>
+															<dd>${rlist.review_content }</dd>
+															<dd class="date">
+																<fmt:formatDate value="${rlist.review_regdate }"
+																	pattern="yyyy-MM-dd" />
+															</dd>
+
+														</dl></li>
+												</c:forEach>
+											</div>
+										</ul>
+									</div>
+									<!-- 리뷰페이징 -->
+									<div id="paging">
+										<ul class='pagination justify-content-center'
+											style='margin: 20px 0'>
 											<c:choose>
-												<c:when test='${i==rpu.pageNum}'>
-													<li class="page-item active"><a class="page-link"
-														href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
-														style='background:#7185bb; color:white;'>${i }
-													</a></li>
+												<c:when test="${rpu.pageNum > rpu.startPageNum}">
+													<li class="page-item"><a class="page-link"
+														href="${cp }/classDetail/detail?pageNum=${rpu.pageNum-1 }&class_num=${class_num}">이전</a></li>
 												</c:when>
 												<c:otherwise>
-													<li class="page-item"><a class="page-link"
-														href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'>${i }
-													</a></li>
+													<li class="page-item disabled"><a class="page-link"
+														href="#">이전</a></li>
 												</c:otherwise>
 											</c:choose>
-										</c:forEach>
-										<c:choose>
-											<c:when test="${rpu.totalPageCount>rpu.pageNum }">
-												<li class="page-item"><a class="page-link"
-													href="${cp }/classDetail/detail?pageNum=${rpu.pageNum+1 }&class_num=${class_num}">다음</a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="page-item disabled"><a class="page-link"
-													href="#">다음</a></li>
-											</c:otherwise>
-										</c:choose>
-									</ul>
-								</div>
+											<c:forEach var='i' begin='${rpu.startPageNum }'
+												end='${rpu.endPageNum }'>
+												<c:choose>
+													<c:when test='${i==rpu.pageNum}'>
+														<li class="page-item active"><a class="page-link"
+															href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
+															style='background: #7185bb; color: white;'>${i } </a></li>
+													</c:when>
+													<c:otherwise>
+														<li class="page-item"><a class="page-link"
+															href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'>${i }
+														</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${rpu.totalPageCount>rpu.pageNum }">
+													<li class="page-item"><a class="page-link"
+														href="${cp }/classDetail/detail?pageNum=${rpu.pageNum+1 }&class_num=${class_num}">다음</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item disabled"><a class="page-link"
+														href="#">다음</a></li>
+												</c:otherwise>
+											</c:choose>
+										</ul>
+									</div>
+								</c:if>
+								<c:if test="${empty rlist}">
+									<h3>작성된 리뷰 없음</h3>
+								</c:if>
 								<!-- ///리뷰페이징끝 -->
 							</div>
 						</div>

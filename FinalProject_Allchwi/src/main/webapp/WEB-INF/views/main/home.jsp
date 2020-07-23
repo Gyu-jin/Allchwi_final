@@ -4,6 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- home.jsp -->
 <style>
+
 .carousel-inner {
 	position: relative;
 	width: 70%;

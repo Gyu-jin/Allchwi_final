@@ -113,39 +113,40 @@ function qnaList(pageNum){
 		 +"</div>";
 		
 	  });
-	  str+="<div id='paging'>"
-		  + "<ul class='pagination justify-content-center' style='margin: 20px 0'>"
-		      if(pageNum > pu.startPageNum){
+	  if(qlist=''){
+		  str+="<div id='paging'>"
+			  + "<ul class='pagination justify-content-center' style='margin: 20px 0'>"
+			      if(pageNum > pu.startPageNum){
+			    	  str+="<li class='page-item'>" 
+			    		  +"<a class='page-link' onclick='currPage("+(pageNum- 1)+")'>이전</a></li>";
+			      }else{
+			    	  str+= "<li class='page-item disabled'>" 
+		    	  		+"<a class='page-link' href='#'>이전</a></li>"; 
+			      }
+		  
+		  for (var j = pu.startPageNum; j <= pu.endPageNum; j++) {                                    
+		      if(j == pageNum) {
+		         str+="<li class='page-item'>"  
+		        	 +"<a class='page-link active' style='background:#7185bb; color:white;'>"+j+"</a></li>";
+		      } else {
+		    	  str+= "<li class='page-item' onclick='currPage("+j+")'>"
+		    	  		+"<a class='page-link'>"+j+"</a>"
+		    	  		+"</li>";
+		         
+		      }
+	      }      
+			  if(pu.totalPageCount>pageNum){
 		    	  str+="<li class='page-item'>" 
-		    		  +"<a class='page-link' onclick='currPage("+(pageNum- 1)+")'>이전</a></li>";
+		    		  +"<a class='page-link' onclick='currPage("+(pageNum+ 1)+")'>다음</a></li>";
 		      }else{
 		    	  str+= "<li class='page-item disabled'>" 
-	    	  		+"<a class='page-link' href='#'>이전</a></li>"; 
+			  		+"<a class='page-link' href='#'>다음</a></li>"; 
 		      }
-	  
-	  for (var j = pu.startPageNum; j <= pu.endPageNum; j++) {                                    
-	      if(j == pageNum) {
-	         str+="<li class='page-item'>"  
-	        	 +"<a class='page-link active' style='background:#7185bb; color:white;'>"+j+"</a></li>";
-	      } else {
-	    	  str+= "<li class='page-item' onclick='currPage("+j+")'>"
-	    	  		+"<a class='page-link'>"+j+"</a>"
-	    	  		+"</li>";
-	         
-	      }
-      }      
-		  if(pu.totalPageCount>pageNum){
-	    	  str+="<li class='page-item'>" 
-	    		  +"<a class='page-link' onclick='currPage("+(pageNum+ 1)+")'>다음</a></li>";
-	      }else{
-	    	  str+= "<li class='page-item disabled'>" 
-		  		+"<a class='page-link' href='#'>다음</a></li>"; 
-	      }
-	  +"</ul>"
-	  +"</div>";
-
-
-	  $(".qna_wrap").html(str);
+		  +"</ul>"
+		  +"</div>";
+		}
+	
+	  	$(".qna_wrap").html(str);
 	 });
 }
 function currPage(pageNum){
