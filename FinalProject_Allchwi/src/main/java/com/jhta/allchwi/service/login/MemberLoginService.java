@@ -115,6 +115,7 @@ public class MemberLoginService{
 	public void logout(HttpSession session) {
 		session.removeAttribute("ml_num");
 	    session.removeAttribute("tutor_auth");
+	    session.removeAttribute("access_Token");
 		//a 세션무효화 -> 세션에 담긴 값들을 모두 초기화
 		session.invalidate();
 	}

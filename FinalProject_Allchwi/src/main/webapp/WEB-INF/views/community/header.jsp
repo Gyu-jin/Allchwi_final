@@ -32,7 +32,7 @@
         <a class="text-muted" href="#">Subscribe</a>
       </div>
       <div class="col-6 text-center" id="h-title">
-        <a href="${cp }/onclass/community">Class Title and Community Name</a>
+        <a href="${cp }/onclass/community">${vo.subtitle}</a>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-center">
         <a class="text-muted" href="#" aria-label="Search">
@@ -43,7 +43,7 @@
     </div>
       <div class="nav-scroller py-1 mb-2">
 	    <nav class="nav d-flex justify-content-between">
-	      <a class="p-2 text-muted" href="#">공지사항</a>
+	      <a class="p-2 text-muted" href="${cp}/community/notice">공지사항</a>
 	      <a class="p-2 text-muted" href="${cp}/community/archive">자료실</a>
 	      <a class="p-2 text-muted" href="#">강의듣기</a>
 	      <a class="p-2 text-muted" href="${cp}/community/assignment">과제</a>
