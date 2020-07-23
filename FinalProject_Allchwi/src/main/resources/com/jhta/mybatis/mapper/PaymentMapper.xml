@@ -13,6 +13,7 @@
 	</update>
 	<select id="getFinished" parameterType="hashmap" resultType="pay">
 		select class_finish from payment where class_finish>0 and ml_num=#{ml_num} and class_num=#{class_num}
+		limit 1
 	</select>
 </mapper>
 
