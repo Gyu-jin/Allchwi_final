@@ -347,27 +347,7 @@ li {
 	margin-left: 24px;
 }
 /*페이징 css*/
-#paging>ul {
-	list-style-type: none;
-}
 
-#paging>ul li {
-	font-size: 1.1em;
-	display: inline-block;
-	float: left;
-	cursor: pointer;
-	padding: 0 3px;
-}
-
-#paging>ul>li:hover {
-	/*background: #fbfbfb;*/
-	/*font-weight:bold;*/
-	color: #0080ff;
-}
-
-#paging>ul>li.selected {
-	color: #0080ff;
-	font-size: 1.2em;
-	font-weight: bold;
-	cursor: default;
+#paging ul li a.active {
+	background:#7185bb; 
 }

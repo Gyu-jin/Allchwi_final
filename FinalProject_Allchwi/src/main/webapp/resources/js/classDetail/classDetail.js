@@ -23,6 +23,7 @@ $(function(){
 	$("#card-header collapse").click(function() {
 		$(this).addClass('show');
 	});
+	//페이지 로딩할때 리스트 불러오기
 	qnaList(1);
 
 		
@@ -113,28 +114,35 @@ function qnaList(pageNum){
 		
 	  });
 	  str+="<div id='paging'>"
-		  +"<ul>";
+		  + "<ul class='pagination justify-content-center' style='margin: 20px 0'>"
+		      if(pageNum > pu.startPageNum){
+		    	  str+="<li class='page-item'>" 
+		    		  +"<a class='page-link' onclick='currPage("+(pageNum- 1)+")'>이전</a></li>";
+		      }else{
+		    	  str+= "<li class='page-item disabled'>" 
+	    	  		+"<a class='page-link' href='#'>이전</a></li>"; 
+		      }
 	  
 	  for (var j = pu.startPageNum; j <= pu.endPageNum; j++) {                                    
 	      if(j == pageNum) {
-	         str += "<li class='selected'>["+j+"]</a>";
+	         str+="<li class='page-item'>"  
+	        	 +"<a class='page-link active' style='background:#7185bb; color:white;'>"+j+"</a></li>";
 	      } else {
-	         str += "<li onclick='currPage("+j+")'>"
-	         	 +"["+j+"]" 
-	         	 +"</li>"
+	    	  str+= "<li class='page-item' onclick='currPage("+j+")'>"
+	    	  		+"<a class='page-link'>"+j+"</a>"
+	    	  		+"</li>";
 	         
 	      }
-      }       
-	  str+="</ul>"
+      }      
+		  if(pu.totalPageCount>pageNum){
+	    	  str+="<li class='page-item'>" 
+	    		  +"<a class='page-link' onclick='currPage("+(pageNum+ 1)+")'>다음</a></li>";
+	      }else{
+	    	  str+= "<li class='page-item disabled'>" 
+		  		+"<a class='page-link' href='#'>다음</a></li>"; 
+	      }
+	  +"</ul>"
 	  +"</div>";
-//	  // 이전페이지 버튼
-//	  str += "<ul>"
-//      if(pu.pageNum > pu.startPageNum){
-//    	  str += "<a class='first' onclick='/allchwi/classDetail/qnalist?pageNum="+i+"'>처음</li >"
-//    	  str += "<li class='previous' onclick='/allchwi/classDetail/qnalist?pageNum="+ (pu.pageNum- 1) + "'>이전</li>"    
-//      }
-//	  str += "</ul>"
-
 
 
 	  $(".qna_wrap").html(str);
@@ -147,12 +155,13 @@ function currPage(pageNum){
 function sendReply(qna_ref) {
 	var reply_content=$("#reply_content"+qna_ref).val();
 	var class_num = $('#class_num').val();
+	var tutor_num = $('#tutor_num').val();
 	var ml_num = $('#ml_num').val();
 	if(reply_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
-		if (ml_num=='') {
-			alert('로그인이 필요합니다');
+		if (ml_num!=tutor_num) {
+			alert('튜터만 답변을 작성할 수 있습니다');
 		}else {
 			$.post('/allchwi/classDetail/qnareply', {
 				class_num: class_num,

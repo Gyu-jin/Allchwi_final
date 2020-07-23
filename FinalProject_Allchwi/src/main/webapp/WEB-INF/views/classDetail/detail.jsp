@@ -7,6 +7,7 @@
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
 <input type="hidden" id="ml_num" value="${ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
+<input type="hidden" id="tutor_num" value="${cdv.ml_num }">
 <input type="hidden" id="finished" value="${finished }">
 <div class="container-fluid" id="container_detail">
 	<div class="row">
@@ -273,27 +274,48 @@
 									</ul>
 								</div>
 								<!-- 리뷰페이징 -->
-								<div>
-									<c:forEach var='i' begin='${rpu.startPageNum }'
-										end='${rpu.endPageNum }'>
+								<div id="paging">
+									<ul class='pagination justify-content-center'
+										style='margin: 20px 0'>
 										<c:choose>
-											<c:when test='${i==rpu.pageNum}'>
-												<a
-													href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
-													style='text-decoration: none; font-weight: bold;'> <span
-													style='color: red'>[${i }]</span>
-												</a>
+											<c:when test="${rpu.pageNum > rpu.startPageNum}">
+												<li class="page-item"><a class="page-link"
+													href="${cp }/classDetail/detail?pageNum=${rpu.pageNum-1 }&class_num=${class_num}">이전</a></li>
 											</c:when>
 											<c:otherwise>
-												<a
-													href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
-													style='text-decoration: none;'> <span
-													style='color: gray'>[${i }]</span>
-												</a>
+												<li class="page-item disabled"><a class="page-link"
+													href="#">이전</a></li>
 											</c:otherwise>
 										</c:choose>
-									</c:forEach>
+										<c:forEach var='i' begin='${rpu.startPageNum }'
+											end='${rpu.endPageNum }'>
+											<c:choose>
+												<c:when test='${i==rpu.pageNum}'>
+													<li class="page-item active"><a class="page-link"
+														href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'
+														style='background:#7185bb; color:white;'>${i }
+													</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item"><a class="page-link"
+														href='${cp }/classDetail/detail?pageNum=${i}&class_num=${class_num}'>${i }
+													</a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										<c:choose>
+											<c:when test="${rpu.totalPageCount>rpu.pageNum }">
+												<li class="page-item"><a class="page-link"
+													href="${cp }/classDetail/detail?pageNum=${rpu.pageNum+1 }&class_num=${class_num}">다음</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item disabled"><a class="page-link"
+													href="#">다음</a></li>
+											</c:otherwise>
+										</c:choose>
+									</ul>
 								</div>
+								<!-- ///리뷰페이징끝 -->
 							</div>
 						</div>
 						<!-- //4.리뷰 -->
