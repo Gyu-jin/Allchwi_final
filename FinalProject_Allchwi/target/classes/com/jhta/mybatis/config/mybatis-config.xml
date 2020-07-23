@@ -55,6 +55,9 @@
 		<typeAlias type="com.jhta.allchwi.vo.community.AssignSubmitVO" alias="assigsubmit"/>
 		<!-- Commu-AssignData alias -->
 		<typeAlias type="com.jhta.allchwi.vo.community.AssignDataVO" alias="assigndata"/>
+		<!-- Commu-Notice alias -->
+		<typeAlias type="com.jhta.allchwi.vo.community.NoticeVO" alias="notice"/>
+		
 	</typeAliases>
 
 	<mappers>
@@ -115,6 +118,8 @@
 		<mapper resource="com/jhta/mybatis/mapper/AssignSubmitMapper.xml"/>	
 		<mapper resource="com/jhta/mybatis/mapper/AssignDataMapper.xml"/>	
 		
+		<!--a 커뮤니티 공지mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/CommunityNoticeMapper.xml"/>	
 	</mappers>
 </configuration>
 
