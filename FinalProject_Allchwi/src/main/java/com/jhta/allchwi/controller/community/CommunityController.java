@@ -35,8 +35,7 @@ public class CommunityController {
 		
 		if(vo!=null) {
 			System.out.println(vo.getCommu_num() + "  " + vo.getClass_num() + "  " +vo.getCommu_title() );
-			model.addAttribute("commuInfo",vo);
-			session.setAttribute("commu_num", vo.getCommu_num());
+			session.setAttribute("commuInfo", vo);
 			return ".community";			
 		}else {
 			return ".error.error";
