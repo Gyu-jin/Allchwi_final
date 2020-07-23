@@ -15,7 +15,9 @@
 		<result column="pro_num" property="pro_num"/>
 	</resultMap>
 	<resultMap type="classReview" id="classReview">
+		<result column="class_num" property="class_num"/>
 		<result column="review_num" property="review_num"/>
+		<result column="pro_num" property="pro_num"/>
 		<result column="curr_rating" property="curr_rating"/>
 		<result column="ready_rating" property="ready_rating"/>
 		<result column="kind_rating" property="kind_rating"/>
@@ -28,6 +30,8 @@
 		<result column="review_content" property="review_content"/>
 		<result column="review_status" property="review_status"/>
 		<result column="review_regdate" property="review_regdate"/>
+		<result column="tutor_nickname" property="tutor_nickname"/>
+		<result column="cnt" property="cnt"/>
 		<collection property="miv" resultMap="miv"/>
 		<collection property="pfv" resultMap="pfv"/>
 	</resultMap>
@@ -67,6 +71,22 @@
 		round(avg(time_rating),1) time_avg from class_review where class_num=#{class_num}
 		)a;
 
+	</select>
+	<select id="best_tutor" resultType="classReview">
+		select ci.class_num,ci.tutor_nickname,ci.pro_num,
+		truncate(sum(a.curr_avg+a.ready_avg+a.kind_avg+a.time_avg)/4,1) tot_avg,cnt
+		from(
+			select class_num,count(review_num) cnt,round(avg(curr_rating),1) curr_avg,
+			round(avg(ready_rating),1) ready_avg,
+			round(avg(kind_rating),1) kind_avg,
+			round(avg(time_rating),1) time_avg
+			from class_review
+			group by class_num
+		)a
+		join class_info ci
+		on ci.class_num=a.class_num
+		where ci.class_status=0
+		group by ci.class_num
 	</select>
 	
 </mapper>

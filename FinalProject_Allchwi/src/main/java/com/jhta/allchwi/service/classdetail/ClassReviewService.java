@@ -26,4 +26,7 @@ public class ClassReviewService {
 	public ClassReviewVO rate_avg(int class_num) {
 		return dao.rate_avg(class_num);
 	}
+	public List<ClassReviewVO> best_tutor(){
+		return dao.best_tutor();
+	}
 }

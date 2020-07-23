@@ -15,17 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jhta.allchwi.service.classdetail.ClassDetailService;
+import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.login.MemberInfoService;
 import com.jhta.allchwi.service.wishlist.WishListService;
 import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
+import com.jhta.allchwi.vo.classdetail.ClassReviewVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
 import com.jhta.allchwi.vo.wishlist.WishListVO;
 
 @Controller
 public class HomeController {
-	@Autowired
-	private MemberInfoService mis;
+	@Autowired private MemberInfoService mis;
 	@Autowired private ClassDetailService detail_service;
+	@Autowired private ClassReviewService crs;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale,HttpServletRequest req, Model model) {
@@ -40,9 +42,12 @@ public class HomeController {
 			//model에 vo 객체 담아 보내기
 			sc.setAttribute("mem", pfv);
 		}
-		
+		//인기수업
 		List<ClassDetailVO> top_list=detail_service.topFive();
 		model.addAttribute("top_list",top_list);
+		//리뷰좋은튜터
+		List<ClassReviewVO> best_tutor=crs.best_tutor();
+		model.addAttribute("best_tutor",best_tutor);
 		
 		return ".main";
 	}

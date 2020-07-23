@@ -91,13 +91,17 @@
 								<!-- 별점 -->
 								<div class="info">
 									<a class="starimg">
-										<c:if test="${not empty tot_avg}">
+										<c:if test="${not empty rlist}">
 										 	<fmt:formatNumber value="${rating.tot_avg }" pattern="0" type="number" var="tot_avg" /> 
 												<c:forEach var="index" begin="1" end="${tot_avg }">
 												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
 											</c:forEach> 
+											<c:forEach var="index" begin="1" end="${5-tot_avg }">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
+											</c:forEach>
 										</c:if>
-										<c:if test="${empty tot_avg}">
+										<c:if test="${empty rlist}">
 											<c:forEach var="index" begin="1" end="5">
 												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
 											</c:forEach>
@@ -255,7 +259,7 @@
 											</li>
 										</ul>
 									</div>
-
+									<br>
 									<!-- 리뷰 목록 -->
 									<div class="review_list" id="bookmarkReview">
 											<div id="innerReviewDiv">
@@ -264,7 +268,8 @@
 													<li><dl>
 															<dt>
 																<p class="profile_img"
-																	style="height: 86px; background-size: cover; background-position: center; background-image: url(//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png);"></p>
+																	style="height: 86px; background-size: cover; background-position: center; 
+																	background-image: url(${cp}/mypage/getimg?pro_num=${rlist.pfv.pro_num});"></p>
 																<p class="name">${rlist.miv.mb_name }</p>
 															</dt>
 															<dd>${rlist.review_content }</dd>

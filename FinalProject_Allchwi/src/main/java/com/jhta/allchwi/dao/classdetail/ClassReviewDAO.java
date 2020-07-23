@@ -29,4 +29,7 @@ public class ClassReviewDAO {
 	public ClassReviewVO rate_avg(int class_num) {
 		return session.selectOne(NAMESPACE+".rate_avg",class_num);
 	}
+	public List<ClassReviewVO> best_tutor() {
+		return session.selectList(NAMESPACE+".best_tutor");
+	}
 }

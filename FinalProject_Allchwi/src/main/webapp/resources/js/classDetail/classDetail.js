@@ -69,15 +69,14 @@ function qnaList(pageNum){
 	  $(qlist).each(function(i){
 	   var qna_regdate = new Date(qlist[i].qna_regdate);
 	   qna_regdate = qna_regdate.toLocaleDateString("ko-US")
-	   var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
 	   str += "<div class='qna_list'>" 
 		 + "<ul>"
 		 + "<li>"
 		 + "<input type='hidden' id='qna_ref' value='"+qlist[i].qna_ref+"'>"
 	     + "<dl>"
 	     + "<dt>"
-	     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center; background-image: url("+ img +")'>"
-	     + "</p>"
+	     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center;"
+	     + " background-image: url(/allchwi/mypage/getimg?pro_num="+qlist[i].pfv.pro_num+");'></p>"
 	     + "<p class='name'>"+qlist[i].miv.mb_name+"</p>"
 	     + "</dt>"
 	     + "<dd>" + qlist[i].qna_content  + "</dd>"
@@ -189,7 +188,6 @@ function replyList(qna_ref) {
 	 $.getJSON("/allchwi/classDetail/commlist?class_num=" + class_num + "&qna_ref=" + qna_ref
 			 , function(data){
 	  var str = "";
-	  var img = "//user-images.githubusercontent.com/65140754/87009744-92636f00-c200-11ea-88b2-252fb36f6fa3.png";
 	  $(data).each(function(){
 	    var qna_regdate = new Date(this.qna_regdate);
 	    qna_regdate = qna_regdate.toLocaleDateString("ko-US");
@@ -197,7 +195,7 @@ function replyList(qna_ref) {
 		   	+"<dl>"
 			+"<dt>"				
 			+"<p class='profile_img' style='width:26px; height: 26px; background-size: cover; background-position: center;"					
-			+ "background-image: url("+ img +")'>"
+			+ "background-image: url(/allchwi/mypage/getimg?pro_num="+this.pfv.pro_num+")'>"
 			+"<p class='name'>"+ this.miv.mb_name +"</p>"
 			+"</dt>"					
 			+"<dd>"+this.qna_content+"</dd>"

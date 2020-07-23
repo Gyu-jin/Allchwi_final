@@ -67,6 +67,39 @@ mark {
 	height: 40px;
 	border-radius: 50%;
 }
+.tutor ul{
+	position: relative;
+    width: 100%;
+    height: 100%;;
+    display: flex;
+}
+
+.tutor ul li .img {
+	overflow: hidden;
+	width: 180px;
+    height: 180px;;
+	margin-bottom: 10px;
+	border-radius: 50%;
+}
+.tutor ul li .t span{
+	display: block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+.tutor ul li .t .score{
+    text-align: center;
+}
+.roundImg{
+	width: 100%;
+}
+li {
+    list-style: none;
+}
+.sec01{
+	margin-bottom: 30px;
+}
 </style>
 <div>
 	<!-- 메인 배너  -->
@@ -147,7 +180,7 @@ mark {
 	<!-- 카테고리 아이콘 끝  -->
 
 
-	<!-- 인기수업 top 8?? -->
+	<!-- 인기수업 -->
 	<h1 class="h3 mb-0 text-gray-800">인기 수업 TOP 8!</h1>
 	<div class="container col-md-12">
 		<div class="row">
@@ -174,5 +207,24 @@ mark {
 			</c:forEach>
 		</div>
 	</div>
-	<!-- 이번주 시작 끝 -->
-</div>
+	<!-- //인기수업  -->
+	<!-- 평점높은튜터 -->
+	<h1 class="h3 sec01">높은 리뷰 평점</h1>
+	<div class="tutor">
+		<ul>
+			<c:forEach var="best_tutor" items="${best_tutor }">
+				<li style="width: 120px; margin-right: 100px;">
+				<a href="${cp}/classDetail/detail?class_num=${best_tutor.class_num}">
+						<div class="img">
+							<img class="roundImg"
+								src="${cp}/mypage/getimg?pro_num=${best_tutor.pro_num}">
+						</div>
+						<div class="t">
+							<span class="name">${best_tutor.tutor_nickname}</span> <span
+								class="score">${best_tutor.tot_avg}(${best_tutor.cnt})</span>
+						</div>
+				</a></li>
+
+			</c:forEach>
+		</ul>
+	</div>
