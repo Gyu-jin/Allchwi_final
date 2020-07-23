@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.classdetail.ClassDetailDAO;
 import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
+import com.jhta.allchwi.vo.wishlist.WishListVO;
 @Service
 public class ClassDetailService {
 	@Autowired private ClassDetailDAO  dao;
 	public ClassDetailVO getDetail(HashMap<String, Object> map) {
 		return dao.getDetail(map);
+	}
+	
+	public List<ClassDetailVO> topFive() {
+		return dao.topFive();
 	}
 }

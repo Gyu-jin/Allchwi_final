@@ -32,6 +32,10 @@ public class ClassDetailVO {
 	private List<ClassInfoVO> coverList;
 	private List<CertificateVO> certList;
 	private List<CurriculumVO> curriList;
+	//추가
+	private String class_date;
+	private int cover_num;
+	
 	public ClassDetailVO() {}
 	public ClassDetailVO(int class_num, int ml_num, int sloc_num, int pro_num, String tutor_nickname,
 			String tutor_phone, String class_address, int class_form, int class_max, int class_min, String class_title,
@@ -208,5 +212,17 @@ public class ClassDetailVO {
 	public void setCurriList(List<CurriculumVO> curriList) {
 		this.curriList = curriList;
 	}
-
+	public String getClass_date() {
+		return class_date;
+	}
+	public void setClass_date(String class_date) {
+		this.class_date = class_date;
+	}
+	public int getCover_num() {
+		return cover_num;
+	}
+	public void setCover_num(int cover_num) {
+		this.cover_num = cover_num;
+	}
+	
 }

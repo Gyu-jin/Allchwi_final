@@ -13,6 +13,7 @@
 		<result column="class_form" property="class_form"/>
 		<result column="class_max" property="class_max"/>
 		<result column="class_min" property="class_min"/>
+		<result column="class_date" property="class_date"/>
 		<result column="class_title" property="class_title"/>
 		<result column="class_price" property="class_price"/>
 		<result column="class_hour" property="class_hour"/>
@@ -67,5 +68,28 @@
 		from curriculum
 		where class_num=#{class_num}
 	</select>
-	
+		
+	<select id="topFive" resultType="classDetail">
+			select  count(*) cnt,ci.class_num,ci.ml_num,ci.pro_num,ci.tutor_nickname,ci.class_address,ci.class_form,
+			ci.class_title,ci.class_price,ci.scategory_num,	loc.sloc_name,loc.bloc_name, class_date, cover_num
+			FROM class_info ci,
+			(
+					select sloc_num, sloc_name, bloc_name 
+			        from  small_location s, big_location b 
+			        where s.bloc_num=b.bloc_num 
+			)loc, wishlist w, class_date cd,
+			   ( 
+					SELECT  class_num , cover_num , ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
+					FROM class_img group by class_num
+				) cover
+			where loc.sloc_num=ci.sloc_num
+	        and w.class_num=ci.class_num
+	        and cd.class_num=w.class_num
+	        and cover.class_num=ci.class_num
+	       	and class_auth=2 and class_status=0
+		 	group by class_num 
+			order by cnt desc
+	    	limit 0,8
+	     
+	</select>
 </mapper>

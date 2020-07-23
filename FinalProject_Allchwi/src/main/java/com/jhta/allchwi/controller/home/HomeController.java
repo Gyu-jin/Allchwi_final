@@ -1,6 +1,7 @@
 package com.jhta.allchwi.controller.home;
 
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
@@ -13,16 +14,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jhta.allchwi.service.classdetail.ClassDetailService;
 import com.jhta.allchwi.service.login.MemberInfoService;
+import com.jhta.allchwi.service.wishlist.WishListService;
+import com.jhta.allchwi.vo.classdetail.ClassDetailVO;
 import com.jhta.allchwi.vo.login.ProfileVO;
+import com.jhta.allchwi.vo.wishlist.WishListVO;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private MemberInfoService mis;
+	@Autowired private ClassDetailService detail_service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale,HttpServletRequest req) {
+	public String home(Locale locale,HttpServletRequest req, Model model) {
 		ServletContext sc=req.getSession().getServletContext();
 		sc.setAttribute("cp", req.getContextPath());
 		//a 로그인하여 세션에 회원번호가 저장되었을때 
@@ -34,6 +40,10 @@ public class HomeController {
 			//model에 vo 객체 담아 보내기
 			sc.setAttribute("mem", pfv);
 		}
+		
+		List<ClassDetailVO> top_list=detail_service.topFive();
+		model.addAttribute("top_list",top_list);
+		
 		return ".main";
 	}
 	

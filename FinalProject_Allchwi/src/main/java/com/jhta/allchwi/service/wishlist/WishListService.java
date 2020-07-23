@@ -27,4 +27,5 @@ public class WishListService {
 	public int count(int ml_num) {
 		return dao.count(ml_num);
 	}
+
 }

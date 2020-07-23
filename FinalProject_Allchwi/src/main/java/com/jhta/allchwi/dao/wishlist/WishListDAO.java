@@ -29,4 +29,5 @@ public class WishListDAO {
 	public int count(int ml_num) {
 		return session.selectOne(NAMESPACE+".count",ml_num);
 	}
+
 }

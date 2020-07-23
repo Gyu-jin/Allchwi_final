@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- home.jsp -->
 <style>
 .carousel-inner {
@@ -37,7 +38,8 @@ h1{
 	height: 51px;
 	margin-bottom: 34px;
 	width: 100%;
-	margin-top: 20px
+	margin-top: 20px;
+	padding-left: 0;
 }
 
 .q_menu li {
@@ -56,6 +58,10 @@ h1{
 mark {
 	background-color: transparent;
 	color: gray;
+}
+#c-cover{
+	width:100%;
+	height: 250px;
 }
 </style>
 <div>
@@ -97,12 +103,7 @@ mark {
 	         <!-- 카테고리 아이콘  -->
 	<div class="q_menu">
 		<ul>
-			<!-- 위시리스트에서 count 제일 많은 클래스 번호 ?? -->
-			<li><a href="#">
-					<div class="icon popular">
-						<img src="${cp}/resources/img/popular.png" alt="">
-					</div> <mark>인기수업</mark>
-			</a></li>
+
 			<li><a href="${cp }/list/search?bcategory_num=1">
 					<div class="icon design">
 						<img src="${cp}/resources/img/work.png" alt="">
@@ -143,28 +144,27 @@ mark {
 	<!-- 카테고리 아이콘 끝  -->
 	
 	
-	<!-- 이번주 시작 -->
-	<h1 class="h3 mb-0 text-gray-800">이번주 시작</h1>
+	<!-- 인기수업 top 8?? -->
+	<h1 class="h3 mb-0 text-gray-800">인기 수업 TOP 8!</h1>
 	<div class="container col-md-12">
 		<div class="row">
-		<c:forEach var="index" begin="1" end="4">
+		<c:forEach var="list" items="${top_list }">
 			<div class="col-3">
 				<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail?class_num=121">
+					<a href="${cp}/classDetail/detail?class_num=${list.class_num}">
 						<div class="card-body">
 							<p>
-								<img src="${cp}/resources/img/it.jpg" alt="">
+								<img src="${cp}/class/getimg?cover_num=${list.cover_num}" id="c-cover">
 							</p>
-							<p class="t1 tov2">모찌의 실무산책</p>
+							<p class="t1 tov2">${list.class_title }</p>
 							<div class="t2">
 								<span class="profile">
 									<img class="roundImg"
-									src="${cp}/resources/img/it.jpg"
+									src="${cp}/mypage/getimg?pro_num=${list.pro_num}"
 									alt="">
 								</span>	
-								<span class="name">정모찌</span> 
-								<span class="d_day">07월07일 </span> 
-								<span>목동</span>
+								<span class="name">${list.tutor_nickname }</span> 
+								<p>${list.bloc_name } ${list.sloc_name }</p>
 							</div>
 						</div>
 					</a>
