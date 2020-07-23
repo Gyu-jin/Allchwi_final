@@ -20,7 +20,7 @@
 			(
 				select count(*) from class_apply a,class_date d,payment p where a.date_num=d.date_num 
 			    <![CDATA[and (SELECT DATE_ADD(class_date, INTERVAL class_month  MONTH))<=now() and a.apply_auth=2 and a.ml_num=#{ml_num}]]>
-			)=1 or i.ml_num=#{ml_num}
+			)>=1 or i.ml_num=#{ml_num}
 		) and c.class_num=i.class_num and i.class_num=#{class_num}
 	</select>	
 

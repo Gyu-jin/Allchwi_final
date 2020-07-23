@@ -21,13 +21,14 @@ public class CommunityController {
 	
 	
 	@GetMapping("/onclass/community")
-	public String adminMain(HttpSession session,int class_num,Model model) {
+	public String adminMain(HttpSession session,int class_num, Model model) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int ml_num = (int)session.getAttribute("ml_num");
 		
 		map.put("ml_num", ml_num);
+		System.out.println(class_num);
 		map.put("class_num", class_num);
 		
 		CommunityVO vo = service.goCommu(map);
