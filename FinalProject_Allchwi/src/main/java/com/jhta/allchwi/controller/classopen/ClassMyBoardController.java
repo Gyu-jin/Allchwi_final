@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.classopen.ClassInfoService;
+import com.jhta.allchwi.service.community.CommunityService;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 
@@ -21,6 +22,8 @@ import com.jhta.allchwi.vo.classopen.ClassInfoVO;
 public class ClassMyBoardController {
 	@Autowired
 	private ClassInfoService service;
+	@Autowired
+	private CommunityService CommuService;
 	
 	@GetMapping("/class/classBoard")
 	public String goClassMyboard(HttpSession session,Model model,
@@ -41,7 +44,10 @@ public class ClassMyBoardController {
 		//내수업 전체 목록 제목,번호가져오기
 		List<ClassInfoVO> title = service.getClassTitle(ml_num);
 		
+		map.put("class_num", list.get("class_num"));
+		int community = CommuService.selectChk(map);
 		
+		model.addAttribute("community", community);
 		model.addAttribute("list", list);
 		model.addAttribute("title", title);
 		

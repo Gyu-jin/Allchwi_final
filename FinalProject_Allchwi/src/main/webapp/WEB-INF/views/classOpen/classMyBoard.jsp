@@ -4,9 +4,29 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${cp}/resources/css/classMyboard/classMyboard.css">
 <script type="text/javascript">
+
 	function selectTitle(val){
 		var v = $(val).val();
 		location.href = "${cp}/class/classBoard?class_num="+v;  
+	}
+	
+	function commuCreate(){
+		$.ajax({
+		    type: "post",
+		    dataType: "text",
+		    url: "${cp}/class/community",
+		    data: {class_num : '${list.class_num}' ,commu_title: '${list.class_title}'},
+		    success: function(data) {
+		    	if(data == 'success'){
+		    		alert('커뮤니티가 생성되었습니다.');
+		    		location.href = "${cp}/class/classBoard?class_num=${list.class_num}"; 
+		    	}else if(data == 'already'){				    		
+		    		alert('이미 커뮤니티가 존재합니다.!');
+		    	}else{
+		    		alert('생성 실패!!!')
+		    	}
+		    }
+		});
 	}
 	
 	function fnStatusChange(){
@@ -128,9 +148,20 @@
 					</div>
 					<div style="margin-top: 56px">
 						<div class="button-box">
+							<c:if test="${list.class_form == 1 }">
+								<c:choose>
+									<c:when test="${community !='1'}">
+										<div class="button_gray cursor" style="margin-left: 10px;" onclick="commuCreate()">커뮤니티 생성</div>
+									</c:when>
+									<c:otherwise>
+										<a href="${cp}/onclass/community?class_num=${list.class_num}">
+										<div class="button_gray cursor" style="margin-left: 10px;">커뮤니티</div></a>
+									</c:otherwise>	
+								</c:choose>
+							</c:if>
 							<c:if test="${list.class_auth!='1'}">
 								<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
-								<div class="button_gray cursor">수업수정</div></a>
+								<div class="button_gray cursor" style="margin-left: 10px;">수업수정</div></a>
 							</c:if>
 							<c:if test="${list.class_status== '0' }">
 								<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(1)">Selling</div></a> 

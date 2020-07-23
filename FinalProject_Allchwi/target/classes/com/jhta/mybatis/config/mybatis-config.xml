@@ -47,6 +47,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.myclassmanage.MyClassManageVO" alias="mcm"/>
 		<!-- wishList alias -->
 		<typeAlias type="com.jhta.allchwi.vo.wishlist.WishListJoinVO" alias="wishList"/>
+		<!-- Community alias -->
+		<typeAlias type="com.jhta.allchwi.vo.community.CommunityVO" alias="commuInfo"/>
 	</typeAliases>
 
 	<mappers>
@@ -98,6 +100,9 @@
 		
 		<!-- 커뮤니티 mapper -->
 		<mapper resource="com/jhta/mybatis/mapper/CommunityArchiveMapper.xml"/>	
+		
+		<!-- 커뮤니티 mapper -->
+		<mapper resource="com/jhta/mybatis/mapper/CommunityMapper.xml"/>	
 		
 		
 	</mappers>

@@ -172,7 +172,7 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <!-- a태그에 원래 있던 내용  href 다음 data-toggle="modal" data-target="#logoutModal" -->
-                <a class="dropdown-item" href="${cp}/login/logout" >
+                <a class="dropdown-item" onclick="location.href='${cp}/login/logout'" >
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
