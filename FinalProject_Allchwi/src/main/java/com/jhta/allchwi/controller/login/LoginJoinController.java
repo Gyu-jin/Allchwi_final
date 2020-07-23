@@ -50,8 +50,8 @@ public class LoginJoinController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("kakaoUser", 0);
+		//a 올취 회원중 중복되는 아이디가 있는지 확인하기 위해 
 		MemberLoginVO vo = mls.idCheck(map);
-		System.out.println(vo);
 		JSONObject json = new JSONObject();
 		//0 검색된 아이디가 존재하면
 		if (vo != null) {

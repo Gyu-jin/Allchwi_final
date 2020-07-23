@@ -111,7 +111,7 @@ public class MemberLoginService{
 	public MemberLoginVO sessionInfo(MemberLoginVO mlv) {
 		return mld.loginCheck(mlv);
 	}
-	//a 로그아웃
+	//a 로그아웃(탈잉 회원가입 유저)
 	public void logout(HttpSession session) {
 		session.removeAttribute("ml_num");
 	    session.removeAttribute("tutor_auth");

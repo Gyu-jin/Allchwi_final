@@ -62,7 +62,7 @@ public class KakaoLoginController {
 				try {
 					int result = mls.kakaoJoinMember(session, kakaoUserInfo);
 					if(result == 4) {
-						//a 저장된 회원정보 중 로그인테이블에서 구분을 위해  값을 vo에 담기
+						//a map 값과 일치하는 로그인정보 가져오기
 						MemberLoginVO getInfoVo = mls.idCheck(map);
 						//a 로그인번호를 세션에 저장
 						session.setAttribute("ml_num", getInfoVo.getMl_num());

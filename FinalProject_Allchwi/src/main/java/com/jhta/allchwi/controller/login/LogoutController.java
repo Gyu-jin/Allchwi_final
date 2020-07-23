@@ -28,12 +28,12 @@ public class LogoutController {
 			String path = "https://kauth.kakao.com/oauth/logout?client_id="+ client_id + "&logout_redirect_uri=" + logout_redirect_uri + "&state=?";
 			return "redirect:" + path;
 		} else {
-			//카카오 회원이 아닌경우 
+			//a 올취에서 가입한 회원인경우 
 			mls.logout(session);
 			return "redirect:/";
 		}
 	}
-	//카카오 서버에서 넘어오는 로그아웃 리다이렉트 uri를 받아서 아래 세션값들을 무효화하여 로그아웃
+	//a 카카오 서버에서 넘어오는 로그아웃 리다이렉트 uri를 받아서 아래 세션값들을 무효화하여 로그아웃
 	@RequestMapping(value="/login/kakaologout")
 	public String kakaologout(HttpSession session) {
 	    session.removeAttribute("access_Token");
