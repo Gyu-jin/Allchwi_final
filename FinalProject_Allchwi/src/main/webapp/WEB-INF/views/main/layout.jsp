@@ -71,7 +71,7 @@ a:hover {
 					<tiles:insertAttribute name="header" />
 				</div>
 				<!-- 메인 -->
-				<div class="container-fluid" style="width: 80%">
+				<div class="container-fluid" style="width: 70%">
 					<div id="body">
 						<tiles:insertAttribute name="body" />
 					</div>

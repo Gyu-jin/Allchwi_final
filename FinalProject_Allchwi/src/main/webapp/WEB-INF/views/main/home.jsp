@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- home.jsp -->
 <style>
-
 .carousel-inner {
 	position: relative;
 	width: 70%;
@@ -17,19 +16,11 @@
 	background-color: #A9C8FB;
 }
 
-.card img {
-	width: 100%;
-	height: 100%;
-}
-.card-body .roundImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-h1{
+h1 {
 	padding-top: 30px;
 }
-.container{
+
+.container {
 	padding-top: 30px;
 }
 
@@ -60,9 +51,21 @@ mark {
 	background-color: transparent;
 	color: gray;
 }
-#c-cover{
-	width:100%;
-	height: 250px;
+
+.c-cover {
+	width: 100%;
+	height: 140px;
+}
+
+.t1 {
+	font-weight: bold;
+	color: #636363;
+}
+
+.card-body .roundImg {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 </style>
 <div>
@@ -101,10 +104,9 @@ mark {
 	</div>
 	<!-- 메인배너 끝 -->
 
-	         <!-- 카테고리 아이콘  -->
+	<!-- 카테고리 아이콘  -->
 	<div class="q_menu">
 		<ul>
-
 			<li><a href="${cp }/list/search?bcategory_num=1">
 					<div class="icon design">
 						<img src="${cp}/resources/img/work.png" alt="">
@@ -143,37 +145,34 @@ mark {
 	</div>
 
 	<!-- 카테고리 아이콘 끝  -->
-	
-	
+
+
 	<!-- 인기수업 top 8?? -->
 	<h1 class="h3 mb-0 text-gray-800">인기 수업 TOP 8!</h1>
 	<div class="container col-md-12">
 		<div class="row">
-		<c:forEach var="list" items="${top_list }">
-			<div class="col-3">
-				<div class="card shadow mb-4">
-					<a href="${cp}/classDetail/detail?class_num=${list.class_num}">
-						<div class="card-body">
-							<p>
-								<img src="${cp}/class/getimg?cover_num=${list.cover_num}" id="c-cover">
-							</p>
-							<p class="t1 tov2">${list.class_title }</p>
-							<div class="t2">
-								<span class="profile">
-									<img class="roundImg"
-									src="${cp}/mypage/getimg?pro_num=${list.pro_num}"
-									alt="">
-								</span>	
-								<span class="name">${list.tutor_nickname }</span> 
-								<p>${list.bloc_name } ${list.sloc_name }</p>
+			<c:forEach var="list" items="${top_list }">
+				<div class="col-3">
+					<div class="card shadow mb-4">
+						<a href="${cp}/classDetail/detail?class_num=${list.class_num}">
+							<div class="card-body">
+								<p>
+									<img src="${cp}/class/getimg?cover_num=${list.cover_num}"
+										class="c-cover">
+								</p>
+								<p class="t1">${list.class_title }</p>
+								<div class="t2">
+									<span class="profile"> <img class="roundImg"
+										src="${cp}/mypage/getimg?pro_num=${list.pro_num}" alt="">
+									</span> <span class="name">${list.tutor_nickname }</span>
+									<p>${list.bloc_name }${list.sloc_name }</p>
+								</div>
 							</div>
-						</div>
-					</a>
+						</a>
+					</div>
 				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
 		</div>
 	</div>
-
 	<!-- 이번주 시작 끝 -->
 </div>

@@ -31,8 +31,8 @@
 }
 
 .roundImg {
-	width: 200px;
-	height: 200px;
+	width: 170px;
+    height: 170px;
 	border-radius: 50%;
 }
 
@@ -42,13 +42,15 @@
 }
 
 .info ul li {
-	width: 140px;
+	width: 120px;
 	text-align: center;
 	float: left;
 	padding-top: 50px;
 	list-style: none;
 }
-
+.starimg img{
+	width: 25px;
+}
 .btn_wishlist img {
 	width: 20px;
 }
@@ -95,7 +97,7 @@
 
 .class_navi.active {
 	position: fixed;
-	width: 51.15%;
+	width: 44.7%;
 }
 
 .class_wrap .class_detail {
@@ -113,7 +115,7 @@
 	float: left;
 	color: #000;
 	text-align: center;
-	margin: 100px 0 50px 100px;
+	margin: 50px 0 0 50px;
 }
 
 #container_detail .class_wrap .class_detail .tutor_profile .name {
@@ -124,7 +126,6 @@
 
 .class_wrap .class_detail .class_title {
 	float: right;
-	padding-top: 40px;
 	margin: 50px 50px 50px 0;
 }
 
@@ -158,7 +159,7 @@
 }
 
 .class_navi ul li {
-	width: 180px;
+	width: 150px;
 	display: inline-block;
 	text-align: center;
 	font-size: 20px;
@@ -181,7 +182,7 @@
 	background-color: #ff936f;
 	float: right;
 	color: white;
-	margin-top: 9px;
+	margin-top: -20px;
 }
 
 .btn_write {
@@ -222,7 +223,7 @@
 }
 
 .sec01 .review_count01 ul li {
-	width: 380px;
+	width: 324px;
 	height: 60px;
 	float: left;
 	text-align: center;

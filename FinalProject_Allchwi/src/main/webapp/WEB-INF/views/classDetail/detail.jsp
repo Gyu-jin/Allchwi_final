@@ -90,11 +90,19 @@
 
 								<!-- 별점 -->
 								<div class="info">
-									<a class="starimg"> <c:forEach var="index" begin="1"
-											end="5">
-											<img
-												src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-										</c:forEach> (${rpu.totalRowCount })
+									<a class="starimg">
+										<c:if test="${not empty tot_avg}">
+										 	<fmt:formatNumber value="${rating.tot_avg }" pattern="0" type="number" var="tot_avg" /> 
+												<c:forEach var="index" begin="1" end="${tot_avg }">
+												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach> 
+										</c:if>
+										<c:if test="${empty tot_avg}">
+											<c:forEach var="index" begin="1" end="5">
+												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
+										</c:if>
+										(${rpu.totalRowCount })
 									</a>
 									<!-- 찜하기 -->
 									<c:choose>
@@ -159,7 +167,7 @@
 										</c:forEach>
 									</ul>
 								</div>
-								<div class="d_info">${cdv.tutor_about}</div>
+								<div class="d_info"><p>${cdv.tutor_about}</p></div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
@@ -250,9 +258,9 @@
 
 									<!-- 리뷰 목록 -->
 									<div class="review_list" id="bookmarkReview">
-										<ul>
 											<div id="innerReviewDiv">
 												<c:forEach var="rlist" items="${rlist }">
+												<ul>
 													<li><dl>
 															<dt>
 																<p class="profile_img"
@@ -265,10 +273,10 @@
 																	pattern="yyyy-MM-dd" />
 															</dd>
 
-														</dl></li>
-												</c:forEach>
-											</div>
-										</ul>
+													</dl></li>
+												</ul>
+											</c:forEach>
+										</div>
 									</div>
 									<!-- 리뷰페이징 -->
 									<div id="paging">
