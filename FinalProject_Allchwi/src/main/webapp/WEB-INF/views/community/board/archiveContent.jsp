@@ -50,26 +50,27 @@
 	
 	<div class="jumbotron">
 		<h4>${vo.room_title }</h4>						
-		<p style="float:right;">${vo.room_regdate} </p>	
+		<p style="float:right;">${vo.room_regdate} </p>
+		<br>	
+		<p style="float:right">조회수: ${vo.room_view}</p>
 		<br>
 		
 		<hr class="my-4">
-		<p style="float:right">${vo.room_view}</p>
 		<div class="card card-body">
-		
-		
-		
-		${vo.room_content }
-		${vo.org_filename }
-		${vo.filesize }
-		<a href="${cp }/community/download?room_num=${vo.room_num }">다운로드 </a>
+			<p>${vo.room_content }</p>
+			<br>
+			<br>
+			<a href="${cp }/community/download?room_num=${vo.room_num }">${vo.org_filename } /${vo.filesize }바이트 </a>
 		
 		
 		<br>	
-		<br>	
-		이전글<a href="${cp }/community/archiveDetail?room_num=${prev.room_num }">${prev.room_title }</a>
-		다음글<a href="${cp}/community/archiveDetail?room_num=${next.room_num }">${next.room_title }</a>
-			
+		<br>
+		<div style="margin-left:670px">
+			이전글<a href="${cp }/community/archiveDetail?room_num=${prev.room_num }">${prev.room_title }</a>
+			&nbsp;
+			&nbsp;
+			다음글<a href="${cp}/community/archiveDetail?room_num=${next.room_num }">${next.room_title }</a>
+		</div>	
 			
 			
 			
