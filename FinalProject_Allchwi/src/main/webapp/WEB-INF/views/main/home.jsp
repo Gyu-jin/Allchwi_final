@@ -65,7 +65,7 @@ mark {
 }
 </style>
 <div>
-	<!-- 메인 배너 -->
+	<!-- 메인 배너  -->
 	<div id="carouselExampleIndicators" class="carousel slide"
 		data-ride="carousel">
 		<ol class="carousel-indicators">
