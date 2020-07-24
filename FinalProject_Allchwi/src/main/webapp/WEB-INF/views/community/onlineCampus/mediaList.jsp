@@ -41,7 +41,7 @@ li {
     color: #fff;
     background-color: #393b42;
 }
-.curriculum ol .total-time {
+.curriculum ol .more-text {
     position: absolute;
     right: 20px;
     top: 15px;
@@ -123,29 +123,43 @@ ul {
     
 <div class="container">
 	<h2 class="h2 mb30">온라인 강의
-	<div class="button_gray cursor" onclick="writeShow(${commuInfo.commu_num})">강의업로드</div>
+	<c:if test="${commuInfo.ml_num==ml_num}">
+		<div class="button_gray cursor" onclick="writeShow(${commuInfo.commu_num})">강의업로드</div>
+	</c:if>
 	</h2>
 	<div class=curriculum id="vodCurri">
 		<ol>
 			<c:forEach var="vo" items="${list}">
+				<fmt:formatNumber var="min" value="${vo.online_time/60}" pattern="0"/>
+				<fmt:formatNumber var="sec" value="${vo.online_time%60}" pattern="00"/>
 				<li class="lst">
 					<h3>
 						${vo.online_title }
-						<span class="total-time">
-						<fmt:formatNumber var="min" value="${vo.online_time/60}" pattern="0"/>
-						<fmt:formatNumber var="sec" value="${vo.online_time%60}" pattern="00"/>
-						${min}:${sec}</span>
+						<c:if test="${commuInfo.ml_num==ml_num}">
+							<div class="dropdown more-text">
+					            <button type="button" style="margin-top: -10px;" class="btn btn-default dropdown toggle" data-toggle="dropdown">
+								<svg class="cursor"  width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				 					 <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								</svg>
+					            <span class="caret"></span></button>
+					            <ul class="dropdown-menu" role="menu">
+					                <li style="text-align: center; margin-bottom: 17px"><a href="#" onclick="updateShow(${vo.online_num})"><font style="font-size: 14px; color: black;">수업 수정</font></a></li>
+					                <li style="text-align: center;"><a href="#" onclick="delClass(${vo.online_num})"><font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
+					            </ul>
+				       		</div>
+			       		</c:if>
+			        
 					</h3>
 					<div class="lecture">
 						<ul>  
 							<li>
 								<div class="thumb">
-									<a href="/vod/play/903">
-									<img src="https://front-img.taling.me/Content/Images/Vod/marketing/ot2.jpg" alt="">
+									<a href="${cp}/vod/play/${vo.online_num}">
+									<img src="${cp}/online/getimg?online_num=${vo.online_num}" alt="">
 									</a>
 								</div>
 								<div class="txt">
-									<a href="/vod/play/903">
+									<a href="${cp}/vod/play/${vo.online_num}">
 									<span class="tit">${vo.online_title }</span>
 									<span class="time">${min}:${sec}</span>
 									<p class="">${vo.online_content }</p>
@@ -203,11 +217,27 @@ ul {
 
 <script>
 function writeShow(commu_num){		
-	alert("asd");
 	var url = "${cp}/community/mediaModal?commu_num="+commu_num;
 	   $('.modal-container').load(url,function(result){
 		$('#myModal').modal();
 	});		
+}
+function updateShow(online_num){		
+	var url = "${cp}/community/mediaModal?online_num="+online_num;
+	   $('.modal-container').load(url,function(result){
+		$('#myModal').modal();
+	});		
+}
+function delClass(online_num){
+	
+	var chk = comfirm("정말 삭제히시겠습니까?");
+	
+	if(chk="true"){
+		
+	}else{
+		
+	}
+	
 }
 
 </script>

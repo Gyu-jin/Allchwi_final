@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.jhta.allchwi.service.classopen.ClassImgService;
+import com.jhta.allchwi.service.onlineclass.OnlineClassService;
 import com.jhta.allchwi.service.profileImg.ProfileImgService;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
+import com.jhta.allchwi.vo.onlineclass.OnlineClassVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
 
 /*
@@ -24,7 +26,8 @@ public class ImgViewController {
 	private ProfileImgService proService;
 	@Autowired
 	private ClassImgService imgService;
-	
+	@Autowired
+	private OnlineClassService onlineService;
 	
 	@GetMapping("/mypage/getimg")
 	public ResponseEntity<byte[]> getImgPro(int pro_num){
@@ -56,6 +59,17 @@ public class ImgViewController {
 		 }else if(formatName.equalsIgnoreCase("png")) {
 		    	headers.setContentType(MediaType.IMAGE_PNG);
 		 }
+		 
+		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
+	}
+	
+	@GetMapping("/online/getimg")
+	public ResponseEntity<byte[]> getImgOnline(int online_num){
+		OnlineClassVO vo = onlineService.getImg(online_num);
+		byte[] imgeContent = (byte[])vo.getOnline_thumbnail();
+		final HttpHeaders headers = new HttpHeaders();
+		
+		headers.setContentType(MediaType.IMAGE_PNG);	 
 		 
 		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
 	}

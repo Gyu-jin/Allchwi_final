@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="goCommu" parameterType="hashmap" resultType="commuInfo">
-		select c.commu_num,c.class_num,c.commu_title,c.commu_regdate from community c,
+		select c.commu_num,c.class_num,c.commu_title,c.commu_regdate,i.ml_num from community c,
 		class_info i 
 		where ( 
 			(

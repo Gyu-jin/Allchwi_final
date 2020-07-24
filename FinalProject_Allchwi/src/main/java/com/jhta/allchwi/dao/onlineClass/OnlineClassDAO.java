@@ -22,6 +22,9 @@ public class OnlineClassDAO {
 		return session.selectList(NAMESPACE + ".list", map);
 	}
 	public int count(HashMap<String, Object> map) {
-		return session.insert(NAMESPACE + ".count", map);
+		return session.selectOne(NAMESPACE + ".count", map);
+	}
+	public OnlineClassVO getImg(int online_num) {
+		return session.selectOne(NAMESPACE + ".getImg", online_num);
 	}
 }

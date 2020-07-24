@@ -7,6 +7,7 @@ public class CommunityVO {
 	private int class_num;
 	private String commu_title;
 	private Timestamp commu_regdate;
+	private int ml_num;
 	
 	public CommunityVO(int commu_num, int class_num, String commu_title, Timestamp commu_regdate) {
 		super();
@@ -38,6 +39,12 @@ public class CommunityVO {
 	}
 	public void setCommu_regdate(Timestamp commu_regdate) {
 		this.commu_regdate = commu_regdate;
+	}
+	public int getMl_num() {
+		return ml_num;
+	}
+	public void setMl_num(int ml_num) {
+		this.ml_num = ml_num;
 	}
 	
 	

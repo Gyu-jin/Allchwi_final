@@ -27,4 +27,8 @@ public class OnlineClassService {
 		return dao.count(map);
 	}
 
+	public OnlineClassVO getImg(int online_num) {
+		return dao.getImg(online_num);
+	}
+
 }

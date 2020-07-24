@@ -41,14 +41,14 @@ public class OnlineClassController {
 		
 		CommunityVO commu = (CommunityVO)session.getAttribute("commuInfo");
 		int commu_num = commu.getCommu_num();
+
+		map.put("commu_num",commu_num);
 		
 		int totalRowCount = service.count(map);
 		
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 3, 5);
 		
 		map.put("startRow",pu.getStartRow() - 1);
-		map.put("commu_num",commu_num);
-		
 		List<OnlineClassVO> list = service.list(map);
 		
 		model.addAttribute("list", list);		

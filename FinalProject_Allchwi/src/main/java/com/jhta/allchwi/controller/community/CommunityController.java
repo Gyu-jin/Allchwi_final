@@ -32,7 +32,7 @@ public class CommunityController {
 		map.put("class_num", class_num);
 		
 		CommunityVO vo = service.goCommu(map);
-		
+		System.out.println(ml_num +"  " + vo.getMl_num());
 		if(vo!=null) {
 			System.out.println(vo.getCommu_num() + "  " + vo.getClass_num() + "  " +vo.getCommu_title() );
 			session.setAttribute("commuInfo", vo);
