@@ -137,7 +137,7 @@ ul {
 						${min}:${sec}</span>
 					</h3>
 					<div class="lecture">
-						<ul>
+						<ul>  
 							<li>
 								<div class="thumb">
 									<a href="/vod/play/903">
