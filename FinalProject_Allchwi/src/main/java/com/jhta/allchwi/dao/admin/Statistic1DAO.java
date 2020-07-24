@@ -1,5 +1,6 @@
 package com.jhta.allchwi.dao.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,8 +15,12 @@ public class Statistic1DAO {
 	private SqlSession session;
 	private final String NAMESPACE = "com.jhta.mybatis.mapper.AdminStatisticMapper";	
 															
-	public List<Statistic1VO> list(){
-		return session.selectList(NAMESPACE+".list");
+	public List<Statistic1VO> list(int thisyear, int nextyear){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("thisyear",thisyear);
+		map.put("nextyear",nextyear);
+	
+		return session.selectList(NAMESPACE+".list",map);
 	}
 	
 	

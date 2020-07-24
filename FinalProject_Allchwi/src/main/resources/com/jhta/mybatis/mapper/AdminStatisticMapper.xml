@@ -3,14 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminStatisticMapper">
-	<select id="list" resultType="com.jhta.allchwi.vo.admin.Statistic1VO">
+	<select id="list" resultType="com.jhta.allchwi.vo.admin.Statistic1VO" parameterType="hashmap">
 	SELECT MONTH(regdate) AS month, sum(pay) monthlySum 
 	FROM sales 
-	<![CDATA[ WHERE regdate >= '2020-01-01' AND regdate <  '2021-01-01' ]]>
+    <![CDATA[	WHERE year(regdate) >= #{thisyear} AND year(regdate) < #{nextyear} ]]>
 	GROUP BY month
 	</select>
-	
-	
 </mapper>
 
 

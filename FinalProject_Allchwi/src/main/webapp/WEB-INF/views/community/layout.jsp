@@ -32,6 +32,24 @@
 
 <!-- Custom styles for admin template-->
 <link href="${cp}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+a,span{
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	text-decoration: none;
+}
+
+a:hover  {
+	color: inherit;
+	text-decoration: none;
+}
+li {
+	list-style: none;
+}
+
+</style>
 </head>
 
 <body id="page-top">

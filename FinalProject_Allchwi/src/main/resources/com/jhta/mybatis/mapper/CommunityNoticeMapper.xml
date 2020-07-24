@@ -7,27 +7,28 @@
 	<insert id="writeNotice" parameterType="notice">
 		insert into
 		notice(notice_num, commu_num, class_num, notice_title, notice_content,
-		notice_view, commu_regdate) values(0, #{commu_num}, #{class_num}, #{notice_title}, #{notice_content}, 0, now())
+		notice_view, notice_regdate) values(0, #{commu_num}, #{class_num}, #{notice_title}, #{notice_content}, 0, now())
 		<selectKey keyProperty="notice_num" resultType="int">
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
-	<!--2 세션에 저장된 회원번호와 세션에 저장된 커뮤니티 번호를 가지고 관리자가 맞는지 확인 / 글쓰기 권한-->
+	<!--2 세션에 저장된 회원번호와 세션에 저장된 튜터 번호를 가지고 관리자가 맞는지 확인 / 글쓰기 권한-->
 	<select id="adminCheck" parameterType="hashmap" resultType="int">
-		select ifnull(count(*), 0) cnt
-		from community commu
-		inner join (select class_num from class_info where ml_num = #{ml_num}) ci
-		on commu.class_num = ci.class_num
-		where commu.class_num = #{class_num}
+		select IFNULL(count(*), 0) cnt
+		from community aa
+		inner join (select class_num from class_info where ml_num = #{ml_num}) bb
+		on aa.class_num = bb.class_num
+		where aa.class_num = #{class_num}
 	</select>
 	<!-- 3커뮤니티 공지사항 목록 뽑기 -->
 	<select id="noticeList" resultType="notice" parameterType="hashmap">
 		select * 
 		from notice
 		where commu_num = #{commu_num}
+		order by notice_regdate desc
 		limit #{startRow}, 5
 	</select>
-	<!-- 4커뮤니티 목록 갯수 -->
+	<!-- 4커뮤니티 공지사항 글 갯수 -->
 	<select id="count" resultType="int" parameterType="hashmap">
 		select ifnull(count(*),0) cnt 
 		from notice

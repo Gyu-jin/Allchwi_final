@@ -87,6 +87,7 @@
 		on ci.class_num=a.class_num
 		where ci.class_status=0
 		group by ci.class_num
+		order by tot_avg desc, cnt desc
 	</select>
 	
 </mapper>

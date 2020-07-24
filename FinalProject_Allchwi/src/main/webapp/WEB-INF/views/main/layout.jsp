@@ -58,6 +58,9 @@ a:hover  {
 	color: inherit;
 	text-decoration: none;
 }
+li {
+	list-style: none;
+}
 </style>
 <body id="page-top">
 	<!-- Page Wrapper -->

@@ -20,13 +20,11 @@
 				</div>
 				<div class="modal-body">
 					<form action="${cp}/community/notice/insertNotice" method="post">
-						<input type="hidden" name="notice_num" value="${cav.apply_num}">
-						<input type="hidden" name="commu_num" value="${cav.date_num}">
-						<input type="hidden" name="class_num" value="${cav.ml_num}">
+						<input type="hidden" name="commu_num" value="${commu.commu_num}">
+						<input type="hidden" name="class_num" value="${commu.class_num}">
 						<div class="form-group">
 							<label for="notice_title" class="control-label">제    목</label> 
-							<input type="text" class="form-control" id="notice_title"
-								value="${cav.stu_phone}">
+							<input type="text" class="form-control" name="notice_title">
 						</div>
 						<div class="form-group">
 							<label for="notice_content" class="control-label">내    용</label>

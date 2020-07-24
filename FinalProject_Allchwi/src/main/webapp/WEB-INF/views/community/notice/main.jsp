@@ -80,23 +80,22 @@
 				<c:choose>
 					<c:when test="${pu.startPageNum>1 }">
 						<li class="page-item"><a class="page-link"
-							href="${cp }/community/archive?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
+							href="${cp }/community/notice?pageNum=${pu.startPageNum-1 }">이전</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					</c:otherwise>
 				</c:choose>
 
-				<c:forEach var="i" begin="${pu.startPageNum}"
-					end="${pu.endPageNum }">
+				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
 					<c:choose>
 						<c:when test="${pu.pageNum==i}">
 							<li class="page-item active"><a class="page-link"
-								href="${cp }/community/archive?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+								href="${cp }/community/notice?pageNum=${i }">${i }</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="${cp }/community/archive?pageNum=${i }&field=${field}&keyword=${keyword}">${i }</a></li>
+								href="${cp }/community/notice?pageNum=${i }">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -104,7 +103,7 @@
 				<c:choose>
 					<c:when test="${pu.totalPageCount>pu.endPageNum }">
 						<li class="page-item"><a class="page-link"
-							href="${cp }/community/archive?pageNum=${pu.endPageNum+1 }&field=${field}&keyword=${keyword}">다음</a></li>
+							href="${cp }/community/notice?pageNum=${pu.endPageNum+1 }">다음</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
@@ -113,7 +112,7 @@
 			</ul>
 		</div>
 		
-		<button type="button" class="btn btn-primary" style="float:right" onclick="showModal()">글작성</button>
+		<button type="button" id="writeOk" class="btn btn-primary" style="float:right" onclick="showModal()">글작성</button>
 		<!--a 공지글 작성 모달창 -->
 		<div class="container">
 			<div class="modal-container"></div>
@@ -121,7 +120,26 @@
 	</div>
 </div>
 <script type="text/javascript">
-//회원 신청서 정보 모달 띄우기
+// 관리자가 아닐경우 글작성을 못하게 함. ajax
+window.onload = function(){
+	console.log("체크체크");
+	//세션에 저장된 값을 가져옴
+	let ml_num = ${ml_num};
+	let class_num = ${commuInfo.class_num}
+	$.getJSON("${cp}/adminCheck.do", {
+				ml_num : ml_num,
+				class_num : class_num				
+			}, function(data) {
+				//관리자인경우
+				if (data.code == 'success') {
+					console.log("성공");
+					$('#writeOk').attr('disabled', false);
+				} else {
+					console.log("실패");
+					$('#writeOk').attr('disabled', true);
+				}
+	});
+}
 function showModal(){
 	var url = "${cp}/community/notice/writeNotice";
     $('.modal-container').load(url,function(result){
