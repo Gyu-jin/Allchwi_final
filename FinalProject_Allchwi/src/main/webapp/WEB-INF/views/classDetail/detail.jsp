@@ -90,23 +90,23 @@
 
 								<!-- 별점 -->
 								<div class="info">
-									<a class="starimg">
-										<c:if test="${not empty rlist}">
-										 	<fmt:formatNumber value="${rating.tot_avg }" pattern="0" type="number" var="tot_avg" /> 
-												<c:forEach var="index" begin="1" end="${tot_avg }">
-												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
-											</c:forEach> 
+									<a class="starimg"> <c:if test="${not empty rlist}">
+											<fmt:formatNumber value="${rating.tot_avg }" pattern="0"
+												type="number" var="tot_avg" />
+											<c:forEach var="index" begin="1" end="${tot_avg }">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+											</c:forEach>
 											<c:forEach var="index" begin="1" end="${5-tot_avg }">
 												<img
 													src="https://user-images.githubusercontent.com/65140754/88132019-57f2cc80-cc19-11ea-9093-0f7747ab82b6.png">
 											</c:forEach>
-										</c:if>
-										<c:if test="${empty rlist}">
+										</c:if> <c:if test="${empty rlist}">
 											<c:forEach var="index" begin="1" end="5">
-												<img src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
+												<img
+													src="https://user-images.githubusercontent.com/65140754/86704557-f98df180-c04f-11ea-98d7-6ef52adba462.png">
 											</c:forEach>
-										</c:if>
-										(${rpu.totalRowCount })
+										</c:if> (${rpu.totalRowCount })
 									</a>
 									<!-- 찜하기 -->
 									<c:choose>
@@ -171,7 +171,9 @@
 										</c:forEach>
 									</ul>
 								</div>
-								<div class="d_info"><p>${cdv.tutor_about}</p></div>
+								<div class="d_info">
+									<p>${cdv.tutor_about}</p>
+								</div>
 							</div>
 						</div>
 						<!-- //2.튜터소개 -->
@@ -262,8 +264,8 @@
 									<br>
 									<!-- 리뷰 목록 -->
 									<div class="review_list" id="bookmarkReview">
-											<div id="innerReviewDiv">
-												<c:forEach var="rlist" items="${rlist }">
+										<div id="innerReviewDiv">
+											<c:forEach var="rlist" items="${rlist }">
 												<ul>
 													<li><dl>
 															<dt>
@@ -278,7 +280,7 @@
 																	pattern="yyyy-MM-dd" />
 															</dd>
 
-													</dl></li>
+														</dl></li>
 												</ul>
 											</c:forEach>
 										</div>
@@ -383,16 +385,29 @@
 										<div class="card-header">
 											<a class="collapsed card-link" data-toggle="collapse"
 												data-parent="#accordionExample"
-												href="#card-element-${index.count}"> ${class_date }&nbsp&nbsp
-												<c:if test="${cdv.class_form==0 }">
-													${dlist.class_startTime}~ ${dlist.class_endTime }
-												</c:if> <c:if test="${cdv.class_form==1 }">
-													${dlist.class_month}개월 과정
-												</c:if>
+												href="#card-element-${index.count}">
+												<div class="date">${class_date }&nbsp&nbsp</div> <c:if
+													test="${cdv.class_form==0 }">
+														${dlist.class_startTime}~ ${dlist.class_endTime }
+													</c:if> <c:if test="${cdv.class_form==1 }">
+														${dlist.class_month}개월 과정
+													</c:if>
 											</a>
 										</div>
 										<div id="card-element-${index.count}" class="collapse">
-											<div class="card-body">장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name}</div>
+											<div class="card-body">
+												<c:forEach var="vo" items="${dlist.list}">
+													<div class="ch">
+														<div class="date">
+															<font style="color: #ff936f;">${vo.time_cnt}회</font> :
+															<fmt:formatDate value="${vo.class_date}"
+																pattern="yyyy-MM-dd" />
+														</div>
+														&nbsp&nbsp ${vo.class_startTime } ~ ${vo.class_endTime }
+													</div>
+												</c:forEach>
+												장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -413,8 +428,11 @@
 							</c:if>
 						</c:forEach>
 						<div class="price">
-							<div class="hp1"><b>￦${cdv.class_price}원</b> / 시간</div>
-							<div class="tp1">￦${cdv.class_price*cdv.class_count*cdv.class_hour}/ 총 ${cdv.class_count}회 ${cdv.class_hour}시간</div>
+							<div class="hp1">
+								<b>￦${cdv.class_price}원</b> / 시간
+							</div>
+							<div class="tp1">￦${cdv.class_price*cdv.class_count*cdv.class_hour}/
+								총 ${cdv.class_count}회 ${cdv.class_hour}시간</div>
 						</div>
 						<c:choose>
 							<c:when test="${empty ml_num}">

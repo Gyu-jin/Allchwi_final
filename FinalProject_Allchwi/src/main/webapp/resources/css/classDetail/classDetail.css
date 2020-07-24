@@ -73,6 +73,11 @@
 	width: 440px;
 	background: white;
 }
+.date{
+    color: #8e8e8e;
+    font-weight: bold;
+    float: left;
+}
 
 /*        수업정보          */
 .roundImg {
