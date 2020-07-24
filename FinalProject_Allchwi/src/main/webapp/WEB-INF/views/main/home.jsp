@@ -76,8 +76,8 @@ mark {
 
 .tutor ul li .img {
 	overflow: hidden;
-	width: 180px;
-    height: 180px;;
+	width: 150px;
+    height: 150px;;
 	margin-bottom: 10px;
 	border-radius: 50%;
 }
