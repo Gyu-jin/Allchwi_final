@@ -39,7 +39,7 @@
 
 				<div class="box">
 					<div class="title">
-						계좌번호<b class="pink">*</b>
+						계좌번호${class_fee }<b class="pink">*</b>
 					</div>
 					<div class="cont input-group col-5">
 						<input type="text" name="rem_account" id="rem_account" class="form-control"
@@ -59,11 +59,15 @@
 				</div>
 
 				<input type="hidden" name="pay_num" value="${pay_num }">
+				<input type="hidden" name="rem_revenue" value="${class_fee }">
 
+				
 				<div class="button_box">
 					<button type="submit" id="firstNext" class="btn btn-outline-danger"
 						data-num='2'>올취 송금요청</button>
 				</div>
+			
+			
 			</div>
 		</div>
 	</form>

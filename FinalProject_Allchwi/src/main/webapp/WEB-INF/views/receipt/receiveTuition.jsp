@@ -271,43 +271,54 @@ button, input, optgroup, select, textarea {
 		<h1>수업료 받기</h1>
 	</div>
 	<div class="my-class-list">
-		<c:forEach var="vo" items="${list}">
-			<div class="class-box">
-				<div class="class-info">
-					<div class="image" style="text-align: center;">
-						<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }"
-							style="width:150px; height:180px;">
-					</div>
+		<c:choose>
+			<c:when test="${list.size()>0 }">
+				<c:forEach var="vo" items="${list}">
+					<div class="class-box">
+						<div class="class-info">
+							<div class="image" style="text-align: center;">
+								<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }"
+									style="width: 150px; height: 180px;">
+							</div>
 
-					<div class="information-box">
-						<h3
-							style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${vo.class_title }</h3>
-						<div class="stars-box">
-							<c:choose>
-								<c:when test="${vo.class_form == 0 }">
-									<font class="class-type">오프라인 수업</font>&nbsp;|&nbsp; &nbsp;
+							<div class="information-box">
+								<h3
+									style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${vo.class_title }</h3>
+								<div class="stars-box">
+									<c:choose>
+										<c:when test="${vo.class_form == 0 }">
+											<font class="class-type">오프라인 수업</font>&nbsp;|&nbsp; &nbsp;
 								</c:when>
-								<c:otherwise>
-									<font class="class-type">온라인 수업</font>&nbsp;|&nbsp; &nbsp;
+										<c:otherwise>
+											<font class="class-type">온라인 수업</font>&nbsp;|&nbsp; &nbsp;
 								</c:otherwise>
-							</c:choose>
+									</c:choose>
 
-							<span> ${vo.mb_nickname }(${vo.id })</span>
-						</div>
-						<div class="start-date">
-							<font>결제날짜 : <fmt:formatDate value="${vo.pay_regdate }"
-									pattern="yy-MM-dd hh:mm:ss" /> &nbsp;&nbsp;
-							</font>
-						</div>
+									<span> ${vo.mb_nickname }(${vo.id })</span>
+								</div>
+								<div class="start-date">
+									<font>결제날짜 : <fmt:formatDate value="${vo.pay_regdate }"
+											pattern="yy-MM-dd hh:mm:ss" /> &nbsp;&nbsp;
+									</font>
+								</div>
 
-						<div class="price">
-							<font>￦</font>${vo.final_price }</div>
-						<button type="button" class="btn btn-primary" onclick="receive('${vo.pay_num}','${vo.final_price }')"
-						style="margin-left: 600px; width: 111px;">수업료 받기</button>
+								<div class="price">
+									<font>￦</font>${vo.final_price }</div>
+								<button type="button" class="btn btn-primary"
+									onclick="receive('${vo.pay_num}','${vo.final_price }','${vo.class_fee}')"
+									style="margin-left: 600px; width: 111px;">수업료 받기</button>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</c:forEach>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+
+				<h4 style="text-align: center;"> 받을 수업료가 없습니다.</h4>
+			</c:otherwise>
+
+
+		</c:choose>
 
 		<div>
 			<ul class="pagination justify-content-center" style="margin: 20px 0">
@@ -352,35 +363,46 @@ button, input, optgroup, select, textarea {
 	</div>
 </div>
 
-		
+
 
 <script type="text/javascript">
 	//post 방식으로 보내기
-	function receive(pay_num,final_price){
-					
+	function receive(pay_num, final_price, class_fee) {
+		alert(pay_num);
+		alert(final_price);
+		alert(class_fee);
+		
+		
 		var form = document.createElement("form");
 		form.setAttribute("charset", "utf-8");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "${cp}/receipt/apply");
-		
+
 		//a 파라미터 값이 null이 아닌 경우 히든 input을 생성하여 값을 넣음.
 		var hiddenClassNum1 = document.createElement("input");
 		hiddenClassNum1.setAttribute("type", "hidden");
 		hiddenClassNum1.setAttribute("name", "pay_num");
 		hiddenClassNum1.setAttribute("value", pay_num);
-		
+
 		var hiddenClassNum2 = document.createElement("input");
 		hiddenClassNum2.setAttribute("type", "hidden");
 		hiddenClassNum2.setAttribute("name", "final_price");
 		hiddenClassNum2.setAttribute("value", final_price);
 
+		
+		var hiddenClassNum3 = document.createElement("input");
+		hiddenClassNum3.setAttribute("type", "hidden");
+		hiddenClassNum3.setAttribute("name", "class_fee");
+		hiddenClassNum3.setAttribute("value", class_fee);
+
 		//a 폼에 히든 input 추가 
 		form.appendChild(hiddenClassNum1);
 		form.appendChild(hiddenClassNum2);
-		
+		form.appendChild(hiddenClassNum3);
+
 		//a body부분에 폼을 붙이고 페이지 이동
 		document.body.appendChild(form);
 		form.submit();
-	
+
 	}
 </script>

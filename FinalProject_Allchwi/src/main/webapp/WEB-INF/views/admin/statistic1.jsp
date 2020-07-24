@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-md-12">
 
-			<!-- 
+
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item active"><a
@@ -26,7 +26,7 @@
 							그래프</a></li>
 				</ol>
 			</nav>
-			 -->
+
 
 
 
@@ -38,16 +38,33 @@
 
 			<button type="button" id="twoyearsago"
 				class="btn btn-outline-secondary">
-				<c:out value="${sysYear-2}" />년
+				<c:out value="${sysYear-2}" />
+				년
 			</button>
 			<button type="button" id="lastyear" class="btn btn-outline-secondary">
-				<c:out value="${sysYear-1}" />년
+				<c:out value="${sysYear-1}" />
+				년
 			</button>
-			<button type="button " id="thisyear" class="btn btn-outline-secondary active" >
-				<c:out value="${sysYear}" />년
+			<button type="button" id="thisyear"
+				class="btn btn-outline-secondary active">
+				<c:out value="${sysYear}" />
+				년
 			</button>
 
 			<div id="chart_div" style="width: 1000px; height: 500px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 		</div>
 	</div>
 </div>
@@ -56,7 +73,9 @@
 
 <!-- 어레이 한개 만들어놓고 어래이에 푸쉬로 -->
 <script type="text/javascript">
-	google.charts.load('current', {'packages' : [ 'corechart' ]});
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
 	google.charts.setOnLoadCallback(drawChart);
 
 	function drawChart() {
@@ -75,10 +94,15 @@
 			}
 		});
 	}
-	
-	$("#lastyear").click(function(){
-	
-		google.charts.load('current', {'packages' : [ 'corechart' ]});
+
+	$("#lastyear").click(function() {
+		$("#twoyearsago").attr('class', "btn btn-outline-secondary");
+		$("#lastyear").attr('class', "btn btn-outline-secondary active");
+		$("#thisyear").attr('class', "btn btn-outline-secondary");
+
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
 		google.charts.setOnLoadCallback(drawChart);
 
 		function drawChart() {
@@ -98,16 +122,17 @@
 				}
 			});
 		}
-		
-		
-		
+
 	});
-	
-	
-	$("#twoyearsago").click(function(){
-	
-	
-		google.charts.load('current', {'packages' : [ 'corechart' ]});
+
+	$("#twoyearsago").click(function() {
+		$("#twoyearsago").attr('class', "btn btn-outline-secondary active");
+		$("#lastyear").attr('class', "btn btn-outline-secondary");
+		$("#thisyear").attr('class', "btn btn-outline-secondary");
+
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
 		google.charts.setOnLoadCallback(drawChart);
 
 		function drawChart() {
@@ -128,11 +153,15 @@
 			});
 		}
 	});
-	
-	
-	
-	$("#thisyear").click(function(){
-		google.charts.load('current', {'packages' : [ 'corechart' ]});
+
+	$("#thisyear").click(function() {
+		$("#twoyearsago").attr('class', "btn btn-outline-secondary");
+		$("#lastyear").attr('class', "btn btn-outline-secondary");
+		$("#thisyear").attr('class', "btn btn-outline-secondary active");
+
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
 		google.charts.setOnLoadCallback(drawChart);
 
 		function drawChart() {
@@ -153,15 +182,13 @@
 			});
 		}
 	});
-	
-	
-	
-	function getData(data){
+
+	function getData(data) {
 		var array = new Array();
-		array[0] = [ '월별', '매출액' ];
+		array[0] = [ '월별', '수익','매출액' ];
 
 		$(data).each(function(i, arr) {
-			var subArray = [ arr.month+"월", arr.monthlySum ];
+			var subArray = [ arr.month + "월", arr.monthlySum, arr.monthlyRevenue ];
 			array[++i] = subArray;
 		});
 
@@ -185,9 +212,6 @@
 
 		chart.draw(data2, options);
 	}
-	
-
-	
 </script>
 
 

@@ -28,8 +28,7 @@ public class StatisticController {
 	@ResponseBody
 	public List<Statistic1VO> statisticAjax(int thisyear, int nextyear){
 		List<Statistic1VO> list = dao.list(thisyear,nextyear);
-		
-		
+			
 		
 		return list;
 	}

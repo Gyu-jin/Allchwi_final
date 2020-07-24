@@ -51,7 +51,7 @@
 									pattern="yyyy-MM-dd" /></td>
 						<c:choose>
 							<c:when test="${vo.rem_status == 0}">
-								<td>승인대기 </td>
+								<td>승인대기 ${vo.rem_revenue }</td>
 							</c:when>
 							<c:otherwise>
 								<td>승인완료 </td>
@@ -61,7 +61,7 @@
 								<c:when test="${vo.rem_status == 0}">
 									<button type="button" class="btn btn-success"
 										data-toggle="modal" data-target="#myModal"
-										onclick="getModal('${vo.pay_num}','${vo.tutor_nickname }','${vo.rem_pay }','${vo.class_title }')">승인</button>
+										onclick="getModal('${vo.pay_num}','${vo.tutor_nickname }','${vo.rem_pay }','${vo.class_title }','${vo.rem_revenue }')">승인</button>
 								</c:when>
 								<c:otherwise>
 									<button type="button" class="btn btn-dark" disabled>승인 완료</button>
@@ -145,23 +145,24 @@
 </div>
 
 <script>
-	function getModal(pay_num, tutor_nickname, rem_pay,class_title) {	
+	function getModal(pay_num, tutor_nickname, rem_pay,class_title,rem_revenue) {	
 		$("div [class='modal-footer']").empty();
 		$("#modal-body").text(
 				tutor_nickname + "님의 " + rem_pay + "원을  송금신청을 수락하시겠습니까?");
 
 		$("div [class='modal-footer']")
 				.append(
-						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=\"accept('"+ pay_num + "','"+tutor_nickname+"','"+rem_pay+"','"+class_title+"')\">네</button>");
-		
-
+						"<button type='button' class='btn btn-success' data-dismiss='modal' onclick=\"accept('"+ pay_num + "','"+tutor_nickname+"','"+rem_pay+"','"+class_title+"','"+rem_revenue+"')\">네</button>");
 		$("div [class='modal-footer']")
 				.append(
 						"<button type='button' class='btn btn-danger' data-dismiss='modal'>아니오</button>")
 	}
 
-	function accept(pay_num,tutor_nickname,rem_pay,class_title) {	
-		location.href = "${cp}/admin/receiptAccept?pay_num=" + pay_num+"&tutor_nickname="+tutor_nickname+"&class_title="+class_title+"&rem_pay="+rem_pay;		
+	function accept(pay_num,tutor_nickname,rem_pay,class_title,rem_revenue) {	
+	
+		
+		
+		location.href = "${cp}/admin/receiptAccept?pay_num=" + pay_num+"&tutor_nickname="+tutor_nickname+"&class_title="+class_title+"&rem_pay="+rem_pay+"&rem_revenue="+rem_revenue;		
 		
 
 	}

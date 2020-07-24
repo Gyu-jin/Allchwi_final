@@ -4,11 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminStatisticMapper">
 	<select id="list" resultType="com.jhta.allchwi.vo.admin.Statistic1VO" parameterType="hashmap">
-	SELECT MONTH(regdate) AS month, sum(pay) monthlySum 
+	SELECT MONTH(regdate) AS month, sum(pay) monthlySum, sum(revenue) monthlyRevenue
 	FROM sales 
     <![CDATA[	WHERE year(regdate) >= #{thisyear} AND year(regdate) < #{nextyear} ]]>
 	GROUP BY month
 	</select>
+
+	
+	
 </mapper>
 
 

@@ -13,11 +13,12 @@ public class ReceiptVO {
 	private String mb_nickname;
 	private int pro_num;
 	private int pay_num;
+	private int class_fee;
 	
 	public ReceiptVO() {}
 
 	public ReceiptVO(String class_title, int class_num, int class_form, Timestamp pay_regdate, int final_price,
-			int class_finish, String id, String mb_nickname, int pro_num, int pay_num) {
+			int class_finish, String id, String mb_nickname, int pro_num, int pay_num, int class_fee) {
 		super();
 		this.class_title = class_title;
 		this.class_num = class_num;
@@ -29,6 +30,7 @@ public class ReceiptVO {
 		this.mb_nickname = mb_nickname;
 		this.pro_num = pro_num;
 		this.pay_num = pay_num;
+		this.class_fee = class_fee;
 	}
 
 	public String getClass_title() {
@@ -111,7 +113,14 @@ public class ReceiptVO {
 		this.pay_num = pay_num;
 	}
 
-	
+	public int getClass_fee() {
+		return class_fee;
+	}
+
+	public void setClass_fee(int class_fee) {
+		this.class_fee = class_fee;
+	}
+
 	
 	
 	

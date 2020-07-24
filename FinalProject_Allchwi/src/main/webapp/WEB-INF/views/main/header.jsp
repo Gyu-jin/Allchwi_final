@@ -50,7 +50,7 @@
 		 <div class="practice-group">
            	
     
-           	<a href="${cp}/onclass/community" target="_blank">커뮤니티</a> 
+           
            	<a href="${cp}/admin/main">관리자 연습</a> 
          
 		 </div>

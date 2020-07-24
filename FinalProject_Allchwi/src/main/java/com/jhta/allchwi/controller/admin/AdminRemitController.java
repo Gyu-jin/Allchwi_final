@@ -27,11 +27,13 @@ public class AdminRemitController {
 	public String goPayment(HttpServletRequest request, Model model,String field, String keyword,
 			@RequestParam(value="pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value="pay_num", defaultValue = "1") int pay_num,
-			@RequestParam(value="rem_pay", defaultValue = "1") int rem_pay,String tutor_nickname,String class_title
+			@RequestParam(value="rem_pay", defaultValue = "1") int rem_pay,
+			@RequestParam(value="rem_revenue",defaultValue = "1") int rem_revenue,
+			String tutor_nickname,String class_title
 			){
 		
 		if(request.getServletPath().equals("/admin/receiptAccept")) {
-			SalesVO vo = new SalesVO(pay_num, class_title, tutor_nickname, rem_pay);
+			SalesVO vo = new SalesVO(pay_num, class_title, tutor_nickname, rem_pay,rem_revenue);
 			try {
 				service.acceptAndSales(pay_num, vo); //rem_stauts=1과 sales테이블에 insert				
 			}catch(Exception e){

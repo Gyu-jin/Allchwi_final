@@ -29,10 +29,13 @@ public class ReceiptController {
 	@RequestMapping(value= {"/receipt/main","/receipt/insert"})
 	public String adminMain(HttpSession session,HttpServletRequest request, Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
 			@RequestParam(value="rem_pay",defaultValue = "1")int rem_pay, String rem_bank, String rem_account, 
-			@RequestParam(value="pay_num",defaultValue = "1")int pay_num) {
+			@RequestParam(value="pay_num",defaultValue = "1")int pay_num,
+			@RequestParam(value="rem_revenue",defaultValue = "1")int rem_revenue
+			
+			) {
 		
 		if(request.getServletPath().equals("/receipt/insert")) {
-			InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
+			InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account,rem_revenue);
 			try {
 				service.insertUpdateRecipt(vo, pay_num);
 			}catch(Exception e) {
@@ -58,9 +61,11 @@ public class ReceiptController {
 	
 	
 	@RequestMapping(value="/receipt/apply")
-	public String receiptApply(Model model, int final_price, int pay_num) {	
+	public String receiptApply(Model model, int final_price, int pay_num, int class_fee) {	
 		model.addAttribute("final_price", final_price);
 		model.addAttribute("pay_num", pay_num);
+		model.addAttribute("class_fee", class_fee);
+		
 		
 		return ".receipt.applyRemit";
 	}
