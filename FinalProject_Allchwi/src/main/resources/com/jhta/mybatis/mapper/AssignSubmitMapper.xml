@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AssignSubmitMapper">
-
+	<insert id="insert" parameterType="assignsubmit">
+		insert into assign_submit values(0,#{assign_num},#{ml_num},#{sub_content},now())
+	</insert>
 	
 </mapper>

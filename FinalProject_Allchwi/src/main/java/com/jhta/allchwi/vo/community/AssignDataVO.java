@@ -1,20 +1,27 @@
 package com.jhta.allchwi.vo.community;
 
+import java.sql.Timestamp;
+
 public class AssignDataVO {
 	private int assigndata_num;
 	private int sub_num;
 	private String assign_orgFilename;
 	private String assign_saveFilename;
+	private Timestamp assigndata_regdate;
 	
 	public AssignDataVO() {}
 
-	public AssignDataVO(int assigndata_num, int sub_num, String assign_orgFilename, String assign_saveFilename) {
+	
+	public AssignDataVO(int assigndata_num, int sub_num, String assign_orgFilename, String assign_saveFilename,
+			Timestamp assigndata_regdate) {
 		super();
 		this.assigndata_num = assigndata_num;
 		this.sub_num = sub_num;
 		this.assign_orgFilename = assign_orgFilename;
 		this.assign_saveFilename = assign_saveFilename;
+		this.assigndata_regdate = assigndata_regdate;
 	}
+
 
 	public int getAssigndata_num() {
 		return assigndata_num;
@@ -46,6 +53,16 @@ public class AssignDataVO {
 
 	public void setAssign_saveFilename(String assign_saveFilename) {
 		this.assign_saveFilename = assign_saveFilename;
+	}
+
+
+	public Timestamp getAssigndata_regdate() {
+		return assigndata_regdate;
+	}
+
+
+	public void setAssigndata_regdate(Timestamp assigndata_regdate) {
+		this.assigndata_regdate = assigndata_regdate;
 	}
 	
 	

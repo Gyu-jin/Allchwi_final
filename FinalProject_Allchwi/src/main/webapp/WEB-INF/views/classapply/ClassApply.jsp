@@ -159,7 +159,7 @@ div {
 	text-align: center;
 	margin: 0 auto;
 	align-items: center;
-	padding-left: 5%;
+	
 }
 
 .form-inline .btn-group-toggle {
@@ -409,7 +409,7 @@ img {
 				</div>
 			</c:forEach>
 				<div class="box">
-					<div class="col-md-5">
+					<div class="col-md-6">
 						<div class="title">
 							수업신청서<b class="pink">*</b>
 							<div class="col-3">
@@ -433,7 +433,7 @@ img {
 						<div class="label-12">연락 가능한 번호</div>
 					</div>
 	
-					<div class="col-md-5">
+					<div class="col-md-4">
 	
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary active"> 
@@ -456,7 +456,7 @@ img {
 						</div>
 	
 						<input type="text" id="phone" name="stu_phone" class="form-control"
-							style="width: 300px; margin-top: 20px;"
+							style="width: 250px; margin-top: 20px;"
 							placeholder="개인연락처를 - 없이 입력해주세요.">
 	
 					</div>
@@ -477,7 +477,7 @@ img {
 					</div>
 				
 					<div class="box">
-						<div class="col-md-5">
+						<div class="col-md-6">
 							<div class="title">
 								결제하기<b class="pink">*</b>
 								<div class="col-3">
@@ -503,7 +503,7 @@ img {
 							<div class="label-1">결제수단</div>
 						</div>
 		
-						<div class="col-md-5">
+						<div class="col-md-4">
 		
 							<div class="label-1-content">
 								${vo.class_price*vo.class_hour*vo.class_count }
