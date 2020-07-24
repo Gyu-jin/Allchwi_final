@@ -54,7 +54,7 @@ a,span{
 	text-decoration: none;
 }
 
-a:hover {
+a:hover  {
 	color: inherit;
 	text-decoration: none;
 }
