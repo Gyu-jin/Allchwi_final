@@ -139,15 +139,16 @@
 					<div class="collapse" id="collapse${status.index }">
 						<div class="card card-body">
 							<div class="content-box">
-								<form id="form-assign" method="post">
+								<form id="form-assign" method="post" enctype="multipart/form-data" action="${cp }/assign/data">
+								<input type="hidden" name="assign_num" value="${vo.assign_num }">
 									<div class="form-group">
 										<label for="exampleFormControlTextarea1">과제 답변 입력하기</label>
-										<textarea class="form-control" name="assign_content" rows="3"></textarea>
+										<textarea class="form-control" name="sub_content" rows="3"></textarea>
 									</div>
 									<div class="flex-div">
 										<div class="col-md-6">
-											<label for="exampleFormControlFile1">과제 파일 올려주세요</label> <input
-												type="file" name="assign_file" class="form-control-file">
+											<label for="exampleFormControlFile1">과제 파일 올려주세요</label> 
+											<input multiple type="file" name="assign_file" class="form-control-file">
 										</div>
 										<div class="col-md-6">
 											<button type="submit" class="btn btn-outline-warning"
