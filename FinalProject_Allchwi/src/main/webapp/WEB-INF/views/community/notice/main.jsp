@@ -140,10 +140,15 @@ window.onload = function(){
 				}
 	});
 }
+//글쓰기 모달창 띄우는 함수
 function showModal(){
 	var url = "${cp}/community/notice/writeNotice";
     $('.modal-container').load(url,function(result){
 		$('#myModal').modal();
 	});
+}
+//글 상세페이지로 이동하는 함수
+function goDetail(notice_num){
+	location.href="${cp}/community/noticeDetail?notice_num="+notice_num;
 }
 </script>

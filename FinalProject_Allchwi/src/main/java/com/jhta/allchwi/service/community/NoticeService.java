@@ -34,11 +34,22 @@ public class NoticeService {
 		//조회수 증가 후 상세 페이지 출력
 		@Transactional
 		public NoticeVO getDetail(int notice_num) throws Exception{
-			ntd.hit(notice_num);
 			return ntd.getDetail(notice_num);
 		}
 		//조회수 증가시키기 
 		public int hit(int notice_num) {
 			return ntd.hit(notice_num);
+		}
+		//조회수 증가 후 다음글
+		public NoticeVO next(int notice_num) {
+			return ntd.next(notice_num);
+		}
+		//조회수 증가 후 이전글
+		public NoticeVO prev(int notice_num) {
+			return ntd.prev(notice_num);
+		}
+		//글삭제
+		public int delete(int notice_num) {
+			return ntd.delete(notice_num);
 		}
 }

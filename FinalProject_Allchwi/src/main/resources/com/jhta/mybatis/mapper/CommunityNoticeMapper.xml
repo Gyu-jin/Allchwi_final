@@ -44,4 +44,23 @@
 	<update id="hit" parameterType="int">
 		update notice set notice_view=notice_view+1 where notice_num=#{notice_num}
 	</update>
+	<!-- 다음글 -->
+	<select id="next" parameterType="int" resultType="notice">
+		select * from(
+		 	select * from notice where notice_num > #{notice_num}
+		   	order by notice_num asc
+		) aa
+		limit 1
+	</select>
+	<!-- 이전글 -->
+	<select id="prev" parameterType="int" resultType="notice">
+	   select * from notice
+	   <![CDATA[ where notice_num < #{notice_num} ]]> 
+	   order by notice_num desc 
+	   limit 1 
+	</select>
+	<!-- 글삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from notice where notice_num = #{notice_num}
+	</delete>
 </mapper>

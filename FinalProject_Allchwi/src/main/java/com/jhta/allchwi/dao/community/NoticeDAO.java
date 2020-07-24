@@ -39,4 +39,16 @@ public class NoticeDAO {
 	public int hit(int notice_num) {
 		return session.update(NAMESPACE + ".hit", notice_num);
 	}
+	//다음글
+	public NoticeVO next(int notice_num) {
+		return session.selectOne(NAMESPACE + ".next", notice_num);
+	}
+	//이전글
+	public NoticeVO prev(int notice_num) {
+		return session.selectOne(NAMESPACE + ".prev", notice_num);
+	}
+	//글삭제
+	public int delete(int notice_num) {
+		return session.delete(NAMESPACE + ".delete", notice_num);
+	}
 }
