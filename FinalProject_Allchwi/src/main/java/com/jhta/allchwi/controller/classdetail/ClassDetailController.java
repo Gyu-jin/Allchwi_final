@@ -66,8 +66,10 @@ public class ClassDetailController {
 		// getdetail
 		ClassDetailVO cdv = cds.getDetail(map);
 		// 날짜시간
-		List<ClassDateVO> dlist = dates.list(class_num);
-
+		
+		
+		List<ClassDateVO> dlist = dates.select(class_num);
+		
 		// 리뷰리스트,페이징
 		map.put("class_num", class_num);
 		int totalRowCount = crs.rcount(map);
@@ -91,7 +93,7 @@ public class ClassDetailController {
 
 	// 인표 상세페이지 이동 detail2
 	@GetMapping("/classDetail/detail2")
-	public ModelAndView detail2(int class_num,HttpSession session,
+	public ModelAndView detail2(int class_num, HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		ModelAndView mv = new ModelAndView(".classDetail.detail");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -115,8 +117,10 @@ public class ClassDetailController {
 		// getdetail
 		ClassDetailVO cdv = cds.getDetail(map);
 		// 날짜시간
-		List<ClassDateVO> dlist = dates.list(class_num);
-
+		
+		
+		List<ClassDateVO> dlist = dates.select(class_num);
+		
 		// 리뷰리스트,페이징
 		map.put("class_num", class_num);
 		int totalRowCount = crs.rcount(map);
@@ -128,6 +132,7 @@ public class ClassDetailController {
 			ClassReviewVO rating= crs.rate_avg(class_num);
 			mv.addObject("rating", rating);
 		}
+
 		mv.addObject("cdv", cdv);
 		mv.addObject("dlist", dlist);
 		mv.addObject("rlist", rlist);
@@ -136,5 +141,4 @@ public class ClassDetailController {
 		
 		return mv;
 	}
-
 }

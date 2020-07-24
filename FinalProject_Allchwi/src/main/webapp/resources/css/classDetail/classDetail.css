@@ -5,19 +5,57 @@
 	padding: 50px 0 50px 0;
 	letter-spacing: 0;
 }
-.carousel-item img{
+
+/*       수업 이미지          */
+.carousel-item img {
 	height: 450px;
 }
-.carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev {
-  display: block;
-}
-.card {
-	width: 440px;
-	background: white;
+
+.carousel-item.active, .carousel-item-next, .carousel-item-prev {
+	display: block;
 }
 
+/*       네비게이션 바          */
+.class_wrap {
+	background: #ececec;
+}
+
+.class_navi {
+	background: white;
+	color: gray;
+	border-bottom: 1px solid #999;
+	padding: 10px 0px;
+	position: sticky;
+	top: 0px;
+	z-index: 1;
+}
+
+.class_navi.active {
+	position: fixed;
+	width: 44.7%;
+}
+
+.class_navi ul li {
+	width: 150px;
+	display: inline-block;
+	text-align: center;
+	font-size: 20px;
+	padding: 20px 0 20px 0;
+}
+
+.class_navi ul li a.on {
+	color: #ff936f;
+	font-weight: bold;
+	font-size: 20px;
+	border-bottom: 2px solid #ff936f;
+}
+
+.class_wrap .class_detail {
+	background: #ececec;
+	width: 100%
+}
+
+/*        우측네비          */
 .remote {
 	width: 100%;
 	background: whitesmoke;
@@ -28,11 +66,18 @@
 .remote.active {
 	position: fixed;
 	top: 0px;
+	width: auto;
 }
 
+.card {
+	width: 440px;
+	background: white;
+}
+
+/*        수업정보          */
 .roundImg {
 	width: 170px;
-    height: 170px;
+	height: 170px;
 	border-radius: 50%;
 }
 
@@ -48,9 +93,20 @@
 	padding-top: 50px;
 	list-style: none;
 }
-.starimg img{
+
+.starimg img {
 	width: 25px;
 }
+
+.btn_wishlist {
+	padding: 10px 18px;
+	border-radius: 10px;
+	background-color: #ff936f;
+	float: right;
+	color: white;
+	margin-top: -20px;
+}
+
 .btn_wishlist img {
 	width: 20px;
 }
@@ -78,31 +134,9 @@
 		url(https://user-images.githubusercontent.com/65140754/86689728-3b17a000-c042-11ea-9861-55fe8f7cd520.png)
 		center top no-repeat;
 }
-.cert ul li img{
+
+.cert ul li img {
 	width: 30px;
-}
-.class_wrap {
-	background: #ececec;
-}
-
-.class_navi {
-	background: white;
-	color: gray;
-	border-bottom: 1px solid #999;
-	padding: 10px 0px;
-	position: sticky;
-	top: 0px;
-	z-index: 1;
-}
-
-.class_navi.active {
-	position: fixed;
-	width: 44.7%;
-}
-
-.class_wrap .class_detail {
-	background: #ececec;
-	width: 100%
 }
 
 .class_wrap .class_detail .info {
@@ -134,57 +168,40 @@
 	overflow: hidden;
 	padding: 0px 80px 80px 80px;
 }
-.d_info{
-	margin-top: 30px;
-    font-size: 16px;
-    color: #666;
-    line-height: 180%;
-    clear: both;
-    margin-left: 30px;
-}
-.t_info{
-	margin-top: 30px;
-	
-}
+
+/* 튜터정보 */
 .class_wrap .class_detail .sec01 {
 	padding-top: 125px;
 	position: relative;
 }
 
-.class_navi ul li a.on {
-	color: #ff936f;
-	font-weight: bold;
-	font-size: 20px;
-	border-bottom: 2px solid #ff936f;
+.d_info {
+	margin-top: 30px;
+	font-size: 16px;
+	color: #666;
+	line-height: 180%;
+	clear: both;
+	margin-left: 30px;
 }
 
-.class_navi ul li {
-	width: 150px;
-	display: inline-block;
-	text-align: center;
-	font-size: 20px;
-	padding: 20px 0 20px 0;
+.t_info {
+	margin-top: 30px;
 }
+
 .currbox h3 {
-    font-size: 24px;
-    color: #ff6f3f;
-    line-height: 100%;
-    padding-left: 50px;
-    margin: 80px 0 30px 0;
+	font-size: 24px;
+	color: #ff6f3f;
+	line-height: 100%;
+	padding-left: 50px;
+	margin: 80px 0 30px 0;
 }
+
 .currbox img {
 	width: 40px;
-    float: left;
-}
-.btn_wishlist {
-	padding: 10px 18px;
-	border-radius: 10px;
-	background-color: #ff936f;
-	float: right;
-	color: white;
-	margin-top: -20px;
+	float: left;
 }
 
+/*         리뷰           */
 .btn_write {
 	padding: 10px 20px;
 	border-radius: 10px;
@@ -192,10 +209,6 @@
 	float: right;
 	color: white;
 	margin-top: 10px;
-}
-
-.modal-footer {
-	background-color: #ff936f;
 }
 
 .btn_send {
@@ -213,9 +226,11 @@
 	vertical-align: middle;
 	margin-top: 85px;
 }
-#btn_write_review{
+
+#btn_write_review {
 	cursor: pointer;
 }
+
 .sec01 .review_count01 {
 	margin-top: 30px;
 	border-bottom: 1px solid #e5e5e5;
@@ -249,10 +264,6 @@
 	line-height: 100%;
 }
 
-.tutor_t {
-	margin: 30px;
-}
-
 .sec01 .review_list ul li {
 	border-bottom: 1px solid #e5e5e5;
 	padding: 35px 0;
@@ -262,8 +273,40 @@
 .sec01 .review_list ul li dl {
 	margin-bottom: 3rem;
 }
-.review_box img, .review_count01 img{
-	width:35px;
+
+.review_box img, .review_count01 img {
+	width: 35px;
+}
+/* qna 목록 */
+.qna_list ul li {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 10px 0;
+	cursor: default;
+}
+
+.qna_list {
+	border: 1px solid #d4cdcd;
+	margin-top: 65px;
+}
+
+.reply_box {
+	margin-top: 20px;
+}
+
+#reply_send {
+	width: 100px;
+	height: 85px;
+	margin-top: -15px;
+	margin-left: 24px;
+}
+/*페이징 css*/
+#paging ul li a.active {
+	background: #7185bb;
+}
+
+/*       튜터 메세지       */
+.tutor_t {
+	margin: 30px;
 }
 
 .tutor_t dl.tutor_txt dt {
@@ -298,6 +341,26 @@
 	margin-top: -10px;
 }
 
+/*        결제정보          */
+.price {
+	padding: 30px 0 10px 0;
+	overflow: hidden;
+	line-height: 150%;
+}
+
+.hp1 {
+	color: #333;
+	text-align: center;
+	font-size: 20px;
+}
+
+.tp1 {
+	color: #ff6243;
+	text-align: center;
+	font-weight: bold;
+	
+}
+
 .btn_pay {
 	display: inline-block;
 	padding: 10px 0 10px 0;
@@ -307,36 +370,4 @@
 	background-color: #7185bb;
 	font-size: 30px;
 	color: white;
-}
-
-
-li {
-	list-style: none;
-}
-
-.qna_list ul li {
-	border-bottom: 1px solid #e5e5e5;
-	padding: 10px 0;
-	cursor: default;
-}
-
-.qna_list {
-	border: 1px solid #d4cdcd;
-	margin-top: 65px;
-}
-
-.reply_box {
-	margin-top: 20px;
-}
-
-#reply_send {
-	width: 100px;
-	height: 85px;
-	margin-top: -15px;
-	margin-left: 24px;
-}
-/*페이징 css*/
-
-#paging ul li a.active {
-	background:#7185bb; 
 }

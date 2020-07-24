@@ -27,6 +27,11 @@
 .star_rating a.on {
 	color: #ff936f;
 }
+.modal-footer {
+	background-color: #ff936f;
+	color: white;
+}
+
 </style>
 <!-- 리뷰작성 모달 -->
 <div id="myModal" class="modal fade" id="modalContactForm" tabindex="-1"

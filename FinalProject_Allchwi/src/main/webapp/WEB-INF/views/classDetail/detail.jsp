@@ -412,7 +412,10 @@
 								</div>
 							</c:if>
 						</c:forEach>
-
+						<div class="price">
+							<div class="hp1"><b>￦${cdv.class_price}원</b> / 시간</div>
+							<div class="tp1">￦${cdv.class_price*cdv.class_count*cdv.class_hour}/ 총 ${cdv.class_count}회 ${cdv.class_hour}시간</div>
+						</div>
 						<c:choose>
 							<c:when test="${empty ml_num}">
 								<div class="button_pay">
