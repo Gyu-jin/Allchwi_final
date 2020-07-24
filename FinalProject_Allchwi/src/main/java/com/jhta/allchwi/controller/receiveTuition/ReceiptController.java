@@ -3,7 +3,9 @@ package com.jhta.allchwi.controller.receiveTuition;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class ReceiptController {
 	private ReceiptService service;
 	
 	@RequestMapping(value= {"/receipt/main","/receipt/insert"})
-	public String adminMain(HttpServletRequest request, Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+	public String adminMain(HttpSession session,HttpServletRequest request, Model model,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
 			@RequestParam(value="rem_pay",defaultValue = "1")int rem_pay, String rem_bank, String rem_account, 
 			@RequestParam(value="pay_num",defaultValue = "1")int pay_num) {
 		
@@ -38,12 +40,14 @@ public class ReceiptController {
 			}
 		}
 		
+		int ml_num = (Integer)session.getAttribute("ml_num");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int totalRowCount = service.count();
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
 		map.put("startRow", pu.getStartRow() - 1);
+		map.put("ml_num",ml_num);
 		
 		List<ReceiptVO> list = service.receipt_list(map);
 		model.addAttribute("list", list);

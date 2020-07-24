@@ -269,19 +269,14 @@ button, input, optgroup, select, textarea {
 	<!--MyTItleBox head-->
 	<div class="title-box">
 		<h1>수업료 받기</h1>
-		<ul>
-			<li class="cursor on"><a href="/My/MyTuteeClassList/">오프라인</a></li>
-			<li class="cursor"><a href="/My/MyTuteeVodList/">온라인
-					<div class="title-tab-cir">0</div>
-			</a></li>
-		</ul>
 	</div>
 	<div class="my-class-list">
 		<c:forEach var="vo" items="${list}">
 			<div class="class-box">
 				<div class="class-info">
 					<div class="image" style="text-align: center;">
-						<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }">
+						<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }"
+							style="width:150px; height:180px;">
 					</div>
 
 					<div class="information-box">
