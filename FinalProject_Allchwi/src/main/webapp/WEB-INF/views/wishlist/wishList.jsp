@@ -21,7 +21,7 @@
 				<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
 			</div>
 			<div class="information-box">
-				<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${list.class_num }'">
+				<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${vo.class_num}'">
 					${vo.class_title }
 				</h3>
 				<div class="stars-box">

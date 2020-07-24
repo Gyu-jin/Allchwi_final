@@ -61,6 +61,7 @@
 			) c where c.class_num=i.class_num and i.scategory_num=s.scategory_num and cnt=1 and i.class_form=#{class_form}
 		) bb
 		where aa.class_num=bb.class_num and bb.class_status!=2
+		order by pay_regdate desc
 		limit #{startRow},2
 	</select>
 	

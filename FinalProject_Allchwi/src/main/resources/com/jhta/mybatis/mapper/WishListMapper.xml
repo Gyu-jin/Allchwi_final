@@ -40,7 +40,7 @@
 		) class_rating
 	 from class_info i,
 	(
-		select * from wishlist where ml_num=18
+		select * from wishlist where ml_num=#{ml_num}
 	) wish,
 	small_location s,
 	(

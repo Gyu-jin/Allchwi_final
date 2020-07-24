@@ -16,9 +16,7 @@ function onUploadComplete(e) {
     totalUploaded += $('#files')[0].size;
     var bar =$('#progressBar');
     bar.width('100%');
-    bar.innerHTML = '100% complete';
-    alert('Finished uploading file(s)');
-    
+    bar.text('100% complete');    
 }
 
 //Will be called when user select the files in file control
@@ -43,9 +41,10 @@ function onUploadProgress(e) {
     if (e.lengthComputable) {
 		console.log("load");
         var percentComplete = Math.round((e.loaded / e.total) * 100);
+        console.log(percentComplete);
         var bar = $('#progressBar');
         bar.css('width',percentComplete + '%');
-        bar.innerHTML = percentComplete + ' % complete';
+        bar.text(percentComplete + ' % complete');
         
     } else {
         debug('unable to compute');
@@ -77,9 +76,13 @@ function uploadNext() {
 		    xhr.addEventListener("error", onUploadFailed, false);
 		    return xhr;
 		  },
-		  success:function(){
-			  alert("완료!!");
-		  }
+		success:function(data){
+			if(data="succeess"){
+				alert("완료!!");				
+			}else{
+				alert("실패!!");
+			}
+		}
 	});
 }
 
@@ -93,8 +96,14 @@ function startUpload() {
 $(function(){
 	
 	$('#files').change(onFileSelect);
-	$('#uploadButton').submit(startUpload);
+	$('#uploadButton').click(startUpload);
 });
+
+$(window).on("beforeunload", function(){
+    return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+});
+
+
 
 </script>
 
@@ -120,9 +129,10 @@ $(function(){
 						style="resize: none"></textarea>
 				</div>
 				<form id="frm" style="margin-bottom: 20px">
-						<input type="file" id="files" name="files" style="margin-bottom: 20px" /><br />
-						<output id="selectedFiles"></output>
-						<input id="uploadButton" type="submit" value="Upload" style="margin-top: 20px" />
+    				<div class="custom-file">
+						<input type="file" class="custom-file-input" id="files" name="files">
+    					<label class="custom-file-label" id="selectedFiles">Choose file</label>
+					</div>
 				</form>
 				<div class="progress" style=" margin-bottom: 20px">
 					<div id="progressBar" class="progress-bar progress-bar-success"
@@ -134,7 +144,7 @@ $(function(){
 	
 			<!-- Modal footer -->
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">업로드</button>
+	        <button type="button" class="btn btn-primary" id="uploadButton">업로드</button>
 	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      </div>
 		</div>

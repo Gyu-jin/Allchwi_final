@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -28,14 +29,13 @@ public class OnlineClassController {
 	}
 	
 	@GetMapping("/community/mediaModal")
-	public String showModal(HttpSession session, int commu_num) {
+	public String showModal(HttpSession session) {
 		return "community/onlineCampus/fileuploadModal";
 	}
 	
 	@RequestMapping(value = "/community/save-product", method = RequestMethod.POST)
-	public void saveFile(
-			MultipartFile files, 
-			 Model model,HttpSession session) {
+	public String saveFile(MultipartFile files, Model model, HttpSession session,HashMap<String, Object> map) {
+		
 		String uploadPath = 
 				session.getServletContext().getRealPath("/resources/mediaFold");
 		
@@ -51,11 +51,9 @@ public class OnlineClassController {
 			try{
 			    Folder.mkdir(); //폴더 생성합니다.
 			    System.out.println("폴더가 생성되었습니다.");
-		        } 
-		        catch(Exception e){
+		    }catch(Exception e){
 			    e.getStackTrace();
-			}        
-	         }else {
+		    }        
 		}
 		
 		String orgfileName = files.getOriginalFilename();
@@ -64,24 +62,16 @@ public class OnlineClassController {
 		
 		File fos = new File(path+File.separator + savefileName);
 		try {
-			
 			files.transferTo(fos);
+			
+			String time = Videoffmpeg.media_player_time(path+File.separator + savefileName);
+			System.out.println("Play_Time : " + time);
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(fos);
 			e.printStackTrace();
-		}
-		/*
-		 * System.out.println("aaaa"); String fileName = files.getOriginalFilename();
-		 * try { System.out.println(session.getServletContext().getRealPath(
-		 * "resources/mediadFold")); File file1 = new
-		 * File(session.getServletContext().getRealPath("resources/mediadFold"),
-		 * fileName); files.transferTo(file1); } catch (IOException e) {
-		 * e.printStackTrace(); }
-		 */
+			return "fail";
+		}		
+		
+		return "success";
 	}
-	
-	@RequestMapping(value = "/product-input-form")
-    public String inputProduct(Model model) {
-        return "productForm";
-    }
 }
