@@ -74,7 +74,7 @@
 		(
 			select round((avg(curr_rating) + avg(ready_rating) + avg(kind_rating) + avg(time_rating))/4,1) class_rating
 			from class_review group by class_num having class_num=aa.class_num),0
-		) class_rating from
+		) class_rating from  
 		(
 			select a.apply_regdate,a.apply_num,a.apply_auth,a.date_num,p.class_fee,p.pay_regdate,d.class_date,d.class_num,d.class_startTime,p.class_finish  
 			from class_apply a, payment p,class_date d 
