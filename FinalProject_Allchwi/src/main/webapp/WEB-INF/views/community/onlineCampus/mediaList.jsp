@@ -67,7 +67,6 @@ ul {
 }
 .curriculum .lecture li a {
     display: block;
-    overflow: hidden;
     height: 100%;
 }
 .thumb img {
@@ -124,7 +123,7 @@ ul {
 <div class="container">
 	<h2 class="h2 mb30">온라인 강의
 	<c:if test="${commuInfo.ml_num==ml_num}">
-		<div class="button_gray cursor" onclick="writeShow(${commuInfo.commu_num})">강의업로드</div>
+		<div class="button_gray cursor" onclick="writeShow()">강의업로드</div>
 	</c:if>
 	</h2>
 	<div class=curriculum id="vodCurri">
@@ -144,7 +143,8 @@ ul {
 					            <span class="caret"></span></button>
 					            <ul class="dropdown-menu" role="menu">
 					                <li style="text-align: center; margin-bottom: 17px"><a href="#" onclick="updateShow(${vo.online_num})"><font style="font-size: 14px; color: black;">수업 수정</font></a></li>
-					                <li style="text-align: center;"><a href="#" onclick="delClass(${vo.online_num})"><font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
+					                <li style="text-align: center;"><a href="#" onclick="delClass(${vo.online_num});$(this).parent().parent().parent().parent().parent().remove()">
+					                <font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
 					            </ul>
 				       		</div>
 			       		</c:if>
@@ -162,8 +162,8 @@ ul {
 									<a href="${cp}/vod/play/${vo.online_num}">
 									<span class="tit">${vo.online_title }</span>
 									<span class="time">${min}:${sec}</span>
-									<p class="">${vo.online_content }</p>
 									</a>
+									<p>${vo.online_content }</p>
 								</div>
 							</li>
 						</ul>
@@ -216,8 +216,8 @@ ul {
 
 
 <script>
-function writeShow(commu_num){		
-	var url = "${cp}/community/mediaModal?commu_num="+commu_num;
+function writeShow(){		
+	var url = "${cp}/community/mediaModal";
 	   $('.modal-container').load(url,function(result){
 		$('#myModal').modal();
 	});		
@@ -230,12 +230,23 @@ function updateShow(online_num){
 }
 function delClass(online_num){
 	
-	var chk = comfirm("정말 삭제히시겠습니까?");
 	
-	if(chk="true"){
-		
+	if( confirm("정말 삭제히시겠습니까?")==true){
+		$.ajax({
+		    type: "post",
+		    dataType: "text",
+		    url: "${cp}/community/onlineDelte",
+		    data: {online_num: online_num},
+		    success: function(data) {
+		    	if(data == 'success'){
+		    		alert('삭제 되었습니다.');
+		    	}else{
+		    		alert('삭제 실패!!!')
+		    	}
+		    }
+		});
 	}else{
-		
+		return;
 	}
 	
 }

@@ -27,4 +27,13 @@ public class OnlineClassDAO {
 	public OnlineClassVO getImg(int online_num) {
 		return session.selectOne(NAMESPACE + ".getImg", online_num);
 	}
+	public OnlineClassVO select(int online_num) {
+		return session.selectOne(NAMESPACE + ".select", online_num);
+	}
+	public int update(OnlineClassVO updateVo) {
+		return session.update(NAMESPACE + ".update", updateVo);
+	}
+	public int delete(int online_num) {
+		return session.delete(NAMESPACE + ".delete", online_num);
+	}
 }
