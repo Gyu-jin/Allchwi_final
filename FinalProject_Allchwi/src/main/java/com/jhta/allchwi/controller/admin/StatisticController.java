@@ -1,5 +1,6 @@
 package com.jhta.allchwi.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class StatisticController {
 	
 	@GetMapping("/admin/statisticAjax1")
 	@ResponseBody
-	public List<Statistic1VO> statisticAjax(){
-		List<Statistic1VO> list = dao.list();
+	public List<Statistic1VO> statisticAjax(int thisyear, int nextyear){
+		List<Statistic1VO> list = dao.list(thisyear,nextyear);
 		
 		
 		
