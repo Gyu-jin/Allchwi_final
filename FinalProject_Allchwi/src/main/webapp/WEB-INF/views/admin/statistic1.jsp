@@ -43,7 +43,7 @@
 			<button type="button" id="lastyear" class="btn btn-outline-secondary">
 				<c:out value="${sysYear-1}" />년
 			</button>
-			<button type="button" id="thisyear" class="btn btn-outline-secondary ">
+			<button type="button " id="thisyear" class="btn btn-outline-secondary active" >
 				<c:out value="${sysYear}" />년
 			</button>
 
