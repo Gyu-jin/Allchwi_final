@@ -15,6 +15,21 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		
+		<!-- JCodec 를 이용하면 아주 편리하게 동영상의 특정 프레임으로부터 이미지를 추출 -->
+		<!-- https://mvnrepository.com/artifact/org.jcodec/jcodec -->
+		<dependency>
+		    <groupId>org.jcodec</groupId>
+		    <artifactId>jcodec</artifactId>
+		    <version>0.2.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jcodec/jcodec-javase -->
+		<dependency>
+		    <groupId>org.jcodec</groupId>
+		    <artifactId>jcodec-javase</artifactId>
+		    <version>0.2.5</version>
+		</dependency>
+	
 		<!-- FFMPEG 라이브럭리  -->
 		<dependency>
 		    <groupId>net.bramp.ffmpeg</groupId>

@@ -240,4 +240,5 @@ button, input, optgroup, select, textarea {
     letter-spacing: -0.35px;
     width: 100px;
     height: 30px;
+    margin-top: 10px;
 }

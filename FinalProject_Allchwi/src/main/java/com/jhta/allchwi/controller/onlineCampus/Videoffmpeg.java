@@ -19,9 +19,9 @@ public class Videoffmpeg {
 	
 	private static final String FFPROBE_PATH = "C:/ffmpeg-20200721-b5f1e05-win64-static/bin/ffprobe.exe";
 	
-	public static String media_player_time(String mediaPath) {
+	public static int media_player_time(String mediaPath) {
 		System.out.println("@@ media_player_time start @@");
-		String returnData = "0";
+		int returnData = 0;
 
 		try {
 			FFprobe ffprobe = new FFprobe(FFPROBE_PATH); // window에 설치된  ffprobe.exe 경로
@@ -29,7 +29,7 @@ public class Videoffmpeg {
 			FFmpegFormat format = probeResult.getFormat();
 			double second = format.duration; // 초단위
 
-			returnData = second + "";
+			returnData = (int) Math.floor(second);
 			System.out.println("second==" + second);
 
 		} catch (IOException e) {
@@ -40,5 +40,7 @@ public class Videoffmpeg {
 
 		return returnData;
 	}
+	
+	
 
 }

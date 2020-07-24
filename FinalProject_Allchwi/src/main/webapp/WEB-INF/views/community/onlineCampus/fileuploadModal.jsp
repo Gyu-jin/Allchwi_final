@@ -16,7 +16,15 @@ function onUploadComplete(e) {
     totalUploaded += $('#files')[0].size;
     var bar =$('#progressBar');
     bar.width('100%');
-    bar.text('100% complete');    
+    bar.text('100% complete');
+    
+    
+    var timer = setTimeout(function() {         
+    	alert('업로드가 완료되었습니다.');         
+    	clearTimeout(timer);   
+    	$('#myModal').modal("hide");
+    }, 500);
+
 }
 
 //Will be called when user select the files in file control
@@ -58,30 +66,23 @@ function onUploadFailed(e) {
 
 //Pick the next file in queue and upload it to remote server
 function uploadNext() {
-    var fd = new FormData($('#frm')[0]);
+    var formdata = new FormData($('#frm')[0]);
   
     $.ajax({
 		type: 'POST',
 		url: '${cp}/community/save-product',
 		enctype: 'multipart/form-data',
 		contentType: false,
-		data: fd,
+		data: formdata,
 		processData: false,
 		xhr: function()
-		  {
+		{
 		    var xhr = new window.XMLHttpRequest();
 		    //Upload progress
 		    xhr.upload.addEventListener("progress", onUploadProgress, false),
 		    xhr.addEventListener("load", onUploadComplete, false);
 		    xhr.addEventListener("error", onUploadFailed, false);
 		    return xhr;
-		  },
-		success:function(data){
-			if(data="succeess"){
-				alert("완료!!");				
-			}else{
-				alert("실패!!");
-			}
 		}
 	});
 }
@@ -119,16 +120,16 @@ $(window).on("beforeunload", function(){
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="online_title" class="control-label">강의 제목</label> <input
-						type="text" class="form-control" id="stu_phone">
-				</div>
-				<div class="form-group">
-					<label for="stu_msg" class="control-label">강의 줄거리</label>
-					<textarea class="form-control" id="online_content" rows="3"
-						style="resize: none"></textarea>
-				</div>
 				<form id="frm" style="margin-bottom: 20px">
+					<div class="form-group">
+						<label for="online_title" class="control-label">강의 제목</label> 
+						<input type="text" class="form-control" id="online_title" name="online_title">
+					</div>
+					<div class="form-group">
+						<label for="stu_msg" class="control-label">강의 줄거리</label>
+						<textarea class="form-control" name="online_content" id="online_content" rows="3"
+							style="resize: none"></textarea>
+					</div>
     				<div class="custom-file">
 						<input type="file" class="custom-file-input" id="files" name="files">
     					<label class="custom-file-label" id="selectedFiles">Choose file</label>
@@ -145,7 +146,7 @@ $(window).on("beforeunload", function(){
 			<!-- Modal footer -->
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary" id="uploadButton">업로드</button>
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 	      </div>
 		</div>
     </div>

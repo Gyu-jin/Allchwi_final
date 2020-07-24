@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 .container {
     max-width: 1040px;
@@ -56,7 +57,7 @@ ul {
     position: relative;
 }
 .curriculum .lecture li .thumb {
-    float: left;
+    display: inline-block;
     width: 272px;
     height: 160px;
 }
@@ -126,31 +127,73 @@ ul {
 	</h2>
 	<div class=curriculum id="vodCurri">
 		<ol>
-			<li class="lst">
-				<h3>
-					ot. 오리엔테이션 - 튜터와 수업 소개
-					<span class="total-time">3:59</span>
-				</h3>
-				<div class="lecture">
-					<ul>
-						<li>
-							<div class="thumb">
-								<a href="/vod/play/903">
-								<img src="https://front-img.taling.me/Content/Images/Vod/marketing/ot2.jpg" alt="">
-								</a>
-							</div>
-							<div class="txt">
-								<a href="/vod/play/903">
-								<span class="tit">ot. 튜터와 수업소개</span>
-								<span class="time">3:59</span>
-								<p class="">#퍼포먼스 마케팅 #연봉 3배 #무조건 성과 내는 마케팅 비법</p>
-								</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</li>
+			<c:forEach var="vo" items="${list}">
+				<li class="lst">
+					<h3>
+						${vo.online_title }
+						<span class="total-time">
+						<fmt:formatNumber var="min" value="${vo.online_time/60}" pattern="0"/>
+						<fmt:formatNumber var="sec" value="${vo.online_time%60}" pattern="00"/>
+						${min}:${sec}</span>
+					</h3>
+					<div class="lecture">
+						<ul>
+							<li>
+								<div class="thumb">
+									<a href="/vod/play/903">
+									<img src="https://front-img.taling.me/Content/Images/Vod/marketing/ot2.jpg" alt="">
+									</a>
+								</div>
+								<div class="txt">
+									<a href="/vod/play/903">
+									<span class="tit">${vo.online_title }</span>
+									<span class="time">${min}:${sec}</span>
+									<p class="">${vo.online_content }</p>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</c:forEach>
 		</ol>
+		<div style="padding-top:100px">
+				<ul class="pagination justify-content-center" style="margin: 20px 0">
+				<c:choose>
+					<c:when test="${pu.startPageNum>1 }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/community/mediaList?pageNum=${pu.startPageNum-1 }">이전</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="i" begin="${pu.startPageNum}"
+					end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${pu.pageNum==i}">
+							<li class="page-item active"><a class="page-link"
+								href="${cp }/community/mediaList?pageNum=${i }">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="${cp }/community/mediaList?pageNum=${i }">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${pu.totalPageCount>pu.endPageNum }">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/community/mediaList?pageNum=${pu.endPageNum+1 }">다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+			</div>
 	</div>
 </div>
 <div class="container">

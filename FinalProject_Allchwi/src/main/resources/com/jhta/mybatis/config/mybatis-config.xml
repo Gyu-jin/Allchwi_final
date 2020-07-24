@@ -57,6 +57,8 @@
 		<typeAlias type="com.jhta.allchwi.vo.community.AssignDataVO" alias="assigndata"/>
 		<!-- Commu-Notice alias -->
 		<typeAlias type="com.jhta.allchwi.vo.community.NoticeVO" alias="notice"/>
+		<!-- onlineclassVo alias -->
+		<typeAlias type="com.jhta.allchwi.vo.onlineclass.OnlineClassVO" alias="onlineClass"/>
 		
 	</typeAliases>
 
@@ -119,7 +121,10 @@
 		<mapper resource="com/jhta/mybatis/mapper/AssignDataMapper.xml"/>	
 		
 		<!--a 커뮤니티 공지mapper -->
-		<mapper resource="com/jhta/mybatis/mapper/CommunityNoticeMapper.xml"/>	
+		<mapper resource="com/jhta/mybatis/mapper/CommunityNoticeMapper.xml"/>
+			
+		<!-- 온라인 강의 -->
+		<mapper resource="com/jhta/mybatis/mapper/OnlineClassMapper.xml"/>	
 	</mappers>
 </configuration>
 
