@@ -144,7 +144,7 @@ window.onload = function(){
 function showModal(){
 	var url = "${cp}/community/notice/writeNotice";
     $('.modal-container').load(url,function(result){
-		$('#myModal').modal();
+		$('#writeNotice').modal();
 	});
 }
 //글 상세페이지로 이동하는 함수

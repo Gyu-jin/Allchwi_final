@@ -63,4 +63,8 @@
 	<delete id="delete" parameterType="int">
 		delete from notice where notice_num = #{notice_num}
 	</delete>
+	<!-- 글수정 -->
+	<update id="update" parameterType="notice">
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content} where notice_num = #{notice_num}
+	</update>
 </mapper>

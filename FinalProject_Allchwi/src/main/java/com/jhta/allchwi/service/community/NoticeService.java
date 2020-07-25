@@ -15,7 +15,7 @@ public class NoticeService {
 	@Autowired 
 	private NoticeDAO ntd;
 	
-	//공지글 작성
+		//공지글 작성
 		public int writeNotice(NoticeVO ntv) {
 			return ntd.writeNotice(ntv);
 		}
@@ -51,5 +51,9 @@ public class NoticeService {
 		//글삭제
 		public int delete(int notice_num) {
 			return ntd.delete(notice_num);
+		}
+		//글수정
+		public int update(NoticeVO ntv) {
+			return ntd.update(ntv);
 		}
 }

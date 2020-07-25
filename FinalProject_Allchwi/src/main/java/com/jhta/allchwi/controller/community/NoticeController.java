@@ -115,4 +115,28 @@ public class NoticeController {
 			return ".error.error";
 		}
 	}
+	// a 공지글 작성 모달창 띄우기
+	@RequestMapping("/community/notice/updateNotice")
+	public String updateNotice(HttpSession session, Model model, @RequestParam(value = "notice_num")int notice_num) {
+		// 페이징 처리를 위한 값을 담기 위해 map 선언
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		NoticeVO ntv;
+		try {
+			ntv = nts.getDetail(notice_num);
+			model.addAttribute("ntv", ntv);
+			//updateNotice jsp로 이동
+			return "community/notice/updateNotice";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ".error.error";
+		}
+	}
+
+	// a 모달창에서 값을 가지고 컨트롤러로 이동
+	@RequestMapping("/community/notice/updateOkNotice")
+	public String updateOkNotice(NoticeVO ntv) {
+		int result = nts.update(ntv);
+		// insert 후 공지사항 페이지로 리다이렉트
+		return "redirect:/community/notice";
+	}
 }

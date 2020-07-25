@@ -51,4 +51,8 @@ public class NoticeDAO {
 	public int delete(int notice_num) {
 		return session.delete(NAMESPACE + ".delete", notice_num);
 	}
+	//글수정
+	public int update(NoticeVO ntv) {
+		return session.update(NAMESPACE + ".update", ntv);
+	}
 }
