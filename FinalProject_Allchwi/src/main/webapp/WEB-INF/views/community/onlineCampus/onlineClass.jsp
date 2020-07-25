@@ -46,7 +46,7 @@
 		<h2 class="h2 mb30">온라인 강의</h2>	
 	</div>
 	<div class=playVideo id="vodCurri">
-		<video width="100%" height="500px" class="media"  controls autoplay="autoplay" id="playVideo" >
+		<video width="100%" height="500px" class="media"  controls autoplay="autoplay" id="video" >
        		<source src="${cp}/video/0b1432e6-b247-4908-bb86-47f49a9d4dd0_ONE PIECE 008.mp4" type="video/mp4">
       		Your browser does not support the video tag.
      	</video>
@@ -54,16 +54,33 @@
 	<div class="cont">
 		줄거리리리릴리리
 	</div>
+	<button type="button" id="bbb">as</button>
 </div>
 
 
 <script type="text/javascript">
 	
-var video = document.getElementById("playVideo");
+var video = document.getElementById("video");
+
 video.onloadeddata = function() {
 
 	//video.currentTime = 50;
 	video.play();
 };
+
+	
+$(window).bind('beforeunload',function(e){
+	var saveTime = parseInt($('#video')[0].currentTime);
+
+	if(saveTime > 180){
+		var fd = new FormData();
+		fd.append('saveTime', saveTime);
+		fd.append('oline_num', oline_num);
+		
+		//브라우저에서 지원하는 비동기 서버통신
+		navigator.sendBeacon('${cp}/community/saveTime', fd);
+	}
+});
+
 
 </script>

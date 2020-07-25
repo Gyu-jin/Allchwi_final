@@ -171,8 +171,6 @@ public class OnlineClassController {
 		}else {
 			return "fail";
 		}
-		
-		
 		return "success";
 	}
 	
