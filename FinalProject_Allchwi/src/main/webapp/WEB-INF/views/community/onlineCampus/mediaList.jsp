@@ -121,6 +121,7 @@ ul {
 </style>
     
 <div class="container">
+<div class="container">
 	<h2 class="h2 mb30">온라인 강의
 	<c:if test="${commuInfo.ml_num==ml_num}">
 		<div class="button_gray cursor" onclick="writeShow()">강의업로드</div>
@@ -154,7 +155,7 @@ ul {
 						<ul>  
 							<li>
 								<div class="thumb">
-									<a href="${cp}/vod/play/${vo.online_num}">
+									<a href="${cp}/community/video">
 									<img src="${cp}/online/getimg?online_num=${vo.online_num}" alt="">
 									</a>
 								</div>
@@ -210,7 +211,6 @@ ul {
 			</div>
 	</div>
 </div>
-<div class="container">
 	<div class="modal-container"></div>
 </div>
 
@@ -225,7 +225,7 @@ function writeShow(){
 function updateShow(online_num){		
 	var url = "${cp}/community/mediaModal?online_num="+online_num;
 	   $('.modal-container').load(url,function(result){
-		$('#myModal').modal();
+		$('#myModal').modal({backdrop: 'static', keyboard: false});
 	});		
 }
 function delClass(online_num){
