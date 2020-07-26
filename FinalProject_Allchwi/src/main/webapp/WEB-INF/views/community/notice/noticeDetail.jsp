@@ -35,17 +35,17 @@
 		</div>
 		<hr class="my-4" style="clear: right; margin: 0px">
 		<div class="card card-body" style="height: 15rem; margin-top: 25px">
-			<p>${ntv.notice_content }</p>
+			<!-- white-space 스타일 시트를 사용하여 개행과 공백등이 원래대로 보이도록 처리-->
+			<div style="white-space: pre">${ntv.notice_content }</div>
 		</div>
 		<div id="btnGroup">
 			<button class="btn btn-primary" id="updateBtn" onclick="showModal('${ntv.notice_num}')">수정</button>
 			<button class="btn btn-danger" id="deleteBtn" onclick="deleteNotice('${ntv.notice_num}')">삭제</button>
 		</div>
 		<div id="bottom">
-			이전글&nbsp&nbsp
 			<c:choose>
 				<c:when test="${prev != null }">
-					<a href="${cp}/community/noticeDetail?notice_num=${prev.notice_num }">${prev.notice_title }</a>
+					이전글&nbsp&nbsp <a href="${cp}/community/noticeDetail?notice_num=${prev.notice_num }">${prev.notice_title }</a>
 				</c:when>
 				<c:otherwise>
 					이전글이 존재하지 않습니다.
@@ -53,10 +53,9 @@
 			</c:choose>
 
 			<hr class="my-2">
-			다음글&nbsp&nbsp
 			<c:choose>
 				<c:when test="${next != null }">
-					<a href="${cp}/community/noticeDetail?notice_num=${next.notice_num }">${next.notice_title }</a>
+					다음글&nbsp&nbsp <a href="${cp}/community/noticeDetail?notice_num=${next.notice_num }">${next.notice_title }</a>
 				</c:when>
 				<c:otherwise>
 					다음글이 존재하지 않습니다.
