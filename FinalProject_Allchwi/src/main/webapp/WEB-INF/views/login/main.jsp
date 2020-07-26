@@ -17,9 +17,7 @@
 				<input type="password" name="pwd" placeholder="Password"> <span
 					class="input-icon"><i class="fa fa-lock"></i></span>
 			</div>
-			<input type="submit" class="login-btn" value="로그인"
-				style="background-color: #45aba6; border-color: #45aba6"
-				id="loginBtn">
+			<input type="submit" class="login-btn" value="로그인" id="loginBtn">
 			<!--a 로그인시 실패 결과 메시지창 -->
 			<div style="text-align: center">
 				<span id=resultMsg style="color: red;"></span>
