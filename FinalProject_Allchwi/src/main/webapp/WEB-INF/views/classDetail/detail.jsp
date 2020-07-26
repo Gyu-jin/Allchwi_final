@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet"
-	href="${cp}/resources/css/classDetail/classDetail.css">
+<link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>  
 <input type="hidden" id="ml_num" value="${ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
 <input type="hidden" id="tutor_num" value="${cdv.ml_num }">
@@ -145,7 +145,7 @@
 									<ul>
 										<li class="ar" id="regionAll"><c:if
 												test="${cdv.class_form==0}">
-												${cdv.sloc_name }
+												${cdv.bloc_name }&nbsp${cdv.sloc_name}
 											</c:if> <c:if test="${cdv.class_form==1}">
 												온라인
 											</c:if></li>
@@ -159,6 +159,7 @@
 						</div>
 						<!-- //1.요약 -->
 						<!-- 2.튜터소개 -->
+						
 						<div class="class_detail detail_sec_bor" id="tutor">
 							<div class="sec01">
 								<h1 class="t_info">튜터정보</h1>
@@ -280,7 +281,7 @@
 																	pattern="yyyy-MM-dd" />
 															</dd>
 
-														</dl></li>
+														</dl></li>    
 												</ul>
 											</c:forEach>
 										</div>
@@ -406,7 +407,6 @@
 														&nbsp&nbsp ${vo.class_startTime } ~ ${vo.class_endTime }
 													</div>
 												</c:forEach>
-												장소 : ${cdv.bloc_name }&nbsp${cdv.sloc_name}
 											</div>
 										</div>
 									</div>
@@ -427,6 +427,8 @@
 								</div>
 							</c:if>
 						</c:forEach>
+						<div id="map" style="width:450px;height:250px;">
+						</div>
 						<div class="price">
 							<div class="hp1">
 								<b>￦${cdv.class_price}원</b> / 시간
@@ -456,3 +458,43 @@
 		</div>
 	</div>
 </div>
+<script>
+
+//카카오 지도 api
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('${cdv.class_address}', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">${cdv.class_address}</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
+    map.setCenter(coords);
+} 
+});    
+</script>

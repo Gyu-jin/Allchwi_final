@@ -58,15 +58,18 @@
 /*        우측네비          */
 .remote {
 	width: 100%;
-	background: whitesmoke;
 	position: sticky;
-	left: 63%;
+	left: 61.5%
 }
-
+.remote_wrap{
+	background: whitesmoke;
+    width: 530px;
+    padding: 30px;
+}
 .remote.active {
 	position: fixed;
 	top: 0px;
-	width: auto;
+	width: 22%;
 }
 
 .card {

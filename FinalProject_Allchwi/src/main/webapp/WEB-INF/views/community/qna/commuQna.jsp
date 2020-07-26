@@ -30,15 +30,22 @@
 .qna_wrap {
 	width: 80%;
 	margin: auto;
+	background: #eaecf4;
+	padding: 80px;
+	
 }
 .qna_list ul li {
 	border-bottom: 1px solid #e5e5e5;
 	padding: 10px 0;
 	cursor: default;
 }
+
+.qna_list ul {
+	margin-right: 40px;
+}
+
 .qna_box{
-	background: #eaecf4;
-    padding: 80px;
+	
     margin-top: 70px
 }
 .qna_list {
