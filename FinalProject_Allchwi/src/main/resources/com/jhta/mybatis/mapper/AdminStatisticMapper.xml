@@ -8,6 +8,7 @@
 	FROM sales 
     <![CDATA[	WHERE year(regdate) >= #{thisyear} AND year(regdate) < #{nextyear} ]]>
 	GROUP BY month
+	WITH ROLLUP
 	</select>
 
 	

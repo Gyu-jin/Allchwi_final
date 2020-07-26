@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 
@@ -50,12 +49,26 @@
 				<c:out value="${sysYear}" />
 				년
 			</button>
-
-			<div id="chart_div" style="width: 1000px; height: 500px;"></div>
-
-
+			<button type="button" class="btn btn-success"
+				style="margin-left: 718px" onclick="fnExcelReport('table','title')">엑셀 파일 다운로드</button>
 
 
+
+			<div id="chart_div" style="width: 1146px; height: 500px;"></div>
+			<div id="table_div" style="width: 1146px; height: 680px;">
+				<table id="table" class="table table-hover table-bordered" style="text-align: center">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">월</th>
+							<th scope="col">월별 수익</th>
+							<th scope="col">월별매출</th>
+						</tr>
+					</thead>
+					<tbody id="tb">
+
+					</tbody>
+				</table>
+			</div>
 
 
 
@@ -185,12 +198,48 @@
 
 	function getData(data) {
 		var array = new Array();
-		array[0] = [ '월별', '수익','매출액' ];
+		array[0] = [ '월별', '수익', '매출액' ];
 
-		$(data).each(function(i, arr) {
-			var subArray = [ arr.month + "월", arr.monthlySum, arr.monthlyRevenue ];
-			array[++i] = subArray;
-		});
+		$("#tb").empty();
+		$(data).each(
+				function(i, arr) {
+					var subArray = [ arr.month + "월", arr.monthlySum,
+							arr.monthlyRevenue ];
+					if (data.length - 1 != i) { //마지막 열 데이터 담지 않기// 같지 않을때까지 넣는다.
+						array[++i] = subArray;
+					}
+
+					var month = arr.month;
+					var monthlySum = arr.monthlySum;
+					var monthlyRevenue = arr.monthlyRevenue;
+
+					monthlySum = addComma(monthlySum);
+					monthlyRevenue = addComma(monthlyRevenue);
+					//$("#tb").append("<tr>");
+					
+					var trs = $("<tr></tr>").appendTo(
+					"#tb");
+					
+	
+					
+					if (month == 0) {
+						$(trs).append("<td class='table-active'>합계:</td>");
+						$(trs).append(
+								"<td class='table-active'>" + monthlySum
+										+ "원</td>");
+						$(trs).append(
+								"<td class='table-active'>" + monthlyRevenue
+										+ "원</td>");
+						
+
+					} else {
+						$(trs).append("<td>" + month + "월</td>");
+						$(trs).append("<td>" + monthlySum + "원</td>");
+						$(trs).append("<td>" + monthlyRevenue + "원</td>");
+						
+					}
+					
+				});
 
 		var data2 = google.visualization.arrayToDataTable(array);
 
@@ -211,6 +260,55 @@
 				.getElementById('chart_div'));
 
 		chart.draw(data2, options);
+	}
+
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+
+	function fnExcelReport(id, title) {
+		var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+		tab_text = tab_text
+				+ '<head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
+		tab_text = tab_text
+				+ '<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
+		tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+		tab_text = tab_text
+				+ '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+		tab_text = tab_text
+				+ '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+		tab_text = tab_text + "<table border='1px'>";
+		var exportTable = $('#' + id).clone();
+		exportTable.find('input').each(function(index, elem) {
+			$(elem).remove();
+		});
+		tab_text = tab_text + exportTable.html();
+		tab_text = tab_text + '</table></body></html>';
+		var data_type = 'data:application/vnd.ms-excel';
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+		var fileName = title + '.xls';
+		//Explorer 환경에서 다운로드
+		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+			if (window.navigator.msSaveBlob) {
+				var blob = new Blob([ tab_text ], {
+					type : "application/csv;charset=utf-8;"
+				});
+				navigator.msSaveBlob(blob, fileName);
+			}
+		} else {
+			var blob2 = new Blob([ tab_text ], {
+				type : "application/csv;charset=utf-8;"
+			});
+			var filename = fileName;
+			var elem = window.document.createElement('a');
+			elem.href = window.URL.createObjectURL(blob2);
+			elem.download = filename;
+			document.body.appendChild(elem);
+			elem.click();
+			document.body.removeChild(elem);
+		}
 	}
 </script>
 

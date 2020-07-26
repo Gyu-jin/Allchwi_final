@@ -77,8 +77,7 @@
 											<td>${vo.ml_num}</td>
 											<td>${vo.mb_name}</td>
 											<td>${vo.id}</td>
-											<td><fmt:formatDate value="${vo.mb_regdate }"
-									pattern="yyyy-MM-dd" /></td>
+											<td><fmt:formatDate value="${vo.mb_regdate }" pattern="yyyy-MM-dd" /></td>
 											<td>${vo.nowclass }개</td>
 											<td>${vo.totclass }개</td>
 											<td><c:choose>
