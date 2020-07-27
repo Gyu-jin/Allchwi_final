@@ -1,6 +1,7 @@
 package com.jhta.allchwi.controller.community;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.allchwi.service.classopen.ClassImgService;
 import com.jhta.allchwi.service.community.AssignmentService;
 import com.jhta.allchwi.service.community.CommunityService;
 import com.jhta.allchwi.service.community.NoticeService;
+import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Controller
@@ -26,6 +29,9 @@ public class CommunityController {
 	
 	@Autowired
 	private AssignmentService assign;
+	
+	@Autowired
+	private ClassImgService cis;
 	
 	
 	@GetMapping("/onclass/community")
@@ -45,9 +51,15 @@ public class CommunityController {
 			//a 해당 주에 올라온 과제 및 공지글 갯수
 			int noticeCount = nts.weekNotice(vo.getCommu_num()); 
 			int assignCount = assign.weekAssign(vo.getCommu_num());
+			//a 온라인 클래스 이미지 가져오기
+			List<ClassImgVO> classImg = cis.getImgList(vo.getClass_num());
+			
 			session.setAttribute("commuInfo", vo);
-			session.setAttribute("noticeCount", noticeCount);
-			session.setAttribute("assignCount", assignCount);
+			model.addAttribute("noticeCount", noticeCount);
+			model.addAttribute("assignCount", assignCount);
+			//session.setAttribute("noticeCount", noticeCount);
+			//session.setAttribute("assignCount", assignCount);
+			
 			return ".community";			
 		}else {
 			return ".error.error";

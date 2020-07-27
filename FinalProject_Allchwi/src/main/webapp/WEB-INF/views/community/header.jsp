@@ -29,15 +29,14 @@
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center" id="h-top">
       <div class="col-3 pt-1">
-        <a class="text-muted" href="#">Subscribe</a>
+		<!-- a 로고 이미지 클릭시 올취 메인페이지로 이동
+		-->
+        <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 120px; height: 60px"></a>
       </div>
       <div class="col-6 text-center" id="h-title">
         <a href="${cp }/onclass/community">${commuInfo.commu_title}</a>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-center">
-        <a class="text-muted" href="#" aria-label="Search">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-        </a>
         <a class="btn btn-sm btn-outline-secondary" href="#">출석체크</a>
       </div>
     </div>
@@ -47,7 +46,9 @@
 	      <a class="p-2 text-muted" href="${cp}/community/archive">자료실</a>
 	      <a class="p-2 text-muted" href="${cp}/community/mediaList">강의듣기</a>
 	      <a class="p-2 text-muted" href="${cp}/community/assignment">과제</a>
+	      <!-- a 자유게시판 안써요
 	      <a class="p-2 text-muted" href="${cp}/community/freeboard">자유게시판</a>
+	       -->
 	      <a class="p-2 text-muted" href="${cp}/community/qna">QnA</a>
 	    </nav>
 	  </div>
