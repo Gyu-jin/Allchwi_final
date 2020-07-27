@@ -390,7 +390,7 @@
 											data-parent="#accordionExample"
 											href="#card-element-${index.count}">
 											<div class="date">
-											<fmt:formatDate value="${dlist.class_date}" pattern="yyyy-MM-dd" />
+												<fmt:formatDate value="${dlist.class_date}" pattern="yyyy-MM-dd" />
 											</div> 
 											<c:if test="${cdv.class_form==0 }">
 													&nbsp&nbsp ${dlist.class_startTime}~ ${dlist.class_endTime }
@@ -435,9 +435,9 @@
 							</c:if>
 						</c:forEach>
 						<c:if test="${cdv.class_form==0 }">
+							${cdv.class_address }
 							<div id="map" style="width: 450px; height: 250px;"></div>
 						</c:if>
-					
 						<div class="price">
 							<div class="hp1">
 								<b>￦${cdv.class_price}원</b> / 시간
@@ -480,32 +480,24 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 
 	//주소로 좌표를 검색합니다
-	geocoder
-			.addressSearch(
-					'${cdv.class_address}',
-					function(result, status) {
-
-						// 정상적으로 검색이 완료됐으면 
-						if (status === kakao.maps.services.Status.OK) {
-
-							var coords = new kakao.maps.LatLng(result[0].y,
-									result[0].x);
-
-							// 결과값으로 받은 위치를 마커로 표시합니다
-							var marker = new kakao.maps.Marker({
-								map : map,
-								position : coords
-							});
-
-							// 인포윈도우로 장소에 대한 설명을 표시합니다
-							var infowindow = new kakao.maps.InfoWindow(
-									{
-										content : '<div style="width:150px;text-align:center;padding:6px 0;">${cdv.class_address}</div>'
-									});
-							infowindow.open(map, marker);
-
-							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
-							map.setCenter(coords);
-						}
-					});
+	geocoder.addressSearch('${cdv.class_address}',
+	function(result, status) {
+	// 정상적으로 검색이 완료됐으면 
+		if (status === kakao.maps.services.Status.OK) {
+			var coords = new kakao.maps.LatLng(result[0].y,result[0].x);
+			// 결과값으로 받은 위치를 마커로 표시합니다
+			var marker = new kakao.maps.Marker({
+				map : map,
+				position : coords
+			});
+	
+			// 인포윈도우로 장소에 대한 설명을 표시합니다
+			var infowindow = new kakao.maps.InfoWindow({
+				content : '<div style="width:150px;text-align:center;padding:6px 0;">${cdv.class_address}</div>'
+			});
+				infowindow.open(map, marker);
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
+				map.setCenter(coords);
+		}
+	});
 </script>

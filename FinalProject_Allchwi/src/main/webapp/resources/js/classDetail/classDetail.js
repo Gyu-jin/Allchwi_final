@@ -111,7 +111,7 @@ function qnaList(pageNum){
 		 +"</div>";
 		
 	  });
-	  if(qlist=''){
+	  if(qlist!=''){
 		  str+="<div id='paging'>"
 			  + "<ul class='pagination justify-content-center' style='margin: 20px 0'>"
 			      if(pageNum > pu.startPageNum){
@@ -194,8 +194,8 @@ function replyList(qna_ref) {
 		   	+"<dl>"
 			+"<dt>"				
 			+"<p class='profile_img' style='width:26px; height: 26px; background-size: cover; background-position: center;"					
-			+ "background-image: url(/allchwi/mypage/getimg?pro_num="+this.pfv.pro_num+")'>"
-			+"<p class='name'>"+ this.miv.mb_name +"</p>"
+			+ "background-image: url(/allchwi/mypage/getimg?pro_num="+this.pro_num+")'>"
+			+"<p class='name'>"+ this.tutor_nickname +"</p>"
 			+"</dt>"					
 			+"<dd>"+this.qna_content+"</dd>"
 			+"<dd class='date'>"+ qna_regdate+ "</dd>"

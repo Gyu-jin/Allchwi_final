@@ -27,4 +27,13 @@ public class CommuQnaService {
 	public int count(HashMap<String, Object> map) {
 		return dao.count(map);
 	}
+	public int replyAuth(HashMap<String, Object> map) {
+		return dao.replyAuth(map);
+	}
+	public int editQna(CommuQnaVO vo) {
+		return dao.editQna(vo);
+	}
+	public int delQna(int qna_num) {
+		return dao.delQna(qna_num);
+	}
 }

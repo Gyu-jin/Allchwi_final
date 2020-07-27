@@ -13,7 +13,7 @@
 
 .carousel {
 	position: relative;
-	background-color: #A9C8FB;
+	background-color: #bfd8ee;
 }
 
 h1 {
@@ -113,15 +113,15 @@ li {
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="${cp}/resources/img/배너1.png" class="d-block w-100"
+				<img src="${cp}/resources/img/배너1.png" id="b1" class="d-block w-100"
 					alt="배너1">
 			</div>
 			<div class="carousel-item">
-				<img src="${cp}/resources/img/배너2.png" class="d-block w-100"
+				<img src="${cp}/resources/img/배너2.png" id="b2" class="d-block w-100"
 					alt="배너2">
 			</div>
 			<div class="carousel-item">
-				<img src="${cp}/resources/img/배너3.png" class="d-block w-100"
+				<img src="${cp}/resources/img/배너3.png" id="b3" class="d-block w-100"
 					alt="배너3">
 			</div>
 		</div>
@@ -228,3 +228,18 @@ li {
 			</c:forEach>
 		</ul>
 	</div>
+<script type="text/javascript">
+var currentIndex = $('div.active').index() + 1;
+$('#carouselExampleIndicators').on('slide.bs.carousel', function (event) {
+	var crs= document.getElementById("carouselExampleIndicators");
+	currentIndex = $('div.active').index() + 1;
+	if(currentIndex==1){
+		crs.style.backgroundColor = "#fff2cc";
+	}else if(currentIndex==2){
+		crs.style.backgroundColor = "#fbe5d7";
+	}else if(currentIndex==3){
+		crs.style.backgroundColor = "#bfd8ee";	
+	}
+
+});
+</script>

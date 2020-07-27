@@ -13,6 +13,8 @@ public class CommuQnaVO {
 	private int qna_lev;
 	private String qna_content;
 	private Timestamp qna_regdate;
+	private int pro_num;
+	private String tutor_nickname;
 	private MemberInfoVO miv;
 	private ProfileVO pfv;
 	public CommuQnaVO() {}
@@ -84,6 +86,22 @@ public class CommuQnaVO {
 	}
 	public void setPfv(ProfileVO pfv) {
 		this.pfv = pfv;
+	}
+
+	public int getPro_num() {
+		return pro_num;
+	}
+
+	public void setPro_num(int pro_num) {
+		this.pro_num = pro_num;
+	}
+
+	public String getTutor_nickname() {
+		return tutor_nickname;
+	}
+
+	public void setTutor_nickname(String tutor_nickname) {
+		this.tutor_nickname = tutor_nickname;
 	}
 	
 

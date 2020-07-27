@@ -102,7 +102,6 @@ $(document).on('click', '#write_qna', function () {
 	var qna_content = $('#qna_content').val();
 	var commu_num = $('#commu_num').val( );
 	var ml_num = $('#ml_num').val();
-	alert(ml_num);
 	if(qna_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
@@ -152,9 +151,13 @@ function qnaList(pageNum){
 	     + "<dd>" + qlist[i].qna_content  + "</dd>"
 	     + "<dd class='date'>" + qna_regdate + "</dd>"
 	     + "</dl>"
+	     + "<div class='editbtn'>"
+		 + "<a type='button' onclick='editQna("+qlist[i].qna_num+")'>수정</a>"
+		 + "<a type='button' onclick='delQna("+qlist[i].qna_num+")'>&nbsp&nbsp삭제</a>"
+		 + "</div>"
 	     + "</li>"
 	     + "<a type='button' class='showreply' onclick='replyList("+qlist[i].qna_ref+")' data-toggle='collapse' data-target='#reply"+this.qna_ref +"'>"
-		 + "댓글보기"+ "</a>"
+		 + "댓글보기</a>"
 		 +"<div class='reply_box collapse' id='reply"+qlist[i].qna_ref+"'>"
 		 +"<table>"
 		 +"<tr>"
@@ -179,7 +182,7 @@ function qnaList(pageNum){
 		 +"</div>";
 		
 	  });
-	  if(qlist=''){
+	  if(qlist!=''){
 		  str+="<div id='paging'>"
 			  + "<ul class='pagination justify-content-center' style='margin: 20px 0'>"
 			      if(pageNum > pu.startPageNum){
@@ -219,6 +222,7 @@ function currPage(pageNum){
 	qnaList(pageNum);
 }
 //qna답변 작성
+
 function sendReply(qna_ref) {
 	var reply_content=$("#reply_content"+qna_ref).val();
 	var commu_num = $('#commu_num').val();
@@ -226,23 +230,35 @@ function sendReply(qna_ref) {
 	if(reply_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
-		$.post('/allchwi/community/qnareply', {
-			commu_num: commu_num,
-			ml_num: ml_num,
-			qna_content: reply_content,
-			qna_lev: '1',
-			qna_ref: qna_ref
-		}, function (data,res) {
-			if (res=='success') {
-				alert('답변등록 성공');
-				$("#reply_content"+qna_ref).val("");
-				replyList(qna_ref);
-			} else {				
-				alert('답변실패');
-			}
+		let class_num = ${commuInfo.class_num}
+		$.getJSON("${cp}/replyAuth", {
+					ml_num : ml_num,
+					class_num : class_num				
+				}, function(data) {
+					//댓글작성 권한 구분
+					if (data.code == 'success') {
+						console.log("성공");
+						$.post('/allchwi/community/qnareply', {
+							commu_num: commu_num,
+							ml_num: ml_num,
+							qna_content: reply_content,
+							qna_lev: '1',
+							qna_ref: qna_ref
+						}, function (data,res) {
+							if (res=='success') {
+								alert('답변등록 성공');
+								$("#reply_content"+qna_ref).val("");
+								replyList(qna_ref);
+							} else {				
+								alert('답변실패');
+							}
+						});
+					} else {
+						alert('답변은 튜터만 작성할 수 있습니다');
+					}
 		});
-
 	}
+		
 }
 
 //qna댓글목록불러오기
@@ -258,8 +274,8 @@ function replyList(qna_ref) {
 		   	+"<dl>"
 			+"<dt>"				
 			+"<p class='profile_img' style='width:26px; height: 26px; background-size: cover; background-position: center;"					
-			+ "background-image: url(/allchwi/mypage/getimg?pro_num="+this.pfv.pro_num+")'>"
-			+"<p class='name'>"+ this.miv.mb_name +"</p>"
+			+ "background-image: url(/allchwi/mypage/getimg?pro_num="+this.pro_num+")'>"
+			+"<p class='name'>"+ this.tutor_nickname +"</p>"
 			+"</dt>"					
 			+"<dd>"+this.qna_content+"</dd>"
 			+"<dd class='date'>"+ qna_regdate+ "</dd>"
@@ -270,6 +286,44 @@ function replyList(qna_ref) {
 	  });
 	  $("#reply"+qna_ref+" ul").html(str);
 	 });
+}
+
+//qna 수정
+function editQna(qna_num) {
+	var qna_content = $('#qna_content').val();
+	if(qna_content== '' ){
+		alert('수정할 내용을 작성해주세요');
+	}else{
+		$.post('/allchwi/community/editQna', {
+			qna_num:qna_num,
+			qna_content:qna_content
+		}, function (data,res) {
+			if (res=='success') {
+				qnaList(1);
+				alert('수정성공');
+				$("#qna_content").val("");
+			} else {				
+				alert('수정실패');
+			}
+		});
+	}
+	
+}
+//qna 삭제
+function delQna(qna_num){
+
+	$.ajax({
+		url : "${cp }/community/delQna?qna_num="+qna_num,
+		success : function(data) {
+			if (data == "success") {
+				alert("삭제성공");
+				location.href = "${cp}/community/qna"
+			} else {
+				alert("삭제실패");
+			}
+
+		}
+	});
 }
 
 </script>
