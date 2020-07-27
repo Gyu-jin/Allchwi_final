@@ -35,24 +35,36 @@ style>.carousel-inner {
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<!-- status.index 0부터 시작 -->
+				<c:forEach var="showImg" items="${classImg}" varStatus="status">
+					<c:choose>
+						<c:when test="${status.index==0}">
+							<li data-slide-to="${status.index}" data-target="#carouselExampleIndicators"
+							class="active"></li>
+						</c:when>
+						<c:otherwise>
+							<li data-slide-to="${status.index}" data-target="#carouselExampleIndicators"></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</ol>
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="${cp}/resources/img/배너1.png" class="d-block w-100"
-						alt="배너1">
-				</div>
-				<div class="carousel-item">
-					<img src="${cp}/resources/img/배너2.png" class="d-block w-100"
-						alt="배너2">
-				</div>
-				<div class="carousel-item">
-					<img src="${cp}/resources/img/배너3.png" class="d-block w-100"
-						alt="배너3">
-				</div>
+				<c:forEach var="showImg" items="${classImg}" varStatus="status">
+					<c:choose>
+						<c:when test="${status.index==0}">
+							<div class="carousel-item active">
+								<img class="d-block w-100"
+								src="${cp}/classImg/getimg?cover_num=${showImg.cover_num}"/>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="carousel-item">
+								<img class="d-block w-100"
+								src="${cp}/classImg/getimg?cover_num=${showImg.cover_num}"/>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
 			<!--a 좌우이동 flex-start, flex-end로 변경  -->
 			<a class="carousel-control-prev" href="#carouselExampleIndicators"

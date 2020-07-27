@@ -57,9 +57,9 @@ public class CommunityController {
 			session.setAttribute("commuInfo", vo);
 			model.addAttribute("noticeCount", noticeCount);
 			model.addAttribute("assignCount", assignCount);
+			model.addAttribute("classImg", classImg);
 			//session.setAttribute("noticeCount", noticeCount);
 			//session.setAttribute("assignCount", assignCount);
-			
 			return ".community";			
 		}else {
 			return ".error.error";
