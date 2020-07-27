@@ -378,4 +378,8 @@
 	background-color: #7185bb;
 	font-size: 30px;
 	color: white;
+	cursor: pointer;
+}
+.btn_pay.disabled {
+	background-color: #bdbdbd;
 }

@@ -37,7 +37,7 @@
 	
 	<select id="dateArray" parameterType="int" resultMap="classDateList">
 		<![CDATA[select date_num,cd.class_num,class_date,class_startTime,class_endTime,class_month,time_ref,time_cnt,
-		class_title,class_price, class_hour,class_count
+		class_title,class_price, class_hour,class_count,class_comment
 		 from class_date cd, class_info ci 
 		 where cd.class_num=ci.class_num and cd.class_num=#{class_num} and CURDATE() <= class_date and time_cnt=1]]>
 	</select>

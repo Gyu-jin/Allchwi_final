@@ -247,7 +247,6 @@ $(document).on('click', '#btn_after_wish', function () {
 });
 
 //리뷰작성버튼
-//$('#btn_write_review').click(function () {	
 $(document).on('click', '#btn_write_review', function () {
 
 	var class_num = $('#class_num').val();
@@ -267,3 +266,14 @@ $(document).on('click', '#btn_write_review', function () {
 	}
 });		
 
+//수업신청하기
+function payAuth(class_num) {
+	var ml_num = $('#ml_num').val();
+	var class_num = $('#class_num').val();
+	if (!ml_num) {
+		alert('로그인이 필요합니다');
+		location.href="/allchwi/login/main";
+	}else{
+		location.href="/allchwi/class/apply?class_num="+class_num;
+	}
+}

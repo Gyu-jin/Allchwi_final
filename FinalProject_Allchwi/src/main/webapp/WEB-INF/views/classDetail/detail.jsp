@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
+<link rel="stylesheet"
+	href="${cp}/resources/css/classDetail/classDetail.css">
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>  
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>
 <input type="hidden" id="ml_num" value="${ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
 <input type="hidden" id="tutor_num" value="${cdv.ml_num }">
@@ -159,7 +161,7 @@
 						</div>
 						<!-- //1.요약 -->
 						<!-- 2.튜터소개 -->
-						
+
 						<div class="class_detail detail_sec_bor" id="tutor">
 							<div class="sec01">
 								<h1 class="t_info">튜터정보</h1>
@@ -281,7 +283,7 @@
 																	pattern="yyyy-MM-dd" />
 															</dd>
 
-														</dl></li>    
+														</dl></li>
 												</ul>
 											</c:forEach>
 										</div>
@@ -375,60 +377,67 @@
 								<h3>온라인수업</h3>
 							</c:if>
 						</div>
+						<c:if test="${empty dlist }">
+							<div class="card-header">
+								예정된 수업 일정이 없습니다
+							</div>
+						</c:if>
 						<c:forEach var="dlist" items="${dlist }" varStatus="index">
-							<c:set var="today" value="<%=new java.util.Date()%>" />
-							<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today" />
-							<fmt:formatDate value="${dlist.class_date }" pattern="yyyy-MM-dd"
-								var="class_date" />
-							<c:if test="${today <= class_date }">
-								<div class="accordion" id="accordionExample">
-									<div class="card">
-										<div class="card-header">
-											<a class="collapsed card-link" data-toggle="collapse"
-												data-parent="#accordionExample"
-												href="#card-element-${index.count}">
-												<div class="date">${class_date }&nbsp&nbsp</div> <c:if
-													test="${cdv.class_form==0 }">
-														${dlist.class_startTime}~ ${dlist.class_endTime }
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-header">
+										<a class="collapsed card-link" data-toggle="collapse"
+											data-parent="#accordionExample"
+											href="#card-element-${index.count}">
+											<div class="date">
+											<fmt:formatDate value="${dlist.class_date}" pattern="yyyy-MM-dd" />
+											</div> 
+											<c:if test="${cdv.class_form==0 }">
+													&nbsp&nbsp ${dlist.class_startTime}~ ${dlist.class_endTime }
 													</c:if> <c:if test="${cdv.class_form==1 }">
 														${dlist.class_month}개월 과정
 													</c:if>
-											</a>
-										</div>
-										<div id="card-element-${index.count}" class="collapse">
-											<div class="card-body">
-												<c:forEach var="vo" items="${dlist.list}">
-													<div class="ch">
-														<div class="date">
-															<font style="color: #ff936f;">${vo.time_cnt}회</font> :
-															<fmt:formatDate value="${vo.class_date}"
-																pattern="yyyy-MM-dd" />
-														</div>
-														&nbsp&nbsp ${vo.class_startTime } ~ ${vo.class_endTime }
+										</a>
+									</div>
+									<div id="card-element-${index.count}" class="collapse">
+										<div class="card-body">
+											<c:if test="${empty dlist.list}">
+													원데이 클래스 입니다
+											</c:if>
+											<c:forEach var="vo" items="${dlist.list}">
+												<div class="ch">
+													<div class="date">
+														<font style="color: #ff936f;">${vo.time_cnt}회</font> :
+														<fmt:formatDate value="${vo.class_date}"
+															pattern="yyyy-MM-dd" />
 													</div>
-												</c:forEach>
-											</div>
+													&nbsp&nbsp ${vo.class_startTime } ~ ${vo.class_endTime }
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 								</div>
-							</c:if>
+							</div>
+
 						</c:forEach>
-						<c:forEach var="dlist" items="${dlist }" varStatus="index">
+						<c:forEach var="vo" items="${dlist}" varStatus="index">
 							<c:if test="${index.last }">
-								<div class="tutor_t">
-									<dl class="tutor_txt">
-										<dt>
-											<div
-												style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/mypage/getimg?pro_num=${cdv.pro_num}');">
-											</div>
-										</dt>
-										<dd>${dlist.class_comment}</dd>
-									</dl>
-								</div>
+							<div class="tutor_t">
+								<dl class="tutor_txt">
+									<dt>
+										<div
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/mypage/getimg?pro_num=${cdv.pro_num}');">
+										</div>
+									</dt>
+									<dd>${vo.class_comment}</dd>
+								</dl>
+							</div>
 							</c:if>
 						</c:forEach>
-						<div id="map" style="width:450px;height:250px;">
-						</div>
+						<c:if test="${cdv.class_form==0 }">
+							<div id="map" style="width: 450px; height: 250px;"></div>
+						</c:if>
+					
 						<div class="price">
 							<div class="hp1">
 								<b>￦${cdv.class_price}원</b> / 시간
@@ -437,20 +446,17 @@
 								총 ${cdv.class_count}회 ${cdv.class_hour}시간</div>
 						</div>
 						<c:choose>
-							<c:when test="${empty ml_num}">
-								<div class="button_pay">
-									<a onclick="alert('로그인이 필요합니다'); " href="${cp}/login/main"
-										class="btn_pay"> 수업 신청하기</a>
+							<c:when test="${empty dlist}">
+								<div class="btn_pay disabled" onclick="alert('신청가능한 수업이 없습니다');">
+									수업 신청하기
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="button_pay">
-									<a href="${cp }/class/apply?class_num=${class_num }"
-										class="btn_pay">수업신청하기</a>
+								<div class="btn_pay" onclick="payAuth(${class_num })">
+									수업 신청하기
 								</div>
 							</c:otherwise>
 						</c:choose>
-
 					</div>
 				</div>
 				<!-- //시간&날짜/ 결제창 -->
@@ -459,42 +465,47 @@
 	</div>
 </div>
 <script>
+	//카카오 지도 api
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level : 3, // 지도의 확대 레벨
+		draggable: false
+	};
 
-//카카오 지도 api
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
-};  
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-//지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	//주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
 
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+	//주소로 좌표를 검색합니다
+	geocoder
+			.addressSearch(
+					'${cdv.class_address}',
+					function(result, status) {
 
-//주소로 좌표를 검색합니다
-geocoder.addressSearch('${cdv.class_address}', function(result, status) {
+						// 정상적으로 검색이 완료됐으면 
+						if (status === kakao.maps.services.Status.OK) {
 
-// 정상적으로 검색이 완료됐으면 
- if (status === kakao.maps.services.Status.OK) {
+							var coords = new kakao.maps.LatLng(result[0].y,
+									result[0].x);
 
-    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : coords
+							});
 
-    // 결과값으로 받은 위치를 마커로 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: coords
-    });
+							// 인포윈도우로 장소에 대한 설명을 표시합니다
+							var infowindow = new kakao.maps.InfoWindow(
+									{
+										content : '<div style="width:150px;text-align:center;padding:6px 0;">${cdv.class_address}</div>'
+									});
+							infowindow.open(map, marker);
 
-    // 인포윈도우로 장소에 대한 설명을 표시합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">${cdv.class_address}</div>'
-    });
-    infowindow.open(map, marker);
-
-    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
-    map.setCenter(coords);
-} 
-});    
+							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
+							map.setCenter(coords);
+						}
+					});
 </script>
