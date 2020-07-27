@@ -45,17 +45,14 @@
 	float: right;
 }
 </style>
-<div class="container">
 
+<div class="container">
 	<div class="title-box">
 		<h1>자료실</h1>
-
 	</div>
 	<div class="jumbotron">
 		<h4>수업 관련 자료를 확인해주세요.</h4>
 		<hr class="my-4">
-		
-
 		<div class="card card-body">
 			<table class="table table-hover" style="text-align: center">
 				<thead class="thead-dark">
@@ -68,7 +65,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
 					<c:forEach var="vo" items="${list }">
 						<tr onclick="detail('${vo.room_num}','${vo.commu_num }')">
 							<td>${vo.room_num }</td>
