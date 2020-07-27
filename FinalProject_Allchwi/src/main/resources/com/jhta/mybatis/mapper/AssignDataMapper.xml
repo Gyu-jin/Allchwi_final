@@ -6,5 +6,7 @@
 	<insert id="insert" parameterType="assigndata">
 		insert into assign_data values(0,#{sub_num},#{assign_orgFilename},#{assign_saveFilename},now())
 	</insert>
-	
+	<select id="list" parameterType="int" resultType="assigndata">
+		select * from assign_data where sub_num=#{sub_num}
+	</select>
 </mapper>

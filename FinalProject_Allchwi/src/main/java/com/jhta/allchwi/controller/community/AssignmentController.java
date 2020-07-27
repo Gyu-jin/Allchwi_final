@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +21,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
+import com.google.gson.JsonArray;
 import com.jhta.allchwi.service.community.AssignDataService;
 import com.jhta.allchwi.service.community.AssignSubmitService;
 import com.jhta.allchwi.service.community.AssignmentService;
@@ -100,17 +106,34 @@ public class AssignmentController {
 		
 	}
 	
-	// 학생 과제 제출 Submit
-	@PostMapping("/assign/submit")
-	public String submitOk(AssignSubmitVO vo) {
+	// 학생 과제 제출 List
+	@PostMapping("/assign/submitList")
+	public String submitOk(int assign_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+    	map.put("assign_num", assign_num);
+    	List<AssignSubmitVO> sub_list=submit_service.sub_list(map);
+    	JSONArray arr=new JSONArray();
+    	for(AssignSubmitVO vo:sub_list) {
+    		JSONObject json=new JSONObject();
+    		json.put("sub_content", vo.getSub_content());
+    		json.put("sub_regdate", vo.getSub_regdate());
+    		json.put("org_filename", vo.getAssign_orgFilename());
+    		json.put("pro_num", vo.getPro_num());
+    		arr.put(json);
+    	}
+    	
+    	
+    	return arr.toString();
 		
-		return "";
 		
 	}
 	
 	// 학생 과제 제출 - data
-	@RequestMapping(value="/assign/data", method = RequestMethod.POST)
-	public String subData(HttpSession session, MultipartHttpServletRequest assign_file, String sub_content, int assign_num) {
+	@RequestMapping(value="/assign/data", method = {RequestMethod.POST,RequestMethod.GET},produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String subData(Model model, HttpSession session, MultipartHttpServletRequest multireq, 
+			@RequestParam(value="sub_content")String sub_content, 
+			@RequestParam(value="assign_num")int assign_num) {
 		
     	int ml_num = (int)session.getAttribute("ml_num");
         
@@ -119,10 +142,11 @@ public class AssignmentController {
         
         int sub_num=svo.getSub_num();
         System.out.println("sub_num:"+sub_num);
+        System.out.println("assign_num :"+assign_num);
         
         
-        List<MultipartFile> fileList = assign_file.getFiles("assign_file");
-        String src = assign_file.getParameter("src");
+        List<MultipartFile> fileList = multireq.getFiles("assign_file");
+        String src = multireq.getParameter("src");
         System.out.println("src value : " + src);
         String path = session.getServletContext().getRealPath("/resources/AssignUpload");
         int assign_data=-1;
@@ -148,9 +172,9 @@ public class AssignmentController {
         }
         
         if(submit>0 && assign_data>0) {
-        	return".community.board.assignment";
+        	return "success";
         }else {
-        	return ".error.error";
+        	return "error";
         }
         
         

@@ -8,7 +8,22 @@ public class AssignSubmitVO {
 	private int ml_num;
 	private String sub_content;
 	private Timestamp sub_regdate;
+	//data
+	private int assigndata_num;
+	private String assign_orgFilename;
+	private String assign_saveFilename;
+	private Timestamp assigndata_regdate;
+	//pro_num
+	private int pro_num;
 	
+	public int getPro_num() {
+		return pro_num;
+	}
+
+	public void setPro_num(int pro_num) {
+		this.pro_num = pro_num;
+	}
+
 	public AssignSubmitVO() {}
 
 	public AssignSubmitVO(int sub_num, int assign_num, int ml_num, String sub_content, Timestamp sub_regdate) {
@@ -59,6 +74,39 @@ public class AssignSubmitVO {
 	public void setSub_regdate(Timestamp sub_regdate) {
 		this.sub_regdate = sub_regdate;
 	}
+
+	public int getAssigndata_num() {
+		return assigndata_num;
+	}
+
+	public void setAssigndata_num(int assigndata_num) {
+		this.assigndata_num = assigndata_num;
+	}
+
+	public String getAssign_orgFilename() {
+		return assign_orgFilename;
+	}
+
+	public void setAssign_orgFilename(String assign_orgFilename) {
+		this.assign_orgFilename = assign_orgFilename;
+	}
+
+	public String getAssign_saveFilename() {
+		return assign_saveFilename;
+	}
+
+	public void setAssign_saveFilename(String assign_saveFilename) {
+		this.assign_saveFilename = assign_saveFilename;
+	}
+
+	public Timestamp getAssigndata_regdate() {
+		return assigndata_regdate;
+	}
+
+	public void setAssigndata_regdate(Timestamp assigndata_regdate) {
+		this.assigndata_regdate = assigndata_regdate;
+	}
+	
 	
 	
 }

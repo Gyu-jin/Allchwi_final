@@ -41,7 +41,7 @@
 .display-4{
 	display: inline;
 }
-#subBtn, #a-update{
+button[name='subBtn'], #a-update{
 	float: right;
 }
  #uploadBtn, #a-delete{
@@ -58,6 +58,7 @@
     border-color: #FF9800;
 }
 </style>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <div class="container">
 
 	<div class="title-box">
@@ -139,7 +140,7 @@
 					<div class="collapse" id="collapse${status.index }">
 						<div class="card card-body">
 							<div class="content-box">
-								<form id="form-assign" method="post" enctype="multipart/form-data" action="${cp }/assign/data">
+								<form name="form-assign" >
 								<input type="hidden" name="assign_num" value="${vo.assign_num }">
 									<div class="form-group">
 										<label for="exampleFormControlTextarea1">과제 답변 입력하기</label>
@@ -148,14 +149,16 @@
 									<div class="flex-div">
 										<div class="col-md-6">
 											<label for="exampleFormControlFile1">과제 파일 올려주세요</label> 
-											<input multiple type="file" name="assign_file" class="form-control-file">
+											<input multiple type="file" name="assign_file" class="form-control-file" id="file">
 										</div>
 										<div class="col-md-6">
 											<button type="submit" class="btn btn-outline-warning"
-												id="subBtn">제출하기</button>
+												name="subBtn" >제출하기</button>
 										</div>
 									</div>
 								</form>
+								
+								<div class="submitAssign"></div>
 							</div>
 						</div>
 
@@ -278,13 +281,52 @@
 			}
 		});
 	});
+	$(document).on("click","button[name='subBtn']",function(e) {
+		e.preventDefault();
+		var div=$(this).parent().parent().parent().parent().find(".submitAssign");
+		var form=$(this).parent().parent().parent();
+		
+		form.attr('method','post'); 
+		var formData = new FormData(form[0]);
+		$.post({
+			url : "${cp }/assign/data",
+			data : formData,
+			cache: false,
+			processData: false, 
+			contentType: false,
+			enctype: "multipart/form-data",
+			success : function(data){
+				if(data=="success"){
+					alert("과제 제출 성공");
+					var assign_num=$("input[name='assign_num']").val();
+					Assign_submitList(assign_num);
+				}else{
+					alert("과제 제출 실패");
+				}
+			}
+		});
+	});
 	
-	$("#subBtn").click(
-			function() {
-				var formData = $("#form-assign").serialize();
-				$.post("${cp}/assign/submit", formData, function(data,
-						textStatus, req) {
-
+	function Assign_submitList(assign_num){
+		$.post({
+			url : "${cp }/assign/submitList",
+			data : {"assign_num":assign_num},
+			dataType: "json",			
+			success : function(data) {
+					
+				$(data).each(function(i,sub){
+					if(i==0){
+						console.log("ss");
+						div.append("<div><img src='${cp}/mypage/getimg?pro_num"+sub.pro_num +"'><p>"+sub.sub_regdate+ " , " + sub.sub_content+"</p></div>");
+						div.append("<div>"+sub.sub_regdate+ " , " + sub.sub_content+"</div>");
+						div.append("<div>"+sub.org_filename +"</div>");
+					}else{
+						div.append("<div>"+sub.org_filename +"</div>");
+						
+					}
 				});
-			});
+			}
+		});
+	}
+
 </script>

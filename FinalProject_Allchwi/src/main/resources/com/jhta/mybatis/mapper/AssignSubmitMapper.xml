@@ -5,6 +5,16 @@
 <mapper namespace="com.jhta.mybatis.mapper.AssignSubmitMapper">
 	<insert id="insert" parameterType="assignsubmit">
 		insert into assign_submit values(0,#{assign_num},#{ml_num},#{sub_content},now())
+		<selectKey keyProperty="sub_num" resultType="int">
+	      SELECT LAST_INSERT_ID()
+	 	</selectKey>
 	</insert>
 	
+	<select id="list" parameterType="hashmap" resultType="assignsubmit">
+		select assign_num, s.ml_num, pro_num, s.sub_num, sub_regdate, assign_orgFilename 
+		from assign_data d, assign_submit s, class_info c
+		where  d.sub_num=s.sub_num 
+		and c.ml_num=s.ml_num
+		and assign_num=#{assign_num}
+	</select>
 </mapper>

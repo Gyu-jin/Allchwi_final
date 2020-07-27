@@ -19,6 +19,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/admin/**" location="/resources/" />
 	
+	<!-- 파일 다운로드 설정 -->
 	<beans:bean id="filedownloadView" class="com.jhta.allchwi.view.DownloadView" />
 	
 	<!-- 뷰이름과 동일한 뷰로 응답하는 뷰리절버 등록 -->
