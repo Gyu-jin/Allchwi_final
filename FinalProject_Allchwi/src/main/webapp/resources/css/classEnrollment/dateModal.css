@@ -107,6 +107,9 @@ b {
     color: #ff005a;
     background: #fff;
 }
+.cursor{
+	cursor: pointer;
+}
 .formbox .option {
     cursor: pointer;
     box-sizing: border-box;

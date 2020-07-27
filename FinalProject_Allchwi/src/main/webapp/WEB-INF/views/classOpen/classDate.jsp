@@ -43,8 +43,25 @@
 		if(val == '0'){
 			
 			var startTime1 = $("#regiDate").contents().find('#startTime1').val();
+			var startDate1 = $("#regiDate").contents().find('#startDate1').val();
 			var endTime1 = $("#regiDate").contents().find('#endTime1').val();
 			var classTime1 = $("#regiDate").contents().find('#classTime1').text();
+			
+			
+			
+			if(startDate1 ==''){
+				alert("시작일자를 입력해주세요");
+				$("#regiDate").contents().find('#startDate1').focus();
+				div.remove();
+				return;
+			}
+			
+			if(classTime1 == '' || endTime1 ==''){
+				alert("시작시간를 입력해주세요");
+				$("#regiDate").contents().find('#startTime1').focus();
+				div.remove();
+				return;
+			}
 			
 			
 			div.append("<div class='intext'>"+
@@ -52,7 +69,7 @@
 					"<img src='${cp}/resources/img/icon_down.png' class='dwn'>"+ 
 					"<img src='${cp}/resources/img/icon_up.png' class='up'>"+
 				"</div>"+
-				"<div class='verify left10' onclick='$(this).parent().remove();'>"+
+				"<div class='verify left10' onclick='cntDown();$(this).parent().remove();'>"+
 					"<img src='${cp}/resources/img/icon_del_bk.png'>삭제"+
 				"</div>");
 			
@@ -68,6 +85,22 @@
 				let endTime = $("#regiDate").contents().find('#endTime'+i).val();
 				let classTime = $("#regiDate").contents().find('#classTime'+i).text();
 				
+
+				if(startDate ==''){
+					alert(i+"회차 시작일자를 입력해주세요");
+					$("#regiDate").contents().find('#classTime'+i).focus();
+					subtext.remove();
+					return;
+				}
+				
+				if(startTime == '' || endTime ==''){
+					alert(i+"회차시작시간를 입력해주세요");
+					$("#regiDate").contents().find('#startTime'+i).focus();
+					subtext.remove();
+					return;
+				}
+				
+				
 				subtext.append("<div class='ch'>"+
 					"<font>"+i+"회</font> : "+ startDate + classTime +
 				"</div>")
@@ -78,10 +111,23 @@
 			}
 		}else{
 			var monthDate = $("#regiDate").contents().find('#monthDate').val();
+			if(startDate1 ==''){
+				alert("시작일자를 입력해주세요");
+				$("#regiDate").contents().find('#startDate1').focus();
+				div.remove();
+				return;
+			}
+			
+			if(monthDate == null || monthDate == ''){
+				alert("개월을 입력해주세요");
+				$("#regiDate").contents().find('#monthDate').focus();
+				div.remove();
+				return;
+			}
 			div.append("<div class='intext'>"+
 					startDate1 +"&ensp;&ensp;&ensp;&ensp;&ensp;" + monthDate + "개월"+
 				"</div>"+
-				"<div class='verify left10' onclick='$(this).parent().remove();'>"+
+				"<div class='verify left10' onclick='cntDown();$(this).parent().remove();'>"+
 					"<img src='${cp}/resources/img/icon_del_bk.png'>삭제"+
 				"</div>");
 			div.append("<input type='hidden' class='cal' name='startDate[]' value='"+ startDate1 +"'>");
@@ -89,6 +135,12 @@
 		}
 		updateCnt++;
 		cls_date();
+	}
+	
+	
+	// 새로 추가한 일정 삭제하면 업로드 카운트 감소.
+	function cntDown(){
+		updateCnt--;
 	}
 	
 	function del_cal(dateNum){
@@ -116,9 +168,8 @@
 				processData: false,
 				dataType : 'text',
 				success: function (data) {			
-					alert("return success");
 					if(data=='success'){
-						location.href =cp+"/";
+						location.href =cp+"/class/classBoard?class_num=${class_num}";
 					}else{
 						location.href=cp+"/error";
 					}
@@ -163,7 +214,7 @@
 										</c:otherwise>
 									</c:choose>
 								</div>
-								<div class="verify left10" onclick="del_cal(${date.date_num});$(this).parent().remove();">
+								<div class="verify left10" onclick="del_cal('${date.date_num}');$(this).parent().remove();">
 									<img src="${cp}/resources/img/icon_del_bk.png">삭제
 								</div>
 								<div class="subtext">

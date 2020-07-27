@@ -114,7 +114,7 @@
 				
 			});
 			
-			// jquery Ui datepicker set
+			// 날짜 표시하기
 			function dateCalpickerSet(index){
 				$("#startDate"+index).datepicker({
 					changeMonth: true,
@@ -125,9 +125,14 @@
 					buttonImageOnly: true,
 					buttonText: "등록일 선택",
 					onClose: function(e){
+						var today = new Date();
 						var date = new Date($("#startDate"+index).datepicker({ dateFormat: 'yy-mm-dd' }).val()),
 						week = new Array('일', '월', '화', '수', '목', '금', '토');
-						if (week[date.getDay()]!= undefined){
+						if(today.getTime() > date.getTime()){
+							alert("오늘보다 이전 날짜를 선택하셨습니다.");
+							$("#startDate"+index).val('');
+							return;
+						}else if (week[date.getDay()]!= undefined){
 							$('#dayWeek').text(week[date.getDay()]);
 						}
 					}
@@ -230,8 +235,8 @@
 		<div class="phone_box region_box" id="class_box" style="top:50px">
 			<div class="head">
 				수업일정
-				<span class="button">
-					<img src="${cp}/resources/img/cls_w.png" onclick="parent.cls_date()">
+				<span class="button cursor">
+					<img src="${cp}/resources/img/cls_w.png" onclick="parent.cls_date()" style="float: right; margin: 20px;}">
 				</span>
 			</div>
 			<div class="box">
@@ -256,7 +261,7 @@
 							</div>
 							<div id="curriDate" style="display:none">
 								<div class="formbox" id="radios2" style="overflow:hidden">
-									<div class="option" value="3">매주 <font id="dayWeek"></font>요일 반복</div>
+									<div class="option on" value="3">매주 <font id="dayWeek"></font>요일 반복</div>
 									<div class="option " value="4">직접입력</div>
 								</div>
 								<div class="multisc" id="type" style="display: none;"></div>
@@ -265,9 +270,9 @@
 						<c:otherwise>
 							<div id="curriDate">
 								<div class="formbox" id="radios3" style="overflow:hidden">
-									<div class="moption" value="3">3개월</div>
-									<div class="moption " value="6">6개월</div>
-									<div class="moption " value="12">12개월</div>
+									<div class="moption on" value="1">1개월</div>
+									<div class="moption " value="2">2개월</div>
+									<div class="moption " value="3">3개월</div>
 								</div>
 							</div>
 						</c:otherwise>
@@ -340,10 +345,10 @@
 				<!--수업 시작일  선택시 화면 끝-->
 	
 				<div class="final_box">
-					<div class="next button prev" onclick="parent.cls_date()">
+					<div class="next button prev cursor" onclick="parent.cls_date()">
 					취소
 					</div>
-					<div class="next button on" onclick="parent.getClassDate(${class_form})">
+					<div class="next button on cursor" onclick="parent.getClassDate(${class_form})">
 					저장
 					</div>
 				</div>

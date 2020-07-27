@@ -31,7 +31,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale,HttpServletRequest req, Model model) {
-		ServletContext sc=req.getSession().getServletContext();
+		ServletContext sc = req.getSession().getServletContext();
 		sc.setAttribute("cp", req.getContextPath());
 		//a 로그인하여 세션에 회원번호가 저장되었을때 
 		if(req.getSession().getAttribute("ml_num") != null ) {
