@@ -186,6 +186,7 @@
 		}
 	});
 
+	// 여기부터
 	function getData(data) {
 		var array = new Array();
 		array[0] = [ '월별', '수익', '매출액' ];
@@ -238,7 +239,8 @@
 
 		chart.draw(data2, options);
 	}
-
+	//여기까지
+	
 	//숫자에 콤마 붙여주는 함수
 	function addComma(num) {
 		var regexp = /\B(?=(\d{3})+(?!\d))/g;

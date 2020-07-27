@@ -34,6 +34,23 @@ public class CategoryController {
 	
 	
 	
+
+	@RequestMapping(value="/admin/searchByCate/list",produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public List<BigsmallCategoryVO> searchByCate() {
+		
+		List<BigsmallCategoryVO> list = service.list();
+		
+		
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/admin/big_category/insert",produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public List<BigsmallCategoryVO> big_category(BigCategoryVO vo) {
@@ -69,11 +86,10 @@ public class CategoryController {
 
 	@RequestMapping(value = "/admin/category/deleteScate", produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public List<BigsmallCategoryVO> scategory_del(int scategory_num) {
+	public List<BigsmallCategoryVO> scategory_del(int scategory_num, int bcategory_num) {
 		service.del_scate(scategory_num);
-		List<BigsmallCategoryVO> whole_list= service.list();
-			
-		return whole_list;
+		List<BigsmallCategoryVO> searchByCate_list = service.searchByCate(bcategory_num);
+		return searchByCate_list;	
 		
 	}
 	
