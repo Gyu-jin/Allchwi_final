@@ -29,7 +29,7 @@ public class LogoutController {
 			return "redirect:" + path;
 		} else {
 			//a 올취에서 가입한 회원인경우 
-			mls.logout(session);
+			mls.logout(session);  
 			return "redirect:/";
 		}
 	}
