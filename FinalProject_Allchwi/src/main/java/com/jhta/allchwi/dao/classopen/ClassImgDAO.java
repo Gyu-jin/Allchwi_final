@@ -1,5 +1,7 @@
 package com.jhta.allchwi.dao.classopen;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,9 @@ public class ClassImgDAO {
 	public int delete(int cover_num) {
 		return session.delete(NAMESPACE + ".delete",cover_num);
 	}
-	
+	//a 튜터번호로 이미지 리스트 가져오기
+	public List<ClassImgVO> getImgList(int class_num){
+		return session.selectList(NAMESPACE + ".imgList", class_num);
+	}
 	
 }
