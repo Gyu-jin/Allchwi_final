@@ -34,7 +34,7 @@
         <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 120px; height: 60px"></a>
       </div>
       <div class="col-6 text-center" id="h-title">
-        <a href="${cp }/onclass/community">${commuInfo.commu_title}</a>
+        <a href="${cp }/onclass/community?class_num=${commuInfo.class_num}">${commuInfo.commu_title}</a>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-center">
         <a class="btn btn-sm btn-outline-secondary" href="#">출석체크</a>
