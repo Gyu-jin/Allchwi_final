@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.service.community.CommunityService;
+import com.jhta.allchwi.service.community.NoticeService;
 import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Controller
 public class CommunityController {
 	@Autowired
 	private CommunityService service;
+	
+	@Autowired
+	private NoticeService nts;
 	
 	
 	@GetMapping("/onclass/community")
@@ -34,8 +38,9 @@ public class CommunityController {
 		CommunityVO vo = service.goCommu(map);
 		System.out.println(ml_num +"  " + vo.getMl_num());
 		if(vo!=null) {
-			System.out.println(vo.getCommu_num() + "  " + vo.getClass_num() + "  " +vo.getCommu_title() );
+			int noticeCount = nts.weekNotice(vo.getCommu_num()); 
 			session.setAttribute("commuInfo", vo);
+			session.setAttribute("noticeCount", noticeCount);
 			return ".community";			
 		}else {
 			return ".error.error";

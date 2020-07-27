@@ -55,4 +55,8 @@ public class NoticeDAO {
 	public int update(NoticeVO ntv) {
 		return session.update(NAMESPACE + ".update", ntv);
 	}
+	//이번주 공지사항 글 갯수
+	public int weekNotice(int commu_num) {
+		return session.selectOne(NAMESPACE + ".weekNotice", commu_num);
+	}
 }

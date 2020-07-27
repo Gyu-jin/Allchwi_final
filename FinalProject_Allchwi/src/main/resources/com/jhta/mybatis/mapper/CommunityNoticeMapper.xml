@@ -67,4 +67,15 @@
 	<update id="update" parameterType="notice">
 		update notice set notice_title = #{notice_title}, notice_content = #{notice_content} where notice_num = #{notice_num}
 	</update>
+	<!-- a 해당 주차 글 갯수 가져오기 -->
+	<select id="weekNotice" parameterType="int" resultType="int">
+		select count(*)
+		from notice
+		where commu_num = #{commu_num} and
+    	date_format(notice_regdate,'%Y-%m-%d')
+    	between
+        (select adddate(curdate(), - weekday(curdate()) + 0 ))
+    	and
+        (select adddate(curdate(), - weekday(curdate()) + 6 ))
+	</select>
 </mapper>

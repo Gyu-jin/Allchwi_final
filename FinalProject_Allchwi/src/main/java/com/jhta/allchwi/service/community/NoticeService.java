@@ -56,4 +56,8 @@ public class NoticeService {
 		public int update(NoticeVO ntv) {
 			return ntd.update(ntv);
 		}
+		//이번주 공지 글 갯수 
+		public int weekNotice(int commu_num) {
+			return ntd.weekNotice(commu_num);
+		}
 }
