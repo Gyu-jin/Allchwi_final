@@ -246,7 +246,14 @@
 				<img class="upf_b" src="${cp}/resources/img/btn_pfimg.png">
 				<div class="upf" id="picture-cover"
 					style="background-image:url('${cp}/mypageImg/getimg?pro_num=${list.pro_num }')">
-					<input type="hidden" id="ProfileImg" value="${cp}/resources/img/profile-defaultImg.jpg"> 
+					<c:choose>
+						<c:when test="${empty list.pro_num  }">
+							<input type="hidden" id="ProfileImg" value="${cp}/resources/img/profile-defaultImg.jpg"> 					
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" id="ProfileImg" value="${cp}/mypageImg/getimg?pro_num=${list.pro_num }"> 					
+						</c:otherwise>
+					</c:choose>
 					<input type="hidden" name="pro_num" value="${list.pro_num }"> 
 					<input type="file" id="picture" name="picture" style="width: 150px; height: 130px; opacity: 0;">
 				</div>
@@ -305,7 +312,7 @@
             </div>
         </div>
 	    <div class="button_box">
-	         <button type="button" id="firstNext" class="btn btn-outline-danger" data-num='2'>다음단계</button>
+	         <button type="button" onclick="nextClassPage(2)" class="btn btn-outline-danger">다음단계</button>
 	    </div>
 	</div>
 	
@@ -346,11 +353,10 @@
 					<div class="rd"><label id="classOption1" onclick="rd(0,1)" class=""></label>온라인 수업</div>
 				</div>
 				<div class="inner3 gray5" id="classOption-info0" style="display: block;">
-					* 시범강의가 아닌, 하루 만에 무언가를 얻어갈 수 있는 원데이 클래스를 준비해주세요.
+					* 다회차 수업일 때 올취 수강생들은 보통 <span class="pink">4~6회차 수업</span>을 선호합니다.<br>
+					되도록 한 달 내에 끝낼 수 있도록 커리큘럼을 만들어주세요.
 				</div>
 				<div class="inner3 gray5" id="classOption-info1" style="display: none;">
-					* 다회차 수업일 때 탈잉 수강생들은 보통 <span class="pink">4~6회차 수업</span>을 선호합니다.<br>
-					되도록 한 달 내에 끝낼 수 있도록 커리큘럼을 만들어주세요.
 				</div>
 			</div>
 		</div>
@@ -379,7 +385,7 @@
 					</select>
 					
 					<div class="inner3">
-						탈잉 수강생들이 선호하는 그룹수업은 평균적으로 <span class="pink">2~6인 내외</span>입니다.<br><br>
+						올취 수강생들이 선호하는 그룹수업은 평균적으로 <span class="pink">2~6인 내외</span>입니다.<br><br>
 						* 그룹수업인데 일대일 수업도 가능한 경우, 수업소개 페이지에 별도 기재 부탁드립니다.<br>
 						&nbsp;&nbsp;ex) 일대일 수업을 원하는 경우, 실시간톡으로 문의주세요.
 					</div>

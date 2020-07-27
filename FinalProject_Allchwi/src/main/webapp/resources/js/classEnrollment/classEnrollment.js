@@ -53,7 +53,7 @@ $(function(){
         
         // 튜터 프로필 입력 여부 확인
         if($('#picture').val() == '' ){
-            if($('#ProfileImg').val() == cp+'/resources/img/profile-defaultImg.jpg' ){
+            if($('#ProfileImg').attr == cp+'/resources/img/profile-defaultImg.jpg' ){
                 alert('프로필사진을 등록해주세요');
                 $('#picture').focus();
                 return false;

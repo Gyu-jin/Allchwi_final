@@ -66,11 +66,14 @@ video.onloadeddata = function() {
 	
 	var savaTime = ${view_point};
 	if(savaTime > 0){
-		if(confirm("이어보보기가 가능합니다.") == false){
+		video.pause();
+		if(confirm("이어보기가 가능합니다.") == false){
 			savaTime = 0;
 		}
+		
 	}
 	video.currentTime = savaTime;
+	video.play();
 };
 	
 $(window).bind('beforeunload',function(e){
