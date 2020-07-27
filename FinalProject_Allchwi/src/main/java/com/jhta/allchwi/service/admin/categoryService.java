@@ -29,6 +29,10 @@ public class categoryService {
 		return dao.list();
 	}
 	
+	public List<BigsmallCategoryVO> searchByCate(int bcategory_num){
+		return dao.searchByCate(bcategory_num);
+	}
+	
 	public List<BigCategoryVO> bcate_list(){
 		return dao.bcate_list();
 	}

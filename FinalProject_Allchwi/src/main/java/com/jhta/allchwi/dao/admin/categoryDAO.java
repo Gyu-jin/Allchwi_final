@@ -42,6 +42,13 @@ public class categoryDAO {
 		return session.delete(NAMESPACE+".del_bcate", bcategory_num);
 	}
 
+	public List<BigsmallCategoryVO> searchByCate(int bcategory_num){
+		return session.selectList(NAMESPACE+".searchByCate", bcategory_num);
+	}
+	
+	
+	
+	
 	public List<SmallCategoryVO> scate_list(int bcategory_num) {
 		
 		return session.selectList(NAMESPACE + ".scate_list",bcategory_num);

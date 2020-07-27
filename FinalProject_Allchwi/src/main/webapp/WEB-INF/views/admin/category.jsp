@@ -25,13 +25,13 @@
 			<br>
 
 			<div class="row">
-				&nbsp; &nbsp; <select id="cat" name="cat" class="form-control col-2">
+				&nbsp; &nbsp; 
+				<select id="cat" name="cat" class="form-control col-2">
 					<c:forEach var="vo" items="${bcate_list }">
 						<option id="option" value="${vo.bcategory_num }">${vo.bcategory_name }</option>
 					</c:forEach>
 				</select>
-
-
+			
 				<div class="input-group mb-1 col-5">
 					<input type="text" id="scate_input" name="scategory_name"
 						class="form-control" placeholder="소분류 입력 해주세요."
@@ -43,7 +43,19 @@
 				</div>
 			</div>
 		</div>
-		<br> <br>
+		
+		<br>
+		<h5>카테고리별 보기</h5>
+			<select id="selectedCat" name="cat" class="form-control col-2" onchange="selectOne()">
+					<c:forEach var="vo" items="${bcate_list }">
+						<option id="option" value="${vo.bcategory_num }" >${vo.bcategory_name }</option>
+					</c:forEach>
+			</select>
+		
+		
+		
+		
+		<br><br>
 		<div id="table">
 			<table class="table table-hover">
 				<thead class="thead-dark">
@@ -63,7 +75,9 @@
 							<td><button type="button"
 									class="btn btn-outline-secondary del_btn"
 									onclick="del(${vo.scategory_num},${vo.bcategory_num })"
-									value="${vo.scategory_num}">삭제</button></td>
+									value="${vo.scategory_num}">삭제
+								</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -181,6 +195,8 @@
 							}else{
 								$("select[name='cat']").append("<option value="+bcategory_num+">"+bcategory_name+"</option>");
 							}
+						
+						
 						});
 					}
 				});
@@ -211,6 +227,24 @@
 					}		
 				});
 			}
+		}
+		
+		
+		function selectOne(){
+			var selectedCat = document.getElementById("selectedCat");
+			
+			var bcategory_num = selectedCat.options[selectedCat.selectedIndex].value;
+			alert(bcategory_num);
+			
+			$.getJSON({
+				url:"${cp}/admin/category/searchByCate",
+				data: {bcategory_num:bcategory_num},
+				success: function(data){
+					redundlist(data);		
+				}
+			});
+			
+		
 		}
 		
 		

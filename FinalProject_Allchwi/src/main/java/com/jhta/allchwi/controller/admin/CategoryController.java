@@ -86,4 +86,14 @@ public class CategoryController {
 		return whole_list;	
 	}
 	
+	
+	
+	@RequestMapping(value = "/admin/category/searchByCate", produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public List<BigsmallCategoryVO> searchByCate(int bcategory_num) {
+		List<BigsmallCategoryVO> searchByCate_list = service.searchByCate(bcategory_num);
+		return searchByCate_list;	
+	}
+	
+	
 }
