@@ -369,14 +369,14 @@ text{
 					<div class='card mb-4 shadow-sm'>
 						<img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' 
 						preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'
-						src="${cp}/class/getimg?cover_num=${vo.cover_num}">
+						src="${cp}/classImg/getimg?cover_num=${vo.cover_num}">
 						<title>	${vo.class_title }</title></img>
 						<div class='card-body'>
 							<text>${vo.class_title } ( ${vo.class_num } ) </text>
 						
 							<div class="profile_box">
                                 <div class="profile">
-                          			<img class="img-profile rounded-circle" src="${cp}/mypage/getimg?pro_num=${vo.pro_num}">
+                          			<img class="img-profile rounded-circle" src="${cp}/mypageImg/getimg?pro_num=${vo.pro_num}">
                                 </div>
                                 <div class="name">${vo.tutor_nickname }</div>
                                             

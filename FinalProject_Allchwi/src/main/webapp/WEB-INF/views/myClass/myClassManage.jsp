@@ -29,7 +29,7 @@
 					<div class="class-box">
 						<div class="class-info">
 							<div class="member" style="text-align: center;">
-								<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }"
+								<img src="${cp}/mypageImg/getimg?pro_num=${vo.pro_num }"
 									style="height: 150px; width: 150px; display: block; margin-left: 10%">
 								<font style="margin-left: 10%;"> 
 								<c:choose>

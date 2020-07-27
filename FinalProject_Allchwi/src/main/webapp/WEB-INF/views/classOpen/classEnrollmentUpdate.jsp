@@ -25,13 +25,13 @@
 		    	$(data.coverList).each(function(i,vo){
 		    		var oImg = ($('<div>').attr('id', 'img-cover'+i)
 		    				.addClass('cover_img')
-		    				.css({'background-image':"url('/allchwi/class/getimg?cover_num="+ vo.cover_num+"')"})
+		    				.css({'background-image':"url('/allchwi/classImg/getimg?cover_num="+ vo.cover_num+"')"})
 		    				.attr('data-value',vo.cover_num)
 		    			).on({
 		    				'click': function() { onImageupdate(vo.cover_num , i) }
 		    			});
 
-		    			oImg.append($('<img>').attr('src',"/allchwi/class/getimg?cover_num="+ vo.cover_num)
+		    			oImg.append($('<img>').attr('src',"/allchwi/classImg/getimg?cover_num="+ vo.cover_num)
 		    				.css({'width':'0','height':'0'})										
 		    			);
 
@@ -245,7 +245,7 @@
 			<div style="margin: 30px 0">
 				<img class="upf_b" src="${cp}/resources/img/btn_pfimg.png">
 				<div class="upf" id="picture-cover"
-					style="background-image:url('${cp}/mypage/getimg?pro_num=${list.pro_num }')">
+					style="background-image:url('${cp}/mypageImg/getimg?pro_num=${list.pro_num }')">
 					<input type="hidden" id="ProfileImg" value="${cp}/resources/img/profile-defaultImg.jpg"> 
 					<input type="hidden" name="pro_num" value="${list.pro_num }"> 
 					<input type="file" id="picture" name="picture" style="width: 150px; height: 130px; opacity: 0;">

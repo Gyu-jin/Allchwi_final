@@ -340,7 +340,7 @@ img {
 								<div class="tutor_t">
 									<dl class="tutor_txt">
 										<dt>
-											<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
+											<div class="tutor_img" style="background-image: url('${cp}/mypageImg/getimg?pro_num=${pro_num}');">
 											</div>
 										</dt>
 										<dd>										
@@ -416,7 +416,7 @@ img {
 								<div class="tutor_t">
 									<dl class="tutor_txt">
 										<dt>
-											<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
+											<div class="tutor_img" style="background-image: url('${cp}/mypageImg/getimg?pro_num=${pro_num}');">
 											</div>
 										</dt>
 										<dd>
@@ -484,7 +484,7 @@ img {
 									<div class="tutor_t">
 										<dl class="tutor_txt">
 											<dt>
-												<div class="tutor_img" style="background-image: url('${cp}/mypage/getimg?pro_num=${pro_num}');">
+												<div class="tutor_img" style="background-image: url('${cp}/mypageImg/getimg?pro_num=${pro_num}');">
 												</div>
 											</dt>
 											<dd>

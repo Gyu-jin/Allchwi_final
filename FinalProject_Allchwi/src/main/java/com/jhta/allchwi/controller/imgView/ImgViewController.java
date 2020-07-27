@@ -29,7 +29,7 @@ public class ImgViewController {
 	@Autowired
 	private OnlineClassService onlineService;
 	
-	@GetMapping("/mypage/getimg")
+	@GetMapping("/mypageImg/getimg")
 	public ResponseEntity<byte[]> getImgPro(int pro_num){
 		ProfileImgVO vo = proService.getImg(pro_num);
 		String imgeName = vo.getPro_filename();
@@ -46,7 +46,7 @@ public class ImgViewController {
 		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
 	}
 	
-	@GetMapping("/class/getimg")
+	@GetMapping("/classImg/getimg")
 	public ResponseEntity<byte[]> getImgCover(int cover_num){
 		ClassImgVO vo = imgService.getImg(cover_num);
 		String imgeName = vo.getCover_name();
@@ -63,7 +63,7 @@ public class ImgViewController {
 		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
 	}
 	
-	@GetMapping("/online/getimg")
+	@GetMapping("/onlineImg/getimg")
 	public ResponseEntity<byte[]> getImgOnline(int online_num){
 		OnlineClassVO vo = onlineService.getImg(online_num);
 		byte[] imgeContent = (byte[])vo.getOnline_thumbnail();

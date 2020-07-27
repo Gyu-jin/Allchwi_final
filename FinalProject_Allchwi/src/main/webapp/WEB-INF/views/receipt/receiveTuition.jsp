@@ -277,7 +277,7 @@ button, input, optgroup, select, textarea {
 					<div class="class-box">
 						<div class="class-info">
 							<div class="image" style="text-align: center;">
-								<img src="${cp}/mypage/getimg?pro_num=${vo.pro_num }"
+								<img src="${cp}/mypageImg/getimg?pro_num=${vo.pro_num }"
 									style="width: 150px; height: 180px;">
 							</div>
 

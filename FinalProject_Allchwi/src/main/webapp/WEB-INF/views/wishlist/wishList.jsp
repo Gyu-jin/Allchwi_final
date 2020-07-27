@@ -18,7 +18,7 @@
 		
 		<div class="class-info">
 			<div class="image">
-				<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
+				<img src="${cp}/classImg/getimg?cover_num=${vo.cover_num }">
 			</div>
 			<div class="information-box">
 				<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${vo.class_num}'">

@@ -362,7 +362,7 @@ function indexIncrement(){
 
 function onImageupdate(val, num)
 {
-	$('#dropZone').css({'background':"url('/allchwi/class/getimg?cover_num="+ val +"')", 'background-repeat' : 'no-repeat', 'background-position':'center' , 'background-size':'cover' , 'box-sizing':'border-box'});
+	$('#dropZone').css({'background':"url('/allchwi/classImg/getimg?cover_num="+ val +"')", 'background-repeat' : 'no-repeat', 'background-position':'center' , 'background-size':'cover' , 'box-sizing':'border-box'});
 	$('#dragInfo').hide();
 	selectIndex = num;
 }

@@ -317,7 +317,7 @@ button[name='subBtn'], #a-update{
 				$(data).each(function(i,sub){
 					if(i==0){
 						console.log("ss");
-						div.append("<div><img src='${cp}/mypage/getimg?pro_num"+sub.pro_num +"'><p>"+sub.sub_regdate+ " , " + sub.sub_content+"</p></div>");
+						div.append("<div><img src='${cp}/mypageImg/getimg?pro_num"+sub.pro_num +"'><p>"+sub.sub_regdate+ " , " + sub.sub_content+"</p></div>");
 						div.append("<div>"+sub.sub_regdate+ " , " + sub.sub_content+"</div>");
 						div.append("<div>"+sub.org_filename +"</div>");
 					}else{

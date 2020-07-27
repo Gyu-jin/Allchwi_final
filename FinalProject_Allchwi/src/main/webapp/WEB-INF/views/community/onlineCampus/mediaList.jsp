@@ -156,7 +156,7 @@ ul {
 							<li>
 								<div class="thumb">
 									<a href="${cp}/community/video?online_num=${vo.online_num}">
-									<img src="${cp}/online/getimg?online_num=${vo.online_num}" alt="">
+									<img src="${cp}/onlineImg/getimg?online_num=${vo.online_num}" alt="">
 									</a>
 								</div>
 								<div class="txt">

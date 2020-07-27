@@ -38,13 +38,13 @@
 									<c:when test="${cover.cnt==1}">
 										<div class="carousel-item active">
 											<img class="d-block w-100" alt="Carousel"
-												src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
+												src="${cp}/classImg/getimg?cover_num=${cover.cover_num}" />
 										</div>
 									</c:when>
 									<c:otherwise>
 										<div class="carousel-item">
 											<img class="d-block w-100" alt="Carousel"
-												src="${cp}/class/getimg?cover_num=${cover.cover_num}" />
+												src="${cp}/classImg/getimg?cover_num=${cover.cover_num}" />
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -80,7 +80,7 @@
 							<div class="tutor_profile">
 								<div class="tutor_img">
 									<img alt="tutorprofile" class="roundImg"
-										src="${cp}/mypage/getimg?pro_num=${cdv.pro_num}" />
+										src="${cp}/mypageImg/getimg?pro_num=${cdv.pro_num}" />
 								</div>
 								<div class="name">${cdv.tutor_nickname }</div>
 							</div>
@@ -274,7 +274,7 @@
 															<dt>
 																<p class="profile_img"
 																	style="height: 86px; background-size: cover; background-position: center; 
-																	background-image: url(${cp}/mypage/getimg?pro_num=${rlist.pfv.pro_num});"></p>
+																	background-image: url(${cp}/mypageImg/getimg?pro_num=${rlist.pfv.pro_num});"></p>
 																<p class="name">${rlist.miv.mb_name }</p>
 															</dt>
 															<dd>${rlist.review_content }</dd>
@@ -426,7 +426,7 @@
 								<dl class="tutor_txt">
 									<dt>
 										<div
-											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/mypage/getimg?pro_num=${cdv.pro_num}');">
+											style="background: #000; z-index: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-image: url('${cp}/mypageImg/getimg?pro_num=${cdv.pro_num}');">
 										</div>
 									</dt>
 									<dd>${vo.class_comment}</dd>

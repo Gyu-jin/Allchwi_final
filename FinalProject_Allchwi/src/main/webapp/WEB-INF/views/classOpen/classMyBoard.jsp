@@ -113,7 +113,7 @@
 			<h3>수업상태</h3>
 			<div class="static-box">
 				<div class="image"
-					style="background-image: url(${cp}/class/getimg?cover_num=${list.cover_num });"></div>
+					style="background-image: url(${cp}/classImg/getimg?cover_num=${list.cover_num });"></div>
 				<div class="info-box">
 					<div class="dropdown more-text">
 			            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">

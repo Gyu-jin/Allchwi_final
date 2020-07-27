@@ -139,7 +139,7 @@
 			<div class="apply">
 				<div class="pf_box">
 					<div class="pf"
-						style="background-image: url('${cp}/mypage/getimg?pro_num=${vo.pro_num}')"></div>
+						style="background-image: url('${cp}/mypageImg/getimg?pro_num=${vo.pro_num}')"></div>
 					<p class="triangle-border top gray" style="margin-top: 50px">
 						신청해 주셔서 정말 감사합니다. <br> <br> 결제 후 " ${vo.tutor_nickname } "님이 수업 신청서를 확인 할
 						때까지 잠시만 기다려주세요. 신청서 확인이 완료되면 회원님께 직접 연락을 드립니다!

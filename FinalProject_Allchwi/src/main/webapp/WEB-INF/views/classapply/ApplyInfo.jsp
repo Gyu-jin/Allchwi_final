@@ -154,7 +154,7 @@
 			<div class="apply">
 				<div class="pf_box">
 					<div class="pf"
-						style="background-image: url('${cp}/mypage/getimg?pro_num=${vo.pro_num}')"></div>
+						style="background-image: url('${cp}/mypageImg/getimg?pro_num=${vo.pro_num}')"></div>
 					<c:choose>
 						<c:when test="${vo.apply_auth==0 }">
 							<p class="triangle-border top gray" style="margin-top: 50px">

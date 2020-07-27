@@ -190,13 +190,13 @@ li {
 						<a href="${cp}/classDetail/detail?class_num=${list.class_num}">
 							<div class="card-body">
 								<p>
-									<img src="${cp}/class/getimg?cover_num=${list.cover_num}"
+									<img src="${cp}/classImg/getimg?cover_num=${list.cover_num}"
 										class="c-cover">
 								</p>
 								<p class="t1">${list.class_title }</p>
 								<div class="t2">
 									<span class="profile"> <img class="roundImg"
-										src="${cp}/mypage/getimg?pro_num=${list.pro_num}" alt="">
+										src="${cp}/mypageImg/getimg?pro_num=${list.pro_num}" alt="">
 									</span> <span class="name">${list.tutor_nickname }</span>
 									<p>${list.bloc_name }${list.sloc_name }</p>
 								</div>
@@ -217,7 +217,7 @@ li {
 				<a href="${cp}/classDetail/detail?class_num=${best_tutor.class_num}">
 						<div class="img">
 							<img class="roundImg"
-								src="${cp}/mypage/getimg?pro_num=${best_tutor.pro_num}">
+								src="${cp}/mypageImg/getimg?pro_num=${best_tutor.pro_num}">
 						</div>
 						<div class="t">
 							<span class="name">${best_tutor.tutor_nickname}</span> <span

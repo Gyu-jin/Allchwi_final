@@ -18,7 +18,7 @@
 			<div class="class-box">
 				<div class="class-info"> 
 					<div class="image" style="text-align: center;">
-						<img src="${cp}/class/getimg?cover_num=${vo.cover_num }">
+						<img src="${cp}/classImg/getimg?cover_num=${vo.cover_num }">
 					</div>
 					<div class="information-box">
 						<div>신청일시: ${vo.apply_regdate }
