@@ -9,8 +9,20 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>SB Admin 2 - Dashboard</title>
+<style>
+	.btn-primary{
+		color: #fff;
+    	background-color: #7185bb !important;
+    	border-color: #7185bb !important;
+	}
+	
+	
+	.bg-gradient-primary {
+		background-color: #7185bb !important; 
+   		background-image: none !important;
+    	background-size: cover;
+	}
+</style>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -41,7 +53,7 @@
 					<i class="fas fa-laugh-wink"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">
-					관리자ss <sup>2</sup>
+					관리자페이지
 				</div>
 			</a>
 

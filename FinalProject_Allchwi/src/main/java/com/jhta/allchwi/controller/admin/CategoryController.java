@@ -88,10 +88,26 @@ public class CategoryController {
 	@ResponseBody
 	public List<BigsmallCategoryVO> scategory_del(int scategory_num, int bcategory_num) {
 		service.del_scate(scategory_num);
+		
+		//List<BigsmallCategoryVO> whole_list = service.list();	//다지우고 전체 띄우기
+		
 		List<BigsmallCategoryVO> searchByCate_list = service.searchByCate(bcategory_num);
 		return searchByCate_list;	
-		
 	}
+	
+	@RequestMapping(value = "/admin/category/deleteScate2", produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public List<BigsmallCategoryVO> scategory_del2(int scategory_num, int bcategory_num) {
+		service.del_scate(scategory_num);
+		
+		List<BigsmallCategoryVO> whole_list = service.list();	//다지우고 전체 띄우기
+		
+		
+		return whole_list;	
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/admin/category/deleteBcate", produces= "application/json;charset=utf-8")
 	@ResponseBody

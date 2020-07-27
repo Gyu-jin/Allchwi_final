@@ -29,7 +29,7 @@ public class ArchiveDAO {
 		return session.selectList(NAMESPACE+".list",map);
 	}
 	
-	public int count() {
+	public int count(int commu_num) {
 		return session.selectOne(NAMESPACE+".count");
 	}
 	

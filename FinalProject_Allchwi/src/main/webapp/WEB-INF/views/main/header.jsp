@@ -127,7 +127,7 @@
 			</c:if>	
 			<c:if test="${tutor_auth != 1}">
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="${cp}/class/wishList" id="tutorEnroll" role="button">
+              <a class="nav-link dropdown-toggle" href="${cp}/class/enrollment" id="tutorEnroll" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터등록</span>
            		</a>
                 

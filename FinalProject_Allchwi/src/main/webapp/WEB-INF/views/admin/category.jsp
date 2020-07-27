@@ -57,10 +57,7 @@
 			</select>
 		</div>
 
-
-
-
-		<br> <br>
+		<br><br>
 		<div id="table">
 			<table class="table table-hover">
 				<thead class="thead-dark">
@@ -77,9 +74,8 @@
 							<td id="bnum">${vo.bcategory_num }</td>
 							<td>${vo.bcategory_name }</td>
 							<td>${vo.scategory_name }</td>
-							<td><button type="button"
-									class="btn btn-outline-secondary del_btn"
-									onclick="del(${vo.scategory_num},${vo.bcategory_num })"
+							<td><button type="button" class="btn btn-outline-secondary del_btn"
+									onclick="delMain(${vo.scategory_num},${vo.bcategory_num })"
 									value="${vo.scategory_num}">삭제</button></td>
 						</tr>
 					</c:forEach>
@@ -201,8 +197,6 @@
 					}
 					
 					$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num2+")'>삭제</button></td>");
-				
-					
 				$("#tb").append("</tr>");
 			
 				$.getJSON({
@@ -229,12 +223,24 @@
 			});	
 		}
 		
-		//삭제함수
+		//삭제함수(계속해서 삭제 함수띄울때)
 		function del(scategory,bcategory){
 			var scategory_num = scategory;
-			console.log(scategory);
+			//console.log(scategory);
+			var selectedCat = document.getElementById("selectedCat");
+			var selectedValue = selectedCat.options[selectedCat.selectedIndex].value;
 			
-			if(scategory_num!=0){	//소분류 삭제( 소분류가 0이 아닐때 = 소분류가 있을때)
+			if(selectedValue==0){
+				$.getJSON({
+					url:"${cp}/admin/category/deleteScate2",
+					data: {scategory_num:scategory_num,bcategory_num:bcategory},
+					success: function(data){	
+						redundlist(data,bcategory);
+					}
+				});
+			
+			
+			}else if(scategory_num!=0){	//소분류 삭제( 소분류가 0이 아닐때 = 소분류가 있을때)
 				$.getJSON({
 					url:"${cp}/admin/category/deleteScate",
 					data: {scategory_num:scategory_num,bcategory_num:bcategory},
@@ -242,8 +248,7 @@
 						redundlist(data,bcategory);
 					}
 				});
-		
-			
+	
 			}else{		//대분류삭제
 				var bcategory_num = bcategory;	
 				console.log(bcategory_num);
@@ -256,6 +261,38 @@
 				});
 			}
 		}
+		
+		
+		//메인 화면단에서 지울때
+		function delMain(scategory,bcategory){
+			var scategory_num = scategory;
+			//console.log(scategory);
+			
+			if(scategory_num!=0){	//소분류 삭제( 소분류가 0이 아닐때 = 소분류가 있을때)
+				$.getJSON({
+					url:"${cp}/admin/category/deleteScate2",
+					data: {scategory_num:scategory_num,bcategory_num:bcategory},
+					success: function(data){	
+						redundlist(data,bcategory);
+					}
+				});
+	
+			}else{		//대분류삭제
+				var bcategory_num = bcategory;	
+				console.log(bcategory_num);
+				$.getJSON({
+					url:"${cp}/admin/category/deleteBcate",
+					data: {bcategory_num:bcategory_num},
+					success: function(data){
+						redundlist(data);
+					}		
+				});
+			}
+		}
+		
+		
+		
+		
 		
 		//카테고리별 보기
 		function searchByCate(){

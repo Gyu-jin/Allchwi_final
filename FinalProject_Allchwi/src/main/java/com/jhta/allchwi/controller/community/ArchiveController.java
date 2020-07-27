@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.community.ArchiveService;
 import com.jhta.allchwi.vo.community.ArchiveVO;
+import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Controller
 public class ArchiveController {
@@ -29,13 +30,18 @@ public class ArchiveController {
 	private ArchiveService service;
 	
 	@GetMapping("/community/archive")
-	public String goAssign(Model model,@RequestParam(value="pageNum",defaultValue = "1") int pageNum) {
+	public String goAssign(HttpSession session, Model model,@RequestParam(value="pageNum",defaultValue = "1") int pageNum) {
+		CommunityVO commuVo = (CommunityVO) session.getAttribute("commuInfo");
+		int commu_num = commuVo.getCommu_num();
+				
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int totalRowCount = service.count();
+		int totalRowCount = service.count(commu_num);
 		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
+		
+		map.put("commu_num",commu_num);
 		map.put("startRow", pu.getStartRow()-1);
-	
+		
 		List<ArchiveVO> list = service.list(map);
 		model.addAttribute("list", list);
 		model.addAttribute("pu",pu);
@@ -130,11 +136,5 @@ public class ArchiveController {
 		model.addAttribute("filesize",vo.getFilesize());
 		return "filedownloadView";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

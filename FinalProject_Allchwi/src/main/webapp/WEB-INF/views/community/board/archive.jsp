@@ -70,7 +70,7 @@
 				<tbody>
 
 					<c:forEach var="vo" items="${list }">
-						<tr onclick="detail('${vo.room_num}')">
+						<tr onclick="detail('${vo.room_num}','${vo.commu_num }')">
 							<td>${vo.room_num }</td>
 							<td>${vo.horsehead }</td>
 							<td>${vo.room_title}</td>
@@ -133,8 +133,8 @@
 </div>
 
 <script type="text/javascript">
-	function detail(room_num){
-		location.href="${cp}/community/archiveDetail?room_num="+room_num;
+	function detail(room_num,commu_num){
+		location.href="${cp}/community/archiveDetail?room_num="+room_num+"&commu_num="+commu_num;
 	}
 	
 

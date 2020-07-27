@@ -27,8 +27,8 @@ public class ArchiveService {
 		return dao.list(map);
 	}
 	
-	public int count() {
-		return dao.count();
+	public int count(int commu_num) {
+		return dao.count(commu_num);
 	}
 	
 	public ArchiveVO detail(int room_num){

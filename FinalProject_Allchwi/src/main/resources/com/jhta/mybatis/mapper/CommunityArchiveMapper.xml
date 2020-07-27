@@ -18,12 +18,12 @@
 	
 	
 	<select id="list" resultType="com.jhta.allchwi.vo.community.ArchiveVO" parameterType="hashmap">
-		select * from ref_room
+		select * from ref_room where commu_num = #{commu_num}
 		limit #{startRow},6
 	</select>
 	
-	<select id="count" resultType="int">
-		select nvl(count(*),0) cnt from ref_room
+	<select id="count" resultType="int" parameterType="int">
+		select nvl(count(*),0) cnt from ref_room where commu_num = #{commu_num}
 	</select>
 	
 	
