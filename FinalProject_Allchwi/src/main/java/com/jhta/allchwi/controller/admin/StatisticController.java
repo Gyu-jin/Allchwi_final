@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jhta.allchwi.dao.admin.Statistic1DAO;
+import com.jhta.allchwi.dao.admin.StatisticDAO;
 import com.jhta.allchwi.vo.admin.Statistic1VO;
+import com.jhta.allchwi.vo.admin.Statistic3VO;
 
 @Controller
 public class StatisticController {
 	@Autowired
-	private Statistic1DAO dao;
+	private StatisticDAO dao;
 	
 	
 	@GetMapping("/admin/statistic1")
@@ -28,15 +29,8 @@ public class StatisticController {
 	@ResponseBody
 	public List<Statistic1VO> statisticAjax(int thisyear, int nextyear){
 		List<Statistic1VO> list = dao.list(thisyear,nextyear);
-			
-		
 		return list;
 	}
-	
-	
-	
-	
-	
 	
 	
 	@GetMapping("/admin/statistic2")
@@ -44,11 +38,21 @@ public class StatisticController {
 		return ".admin.statistic2";
 	}
 	
+	
+
+
 	@GetMapping("/admin/statistic3")
 	public String statstic3() {
 		return ".admin.statistic3";
 	}
 	
+	
+	@GetMapping("/admin/statisticAjax3")
+	@ResponseBody
+	public List<Statistic3VO> statisticAjax3(){
+		List<Statistic3VO> cate_list =  dao.cate_statlist();
+		return cate_list;
+	}
 	
 	
 }

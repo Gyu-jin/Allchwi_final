@@ -6,19 +6,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jhta.allchwi.dao.admin.Statistic1DAO;
+import com.jhta.allchwi.dao.admin.StatisticDAO;
 import com.jhta.allchwi.vo.admin.Statistic1VO;
+import com.jhta.allchwi.vo.admin.Statistic3VO;
 
 @Service
-public class AdminStatistic1Service {
+public class AdminStatisticService {
 	@Autowired
-	private Statistic1DAO dao;
+	private StatisticDAO dao;
 	
 	public List<Statistic1VO> list(int thisyear, int nextyear) {
 
 		return dao.list(thisyear, nextyear);
-	
 	}
+	
+	public List<Statistic3VO> cate_statlist(){
+		return dao.cate_statlist();
+	}
+	
+	
 	
 	
 }

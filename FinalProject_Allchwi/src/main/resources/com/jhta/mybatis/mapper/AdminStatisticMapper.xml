@@ -4,14 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.AdminStatisticMapper">
 	<select id="list" resultType="com.jhta.allchwi.vo.admin.Statistic1VO" parameterType="hashmap">
-	SELECT MONTH(regdate) AS month, sum(pay) monthlySum, sum(revenue) monthlyRevenue
-	FROM sales 
-    <![CDATA[	WHERE year(regdate) >= #{thisyear} AND year(regdate) < #{nextyear} ]]>
-	GROUP BY month
-	WITH ROLLUP
+		SELECT MONTH(regdate) AS month, sum(pay) monthlySum, sum(revenue) monthlyRevenue
+		FROM sales 
+	    <![CDATA[	WHERE year(regdate) >= #{thisyear} AND year(regdate) < #{nextyear} ]]>
+		GROUP BY month
+		WITH ROLLUP
 	</select>
 
-	
+	<select id="cate_statlist" resultType="com.jhta.allchwi.vo.admin.Statistic3VO" >
+		select count(*), b.bcategory_name
+		from big_category b, small_category s
+		where b.bcategory_num = s.bcategory_num
+		group by b.bcategory_num
+	</select>
 	
 </mapper>
 

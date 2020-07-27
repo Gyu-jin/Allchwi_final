@@ -27,7 +27,6 @@
 		order by class_num desc limit #{startRow},10
 	</select>
 
-
 	<select id="count" resultType="int" parameterType="hashmap"> 
 		select NVL(count(*),0) cnt 
 		from (select ci.ml_num, ci.class_num class_num, ci.tutor_nickname, ci.class_title,
@@ -38,7 +37,6 @@
 			where ${field} like CONCAT('%',#{keyword},'%') 
 		</if> 
 	</select> 
-
 
 </mapper>
 

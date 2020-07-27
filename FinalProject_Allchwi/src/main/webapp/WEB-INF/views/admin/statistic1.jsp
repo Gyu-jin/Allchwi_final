@@ -21,8 +21,7 @@
 						href="${cp }/admin/statistic1">월별 매출액</a></li>
 					<li class="breadcrumb-item"><a href="${cp }/admin/statistic2">막대바
 							그래프</a></li>
-					<li class="breadcrumb-item"><a href="${cp }/admin/statistic3">기타
-							그래프</a></li>
+					<li class="breadcrumb-item"><a href="${cp }/admin/statistic3">카테고리 점유율</a></li>
 				</ol>
 			</nav>
 
@@ -50,7 +49,7 @@
 				년
 			</button>
 			<button type="button" class="btn btn-success"
-				style="margin-left: 718px" onclick="fnExcelReport('table','title')">엑셀 파일 다운로드</button>
+				style="margin-left: 718px" onclick="fnExcelReport('table','monthly sales/revenue')">엑셀 파일 다운로드</button>
 
 
 
@@ -69,15 +68,6 @@
 					</tbody>
 				</table>
 			</div>
-
-
-
-
-
-
-
-
-
 		</div>
 	</div>
 </div>
@@ -201,45 +191,32 @@
 		array[0] = [ '월별', '수익', '매출액' ];
 
 		$("#tb").empty();
-		$(data).each(
-				function(i, arr) {
-					var subArray = [ arr.month + "월", arr.monthlySum,
-							arr.monthlyRevenue ];
-					if (data.length - 1 != i) { //마지막 열 데이터 담지 않기// 같지 않을때까지 넣는다.
-						array[++i] = subArray;
-					}
+		$(data).each(function(i, arr) {
+			var subArray = [ arr.month + "월", arr.monthlySum,arr.monthlyRevenue ];
+				if (data.length - 1 != i) { //마지막 열 데이터 담지 않기// 같지 않을때까지 넣는다.
+					array[++i] = subArray;
+				}
+				
+				var month = arr.month;
+				var monthlySum = arr.monthlySum;
+				var monthlyRevenue = arr.monthlyRevenue;
 
-					var month = arr.month;
-					var monthlySum = arr.monthlySum;
-					var monthlyRevenue = arr.monthlyRevenue;
-
-					monthlySum = addComma(monthlySum);
-					monthlyRevenue = addComma(monthlyRevenue);
-					//$("#tb").append("<tr>");
+				monthlySum = addComma(monthlySum);
+				monthlyRevenue = addComma(monthlyRevenue);
 					
-					var trs = $("<tr></tr>").appendTo(
-					"#tb");
-					
-	
-					
-					if (month == 0) {
-						$(trs).append("<td class='table-active'>합계:</td>");
-						$(trs).append(
-								"<td class='table-active'>" + monthlySum
-										+ "원</td>");
-						$(trs).append(
-								"<td class='table-active'>" + monthlyRevenue
-										+ "원</td>");
-						
-
-					} else {
-						$(trs).append("<td>" + month + "월</td>");
-						$(trs).append("<td>" + monthlySum + "원</td>");
-						$(trs).append("<td>" + monthlyRevenue + "원</td>");
-						
-					}
-					
-				});
+				var trs = $("<tr></tr>").appendTo("#tb");
+				
+				if (month == 0) {
+					$(trs).append("<td class='table-active'>합계:</td>");
+					$(trs).append(
+							"<td class='table-active'>" + monthlySum+ "원</td>");
+					$(trs).append("<td class='table-active'>" + monthlyRevenue+ "원</td>");
+				} else {
+					$(trs).append("<td>" + month + "월</td>");
+					$(trs).append("<td>" + monthlySum + "원</td>");
+					$(trs).append("<td>" + monthlyRevenue + "원</td>");
+				}
+			});
 
 		var data2 = google.visualization.arrayToDataTable(array);
 
@@ -262,11 +239,13 @@
 		chart.draw(data2, options);
 	}
 
+	//숫자에 콤마 붙여주는 함수
 	function addComma(num) {
 		var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		return num.toString().replace(regexp, ',');
 	}
 
+	//엑셀파일 다운로드 함수
 	function fnExcelReport(id, title) {
 		var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
 		tab_text = tab_text
@@ -289,6 +268,7 @@
 		var ua = window.navigator.userAgent;
 		var msie = ua.indexOf("MSIE ");
 		var fileName = title + '.xls';
+		
 		//Explorer 환경에서 다운로드
 		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
 			if (window.navigator.msSaveBlob) {
