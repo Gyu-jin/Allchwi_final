@@ -25,12 +25,14 @@ public class StreamView extends AbstractView {
                                                              )
                                                               throws Exception {
 
+    	String folder = (String)map.get("folder");
+    	
 		String movieDir = 
-				request.getSession().getServletContext().getRealPath("/resources/mediaFold/1_온라인");
+				request.getSession().getServletContext().getRealPath("/resources/mediaFold/" + folder);
 		
         //대상 동영상 파일명
         String movieName = (String)map.get("movieName");
-
+        System.out.println(movieName);
         //progressbar 에서 특정 위치를 클릭하거나 해서 임의 위치의 내용을 요청할 수 있으므로
         //파일의 임의의 위치에서 읽어오기 위해 RandomAccessFile 클래스를 사용한다.
         //해당 파일이 없을 경우 예외 발생

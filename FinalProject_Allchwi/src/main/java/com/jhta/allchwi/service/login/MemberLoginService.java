@@ -157,4 +157,7 @@ public class MemberLoginService{
 			int result = a + a1 + a2 + a3;
 			return result;
 		}
+		public void tutorAuth(int ml_num) {
+			mld.tutorAuth(ml_num);
+		}
 }

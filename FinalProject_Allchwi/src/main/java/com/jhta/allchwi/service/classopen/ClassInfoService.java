@@ -15,6 +15,7 @@ import com.jhta.allchwi.dao.classopen.CurriculumDAO;
 import com.jhta.allchwi.dao.location.BigLocationDAO;
 import com.jhta.allchwi.dao.location.SmallLocationDAO;
 import com.jhta.allchwi.dao.profileImg.ProfileImgDAO;
+import com.jhta.allchwi.service.login.MemberLoginService;
 import com.jhta.allchwi.vo.classopen.CertificateVO;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.classopen.ClassInfoVO;
@@ -40,6 +41,8 @@ public class ClassInfoService {
 	private BigLocationDAO bigDao;
 	@Autowired
 	private SmallLocationDAO smallDao;
+	@Autowired
+	private MemberLoginService loginService;
 	
 	public int insert(ClassInfoVO vo) {
 		return infoDao.insert(vo);
@@ -103,6 +106,8 @@ public class ClassInfoService {
 			curri.setClass_num(class_num);
 			curriDao.insert(curri);
 		}
+		
+		loginService.tutorAuth(vo.getMl_num());
 		
 		return true;
 	}
@@ -191,6 +196,11 @@ public class ClassInfoService {
 				for(int cert_num : deletecert) {
 					certDao.delete(cert_num);
 				}
+				
+				//튜터 여부 업데이트
+				
+				
+				
 				return true;
 	}
 
@@ -198,7 +208,8 @@ public class ClassInfoService {
 		return infoDao.salesUpdate(map);
 	}
 
-	public int classDelete(HashMap<String, Object> map) throws Exception{
-		return infoDao.classDelete(map);
+	public void classDelete(HashMap<String, Object> map) throws Exception{
+		infoDao.classDelete(map);
+		loginService.tutorAuth((int)map.get("ml_num"));
 	}
 }

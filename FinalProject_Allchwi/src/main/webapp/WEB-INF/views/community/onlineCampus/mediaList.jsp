@@ -155,12 +155,12 @@ ul {
 						<ul>  
 							<li>
 								<div class="thumb">
-									<a href="${cp}/community/video">
+									<a href="${cp}/community/video?online_num=${vo.online_num}">
 									<img src="${cp}/online/getimg?online_num=${vo.online_num}" alt="">
 									</a>
 								</div>
 								<div class="txt">
-									<a href="${cp}/vod/play/${vo.online_num}">
+									<a href="${cp}/community/video?online_num${vo.online_num}">
 									<span class="tit">${vo.online_title }</span>
 									<span class="time">${min}:${sec}</span>
 									</a>

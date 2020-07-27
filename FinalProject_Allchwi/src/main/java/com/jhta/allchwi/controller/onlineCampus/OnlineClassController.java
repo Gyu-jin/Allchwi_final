@@ -93,7 +93,7 @@ public class OnlineClassController {
 			
 			
 			String path = uploadPath+ File.separator+commu_num+"_"+commu_title;
-			System.out.println(uploadPath);
+			System.out.println(path);
 			File Folder = new File(path);
 	
 			// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
@@ -111,7 +111,7 @@ public class OnlineClassController {
 			String savefileName = UUID.randomUUID() + "_" + orgfileName;
 			
 			File fos = new File(path+File.separator + savefileName);
-			String online_file = commu_num+ "_" + commu_title + File.separator 
+			String online_file = commu_num+ "_" + commu_title 
 					+ File.separator + savefileName;
 			try {
 				files.transferTo(fos);

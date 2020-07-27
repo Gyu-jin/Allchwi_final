@@ -38,6 +38,19 @@
 	<update id="signout" parameterType="hashmap">
 		update member_login set login_auth = #{login_auth} where ml_num = #{ml_num}
 	</update>
+	
+	<update id="tutorAuth" parameterType="int">
+		update member_login 
+		set tutor_auth = case
+		when tutor_auth = 0 and (select ifnull(count(class_num),0) from class_info where ml_num=#{ml_num}) > 0 
+		then 1  
+		when tutor_auth = 1 and (select ifnull(count(class_num),0) from class_info where ml_num=#{ml_num}) = 0 
+		then 0  
+		else 
+			0 
+		end
+		where ml_num=#{ml_num}
+	</update>
 </mapper>
 
 

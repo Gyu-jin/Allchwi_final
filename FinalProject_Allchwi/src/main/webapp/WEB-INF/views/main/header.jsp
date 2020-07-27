@@ -96,7 +96,7 @@
 				
 				
 			
-				
+			<c:if test="${tutor_auth ==1}">
             <!-- 튜터등록 링크 -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="tutorEnroll" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,7 +107,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="tutorEnroll">
                 <a class="dropdown-item" href="${cp}/class/enrollment" >
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	튜터등록
+                  	새수업등록
                 </a>
                 <a class="dropdown-item" href="${cp}/class/classBoard" id="tutorEnroll">
                   <i class="fas fa-database fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -124,7 +124,15 @@
                
               </div>
              </li>
-           
+			</c:if>	
+			<c:if test="${tutor_auth != 1}">
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="${cp}/class/wishList" id="tutorEnroll" role="button">
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">튜터등록</span>
+           		</a>
+                
+            </li>
+            </c:if>
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="${cp}/class/wishList" id="tutorEnroll" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">위시리스트</span>

@@ -49,4 +49,7 @@ public class MemberLoginDAO {
 	public int signout(HashMap<String, Object> hm) {
 		return session.update(NAMESPACE + ".signout", hm);
 	}
+	public void tutorAuth(int ml_num) {
+		session.update(NAMESPACE+"tutorAuth",ml_num);
+	}
 }
