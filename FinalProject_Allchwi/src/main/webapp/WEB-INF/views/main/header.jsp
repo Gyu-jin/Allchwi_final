@@ -46,6 +46,15 @@
 		          </form>
 	          </div>
           </div>
+          
+          <!-- 관리자 화면 -->
+		
+          <a href="${cp}/admin/main" id="admin" role="button">
+            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
+          </a>
+               
+         
+			
        
 		 
           <!-- 왼쪽 메뉴 세개(튜터등록, 수업신청, 로그인 -->
@@ -86,13 +95,6 @@
 			<c:otherwise>
 				
 				
-			<!-- 관리자 화면 -->
-			<li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="${cp}/admin/main" id="admin" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
-           		</a>
-               
-            </li>
 			
 				
             <!-- 튜터등록 링크 -->
