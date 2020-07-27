@@ -15,7 +15,16 @@ public class AssignSubmitVO {
 	private Timestamp assigndata_regdate;
 	//pro_num
 	private int pro_num;
+	private String mb_name;
 	
+	public String getMb_name() {
+		return mb_name;
+	}
+
+	public void setMb_name(String mb_name) {
+		this.mb_name = mb_name;
+	}
+
 	public int getPro_num() {
 		return pro_num;
 	}
@@ -23,7 +32,7 @@ public class AssignSubmitVO {
 	public void setPro_num(int pro_num) {
 		this.pro_num = pro_num;
 	}
-
+	//
 	public AssignSubmitVO() {}
 
 	public AssignSubmitVO(int sub_num, int assign_num, int ml_num, String sub_content, Timestamp sub_regdate) {

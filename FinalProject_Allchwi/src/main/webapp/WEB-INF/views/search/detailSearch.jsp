@@ -144,10 +144,11 @@ text{
 	position: absolute;
 	color: #ff936f;
 	font-weight:bold;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 	width: 200px;
  	height: 50px;
-	margin-left: 65%;
+	margin-left: 68%;
+	margin-top: 8%;
 }
 
 </style>
@@ -382,7 +383,7 @@ text{
                                             
                             </div>
 							<p class='card-text'><fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> 시작!</p>
-							<a href="${cp }/class/apply?class_num=${vo.class_num}&ml_num=${sessionScope.ml_num}">수업신청</a>
+							
 							
 							<div class='d-flex justify-content-between align-items-center'>
 							<div class='btn-group'>

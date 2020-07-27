@@ -8,19 +8,27 @@ public class AssignDataVO {
 	private String assign_orgFilename;
 	private String assign_saveFilename;
 	private Timestamp assigndata_regdate;
+	private long assigndata_size;
 	
 	public AssignDataVO() {}
 
 	
+	
+
+
 	public AssignDataVO(int assigndata_num, int sub_num, String assign_orgFilename, String assign_saveFilename,
-			Timestamp assigndata_regdate) {
+			Timestamp assigndata_regdate, long assigndata_size) {
 		super();
 		this.assigndata_num = assigndata_num;
 		this.sub_num = sub_num;
 		this.assign_orgFilename = assign_orgFilename;
 		this.assign_saveFilename = assign_saveFilename;
 		this.assigndata_regdate = assigndata_regdate;
+		this.assigndata_size = assigndata_size;
 	}
+
+
+
 
 
 	public int getAssigndata_num() {
@@ -64,6 +72,23 @@ public class AssignDataVO {
 	public void setAssigndata_regdate(Timestamp assigndata_regdate) {
 		this.assigndata_regdate = assigndata_regdate;
 	}
+
+
+
+
+
+	public long getAssigndata_size() {
+		return assigndata_size;
+	}
+
+
+
+
+
+	public void setAssigndata_size(long assigndata_size) {
+		this.assigndata_size = assigndata_size;
+	}
+	
 	
 	
 }

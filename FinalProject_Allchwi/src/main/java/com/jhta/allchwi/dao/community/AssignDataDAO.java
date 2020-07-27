@@ -21,4 +21,8 @@ public class AssignDataDAO {
 	public List<AssignDataVO> data_list(int sub_num){
 		return session.selectList(NAMESPACE+".list",sub_num);
 	}
+	
+	public AssignDataVO saveFilename(int assigndata_num) {
+		return session.selectOne(NAMESPACE+".getSaveFileName", assigndata_num);
+	}
 }

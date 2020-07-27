@@ -19,4 +19,8 @@ public class AssignDataService {
 	public List<AssignDataVO> data_list(int sub_num){
 		return dao.data_list(sub_num);
 	}
+	
+	public AssignDataVO saveFilename(int assigndata_num) {
+		return dao.saveFilename(assigndata_num);
+	}
 }

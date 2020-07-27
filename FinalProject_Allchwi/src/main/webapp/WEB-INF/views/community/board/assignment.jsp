@@ -57,58 +57,86 @@ button[name='subBtn'], #a-update{
     background-color: #FF9800;
     border-color: #FF9800;
 }
+.qna_list ul li {
+	
+	padding: 10px 0;
+	cursor: default;
+}
+
+.qna_list ul {
+	margin-right: 40px;
+}
+
+.qna_box{
+	
+    margin-top: 70px
+}
+.qna_list {
+	border: 1px solid #d4cdcd;
+	margin-top: 65px;
+	background: white;
+}
+.fileDiv {
+    display: inline-block;
+    border: 1px solid lightgray;
+    width: 100%;
+    padding: 5%;
+}
 </style>
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <div class="container">
 
 	<div class="title-box">
 		<h1>과제 게시판</h1>
-		<button type="button" id="uploadBtn" class="btn btn-primary"
-			data-toggle="modal" data-target="#a-uploadModal" data-whatever="@mdo">과제
-			올리기(튜터)</button>
-
-		<!-- 과제 올리기(튜터) 버튼 클릭 시 나타나는 과제 업로드 모달 -->
 		
-		<div class="modal fade" id="a-uploadModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">과제 올리기</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+		<!-- 과제 올리기(튜터) 버튼 클릭 시 나타나는 과제 업로드 모달 -->
+		<c:if test="${tutor_num eq stu_num }">
+			<button type="button" id="uploadBtn" class="btn btn-primary"
+				data-toggle="modal" data-target="#a-uploadModal" data-whatever="@mdo">과제
+				올리기(튜터)</button>
+
+		
+			<div class="modal fade" id="a-uploadModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">과제 올리기</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						
+						<!-- Assignment insert form -->
+						
+						<form class="a-upload-form">
+							<div class="modal-body">
+	
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">과제
+										타이틀:</label> <input type="text" class="form-control"
+										name="assign_title">
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">과제 내용:</label>
+									<textarea class="form-control" name="assign_content"></textarea>
+								</div>
+								<input type="hidden" name="commu_num"
+									value="${commuInfo.commu_num }">
+	
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">취소</button>
+								<button type="submit" class="btn btn-primary" id="a-uploadBtn"
+									data-dismiss="modal">올리기</button>
+							</div>
+						</form>
 					</div>
-					
-					<!-- Assignment insert form -->
-					
-					<form class="a-upload-form">
-						<div class="modal-body">
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">과제
-									타이틀:</label> <input type="text" class="form-control"
-									name="assign_title">
-							</div>
-							<div class="form-group">
-								<label for="message-text" class="col-form-label">과제 내용:</label>
-								<textarea class="form-control" name="assign_content"></textarea>
-							</div>
-							<input type="hidden" name="commu_num"
-								value="${commuInfo.commu_num }">
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" id="a-uploadBtn"
-								data-dismiss="modal">올리기</button>
-						</div>
-					</form>
 				</div>
 			</div>
-		</div>
+		</c:if>
 	</div>
 	
 	<!-- 과제 목록 -->
@@ -120,21 +148,21 @@ button[name='subBtn'], #a-update{
 					<h1 class="display-4">${vo.assign_title }</h1>
 					
 					<!-- 튜터만 수정/삭제 가능 -->
-					
-					<button type="button" class="btn btn-primary" id="a-update" 
-					data-toggle="modal" data-target="#a-updateModal" data-whatever="${vo.assign_num }">수정</button>
-					
-					<button type="button" class="btn btn-primary" id="a-delete" onclick="deleteA(${vo.assign_num })">삭제</button>
-					
+					<c:if test="${tutor_num eq stu_num }">
+						<button type="button" class="btn btn-primary" id="a-update" 
+						data-toggle="modal" data-target="#a-updateModal" data-whatever="${vo.assign_num }">수정</button>
+						
+						<button type="button" class="btn btn-primary" id="a-delete" onclick="deleteA(${vo.assign_num })">삭제</button>
+					</c:if>	
 				
 					<p class="lead">${vo.assign_content }</p>
 					<hr class="my-4">
 					<p>과제 관련 파일은 자료실에서 다운받아 주세요 - 튜터 ${vo.assign_num }</p>
 
 					<p>
-						<a class="btn btn-primary" data-toggle="collapse"
+						<a class="btn btn-primary" data-toggle="collapse" name="goSubmit"
 							href="#collapse${status.index }" role="button" aria-expanded="false"
-							aria-controls="collapse${status.index }"> 과제 제출하러 가기! </a>
+							aria-controls="collapse${status.index }" onclick="Assign_submitList(${vo.assign_num })"> 과제 제출하러 가기! </a>
 					</p>
 					<!-- 과제 제출 & 제출한 과제 목록 -->
 					<div class="collapse" id="collapse${status.index }">
@@ -152,8 +180,10 @@ button[name='subBtn'], #a-update{
 											<input multiple type="file" name="assign_file" class="form-control-file" id="file">
 										</div>
 										<div class="col-md-6">
-											<button type="submit" class="btn btn-outline-warning"
-												name="subBtn" >제출하기</button>
+										<!-- 튜터가 아닌 학생만 과제 제출 가능 -->
+											<c:if test="${tutor_num != stu_num }">
+												<button type="submit" class="btn btn-outline-warning" name="subBtn" >제출하기</button>
+											</c:if>
 										</div>
 									</div>
 								</form>
@@ -185,6 +215,7 @@ button[name='subBtn'], #a-update{
 					
 					
 <script>
+
 	// 튜터 : 수정 할 글 정보 불러오기
 	$("#a-updateModal").on('show.bs.modal',function(e){
 		var assign_num = $(e.relatedTarget).data('whatever');
@@ -283,9 +314,9 @@ button[name='subBtn'], #a-update{
 	});
 	$(document).on("click","button[name='subBtn']",function(e) {
 		e.preventDefault();
-		var div=$(this).parent().parent().parent().parent().find(".submitAssign");
-		var form=$(this).parent().parent().parent();
 		
+		var form=$(this).parent().parent().parent();
+		var assign_num=form.find("input[name='assign_num']").val();
 		form.attr('method','post'); 
 		var formData = new FormData(form[0]);
 		$.post({
@@ -298,7 +329,6 @@ button[name='subBtn'], #a-update{
 			success : function(data){
 				if(data=="success"){
 					alert("과제 제출 성공");
-					var assign_num=$("input[name='assign_num']").val();
 					Assign_submitList(assign_num);
 				}else{
 					alert("과제 제출 실패");
@@ -308,21 +338,38 @@ button[name='subBtn'], #a-update{
 	});
 	
 	function Assign_submitList(assign_num){
+		var div=$("button[name='subBtn']").parent().parent().parent().parent().find(".submitAssign");
+		div.empty();
 		$.post({
 			url : "${cp }/assign/submitList",
 			data : {"assign_num":assign_num},
 			dataType: "json",			
 			success : function(data) {
-					
+				var oldsub=0;
+				var fileDiv = null;
 				$(data).each(function(i,sub){
-					if(i==0){
-						console.log("ss");
-						div.append("<div><img src='${cp}/mypageImg/getimg?pro_num"+sub.pro_num +"'><p>"+sub.sub_regdate+ " , " + sub.sub_content+"</p></div>");
-						div.append("<div>"+sub.sub_regdate+ " , " + sub.sub_content+"</div>");
-						div.append("<div>"+sub.org_filename +"</div>");
+					
+					if(oldsub != sub.sub_num){
+						div.append("<div class='qna_list'>" 
+								 + "<ul>"
+								 + "<li>"
+							     + "<dl>"
+							     + "<dt>"
+							     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center;"
+							     + " background-image: url(${cp}/mypageImg/getimg?pro_num="+sub.pro_num+");"
+							     + " border-radius: 50%;'></p>"
+							     + "<p class='name'>"+sub.mb_name+"</p>"
+							     + "</dt>"
+							     + "<dd>과제 답변 : " + sub.sub_content  + "</dd>"
+							     + "<dd class='date'>제출일 : " + sub.sub_regdate + "</dd>"
+							     + "</dl>"
+							     + "</li></ul></div>");
+						fileDiv = $("<div></div>").appendTo(div);
+						fileDiv.addClass("fileDiv");
+						fileDiv.append("<div>첨부파일명 : <a href='${cp}/assign/download?assigndata_num="+sub.assigndata_num  +"'>"+sub.assign_orgFilename +"</a></div>");
+						oldsub=sub.sub_num;
 					}else{
-						div.append("<div>"+sub.org_filename +"</div>");
-						
+						fileDiv.append("<div>첨부파일명 : <a href='${cp}/assign/download?assigndata_num="+sub.assigndata_num  +"'>"+sub.assign_orgFilename +"</a></div>");
 					}
 				});
 			}
@@ -330,3 +377,7 @@ button[name='subBtn'], #a-update{
 	}
 
 </script>
+
+
+
+

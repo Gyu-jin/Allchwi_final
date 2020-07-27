@@ -31,9 +31,11 @@ import com.google.gson.JsonArray;
 import com.jhta.allchwi.service.community.AssignDataService;
 import com.jhta.allchwi.service.community.AssignSubmitService;
 import com.jhta.allchwi.service.community.AssignmentService;
+import com.jhta.allchwi.vo.community.ArchiveVO;
 import com.jhta.allchwi.vo.community.AssignDataVO;
 import com.jhta.allchwi.vo.community.AssignSubmitVO;
 import com.jhta.allchwi.vo.community.AssignmentVO;
+import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Controller
 public class AssignmentController {
@@ -44,8 +46,18 @@ public class AssignmentController {
 	
 	// 과제 게시판으로 이동
 	@GetMapping("/community/assignment")
-	public String goAssign(Model model) {
+	public String goAssign(HttpSession session, Model model) {
+		// 현재 로그인 된 ml_num
+		int ml_num = (int)session.getAttribute("ml_num");
+		// 해당 class_num의 ml_num(튜터)
+		CommunityVO vo = (CommunityVO)session.getAttribute("commuInfo");
+		int tutor_num=vo.getMl_num();
 		
+		model.addAttribute("stu_num",ml_num);
+		model.addAttribute("tutor_num",tutor_num);
+		System.out.println("tutor_num:"+tutor_num + " , " + "stu_num : " + ml_num);
+		
+		// 전체 과제 목록
 		List<AssignmentVO> list=assign_service.list();
 		model.addAttribute("list", list);
 		return ".community.board.assignment";
@@ -108,22 +120,25 @@ public class AssignmentController {
 	
 	// 학생 과제 제출 List
 	@PostMapping("/assign/submitList")
-	public String submitOk(int assign_num,@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+	@ResponseBody
+	public List<AssignSubmitVO> submitOk(@RequestParam(value="assign_num")int assign_num,
+			@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
     	map.put("assign_num", assign_num);
     	List<AssignSubmitVO> sub_list=submit_service.sub_list(map);
-    	JSONArray arr=new JSONArray();
-    	for(AssignSubmitVO vo:sub_list) {
-    		JSONObject json=new JSONObject();
-    		json.put("sub_content", vo.getSub_content());
-    		json.put("sub_regdate", vo.getSub_regdate());
-    		json.put("org_filename", vo.getAssign_orgFilename());
-    		json.put("pro_num", vo.getPro_num());
-    		arr.put(json);
-    	}
+    	System.out.println("listsize: "+ sub_list.size());
+		/*
+		 * JSONArray arr=new JSONArray(); for(AssignSubmitVO vo:sub_list) { JSONObject
+		 * json=new JSONObject(); json.put("sub_content", vo.getSub_content());
+		 * json.put("sub_regdate", vo.getSub_regdate()); json.put("org_filename",
+		 * vo.getAssign_orgFilename()); json.put("pro_num", vo.getPro_num());
+		 * System.out.println("sub_content:" + vo.getSub_content());
+		 * System.out.println("sub_regdate:"+ vo.getSub_regdate());
+		 * System.out.println("org_filename:"+ vo.getAssign_orgFilename());
+		 * System.out.println("pro_num:"+ vo.getPro_num()); arr.put(json); }
+		 */
     	
-    	
-    	return arr.toString();
+    	return sub_list;
 		
 		
 	}
@@ -162,7 +177,7 @@ public class AssignmentController {
 
             try {
                 mf.transferTo(new File(path+"\\"+assign_saveFilename));
-                AssignDataVO dvo=new AssignDataVO(0, sub_num, assign_orgFilename, assign_saveFilename, null);
+                AssignDataVO dvo=new AssignDataVO(0, sub_num, assign_orgFilename, assign_saveFilename, null, fileSize);
                 assign_data=data_service.insert(dvo);
             } catch (IllegalStateException e) {
                 e.printStackTrace();
@@ -176,8 +191,27 @@ public class AssignmentController {
         }else {
         	return "error";
         }
-        
-        
-	
 	}
+        //파일 다운로드
+        @GetMapping("/assign/download")
+    	public String download(int assigndata_num ,Model model,HttpSession session) {
+    		//다운로드할 파일정보를 갖는 객체얻어오기
+    		
+    		AssignDataVO vo=data_service.saveFilename(assigndata_num);
+    		String path=session.getServletContext().getRealPath("/resources/AssignUpload");
+    		//다운로드할파일객체
+    		File f=new File(path + File.separator + vo.getAssign_saveFilename());
+    		
+    		//다운로드창에 보여질 파일명
+    		String filename=vo.getAssign_orgFilename();
+    		
+    		//System.out.println(filename);
+    		
+    		model.addAttribute("file",f);
+    		model.addAttribute("filename",filename);
+    		model.addAttribute("filesize",vo.getAssigndata_size());
+    		return "filedownloadView";
+    	}
+	
+	
 }
