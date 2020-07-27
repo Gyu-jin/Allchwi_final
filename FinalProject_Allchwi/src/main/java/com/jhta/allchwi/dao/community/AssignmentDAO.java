@@ -32,4 +32,8 @@ public class AssignmentDAO {
 	public int update(AssignmentVO vo) {
 		return session.update(NAMESPACE+".update",vo);
 	}
+	//a 이번주 과제 글 갯수
+	public int weekAssign(int commu_num) {
+		return session.selectOne(NAMESPACE + ".weekAssign", commu_num);
+	}
 }

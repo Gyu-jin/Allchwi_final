@@ -31,4 +31,8 @@ public class AssignmentService {
 	public int update(AssignmentVO vo) {
 		return dao.update(vo);
 	}
+	//a 이번주 과제 글 갯수
+	public int weekAssign(int commu_num) {
+		return dao.weekAssign(commu_num);
+	}
 }

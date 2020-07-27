@@ -98,21 +98,24 @@ style>.carousel-inner {
 			<div
 				class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col p-4 d-flex flex-column position-static">
-					<strong class="d-inline-block mb-2 text-success">Design</strong>
-					<h3 class="mb-0">Post title</h3>
-					<div class="mb-1 text-muted">Nov 11</div>
-					<p class="mb-auto">This is a wider card with supporting text
-						below as a natural lead-in to additional content.</p>
-					<a href="#" class="stretched-link">Continue reading</a>
+					<strong class="d-inline-block mb-2 text-success">Assignment</strong>
+					<h3 class="mb-0">과제</h3>
+					<div class="mb-1 text-muted">[이번주 등록된 과제]</div>
+					<c:choose>
+						<c:when test="${assignCount != 0}">
+							<p class="card-text mb-auto">등록된 과제가 ${assignCount}개 있습니다.
+							<br>과제를 확인해주시기 바랍니다. &nbsp :)</p>
+						</c:when>
+						<c:otherwise>
+							<p class="card-text mb-auto">이번주 등록된 과제가 없습니다.</p>
+						</c:otherwise>
+					</c:choose>
+					<a href="${cp}/community/assignment" class="stretched-link">바로가기</a>
 				</div>
+				<!-- a 이미지 출력 -->
 				<div class="col-auto d-none d-lg-block">
-					<svg class="bd-placeholder-img" width="200" height="250"
-						xmlns="http://www.w3.org/2000/svg"
-						preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-						aria-label="Placeholder: Thumbnail">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#55595c"></rect>
-						<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+					<img class="bd-placeholder-img" width="200" height="250" 
+					alt="puppy" src="${cp}/resources/img/puppy2.jpg">
 				</div>
 			</div>
 		</div>

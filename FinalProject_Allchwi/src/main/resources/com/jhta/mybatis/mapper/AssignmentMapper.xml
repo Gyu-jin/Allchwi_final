@@ -18,4 +18,15 @@
 	<select id="updatelist" parameterType="int" resultType="assignment">
 		select * from assignment where assign_num=#{assign_num}
 	</select>
+	<!-- a 해당 주차 과제 갯수 가져오기-->
+	<select id="weekAssign" parameterType="int" resultType="int">
+		select count(*)
+		from assignment
+		where commu_num = #{commu_num} and
+    	date_format(assign_regdate,'%Y-%m-%d')
+    	between
+        (select adddate(curdate(), - weekday(curdate()) + 0 ))
+    	and
+        (select adddate(curdate(), - weekday(curdate()) + 6 ))
+	</select>
 </mapper>

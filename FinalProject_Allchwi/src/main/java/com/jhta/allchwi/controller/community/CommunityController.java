@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.allchwi.service.community.AssignmentService;
 import com.jhta.allchwi.service.community.CommunityService;
 import com.jhta.allchwi.service.community.NoticeService;
 import com.jhta.allchwi.vo.community.CommunityVO;
@@ -22,6 +23,9 @@ public class CommunityController {
 	
 	@Autowired
 	private NoticeService nts;
+	
+	@Autowired
+	private AssignmentService assign;
 	
 	
 	@GetMapping("/onclass/community")
@@ -38,9 +42,12 @@ public class CommunityController {
 		CommunityVO vo = service.goCommu(map);
 		System.out.println(ml_num +"  " + vo.getMl_num());
 		if(vo!=null) {
+			//a 해당 주에 올라온 과제 및 공지글 갯수
 			int noticeCount = nts.weekNotice(vo.getCommu_num()); 
+			int assignCount = assign.weekAssign(vo.getCommu_num());
 			session.setAttribute("commuInfo", vo);
 			session.setAttribute("noticeCount", noticeCount);
+			session.setAttribute("assignCount", assignCount);
 			return ".community";			
 		}else {
 			return ".error.error";
