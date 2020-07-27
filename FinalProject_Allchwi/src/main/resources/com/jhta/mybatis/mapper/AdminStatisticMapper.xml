@@ -12,10 +12,10 @@
 	</select>
 
 	<select id="cate_statlist" resultType="com.jhta.allchwi.vo.admin.Statistic3VO" >
-		select count(*), b.bcategory_name
+		select count(*) cate_count, b.bcategory_name
 		from big_category b, small_category s
 		where b.bcategory_num = s.bcategory_num
-		group by b.bcategory_num
+		group by b.bcategory_num with rollup
 	</select>
 	
 </mapper>
