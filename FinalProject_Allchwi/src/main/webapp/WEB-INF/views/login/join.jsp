@@ -79,12 +79,15 @@
 		let regExp = /([^가-힣\x20])/i;
 		//검사
 		if (regExp.test(name)) {
+			nameMsg.css("color", "red");
 			nameMsg.html("한글이 아닙니다.[자음, 모음만 처리불가]");
 			nameBl = false;
 		} else if (name.length < 1) {
+			nameMsg.css("color", "red");
 			nameMsg.html("2글자 이상 입력하세요");
 			nameBl = false;
 		} else if (name.length > 5) {
+			nameMsg.css("color", "red");
 			nameMsg.html("5글자 이내로 입력하세요");
 			nameBl = false;
 		} else {
@@ -92,7 +95,6 @@
 			nameBl = true;
 			buttonUp();
 		}
-		console.log(nameBl + "체크");
 	}
 	//이메일 유효성 검사
 	function idCheck() {
@@ -100,12 +102,15 @@
 		let idMsg = $("#idMsg");
 		let regExpId = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if (!regExpId.test(id)) {
+			idMsg.css("color", "red");
 			idMsg.html("이메일 형식으로 입력해주세요.");
 			idBl = false;
 		} else if (id.length < 15) {
+			idMsg.css("color", "red");
 			idMsg.html("15자리 이상 입력해주세요.");
 			idBl = false;
 		} else if (id.length > 20) {
+			idMsg.css("color", "red");
 			idMsg.html("20자리 이내로 입력해주세요.");
 			idBl = false;
 		} else {
@@ -137,12 +142,15 @@
 		//(?=.*\d) -> 임의의 모든 문자중 (0~9)숫자대응
 		var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]/;
 		if (!regExpPwd.test(pwd)) {
+			pwdMsg.css("color", "red");
 			pwdMsg.html("영문 + 숫자 + 특수문자를 조합해주세요.");
 			pwdBl = false;
 		} else if (pwd.length < 8) {
+			pwdMsg.css("color", "red");
 			pwdMsg.html("8자리 이상 입력해주세요.");
 			pwdBl = false;
 		} else if (pwd.length > 10) {
+			pwdMsg.css("color", "red");
 			pwdMsg.html("10자리 이내로 입력해주세요.");
 			pwdBl = false;
 		} else {
@@ -171,7 +179,6 @@
 			pwdBl1 = true;
 			buttonUp();
 		}
-		console.log(pwdBl1 + "중복체크");
 	}
 	// 버튼 활성화 함수 -> submit, 클릭 
 	function buttonUp() {
