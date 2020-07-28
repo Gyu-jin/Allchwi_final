@@ -102,6 +102,7 @@ public class ClassOpenController {
 		
 		// 승인여부 init
 		vo.setClass_auth(1);
+		vo.setClass_status(1);
 		
 		// 프로필 이미지 업로드.
 		String proImgName = picture.getOriginalFilename(); //프로필이미지 파일명
