@@ -100,6 +100,20 @@ li {
 .sec01{
 	margin-bottom: 30px;
 }
+.classtitle-box{
+	width:84%;
+    height: 80px;
+    font-size: 17px;
+    overflow: hidden;
+    font-weight: bold;
+    line-height: 1.4;
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+    height: 350px;
+}
 </style>
 <div>
 	<!-- 메인 배너  -->
@@ -193,12 +207,13 @@ li {
 									<img src="${cp}/classImg/getimg?cover_num=${list.cover_num}"
 										class="c-cover">
 								</p>
-								<p class="t1">${list.class_title }</p>
+								<div class="classtitle-box">${list.class_title }</div>
+								<br>
 								<div class="t2">
 									<span class="profile"> <img class="roundImg"
 										src="${cp}/mypageImg/getimg?pro_num=${list.pro_num}" alt="">
-									</span> <span class="name">${list.tutor_nickname }</span>
-									<p>${list.bloc_name }${list.sloc_name }</p>
+									</span> <span class="name">${list.tutor_nickname }</span> &nbsp &nbsp | &nbsp &nbsp
+									<span class="loc">${list.bloc_name }${list.sloc_name }</span>
 								</div>
 							</div>
 						</a>

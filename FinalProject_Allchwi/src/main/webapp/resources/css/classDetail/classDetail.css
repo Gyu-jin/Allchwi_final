@@ -287,6 +287,9 @@
 	width: 35px;
 }
 /* qna 목록 */
+#qna{
+	padding-bottom: 100ppx;
+}
 .qna_list ul li {
 	border-bottom: 1px solid #e5e5e5;
 	padding: 10px 0;
