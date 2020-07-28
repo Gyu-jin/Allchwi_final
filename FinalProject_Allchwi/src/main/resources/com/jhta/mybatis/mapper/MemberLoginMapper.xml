@@ -47,7 +47,7 @@
 		when tutor_auth = 1 and (select ifnull(count(class_num),0) from class_info where ml_num=#{ml_num}) = 0 
 		then 0  
 		else 
-			0 
+			1 
 		end
 		where ml_num=#{ml_num}
 	</update>

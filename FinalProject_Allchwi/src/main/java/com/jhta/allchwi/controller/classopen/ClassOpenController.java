@@ -160,7 +160,7 @@ public class ClassOpenController {
 			return "fail";
 		}
 		
-		session.setAttribute("class_status", vo.getClass_status());
+		session.setAttribute("tutor_auth", 1);
 		
 		return "success";
 	}

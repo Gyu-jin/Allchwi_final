@@ -81,16 +81,7 @@
 						$(this).siblings('.option').removeClass('on');
 						$('#oneday').show();
 						$('#type').hide();
-						//매주반복 선택시 - 주차별 detail 장소 시간 정보 초기화
-						$('#type').find('input[name="startDate[]"]').val('');
-						var oldDate = new Date($("#startDate1").val());
-						for(let i = 2;i<=classCount;i++){	
-							oldDate.setDate(oldDate.getDate()+7);
-							$('#type').find('#startDate'+i).val($.datepicker.formatDate('yy-mm-dd',oldDate));
-							$('#type').find('#classTime'+i).text($('#classTime1').text());
-							$('#type').find('#startTime'+i).val($('#startTime1').val());
-							$('#type').find('#endTime'+i).val($('#endTime1').val());
-						}
+						dateWeekSet();
 					}
 					else if($(this).attr('value')=='4'){
 						$(this).addClass('on');
@@ -113,6 +104,20 @@
 				
 				
 			});
+			
+			
+			function dateWeekSet(){
+				//매주반복 선택시 - 주차별 detail 장소 시간 정보 초기화
+				$('#type').find('input[name="startDate[]"]').val('');
+				var oldDate = new Date($("#startDate1").val());
+				for(let i = 2;i<=classCount;i++){	
+					oldDate.setDate(oldDate.getDate()+7);
+					$('#type').find('#startDate'+i).val($.datepicker.formatDate('yy-mm-dd',oldDate));
+					$('#type').find('#classTime'+i).text($('#classTime1').text());
+					$('#type').find('#startTime'+i).val($('#startTime1').val());
+					$('#type').find('#endTime'+i).val($('#endTime1').val());
+				}
+			}
 			
 			// 날짜 표시하기
 			function dateCalpickerSet(index){
@@ -145,6 +150,7 @@
 					var height = $(window).scrollTop()+50;
 					if(index==1){								
 						$('#curriDate').show();
+						dateWeekSet();
 					}
 					$('#back').show();
 					$('#popClassTime').css('top',height);
