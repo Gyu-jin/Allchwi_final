@@ -190,6 +190,7 @@
 	line-height: 180%;
 	clear: both;
 	margin-left: 30px;
+	white-space: pre;
 }
 
 .t_info {
