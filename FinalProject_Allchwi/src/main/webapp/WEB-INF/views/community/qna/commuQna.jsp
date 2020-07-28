@@ -64,6 +64,11 @@
 	margin-top: -15px;
 	margin-left: 24px;
 }
+.btn{
+	width: 100px;
+	height: 85px;
+	margin-left: 24px;
+}
 .reply_box {
 	margin-top: 20px;
 }
@@ -97,6 +102,7 @@
 <script>
 $(function(){
 	qnaList(1);
+
 });
 $(document).on('click', '#write_qna', function () {
 	var qna_content = $('#qna_content').val();
@@ -134,9 +140,10 @@ function qnaList(pageNum){
 	  var str = "";
 	  var qlist=data.qlist;
 	  var pu=data.pu;
+	  var ml_num = $('#ml_num').val();
 	  $(qlist).each(function(i){
 	   var qna_regdate = new Date(qlist[i].qna_regdate);
-	   qna_regdate = qna_regdate.toLocaleDateString("ko-US")
+	   qna_regdate = qna_regdate.toLocaleDateString("ko-US");
 	   str += "<div class='qna_list'>" 
 		 + "<ul>"
 		 + "<li>"
@@ -148,14 +155,16 @@ function qnaList(pageNum){
 	     + " border-radius: 50%;'></p>"
 	     + "<p class='name'>"+qlist[i].miv.mb_name+"</p>"
 	     + "</dt>"
-	     + "<dd>" + qlist[i].qna_content  + "</dd>"
+	     + "<div class='qna_content' id='qna_content"+qlist[i].qna_num+"'>" + qlist[i].qna_content  + "</dd>"
 	     + "<dd class='date'>" + qna_regdate + "</dd>"
-	     + "</dl>"
-	     + "<div class='editbtn'>"
-		 + "<a type='button' onclick='editQna("+qlist[i].qna_num+")'>수정</a>"
-		 + "<a type='button' onclick='delQna("+qlist[i].qna_num+")'>&nbsp&nbsp삭제</a>"
-		 + "</div>"
-	     + "</li>"
+	     + "</dl>";
+	     if(ml_num==qlist[i].ml_num){
+	    	 str+= "<div class='editbtn' id='editbtn'>"
+			 + "<a type='button' onclick='editBox("+qlist[i].qna_num+")'>수정</a>"
+			 + "<a type='button' onclick='delQna("+qlist[i].qna_num+")'>&nbsp&nbsp삭제</a>"
+			 + "</div>";
+	     }
+	     str+= "</li>"
 	     + "<a type='button' class='showreply' onclick='replyList("+qlist[i].qna_ref+")' data-toggle='collapse' data-target='#reply"+this.qna_ref +"'>"
 		 + "댓글보기</a>"
 		 +"<div class='reply_box collapse' id='reply"+qlist[i].qna_ref+"'>"
@@ -287,16 +296,23 @@ function replyList(qna_ref) {
 	  $("#reply"+qna_ref+" ul").html(str);
 	 });
 }
-
+function editBox(qna_num) {
+	var str = "<table><tr><td>"
+			+ "<textarea class='form-control edit_content' id='edit_content' cols='60' rows='3'>"
+			+"</textarea></td>"
+			+"<td><input type='button' onclick='editQna("+qna_num+")' class='btn btn-primary'" 
+			+"value='수정하기'></td></tr></table>";
+	 $("#editbtn").html(str);
+}
 //qna 수정
 function editQna(qna_num) {
-	var qna_content = $('#qna_content').val();
-	if(qna_content== '' ){
+	var edit_content=$("#edit_content").val();
+	if(edit_content== '' ){
 		alert('수정할 내용을 작성해주세요');
 	}else{
 		$.post('/allchwi/community/editQna', {
 			qna_num:qna_num,
-			qna_content:qna_content
+			qna_content:edit_content
 		}, function (data,res) {
 			if (res=='success') {
 				qnaList(1);
@@ -311,7 +327,6 @@ function editQna(qna_num) {
 }
 //qna 삭제
 function delQna(qna_num){
-
 	$.ajax({
 		url : "${cp }/community/delQna?qna_num="+qna_num,
 		success : function(data) {

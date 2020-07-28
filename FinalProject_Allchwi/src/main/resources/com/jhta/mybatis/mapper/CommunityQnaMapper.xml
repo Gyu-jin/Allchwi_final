@@ -35,7 +35,7 @@
 	
 	<select id="qnalist" parameterType="hashmap" resultMap="commuQna">
 		select
-		q.qna_num,q.qna_ref,q.qna_lev,q.qna_content,q.qna_regdate,
+		q.qna_num,q.qna_ref,q.qna_lev,q.qna_content,q.qna_regdate,q.ml_num,
 		m.mb_name,p.pro_num
 		from commu_qna q join member_info m
 		on q.ml_num = m.ml_num
