@@ -95,7 +95,7 @@ public class ClassDetailController {
 	@GetMapping("/classDetail/detail2")
 	public ModelAndView detail2(int class_num, HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
-		ModelAndView mv = new ModelAndView(".classDetail.detail");
+		ModelAndView mv = new ModelAndView("/classDetail/detail");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("class_num", class_num);
 		if(session.getAttribute("ml_num")!=null) {

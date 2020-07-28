@@ -20,6 +20,10 @@ public class MemberListController {
 	public String adminMain(Model model) {
 		List<MemberListVO> list = service.member_list();
 		model.addAttribute("list", list);
+		//for (MemberListVO vo:list) {
+		//	System.out.println(vo.getMb_name() +"," + vo.getMb_name().length());
+		//}
+		
 		return ".admin.memberlist";
 	}
 	

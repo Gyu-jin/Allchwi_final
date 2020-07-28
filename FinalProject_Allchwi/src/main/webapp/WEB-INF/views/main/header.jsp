@@ -49,10 +49,11 @@
           
           <!-- 관리자 화면 -->
 		
+		<c:if test="${sessionScope.tutor_auth == 3}">
           <a href="${cp}/admin/main" id="admin" role="button">
             		<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
           </a>
-               
+        </c:if>
          
 			
        

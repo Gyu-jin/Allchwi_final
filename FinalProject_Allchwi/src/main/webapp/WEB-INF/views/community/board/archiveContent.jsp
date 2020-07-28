@@ -36,7 +36,16 @@
 		<hr class="my-4" style="clear: right; margin: 0px">
 		<div class="card card-body" style="height: 15rem; margin-top: 25px">
 			<div style="white-space: pre">${vo.room_content}</div>
+			
+				
+			<div id="btnGroup">
+				<button class="btn btn-primary" id="updateBtn" onclick="showModal('${ntv.notice_num}')">수정</button>
+				<button class="btn btn-danger" id="deleteBtn" onclick="deleteNotice('${ntv.notice_num}')">삭제</button>
+			</div>
 		</div>
+		
+		
+		
 		<div id="download">
 			<c:choose>
 				<c:when test="${vo.filesize != 0 }">
@@ -47,6 +56,9 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		
+		
+		
 		<div id="bottom">
 			<c:choose>
 				<c:when test="${prev != null }">
@@ -56,6 +68,8 @@
 					이전글이 존재하지 않습니다.
 				</c:otherwise>
 			</c:choose>
+			
+			
 
 			<hr class="my-2">
 			<c:choose>

@@ -58,7 +58,7 @@
 							</c:choose>
 							<td>${vo.scategory_name }</td>
 							<td>${vo.people}명</td>
-							<td><a href="#" style="color:blue" data-toggle="modal" data-target="#myModal" onclick="getModal()">수업
+							<td><a href="${cp}/classDetail/detail?class_num=${vo.class_num}" target="_blank" style="color:blue" >수업
 								상세정보</a></td>
 						<tr>
 					</c:forEach>
@@ -146,7 +146,7 @@
 <script type="text/javascript">
 	function getModal() {
 		$.ajax({
-			url:"${cp}/classDetail/detail2?class_num=4",
+			url:"${cp}/classDetail/detail2?class_num=125",
 			dataType:"text",
 			success:function(data){
 				$("#modal-body").html(data);

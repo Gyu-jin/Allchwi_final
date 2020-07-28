@@ -75,7 +75,14 @@
 									<c:forEach var="vo" items="${list }">
 										<tr>
 											<td>${vo.ml_num}</td>
-											<td>${vo.mb_name}</td>
+											<c:choose>
+												<c:when test="${vo.mb_name==null}">
+													<td>${vo.mb_nickname}</td>
+												</c:when>
+												<c:otherwise>
+													<td>${vo.mb_name}</td>
+												</c:otherwise>
+											</c:choose>
 											<td>${vo.id}</td>
 											<td><fmt:formatDate value="${vo.mb_regdate }" pattern="yyyy-MM-dd" /></td>
 											<td>${vo.nowclass }개</td>
