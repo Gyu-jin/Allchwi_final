@@ -10,18 +10,17 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <style>
-	.btn-primary{
-		color: #fff;
-    	background-color: #7185bb !important;
-    	border-color: #7185bb !important;
-	}
-	
-	
-	.bg-gradient-primary {
-		background-color: #7185bb !important; 
-   		background-image: none !important;
-    	background-size: cover;
-	}
+.btn-primary {
+	color: #fff;
+	background-color: #7185bb !important;
+	border-color: #7185bb !important;
+}
+
+.bg-gradient-primary {
+	background-color: #7185bb !important;
+	background-image: none !important;
+	background-size: cover;
+}
 </style>
 
 <!-- Custom fonts for this template-->
@@ -46,15 +45,12 @@
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
+			<a class="sidebar-brand d-flex align-items-center justify-content-center"
 				href="${cp }/admin/main">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
+					<i class="fas fa-fw fa-calculator"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">
-					관리자페이지
-				</div>
+				<div class="sidebar-brand-text mx-3">관리자페이지</div>
 			</a>
 
 			<!-- Divider -->
@@ -63,12 +59,12 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/category"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>카테고리추가</span></a></li>
+					class="far fa-fw fa-plus-square"></i> <span>카테고리추가</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/memberlist"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>회원리스트</span></a></li>
+					class="fas fa-fw fa-clipboard-list"></i> <span>회원리스트</span></a></li>
 
 
 
@@ -76,17 +72,17 @@
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseTwo"
 				aria-expanded="true" aria-controls="collapseTwo"> <i
-					class="fas fa-fw fa-cog"></i> <span>수업관리</span>
+					class="fas fa-fw fa-chalkboard-teacher"></i> <span>수업관리</span>
 			</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">리스트:</h6>
-						<a class="collapse-item" href="${cp }/admin/confirmClass">미등록 수업 심사</a> 
-						<a class="collapse-item" href="${cp }/admin/manageClass">수업 리스트</a>
+						<a class="collapse-item" href="${cp }/admin/confirmClass">미등록
+							수업 심사</a> <a class="collapse-item" href="${cp }/admin/manageClass">수업
+							리스트</a>
 					</div>
-				</div>
-			</li>
+				</div></li>
 
 
 
@@ -96,17 +92,17 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/payment"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>회원결제내역</span></a></li>
+					class="fas fa-fw fa-hand-holding-usd"></i> <span>회원결제내역</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"
-				href="${cp }/admin/remit"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>송금승인신청</span></a></li>
+				href="${cp }/admin/remit"> <i class="fas fa-fw fa-handshake"></i>
+					<span>송금승인신청</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/statistic1"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>통계</span></a></li>
+					class="fas fa-fw fa-chart-pie"></i><span>통계</span></a></li>
 
 
 
