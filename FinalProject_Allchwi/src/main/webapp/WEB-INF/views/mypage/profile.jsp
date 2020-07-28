@@ -50,7 +50,7 @@
 			<div class="inner-cont">
 				<div class="label-title">내소개</div>
 				<div class="contents">
-					<textarea class="form-control" id="introduction" placeholder="자기 소개 입력"	name="mb_about">${result.mb_about}</textarea>
+					<textarea class="form-control" id="introduction" placeholder="자기 소개 입력"	name="mb_about" style="white-space: pre">${result.mb_about}</textarea>
 					<div class="count_char">
 						<font id="introduction-count">0</font>/300
 					</div>
