@@ -57,7 +57,7 @@
 						style="font-size: 20px; color: red; padding-left: 20px;"></span>
 				</div>
 				<input type="submit" class="login-btn" value="회원가입" name="join" onsubmit="return buttonUp()" 
-				disabled="disabled" style="background-color: gray; border: 1px solid gray;">
+				disabled="disabled">
 			</form>
 		</div>
 	</div>
