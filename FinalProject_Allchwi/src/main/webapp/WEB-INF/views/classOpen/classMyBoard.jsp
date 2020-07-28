@@ -157,7 +157,7 @@
 										<a href="${cp}/onclass/community?class_num=${list.class_num}">
 										<div class="button_gray cursor" style="margin-left: 10px;">커뮤니티</div></a>
 									</c:otherwise>	
-								</c:choose>
+								</c:choose> 
 							</c:if>
 							<c:if test="${list.class_auth!='1'}">
 								<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
