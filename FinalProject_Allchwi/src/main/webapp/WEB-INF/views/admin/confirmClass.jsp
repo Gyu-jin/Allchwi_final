@@ -36,9 +36,7 @@
 	<div id="content" class="container-fluid">
 
 		<div class="breadcrumb">
-			<h2>
-				<a href="${cp }/admin/confirmClass">수업목록</a>
-			</h2>
+			<h2>미등록 수업 심사</h2>
 			<div style="margin-left: 65%;">
 				<form action="${cp }/admin/confirmClass" class="form-inline"
 					style="display: inline-block">
@@ -70,7 +68,7 @@
 								<div class="card">
 									<h5 class="card-header" style="text-align: center;">
 										${vo.class_title }
-										<a href="${cp}/classDetail/detail?class_num=${vo.class_num}">
+										<a href="${cp}/classDetail/detail?class_num=${vo.class_num}" target="_blank">
 											<button type="button" class="btn btn-primary">상세정보</button>
 										</a>
 									</h5>
@@ -174,12 +172,12 @@
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">Modal Heading</h4>
+				<h4 class="modal-title">수업심사</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
 			<!-- Modal body -->
-			<div class="modal-body" id="modal-body">승인</div>
+			<div class="modal-body" id="modal-body">해당 수업을 승인 하시겠습니까?</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer" id="modal-footer">

@@ -7,9 +7,7 @@
 <div id="content-wrapper" class="d-flex flex-column">
 	<div class="container-fluid">
 		<div class="breadcrumb">
-			<h2>
-				<a href="${cp }/admin/payment">회원결제내역</a>
-			</h2>
+			<h2>회원결제내역</h2>
 			<div style="margin-left: 65%;">
 				<form class="form-inline" style="display: inline-block">
 					<select class="form-control col-2" name="field" style="display: inline-block; width: 700px;">
@@ -42,8 +40,10 @@
 							<td><fmt:formatDate value="${vo.pay_regdate }"
 									pattern="yyyy-MM-dd" /></td>
 							<td>${vo.class_title }</td>
-							<td>${vo.pay_way }</td>
-							<td>${vo.final_price }</td>
+							<c:if test="${vo.pay_way == 'card'}">
+								<td>신용카드</td>
+							</c:if>
+							<td><fmt:formatNumber value="${vo.final_price}" pattern="#,###" />원</td>							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -92,11 +92,7 @@
 			<input type="hidden" value="${pu.pageNum}" id="pageNum">
 			<input type="hidden" id="fieldCopy">
 			<input type="hidden" id="keywordCopy">
-	
-	
 	</div>
-		
-
 </div>
 
 
@@ -156,13 +152,22 @@
 				var pay_way  = value[i].pay_way;
 				var final_price  = value[i].final_price;
 
+				if(pay_way == 'card'){			//결제수단 
+					pay_way = '신용카드';
+				}
+				
+				final_price = addComma(final_price);	//숫자에 , 붙여주는 함수
+				
+				
+				
+				
 				$("#tb").append("<tr>");
 				$("#tb").append("<td>" + ml_num + "</td>");
 				$("#tb").append("<td>" + id + "</td>");
 				$("#tb").append("<td>" + pay_regdate + "</td>");
 				$("#tb").append("<td>" + class_title + "</td>");
 				$("#tb").append("<td>" + pay_way + "</td>");
-				$("#tb").append("<td>" + final_price + "</td>");
+				$("#tb").append("<td>" + final_price + "원</td>");
 				$("#tb").append("</tr>");
 			
 			}
@@ -295,4 +300,11 @@
 			}
 		})
 	});
+	
+	
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+
 </script>

@@ -6,18 +6,15 @@
 <div class="container-fluid">
 	<div id="content-wrapper" class="d-flex flex-column">
 		<div class="breadcrumb">
-			<h2>수업관리</h2>
+			<h2>수업 리스트</h2>
 			<div style="margin-left: 65%;">
 				<form action="${cp }/admin/manageClass" class="form-inline" style="display: inline-block">
 					<select class="form-control col-2" name="field" style="display: inline-block; width: 700px;">
-						<option value="ml_num"
-							<c:if test="${field == 'ml_num'}">selected</c:if>>회원번호</option>
-						<option value="tutor_nickname"
-							<c:if test="${field == 'tutor_nickname'}">selected</c:if>>강사이름</option>
-						<option value="class_title"
-							<c:if test="${field == 'class_title'}">selected</c:if>>수업제목</option>
-						<option value="scategory_name"
-							<c:if test="${field == 'scategory_name'}">selected</c:if>>카테고리</option>
+						
+						<option value="class_title" <c:if test="${field == 'class_title'}">selected</c:if>>수업제목</option>
+						<option value="tutor_nickname" <c:if test="${field == 'tutor_nickname'}">selected</c:if>>강사이름</option>
+						<option value="scategory_name" <c:if test="${field == 'scategory_name'}">selected</c:if>>카테고리</option>
+						<option value="ml_num"<c:if test="${field == 'ml_num'}">selected</c:if>>회원번호</option>
 					</select> <input class="form-control mr-sm-2" type="text" name="keyword" />
 					<button class="btn btn-primary my-2 my-sm-0" type="submit">
 						검색</button>
