@@ -10,6 +10,7 @@
 	margin: 0 auto;
 	padding-bottom: 100px;
 	margin-bottom: 50%;
+	margin-top: 10%;
 }
 
 .tutor_cont .pf_box {
@@ -20,6 +21,7 @@
 }
 .tutor_cont .gray {
     background-color: #f1f1f1;
+    font-size: 0.9rem;
 }
 
 .triangle-border {
@@ -80,7 +82,7 @@
     font-weight: 600;
     font-size: 20px;
     text-align: center;
-    color: #ff005b;
+    color: #7185bb;
 }
 .appcont .payend .center4 {
     width: 100%;
@@ -102,7 +104,7 @@
     font-weight: 600;
     font-size: 16px;
     padding-left: 40px;
-    color: #ff005b;
+    color: #ff936f;
 }
 .nickname {
 	width: 200px;
@@ -120,21 +122,18 @@
 .class_title{
 	padding:20px;
 }
+.center5 h4{
+	font-family: 
+}
+
+
 </style>
 
 
 <div class="container">
 	<div class="tutor_cont">
-		<div class="title-box">
-			<h1>수업 신청 성공!</h1>
-			
-		</div>
+	
 		<c:forEach var="vo" items="${list}">
-			
-			<div class="class_title">
-				<h3 onclick="location.href='${cp}/class/classDetail/class_num=${vo.class_num }'"
-				style="cursor: pointer">${vo.class_title }</h3>
-			</div>
 			<div class="date">*수업 신청서 제출일 : <fmt:formatDate value="${vo.apply_regdate}" pattern="yyyy-MM-dd" /></div>
 			<div class="apply">
 				<div class="pf_box">
@@ -153,7 +152,10 @@
 							</div>
 						</div>
 						<div class="payend">
-							<div class="center5">수업 신청이 완료되었습니다.</div>
+							<div class="center5">
+								<h4 onclick="location.href='${cp}/class/classDetail/class_num=${vo.class_num }'"
+									style="cursor: pointer">${vo.class_title }</h4>
+								수업 신청이 완료되었습니다.</div>
 						</div>
 						<div class="payend">
 							<div class="center4">신청일로부터 10일 내에 신청승인이 완료됩니다!</div>
