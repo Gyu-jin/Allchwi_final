@@ -28,6 +28,7 @@
     flex-direction: row;
     float: right;
 }
+
 </style>
 <!-- header.jsp -->
 <div>
@@ -55,15 +56,7 @@
 		          </form>
 	          </div>
           </div>
-          
-          <!-- 관리자 화면 -->
-		
-		<c:if test="${sessionScope.tutor_auth == 3}">
-          <a href="${cp}/admin/main" id="admin" role="button">
-            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
-          </a>
-        </c:if>
-         
+    
 			
        
 		 
@@ -83,7 +76,17 @@
 			</c:when>
 			<c:otherwise>
 				
-				
+					      
+	          <!-- 관리자 화면 -->
+			
+			<c:if test="${sessionScope.tutor_auth == 3}">
+				<li class="nav-item dropdown no-arrow">
+		          <a href="${cp}/admin/main" id="admin" role="button"  class="nav-link dropdown-toggle">
+		            		<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
+		          </a>
+	          	</li>
+	        </c:if>
+         
 			
 			<c:if test="${tutor_auth ==1}">
             <!-- 튜터등록 링크 -->
