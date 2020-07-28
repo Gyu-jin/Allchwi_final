@@ -164,10 +164,10 @@
 								<div class="button_gray cursor" style="margin-left: 10px;">수업수정</div></a>
 							</c:if>
 							<c:if test="${list.class_status== '1' }">
-								<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(1)">Selling</div></a> 
+								<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(0)">판매시작하기</div></a> 
 							</c:if>
 							<c:if test="${list.class_status== '0' }">
-								<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(0)">Soldout</div>
+								<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(1)">판매중지하기</div>
 							</c:if>
 						</div>
 					</div>
