@@ -79,6 +79,11 @@
 	margin-top: -15px;
 	margin-left: 24px;
 }
+.editbtn{
+	float: right;
+    margin-top: -22px;
+    color: #4e73df;
+}
 </style>
 <div class="container">
 	<div class="title-box">
@@ -159,7 +164,7 @@ function qnaList(pageNum){
 	     + "<dd class='date'>" + qna_regdate + "</dd>"
 	     + "</dl>";
 	     if(ml_num==qlist[i].ml_num){
-	    	 str+= "<div class='editbtn' id='editbtn'>"
+	    	 str+= "<div class='editbtn' id='editbtn"+qlist[i].qna_num+"'>"
 			 + "<a type='button' onclick='editBox("+qlist[i].qna_num+")'>수정</a>"
 			 + "<a type='button' onclick='delQna("+qlist[i].qna_num+")'>&nbsp&nbsp삭제</a>"
 			 + "</div>";
@@ -302,7 +307,7 @@ function editBox(qna_num) {
 			+"</textarea></td>"
 			+"<td><input type='button' onclick='editQna("+qna_num+")' class='btn btn-primary'" 
 			+"value='수정하기'></td></tr></table>";
-	 $("#editbtn").html(str);
+	 $("#editbtn"+qna_num).html(str);
 }
 //qna 수정
 function editQna(qna_num) {
