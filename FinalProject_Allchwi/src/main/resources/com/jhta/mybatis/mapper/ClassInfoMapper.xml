@@ -29,7 +29,7 @@
 		( 
 			SELECT  class_num , cover_num , 
 			ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
-			FROM class_img 
+			FROM class_img order by cover_regdate 
 		) cover
 		where cover.class_num=aa.class_num and cnt=1 and aa.ml_num=#{ml_num} and class_status!=2
 		<include refid="class_num"/>

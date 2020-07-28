@@ -141,7 +141,7 @@
 								<div class="button_gray" style="float:right;">심사완료</div>
 							</c:when>																																														
 						</c:choose>
-						<c:if test="${list.class_status == '0' }">
+						<c:if test="${list.class_status == '1' }">
 							<a href="${cp}/class/classDate?class_num=${list.class_num}">
 							<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 						</c:if>
