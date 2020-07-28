@@ -45,18 +45,19 @@
 						<td>${vo.ml_num}</td>
 						<td>${vo.tutor_nickname}</td>
 						<td>${vo.class_title}</td>
-						<td>${vo.rem_pay}</td>
-						<td>${vo.rem_bank}/ ${vo.rem_account }</td>
+						<td><fmt:formatNumber value="${vo.rem_pay}" pattern="#,###" />원</td>
+						<td>${vo.rem_bank} / ${vo.rem_account }</td>
 						<td><fmt:formatDate value="${vo.rem_regdate }"
 									pattern="yyyy-MM-dd" /></td>
 						<c:choose>
 							<c:when test="${vo.rem_status == 0}">
-								<td>승인대기 ${vo.rem_revenue }</td>
+								<td>승인대기</td>
 							</c:when>
 							<c:otherwise>
 								<td>승인완료 </td>
 							</c:otherwise>
 						</c:choose>
+						
 						<td><c:choose>
 								<c:when test="${vo.rem_status == 0}">
 									<button type="button" class="btn btn-success"
@@ -66,7 +67,6 @@
 								<c:otherwise>
 									<button type="button" class="btn btn-dark" disabled>승인 완료</button>
 								</c:otherwise>
-
 							</c:choose></td>
 					</tr>
 				</c:forEach>

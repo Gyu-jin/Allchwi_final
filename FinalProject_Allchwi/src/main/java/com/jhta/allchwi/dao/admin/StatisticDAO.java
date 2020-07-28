@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.admin.Statistic1VO;
+import com.jhta.allchwi.vo.admin.Statistic2VO;
 import com.jhta.allchwi.vo.admin.Statistic3VO;
 
 @Repository
@@ -24,10 +25,14 @@ public class StatisticDAO {
 		return session.selectList(NAMESPACE+".list",map);
 	}
 	
+	public List<Statistic2VO> top_statlist(){
+		return session.selectList(NAMESPACE+".top_statlist");
+	}
+	
+	
 	
 	public List<Statistic3VO> cate_statlist(){
 		return session.selectList(NAMESPACE+".cate_statlist");
-		
 	}
 	
 	

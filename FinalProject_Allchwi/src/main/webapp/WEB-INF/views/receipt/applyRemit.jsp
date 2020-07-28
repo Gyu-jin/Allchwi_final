@@ -39,7 +39,7 @@
 
 				<div class="box">
 					<div class="title">
-						계좌번호${class_fee }<b class="pink">*</b>
+						계좌번호<b class="pink">*</b>
 					</div>
 					<div class="cont input-group col-5">
 						<input type="text" name="rem_account" id="rem_account" class="form-control"
@@ -98,40 +98,7 @@
 			return false;
 		}
 		
-		
-		if (!idCheck.test(id.value)) {
-			alert("아이디는 4~10자리 알파벳과 숫자만으로 만들어주세요.");
-			return false;
-		}
-
-		if (!pwCheck.test(pwd1.value)) {
-			alert("비밀번호는 6~12자리로 특수기호 없이 입력해주세요.");
-			return false;
-		}
-
-		if (!nickNameCheck.test(name.value)) {
-			alert("이름은 2~12 한글 또는 영어로 기입해주세요.");
-			return false;
-		}
-
-	
-		if (!emailCheck.test(email.value)) {
-			alert("올바른 이메일을 입력해주세요.");
-			return false;
-		}
-
-		
-		if (!phoneCheck.test(phone.value)) {
-			alert("올바른 휴대전화번호를 입력해주세요.");
-			return false;
-		}
-
-		
-
+		alert("금액이 일주일이내로 입급됩니다.");	
 		return true;
 	}
-
-
-
-
 </script>

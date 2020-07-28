@@ -54,7 +54,7 @@
 
 
 			<div id="chart_div" style="width: 1146px; height: 500px;"></div>
-			<div id="table_div" style="width: 1146px; height: 680px;">
+			<div id="table_div" style="width: 1146px; height: 690px;">
 				<table id="table" class="table table-hover table-bordered" style="text-align: center">
 					<thead class="thead-dark">
 						<tr>

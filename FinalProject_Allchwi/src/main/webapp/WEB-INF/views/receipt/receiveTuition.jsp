@@ -367,12 +367,7 @@ button, input, optgroup, select, textarea {
 
 <script type="text/javascript">
 	//post 방식으로 보내기
-	function receive(pay_num, final_price, class_fee) {
-		alert(pay_num);
-		alert(final_price);
-		alert(class_fee);
-		
-		
+	function receive(pay_num, final_price, class_fee) {		
 		var form = document.createElement("form");
 		form.setAttribute("charset", "utf-8");
 		form.setAttribute("method", "post");

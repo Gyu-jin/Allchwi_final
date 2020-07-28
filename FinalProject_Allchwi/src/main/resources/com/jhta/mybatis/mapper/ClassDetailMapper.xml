@@ -90,6 +90,5 @@
 		 	group by class_num 
 			order by cnt desc
 	    	limit 0,8
-	     
 	</select>
 </mapper>

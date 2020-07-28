@@ -69,21 +69,4 @@ public class ReceiptController {
 		
 		return ".receipt.applyRemit";
 	}
-	
-	
-	/*
-	public String insert(int rem_pay, String rem_bank, String rem_account, int pay_num) {
-		
-		InsertRemitVO vo = new InsertRemitVO(pay_num, rem_pay, rem_bank, rem_account);
-		int n  = service.insertRemit(vo);
-				
-		
-		
-		
-		
-		
-		return ".receipt.receiveTuition";
-	}
-	*/
-	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.allchwi.dao.admin.StatisticDAO;
 import com.jhta.allchwi.vo.admin.Statistic1VO;
+import com.jhta.allchwi.vo.admin.Statistic2VO;
 import com.jhta.allchwi.vo.admin.Statistic3VO;
 
 @Controller
@@ -38,7 +39,12 @@ public class StatisticController {
 		return ".admin.statistic2";
 	}
 	
-	
+	@GetMapping("/admin/statisticAjax2")
+	@ResponseBody
+	public List<Statistic2VO> statisticAjax2(){
+		List<Statistic2VO> top_statlist =  dao.top_statlist();		
+		return top_statlist;
+	}
 
 
 	@GetMapping("/admin/statistic3")
