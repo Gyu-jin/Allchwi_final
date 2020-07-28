@@ -42,7 +42,7 @@
           <!-- 로고 , 검색창 Topbar -->
           <div class="container-sm" id="logoandsearch">
 	          <div class="header_loog">
-		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 200px; height: 100px"></a>
+		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 200px; height: 100px;vertical-align: middle;"></a>
 		          <form action="${cp}/list/search"
 		          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 		            <div class="input-group">
