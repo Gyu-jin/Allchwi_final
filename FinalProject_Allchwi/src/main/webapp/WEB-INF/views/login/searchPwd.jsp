@@ -69,7 +69,7 @@ function idCheck() {
 		idBl = false;
 	} else {
 		//아이디 존재여부를 ajax사용하여 
-		$.getJSON("${cp}/CheckID.do", {
+		$.getJSON("${cp}/CheckID/do", {
 			id : id
 		}, function(data) {
 			console.log(data.code);
