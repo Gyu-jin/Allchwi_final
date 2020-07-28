@@ -44,7 +44,7 @@ public class LoginJoinController {
 	}
 	
 	//ajax로 아이디 중복확인(올취에서 회원가입할 경우)
-	@RequestMapping(value = "/CheckID.do", produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/CheckID/do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String idCheck(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

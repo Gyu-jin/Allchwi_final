@@ -56,7 +56,8 @@
 					<span id="pwdDMsg"
 						style="font-size: 20px; color: red; padding-left: 20px;"></span>
 				</div>
-				<input type="submit" class="login-btn" value="회원가입" name="join" onsubmit="return buttonUp()" disabled="disabled">
+				<input type="submit" class="login-btn" value="회원가입" name="join" onsubmit="return buttonUp()" 
+				disabled="disabled" style="background-color: gray; border: 1px solid gray;">
 			</form>
 		</div>
 	</div>
@@ -109,7 +110,7 @@
 			idBl = false;
 		} else {
 			//아이디 존재여부를 ajax사용하여 
-			$.getJSON("${cp}/CheckID.do", {
+			$.getJSON("${cp}/CheckID/do", {
 				id : id
 			}, function(data) {
 				console.log(data.code);
@@ -145,7 +146,8 @@
 			pwdMsg.html("10자리 이내로 입력해주세요.");
 			pwdBl = false;
 		} else {
-			pwdMsg.html("");
+			pwdMsg.css("color", "green");
+			pwdMsg.html("사용가능한 비밀번호입니다.");
 			pwdBl = true;
 			buttonUp();
 		}
@@ -175,10 +177,6 @@
 	function buttonUp() {
 		let btn = $("input[name='join']");
 		let btnColor = $(".login-form .login-btn");
-		console.log(nameBl + "1");
-		console.log(idBl + "2");
-		console.log(pwdBl + "3");
-		console.log(pwdBl1 + "4");
 		if (nameBl && idBl && pwdBl && pwdBl1) {
 			console.log("트루");
 			btn.removeAttr('disabled');
