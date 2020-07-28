@@ -143,7 +143,7 @@ public class AssignmentController {
 		
 	}
 	
-	// 학생 과제 제출 - data
+	// 학생 과제 제출 - data insert
 	@RequestMapping(value="/assign/data", method = {RequestMethod.POST,RequestMethod.GET},produces = "text/plain;charset=utf-8")
 	@ResponseBody
 	public String subData(Model model, HttpSession session, MultipartHttpServletRequest multireq, 
@@ -161,14 +161,11 @@ public class AssignmentController {
         
         
         List<MultipartFile> fileList = multireq.getFiles("assign_file");
-        String src = multireq.getParameter("src");
-        System.out.println("src value : " + src);
         String path = session.getServletContext().getRealPath("/resources/AssignUpload");
         int assign_data=-1;
         for (MultipartFile mf : fileList) {
         	
             String assign_orgFilename = mf.getOriginalFilename(); // 원본 파일 명
-            System.out.println("assign_orgFilename:"+assign_orgFilename);
             String assign_saveFilename=UUID.randomUUID()+"_" +assign_orgFilename; // 저장 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
 
@@ -192,21 +189,20 @@ public class AssignmentController {
         	return "error";
         }
 	}
-        //파일 다운로드
+        // 학생 과제 제출 파일 다운로드
         @GetMapping("/assign/download")
     	public String download(int assigndata_num ,Model model,HttpSession session) {
     		//다운로드할 파일정보를 갖는 객체얻어오기
     		
     		AssignDataVO vo=data_service.saveFilename(assigndata_num);
     		String path=session.getServletContext().getRealPath("/resources/AssignUpload");
+    		
     		//다운로드할파일객체
     		File f=new File(path + File.separator + vo.getAssign_saveFilename());
     		
     		//다운로드창에 보여질 파일명
     		String filename=vo.getAssign_orgFilename();
-    		
-    		//System.out.println(filename);
-    		
+    
     		model.addAttribute("file",f);
     		model.addAttribute("filename",filename);
     		model.addAttribute("filesize",vo.getAssigndata_size());

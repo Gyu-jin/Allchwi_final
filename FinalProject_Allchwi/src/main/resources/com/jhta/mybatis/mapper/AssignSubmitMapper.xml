@@ -17,5 +17,6 @@
 			from assign_data d, assign_submit s
 			where  d.sub_num=s.sub_num and assign_num=#{assign_num}) a , member_info m
 		where m.ml_num=a.ml_num
+		order by sub_num desc
 	</select>
 </mapper>

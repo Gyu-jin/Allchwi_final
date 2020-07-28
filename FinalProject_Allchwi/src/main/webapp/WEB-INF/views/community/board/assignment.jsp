@@ -122,8 +122,7 @@ button[name='subBtn'], #a-update{
 									<label for="message-text" class="col-form-label">과제 내용:</label>
 									<textarea class="form-control" name="assign_content"></textarea>
 								</div>
-								<input type="hidden" name="commu_num"
-									value="${commuInfo.commu_num }">
+								<input type="hidden" name="commu_num" value="${commuInfo.commu_num }">
 	
 							</div>
 							<div class="modal-footer">
@@ -162,7 +161,7 @@ button[name='subBtn'], #a-update{
 					<p>
 						<a class="btn btn-primary" data-toggle="collapse" name="goSubmit"
 							href="#collapse${status.index }" role="button" aria-expanded="false"
-							aria-controls="collapse${status.index }" onclick="Assign_submitList(${vo.assign_num })"> 과제 제출하러 가기! </a>
+							aria-controls="collapse${status.index }" onclick="Assign_submitList(${vo.assign_num },${status.index })"> 과제 제출하러 가기! </a>
 					</p>
 					<!-- 과제 제출 & 제출한 과제 목록 -->
 					<div class="collapse" id="collapse${status.index }">
@@ -186,9 +185,12 @@ button[name='subBtn'], #a-update{
 											</c:if>
 										</div>
 									</div>
+									<input type="hidden" name="statusindex" value="${status.index }">
 								</form>
 								
-								<div class="submitAssign"></div>
+								<!-- 과제 번호(assign_num)마다 다른 과제제출번호(sub_num)을 불러오기 위한 div -->
+								<div id="submitAssign${status.index }"></div>
+								
 							</div>
 						</div>
 
@@ -316,20 +318,38 @@ button[name='subBtn'], #a-update{
 		e.preventDefault();
 		
 		var form=$(this).parent().parent().parent();
+		// 클릭한 버튼에 해당하는 assign_num과 각 과제제출 div id 뒤에 붙는 statusindex
 		var assign_num=form.find("input[name='assign_num']").val();
+		var statusindex=form.find("input[name='statusindex']").val();
+		var sub_content=form.find("textarea[name='sub_content']");
+		var assign_file=form.find("input[name='assign_file']");
 		form.attr('method','post'); 
 		var formData = new FormData(form[0]);
-		$.post({
+		$.ajax({
+			type:"POST",
 			url : "${cp }/assign/data",
 			data : formData,
 			cache: false,
 			processData: false, 
 			contentType: false,
 			enctype: "multipart/form-data",
+			beforeSend: function(xhr,opts){
+				console.log("beforeSend : " + sub_content.val() +", "+ assign_file.val());
+				if(sub_content.val()=="" || sub_content.val()==null){
+					alert("내용을 입력해주세요");
+					sub_content.focus();
+					return false;
+				}else if(assign_file.val()=="" || assign_file.val() == null){
+					alert("파일을 한개 이상 제출해주세요");									
+					return false;
+				}
+			},
 			success : function(data){
 				if(data=="success"){
 					alert("과제 제출 성공");
-					Assign_submitList(assign_num);
+					sub_content.val("");
+					assign_file.val("");
+					Assign_submitList(assign_num,statusindex);
 				}else{
 					alert("과제 제출 실패");
 				}
@@ -337,8 +357,8 @@ button[name='subBtn'], #a-update{
 		});
 	});
 	
-	function Assign_submitList(assign_num){
-		var div=$("button[name='subBtn']").parent().parent().parent().parent().find(".submitAssign");
+	function Assign_submitList(assign_num, statusindex ){
+		var div=$("button[name='subBtn']").parent().parent().parent().parent().find("#submitAssign"+statusindex);
 		div.empty();
 		$.post({
 			url : "${cp }/assign/submitList",
@@ -348,22 +368,23 @@ button[name='subBtn'], #a-update{
 				var oldsub=0;
 				var fileDiv = null;
 				$(data).each(function(i,sub){
-					
+					var sub_regdate = new Date(this.sub_regdate);
+					sub_regdate = sub_regdate.toLocaleDateString("ko-US");
 					if(oldsub != sub.sub_num){
 						div.append("<div class='qna_list'>" 
-								 + "<ul>"
-								 + "<li>"
-							     + "<dl>"
-							     + "<dt>"
-							     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center;"
-							     + " background-image: url(${cp}/mypageImg/getimg?pro_num="+sub.pro_num+");"
-							     + " border-radius: 50%;'></p>"
-							     + "<p class='name'>"+sub.mb_name+"</p>"
-							     + "</dt>"
-							     + "<dd>과제 답변 : " + sub.sub_content  + "</dd>"
-							     + "<dd class='date'>제출일 : " + sub.sub_regdate + "</dd>"
-							     + "</dl>"
-							     + "</li></ul></div>");
+									 + "<ul>"
+										 + "<li>"
+							    			 + "<dl>"
+							    				 + "<dt>"
+							    					 + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center;"
+							   						  + " background-image: url(${cp}/mypageImg/getimg?pro_num="+sub.pro_num+");"
+							    						 + " border-radius: 50%;'></p>"
+							    					 + "<p class='name'>"+sub.mb_name+"</p>"
+							    				 + "</dt>"
+							     				+ "<dd>과제 답변 : " + sub.sub_content  + "</dd>"
+							     				+ "<dd class='date'>제출일 : " + sub_regdate + "</dd>"
+							     			+ "</dl>"
+							    	 + "</li></ul></div>");
 						fileDiv = $("<div></div>").appendTo(div);
 						fileDiv.addClass("fileDiv");
 						fileDiv.append("<div>첨부파일명 : <a href='${cp}/assign/download?assigndata_num="+sub.assigndata_num  +"'>"+sub.assign_orgFilename +"</a></div>");
