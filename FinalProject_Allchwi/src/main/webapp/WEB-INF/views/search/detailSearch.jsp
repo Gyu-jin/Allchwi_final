@@ -105,7 +105,7 @@ h1,h3{
     margin-left: 70%;
     position: absolute;
     height: 100px;
-    margin-top: -12%;
+    margin-top: -18%;
     text-align: center;
 }
 .profile_box .name {
@@ -150,7 +150,13 @@ text{
 	margin-left: 68%;
 	margin-top: 8%;
 }
-
+.classtitle-box{
+	width: 75%;
+}
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+    max-height: 366px;
+}
 </style>
 <script>
 
@@ -373,8 +379,9 @@ text{
 						src="${cp}/classImg/getimg?cover_num=${vo.cover_num}">
 						<title>	${vo.class_title }</title></img>
 						<div class='card-body'>
-							<text>${vo.class_title } ( ${vo.class_num } ) </text>
-						
+							<div class="classtitle-box">
+								<text>${vo.class_title }</text>
+							</div>
 							<div class="profile_box">
                                 <div class="profile">
                           			<img class="img-profile rounded-circle" src="${cp}/mypageImg/getimg?pro_num=${vo.pro_num}">
