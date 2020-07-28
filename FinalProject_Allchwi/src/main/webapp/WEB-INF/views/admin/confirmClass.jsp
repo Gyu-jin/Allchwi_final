@@ -70,9 +70,9 @@
 								<div class="card">
 									<h5 class="card-header" style="text-align: center;">
 										${vo.class_title }
-										<button type="button" class="btn btn-primary"
-											onclick="getDetail()" data-toggle="modal"
-											data-target="#myModal3">상세정보</button>
+										<a href="${cp}/classDetail/detail?class_num=${vo.class_num}">
+											<button type="button" class="btn btn-primary">상세정보</button>
+										</a>
 									</h5>
 
 
@@ -207,41 +207,12 @@
 	</div>
 </div>
 
-<!-- The Modal -->
-<div class="modal" id="myModal3">
-	<div class="modal-dialog modal-xl">
-		<div class="modal-content">
 
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Modal Heading</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body" id="modal-body3">Modal body..</div>
-
-
-
-		</div>
-	</div>
-</div>
 
 
 
 <script>
-	function getDetail() {
-		$.ajax({
-			url : "${cp}/classDetail/detail2?class_num=4",
-			dataType : "text",
-			success : function(data) {
-				$("#modal-body3").html(data);
-				$(".card-body").find("img").css("margin-top", "-130px");
-				$(".card-body").css("height", "188px");
-				$(".card").css("width", "100%");
-			}
-		});
-	}
+	
 
 	function getModal(class_num) {
 		$("#modal-footer").empty();

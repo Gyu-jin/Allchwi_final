@@ -143,16 +143,4 @@
 	</div>
 </div>	
 	
-<script type="text/javascript">
-	function getModal() {
-		$.ajax({
-			url:"${cp}/classDetail/detail2?class_num=125",
-			dataType:"text",
-			success:function(data){
-				$("#modal-body").html(data);
-			}
-		});
-	}
-</script>
-
 
