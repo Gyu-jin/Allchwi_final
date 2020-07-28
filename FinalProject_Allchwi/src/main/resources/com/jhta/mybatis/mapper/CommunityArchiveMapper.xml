@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.mapper.CommunityArchiveMapper">
 
 	<insert id="insert" parameterType="com.jhta.allchwi.vo.community.ArchiveVO" useGeneratedKeys="true" keyProperty="room_num">
-		insert into ref_room values(0,#{comu_num},#{room_title},#{room_content},now(),0,#{horsehead},#{org_filename},#{save_filename},#{filesize})
+		insert into ref_room values(0,#{commu_num},#{room_title},#{room_content},now(),0,#{horsehead},#{org_filename},#{save_filename},#{filesize})
 		<selectKey keyProperty="room_num" resultType="int">
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -18,7 +18,7 @@
 	
 	
 	<select id="list" resultType="com.jhta.allchwi.vo.community.ArchiveVO" parameterType="hashmap">
-		select * from ref_room where commu_num = #{commu_num}
+		select * from ref_room where commu_num = #{commu_num} order by room_num desc
 		limit #{startRow},6
 	</select>
 	

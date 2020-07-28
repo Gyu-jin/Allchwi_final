@@ -40,7 +40,7 @@
 		<div id="download">
 			<c:choose>
 				<c:when test="${vo.filesize != 0 }">
-					<p style="display: inline;">다운로드 &nbsp </p><a href="${cp }/community/download?room_num=${vo.room_num }">${vo.org_filename } /${vo.filesize }바이트 </a>
+					<p style="display: inline;">다운로드 &nbsp </p><a href="${cp }/community/download?room_num=${vo.room_num }" style="text-decoration: none; color: blue;">${vo.org_filename } /${vo.filesize }바이트 </a>
 				</c:when>
 				<c:otherwise>
 					<p>다운로드할 파일이 존재하지 않습니다.</p>

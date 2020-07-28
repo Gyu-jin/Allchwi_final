@@ -30,21 +30,37 @@ public class ArchiveController {
 	private ArchiveService service;
 	
 	@GetMapping("/community/archive")
-	public String goAssign(HttpSession session, Model model,@RequestParam(value="pageNum",defaultValue = "1") int pageNum) {
+	public String goAssign(HttpSession session, Model model,
+		@RequestParam(value="pageNum",defaultValue = "1") int pageNum) {
+		
+		
 		CommunityVO commuVo = (CommunityVO) session.getAttribute("commuInfo");
 		int commu_num = commuVo.getCommu_num();
 				
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int commu_ml_num = commuVo.getMl_num();
+		int ml_num= (Integer)session.getAttribute("ml_num");
+		
+		
+	
 		int totalRowCount = service.count(commu_num);
 		
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 6, 5);
 		
 		map.put("commu_num",commu_num);
 		map.put("startRow", pu.getStartRow()-1);
+		map.put("endRow", pu.getEndRow());
+		
 		
 		List<ArchiveVO> list = service.list(map);
 		model.addAttribute("list", list);
 		model.addAttribute("pu",pu);
+		model.addAttribute("commu_ml_num",commu_ml_num);
+		model.addAttribute("ml_num",ml_num);
+		
 		
 		return ".community.board.archive";
 	}
@@ -75,7 +91,10 @@ public class ArchiveController {
 		//System.out.println(horsehead);
 		//System.out.println(room_title);
 		//System.out.println(room_content);
-			
+		CommunityVO commuVo = (CommunityVO) session.getAttribute("commuInfo");
+		int commu_num = commuVo.getCommu_num();
+		
+		
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=
 				session.getServletContext().getRealPath("/resources/archiveUpload");
@@ -106,7 +125,7 @@ public class ArchiveController {
 			//System.out.println(filesize);
 			
 			//DB에 파일정보 저장하기
-			ArchiveVO vo = new ArchiveVO(0, 10, room_title, room_content, null, 0, horsehead, org_filename, save_filename, filesize);
+			ArchiveVO vo = new ArchiveVO(0, commu_num, room_title, room_content, null, 0, horsehead, org_filename, save_filename, filesize);
 			service.insert(vo);
 			return "redirect:/community/archive";
 		
@@ -120,11 +139,17 @@ public class ArchiveController {
 	@GetMapping("/community/download")
 	public String download(int room_num,Model model,HttpSession session) {
 		//다운로드할 파일정보를 갖는 객체얻어오기
+		System.out.println("room_num:" + room_num);
+
 		
 		ArchiveVO vo =service.getInfo(room_num);
+		System.out.println("세이브 파일네임:" + vo.getSave_filename());
+		
+		
 		String path=session.getServletContext().getRealPath("/resources/archiveUpload");
 		//다운로드할파일객체
 		File f=new File(path + File.separator + vo.getSave_filename());
+		
 		
 		//다운로드창에 보여질 파일명
 		String filename=vo.getOrg_filename();

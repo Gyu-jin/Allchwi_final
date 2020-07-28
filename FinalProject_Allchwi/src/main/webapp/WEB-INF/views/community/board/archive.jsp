@@ -58,7 +58,7 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>번호</th>
-						<th>말머리</th>
+						<th>말머리 </th>
 						<th>제목</th>
 						<th>작성일</th>
 						<th>조회수</th>
@@ -68,7 +68,17 @@
 					<c:forEach var="vo" items="${list }">
 						<tr onclick="detail('${vo.room_num}','${vo.commu_num }')">
 							<td>${vo.room_num }</td>
-							<td>${vo.horsehead }</td>
+							<c:choose>	
+								<c:when test="${vo.horsehead == 1}">						
+									<td>과제</td>
+								</c:when>
+								<c:when test="${vo.horsehead == 2}">						
+									<td>참고자료</td>
+								</c:when>
+								<c:otherwise>
+									<td>수업자료</td>
+								</c:otherwise>
+							</c:choose>
 							<td>${vo.room_title}</td>
 							<td><fmt:formatDate value="${vo.room_regdate }"
 									pattern="yyyy-MM-dd" /></td>
@@ -80,9 +90,6 @@
 				</tbody>
 			</table>
 		</div>
-
-
-
 
 		<div>
 			<ul class="pagination justify-content-center" style="margin: 20px 0">
@@ -96,8 +103,7 @@
 					</c:otherwise>
 				</c:choose>
 
-				<c:forEach var="i" begin="${pu.startPageNum}"
-					end="${pu.endPageNum }">
+				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
 					<c:choose>
 						<c:when test="${pu.pageNum==i}">
 							<li class="page-item active"><a class="page-link"
@@ -122,8 +128,16 @@
 			</ul>
 		</div>
 		
+		<c:choose>
+			<c:when test="${ml_num == commu_ml_num} ">
+				<button type="button" class="btn btn-primary" style="float:right" onclick="location.href='${cp}/community/writeContent'">글작성</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" class="btn btn-primary" style="float:right"  disabled="disabled">글작성</button>
+			</c:otherwise>
+		</c:choose>
 		<button type="button" class="btn btn-primary" style="float:right" onclick="location.href='${cp}/community/writeContent'">글작성</button>
-		
+
 
 	</div>
 </div>

@@ -30,7 +30,7 @@ public class ArchiveDAO {
 	}
 	
 	public int count(int commu_num) {
-		return session.selectOne(NAMESPACE+".count");
+		return session.selectOne(NAMESPACE+".count",commu_num);
 	}
 	
 	public ArchiveVO detail(int room_num){
