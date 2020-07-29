@@ -169,6 +169,11 @@
 .class_wrap .class_detail .class_title {
 	float: right;
 	margin: 50px 50px 50px 0;
+    width: 65%;
+    height: 100%;
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 1.4;
 }
 
 .class_wrap .detail_sec_bor {
