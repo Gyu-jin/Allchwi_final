@@ -82,7 +82,7 @@ public class ListSearchController {
 		
 		
 		int totalRowCount=service.count(map);
-		PageUtil pu=new PageUtil(pageNum, totalRowCount, 3, 5);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 9, 5);
 		System.out.println("endPageNUm : "+pu.getEndPageNum());
 		System.out.println("총 글의 갯수 : " +totalRowCount);
 		int startRow=pu.getStartRow()-1;

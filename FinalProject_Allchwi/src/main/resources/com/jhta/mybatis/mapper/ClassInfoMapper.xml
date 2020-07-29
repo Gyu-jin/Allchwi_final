@@ -177,7 +177,7 @@
 		<include refid="month"/>
 		group by class_num
 		order by class_num desc
-		limit #{startRow},3
+		limit #{startRow},9
 	</select>
 	
 	<!-- totalRowCount : 검색 조건에 맞는 총 글 갯수 구하는 sql -->
