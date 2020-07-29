@@ -23,7 +23,7 @@
 					</select>
 				</div>
 				
-				<input type="text" value=>		
+				
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">글내용</label>
 					
