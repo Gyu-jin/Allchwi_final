@@ -22,12 +22,14 @@ public class LogoutController {
 		//a 카카오 회원일 경우 세션에 담긴 access token 확인 후
 		String access_Token = (String)session.getAttribute("access_Token");
 		//a 토큰 값 존재할 경우 아래 경로로 리다이렉트 이동하여 카카오서버에서 계정 나가기 후 로그아웃 리다이렉트 uri로 이동
-		if(access_Token != null || access_Token != "") {
+		if(access_Token != null) {
+			System.out.println("카카오 맞다.");
 			String client_id = "4f883a7141cac9d993029eba73513c89";
 			String logout_redirect_uri = "http://localhost:8091/allchwi/login/kakaologout";
 			String path = "https://kauth.kakao.com/oauth/logout?client_id="+ client_id + "&logout_redirect_uri=" + logout_redirect_uri + "&state=?";
 			return "redirect:" + path;
 		} else {
+			System.out.println("카카오 아니다.");
 			//a 올취에서 가입한 회원인경우 
 			mls.logout(session);    
 			return "redirect:/";
