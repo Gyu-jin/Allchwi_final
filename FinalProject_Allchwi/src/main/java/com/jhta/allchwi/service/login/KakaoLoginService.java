@@ -35,7 +35,8 @@ public class KakaoLoginService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=4f883a7141cac9d993029eba73513c89");
-			sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
+			sb.append("&redirect_uri=http://192.168.0.29:8091/allchwi/login/kakaologin");
+			//기존sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
