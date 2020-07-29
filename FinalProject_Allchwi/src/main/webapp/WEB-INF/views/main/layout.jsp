@@ -14,8 +14,13 @@
 
 <title>views/main/layout.jsp</title>
 <!-- font -->
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"><!-- Bootstrap core JavaScript-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic+Coding&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nanum+Gothic:wght@400;700&display=swap"
+	rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
 <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
 <script
 	src="${cp}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -34,13 +39,28 @@
 
 <!-- Custom styles for admin template-->
 <link href="${cp}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 </head>
 <style>
-body{
-	font-family: 'Nanum Gothic', sans-serif;
+@font-face {
+	font-family: 'NanumSquareRound';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-a,span{
+body {
+	font-family: 'NanumSquareRound';
+}
+
+.nanumsquare {
+	font-family: 'NanumSquare', sans-serif !important;
+}
+
+a, span {
 	color: inherit;
 	font-size: inherit;
 	font-weight: inherit;
@@ -48,10 +68,11 @@ a,span{
 	text-decoration: none;
 }
 
-a:hover  {
+a:hover {
 	color: inherit;
 	text-decoration: none;
 }
+
 li {
 	list-style: none;
 }

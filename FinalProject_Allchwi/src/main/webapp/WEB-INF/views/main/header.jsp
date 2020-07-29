@@ -13,6 +13,7 @@
 .header_Mymenu{
 	margin-left:70%;
 	width: 18%;
+	font-size: 17px;
 }
 .btn-primary {
     color: #fff;
@@ -22,7 +23,7 @@
 #logoandsearch{
 	width: 70%;
 	position: absolute;
-
+	margin-left: 2%;
 }
 .navbar-expand .navbar-nav {
     flex-direction: row;
@@ -42,7 +43,7 @@
           <!-- 로고 , 검색창 Topbar -->
           <div class="container-sm" id="logoandsearch">
 	          <div class="header_loog">
-		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 200px; height: 100px;vertical-align: middle;"></a>
+		          <a href="${cp }/"><img src="${cp}/resources/img/Allchwi_logo.png" style="width: 15%; height: 3%;vertical-align: middle;"></a>
 		          <form action="${cp}/list/search"
 		          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 		            <div class="input-group">

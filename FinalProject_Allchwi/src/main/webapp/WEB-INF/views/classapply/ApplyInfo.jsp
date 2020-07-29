@@ -12,7 +12,6 @@
     border-bottom: none; 
     margin-bottom: 40px;
     overflow: hidden;
-    
 }
 
 .tutor_cont {

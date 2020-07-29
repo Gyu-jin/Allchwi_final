@@ -213,14 +213,14 @@
 <h1>${bcategory_name }</h1>
 <h3>${scategory_name }</h3>
 
-	<select class="custom-select my-1 mr-sm-2"
+<!-- 	<select class="custom-select my-1 mr-sm-2"
 		id="inlineFormCustomSelectPref2">
 		<option selected value="1">정확도순</option>
 		<option value="2">최신순</option>
 		<option value="3">인기순</option>
 	</select> <br>
 
-
+ -->
 	<div class="row" id="searchList">
 
 		<c:choose>
@@ -244,6 +244,7 @@
                                 <div class="name">${vo.tutor_nickname }</div>
                                             
                             </div>
+                            
 							<p class='card-text' style="font-size: 0.9rem;"><fmt:formatDate value="${vo.class_date}" pattern="yyyy-MM-dd"/> 시작!</p>
 							
 							
@@ -266,7 +267,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="col-md-12" style="text-align:center;padding:20%">
-					<h3>검색 결과가 없습니다..</h3>
+					<h2>검색 결과가 없습니다..</h2>
 				</div>
 			</c:otherwise>
 		</c:choose>

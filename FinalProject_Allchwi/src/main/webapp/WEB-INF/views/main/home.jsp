@@ -23,7 +23,10 @@ h1 {
 .container {
 	padding-top: 30px;
 }
-
+.q_menu {
+	margin-top: 3%;
+    margin-bottom: 3%;
+}
 .q_menu ul {
 	display: flex;
 	justify-content: space-between;
@@ -114,6 +117,9 @@ li {
     padding: 1.25rem;
     height: 350px;
 }
+.icon{
+	margin-bottom: 10px;
+}
 </style>
 <div>
 	<!-- 메인 배너  -->
@@ -127,16 +133,16 @@ li {
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="${cp}/resources/img/배너1.png" id="b1" class="d-block w-100"
-					alt="배너1">
+				<a href="${cp }/classDetail/detail?class_num=12"><img src="${cp}/resources/img/배너1.png" id="b1" class="d-block w-100"
+					alt="배너1"></a>
 			</div>
 			<div class="carousel-item">
-				<img src="${cp}/resources/img/배너2.png" id="b2" class="d-block w-100"
-					alt="배너2">
+				<a href="${cp}/list/search?bcategory_num=7"><img src="${cp}/resources/img/배너2.png" id="b2" class="d-block w-100"
+					alt="배너2"></a>
 			</div>
 			<div class="carousel-item">
-				<img src="${cp}/resources/img/배너3.png" id="b3" class="d-block w-100"
-					alt="배너3">
+				<a href="${cp}/list/search?scategory_num=19"><img src="${cp}/resources/img/배너3.png" id="b3" class="d-block w-100"
+					alt="배너3"></a>
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -155,37 +161,37 @@ li {
 	<div class="q_menu">
 		<ul>
 			<li><a href="${cp }/list/search?bcategory_num=1">
-					<div class="icon design">
+					<div class="icon">
 						<img src="${cp}/resources/img/work.png" alt="">
 					</div> <mark>실무역량</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=2">
-					<div class="icon work">
+					<div class="icon">
 						<img src="${cp}/resources/img/design.png" alt="">
 					</div> <mark>디자인</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=3">
-					<div class="icon beauty">
+					<div class="icon">
 						<img src="${cp}/resources/img/beauty.png" alt="">
 					</div> <mark>뷰티</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=4">
-					<div class="icon video">
+					<div class="icon">
 						<img src="${cp}/resources/img/video.png" alt="">
 					</div> <mark>영상</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=5">
-					<div class="icon language">
+					<div class="icon">
 						<img src="${cp}/resources/img/music.png" alt="">
 					</div> <mark>음악</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=6">
-					<div class="icon language">
+					<div class="icon">
 						<img src="${cp}/resources/img/language.png" alt="">
 					</div> <mark>언어</mark>
 			</a></li>
 			<li><a href="${cp }/list/search?bcategory_num=7">
-					<div class="icon language">
+					<div class="icon">
 						<img src="${cp}/resources/img/cook.png" alt="">
 					</div> <mark>라이프스타일</mark>
 			</a></li>
@@ -212,7 +218,7 @@ li {
 								<div class="t2">
 									<span class="profile"> <img class="roundImg"
 										src="${cp}/mypageImg/getimg?pro_num=${list.pro_num}" alt="">
-									</span> <span class="name">${list.tutor_nickname }</span> &nbsp &nbsp | &nbsp &nbsp
+									</span> <span class="name">${list.tutor_nickname }</span> &nbsp | &nbsp
 									<span class="loc">${list.bloc_name }${list.sloc_name }</span>
 								</div>
 							</div>

@@ -122,9 +122,9 @@ text{
     text-align: center;
 }
 
-.btn_wishlist img{
-	width:20px;
-	height: 20px;
+.navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    font-size: 17px;
 }
 .class_price{
 	position: absolute;
@@ -137,18 +137,20 @@ text{
 	margin-top: 8%;
 }
 .classtitle-box{
-    width: 64%;
-    height: 40px;
-    font-size: 14px;
+    width: 62%;
+    height: 50px;
+    font-size: 18px;
     overflow: hidden;
-    color: black;
+    color:#494d5a;
     font-weight: bold;
     line-height: 1.4;
 }
-
+.card-text{
+	margin-top: 8px;
+}
 .mb-4, .my-4 {
     margin-bottom: 1.5rem!important;
-    max-height: 366px;
+    max-height: 466px;
 }
 .btn-outline-secondary:hover {
     color: #fff;
