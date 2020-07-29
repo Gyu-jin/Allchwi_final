@@ -28,7 +28,8 @@ public class LogoutController {
 			//기존 본인 서버 실행시
 			//String logout_redirect_uri = "http://localhost:8091/allchwi/login/kakaologout";
 			//규진이 서버 실행시
-			String logout_redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologout";
+			//String logout_redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologout";
+			String logout_redirect_uri = "http://175.192.131.221:8091/allchwi/login/kakaologout";
 			String path = "https://kauth.kakao.com/oauth/logout?client_id="+ client_id + "&logout_redirect_uri=" + logout_redirect_uri + "&state=?";
 			return "redirect:" + path;
 		} else {
