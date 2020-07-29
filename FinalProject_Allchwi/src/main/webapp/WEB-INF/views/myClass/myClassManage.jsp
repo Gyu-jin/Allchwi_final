@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript" src="${cp}/resources/vendor/bootstrap/js/bootstrap.js"></script>
 <link rel="stylesheet"
 	href="/allchwi/resources/css/myClass/myClassManage.css">
@@ -44,9 +45,19 @@
 							</div>
 							<div class="information-box">
 								<p style="margin-left: 7%">신청일시: ${vo.apply_regdate }</p>
-								<h3 style="margin-left: 7%">${vo.class_title }</h3>
+								<!-- 30글자 넘어갈경우 ... 붙여서 출력 -->
+								<h3 style="margin-left: 7%;">
+								<c:choose>
+									<c:when test="${fn:length(vo.class_title) gt 30}">
+								    	${fn:substring(vo.class_title, 0, 29)}...
+								    </c:when>
+								    <c:otherwise>
+								        ${vo.class_title}
+								    </c:otherwise>
+								</c:choose>
+								</h3>
 								<div class="price">
-									<fmt:setLocale value="ko_KR" />
+									<fmt:setLocale value="ko_KR"/>
 									<fmt:formatNumber type="currency" value="${vo.class_fee}" />
 								</div>
 								<div class="start-date">
