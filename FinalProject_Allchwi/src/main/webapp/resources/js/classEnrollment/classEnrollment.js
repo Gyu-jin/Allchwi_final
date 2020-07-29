@@ -521,7 +521,6 @@ function updateCalculation() {
 	$('#calc-total-times').text(totalTimes);
 
 	$('#calc-result').text(formatMoney((unitPrice * time * totalTimes).toString()));
-	$('#calc-fee').text(formatMoney(unitPrice.toString()));
 
 }
 

@@ -336,9 +336,6 @@
 						<font class="pink"><b>
 							<span id="calc-result">0</span></b>원
 						</font>
-						<br>
-						연결수수료&nbsp;&nbsp;<b>
-						<span id="calc-fee">0</span></b>원
 					</div>
 				</div>
 			</div>

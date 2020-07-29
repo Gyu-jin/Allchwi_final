@@ -26,6 +26,10 @@ public class OnlineCheckDAO {
 	public int insert(OnlineCheckVO vo) {
 		return session.insert(NAMESPACE + ".insert", vo);
 	}
+
+	public void delete(int online_num) {
+		session.delete(NAMESPACE + ".delete", online_num);
+	}
 	
 	
 }

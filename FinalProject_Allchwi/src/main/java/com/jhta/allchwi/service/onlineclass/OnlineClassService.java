@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.jhta.allchwi.dao.onlineClass.OnlineCheckDAO;
 import com.jhta.allchwi.dao.onlineClass.OnlineClassDAO;
 import com.jhta.allchwi.vo.community.CommunityVO;
 import com.jhta.allchwi.vo.onlineclass.OnlineClassVO;
@@ -15,6 +17,8 @@ import com.jhta.allchwi.vo.onlineclass.OnlineClassVO;
 public class OnlineClassService {
 	@Autowired
 	private OnlineClassDAO dao;
+	@Autowired
+	private OnlineCheckDAO check_dao;
 	
 	public void classInsert(OnlineClassVO vo) {
 		dao.classInsert(vo);
@@ -40,8 +44,10 @@ public class OnlineClassService {
 		dao.update(updateVo);
 	}
 
+	@Transactional
 	public void delete(int online_num) throws SQLException {
 		dao.delete(online_num);
+		check_dao.delete(online_num);
 	}
 
 }

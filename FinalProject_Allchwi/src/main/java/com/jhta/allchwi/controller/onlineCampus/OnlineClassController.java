@@ -79,7 +79,6 @@ public class OnlineClassController {
 			@RequestParam(value="online_num",defaultValue = "0")int online_num,
 			HttpSession session,@RequestParam  HashMap<String, Object> formdata) {
 		
-		String commu_title =((CommunityVO)session.getAttribute("commuInfo")).getCommu_title();
 		int commu_num =((CommunityVO)session.getAttribute("commuInfo")).getCommu_num();
 		
 		String online_title = (String)formdata.get("online_title");
@@ -92,7 +91,7 @@ public class OnlineClassController {
 					session.getServletContext().getRealPath("/resources/mediaFold");
 			
 			
-			String path = uploadPath+ File.separator+commu_num+"_"+commu_title;
+			String path = uploadPath+ File.separator+commu_num;
 			System.out.println(path);
 			File Folder = new File(path);
 	
@@ -111,7 +110,7 @@ public class OnlineClassController {
 			String savefileName = UUID.randomUUID() + "_" + orgfileName;
 			
 			File fos = new File(path+File.separator + savefileName);
-			String online_file = commu_num+ "_" + commu_title 
+			String online_file = commu_num 
 					+ File.separator + savefileName;
 			try {
 				files.transferTo(fos);
@@ -161,8 +160,8 @@ public class OnlineClassController {
 						session.getServletContext().getRealPath("/resources/mediaFold");
 				
 				File file = new File(uploadPath + File.separator + vo.getOnline_file());
-				file.delete();
 				
+				file.delete();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return "fail";
