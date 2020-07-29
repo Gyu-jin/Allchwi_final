@@ -17,6 +17,10 @@
 			var globalChkStatus = true;
 
 			$(function(){		
+				if(${class_form} == '1'){				
+					$('#monthDate').val('1');
+				}
+				
 				var classCount = $('#classCount').val();
 				
 				 $.datepicker.setDefaults({
@@ -147,8 +151,9 @@
 			// 시간 선택 popUp창 클릭이벤트
 			function classTimeClick(index){
 				$('#classTime'+index).click(function(){
+					let classCount = $('#classCount').val();
 					var height = $(window).scrollTop()+50;
-					if(index==1){								
+					if(index==1 && classCount != 1){								
 						$('#curriDate').show();
 						dateWeekSet();
 					}
