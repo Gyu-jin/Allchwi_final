@@ -196,7 +196,7 @@
 	line-height: 180%;
 	clear: both;
 	margin-left: 30px;
-	white-space: pre;
+	white-space: break-spaces;
 }
 
 .t_info {

@@ -395,7 +395,7 @@
 											<c:if test="${cdv.class_form==0 }">
 													&nbsp&nbsp ${dlist.class_startTime}~ ${dlist.class_endTime }
 													</c:if> <c:if test="${cdv.class_form==1 }">
-														${dlist.class_month}개월 과정
+														&nbsp&nbsp ${dlist.class_month}개월 과정
 													</c:if>
 										</a>
 									</div>
