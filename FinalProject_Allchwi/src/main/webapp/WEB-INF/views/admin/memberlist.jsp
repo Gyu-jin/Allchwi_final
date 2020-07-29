@@ -183,7 +183,8 @@
 				"sSearch": "검색:",
 				"sZeroRecords": "검색 결과가 없습니다.",
 				"sLengthMenu": "_MENU_ 개씩 보여주기",
-				
+				"infoFiltered": "",
+				"infoEmpty": "",
 				
 				"paginate": {
 					 "previous": "이전",
