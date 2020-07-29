@@ -22,6 +22,8 @@
 						<option value=3>수업자료</option>
 					</select>
 				</div>
+				
+				<input type="text" value=>		
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">글내용</label>
 					

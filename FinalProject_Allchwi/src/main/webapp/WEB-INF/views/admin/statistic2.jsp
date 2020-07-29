@@ -23,7 +23,7 @@
 	</div>
 </div>
 
-<div id="top_x_div" style="width: 900px; height: 500px;"></div>
+<div id="top_x_div" style="width: 1146px; height: 500px;"></div>
 
 
 <script type="text/javascript">
@@ -38,13 +38,16 @@
 			success : function(data) {
 				var array = new Array();
 				array[0] = [ '수업명', '위시 수' ];
+				$(data).each(function(i, arr) {
+					var subArray = [arr.title,arr.cnt ];
+					
+					
+					
+					array[++i] = subArray;
+				});
 				
-				var data = new google.visualization.arrayToDataTable([
-						[ 'Opening Move', 'Percentage' ],
-						[ "King's pawn (e4)", 44 ],
-						[ "Queen's pawn (d4)", 31 ],
-						[ "Knight to King 3 (Nf3)", 12 ],
-						[ "Queen's bishop pawn (c4)", 10 ], [ 'Other', 3 ] ]);
+				
+				var data2 = new google.visualization.arrayToDataTable(array);
 
 				var options = {
 					title : 'Chess opening moves',
@@ -73,7 +76,7 @@
 
 				var chart = new google.charts.Bar(document
 						.getElementById('top_x_div'));
-				chart.draw(data, options);
+				chart.draw(data2, options);
 			}
 		});
 	}
