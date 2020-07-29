@@ -36,16 +36,10 @@
 <link href="${cp}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 <style>
-@font-face{
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 10px;
-}
-h1, h2, h3, h4, h5, h6{
-	font-family: 'Do Hyeon', sans-serif;
-}
-mark,p,a,span,ul,li{
+body{
 	font-family: 'Nanum Gothic', sans-serif;
 }
+
 a,span{
 	color: inherit;
 	font-size: inherit;
