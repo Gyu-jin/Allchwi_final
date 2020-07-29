@@ -346,6 +346,7 @@
 	background: lightgray;
 	color: #666;
 	letter-spacing: 0;
+	white-space: pre-line;
 }
 
 .tutor_t dl.tutor_txt dd:after {

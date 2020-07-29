@@ -146,15 +146,15 @@ li {
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<a href="${cp }/classDetail/detail?class_num=12"><img src="${cp}/resources/img/배너1.png" id="b1" class="d-block w-100"
+				<a href="${cp }/classDetail/detail?class_num=12"><img src="${cp}/resources/img/배너1.jpg" id="b1" class="d-block w-100"
 					alt="배너1"></a>
 			</div>
 			<div class="carousel-item">
-				<a href="${cp}/list/search?bcategory_num=7"><img src="${cp}/resources/img/배너2.png" id="b2" class="d-block w-100"
+				<a href="${cp}/list/search?bcategory_num=7"><img src="${cp}/resources/img/배너2.jpg" id="b2" class="d-block w-100"
 					alt="배너2"></a>
 			</div>
 			<div class="carousel-item">
-				<a href="${cp}/list/search?scategory_num=19"><img src="${cp}/resources/img/배너3.png" id="b3" class="d-block w-100"
+				<a href="${cp}/list/search?scategory_num=19"><img src="${cp}/resources/img/배너3.jpg" id="b3" class="d-block w-100"
 					alt="배너3"></a>
 			</div>
 		</div>
