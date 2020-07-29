@@ -185,13 +185,13 @@
 						</div> 
 						<div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: inline-flex;">
 							<label class="btn btn-secondary active"> 
-								<input type="radio" name="class_month" value="3" checked> 3개월
+								<input type="radio" name="class_month" value="1" checked> 1개월
 							</label> 
 							<label class="btn btn-secondary"> 
-								<input type="radio" name="class_month" value="6"> 6개월
+								<input type="radio" name="class_month" value="2"> 2개월
 							</label> 
 							<label class="btn btn-secondary"> 
-								<input type="radio" name="class_month" value="12"> 12개월
+								<input type="radio" name="class_month" value="3"> 3개월
 							</label> 
 						</div>
 		
