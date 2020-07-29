@@ -115,16 +115,18 @@
 				<div class="image"
 					style="background-image: url(${cp}/classImg/getimg?cover_num=${list.cover_num });"></div>
 				<div class="info-box">
-					<div class="dropdown more-text">
-			            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">
-						<svg class="cursor" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-		 					 <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-						</svg>
-			            <span class="caret"></span></button>
-			            <ul class="dropdown-menu" role="menu">
-			                <li style="text-align: center;"><a href="#" onclick="delClassInfo()"><font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
-			            </ul>
-			        </div>
+					<c:if test="${list.class_auth == '2' }">
+						<div class="dropdown more-text">
+				            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">
+							<svg class="cursor" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			 					 <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+							</svg>
+				            <span class="caret"></span></button>
+				            <ul class="dropdown-menu" role="menu">
+				                <li style="text-align: center;"><a href="#" onclick="delClassInfo()"><font style="font-size: 14px; color: black;">수업 삭제</font></a></li>
+				            </ul>
+				        </div>
+					</c:if>
 					<div>
 						<h3 onclick="location.href='${cp}/classDetail/detail?class_num=${list.class_num }'" style="cursor: pointer">${list.class_title }</h3>
 					</div>
@@ -141,7 +143,7 @@
 								<div class="button_gray" style="float:right;">심사완료</div>
 							</c:when>																																														
 						</c:choose>
-						<c:if test="${list.class_status == '1' }">
+						<c:if test="${list.class_status == '1'&& list.class_auth == '2' }">
 							<a href="${cp}/class/classDate?class_num=${list.class_num}">
 							<div class="button_gray" style="margin-right : 10px; float:right;">시간/날짜 설정</div></a> 
 						</c:if>
@@ -163,10 +165,10 @@
 								<a href="${cp}/class/classInfoUpdate?class_num=${list.class_num}">
 								<div class="button_gray cursor" style="margin-left: 10px;">수업수정</div></a>
 							</c:if>
-							<c:if test="${list.class_status== '1' }">
+							<c:if test="${list.class_status== '1' && list.class_auth == '2'}">
 								<div class="button_gray cursor" style="margin-left: 10px;" onclick="salesStatus(0)">판매시작하기</div></a> 
 							</c:if>
-							<c:if test="${list.class_status== '0' }">
+							<c:if test="${list.class_status== '0' && list.class_auth == '2'}">
 								<div class="button_white cursor" style="margin-left: 10px;" onclick="salesStatus(1)">판매중지하기</div>
 							</c:if>
 						</div>

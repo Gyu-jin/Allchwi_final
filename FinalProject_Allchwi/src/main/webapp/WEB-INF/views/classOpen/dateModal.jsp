@@ -17,7 +17,7 @@
 			var globalChkStatus = true;
 
 			$(function(){		
-				if(${class_form} == '1'){				
+				if('${class_form}' == '1'){				
 					$('#monthDate').val('1');
 				}
 				
@@ -113,6 +113,7 @@
 			function dateWeekSet(){
 				//매주반복 선택시 - 주차별 detail 장소 시간 정보 초기화
 				$('#type').find('input[name="startDate[]"]').val('');
+				var classCount = $('#classCount').val();
 				var oldDate = new Date($("#startDate1").val());
 				for(let i = 2;i<=classCount;i++){	
 					oldDate.setDate(oldDate.getDate()+7);

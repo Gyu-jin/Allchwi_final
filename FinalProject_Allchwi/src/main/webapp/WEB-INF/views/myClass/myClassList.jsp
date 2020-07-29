@@ -7,7 +7,7 @@
 <div class="container">
 		<!--MyTItleBox head-->
 		<div class="title-box">
-		    <h1>나의 탈잉</h1>
+		    <h1>내 수강 목록</h1>
 		    <ul>
 		        <li id="offline" class="cursor on"><a href="${cp}/mypage/myClassList">오프라인</a></li>
 		        <li id="online" class="cursor"><a href="${cp}/mypage/myClassList?class_form=1">온라인</a></li>
@@ -57,7 +57,7 @@
 									</c:choose>
 								</c:forEach>
 							</font>
-							<span>	(${vo.class_rating })${grade }</span>						
+							<span>	(${vo.class_rating })</span>						
 						</div>
 						<div class="start-date">
 							<font>결제일 : ${vo.pay_regdate }</font>&nbsp;|&nbsp;
@@ -67,11 +67,11 @@
 						<jsp:useBean id="today" class="java.util.Date" />
 						<fmt:formatDate var="now" value="${today}" pattern="yyyy-MM-dd" />
 						<fmt:formatDate var="startDate" value="${vo.class_date }" pattern="yyyy-MM-dd" />
-						<c:if test="${startDate >= now && vo.class_finish == '0'}">
+						<c:if test="${startDate >= now && vo.class_finish == '0' && vo.apply_auth=='1' }">
 							<div class="review-fold cursor on" onclick="classFinish('${vo.apply_num}')" style="display: inline-block; float: left; margin-right: 20px;">수강완료
 							</div>
 						</c:if>
-						<c:if test="${vo.class_finish=='1'}">
+						<c:if test="${vo.class_finish!='0'}">
 							<div class="review-fold cursor on" onclick="showModal(${vo.class_num})">리뷰작성
 							</div>
 						</c:if>

@@ -435,6 +435,14 @@ $(function(){
 			$('#Title').focus();
 			return false;
 		}
+		
+		var pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+		if(pattern.test($('#Title').val()) == true){
+			alert('제목에 특수문자를 입력하지 마세요');
+			$('#Title').focus();
+			return false;
+		}
+		
 		// 지역 입력 여부확인
 		if($('#address').val() == ''){
 			alert('수업 지역을 선택해주세요.')
@@ -629,7 +637,10 @@ $(function(){
 	
 		if(eventLoc != ""){
 			alert('튜터님 수업에 대해 조금 더 알려주세요.');
-			$(eventLoc).addClass('on').focus();
+			$(eventLoc).add
+
+			
+			('on').focus();
 			return false;
 		}
 		$('#frm-class').submit();

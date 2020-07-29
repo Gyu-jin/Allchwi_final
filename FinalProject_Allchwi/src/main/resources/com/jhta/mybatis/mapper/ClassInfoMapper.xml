@@ -31,13 +31,13 @@
 			ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate asc) cnt 
 			FROM class_img
 		) cover
-		where cover.class_num=aa.class_num and cnt=1 and aa.ml_num=#{ml_num} and class_status!=2
+		where cover.class_num=aa.class_num and cnt=1 and aa.ml_num=#{ml_num} and class_status!=2 and class_auth != 3
 		<include refid="class_num"/>
 		order by class_regdate desc limit 1
 	</select>
 	
 	<select id="title_list" parameterType="int" resultType="classinfo">
-		select class_title,class_num from class_info where ml_num=#{ml_num} and class_status != 2;
+		select class_title,class_num from class_info where ml_num=#{ml_num} and class_status != 2 and class_auth !=3
 	</select>
 	
 		<select id="myClassList" parameterType="hashmap" resultType="myclassList">
