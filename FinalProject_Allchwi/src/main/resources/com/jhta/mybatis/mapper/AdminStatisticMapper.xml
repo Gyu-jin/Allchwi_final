@@ -20,7 +20,7 @@
 	
 	<select id="top_statlist" resultType="com.jhta.allchwi.vo.admin.Statistic2VO">
 		select count(*) cnt, (select class_title from class_info cc where cc.class_num=ww.class_num) title 
-		from wishlist ww group by class_num order by cnt desc
+		from wishlist ww group by class_num order by cnt desc limit 0,9
 	</select>
 	
 	

@@ -30,7 +30,7 @@
 				<tr>
 					<th>회원번호</th>
 					<th>강사이름</th>
-					<th>수업제목</th>
+					<th style="width:300px">수업제목</th>
 					<th>신청금액</th>
 					<th>은행명/계좌번호</th>
 					<th>신청일</th>

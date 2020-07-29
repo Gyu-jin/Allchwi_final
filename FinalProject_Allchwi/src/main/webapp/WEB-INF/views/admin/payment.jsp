@@ -27,7 +27,7 @@
 						<th>회원번호</th>
 						<th>회원 아이디</th>
 						<th>결제날짜</th>
-						<th>수업제목</th>
+						<th style="width:300px">수업제목</th>
 						<th>결제방법</th>
 						<th>결제금액</th>
 					</tr>

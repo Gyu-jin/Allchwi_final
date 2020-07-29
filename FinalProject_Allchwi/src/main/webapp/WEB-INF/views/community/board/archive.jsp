@@ -129,14 +129,14 @@
 		</div>
 		
 		<c:choose>
-			<c:when test="${ml_num == commu_ml_num} ">
+			<c:when test="${ml_num == commu_ml_num}">
 				<button type="button" class="btn btn-primary" style="float:right" onclick="location.href='${cp}/community/writeContent'">글작성</button>
 			</c:when>
 			<c:otherwise>
 				<button type="button" class="btn btn-primary" style="float:right"  disabled="disabled">글작성</button>
 			</c:otherwise>
 		</c:choose>
-		<button type="button" class="btn btn-primary" style="float:right" onclick="location.href='${cp}/community/writeContent'">글작성</button>
+
 
 
 	</div>

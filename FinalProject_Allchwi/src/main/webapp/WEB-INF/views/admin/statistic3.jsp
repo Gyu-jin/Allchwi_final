@@ -11,10 +11,9 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item active"><a
 						href="${cp }/admin/statistic1">월별 매출액</a></li>
-					<li class="breadcrumb-item"><a href="${cp }/admin/statistic2">막대바
-							그래프</a></li>
 					<li class="breadcrumb-item"><a href="${cp }/admin/statistic3">카테고리
 							점유율</a></li>
+					<li class="breadcrumb-item"><a href="${cp }/admin/statistic2">인기수업 TOP10</a></li>
 				</ol>
 			</nav>
 
