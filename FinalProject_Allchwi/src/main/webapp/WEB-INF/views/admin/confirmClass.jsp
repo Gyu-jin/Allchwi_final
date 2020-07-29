@@ -244,12 +244,12 @@
 				.append(
 						"<button type='button' class='btn btn-danger btnRight' data-dismiss='modal'>닫기</button>");
 		$(modalForm).append(
-				"<input type='submit' class='btn btn-success btnRight' onclick=deny('"
-						+ class_num + "') value='심사 반려'>");
+				"<input type='submit' class='btn btn-success btnRight' onclick=\"deny('"+ class_num + "','"+id+"')\" value='심사 반려'>");
 
 	}
-	function deny(class_num) {
-		location.href = "${cp}/admin/denyClass?class_num=" + class_num;
+	function deny(class_num,id) {
+		
+		location.href = "${cp}/admin/denyClass?class_num=" + class_num+"&id="+id;
 	}
 </script>
 

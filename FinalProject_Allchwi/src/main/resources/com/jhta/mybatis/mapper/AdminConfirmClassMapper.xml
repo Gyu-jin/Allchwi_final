@@ -17,7 +17,7 @@
         (SELECT  class_num , cover_num , 
 			ROW_NUMBER() OVER (PARTITION BY class_num ORDER BY cover_regdate DESC) cnt 
 			FROM class_img)  bb 
-		where aa.class_num = bb.class_num and cnt=1
+		where aa.class_num = bb.class_num and cnt=1 order by class_num desc
 		
 		<if test="field!=null and field!=''"> 
 			and ${field} like CONCAT('%',#{keyword},'%') 	
