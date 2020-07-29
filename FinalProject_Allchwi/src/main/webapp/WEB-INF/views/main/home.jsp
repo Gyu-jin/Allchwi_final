@@ -70,6 +70,10 @@ mark {
 	height: 40px;
 	border-radius: 50%;
 }
+.tutor{
+	padding-bottom: 10%;
+}
+
 .tutor ul{
 	position: relative;
     width: 100%;
@@ -102,6 +106,7 @@ li {
 }
 .sec01{
 	margin-bottom: 30px;
+	color: #5a5c69;
 }
 .classtitle-box{
 	width:84%;
@@ -119,6 +124,14 @@ li {
 }
 .icon{
 	margin-bottom: 10px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -.75rem;
+    margin-left: -.75rem;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 </style>
 <div>
@@ -230,7 +243,7 @@ li {
 	</div>
 	<!-- //인기수업  -->
 	<!-- 평점높은튜터 -->
-	<h1 class="h3 sec01">높은 리뷰 평점</h1>
+	<h1 class="h3 sec01">리뷰 왕 튜터!</h1>
 	<div class="tutor">
 		<ul>
 			<c:forEach var="best_tutor" items="${best_tutor }">

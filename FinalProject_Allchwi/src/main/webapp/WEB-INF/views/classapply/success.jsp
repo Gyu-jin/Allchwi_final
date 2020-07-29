@@ -122,10 +122,15 @@
 .class_title{
 	padding:20px;
 }
-.center5 h4{
-	font-family: 
-}
 
+.link{
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	margin: auto;
+	margin-top: 15%;
+}
 
 </style>
 
@@ -171,7 +176,11 @@
 							<div class="left">튜터 연락처</div>
 							<div class="right" id="expireDate">${vo.tutor_phone}</div>
 						</div>
-					
+						
+						<div class="payend">
+							<div class="link">
+								<a href="${cp }/">메인으로 돌아가기</a> &nbsp &nbsp  |  &nbsp &nbsp <a href="${cp }/mypage/myClassList">내 수업 목록보기</a></div>
+						</div>
 					</div>
 				</div>
 			</div>
