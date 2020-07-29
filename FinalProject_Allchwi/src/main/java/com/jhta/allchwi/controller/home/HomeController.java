@@ -40,7 +40,7 @@ public class HomeController {
 			//a 회원번호 사용하여 vo에 이미지 및 이름, 닉네임 담기
 			ProfileVO pfv = mis.selectInfo(ml_num);
 			//model에 vo 객체 담아 보내기
-			sc.setAttribute("mem", pfv);
+			req.getSession().setAttribute("mem", pfv);
 		}
 		//인기수업
 		List<ClassDetailVO> top_list=detail_service.topFive();

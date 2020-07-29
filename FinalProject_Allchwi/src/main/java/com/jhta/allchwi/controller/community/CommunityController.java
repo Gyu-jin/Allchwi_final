@@ -46,7 +46,6 @@ public class CommunityController {
 		map.put("class_num", class_num);
 		
 		CommunityVO vo = service.goCommu(map);
-		System.out.println(ml_num +"  " + vo.getMl_num());
 		if(vo!=null) {
 			//a 해당 주에 올라온 과제 및 공지글 갯수
 			int noticeCount = nts.weekNotice(vo.getCommu_num()); 

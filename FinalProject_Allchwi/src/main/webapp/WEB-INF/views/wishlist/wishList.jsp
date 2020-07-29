@@ -7,7 +7,7 @@
 <div class="container">
 	<!-- My WishList Header -->
 	<div class="title-box">
-		<h1>나의 탈잉</h1>
+		<h1>위시리스트</h1>
 		<ul>
 			<li class="wishOn"><a href="${cp}/class/wishList">위시리스트</a></li>
 		</ul>
