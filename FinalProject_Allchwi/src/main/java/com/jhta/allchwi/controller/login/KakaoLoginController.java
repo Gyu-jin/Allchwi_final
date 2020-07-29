@@ -27,7 +27,10 @@ public class KakaoLoginController {
 	//카카오 로그인페이지로 이동
 	public String goLoginPage() {
 		String client_id = "4f883a7141cac9d993029eba73513c89";
-		String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
+		//기존 본인서버에서 실행시
+		//String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
+		//규진이 서버에서 실행시
+		String redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologin";
 		String path = "https://kauth.kakao.com/oauth/authorize?client_id="+ client_id + "&redirect_uri=" + redirect_uri + "&response_type=code";
 		return "redirect:" + path;
 	}
