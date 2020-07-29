@@ -30,8 +30,8 @@ public class KakaoLoginController {
 		//기존 본인서버에서 실행시
 		//String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
 		//규진이 서버에서 실행시
-		//String redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologin";
-		String redirect_uri = "http://175.192.131.221:8091/allchwi/login/kakaologin";  
+		String redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologin";
+		//String redirect_uri = "http://175.192.131.221:8091/allchwi/login/kakaologin";  
 		String path = "https://kauth.kakao.com/oauth/authorize?client_id="+ client_id + "&redirect_uri=" + redirect_uri + "&response_type=code";
 		return "redirect:" + path;
 	}
