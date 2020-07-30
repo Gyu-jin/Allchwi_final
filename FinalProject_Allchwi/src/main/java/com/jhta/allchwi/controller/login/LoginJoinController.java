@@ -26,6 +26,7 @@ public class LoginJoinController {
 	public String goJoin() {
 		return ".login.join";
 	}
+	
 	//a 회원가입정보 포스트 방식으로 받기 / session => 실제경로 구해오기 위해 필요 / mlv => 아이디, 비밀번호  / miv => 이름
 	@PostMapping("/login/join")
 	public String signUp(HttpSession session, MemberLoginVO mlv, MemberInfoVO miv) {		
@@ -64,4 +65,24 @@ public class LoginJoinController {
 		// json 형태로 나타냄
 		return json.toString();
 	}
+	//ajax로 전체 아이디 중복확인(카카오 로그인시 아이디가 없을 경우)
+	@RequestMapping(value = "/CheckID/do2", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String allCheck(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		//a 올취 회원중 중복되는 아이디가 있는지 확인하기 위해 
+		MemberLoginVO vo = mls.idCheck(map);
+		JSONObject json = new JSONObject();
+		//0 검색된 아이디가 존재하면
+		if (vo != null) {
+			//0 아이디가 존재 -> 사용할 수 없음
+			json.put("code", "fail");
+		} else {
+			//0 아이디가 없음 -> 사용 가능
+			json.put("code", "success");
+		}
+		// json 형태로 나타냄
+		return json.toString();
+	}	
 }

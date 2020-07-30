@@ -10,8 +10,11 @@
 <div class="container">
 	<div id=loginbody>
 		<div class="login-form">
-			<form action="${cp}/login/join" method="post">
-				<h1>올취 회원가입</h1>
+			<form action="${cp}/login/kakaoSignIn" method="post">
+				<h1>추가 정보입력</h1>
+				<!-- 히든으로 값 넘기기 닉네임 -->
+				<input type="hidden" value="${access_Token}" name="access_Token">
+				<input type="hidden" value="${kakaoInfo.nickname}" name="mb_nickname">
 				<!-- 이름 입력 -->
 				<div class="form-group">
 					<input type="text" name="mb_name" placeholder="이름 (한글만 입력, 2~5자 이내)"
@@ -24,38 +27,23 @@
 						style="font-size: 20px; color: red; padding-left: 20px;"></span>
 				</div>
 				<!-- 아이디(이메일형식) 입력-->
-				<div class="form-group">
-					<input type="email" name="id" placeholder="이메일(이메일형식, 15~20자 이내)"
-						onblur="idCheck()"> <span class="input-icon"><i
-						class="fa fa-envelope"></i></span>
-				</div>
-				<!-- 결과메세지 출력창 -->
-				<div>
-					<span id="idMsg"
-						style="font-size: 20px; color: red; padding-left: 20px;"></span>
-				</div>
-				<!-- 비밀번호 입력(특문, 영문, 숫자조합) 입력-->
-				<div class="form-group">
-					<input type="password" name="pwd" placeholder="비밀번호(특문/영문/숫자조합, 8~10자 이내)"
-						onblur="pwdCheck()"> <span class="input-icon"><i
-						class="fa fa-lock"></i></span>
-				</div>
-				<!-- 결과메세지 출력창 -->
-				<div>
-					<span id="pwdMsg"
-						style="font-size: 20px; color: red; padding-left: 20px;"></span>
-				</div>
-				<!-- 비밀번호 재입력(일치하도록)-->
-				<div class="form-group">
-					<input type="password" name="pwd1" placeholder="비밀번호를 재입력해주세요"
-						onblur="pwdDCheck()"> <span class="input-icon"><i
-						class="fa fa-lock"></i></span>
-				</div>
-				<!-- 결과메세지 출력창 -->
-				<div>
-					<span id="pwdDMsg"
-						style="font-size: 20px; color: red; padding-left: 20px;"></span>
-				</div>
+				<c:choose>
+					<c:when test="${kakaoInfo.email == null}">
+						<div class="form-group">
+							<input type="email" name="id" placeholder="이메일(이메일형식, 15~20자 이내)"
+								onblur="idCheck()"> <span class="input-icon"><i
+								class="fa fa-envelope"></i></span>
+						</div>
+						<!-- 결과메세지 출력창 -->
+						<div>
+							<span id="idMsg"
+								style="font-size: 20px; color: red; padding-left: 20px;"></span>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" value="${kakaoInfo.email}" name="id">
+					</c:otherwise>
+				</c:choose>
 				<input type="submit" class="login-btn" value="회원가입" name="join" onsubmit="return buttonUp()" 
 				disabled="disabled">
 			</form>
@@ -66,8 +54,13 @@
 	//가입 버튼 활성화 변수
 	var nameBl = false;
 	var idBl = false;
-	var pwdBl = false;
-	var pwdBl1 = false;
+	//해당 이메일 값이 존재할때 입력영역이 생기지 않으므로 유효성 검사를 하지 않도록 Bl값을 true로 함
+	var emailVal = '<c:out value="${kakaoInfo.email}"/>';
+	if(emailVal != null || emailVal != '' || emailVal != undefined){
+		idBl = true;
+	} else {
+		idBl = false;
+	}
 
 	//이름 유효성 검사
 	function nameCheck() {
@@ -115,7 +108,7 @@
 			idBl = false;
 		} else {
 			//아이디 존재여부를 ajax사용하여 
-			$.getJSON("${cp}/CheckID/do", {
+			$.getJSON("${cp}/CheckID/do2", {
 				id : id
 			}, function(data) {
 				console.log(data.code);
@@ -132,59 +125,12 @@
 			});
 		}
 	}
-	//비밀번호 유효성 검사
-	function pwdCheck() {
-		let pwd = $("input[name='pwd']").val();
-		let pwdMsg = $("#pwdMsg");
-		console.log(pwd);
-		// 특문 + 숫자 + 영문
-		//var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
-		//(?=.*\d) -> 임의의 모든 문자중 (0~9)숫자대응
-		var regExpPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]/;
-		if (!regExpPwd.test(pwd)) {
-			pwdMsg.css("color", "red");
-			pwdMsg.html("영문 + 숫자 + 특수문자를 조합해주세요.");
-			pwdBl = false;
-		} else if (pwd.length < 8) {
-			pwdMsg.css("color", "red");
-			pwdMsg.html("8자리 이상 입력해주세요.");
-			pwdBl = false;
-		} else if (pwd.length > 10) {
-			pwdMsg.css("color", "red");
-			pwdMsg.html("10자리 이내로 입력해주세요.");
-			pwdBl = false;
-		} else {
-			pwdMsg.css("color", "green");
-			pwdMsg.html("사용가능한 비밀번호입니다.");
-			pwdBl = true;
-			buttonUp();
-		}
-		console.log(pwdBl + "체크");
-	}
-	//비밀번호 확인 유효성 검사
-	function pwdDCheck() {
-		let pwd = $("input[name='pwd']").val();
-		let pwd1 = $("input[name='pwd1']").val();
-		let pwdDMsg = $("#pwdDMsg");
-		if (pwd1 === "") {
-			pwdDMsg.html("");
-			pwdBl1 = false;
-		} else if (!(pwd === pwd1)) {
-			pwdDMsg.css("color", "red");
-			pwdDMsg.html("비밀번호가 일치하지 않습니다.");
-			pwdBl1 = false;
-		} else {
-			pwdDMsg.css("color", "green");
-			pwdDMsg.html("비밀번호가 일치합니다.");
-			pwdBl1 = true;
-			buttonUp();
-		}
-	}
+	
 	// 버튼 활성화 함수 -> submit, 클릭 
 	function buttonUp() {
 		let btn = $("input[name='join']");
 		let btnColor = $(".login-form .login-btn");
-		if (nameBl && idBl && pwdBl && pwdBl1) {
+		if (nameBl && idBl) {
 			console.log("트루");
 			btn.removeAttr('disabled');
 			btnColor.css('background-color','#45aba6');			

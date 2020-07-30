@@ -35,9 +35,9 @@ public class KakaoLoginService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=4f883a7141cac9d993029eba73513c89");
-			sb.append("&redirect_uri=http://pakye.synology.me:7070/allchwi/login/kakaologin");
+			//sb.append("&redirect_uri=http://pakye.synology.me:7070/allchwi/login/kakaologin");
 			//규진sb.append("&redirect_uri=http://192.168.0.29:8091/allchwi/login/kakaologin");
-			//기존sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
+			sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -108,9 +108,15 @@ public class KakaoLoginService {
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			String email = "";
+			if(kakao_account.getAsJsonObject().get("email") != null) {
+				email = kakao_account.getAsJsonObject().get("email").getAsString();
+			} else {
+				email = null;
+			}
 			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
+			userInfo.put("email", email);				
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

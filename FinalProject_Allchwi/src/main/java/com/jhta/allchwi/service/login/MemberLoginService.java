@@ -124,9 +124,9 @@ public class MemberLoginService{
 	}
 	//kakao 로그인 후 미가입 회원 가입시 트랜잭션 처리
 		@Transactional
-		public int kakaoJoinMember(HttpSession session, HashMap<String, Object> kakaoUserInfo) throws Exception{
+		public int kakaoJoinMember(HttpSession session, MemberLoginVO mlv, MemberInfoVO miv) throws Exception{
 			//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
-			MemberLoginVO imlv = new MemberLoginVO(0, (String)kakaoUserInfo.get("email"), null, 0, 0, null, 'n',1);
+			MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), null, 0, 0, null, 'n',1);
 			int a = mld.join(imlv);
 			//a 회원가입시 1000포인트 적립 / s => save[적립]
 			PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');
@@ -151,7 +151,7 @@ public class MemberLoginService{
 			int a2 = pid.insert(piv);
 			
 			//a 참조키를 받아야하므로 제일 마지막에 저장, 이름을 vo에 넣고 DB에 저장
-			MemberInfoVO imiv = new MemberInfoVO(0, imlv.getMl_num(), piv.getPro_num(), null, null, (String)kakaoUserInfo.get("nickname"), null, 0, null, null);
+			MemberInfoVO imiv = new MemberInfoVO(0, imlv.getMl_num(), piv.getPro_num(), miv.getMb_name(), null, miv.getMb_nickname(), null, 0, null, null);
 			int a3 = mid.SignIn(imiv);
 			
 			int result = a + a1 + a2 + a3;
