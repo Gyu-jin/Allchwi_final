@@ -23,6 +23,9 @@ public class LoginMainController {
 	//2 로그인정보 확인  - 로그인 처리
 	@PostMapping("/login/signUp")
 	public String loginCheck(HttpSession session, MemberLoginVO mlv, RedirectAttributes ras) {
+		//회원중에서 검색
+		mlv.setKakaoUser(0);
+		System.out.println(mlv.getKakaoUser() + "넌 무엇이냐");
 		int result = mls.loginCheck(mlv);
 		//a 로그인 성공시
 		if(result == 1) {
@@ -30,7 +33,7 @@ public class LoginMainController {
 			MemberLoginVO get = mls.sessionInfo(mlv);
 			session.setAttribute("ml_num", get.getMl_num());
 			if(get.getTutor_auth() != 0) {
-				//a 튜터인증 여부 저장 - 나중에 등록 시 필요 
+				//a 튜터인증 여부 저장 - 나중에 등록 시 필요
 				session.setAttribute("tutor_auth", get.getTutor_auth());
 			}
 			return "redirect:/";
