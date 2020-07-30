@@ -44,10 +44,11 @@
 			<div id="table">
 				<table class="table">
 					<thead class="thead-dark">
+						<!-- 제목 컬럼 사이즈 고정 -->
 						<tr>
-							<th scope="col">일자</th>
-							<th scope="col">포인트 적립/사용 내역</th>
-							<th scope="col">포인트</th>
+							<th scope="col" style="width: 310px;">일자</th>
+							<th scope="col" style="width: 350px;">포인트 적립/사용 내역</th>
+							<th scope="col" style="width: 176px;">포인트</th>
 						</tr>
 					</thead>
 					<tbody id="tb">
