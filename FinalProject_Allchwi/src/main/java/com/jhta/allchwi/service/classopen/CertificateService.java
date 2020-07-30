@@ -1,9 +1,12 @@
 package com.jhta.allchwi.service.classopen;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.classopen.CertificateDAO;
+
 import com.jhta.allchwi.vo.classopen.CertificateVO;
 
 @Service
@@ -13,6 +16,10 @@ public class CertificateService {
 	
 	public int insert(CertificateVO vo) {
 		return dao.insert(vo);
+	}
+	
+	public CertificateVO getImg(int certif_num){
+		return dao.getImg(certif_num);
 	}
 	
 }

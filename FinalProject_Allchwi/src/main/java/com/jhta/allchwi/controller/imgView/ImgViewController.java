@@ -1,5 +1,7 @@
 package com.jhta.allchwi.controller.imgView;
 
+import java.security.cert.Certificate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.jhta.allchwi.service.classopen.CertificateService;
 import com.jhta.allchwi.service.classopen.ClassImgService;
 import com.jhta.allchwi.service.onlineclass.OnlineClassService;
 import com.jhta.allchwi.service.profileImg.ProfileImgService;
+import com.jhta.allchwi.vo.classopen.CertificateVO;
 import com.jhta.allchwi.vo.classopen.ClassImgVO;
 import com.jhta.allchwi.vo.onlineclass.OnlineClassVO;
 import com.jhta.allchwi.vo.profileImg.ProfileImgVO;
@@ -28,7 +32,11 @@ public class ImgViewController {
 	private ClassImgService imgService;
 	@Autowired
 	private OnlineClassService onlineService;
+	@Autowired
+	private CertificateService certiService;
 	
+	
+
 	@GetMapping("/mypageImg/getimg")
 	public ResponseEntity<byte[]> getImgPro(int pro_num){
 		ProfileImgVO vo = proService.getImg(pro_num);
@@ -63,6 +71,27 @@ public class ImgViewController {
 		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
 	}
 	
+	//자격증 이미지 뽑기
+	@GetMapping("/certiImg/getimg")
+	public ResponseEntity<byte[]> getCertiCover(int certif_num){
+		//System.out.println("썰티번호" + certif_num);
+		CertificateVO vo = certiService.getImg(certif_num);
+		String imgeName = vo.getCertif_name();
+		byte[] imgeContent = (byte[])vo.getCertif_file();
+		String formatName = imgeName.substring(imgeName.lastIndexOf(".") + 1);
+		final HttpHeaders headers = new HttpHeaders();
+		
+		 if(formatName.equalsIgnoreCase("jpg")) {
+		    	headers.setContentType(MediaType.IMAGE_JPEG);
+		 }else if(formatName.equalsIgnoreCase("png")) {
+		    	headers.setContentType(MediaType.IMAGE_PNG);
+		 }
+		 
+		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
+	}
+	
+	
+		
 	@GetMapping("/onlineImg/getimg")
 	public ResponseEntity<byte[]> getImgOnline(int online_num){
 		OnlineClassVO vo = onlineService.getImg(online_num);
@@ -73,6 +102,8 @@ public class ImgViewController {
 		 
 		return new ResponseEntity<byte[]>(imgeContent,headers,HttpStatus.OK);
 	}
+	
+	
 	
 	
 }

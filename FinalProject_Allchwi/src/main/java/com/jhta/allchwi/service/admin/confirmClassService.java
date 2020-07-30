@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.admin.confirmClassDAO;
+import com.jhta.allchwi.vo.admin.CertiVO;
+import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
 
 @Service
@@ -28,6 +30,14 @@ public class confirmClassService {
 	
 	public int denyClass(int class_num) {
 		return dao.denyClass(class_num);
+	}
+	
+	public ClassDetailVO class_detail(int class_num){
+		return dao.detail_list(class_num);
+	}
+	
+	public List<CertiVO> certi_list(int class_num) {
+		return dao.certi_list(class_num);
 	}
 	
 	

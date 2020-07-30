@@ -145,6 +145,11 @@
 </div>
 
 <script>
+
+
+
+
+
 	function getModal(pay_num, tutor_nickname, rem_pay,class_title,rem_revenue) {	
 		$("div [class='modal-footer']").empty();
 		$("#modal-body").text(

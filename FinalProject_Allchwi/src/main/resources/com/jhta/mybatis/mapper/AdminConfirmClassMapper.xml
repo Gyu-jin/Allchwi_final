@@ -58,4 +58,19 @@
 	</update>
 	
 	
+	
+	<select id="class_detail" parameterType="int" resultType="com.jhta.allchwi.vo.admin.ClassDetailVO">
+		select ci.class_title, ci.class_form, ci.class_hour, ci.class_min, ci.class_max, ci.class_price, ci.tutor_about, ci.class_about, ci.class_target, ci.tutor_nickname,
+		ci.tutor_phone,ci.class_address, sm.sloc_name, big.bloc_name, ci.pro_num 
+		from class_info ci, small_location sm, big_location big
+		where ci.sloc_num = sm.sloc_num and sm.bloc_num=big.bloc_num and ci.class_num=${class_num}
+	</select>
+	
+	<select id="certi_list" parameterType="int" resultType="com.jhta.allchwi.vo.admin.CertiVO">
+		select certif_name,certif_num
+		from class_info ci, certificate cr
+		where ci.class_num = cr.class_num and ci.class_num=${class_num}
+	</select>
+	
+	
 </mapper>

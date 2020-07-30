@@ -41,8 +41,12 @@ public class ManageClassController {
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("field", field);
 		
-		
 		return ".admin.manageClass";
 	}
+	
+
+	
+	
+	
 
 }

@@ -68,9 +68,14 @@
 								<div class="card">
 									<h5 class="card-header" style="text-align: center;">
 										${vo.class_title }
+										<!-- 
 										<a href="${cp}/classDetail/detail?class_num=${vo.class_num}" target="_blank">
 											<button type="button" class="btn btn-primary">상세정보</button>
 										</a>
+										 -->
+										<a href="${cp }/admin/classDetail?class_num=${vo.class_num}">
+											<button type="button" class="btn btn-primary">상세정보</button>
+										</a>		
 									</h5>
 
 

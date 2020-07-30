@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.allchwi.vo.admin.CertiVO;
+import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
 
 @Repository
@@ -31,6 +33,16 @@ public class confirmClassDAO {
 	
 	public int denyClass(int class_num) {
 		return session.update(NAMESPACE+".denyClass", class_num);
+	}
+	
+	
+	public ClassDetailVO detail_list(int class_num){
+		return session.selectOne(NAMESPACE+".class_detail", class_num);
+	}
+	
+	
+	public List<CertiVO> certi_list(int class_num){
+		return session.selectList(NAMESPACE+".certi_list", class_num);
 	}
 	
 	

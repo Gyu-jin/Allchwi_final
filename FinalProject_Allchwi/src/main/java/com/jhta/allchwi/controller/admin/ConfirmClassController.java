@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.confirmClassService;
 import com.jhta.allchwi.service.login.MailSenderService;
+import com.jhta.allchwi.vo.admin.CertiVO;
+import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
 
 @Controller
@@ -76,5 +78,31 @@ public class ConfirmClassController {
 		
 		return ".admin.confirmClass";
 	}
+	
+	@GetMapping("admin/classDetail")
+	public String classDetail(int class_num, Model model) {
+		
+		ClassDetailVO vo = service.class_detail(class_num);
+		List<CertiVO> certiList = service.certi_list(class_num);
+		
+		for (CertiVO vo4 : certiList) {
+			System.out.println("자격증명" +vo4.getCertif_name());
+			System.out.println("자격증번호" +vo4.getCertif_num());
+			
+		}
+		
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("certiList", certiList);
+		
+		
+		
+		
+		return ".admin.classDetail";
+	}
+	
+	
+	
+	
 	
 }
