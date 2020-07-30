@@ -90,7 +90,6 @@ $(document).on('click', '#btn_write_review', function () {
 	var ready_rating = $("#ready_rating a.on").length;
 	var kind_rating = $("#kind_rating a.on").length;
 	var time_rating = $("#time_rating a.on").length;
-	alert(review_content);
 	if(review_content== '' ){
 		alert('내용을 작성해주세요');
 	}else{
