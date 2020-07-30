@@ -20,14 +20,15 @@ body {
     height: 100px;
 }
 #h-title{
-	width:50%;
+
 	font-family: 'NanumSquareRound';
 	font-size: 1.3rem;
+	font-weight: bold;
 }
 
 #h-title a{
 	text-decoration: none;
-	color:#7185bb;
+	color:gray;
 }
 </style>
 <div class="container">

@@ -6,8 +6,8 @@
 	<insert id="insert" parameterType="assignment">
 		insert into assignment values(0,#{commu_num},#{assign_title},#{assign_content},now())
 	</insert>
-	<select id="list" resultType="assignment">
-		select * from assignment order by assign_num desc
+	<select id="list" resultType="assignment" parameterType="int">
+		select * from assignment where commu_num=#{commu_num} order by assign_num desc
 	</select>
 	<delete id="delete" parameterType="int">
 		delete from assignment where assign_num=#{assign_num}

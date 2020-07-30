@@ -58,7 +58,8 @@ public class AssignmentController {
 		System.out.println("tutor_num:"+tutor_num + " , " + "stu_num : " + ml_num);
 		
 		// 전체 과제 목록
-		List<AssignmentVO> list=assign_service.list();
+		int commu_num=vo.getCommu_num();
+		List<AssignmentVO> list=assign_service.list(commu_num);
 		model.addAttribute("list", list);
 		return ".community.board.assignment";
 	}

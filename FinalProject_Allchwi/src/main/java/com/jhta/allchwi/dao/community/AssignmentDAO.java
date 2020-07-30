@@ -17,8 +17,8 @@ public class AssignmentDAO {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
 	
-	public List<AssignmentVO> list(){
-		return session.selectList(NAMESPACE+".list");
+	public List<AssignmentVO> list(int commu_num){
+		return session.selectList(NAMESPACE+".list",commu_num);
 	}
 	
 	public int delete(int assign_num) {

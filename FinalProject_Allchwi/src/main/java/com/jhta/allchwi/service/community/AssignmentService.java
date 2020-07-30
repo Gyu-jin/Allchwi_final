@@ -16,8 +16,8 @@ public class AssignmentService {
 		return dao.insert(vo);
 	}
 	
-	public List<AssignmentVO> list(){
-		return dao.list();
+	public List<AssignmentVO> list(int commu_num){
+		return dao.list(commu_num);
 	}
 	
 	public int delete(int assign_num) {
