@@ -11,8 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>views/community/layout.jsp</title>
+<title>AllChwi!_Community</title>
 <!-- Bootstrap core JavaScript-->
 <script src="${cp}/resources/vendor/jquery/jquery.min.js"></script>
 <script

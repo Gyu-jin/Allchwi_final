@@ -133,6 +133,12 @@ li {
     padding-top: 3%;
     padding-bottom: 3%;
 }
+.name{
+	font-size:14px;
+}
+.loc{
+	font-size:14px;
+}
 </style>
 <div>
 	<!-- 메인 배너  -->

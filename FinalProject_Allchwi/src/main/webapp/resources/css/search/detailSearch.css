@@ -9,7 +9,8 @@
 	font-style: normal;
 }
 h1,h3{
-	font-family: 'CookieRunOTF-Bold';
+	font-family: 'NanumSquareRound';
+	font-size: 900;
 }
 .form-inline {
 	display: block;

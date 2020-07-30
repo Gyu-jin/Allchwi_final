@@ -3,21 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 @font-face {
-	font-family: 'CookieRunOTF-Bold';
+	font-family: 'NanumSquareRound';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff')
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
+body {
+	font-family: 'NanumSquareRound';
+}
+
 #h-top {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
     height: 100px;
 }
 #h-title{
-	font-family: 'CookieRunOTF-Bold';
-	font-size: 2rem;
+	width:50%;
+	font-family: 'NanumSquareRound';
+	font-size: 1.3rem;
 }
 
 #h-title a{

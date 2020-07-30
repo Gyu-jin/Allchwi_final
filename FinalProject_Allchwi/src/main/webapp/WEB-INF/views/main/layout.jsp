@@ -11,8 +11,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>views/main/layout.jsp</title>
+<link rel="icon" href="${cp }/resources/img/favicon.ico">
+<title>AllChwi!</title>
 <!-- font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic+Coding&display=swap"
