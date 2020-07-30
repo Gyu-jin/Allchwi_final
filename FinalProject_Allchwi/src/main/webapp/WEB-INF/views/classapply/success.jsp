@@ -59,7 +59,7 @@
     width: 700px;
     float: right;
     border-top: 1px solid #d8d9db;
-    padding-top: 70px;
+    padding-top: 30px;
 }
 .appcont .height4 {
     height: 100px;
@@ -74,7 +74,7 @@
 }
 .apply-img{
     max-width: 60px;
-    max-height: 60px%;
+    max-height: 60px;
     vertical-align: top;
 }
 .appcont .payend .center5 {
@@ -129,9 +129,11 @@
 	text-align: center;
 	vertical-align: middle;
 	margin: auto;
-	margin-top: 15%;
+	margin-top: -8%;
 }
-
+.h4, h4 {
+    font-size: 1.4rem;
+}
 </style>
 
 

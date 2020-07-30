@@ -68,10 +68,10 @@
 }
 
 .tutor_cont .sh_box {
-	width: 700px;
-	float: right;
-	border-top: 1px solid #d8d9db;
-	padding-top: 70px;
+    width: 700px;
+    float: right;
+    border-top: 1px solid #d8d9db;
+    padding-top: 30px;
 }
 
 .appcont .height4 {
@@ -89,7 +89,7 @@
 
 .apply-img {
 	max-width: 60px;
-	max-height: 60px%;
+	max-height: 60px;
 	vertical-align: top;
 }
 
@@ -143,6 +143,9 @@
 .class_title {
 	padding: 20px;
 }
+.h4, h4 {
+    font-size: 1.4rem;
+}
 </style>
 <div class="container">
 	<div class="tutor_cont">
@@ -188,10 +191,15 @@
 								</div>
 
 								<div class="payend">
-									<div class="center5">수업 신청 승인 대기중입니다.</div>
+									<div class="center5">
+										<h4 onclick="location.href='${cp}/class/classDetail/class_num=${vo.class_num }'"
+											style="cursor: pointer">${vo.class_title }</h4>
+										수업 신청 승인 대기중입니다.
+									</div>
 								</div>
-								<div class="payend">
-									<div class="center4">신청일로부터 10일 내에 신청승인이 완료됩니다!</div>
+								<div class="payend">					
+									<div class="center4">								
+									신청일로부터 10일 내에 신청승인이 완료됩니다!</div>
 								</div>
 							</c:when>
 							<c:otherwise>
