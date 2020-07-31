@@ -35,9 +35,9 @@ public class KakaoLoginService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=4f883a7141cac9d993029eba73513c89");
-			//sb.append("&redirect_uri=http://pakye.synology.me:7070/allchwi/login/kakaologin");
+			sb.append("&redirect_uri=http://pakye.synology.me:7070/allchwi/login/kakaologin");
 			//규진sb.append("&redirect_uri=http://192.168.0.29:8091/allchwi/login/kakaologin");
-			sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
+			//sb.append("&redirect_uri=http://localhost:8091/allchwi/login/kakaologin");
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -75,7 +75,7 @@ public class KakaoLoginService {
 		return access_Token;
 	}
 
-	// a 회원정보 얻어오기
+	// a 카카오 회원정보 얻어오기
 	public HashMap<String, Object> getUserInfo(String access_Token) {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<>();
@@ -103,19 +103,25 @@ public class KakaoLoginService {
 
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
-
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-
+			//카카오 유저 구분을 위해 고유아이디값을 출력
+			String kakaoId = element.getAsJsonObject().get("id").getAsString();
+			//별명의 경우 필수 동의 이므로 가져올수 있음. 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			//이메일은 선택 동의 이므로 동의를 하지 않을 경우가 있을 수 있으므로 
 			String email = "";
+			//json의 이메일 정보가 담겨있는지 확인 후 담겨있을 경우
 			if(kakao_account.getAsJsonObject().get("email") != null) {
 				email = kakao_account.getAsJsonObject().get("email").getAsString();
+			//이메일 정보가 없을 경우
 			} else {
-				email = null;
+				email = "";
 			}
+			//map에 담아줌
 			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);				
+			userInfo.put("email", email);
+			userInfo.put("kakaoUser", kakaoId);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

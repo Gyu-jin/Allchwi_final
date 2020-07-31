@@ -12,13 +12,17 @@
 	</insert>
 	<!-- 카카오 유저 조건 -->
 	<sql id="kakaoCheck">
-		<if test="kakaoUser != null and kakaoUser != ''">
+		<if test="kakaoUser != 'n'">
 			and kakaoUser = #{kakaoUser}
 		</if>
 	</sql>
 	<!--1 아이디 검사  -->
 	<select id="idCheck" resultType="mlv" parameterType="hashmap">
 		select * from member_login where id = #{id} <include refid="kakaoCheck"/>
+	</select>
+	<!-- 카카오 로그인시 아이디 검사 -->
+	<select id="kakaoIdCheck" resultType="mlv" parameterType="hashmap">
+		select * from member_login where kakaoUser = #{kakaoUser}
 	</select>
 	<!--2 비밀번호 변경 -->
 	<update id="searchPwd" parameterType="hashmap">
@@ -34,7 +38,7 @@
 	</update>
 	<!--5 로그인정보 일치여부 확인 -->
 	<select id="loginCheck" resultType="mlv" parameterType="mlv">
-		select * from member_login where id = #{id} and pwd = #{pwd} and kakaoUser = 0
+		select * from member_login where id = #{id} and pwd = #{pwd} and kakaoUser = 'n'
 	</select>
 	<!--6 회원번호로 로그인정보 VO 출력 -->
 	<select id="loginInfo" resultType="mlv" parameterType="int">

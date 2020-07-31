@@ -29,11 +29,11 @@ public class KakaoLoginController {
 	public String goLoginPage() {
 		String client_id = "4f883a7141cac9d993029eba73513c89";
 		//기존 본인서버에서 실행시
-		String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
+		//String redirect_uri = "http://localhost:8091/allchwi/login/kakaologin";
 		//규진이 서버에서 실행시
 		//String redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologin";
 		//나스 서버 실행시 
-		//String redirect_uri = "http://pakye.synology.me:7070/allchwi/login/kakaologin";
+		String redirect_uri = "http://pakye.synology.me:7070/allchwi/login/kakaologin";
 		String path = "https://kauth.kakao.com/oauth/authorize?client_id="+ client_id + "&redirect_uri=" + redirect_uri + "&response_type=code";
 		return "redirect:" + path;
 	}
@@ -48,11 +48,10 @@ public class KakaoLoginController {
 		String kakaoEmail = (String)kakaoUserInfo.get("email");
 		//kakao 계정이 존재할 경우 
 		if(kakaoEmail != "" || kakaoEmail != null) {
-			//kakao 이메일과 카카오 유저번호 map에 담아주기
-			map.put("id",kakaoEmail);
-			map.put("kakaoUser",1);
+			//kakao 이메일과 카카오 유저아이디 map에 담아주기
+			map.put("kakaoUser",(String)kakaoUserInfo.get("kakaoUser"));
 			//a 카카오 이메일로 회원정보가 있는지 검색
-			MemberLoginVO infoCheckVo = mls.idCheck(map);
+			MemberLoginVO infoCheckVo = mls.kakaoIdCheck(map);
 			//a 회원정보 존재 -> 가입된 회원 -> 로그인후 메인페이지로 이동
 			if (infoCheckVo != null) {
 				//a 로그인번호를 세션에 저장
@@ -80,16 +79,18 @@ public class KakaoLoginController {
 			return ".login.kakaoJoin";			
 		}
 	}
+	//카카오 회원 올취 회원가입
 	@RequestMapping(value = "/login/kakaoSignIn")
-	public String kakaologin2(HttpSession session, Model model, MemberLoginVO mlv, MemberInfoVO miv, String access_Token, HashMap<String, Object> map) {
+	public String kakaologin2(HttpSession session, Model model, MemberLoginVO mlv, MemberInfoVO miv, String access_Token, HashMap<String, Object> map, String kakaoUserId) {
 		try {
-			
+			//카카오 회원아이디를 memberloginVO 담음
+			mlv.setKakaoUser(kakaoUserId);
+			//회원가입
 			int result = mls.kakaoJoinMember(session, mlv, miv);
 			if(result == 4) {
-				map.put("id", mlv.getId());
-				map.put("kakaoUser", 1);
+				map.put("kakaoUser", kakaoUserId);
 				//a map 값과 일치하는 로그인정보 가져오기
-				MemberLoginVO getInfoVo = mls.idCheck(map);
+				MemberLoginVO getInfoVo = mls.kakaoIdCheck(map);
 				//a 로그인번호를 세션에 저장
 				session.setAttribute("ml_num", getInfoVo.getMl_num());
 				//a kakao회원인지 아닌지 구분을 위해 세션에 토큰 저장

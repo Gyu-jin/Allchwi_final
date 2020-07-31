@@ -12,9 +12,10 @@
 		<div class="login-form">
 			<form action="${cp}/login/kakaoSignIn" method="post">
 				<h1>추가 정보입력</h1>
-				<!-- 히든으로 값 넘기기 닉네임 -->
+				<!-- 히든으로 값 넘기기 닉네임 / 토큰 / 카카오유저고유아이디-->
 				<input type="hidden" value="${access_Token}" name="access_Token">
-				<input type="hidden" value="${kakaoInfo.nickname}" name="mb_nickname">
+				<input type="hidden" value="${kakaoUserInfo.nickname}" name="mb_nickname">
+				<input type="hidden" value="${kakaoUserInfo.kakaoUser}" name="kakaoUserId">
 				<!-- 이름 입력 -->
 				<div class="form-group">
 					<input type="text" name="mb_name" placeholder="이름 (한글만 입력, 2~5자 이내)"
@@ -26,9 +27,9 @@
 					<span id="nameMsg"
 						style="font-size: 20px; color: red; padding-left: 20px;"></span>
 				</div>
-				<!-- 아이디(이메일형식) 입력-->
+				<!-- 아이디(이메일형식) 입력 / 이메일 동의 안했을경우 둘다 입력 / 전체 동의시 이름만 입력-->
 				<c:choose>
-					<c:when test="${kakaoInfo.email == null}">
+					<c:when test="${kakaoUserInfo.email == null || kakaoUserInfo.email == ''}">
 						<div class="form-group">
 							<input type="email" name="id" placeholder="이메일(이메일형식, 15~20자 이내)"
 								onblur="idCheck()"> <span class="input-icon"><i
@@ -41,7 +42,7 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<input type="hidden" value="${kakaoInfo.email}" name="id">
+						<input type="hidden" value="${kakaoUserInfo.email}" name="id">
 					</c:otherwise>
 				</c:choose>
 				<input type="submit" class="login-btn" value="회원가입" name="join" onsubmit="return buttonUp()" 

@@ -10,13 +10,13 @@ public class MemberLoginVO {
 	private int login_auth;
 	private Timestamp ml_regdate;
 	private char email_auth;
-	//a 카카오 유저인지 아닌지 확인 일반 유저 0, 카카오 유저 1
-	private int kakaoUser;
+	//a 카카오 유저인지 아닌지 확인 일반 유저 "n", 카카오 유저 - 카카오 유저 고유 아이디
+	private String kakaoUser;
 	
 	public MemberLoginVO() {}
 
 	public MemberLoginVO(int ml_num, String id, String pwd, int tutor_auth, int login_auth, Timestamp ml_regdate,
-			char email_auth, int kakaoUser) {
+			char email_auth, String kakaoUser) {
 		super();
 		this.ml_num = ml_num;
 		this.id = id;
@@ -84,11 +84,11 @@ public class MemberLoginVO {
 		this.email_auth = email_auth;
 	}
 
-	public int getKakaoUser() {
+	public String getKakaoUser() {
 		return kakaoUser;
 	}
 
-	public void setKakaoUser(int kakaoUser) {
+	public void setKakaoUser(String kakaoUser) {
 		this.kakaoUser = kakaoUser;
 	}
 }

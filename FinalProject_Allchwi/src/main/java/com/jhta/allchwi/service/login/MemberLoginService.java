@@ -41,6 +41,10 @@ public class MemberLoginService{
 	public MemberLoginVO idCheck(HashMap<String, Object> hm) {
 		return mld.idCheck(hm);
 	}
+	//카카오 유저 확인
+	public MemberLoginVO kakaoIdCheck(HashMap<String, Object> hm) {
+		return mld.kakaoIdCheck(hm);
+	}
 	//현재 비밀번호 일치 여부 확인
 	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {
 		return mld.checkPwd(hm);
@@ -57,7 +61,7 @@ public class MemberLoginService{
 //		a 방법이 없을 경우 @supresswarning 어노테이션 추가하여 경고창만 없앰(실질적인 해결방법은 아님..)
 //		HashMap<String, Object> hm = (HashMap<String, Object>) data;
 		//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
-		MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), mlv.getPwd(), 0, 0, null, 'n',0);
+		MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), mlv.getPwd(), 0, 0, null, 'n', "n");
 		int a = mld.join(imlv);
 		//a 회원가입시 1000포인트 적립 / s => save[적립]
 		PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');
@@ -88,7 +92,7 @@ public class MemberLoginService{
 		int result = a + a1 + a2 + a3;
 		return result;
 	}
-	//a 현재 비밀번호 일치 여부 확인
+	//a 올취페이지로 회원가입한 회원의 현재 비밀번호 일치 여부 확인
 	public int loginCheck(MemberLoginVO mlv) {
 		MemberLoginVO result = mld.loginCheck(mlv);
 		//a 아이디 비밀번호 일치시
@@ -111,7 +115,7 @@ public class MemberLoginService{
 	public MemberLoginVO sessionInfo(MemberLoginVO mlv) {
 		return mld.loginCheck(mlv);
 	}
-	//a 로그아웃(탈잉 회원가입 유저)
+	//a 로그아웃(올취 회원가입 유저)
 	public void logout(HttpSession session) {
 		session.removeAttribute("ml_num");
 	    session.removeAttribute("tutor_auth");
@@ -125,8 +129,8 @@ public class MemberLoginService{
 	//kakao 로그인 후 미가입 회원 가입시 트랜잭션 처리
 		@Transactional
 		public int kakaoJoinMember(HttpSession session, MemberLoginVO mlv, MemberInfoVO miv) throws Exception{
-			//a 받아온 아이디와 비밀번호를 vo에 넣어서 필요한 정보와 같이 DB에 저장
-			MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), null, 0, 0, null, 'n',1);
+			//a 받아온 아이디와 비밀번호, 카카오고유아이디를  vo에 넣어서 필요한 정보와 같이 DB에 저장
+			MemberLoginVO imlv = new MemberLoginVO(0, mlv.getId(), null, 0, 0, null, 'n', mlv.getKakaoUser());
 			int a = mld.join(imlv);
 			//a 회원가입시 1000포인트 적립 / s => save[적립]
 			PointVO pv = new PointVO(0, imlv.getMl_num(), 1000, "회원가입적립", null, 's');

@@ -26,11 +26,11 @@ public class LogoutController {
 			System.out.println("카카오 맞다.");
 			String client_id = "4f883a7141cac9d993029eba73513c89";
 			//기존 본인 서버 실행시
-			String logout_redirect_uri = "http://localhost:8091/allchwi/login/kakaologout";
+			//String logout_redirect_uri = "http://localhost:8091/allchwi/login/kakaologout";
 			//규진이 서버 실행시
 			//String logout_redirect_uri = "http://192.168.0.29:8091/allchwi/login/kakaologout";
 			//나스
-			//String logout_redirect_uri = "http://pakye.synology.me:7070/allchwi/login/kakaologout";
+			String logout_redirect_uri = "http://pakye.synology.me:7070/allchwi/login/kakaologout";
 			String path = "https://kauth.kakao.com/oauth/logout?client_id="+ client_id + "&logout_redirect_uri=" + logout_redirect_uri + "&state=?";
 			return "redirect:" + path;
 		} else {
