@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -44,6 +45,10 @@ public class MemberLoginService{
 	//카카오 유저 확인
 	public MemberLoginVO kakaoIdCheck(HashMap<String, Object> hm) {
 		return mld.kakaoIdCheck(hm);
+	}
+	//전체 아이디 확인
+	public List<MemberLoginVO> allIdCheck(HashMap<String, Object> hm) {
+		return mld.allIdCheck(hm);
 	}
 	//현재 비밀번호 일치 여부 확인
 	public MemberLoginVO checkPwd(HashMap<String, Object> hm) {

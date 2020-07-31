@@ -1,6 +1,7 @@
 package com.jhta.allchwi.dao.login;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,10 @@ public class MemberLoginDAO {
 	//1-1 카카오유저 고유아이디 값으로 회원 조회
 	public MemberLoginVO kakaoIdCheck(HashMap<String, Object> hm) {
 		return session.selectOne(NAMESPACE + ".kakaoIdCheck", hm);
+	}
+	//1-2 아이디로 전체 회원 아이디 조회
+	public List<MemberLoginVO> allIdCheck(HashMap<String, Object> hm) {
+		return session.selectList(NAMESPACE + ".allIdCheck", hm);
 	}
 	//2 id값으로 회원 비밀번호 검색하여 변경
 	public int searchPwd(HashMap<String, Object> hm) {

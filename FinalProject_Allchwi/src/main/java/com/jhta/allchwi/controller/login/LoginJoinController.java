@@ -1,6 +1,7 @@
 package com.jhta.allchwi.controller.login;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +51,6 @@ public class LoginJoinController {
 	public String idCheck(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		map.put("kakaoUser", null);
 		//a 올취 회원중 중복되는 아이디가 있는지 확인하기 위해 
 		MemberLoginVO vo = mls.idCheck(map);
 		JSONObject json = new JSONObject();
@@ -71,8 +71,8 @@ public class LoginJoinController {
 	public String allCheck(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		//a 올취 회원중 중복되는 아이디가 있는지 확인하기 위해 
-		MemberLoginVO vo = mls.idCheck(map);
+		//a 전체 회원중 중복되는 아이디가 있는지 확인하기 위해 
+		List<MemberLoginVO> vo = mls.allIdCheck(map);
 		JSONObject json = new JSONObject();
 		//0 검색된 아이디가 존재하면
 		if (vo != null) {

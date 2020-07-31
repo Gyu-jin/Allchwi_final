@@ -10,19 +10,17 @@
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
-	<!-- 카카오 유저 조건 -->
-	<sql id="kakaoCheck">
-		<if test="kakaoUser != 'n'">
-			and kakaoUser = #{kakaoUser}
-		</if>
-	</sql>
 	<!--1 아이디 검사  -->
 	<select id="idCheck" resultType="mlv" parameterType="hashmap">
-		select * from member_login where id = #{id} <include refid="kakaoCheck"/>
+		select * from member_login where id = #{id} and kakaoUser = "n"
 	</select>
 	<!-- 카카오 로그인시 아이디 검사 -->
 	<select id="kakaoIdCheck" resultType="mlv" parameterType="hashmap">
 		select * from member_login where kakaoUser = #{kakaoUser}
+	</select>
+	<!-- 전체 아이디 검사 -->
+	<select id="allIdCheck" resultType="mlv" parameterType="hashmap">
+		select * from member_login where id = #{id}
 	</select>
 	<!--2 비밀번호 변경 -->
 	<update id="searchPwd" parameterType="hashmap">
