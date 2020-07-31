@@ -120,41 +120,66 @@
 										<c:forEach var="cert" items="${certiList}">
 											<li class="com"><img
 												src="https://user-images.githubusercontent.com/65140754/88015559-721aa500-cb5c-11ea-9c7b-4acdb7694eaf.png">
-												${cert.certif_name } / ${cert.certif_num }</li>
+												${cert.certif_name }</li>
 										</c:forEach>
 									</ul>
 
-									<c:forEach var="cert" items="${certiList}" varStatus="status">
-										<div id="carouselExampleCaptions" class="carousel slide"
-											data-ride="carousel">
-											<ol class="carousel-indicators">
-												<li data-target="#carouselExampleCaptions"
-													data-slide-to="${status.index }" class="active"></li>
-											</ol>
-											<div class="carousel-inner">
-												<div class="carousel-item active">
-													<img src="${cp}/certiImg/getimg?certif_num=${cert.certif_num }" class="d-block w-100" alt="...">
-													<div class="carousel-caption d-none d-md-block">
-														<h5>${cert.certif_name}</h5>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-									
-									<a class="carousel-control-prev"
-												href="#carouselExampleCaptions" role="button"
-												data-slide="prev"> <span
-												class="carousel-control-prev-icon" aria-hidden="true"></span>
-												<span class="sr-only">Previous</span>
-									</a> 
-									<a class="carousel-control-next"
-												href="#carouselExampleCaptions" role="button"
-												data-slide="next"> <span
-												class="carousel-control-next-icon" aria-hidden="true"></span>
-												<span class="sr-only">Next</span>
-									</a>
+									<div id="carouselExampleCaptions" class="carousel slide"
+										data-ride="carousel">
+										<ol class="carousel-indicators">
+											<c:forEach var="cert" items="${certiList}" varStatus="status">
+												<c:choose>
+													<c:when test="${status.index==0}">
+														<li data-target="#carouselExampleCaptions"
+															data-slide-to="${status.index}" class="active"></li>
+													</c:when>
+													<c:otherwise>
+														<li data-target="#carouselExampleCaptions"
+															data-slide-to="${status.index}"></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</ol>
 
+										<div class="carousel-inner">
+											<c:forEach var="cert" items="${certiList}" varStatus="status">
+												<c:choose>
+													<c:when test="${status.index==0}">
+														<div class="carousel-item active">
+															<img
+																src="${cp}/certiImg/getimg?certif_num=${cert.certif_num }"
+																class="d-block w-100">
+															<div class="carousel-caption d-none d-md-block">
+																<h5>${cert.certif_name }</h5>
+															</div>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="carousel-item">
+															<img
+																src="${cp}/certiImg/getimg?certif_num=${cert.certif_num }"
+																class="d-block w-100">
+															<div class="carousel-caption d-none d-md-block">
+																<h5>${cert.certif_name }</h5>
+															</div>
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</div>
+
+										<a class="carousel-control-prev"
+											href="#carouselExampleCaptions" role="button"
+											data-slide="prev"> <span
+											class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="carousel-control-next"
+											href="#carouselExampleCaptions" role="button"
+											data-slide="next"> <span
+											class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
 
 								</div>
 
@@ -197,6 +222,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 	//카카오 지도 api
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
