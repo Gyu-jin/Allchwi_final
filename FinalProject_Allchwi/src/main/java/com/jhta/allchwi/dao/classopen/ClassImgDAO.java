@@ -27,7 +27,7 @@ public class ClassImgDAO {
 	}
 	//a 튜터번호로 이미지 리스트 가져오기
 	public List<ClassImgVO> getImgList(int class_num){
-		return session.selectList(NAMESPACE + ".imgSelect", class_num);
+		return session.selectList(NAMESPACE + ".imgList", class_num);
 	}
 	
 }

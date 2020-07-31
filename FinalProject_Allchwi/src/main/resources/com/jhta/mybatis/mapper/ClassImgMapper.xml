@@ -16,7 +16,7 @@
 	</delete>
 	
 	<!-- a 튜터번호로  이미지 가져오기 -->
-	<select id="certiList" parameterType="int" resultType="classImg">
+	<select id="imgList" parameterType="int" resultType="classImg">
 		select * from class_img where class_num=#{class_num}
 	</select>
 </mapper>
