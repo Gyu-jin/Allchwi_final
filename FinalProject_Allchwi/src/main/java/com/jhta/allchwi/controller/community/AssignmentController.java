@@ -55,7 +55,6 @@ public class AssignmentController {
 		
 		model.addAttribute("stu_num",ml_num);
 		model.addAttribute("tutor_num",tutor_num);
-		System.out.println("tutor_num:"+tutor_num + " , " + "stu_num : " + ml_num);
 		
 		// 전체 과제 목록
 		int commu_num=vo.getCommu_num();
@@ -109,7 +108,7 @@ public class AssignmentController {
 	@RequestMapping(value="/assign/updateOk", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateOk(AssignmentVO vo) {
-		System.out.println("assign/updateOk method");
+		
 		int n=assign_service.update(vo);
 		if(n>0) {		
 			return "success";
@@ -124,21 +123,12 @@ public class AssignmentController {
 	@ResponseBody
 	public List<AssignSubmitVO> submitOk(@RequestParam(value="assign_num")int assign_num,
 			@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+		
 		HashMap<String, Object> map=new HashMap<String, Object>();
     	map.put("assign_num", assign_num);
     	List<AssignSubmitVO> sub_list=submit_service.sub_list(map);
     	System.out.println("listsize: "+ sub_list.size());
-		/*
-		 * JSONArray arr=new JSONArray(); for(AssignSubmitVO vo:sub_list) { JSONObject
-		 * json=new JSONObject(); json.put("sub_content", vo.getSub_content());
-		 * json.put("sub_regdate", vo.getSub_regdate()); json.put("org_filename",
-		 * vo.getAssign_orgFilename()); json.put("pro_num", vo.getPro_num());
-		 * System.out.println("sub_content:" + vo.getSub_content());
-		 * System.out.println("sub_regdate:"+ vo.getSub_regdate());
-		 * System.out.println("org_filename:"+ vo.getAssign_orgFilename());
-		 * System.out.println("pro_num:"+ vo.getPro_num()); arr.put(json); }
-		 */
-    	
+
     	return sub_list;
 		
 		
@@ -157,9 +147,6 @@ public class AssignmentController {
         int submit=submit_service.insert(svo);
         
         int sub_num=svo.getSub_num();
-        System.out.println("sub_num:"+sub_num);
-        System.out.println("assign_num :"+assign_num);
-        
         
         List<MultipartFile> fileList = multireq.getFiles("assign_file");
         String path = session.getServletContext().getRealPath("/resources/AssignUpload");
@@ -169,9 +156,6 @@ public class AssignmentController {
             String assign_orgFilename = mf.getOriginalFilename(); // 원본 파일 명
             String assign_saveFilename=UUID.randomUUID()+"_" +assign_orgFilename; // 저장 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("assign_orgFilename : " + assign_orgFilename);
-            System.out.println("fileSize : " + fileSize);
 
             try {
                 mf.transferTo(new File(path+"\\"+assign_saveFilename));
@@ -193,8 +177,8 @@ public class AssignmentController {
         // 학생 과제 제출 파일 다운로드
         @GetMapping("/assign/download")
     	public String download(int assigndata_num ,Model model,HttpSession session) {
+        	
     		//다운로드할 파일정보를 갖는 객체얻어오기
-    		
     		AssignDataVO vo=data_service.saveFilename(assigndata_num);
     		String path=session.getServletContext().getRealPath("/resources/AssignUpload");
     		

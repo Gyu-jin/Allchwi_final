@@ -563,9 +563,7 @@ img {
 	    var usePoint =parseInt( $(this).val());
 	    var classPay= $("#class_fee").val();
 	    var ppoint= $("#ppoint").val();
-	    console.log(classPay );
-	    console.log(ppoint );
-	    console.log(usePoint );
+
 	    if(usePoint>ppoint){
 	    	alert("보유하신 포인트보다 작은 금액만 입력 가능합니다!");
 	    	$("#pointDiv").focus();
@@ -587,7 +585,7 @@ img {
 	      IMP.init('imp41758276'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	      var msg;
 	      var final_price=$("input[name='final_price']").val();  
-	      console.log(final_price);
+
 	        IMP.request_pay({
 	            pg : 'html5_inicis',
 	            pay_method : 'vbank',
@@ -599,18 +597,15 @@ img {
 	            buyer_tel : '321',
 	            buyer_addr : '123',
 	            buyer_postcode : '123-456',
-	            //m_redirect_url : 'http://www.naver.com'
+	    
 	        }, function(rsp) {
 	            if ( rsp.success ) {
 
 	                //성공시 이동할 페이지
 	                var formData = $("#applyForm").serialize();
 	                var class_num=$("input[name='class_num']").val();
-	        		
-	        		
-	        		
+    		
 	        		$.post("${cp}/class/applyOk",formData , function(data) {
-	        			console.log("콜백" + data);
 	        			
 	        			if(data=="success"){
 	        				
@@ -618,7 +613,6 @@ img {
 	                        msg += '\n고유ID : ' + rsp.imp_uid;
 	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	                        msg += '\결제 금액 : ' + rsp.paid_amount;
-	                        msg += '카드 승인번호 : ' + rsp.apply_num;
 	                        
 	                        alert(msg);
 	        				
@@ -637,7 +631,7 @@ img {
 	                alert(msg);
 	                //실패시 이동할 페이지
 	                location.href="${cp}/";
-	                console.log(final_price);
+
 	                
 	            }
 	        });

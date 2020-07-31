@@ -1,6 +1,5 @@
 package com.jhta.allchwi.controller.classapply;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,13 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.jhta.allchwi.service.classapply.ClassApplyService;
 import com.jhta.allchwi.service.classopen.ClassDateService;
@@ -75,7 +71,7 @@ public class ClassApplyController {
 	@ResponseBody
 	public String classApplyOk(HttpSession session, ClassApplyVO vo, PaymentVO payvo,
 			@RequestParam(value = "pay_point", defaultValue = "0") int pay_point) {
-		System.out.println("apply post mapping.. 포인트 값 : " + pay_point);
+
 
 		int ml_num = (int) session.getAttribute("ml_num");
 		int class_num = payvo.getClass_num();
@@ -102,7 +98,7 @@ public class ClassApplyController {
 	// 수업신청 성공 시 결과 정보 가져와서 success.jsp로 가져가기..
 	@RequestMapping(value = "/class/success", method = RequestMethod.GET)
 	public String goSuccess(HttpSession session, int class_num, Model model) {
-		System.out.println("ClassApplyController : 수업 신청 성공!");
+
 		int ml_num = (int) session.getAttribute("ml_num");
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("ml_num",ml_num);
