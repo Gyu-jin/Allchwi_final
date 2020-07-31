@@ -6,6 +6,12 @@
 	<typeAliases>
 		<typeAlias type="com.jhta.allchwi.vo.admin.BigCategoryVO" alias="big_category"/>
 		<typeAlias type="com.jhta.allchwi.vo.admin.SmallCategoryVO" alias="small_category"/>
+		<!-- AdminClassDetail -->
+		<typeAlias type="com.jhta.allchwi.vo.admin.ClassDetailVO" alias="adminClassDetail"/>
+		<!-- AdminCerti -->
+		<typeAlias type="com.jhta.allchwi.vo.admin.CertiVO" alias="adminCerti"/>
+		
+		
 		<!-- Login 관련 Mapper vo alias -->
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberLoginVO" alias="mlv"/>		
 		<typeAlias type="com.jhta.allchwi.vo.login.MemberInfoVO" alias="miv"/>
@@ -63,6 +69,7 @@
 		<typeAlias type="com.jhta.allchwi.vo.community.CommuQnaVO" alias="commuQna"/>
 		<!-- OnlineCheck -->
 		<typeAlias type="com.jhta.allchwi.vo.onlineclass.OnlineCheckVO" alias="onlineCheck"/>
+		
 		
 	</typeAliases>
 
