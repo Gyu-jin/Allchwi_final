@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
-<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <!--  <script src="${cp}/resources/js/classDetail/classDetail.js"></script> -->
 
 <script type="text/javascript"
@@ -19,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="row">
 				<!-- 왼쪽수업정보 -->
-				<div class="col-md-8">
+				<div class="col-md-12">
 				
 					<!-- class wrap -->
 					<!-- class_navi -->

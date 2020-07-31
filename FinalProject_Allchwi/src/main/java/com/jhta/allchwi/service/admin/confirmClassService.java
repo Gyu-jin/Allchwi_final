@@ -10,6 +10,7 @@ import com.jhta.allchwi.dao.admin.confirmClassDAO;
 import com.jhta.allchwi.vo.admin.CertiVO;
 import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
+import com.jhta.allchwi.vo.admin.CurriVO;
 
 @Service
 public class confirmClassService {
@@ -40,5 +41,9 @@ public class confirmClassService {
 		return dao.certi_list(class_num);
 	}
 	
+	
+	public List<CurriVO> curri_list(int class_num) {
+		return dao.curri_list(class_num);
+	}
 	
 }
