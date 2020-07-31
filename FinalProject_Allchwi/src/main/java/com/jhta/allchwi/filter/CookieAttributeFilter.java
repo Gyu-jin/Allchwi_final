@@ -24,7 +24,7 @@ public class CookieAttributeFilter implements Filter{
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		chain.doFilter(request, response);
 		addSameSite(httpServletResponse , "None"); 
-		
+		  
 	}
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
