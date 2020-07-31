@@ -105,6 +105,10 @@
 					class="fas fa-fw fa-chart-pie"></i><span>통계</span></a></li>
 
 
+			<li class="nav-item active"><a class="nav-link"
+				href="${cp }/admin/changePics"> <i
+					class="fas fa-fw fa-chart-pie"></i><span>대문바꾸기</span></a></li>
+
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">

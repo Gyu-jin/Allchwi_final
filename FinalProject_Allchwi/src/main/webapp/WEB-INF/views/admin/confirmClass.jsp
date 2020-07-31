@@ -219,14 +219,14 @@
 </div>
 
 
-<!-- The Modal -->
+<!-- 수업디테일 모달 -->
 <div class="modal" id="myModal3">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal test</h4>
+        <h4 class="modal-title">수업 세부내용</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -237,7 +237,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
       </div>
 
     </div>
@@ -251,37 +251,25 @@
 
 
 <script>
-
-
+	//class_num을 받아 새화면에 수업정보 띄우는 모달 (ajax통신으로 화면단 불러옴)
 	function getDetail(class_num){
-	
-		
 		$.ajax({
 			url:"${cp}/admin/classDetail",
 			data: {class_num:class_num},
 			dataType:"text",
 			success:function(data){
-				$("#class_detail").html(data);
+				$("#class_detail").html(data);	//id에 화면 띄워줌
+				
+				//모달 생성시 css깨지는거 수정
 				$(".card-body").find("img").css("margin-top","0px")
 				$(".card-body").css("height","230px")
 				
 				$(".card-body").find("img").css("margin-top", "-130px");
 				$(".card-body").css("height", "188px");
 				$(".card").css("width", "100%");
-				
-				
-				//style="width: 160px; height: 173px; margin-top: -130px;"
 			}
 		});
-		
 	}
-
-	
-
-
-
-
-	
 
 	function getModal(class_num) {
 		$("#modal-footer").empty();

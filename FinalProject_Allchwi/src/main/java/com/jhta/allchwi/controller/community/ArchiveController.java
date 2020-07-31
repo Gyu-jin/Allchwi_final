@@ -94,7 +94,6 @@ public class ArchiveController {
 		CommunityVO commuVo = (CommunityVO) session.getAttribute("commuInfo");
 		int commu_num = commuVo.getCommu_num();
 		
-		
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=
 				session.getServletContext().getRealPath("/resources/archiveUpload");

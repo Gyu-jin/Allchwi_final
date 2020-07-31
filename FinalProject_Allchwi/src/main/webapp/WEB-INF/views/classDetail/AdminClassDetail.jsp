@@ -9,17 +9,13 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>
 
 
-
-
-
-
-<div class="container-fluid" id="container_detail">
+<div class="container-fluid" id="container_detail" style="margin-top:-65px">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<!-- 왼쪽수업정보 -->
 				<div class="col-md-12">
-				
+	
 					<!-- class wrap -->
 					<!-- class_navi -->
 					<div class="class_wrap">
@@ -74,8 +70,7 @@
 								<h1 class="t_info">튜터정보</h1>
 
 								<div class="cert">
-									<div id="carouselExampleCaptions" class="carousel slide"
-										data-ride="carousel">
+								
 										<ul>
 											<c:forEach var="cert" items="${certiList}">
 												<li class="com"><img
@@ -84,7 +79,7 @@
 											</c:forEach>
 										</ul>
 
-
+										<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
 											<c:forEach var="cert" items="${certiList}" varStatus="status">
 												<c:choose>
