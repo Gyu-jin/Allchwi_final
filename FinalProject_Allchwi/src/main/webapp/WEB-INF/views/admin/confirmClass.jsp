@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
-
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,8 +63,7 @@
 
 
 					<c:forEach var="vo" items="${list }">
-						<div class="row"
-							style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
+						<div class="row" style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
 							<div class="col-md-12">
 								<div class="card">
 									<h5 class="card-header" style="text-align: center;">
@@ -73,9 +73,16 @@
 											<button type="button" class="btn btn-primary">상세정보</button>
 										</a>
 										 -->
+										 
+										 <!-- 
 										<a href="${cp }/admin/classDetail?class_num=${vo.class_num}">
 											<button type="button" class="btn btn-primary">상세정보</button>
-										</a>		
+										</a>	
+										  -->	
+										
+										
+										<button type="button" class="btn btn-primary" onclick="getDetail('${vo.class_num}')" data-toggle="modal" data-target="#myModal3">상세정보</button>
+											
 									</h5>
 
 
@@ -193,6 +200,7 @@
 </div>
 
 
+
 <!-- 수업 거절 모달-->
 <div class="modal" id="myModal2">
 	<div class="modal-dialog">
@@ -211,10 +219,68 @@
 </div>
 
 
+<!-- The Modal -->
+<div class="modal" id="myModal3">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal test</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="class_detail">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
 
 <script>
+
+
+	function getDetail(class_num){
+	
+		
+		$.ajax({
+			url:"${cp}/admin/classDetail",
+			data: {class_num:class_num},
+			dataType:"text",
+			success:function(data){
+				$("#class_detail").html(data);
+				$(".card-body").find("img").css("margin-top","0px")
+				$(".card-body").css("height","230px")
+				
+				$(".card-body").find("img").css("margin-top", "-130px");
+				$(".card-body").css("height", "188px");
+				$(".card").css("width", "100%");
+				
+				
+				//style="width: 160px; height: 173px; margin-top: -130px;"
+			}
+		});
+		
+	}
+
+	
+
+
+
+
 	
 
 	function getModal(class_num) {

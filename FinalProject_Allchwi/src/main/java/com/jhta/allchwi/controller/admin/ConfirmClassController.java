@@ -24,6 +24,7 @@ import com.jhta.allchwi.service.login.MailSenderService;
 import com.jhta.allchwi.vo.admin.CertiVO;
 import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
+import com.jhta.allchwi.vo.admin.CurriVO;
 
 @Controller
 public class ConfirmClassController {
@@ -84,21 +85,16 @@ public class ConfirmClassController {
 		
 		ClassDetailVO vo = service.class_detail(class_num);
 		List<CertiVO> certiList = service.certi_list(class_num);
+		List<CurriVO> curriList = service.curri_list(class_num);
 		
-		for (CertiVO vo4 : certiList) {
-			System.out.println("자격증명" +vo4.getCertif_name());
-			System.out.println("자격증번호" +vo4.getCertif_num());
-			
-		}
 		
+	
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("certiList", certiList);
+		model.addAttribute("curriList", curriList);
 		
-		
-		
-		
-		return ".admin.classDetail";
+		return "classDetail/AdminClassDetail";
 	}
 	
 	

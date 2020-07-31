@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.jhta.allchwi.vo.admin.CertiVO;
 import com.jhta.allchwi.vo.admin.ClassDetailVO;
 import com.jhta.allchwi.vo.admin.ConfirmClassVO;
+import com.jhta.allchwi.vo.admin.CurriVO;
 
 @Repository
 public class confirmClassDAO {
@@ -43,6 +44,10 @@ public class confirmClassDAO {
 	
 	public List<CertiVO> certi_list(int class_num){
 		return session.selectList(NAMESPACE+".certi_list", class_num);
+	}
+	
+	public List<CurriVO> curri_list(int class_num){
+		return session.selectList(NAMESPACE+".curri_list", class_num);
 	}
 	
 	
