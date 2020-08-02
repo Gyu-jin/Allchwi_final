@@ -158,7 +158,7 @@ public class AssignmentController {
             long fileSize = mf.getSize(); // 파일 사이즈
 
             try {
-                mf.transferTo(new File(path+"\\"+assign_saveFilename));
+                mf.transferTo(new File(path+File.separator+assign_saveFilename));
                 AssignDataVO dvo=new AssignDataVO(0, sub_num, assign_orgFilename, assign_saveFilename, null, fileSize);
                 assign_data=data_service.insert(dvo);
             } catch (IllegalStateException e) {

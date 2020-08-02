@@ -110,7 +110,7 @@ public class ArchiveController {
 			
 			//전송된 파일을 서버에 복사(업로드) 하기 위한 출력스트림
 			FileOutputStream fos =
-					new FileOutputStream(uploadPath+"\\"+save_filename);
+					new FileOutputStream(uploadPath+File.separator+save_filename);
 			
 			//파일복사하기
 			FileCopyUtils.copy(fis, fos);
