@@ -17,7 +17,7 @@
 			<div class="inner-cont" style="padding-top: 0">
 				<!--a 기본 프로필 이미지  읽어와서 이미지에 넣어야함-->
 				<div class="pf"
-					style="background-image: url(/allchwi/resources/img/profile-defaultImg.jpg)"
+					style="background-image: url(${cp}/resources/img/profile-defaultImg.jpg)"
 					id="picture-cover">
 					<!--a 이미지 번호를 통해 이미지 출력 / png 출력시 inner-cont의 배경이 보이지 않도록 background color 처리 -->
 					<img class="pf" id="proImg" src="${cp}/mypageImg/getimg?pro_num=${result.pro_num}" 

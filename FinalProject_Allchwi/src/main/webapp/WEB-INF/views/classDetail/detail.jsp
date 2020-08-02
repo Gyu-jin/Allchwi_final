@@ -7,6 +7,7 @@
 <script src="${cp}/resources/js/classDetail/classDetail.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>
+<link id="cp" data-contextPath="${cp}"/>
 <input type="hidden" id="ml_num" value="${ml_num }">
 <input type="hidden" id="class_num" value="${class_num }">
 <input type="hidden" id="tutor_num" value="${cdv.ml_num }">

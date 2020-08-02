@@ -25,13 +25,13 @@
 		    	$(data.coverList).each(function(i,vo){
 		    		var oImg = ($('<div>').attr('id', 'img-cover'+i)
 		    				.addClass('cover_img')
-		    				.css({'background-image':"url('/allchwi/classImg/getimg?cover_num="+ vo.cover_num+"')"})
+		    				.css({'background-image':"url('${cp}/classImg/getimg?cover_num="+ vo.cover_num+"')"})
 		    				.attr('data-value',vo.cover_num)
 		    			).on({
 		    				'click': function() { onImageupdate(vo.cover_num , i) }
 		    			});
 
-		    			oImg.append($('<img>').attr('src',"/allchwi/classImg/getimg?cover_num="+ vo.cover_num)
+		    			oImg.append($('<img>').attr('src',"${cp}/classImg/getimg?cover_num="+ vo.cover_num)
 		    				.css({'width':'0','height':'0'})										
 		    			);
 
