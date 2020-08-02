@@ -20,7 +20,7 @@ public class Videoffmpeg {
 	private static final String FFPROBE_PATH = "C:/ffmpeg-20200721-b5f1e05-win64-static/bin/ffprobe.exe";
 	
 	public static int media_player_time(String mediaPath) {
-		System.out.println("@@ media_player_time start @@");
+		//System.out.println("@@ media_player_time start @@");
 		int returnData = 0;
 
 		try {
@@ -30,12 +30,12 @@ public class Videoffmpeg {
 			double second = format.duration; // 초단위
 
 			returnData = (int) Math.floor(second);
-			System.out.println("second==" + second);
+			//System.out.println("second==" + second);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("@@ media_player_time end @@");
+			//System.out.println("@@ media_player_time end @@");
 		}
 
 		return returnData;

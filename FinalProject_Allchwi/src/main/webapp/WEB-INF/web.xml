@@ -3,15 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
-	<filter>
-		<filter-name>cookieAttribute</filter-name>
-		<filter-class>com.jhta.allchwi.filter.CookieAttributeFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>cookieAttribute</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
 	<!-- 한글 인코딩 필터 -->
 	<filter>
 		<filter-name>characterEncoding</filter-name>
@@ -29,13 +20,40 @@
 	</filter-mapping>
 
 	<filter>
+		<filter-name>multipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter
+		</filter-class>
+		<init-param>
+			<param-name>multipartResolverBeanName</param-name>
+			<param-value>multipartResolver</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>multipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>xssEscapeServletFilter</filter-name>
+		<filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssEscapeServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- lucy-xss-servlet-filter로 대체 했음. -->
+	
+<!-- 	<filter>
 		<filter-name>XSS</filter-name>
 		<filter-class>com.jhta.allchwi.filter.CrossScriptingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>XSS</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 	<filter>
 		<filter-name>loginCheckFilter</filter-name>

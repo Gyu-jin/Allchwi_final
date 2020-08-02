@@ -84,9 +84,11 @@ public class StreamingVideo {
 		int online_num = Integer.parseInt((String)fd.get("online_num"));
 		int ml_num = (int)session.getAttribute("ml_num");
 		
-		System.out.println("view_point : " + view_point);
-		System.out.println("online_num : " + online_num);
-		System.out.println("ml_num : " + ml_num);
+		/*
+		 * System.out.println("view_point : " + view_point);
+		 * System.out.println("online_num : " + online_num);
+		 * System.out.println("ml_num : " + ml_num);
+		 */
 		
 		OnlineCheckVO vo = new OnlineCheckVO(0, ml_num, online_num, view_point, null);
 		

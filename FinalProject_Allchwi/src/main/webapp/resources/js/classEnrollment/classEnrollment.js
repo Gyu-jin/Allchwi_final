@@ -693,8 +693,7 @@ $(function(){
 			dataType : 'text',
 			processData: false,
 			success: function (data) {
-				
-				alert("return success");
+				//alert("return success");
 				if(data=='success'){
 					location.href =cp+"/";
 				}else{
