@@ -40,13 +40,13 @@ public class LoginCheckFilter implements Filter {
 		System.out.println(path);
 		int count = StringUtils.countOccurrencesOf(path, "/");
 		System.out.println(count);
-		if(count > 2) {
-			path = path.split("/")[2];
+		if(count > 1) {
+			path = path.split("/")[1];
 			System.out.println(path);
 		}
 		
 		System.out.println(excludedUrls.contains(path));
-		if(!excludedUrls.contains(path) && !path.equals("/allchwi/"))
+		if(!excludedUrls.contains(path) && !path.equals("/"))
 		{
 			System.out.println("go : " + path);
 			Integer ml_num = (Integer)req.getSession().getAttribute("ml_num");

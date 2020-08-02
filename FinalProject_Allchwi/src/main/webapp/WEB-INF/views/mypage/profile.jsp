@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
-<link rel="stylesheet" href="/allchwi/resources/css/mypage/mypageForm.css">
+<link rel="stylesheet" href="${cp }/resources/css/mypage/mypageForm.css">
 <div class="container">
 	<form method="POST" action="${cp}/mypage/mypageForm" enctype="multipart/form-data">
 		<!--profile head-->

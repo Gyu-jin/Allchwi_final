@@ -131,7 +131,7 @@
 					changeYear: true,
 					dateFormat: "yy-mm-dd",
 					showOn: "button",
-					buttonImage: "/allchwi/resources/img/icon_input_calendar.png",
+					buttonImage: "${cp}/resources/img/icon_input_calendar.png",
 					buttonImageOnly: true,
 					buttonText: "등록일 선택",
 					onClose: function(e){

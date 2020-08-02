@@ -18,7 +18,7 @@
 		$.ajax({
 		    type: "post",
 		    dataType: "json",
-		    url: "/allchwi/class/classUpdate",
+		    url: "${cp}/class/classUpdate",
 		    data: {class_num: '${list.class_num}'},
 		    success: function(data) {
 		    	

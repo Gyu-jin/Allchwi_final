@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${cp}/resources/js/jquery-3.5.1.js"></script>
 <link rel="stylesheet"
-	href="/allchwi/resources/css/mypage/mypointForm.css">
+	href="${cp }/resources/css/mypage/mypointForm.css">
 <div class="container">
 	<!--point head-->
 	<div class="pointHead">

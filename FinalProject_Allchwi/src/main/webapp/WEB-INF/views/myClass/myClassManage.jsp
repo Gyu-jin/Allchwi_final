@@ -5,7 +5,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript" src="${cp}/resources/vendor/bootstrap/js/bootstrap.js"></script>
 <link rel="stylesheet"
-	href="/allchwi/resources/css/myClass/myClassManage.css">
+	href="${cp }/resources/css/myClass/myClassManage.css">
 <div class="container">
 	<!--MyTItleBox head-->
 	<div class="title-box">

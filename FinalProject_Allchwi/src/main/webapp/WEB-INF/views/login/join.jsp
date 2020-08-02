@@ -5,7 +5,7 @@
 <!-- 1아이콘 폰트 사용 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/allchwi/resources/css/login/loginForm.css">
+<link rel="stylesheet" href="${cp}/resources/css/login/loginForm.css">
 
 <div class="container">
 	<div id=loginbody>

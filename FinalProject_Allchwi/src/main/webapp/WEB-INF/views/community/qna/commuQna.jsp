@@ -121,7 +121,7 @@ $(document).on('click', '#write_qna', function () {
 		if (ml_num=='') {
 			alert('로그인이 필요합니다');
 		}else {
-			$.post('/allchwi/community/insertQna', {
+			$.post('${cp}/community/insertQna', {
 				commu_num: commu_num,
 				ml_num: ml_num,
 				qna_content:qna_content,
@@ -141,7 +141,7 @@ $(document).on('click', '#write_qna', function () {
 //qna목록
 function qnaList(pageNum){
 	var commu_num = $('#commu_num').val();
-	 $.getJSON("/allchwi/community/qnalist?commu_num="+ commu_num+"&pageNum="+pageNum, function(data){
+	 $.getJSON("${cp}/community/qnalist?commu_num="+ commu_num+"&pageNum="+pageNum, function(data){
 	  var str = "";
 	  var qlist=data.qlist;
 	  var pu=data.pu;
@@ -156,7 +156,7 @@ function qnaList(pageNum){
 	     + "<dl>"
 	     + "<dt>"
 	     + "<p class='profile_img' style='width: 50px; height: 50px; background-size: cover; background-position: center;"
-	     + " background-image: url(/allchwi/mypageImg/getimg?pro_num="+qlist[i].pfv.pro_num+");"
+	     + " background-image: url(${cp}/mypageImg/getimg?pro_num="+qlist[i].pfv.pro_num+");"
 	     + " border-radius: 50%;'></p>"
 	     + "<p class='name'>"+qlist[i].miv.mb_name+"</p>"
 	     + "</dt>"
@@ -252,7 +252,7 @@ function sendReply(qna_ref) {
 					//댓글작성 권한 구분
 					if (data.code == 'success') {
 						console.log("성공");
-						$.post('/allchwi/community/qnareply', {
+						$.post('${cp}/community/qnareply', {
 							commu_num: commu_num,
 							ml_num: ml_num,
 							qna_content: reply_content,
@@ -278,7 +278,7 @@ function sendReply(qna_ref) {
 //qna댓글목록불러오기
 function replyList(qna_ref) {
 	 var commu_num = $('#commu_num').val();
-	 $.getJSON("/allchwi/community/commlist?commu_num=" + commu_num + "&qna_ref=" + qna_ref
+	 $.getJSON("${cp}/community/commlist?commu_num=" + commu_num + "&qna_ref=" + qna_ref
 			 , function(data){
 	  var str = "";
 	  $(data).each(function(){
@@ -288,7 +288,7 @@ function replyList(qna_ref) {
 		   	+"<dl>"
 			+"<dt>"				
 			+"<p class='profile_img' style='width:26px; height: 26px; background-size: cover; background-position: center;"					
-			+ "background-image: url(/allchwi/mypageImg/getimg?pro_num="+this.pro_num+")'>"
+			+ "background-image: url(${cp}/mypageImg/getimg?pro_num="+this.pro_num+")'>"
 			+"<p class='name'>"+ this.tutor_nickname +"</p>"
 			+"</dt>"					
 			+"<dd>"+this.qna_content+"</dd>"
@@ -315,7 +315,7 @@ function editQna(qna_num) {
 	if(edit_content== '' ){
 		alert('수정할 내용을 작성해주세요');
 	}else{
-		$.post('/allchwi/community/editQna', {
+		$.post('${cp}/community/editQna', {
 			qna_num:qna_num,
 			qna_content:edit_content
 		}, function (data,res) {

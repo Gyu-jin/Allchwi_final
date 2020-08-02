@@ -96,7 +96,7 @@ $(document).on('click', '#btn_write_review', function () {
 		if (ml_num=='') {
 			alert('로그인이 필요합니다');
 		}else {
-			$.post('/allchwi/classDetail/insertreview', {
+			$.post('${cp }/classDetail/insertreview', {
 				class_num: class_num,
 				ml_num: ml_num,
 				curr_rating:curr_rating,
