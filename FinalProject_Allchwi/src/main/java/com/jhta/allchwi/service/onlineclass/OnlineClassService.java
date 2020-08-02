@@ -46,8 +46,8 @@ public class OnlineClassService {
 
 	@Transactional
 	public void delete(int online_num) throws SQLException {
-		dao.delete(online_num);
 		check_dao.delete(online_num);
+		dao.delete(online_num);
 	}
 
 }
