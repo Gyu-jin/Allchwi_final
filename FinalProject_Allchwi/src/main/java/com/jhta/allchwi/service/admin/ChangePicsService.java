@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.allchwi.dao.admin.ChangePicsDAO;
 import com.jhta.allchwi.vo.admin.MainPicsVO;
@@ -27,9 +28,16 @@ public class ChangePicsService {
 		return dao.count();
 	}
 	
-	
 	public List<String> banner_list(){
 		return dao.banner_list();
+	}
+	
+	
+	@Transactional
+	public int confirmPics(HashMap<String, Object> map) throws Exception {
+		dao.reset();
+		dao.confirmPics(map);
+		return 1;
 	}
 	
 }

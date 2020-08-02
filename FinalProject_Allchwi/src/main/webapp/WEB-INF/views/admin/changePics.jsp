@@ -109,7 +109,7 @@
 		}
 		if (cnt >= 3) {
 			alert("세가지 그림을 모두 선택하셨습니다.");
-			location.href="${cp}/admin/c";
+			location.href="${cp}/admin/confirmPics?firstPic="+firstPic+"&secondPic="+secondPic+"&thirdPic="+thirdPic;
 		}
 	}
 	

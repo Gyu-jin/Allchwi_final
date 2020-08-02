@@ -43,7 +43,7 @@ public class ChangePicsController {
 		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
 		
-		map.put("startRow", pu.getStartRow());
+		map.put("startRow", pu.getStartRow()-1);
 		
 		
 		
@@ -95,6 +95,23 @@ public class ChangePicsController {
 		return ".admin.changePics";
 	}
 	
+	
+	@RequestMapping("admin/confirmPics")
+	public String confirmPics(String firstPic, String secondPic, String thirdPic) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("firstPic", firstPic);
+		map.put("secondPic", secondPic);
+		map.put("thirdPic", thirdPic);
+		try {
+			service.confirmPics(map);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			return ".admin.error";
+		}
+		
+		return ".admin.changePics";
+	}
 	
 	
 }

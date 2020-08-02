@@ -27,6 +27,15 @@
 	
 	
 	
+	<update id="reset">
+		update main_pics set pic_onoff=0
+	</update>
+	
+	<update id="confirmPics" parameterType="hashmap">
+		update main_pics set pic_onoff=1 where save_filename=#{firstPic} or save_filename=#{secondPic} or save_filename=#{thirdPic}	
+	</update>
+
+
 
 </mapper>
 

@@ -33,6 +33,15 @@ public class ChangePicsDAO {
 		return session.selectList(NAMESPACE+".banner_list");
 	}
 	
+	public int reset() {
+		return session.update(NAMESPACE+".reset");		
+	}
+	
+	public int confirmPics(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".confirmPics", map);		
+	}
+	
+	
 	
 	
 }
