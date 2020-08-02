@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jhta.allchwi.service.admin.ChangePicsService;
 import com.jhta.allchwi.service.classdetail.ClassDetailService;
 import com.jhta.allchwi.service.classdetail.ClassReviewService;
 import com.jhta.allchwi.service.login.MemberInfoService;
@@ -28,6 +29,7 @@ public class HomeController {
 	@Autowired private MemberInfoService mis;
 	@Autowired private ClassDetailService detail_service;
 	@Autowired private ClassReviewService crs;
+	@Autowired private ChangePicsService changePicsService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale,HttpServletRequest req, Model model) {
@@ -48,6 +50,16 @@ public class HomeController {
 		//리뷰좋은튜터
 		List<ClassReviewVO> best_tutor=crs.best_tutor();
 		model.addAttribute("best_tutor",best_tutor);
+		
+		
+		//홈화면 배너뽑아주기
+		List<String> banner_list =changePicsService.banner_list();
+			
+		model.addAttribute("firstPic", banner_list.get(0));
+		model.addAttribute("secondPic", banner_list.get(1));
+		model.addAttribute("thirdPic", banner_list.get(2));
+		
+		
 		
 		return ".main";
 	}

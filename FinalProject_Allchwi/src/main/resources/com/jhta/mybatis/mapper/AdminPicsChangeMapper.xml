@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.AdminPicsChangeMapper">
+	
+	<insert id="picsInsert" parameterType="com.jhta.allchwi.vo.admin.MainPicsVO">
+		insert into main_pics values(0,#{org_filename},#{save_filename},#{filesize},0)
+		<selectKey keyProperty="picNum" resultType="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<select id="pics_list" resultType="com.jhta.allchwi.vo.admin.PicsListVO" parameterType="hashmap">
+		select * from main_pics
+		limit #{startRow},5
+	</select>
+	
+	<select id="count" resultType="int">
+		select NVL(count(*),0) cnt from (select * from main_pics) aa
+	</select>
+	
+	
+	<select id="banner_list" resultType="string">
+		select save_filename from main_pics where pic_onoff=1
+	</select>
+	
+	
+	
+
+</mapper>
+

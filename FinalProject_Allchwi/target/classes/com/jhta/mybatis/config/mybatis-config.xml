@@ -82,6 +82,8 @@
 		<mapper resource="com/jhta/mybatis/mapper/AdminPaymentMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminRemitMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/mapper/AdminStatisticMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/mapper/AdminPicsChangeMapper.xml"/>
+		
 		
 		<!-- Login관련 Mapper 경로 -->
 		<mapper resource="com/jhta/mybatis/mapper/MemberLoginMapper.xml"/>
