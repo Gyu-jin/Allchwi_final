@@ -63,7 +63,7 @@
 		<init-param>
       		<param-name>excludedUrls</param-name>
        		<!--  제외할 url들 --> 
-       		<param-value>classDetail,list,resources,onlineImg,classImg,mypageImg,CheckID,login</param-value>
+       		<param-value>classDetail,list,resources,onlineImg,classImg,mypageImg,CheckID,login,locatrion</param-value>
     	</init-param>
 	</filter>
 	<filter-mapping>
