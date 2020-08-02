@@ -17,7 +17,8 @@ import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 
 public class Videoffmpeg {
 	
-	private static final String FFPROBE_PATH = "C:/ffmpeg-20200721-b5f1e05-win64-static/bin/ffprobe.exe";
+	//private static final String FFPROBE_PATH = "C:/ffmpeg-20200721-b5f1e05-win64-static/bin/ffprobe.exe";
+	private static final String FFPROBE_PATH = "/var/packages/ffmpeg/target/bin/ffprobe";
 	
 	public static int media_player_time(String mediaPath) {
 		//System.out.println("@@ media_player_time start @@");
