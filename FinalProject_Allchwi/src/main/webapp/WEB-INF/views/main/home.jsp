@@ -113,6 +113,7 @@ mark {
 }
 .roundpro{
 	width: 100%;
+	height: 122px;
 	border-radius: 50%;
 }
 
