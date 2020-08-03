@@ -181,7 +181,8 @@
 						
 						<div class="payend">
 							<div class="link">
-								<a href="${cp }/">메인으로 돌아가기</a> &nbsp &nbsp  |  &nbsp &nbsp <a href="${cp }/mypage/myClassList">내 수업 목록보기</a></div>
+								<a href="${cp }/">메인으로 돌아가기</a> &nbsp &nbsp  |  &nbsp &nbsp 
+								<a href="${cp }/mypage/myClassList">내 수업 목록보기</a></div>
 						</div>
 					</div>
 				</div>

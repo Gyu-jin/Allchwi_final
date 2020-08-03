@@ -89,6 +89,7 @@ public class ListSearchController {
 		return mv;
 	}
 	
+	// 세부 지역 불러오기
 	@PostMapping("/locatrion/search")
 	@ResponseBody
 	public List<SmallLocationVO> getScate(int bloc_num){
