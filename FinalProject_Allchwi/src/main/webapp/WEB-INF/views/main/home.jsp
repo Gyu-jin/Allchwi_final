@@ -123,7 +123,6 @@ mark {
 }
 
 .classtitle-box {
-	width: 84%;
 	height: 80px;
 	font-size: 17px;
 	overflow: hidden;
@@ -177,6 +176,15 @@ mark {
 	box-shadow: 0 0 5px #555;
 	max-width: 100%;
 }
+.swiper-button-prev{
+ 	background-image: url("https://user-images.githubusercontent.com/65140754/89138241-e8180680-d575-11ea-8855-a1e5269eb285.png");   
+}
+.swiper-button-next{
+	background-image: url("https://user-images.githubusercontent.com/65140754/89138252-efd7ab00-d575-11ea-8d50-2f89c0f73700.png");   
+} 
+.swiper-button-next, .swiper-button-prev {
+    width: 45px;
+    background-size: 50px 44px;
 </style>
 <div>
 	<!-- 메인 배너  -->
@@ -256,7 +264,6 @@ mark {
 					</div> <mark>라이프스타일</mark>
 			</a></li>
 	</div>
-
 	<!-- 카테고리 아이콘 끝  -->
 
 	<!-- 인기수업 -->
@@ -289,14 +296,13 @@ mark {
 
 		<!-- 네비게이션 -->
 		<div class="swiper-button-next"></div>
-		<!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-		<div class="swiper-button-prev"></div>
 		<!-- 이전 버튼 -->
-
+		<div class="swiper-button-prev"></div>
 		<!-- 페이징 -->
 		<div class="swiper-pagination"></div>
 	</div>
-
+	<!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	
 
 
 	<!-- //인기수업  -->
