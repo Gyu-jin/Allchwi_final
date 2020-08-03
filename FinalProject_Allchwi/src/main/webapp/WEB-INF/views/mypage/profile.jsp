@@ -23,7 +23,7 @@
 					<img class="pf" id="proImg" src="${cp}/mypageImg/getimg?pro_num=${result.pro_num}" 
 					style="margin: 0; z-index: 4; background-color: #f8f9fc">
 					<!-- a 카메라 이미지를 버튼처럼 사용  -->
-					<img class="camera"	src="/allchwi/resources/img/btn_pfimg.png"
+					<img class="camera"	src="${cp}/resources/img/btn_pfimg.png"
 					style="position: absolute;">
 					<input type="file" id="picture" name="pro_img">
 				</div>
