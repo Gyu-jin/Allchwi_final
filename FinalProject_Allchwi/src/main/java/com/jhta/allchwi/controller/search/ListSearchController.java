@@ -33,7 +33,7 @@ public class ListSearchController {
 	@Autowired private BigLocationService bloc_service;
 	@Autowired private SmallLocationService sloc_service;
 
-	@RequestMapping(value="/list/search",method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/list/search",method = {RequestMethod.GET,RequestMethod.POST},produces ="application/text; charset=utf8")
 	public ModelAndView goSearchList(HttpServletRequest req,@RequestParam(value="pageNum",defaultValue="1")int pageNum,
 										@RequestParam(value="bcategory_num",defaultValue="-1")int bcategory_num, 
 										@RequestParam(value="scategory_num",defaultValue="-1")int scategory_num,
