@@ -57,8 +57,7 @@ public class HomeController {
 		//홈화면 배너뽑아주기
 		List<String> banner_list =changePicsService.banner_list();
 		if(banner_list.size() > 0) {
-			
-			
+				
 			
 			model.addAttribute("firstPic", banner_list.get(0));
 			model.addAttribute("secondPic", banner_list.get(1));
