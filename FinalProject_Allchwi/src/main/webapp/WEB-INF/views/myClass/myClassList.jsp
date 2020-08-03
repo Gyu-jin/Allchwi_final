@@ -90,7 +90,7 @@
 				<c:choose>
 					<c:when test="${pu.startPageNum>1 }">
 						<li class="page-item"><a class="page-link"
-							href="${cp }/mypage/myClassList?pageNum=${pu.startPageNum-1 }">이전</a></li>
+							href="${cp }/mypage/myClassList?pageNum=${pu.startPageNum-1 }&class_form=${class_form}">이전</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
@@ -102,11 +102,11 @@
 					<c:choose>
 						<c:when test="${pu.pageNum==i}">
 							<li class="page-item active"><a class="page-link"
-								href="${cp }/mypage/myClassList?pageNum=${i }">${i }</a></li>
+								href="${cp }/mypage/myClassList?pageNum=${i }&class_form=${class_form}">${i }</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="${cp }/mypage/myClassList?pageNum=${i }">${i }</a></li>
+								href="${cp }/mypage/myClassList?pageNum=${i }&class_form=${class_form}">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -114,7 +114,7 @@
 				<c:choose>
 					<c:when test="${pu.totalPageCount>pu.endPageNum }">
 						<li class="page-item"><a class="page-link"
-							href="${cp }/mypage/myClassList?pageNum=${pu.endPageNum+1 }">다음</a></li>
+							href="${cp }/mypage/myClassList?pageNum=${pu.endPageNum+1 }&class_form=${class_form}">다음</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
