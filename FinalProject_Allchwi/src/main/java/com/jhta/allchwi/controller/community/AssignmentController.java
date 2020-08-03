@@ -121,13 +121,11 @@ public class AssignmentController {
 	// 학생 과제 제출 List
 	@PostMapping("/assign/submitList")
 	@ResponseBody
-	public List<AssignSubmitVO> submitOk(@RequestParam(value="assign_num")int assign_num,
-			@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
-		
+	public List<AssignSubmitVO> submitOk(@RequestParam(value="assign_num")int assign_num) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
     	map.put("assign_num", assign_num);
     	List<AssignSubmitVO> sub_list=submit_service.sub_list(map);
-    	System.out.println("listsize: "+ sub_list.size());
+    	//System.out.println("listsize: "+ sub_list.size());
 
     	return sub_list;
 		

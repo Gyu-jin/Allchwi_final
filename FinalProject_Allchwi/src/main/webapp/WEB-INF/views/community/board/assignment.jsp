@@ -180,9 +180,14 @@ button[name='subBtn'], #a-update{
 										</div>
 										<div class="col-md-6">
 										<!-- 튜터가 아닌 학생만 과제 제출 가능 -->
-											<c:if test="${tutor_num != stu_num }">
-												<button type="submit" class="btn btn-outline-warning" name="subBtn" >제출하기</button>
-											</c:if>
+											<c:choose>
+												<c:when test="${tutor_num != stu_num }">
+													<button type="submit" class="btn btn-outline-warning" name="subBtn" disabled="disabled">제출하기</button>
+												</c:when>
+												<c:otherwise>
+													<button type="submit" class="btn btn-outline-warning" name="subBtn">제출하기</button>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 									<input type="hidden" name="statusindex" value="${status.index }">
@@ -221,7 +226,6 @@ button[name='subBtn'], #a-update{
 	// 튜터 : 수정 할 글 정보 불러오기
 	$("#a-updateModal").on('show.bs.modal',function(e){
 		var assign_num = $(e.relatedTarget).data('whatever');
-		console.log("assign_num:"+assign_num);
 		$.ajax({
 			url : "${cp }/assign/update?assign_num="+assign_num,
 			dataType: "json",
@@ -358,19 +362,21 @@ button[name='subBtn'], #a-update{
 	});
 	
 	function Assign_submitList(assign_num, statusindex ){
+
 		var div=$("button[name='subBtn']").parent().parent().parent().parent().find("#submitAssign"+statusindex);
-		div.empty();
 		$.post({
 			url : "${cp }/assign/submitList",
 			data : {"assign_num":assign_num},
 			dataType: "json",			
 			success : function(data) {
+				
 				var oldsub=0;
 				var fileDiv = null;
 				$(data).each(function(i,sub){
 					var sub_regdate = new Date(this.sub_regdate);
 					sub_regdate = sub_regdate.toLocaleDateString("ko-US");
 					if(oldsub != sub.sub_num){
+			
 						div.append("<div class='qna_list'>" 
 									 + "<ul>"
 										 + "<li>"
