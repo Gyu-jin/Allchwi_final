@@ -1,5 +1,6 @@
 package com.jhta.allchwi.controller.admin;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +75,7 @@ public class ChangePicsController {
 			InputStream fis = file1.getInputStream();
 			
 			//전송된 파일을 서버에 복사(업로드) 하기 위한 출력스트림
-			FileOutputStream fos = new FileOutputStream(uploadPath+"\\"+save_filename);
+			FileOutputStream fos = new FileOutputStream(uploadPath+ File.separator +save_filename);
 			
 			//파일복사하기
 			FileCopyUtils.copy(fis, fos);
