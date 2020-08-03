@@ -77,7 +77,7 @@ public class MailSenderService {
 			String htmlStr = "<h2>Allchwi 비밀번호 인증메일입니다!</h2><br>" 
 					+ "<h3>" + hm.get("id") + "님</h3>" 
 					+ "<p> 회원님의 임시 비밀번호는 [ " + hm.get("pwd") + " ] 입니다.<br>" 
-					+ "<a href='http://localhost:8091" + req.getContextPath() + "/'>홈페이지 바로가기</a></p>";
+					+ "<a href='http://www.allchwi.com" + req.getContextPath() + "'>홈페이지 바로가기</a></p>";
 			try {
 				//제목
 				mail.setSubject("[비밀번호 재발급] Allchwi 임시비밀번호 메일입니다", "utf-8");
