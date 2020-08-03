@@ -20,8 +20,8 @@ public class ChangePicsDAO {
 		return session.insert(NAMESPACE+".picsInsert", vo);
 	}
 	
-	public List<PicsListVO> pics_list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".pics_list",map);
+	public List<PicsListVO> pics_list(){
+		return session.selectList(NAMESPACE+".pics_list");
 	}
 	
 	public int count () {

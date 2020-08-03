@@ -31,7 +31,7 @@
 				</div>
 			</c:forEach>
 		</div>
-
+		<!--
 		<div>
 			<ul class="pagination justify-content-center" style="margin: 20px 0">
 				<c:choose>
@@ -69,7 +69,7 @@
 				</c:choose>
 			</ul>
 		</div>
-
+		 -->
 
 
 		<div id="imglist">

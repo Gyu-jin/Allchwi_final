@@ -20,8 +20,8 @@ public class ChangePicsService {
 		return dao.picsInsert(vo);
 	}
 	
-	public List<PicsListVO> pics_list(HashMap<String, Object> map){
-		return dao.pics_list(map);
+	public List<PicsListVO> pics_list(){
+		return dao.pics_list();
 	}
 	
 	public int count() {
