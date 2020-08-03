@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="pics_list" resultType="com.jhta.allchwi.vo.admin.PicsListVO" parameterType="hashmap">
-		select * from main_pics
+		select * from main_pics order by picNum desc
 		limit #{startRow},5
 	</select>
 	
