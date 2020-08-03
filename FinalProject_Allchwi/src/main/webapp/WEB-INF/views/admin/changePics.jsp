@@ -8,9 +8,7 @@
 
 		<div>
 			<h1>사진바꾸기</h1>
-			<form method="post" action="${cp }/admin/insertPics"
-				enctype="multipart/form-data">
-
+			<form method="post" action="${cp }/admin/insertPics" enctype="multipart/form-data" onsubmit="return validate();">
 				<div class="form-group">
 					<label for="exampleFormControlFile1">파일 업로드</label> <input
 						type="file" name="file1" class="form-control-file"
@@ -84,6 +82,12 @@
 
 
 <script>
+	function validate(){
+		
+	}
+
+
+
 	var cnt = 0;
 	var firstPic = null;
 	var secondPic = null;
