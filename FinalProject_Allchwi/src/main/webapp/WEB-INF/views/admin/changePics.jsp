@@ -11,7 +11,7 @@
 			<form method="post" action="${cp }/admin/insertPics" enctype="multipart/form-data" onsubmit="return validate();">
 				<div class="form-group">
 					<label for="exampleFormControlFile1">파일 업로드</label> <input
-						type="file" name="file1" class="form-control-file"
+						type="file" name="file1" id="file1" class="form-control-file"
 						id="exampleFormControlFile1">
 				</div>
 
@@ -83,7 +83,13 @@
 
 <script>
 	function validate(){
-		
+		var file1 = document.getElementById("file1");
+	
+		if (file1.value == "") {
+			alert("파일을 업로드 해주세요.");
+			return false;
+		}
+		return true;
 	}
 
 
