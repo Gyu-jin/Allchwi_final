@@ -16,16 +16,24 @@
 			<div class="jumbotron">
 				<form method="post" action="${cp }/admin/insertPics"
 					enctype="multipart/form-data" onsubmit="return validate();">
-					<div class="form-group">
-						<label for="exampleFormControlFile1">파일 업로드</label> <input
-							type="file" name="file1" id="file1" class="form-control-file"
-							id="exampleFormControlFile1">
+
+
+
+					<div class="form-group" id="certi" >
+						<label for="exampleFormControlFile1">파일 업로드</label>
+						 <input type="file" name="file1" id="file1" 
+							class="form-control-file" id="exampleFormControlFile1">
 					</div>
 
-					<input type="submit" value="제출">
-				</form>
-			</div>
+			
+					<button type="button" class="btn btn-primary" onclick='add_certificate()'>사진 추가 업로드</button>
+					<br>
+					<br>
+					<button type="submit" class="btn btn-primary" style="float:right; width:200px;">등록</button>
 
+				</form>
+
+			</div>
 		</div>
 
 
@@ -41,45 +49,7 @@
 				</div>
 			</c:forEach>
 		</div>
-		<!--
-		<div>
-			<ul class="pagination justify-content-center" style="margin: 20px 0">
-				<c:choose>
-					<c:when test="${pu.startPageNum>1 }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/admin/changePics?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}">이전</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-					</c:otherwise>
-				</c:choose>
 
-				<c:forEach var="i" begin="${pu.startPageNum}"
-					end="${pu.endPageNum }">
-					<c:choose>
-						<c:when test="${pu.pageNum==i}">
-							<li class="page-item active"><a class="page-link"
-								href="${cp }/admin/changePics?pageNum=${i }">${i }</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="${cp }/admin/changePics?pageNum=${i }">${i }</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<c:choose>
-					<c:when test="${pu.totalPageCount>pu.endPageNum }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/admin/changePics?pageNum=${pu.endPageNum+1 }">다음</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
-		 -->
 
 
 		<div id="imglist">
@@ -94,12 +64,27 @@
 
 
 <script>
-	function validate() {
-		var file1 = document.getElementById("file1");
+	
+	var fileNum = 2;
 
-		if (file1.value == "") {
-			alert("파일을 업로드 해주세요.");
-			return false;
+	function add_certificate() {
+		// 자격증 업로드 태그 생성.
+		$('#certi').append("<label for='exampleFormControlFile1'>파일 업로드</label>"
+							+ "<input type='file' name='file1' id='file"+fileNum+"' class='form-control-file'"+
+						" id='exampleFormControlFile1'>");
+		// 번호증가
+		fileNum++;
+	}
+
+	function validate() {
+		//alert(document.getElementsByName("file1").length+"배열 갯수");
+		var file1 = document.getElementsByName("file1");
+				
+		for (var i = 0; i < file1.length; i++) {
+			if (file1[i].value == null || file1[i].value=="") {
+				alert("파일을 업로드 해주세요.");
+				return false;
+			}
 		}
 		return true;
 	}
