@@ -85,7 +85,6 @@
 				<c:otherwise>
 					<button type="button" id="next" class="btn btn-outline-primary" disabled>다음</button>
 				</c:otherwise>
-			
 			</c:choose>
 		</div>
 

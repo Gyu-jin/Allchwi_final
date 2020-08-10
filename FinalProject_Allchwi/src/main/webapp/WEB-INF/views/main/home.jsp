@@ -199,17 +199,19 @@ mark {
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<a href="${cp }/classDetail/detail?class_num=12"><img
-					src="${cp}/resources/mainPicsUpload/${firstPic}" id="b1" class="d-block w-100"
-					alt="배너1"></a>
+					src="${cp}/resources/mainPicsUpload/${firstPic}" id="b1" style="width:897px; height:505px;" 
+					alt="배너1"></a> 
 			</div>
 			<div class="carousel-item">
 				<a href="${cp}/list/search?bcategory_num=7"><img
-					src="${cp}/resources/mainPicsUpload/${secondPic}" id="b2" class="d-block w-100"
+					src="${cp}/resources/mainPicsUpload/${secondPic}" id="b2" style="width:897px; height:505px;" 
 					alt="배너2"></a>
+					
+					<!--  class="d-block w-100"-->
 			</div>
 			<div class="carousel-item">
 				<a href="${cp}/list/search?scategory_num=19"><img
-					src="${cp}/resources/mainPicsUpload/${thirdPic}" id="b3" class="d-block w-100"
+					src="${cp}/resources/mainPicsUpload/${thirdPic}" id="b3" style="width:897px; height:505px;" 
 					alt="배너3"></a>
 			</div>
 		</div>

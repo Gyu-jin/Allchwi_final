@@ -20,8 +20,8 @@ public class ChangePicsService {
 		return dao.picsInsert(vo);
 	}
 	
-	public List<PicsListVO> pics_list(){
-		return dao.pics_list();
+	public List<PicsListVO> pics_list(HashMap<String, Object> map){
+		return dao.pics_list(map);
 	}
 	
 	public int count() {
@@ -36,7 +36,9 @@ public class ChangePicsService {
 	@Transactional
 	public int confirmPics(HashMap<String, Object> map) throws Exception {
 		dao.reset();
-		dao.confirmPics(map);
+		dao.confirmPics1((String)map.get("firstPic"));
+		dao.confirmPics2((String)map.get("secondPic"));
+		dao.confirmPics3((String)map.get("thirdPic"));
 		return 1;
 	}
 	

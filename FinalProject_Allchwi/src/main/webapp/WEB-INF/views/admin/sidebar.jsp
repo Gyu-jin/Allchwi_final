@@ -92,7 +92,7 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/payment"> <i
-					class="fas fa-fw fa-hand-holding-usd"></i> <span>회원결제내역</span></a></li>
+					class="fa fa-credit-card" aria-hidden="true"></i> <span>회원결제내역</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"
@@ -102,12 +102,12 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/statistic1"> <i
-					class="fas fa-fw fa-chart-pie"></i><span>통계</span></a></li>
+					class="fas fa-fw fa-chart-pie"></i> <span>통계</span></a></li>
 
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/changePics"> <i
-					class="fas fa-fw fa-chart-pie"></i><span>대문바꾸기</span></a></li>
+					class="far fa-image"></i> <span>대문바꾸기</span></a></li>
 
 
 			<!-- Sidebar Toggler (Sidebar) -->

@@ -20,8 +20,8 @@ public class ChangePicsDAO {
 		return session.insert(NAMESPACE+".picsInsert", vo);
 	}
 	
-	public List<PicsListVO> pics_list(){
-		return session.selectList(NAMESPACE+".pics_list");
+	public List<PicsListVO> pics_list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".pics_list",map);
 	}
 	
 	public int count () {
@@ -37,8 +37,16 @@ public class ChangePicsDAO {
 		return session.update(NAMESPACE+".reset");		
 	}
 	
-	public int confirmPics(HashMap<String, Object> map) {
-		return session.update(NAMESPACE+".confirmPics", map);		
+	public int confirmPics1(String firstPic) {
+		return session.update(NAMESPACE+".confirmPics1", firstPic);		
+	}
+	
+	public int confirmPics2(String secondPic) {
+		return session.update(NAMESPACE+".confirmPics2", secondPic);		
+	}
+	
+	public int confirmPics3(String thirdPic) {
+		return session.update(NAMESPACE+".confirmPics3", thirdPic);		
 	}
 	
 	
