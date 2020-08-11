@@ -44,6 +44,7 @@
 		</div>
 		<br>
 		<br>
+		<hr width = "100%" color = "black" size = "3">
 			
 		<h4>이미지 리스트(이미지를 클릭하여 선택)</h4>
 		<div id="aa" style="width: 1208px;">
@@ -81,13 +82,11 @@
 		
 
 		<br>
-		<hr>
+		<hr width = "100%" color = "black" size = "3">
+		
 		<h4>선택된 이미지(더블클릭시 선택한 이미지 제거)</h4>
 		<div id="imglist">
-			<!--  <img id="img1" style="width: 150px; height: 150px;"> 
-			<img id="img2" style="width: 150px; height: 150px;"> 
-			<img id="img3" style="width: 150px; height: 150px;">
-			--> 
+			
 		</div>
 
 		<div id="confirmBtn"></div>
@@ -98,46 +97,62 @@
 
 
 <script>
-	function test(img){
+	function del(img,save_filename){
+		if($("#imglist").children().length==3){
+			$("#confirmBtn").empty();
+		}
 		img.remove();
+		$("img[id='"+save_filename+"']").removeClass("imgBorder"); 
+		
+		var len = $("#imglist").children().length;
+		
+		if(len==0){
+			arr.splice(len,1);	
+		}
+		if(len==1){
+			arr.splice(len,1);	
+		}
+		if(len==2){
+			arr.splice(len,1);	
+		}		
 	}
 	
-	var cnt = 0;
 	var firstPic = null;
 	var secondPic = null;
 	var thirdPic = null;
-	var imgList = document.getElementById("imgList");
-	var arr = new Array(2); 
+	var arr = new Array(); 
 	
 	function selectPics(save_filename) {
-		++cnt;
-		if (cnt == 1) {
-			firstPic = save_filename;			
-			arr[0] = firstPic;										//empty해도 테두리 남도록 설정하기 위해 배열에 담아 저장
-			$("img[id='"+firstPic+"']").addClass("imgBorder");		// 테두리설정
-			var img1 = $("<img id='img1' style='width: 150px; height: 150px;' onclick='test(this)'>").appendTo("#imglist"); 
-			$(img1).prop("src","${cp}/resources/mainPicsUpload/" + firstPic );    	//선택된 이미지 칸에 추가
+		if($("#imglist").children().length==0){
+		    arr[0]=save_filename;	
 		}
-		if (cnt == 2) {
-			secondPic = save_filename;
-			arr[1] = secondPic;
-			$("img[id='"+secondPic+"']").addClass("imgBorder");		
-			var img2 = $("<img id='img1' style='width: 150px; height: 150px;' onclick='test(this)'>").appendTo("#imglist"); 
-			$(img2).prop("src","${cp}/resources/mainPicsUpload/" + secondPic );    	//선택된 이미지 칸에 추가
-			//img2.src = "${cp}/resources/mainPicsUpload/" + secondPic;
+		if($("#imglist").children().length==1){
+			arr[1]=save_filename;
 		}
-		if (cnt == 3) {
-			thirdPic = save_filename;
-			arr[2] = thirdPic;
-			$("img[id='"+thirdPic+"']").addClass("imgBorder");
-			var img3 = $("<img id='img1' style='width: 150px; height: 150px;' onclick='test(this)'>").appendTo("#imglist"); 
-			$(img3).prop("src","${cp}/resources/mainPicsUpload/" + thirdPic );    	//선택된 이미지 칸에 추가
-			//img3.src = "${cp}/resources/mainPicsUpload/" + thirdPic;
-			
+		if($("#imglist").children().length==2){
+			arr[2]=save_filename;
 		}
+		
+	
+		$("#confirmBtn").empty();
+		if ($("#imglist").children().length <= 2) {		
+		
+				
+			$("img[id='"+save_filename+"']").addClass("imgBorder");		// 테두리설정
+			var img1 = $("<img id='img1' style='width: 150px; height: 150px;' ondblclick=del(this,'"+save_filename+"')>").appendTo("#imglist"); 
+			$(img1).prop("src","${cp}/resources/mainPicsUpload/" + save_filename );    	//선택된 이미지 칸에 추가		 			
+		}
+		
 		
 		if($("#imglist").children().length==3){
 			alert("세가지 그림을 모두 선택하셨습니다.");
+			
+			firstPic = $("#imglist img:nth-child(1)").prop("src").split("/").reverse()[0];	//선택된 이미지는 3개 nth-child로 구분해 가져옴
+			secondPic = $("#imglist img:nth-child(2)").prop("src").split("/").reverse()[0];
+			thirdPic = $("#imglist img:nth-child(3)").prop("src").split("/").reverse()[0];
+			
+			
+			
 			$("#confirmBtn")
 					.append(
 							"<br><br><button type='button' style='width:240px;' class='btn btn-success'"
@@ -145,9 +160,34 @@
 									+ firstPic + "&secondPic=" + secondPic
 									+ "&thirdPic=" + thirdPic
 									+ "'\">배너변경하기</button>");
+			
 		}
 	}
 	
+	
+	function content(data) {
+		$("#pics").empty();
+		$.each(data,function(i, pic) {
+			var save_filename = pic.save_filename;
+			var org_filename = pic.org_filename;
+
+			var div = $("<div style='display:inline-block;'></div>").appendTo("#pics");
+			$(div).append("<img style='width: 200px; height: 200px;' src='${cp }/resources/mainPicsUpload/"
+							+ save_filename+ "' onclick=\"selectPics('"+ save_filename + "')\" id='"+save_filename+"'>");
+			$(div).append("<p style='text-align: center;'>"+ org_filename + "</p>");
+		});
+		
+		// empty후에 사라진 border유지 작업
+		var qwe1= arr[0];
+		var qwe2= arr[1];
+		var qwe3= arr[2];	
+		
+		$("img[id='"+qwe1+"']").addClass("imgBorder"); 
+		$("img[id='"+qwe2+"']").addClass("imgBorder"); 
+		$("img[id='"+qwe3+"']").addClass("imgBorder"); 	
+	}
+	
+
 	
 
 	var pageNum = Number(document.getElementById("pageNum").value);
@@ -178,8 +218,7 @@
 			},
 
 			success : function(data) {
-				content(data);
-				
+				content(data);	
 			}
 		})
 		pageNum++;
@@ -201,26 +240,7 @@
 		}
 	}
 
-	function content(data) {
-		$("#pics").empty();
-		$.each(data,function(i, pic) {
-			var save_filename = pic.save_filename;
-			var org_filename = pic.org_filename;
 
-			var div = $("<div style='display:inline-block;'></div>").appendTo("#pics");
-			$(div).append("<img style='width: 200px; height: 200px;' src='${cp }/resources/mainPicsUpload/"
-							+ save_filename+ "' onclick=\"selectPics('"+ save_filename + "')\" id='"+save_filename+"'>");
-			$(div).append("<p style='text-align: center;'>"+ org_filename + "</p>");
-		});
-		
-		var firstPic= arr[0];
-		var secondPic= arr[1];
-		var thirdPic= arr[2];
-		
-		$("img[id='"+firstPic+"']").addClass("imgBorder"); 
-		$("img[id='"+secondPic+"']").addClass("imgBorder"); 
-		$("img[id='"+thirdPic+"']").addClass("imgBorder"); 
-	}
 
 	// 사진 추가 함수
 	function add_imgs() {
@@ -244,6 +264,8 @@
 		return true;
 	}
 
+	
+	
 	
 </script>
 

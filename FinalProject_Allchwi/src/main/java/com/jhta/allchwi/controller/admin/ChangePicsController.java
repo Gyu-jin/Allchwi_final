@@ -39,10 +39,13 @@ public class ChangePicsController {
 	@Autowired
 	private ChangePicsService service;
 
-	@RequestMapping(value = { "/admin/changePics", "/admin/insertPics" })
+	@RequestMapping(value = { "/admin/changePics", "/admin/insertPics", "admin/confirmPics" })
 	public String changePics(HttpServletRequest request, Model model, List<MultipartFile> file1, HttpSession session,
-			@RequestParam(value="pageNum", defaultValue = "1") int pageNum
+			@RequestParam(value="pageNum", defaultValue = "1") int pageNum,
+			String firstPic, String secondPic, String thirdPic
 	){
+		
+		// 이미지 업로드 할때
 		if (request.getServletPath().equals("/admin/insertPics")) {
 			// 업로드할 폴더 경로 얻어오기
 			String uploadPath = session.getServletContext().getRealPath("/resources/mainPicsUpload");
@@ -80,6 +83,24 @@ public class ChangePicsController {
 				}
 			}
 		}
+		
+		// 사진확정 할때
+		if (request.getServletPath().equals("/admin/confirmPics")) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("firstPic", firstPic);
+			map.put("secondPic", secondPic);
+			map.put("thirdPic", thirdPic);
+			try {
+				service.confirmPics(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ".admin.error";
+			}
+		}
+		
+		
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int totalRowCount=service.count();
 		
@@ -112,7 +133,7 @@ public class ChangePicsController {
 	
 	
 	
-
+	/*
 	@RequestMapping("admin/confirmPics")
 	public String confirmPics(String firstPic, String secondPic, String thirdPic) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -129,5 +150,6 @@ public class ChangePicsController {
 
 		return ".admin.changePics";
 	}
+	*/
 
 }
