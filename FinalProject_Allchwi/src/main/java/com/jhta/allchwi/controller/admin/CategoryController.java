@@ -1,17 +1,17 @@
 package com.jhta.allchwi.controller.admin;
 
-import java.util.List;import java.util.function.BiConsumer;
+import java.util.HashMap;
+import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.jhta.allchwi.page.util.PageUtil;
 import com.jhta.allchwi.service.admin.categoryService;
 import com.jhta.allchwi.vo.admin.BigCategoryVO;
 import com.jhta.allchwi.vo.admin.BigsmallCategoryVO;
@@ -23,8 +23,15 @@ public class CategoryController {
 	private categoryService service;
 	
 	@GetMapping("/admin/category")
-	public String adminMain(Model model) {
-		List<BigsmallCategoryVO> list = service.list();
+	public String adminMain(Model model,@RequestParam(value="pageNum", defaultValue ="1"  )int pageNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int totalRowCount =service.count();
+		
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
+		map.put("startRow", pu.getStartRow());
+		
+		List<BigsmallCategoryVO> list = service.cate_list(map);
 		List<BigCategoryVO> bcate_list = service.bcate_list();
 		
 		model.addAttribute("list", list);
@@ -41,16 +48,10 @@ public class CategoryController {
 		
 		List<BigsmallCategoryVO> list = service.list();
 		
-		
-		
 		return list;
 	}
 	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value="/admin/big_category/insert",produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public List<BigsmallCategoryVO> big_category(BigCategoryVO vo) {
@@ -80,10 +81,6 @@ public class CategoryController {
 		return list;
 	}
 	
-	
-	
-	
-
 	@RequestMapping(value = "/admin/category/deleteScate", produces= "application/json;charset=utf-8")
 	@ResponseBody
 	public List<BigsmallCategoryVO> scategory_del(int scategory_num, int bcategory_num) {

@@ -1,6 +1,7 @@
 package com.jhta.allchwi.dao.admin;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,6 +30,17 @@ public class categoryDAO {
 	public List<BigsmallCategoryVO> list() {
 		return session.selectList(NAMESPACE+".list");
 	}
+	
+	
+	public List<BigsmallCategoryVO> cate_list(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".cate_list",map);
+	}
+	
+	public int count() {
+		return session.selectOne(NAMESPACE+".count");
+	}
+	
+	
 
 	public List<BigCategoryVO> bcate_list(){
 		return session.selectList(NAMESPACE+".bcate_list");

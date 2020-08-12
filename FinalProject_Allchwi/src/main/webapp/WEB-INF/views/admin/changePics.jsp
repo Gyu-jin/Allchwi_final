@@ -84,7 +84,7 @@
 		<br>
 		<hr width = "100%" color = "black" size = "3">
 		
-		<h4>선택된 이미지(더블클릭시 선택한 이미지 제거)</h4>
+		<h4>선택된 이미지(더블클릭시 아래의 선택한 이미지 제거)</h4>
 		<div id="imglist">
 			
 		</div>
@@ -97,26 +97,6 @@
 
 
 <script>
-	function del(img,save_filename){
-		if($("#imglist").children().length==3){
-			$("#confirmBtn").empty();
-		}
-		img.remove();
-		$("img[id='"+save_filename+"']").removeClass("imgBorder"); 
-		
-		var len = $("#imglist").children().length;
-		
-		if(len==0){
-			arr.splice(len,1);	
-		}
-		if(len==1){
-			arr.splice(len,1);	
-		}
-		if(len==2){
-			arr.splice(len,1);	
-		}		
-	}
-	
 	var firstPic = null;
 	var secondPic = null;
 	var thirdPic = null;
@@ -133,16 +113,13 @@
 			arr[2]=save_filename;
 		}
 		
-	
 		$("#confirmBtn").empty();
 		if ($("#imglist").children().length <= 2) {		
-		
 				
 			$("img[id='"+save_filename+"']").addClass("imgBorder");		// 테두리설정
-			var img1 = $("<img id='img1' style='width: 150px; height: 150px;' ondblclick=del(this,'"+save_filename+"')>").appendTo("#imglist"); 
+			var img1 = $("<img style='width: 150px; height: 150px;' ondblclick=del(this,'"+save_filename+"')>").appendTo("#imglist"); 
 			$(img1).prop("src","${cp}/resources/mainPicsUpload/" + save_filename );    	//선택된 이미지 칸에 추가		 			
 		}
-		
 		
 		if($("#imglist").children().length==3){
 			alert("세가지 그림을 모두 선택하셨습니다.");
@@ -160,9 +137,21 @@
 									+ firstPic + "&secondPic=" + secondPic
 									+ "&thirdPic=" + thirdPic
 									+ "'\">배너변경하기</button>");
-			
 		}
 	}
+	
+	
+	function del(img,save_filename){
+		if($("#imglist").children().length==3){
+			$("#confirmBtn").empty();
+		}
+		img.remove();
+		$("img[id='"+save_filename+"']").removeClass("imgBorder"); 
+		
+		//이름을 가져와 배열서 지우기
+		arr.splice(arr.indexOf(save_filename),1);
+	}
+	
 	
 	
 	function content(data) {

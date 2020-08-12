@@ -80,12 +80,27 @@
 						</tr>
 					</c:forEach>
 				</tbody>
+				 <thead class="thead-light">
+				    <tr>
+				    	<th colspan="4" style="text-align: center;" onclick="more()">더보기</th>
+				    </tr>
+				 </thead>
 			</table>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
+		function more(){
+			$.getJSON({
+				url:"${cp}/admin/searchByCate/list",
+				success: function(data){	
+					redundlist(data);
+				}
+			});
+		}
+
+
 		
 		// 대분류 입력 (클릭,엔터키)
 		$("#bcate_btn").click(function(){
@@ -110,9 +125,6 @@
 				small_insert();
 			}
 		});
-		
-		
-		
 		
 		
 		//대분류 등록 함수

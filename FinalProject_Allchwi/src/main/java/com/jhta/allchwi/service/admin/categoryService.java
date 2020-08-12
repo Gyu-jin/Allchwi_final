@@ -1,5 +1,6 @@
 package com.jhta.allchwi.service.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class categoryService {
 	public List<BigsmallCategoryVO> list(){
 		return dao.list();
 	}
+	
+	public List<BigsmallCategoryVO> cate_list(HashMap<String, Object> map){
+		return dao.cate_list(map);
+	}
+	
+	public int count() {
+		return dao.count();
+	}
+	
+	
 	
 	public List<BigsmallCategoryVO> searchByCate(int bcategory_num){
 		return dao.searchByCate(bcategory_num);
