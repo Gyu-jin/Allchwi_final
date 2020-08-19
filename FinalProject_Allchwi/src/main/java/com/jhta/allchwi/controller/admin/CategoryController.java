@@ -142,9 +142,11 @@ public class CategoryController {
 	//대분류 입력시 중복값 막기
 	@RequestMapping(value="/admin/bcate_check",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public String bcate_check(String bcategory_name) {
+	public HashMap<String, Object> bcate_check(String bcategory_name) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String using = service.bcate_check(bcategory_name);		
-		return using;
+		map.put("using",using);
+		return map;
 	}
 	
 }

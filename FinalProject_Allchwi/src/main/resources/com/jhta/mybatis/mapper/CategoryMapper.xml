@@ -55,7 +55,7 @@
 	</select>
 	
 	<select id="bcate_check" resultType="string" parameterType="string">
-		select * from big_category where bcategory_name = #{bcategory_name}
+		select bcategory_name from big_category where bcategory_name = #{bcategory_name}
 	</select>
 	
 	

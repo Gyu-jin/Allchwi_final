@@ -94,14 +94,12 @@
 <script type="text/javascript">
 		// 대분류 입력 (클릭,엔터키)
 		$("#bcate_btn").click(function(){
-			bcate_check();
-			//big_insert();
+			big_insert();
 		});
 		
 		$("#bcate_input").keyup(function(){
 			 if(event.keyCode == 13){
-				bcate_check();
-				//big_insert();
+				big_insert();
 			 }
 		});
 		
@@ -119,30 +117,40 @@
 		});
 		
 	
-		
-		function bcate_check(){
+		//대분류 등록 함수
+		function big_insert(){
 			var bcategory_name = $("input[name='bcategory_name']").val();
+			$("#bcate_check").empty();
+			
 			$.getJSON({
 				url:"${cp}/admin/bcate_check",
 				data: {bcategory_name:bcategory_name},
 				success: function(data){
-					$(data).each(function(i,bcate){
-						var ccc= bcate.using;
-						alert(ccc);
-					});
-					/*
-					if(data){
+					if(data.using != null){
 						var span = document.getElementById("bcate_check");
-							span.innerHTML = "이미 사용중인 카테고리 이름 입니다.";
-							span.style.color = "red";
+						span.innerHTML = "이미 사용중인 카테고리 이름 입니다.";
+						span.style.color = "red";
+					}else{
+						if(bcategory_name=="" || bcategory_name == null){
+							alert("값을 입력해주세요 !");
+						}else{
+							$.getJSON({
+								url:"${cp}/admin/big_category/insert",
+								data: {bcategory_name:bcategory_name},
+								success: function(data){
+									redundlist(data);		
+								}
+							});
+							alert("등록성공 !");
+						}
 					}
-					*/
 				}
 			});
 		}
 		
 		
 		//대분류 등록 함수
+		/*
 		function big_insert(){
 			var bcategory_name = $("input[name='bcategory_name']").val();
 			if(bcategory_name=="" || bcategory_name == null){
@@ -158,6 +166,7 @@
 				alert("등록성공 !");
 			}
 		}
+		*/
 		
 		//소분류 등록 함수
 		function small_insert(){
