@@ -30,8 +30,8 @@ public class categoryService {
 		return dao.list();
 	}
 	
-	public List<BigsmallCategoryVO> cate_list(HashMap<String, Object> map){
-		return dao.cate_list(map);
+	public List<BigsmallCategoryVO> cate_list(){
+		return dao.cate_list();
 	}
 	
 	public int count() {
@@ -43,6 +43,12 @@ public class categoryService {
 	public List<BigsmallCategoryVO> searchByCate(int bcategory_num){
 		return dao.searchByCate(bcategory_num);
 	}
+	
+	public List<BigsmallCategoryVO> searchByCateList5(int bcategory_num){
+		return dao.searchByCateList5(bcategory_num);
+	}
+	
+	
 	
 	public List<BigCategoryVO> bcate_list(){
 		return dao.bcate_list();
@@ -56,6 +62,14 @@ public class categoryService {
 	public int del_bcate(int bcategory_num) {
 		return dao.del_bcate(bcategory_num);
 	}
+	
+	public String bcate_check(String bcategory_name) {
+		return dao.bcate_check(bcategory_name);
+	}
+	
+	
+	
+	
 	
 	public List<SmallCategoryVO> scate_list(int bcategory_num){
 		return dao.scate_list(bcategory_num);

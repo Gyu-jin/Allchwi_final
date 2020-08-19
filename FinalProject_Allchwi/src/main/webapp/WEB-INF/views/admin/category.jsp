@@ -20,6 +20,7 @@
 							id="bcate_btn">등록</button>
 					</div>
 				</div>
+					<span id="bcate_check"></span>
 			</div>
 
 			<br>
@@ -69,7 +70,7 @@
 					</tr>
 				</thead>
 				<tbody id="tb">
-					<c:forEach var="vo" items="${list }">
+					<c:forEach var="vo" items="${cate_list }">
 						<tr>
 							<td id="bnum">${vo.bcategory_num }</td>
 							<td>${vo.bcategory_name }</td>
@@ -80,36 +81,27 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-				 <thead class="thead-light">
-				    <tr>
-				    	<th colspan="4" style="text-align: center;" onclick="more()">더보기</th>
-				    </tr>
-				 </thead>
 			</table>
+			<c:if test="${cate_list.size()>=5 }">
+				<div id="btns">
+					<button type="button" class="btn btn-secondary" style="width:100%" onClick="more()">더보기</button>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-		function more(){
-			$.getJSON({
-				url:"${cp}/admin/searchByCate/list",
-				success: function(data){	
-					redundlist(data);
-				}
-			});
-		}
-
-
-		
 		// 대분류 입력 (클릭,엔터키)
 		$("#bcate_btn").click(function(){
-			big_insert();
+			bcate_check();
+			//big_insert();
 		});
 		
 		$("#bcate_input").keyup(function(){
 			 if(event.keyCode == 13){
-				big_insert();
+				bcate_check();
+				//big_insert();
 			 }
 		});
 		
@@ -125,6 +117,29 @@
 				small_insert();
 			}
 		});
+		
+	
+		
+		function bcate_check(){
+			var bcategory_name = $("input[name='bcategory_name']").val();
+			$.getJSON({
+				url:"${cp}/admin/bcate_check",
+				data: {bcategory_name:bcategory_name},
+				success: function(data){
+					$(data).each(function(i,bcate){
+						var ccc= bcate.using;
+						alert(ccc);
+					});
+					/*
+					if(data){
+						var span = document.getElementById("bcate_check");
+							span.innerHTML = "이미 사용중인 카테고리 이름 입니다.";
+							span.style.color = "red";
+					}
+					*/
+				}
+			});
+		}
 		
 		
 		//대분류 등록 함수
@@ -189,6 +204,7 @@
 			$("#bcate_input").val(""); 
 			$("#scate_input").val("");
 			$("#tb").empty();
+			$("#btns").empty();
 			$(data).each(function(i,arr){
 				var bcategory_num2= arr.bcategory_num;
 				var bcategory_name= arr.bcategory_name;
@@ -199,17 +215,17 @@
 					scategory_num=0;
 				}
 				
-				$("#tb").append("<tr>");
-					$("#tb").append("<td>"+bcategory_num2+"</td>");
-					$("#tb").append("<td>"+bcategory_name+"</td>");
-					if(scategory_name==undefined){
-						$("#tb").append("<td> </td>");
+				
+				var trs = $("<tr></tr>").appendTo("#tb");
+				
+					$(trs).append("<td>"+bcategory_num2+"</td>");
+					$(trs).append("<td>"+bcategory_name+"</td>");					
+					if(scategory_name==null){
+						 $(trs).append("<td></td>");
 					}else{
-						$("#tb").append("<td>"+scategory_name+"</td>");
+					 	 $(trs).append("<td>"+scategory_name+"</td>");
 					}
-					
-					$("#tb").append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num2+")'>삭제</button></td>");
-				$("#tb").append("</tr>");
+					$(trs).append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num2+")'>삭제</button></td>");
 			
 				$.getJSON({
 					url:"${cp}/admin/big_category_list",
@@ -235,29 +251,42 @@
 			});	
 		}
 		
-		//삭제함수(계속해서 삭제 함수띄울때)
+		//삭제함수(카테고리별로 볼때)
 		function del(scategory,bcategory){
 			var scategory_num = scategory;
 			//console.log(scategory);
 			var selectedCat = document.getElementById("selectedCat");
 			var selectedValue = selectedCat.options[selectedCat.selectedIndex].value;
 			
-			if(selectedValue==0){
-				$.getJSON({
-					url:"${cp}/admin/category/deleteScate2",
-					data: {scategory_num:scategory_num,bcategory_num:bcategory},
-					success: function(data){	
-						redundlist(data,bcategory);
-					}
-				});
+			if(selectedValue==0){   //전체리스트에서 삭제 (전체리스트 selectedValue==0으로 해둠)
+				
+				if(scategory_num!=0){	//소분류 삭제(snum이 0이 아닐때 = 소분류가 있을때)
+					$.getJSON({
+						url:"${cp}/admin/category/deleteScate2",
+						data: {scategory_num:scategory_num,bcategory_num:bcategory},
+						success: function(data){	
+							redundlist(data,bcategory);
+						}
+					});
+		
+				}else{		//대분류삭제
+					var bcategory_num = bcategory;	
+					console.log(bcategory_num);
+					$.getJSON({
+						url:"${cp}/admin/category/deleteBcate",
+						data: {bcategory_num:bcategory_num},
+						success: function(data){
+							redundlist(data);
+						}		
+					});
+				}
 			
-			
-			}else if(scategory_num!=0){	//소분류 삭제( 소분류가 0이 아닐때 = 소분류가 있을때)
+			}else if(scategory_num!=0){	//소분류 삭제 (scategory_num가 0이 아닐때 = 소분류가 있을때)
 				$.getJSON({
 					url:"${cp}/admin/category/deleteScate",
 					data: {scategory_num:scategory_num,bcategory_num:bcategory},
 					success: function(data){	
-						redundlist(data,bcategory);
+						redundlist(data,bcategory);	
 					}
 				});
 	
@@ -268,7 +297,7 @@
 					url:"${cp}/admin/category/deleteBcate",
 					data: {bcategory_num:bcategory_num},
 					success: function(data){
-						redundlist(data);
+						redundlist(data);	
 					}		
 				});
 			}
@@ -302,34 +331,91 @@
 			}
 		}
 		
-		
-		
-		
-		
 		//카테고리별 보기
 		function searchByCate(){
 			var selectedCat = document.getElementById("selectedCat");
 			var bcategory_num = selectedCat.options[selectedCat.selectedIndex].value;
+			$("#btns").empty();
 			
 			if(bcategory_num==0){		//value=0일때 전체리스트
 				$.getJSON({
-					url:"${cp}/admin/searchByCate/list",
+					url:"${cp}/admin/lessList", 
 					success: function(data){	
 						redundlist(data);
+						if($("#tb> tr").length>=5){
+							$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+								"onClick='more()'>더보기</button>");									
+						}
 					}
 				});
+					
 			}else{			//카테고리별 보여주기 value값에 따라 소분류 리스트
 				$.getJSON({
-					url:"${cp}/admin/category/searchByCate",
+					url:"${cp}/admin/category/searchByCateList5",
 					data: {bcategory_num:bcategory_num},
 					success: function(data){	
 						redundlist(data,bcategory_num);
+						//행의 갯수가 5이상일때만 버튼활성화
+						if($("#tb> tr").length>=5){
+						$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+							"onClick=\"morebyCate('"+bcategory_num+"')\">더보기</button>");									
+						}	
 					}
-				});
+				});											
 			}
 		}
 		
+		function morebyCate(bcategory_num){
+			$.getJSON({
+				url:"${cp}/admin/category/searchByCate",
+				data: {bcategory_num:bcategory_num},
+				success: function(data){	
+					redundlist(data,bcategory_num);
+					$("#btns").empty();
+					$("#btns").append("<button type='button' class='btn btn-secondary'"+
+					"style='width:100%' onclick=\"lessbyCate('"+bcategory_num+"')\">닫기</button>");
+				}
+			});
+		}
 		
+		function lessbyCate(bcategory_num){
+			
+			$.getJSON({
+				url:"${cp}/admin/category/searchByCateList5",
+				data: {bcategory_num:bcategory_num},
+				success: function(data){	
+					redundlist(data,bcategory_num);
+					//행의 갯수가 5이상일때만 버튼활성화
+					if($("#tb> tr").length>=5){
+					$("#btns").empty();	
+					$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+						"onClick=\"morebyCate('"+bcategory_num+"')\">더보기</button>");									
+					}	
+				}
+			});			
+		}
 		
+		function more(){
+			$.getJSON({
+				url:"${cp}/admin/searchByCate/list",
+				success: function(data){	
+					redundlist(data);
+					$("#btns").empty();
+					$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%' onclick='less()'>닫기</button>");
+				}
+			});	
+		}
 
+		function less(){
+			$.getJSON({
+				url:"${cp}/admin/lessList",
+				success: function(data){						
+					redundlist(data);
+					$("#btns").empty();
+					$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%' onClick='more()'>더보기</button>");
+				}
+			});
+			
+		}
+		
 </script>

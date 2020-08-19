@@ -32,8 +32,8 @@ public class categoryDAO {
 	}
 	
 	
-	public List<BigsmallCategoryVO> cate_list(HashMap<String, Object> map) {
-		return session.selectList(NAMESPACE+".cate_list",map);
+	public List<BigsmallCategoryVO> cate_list() {
+		return session.selectList(NAMESPACE+".cate_list");
 	}
 	
 	public int count() {
@@ -58,6 +58,11 @@ public class categoryDAO {
 		return session.selectList(NAMESPACE+".searchByCate", bcategory_num);
 	}
 	
+	public List<BigsmallCategoryVO> searchByCateList5(int bcategory_num){
+		return session.selectList(NAMESPACE+".searchByCateList5", bcategory_num);
+	}
+	
+	
 	
 	
 	
@@ -75,7 +80,9 @@ public class categoryDAO {
 		return session.selectOne(NAMESPACE+".bcatename",bcategory_num);
 	}
 	
-	
+	public String bcate_check(String bcategory_name) {
+		return session.selectOne(NAMESPACE+".bcate_check",bcategory_name);
+	}
 	
 	
 }
