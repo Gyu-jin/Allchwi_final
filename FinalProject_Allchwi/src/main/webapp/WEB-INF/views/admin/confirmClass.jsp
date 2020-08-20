@@ -60,8 +60,6 @@
 		<div style="float: center;">
 			<c:choose>
 				<c:when test="${list.size()>0 }">
-
-
 					<c:forEach var="vo" items="${list }">
 						<div class="row" style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
 							<div class="col-md-12">

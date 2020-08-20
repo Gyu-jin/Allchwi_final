@@ -63,6 +63,13 @@ public class categoryDAO {
 	}
 	
 	
+	public List<BigsmallCategoryVO> search(String keyword){
+		return session.selectList(NAMESPACE+".search", keyword);
+	}
+	
+	public List<BigsmallCategoryVO> searchMore(String keyword){
+		return session.selectList(NAMESPACE+".searchMore", keyword);
+	}
 	
 	
 	

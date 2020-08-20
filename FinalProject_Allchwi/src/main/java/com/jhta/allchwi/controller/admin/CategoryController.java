@@ -149,4 +149,21 @@ public class CategoryController {
 		return map;
 	}
 	
+	//검색 5개만보기
+	@RequestMapping(value="/admin/category/search",produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public List<BigsmallCategoryVO> search(String keyword) {
+		List<BigsmallCategoryVO> searchList = service.search(keyword);		
+		return searchList;
+	}
+	
+	//검색 5개이상 보기
+	@RequestMapping(value="/admin/category/searchMore",produces= "application/json;charset=utf-8")
+	@ResponseBody		
+	public List<BigsmallCategoryVO> searchMore(String keyword) {
+		List<BigsmallCategoryVO> searchMoreList = service.searchMore(keyword);		
+		return searchMoreList;
+	}	
+	
+
 }

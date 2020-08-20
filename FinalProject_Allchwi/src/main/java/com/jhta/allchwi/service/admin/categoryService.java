@@ -67,6 +67,13 @@ public class categoryService {
 		return dao.bcate_check(bcategory_name);
 	}
 	
+	public List<BigsmallCategoryVO> search(String keyword) {
+		return dao.search(keyword);
+	}
+	
+	public List<BigsmallCategoryVO> searchMore(String keyword) {
+		return dao.searchMore(keyword);
+	}
 	
 	
 	

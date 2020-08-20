@@ -21,8 +21,13 @@
 					</div>
 				</div>
 					<span id="bcate_check"></span>
+			<span>
+			<input type="search" class="form-control form-control-sm"  placeholder="검색" id="searchBar" onsearch="searchX()"
+			style="margin-left:328%">
+			</span>
+			
 			</div>
-
+			
 			<br>
 
 			<div class="row">
@@ -148,26 +153,6 @@
 			});
 		}
 		
-		
-		//대분류 등록 함수
-		/*
-		function big_insert(){
-			var bcategory_name = $("input[name='bcategory_name']").val();
-			if(bcategory_name=="" || bcategory_name == null){
-				alert("값을 입력해주세요 !");
-			}else{
-				$.getJSON({
-					url:"${cp}/admin/big_category/insert",
-					data: {bcategory_name:bcategory_name},
-					success: function(data){
-						redundlist(data);		
-					}
-				});
-				alert("등록성공 !");
-			}
-		}
-		*/
-		
 		//소분류 등록 함수
 		function small_insert(){
 			var bcategory_num = $("select[name='cat']").val();
@@ -214,19 +199,23 @@
 			$("#scate_input").val("");
 			$("#tb").empty();
 			$("#btns").empty();
+			
+			if(data==""){
+				let noSearch = $("<tr></tr>").appendTo("#tb");
+				$(noSearch).append("<td colspan='4' style='text-align: center;'>검색 결과 없음</td>");	
+			}
+		
 			$(data).each(function(i,arr){
 				var bcategory_num2= arr.bcategory_num;
 				var bcategory_name= arr.bcategory_name;
 				var scategory_name = arr.scategory_name;
 				var scategory_num = arr.scategory_num;
-				
+						
 				if(scategory_num == null || scategory_num ==""){
 					scategory_num=0;
 				}
-				
-				
+							
 				var trs = $("<tr></tr>").appendTo("#tb");
-				
 					$(trs).append("<td>"+bcategory_num2+"</td>");
 					$(trs).append("<td>"+bcategory_name+"</td>");					
 					if(scategory_name==null){
@@ -235,7 +224,8 @@
 					 	 $(trs).append("<td>"+scategory_name+"</td>");
 					}
 					$(trs).append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num2+")'>삭제</button></td>");
-			
+					
+					
 				$.getJSON({
 					url:"${cp}/admin/big_category_list",
 					success: function(data){
@@ -257,7 +247,7 @@
 						});
 					}
 				});
-			});	
+			});
 		}
 		
 		//삭제함수(카테고리별로 볼때)
@@ -423,8 +413,65 @@
 					$("#btns").empty();
 					$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%' onClick='more()'>더보기</button>");
 				}
+			});	
+		}
+		
+		
+		///////////////////// 검색	////////////////////////////////////////////////////
+		$("#searchBar").keyup(function(){
+			var keywords = $("#searchBar").val();
+			$.getJSON({
+				url:"${cp}/admin/category/search",
+				data: {keyword:keywords},
+				success: function(data){	
+					redundlist(data);
+					if($("#tb> tr").length>=5){
+						$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+							"onClick='searchMore()'>더보기</button>");									
+					}
+				}
 			});
-			
+		});
+
+		function searchX(){
+			$.getJSON({
+				url:"${cp}/admin/lessList",
+				success: function(data){	
+					redundlist(data);
+					if($("#tb> tr").length>=5){
+						$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+							"onClick='more()'>더보기</button>");									
+					}
+				}
+			});
+		}
+		
+		function searchMore(){
+			var keywords = $("#searchBar").val();
+			$.getJSON({
+				url:"${cp}/admin/category/searchMore",
+				data: {keyword:keywords},
+				success: function(data){	
+					redundlist(data);
+					$("#btns").empty();
+					$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%' onclick='searchLess()'>닫기</button>");
+				}
+			});
+		}
+		
+		function searchLess(){
+			var keywords = $("#searchBar").val();
+			$.getJSON({
+				url:"${cp}/admin/category/search",
+				data: {keyword:keywords},
+				success: function(data){	
+					redundlist(data);
+					if($("#tb> tr").length>=5){
+						$("#btns").append("<button type='button' class='btn btn-secondary' style='width:100%'"+
+							"onClick='more()'>더보기</button>");									
+					}
+				}
+			});
 		}
 		
 </script>
