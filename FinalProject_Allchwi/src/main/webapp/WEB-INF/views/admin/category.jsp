@@ -20,11 +20,11 @@
 							id="bcate_btn">등록</button>
 					</div>
 				</div>
-					<span id="bcate_check"></span>
-			<span>
+					<span id="bcate_check" style="width:261px;"></span>
+			<div>
 			<input type="search" class="form-control form-control-sm"  placeholder="검색" id="searchBar" onsearch="searchX()"
-			style="margin-left:328%">
-			</span>
+			style="width:170px; margin-left:310px; position:absolute;">
+			</div>
 			
 			</div>
 			

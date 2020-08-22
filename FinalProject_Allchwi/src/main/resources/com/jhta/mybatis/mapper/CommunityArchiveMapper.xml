@@ -11,6 +11,17 @@
 	    </selectKey>
 	</insert>
 	
+	<delete id="delete" parameterType="int" >
+		delete from ref_room where room_num = #{room_num}
+	</delete>
+	
+	<update id="update" parameterType="com.jhta.allchwi.vo.community.ArchiveVO">
+		update ref_room set room_title = #{room_title},room_content=#{room_content},room_regdate=now(),horsehead=#{horsehead}
+		<if test="org_filename!=null and org_filename!=''">
+		,org_filename=#{org_filename},save_filename=#{save_filename}, filesize=#{filesize} 
+		</if>
+		where room_num = #{room_num} 	
+	</update>
 	
 	<select id="getInfo" resultType="com.jhta.allchwi.vo.community.ArchiveVO" parameterType="int">
 		select * from ref_room where room_num=#{room_num}

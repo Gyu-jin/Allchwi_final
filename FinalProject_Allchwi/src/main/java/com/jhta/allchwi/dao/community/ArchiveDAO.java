@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.allchwi.vo.community.ArchiveVO;
+import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Repository
 public class ArchiveDAO {
@@ -19,6 +20,13 @@ public class ArchiveDAO {
 		return session.insert(NAMESPACE+".insert", vo);
 	}
 	
+	public int delete(int room_num) {
+		return session.delete(NAMESPACE+".delete", room_num);
+	}
+	
+	public int update(ArchiveVO vo) {
+		return session.update(NAMESPACE+".update", vo);
+	}
 	
 	public ArchiveVO getInfo(int room_num) {
 		return session.selectOne(NAMESPACE+".getInfo", room_num);

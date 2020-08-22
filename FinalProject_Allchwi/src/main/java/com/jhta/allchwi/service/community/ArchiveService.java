@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.allchwi.dao.community.ArchiveDAO;
 import com.jhta.allchwi.vo.community.ArchiveVO;
+import com.jhta.allchwi.vo.community.CommunityVO;
 
 @Service
 public class ArchiveService {
@@ -16,6 +17,14 @@ public class ArchiveService {
 	
 	public int insert(ArchiveVO vo) {
 		return dao.insert(vo);
+	}
+	
+	public int delete(int room_num) {
+		return dao.delete(room_num);
+	}
+	
+	public int update(ArchiveVO vo) {
+		return dao.update(vo);
 	}
 	
 	public ArchiveVO getInfo(int room_num) {

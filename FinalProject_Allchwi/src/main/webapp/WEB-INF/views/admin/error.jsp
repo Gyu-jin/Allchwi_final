@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-		삭제 실패
+	<h1>에러</h1>
 </body>
 </html>

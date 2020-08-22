@@ -23,7 +23,12 @@
 <div class="container">
 	<div class="jumbotron" style="padding: 2rem;">
 		<div>
-			<h4>${vo.room_title }</h4>						
+			<h4>${vo.room_title }</h4>
+			<c:if test="${ml_num == commu_ml_num}">			
+				<button type="button" id="updateBtn" class="btn btn-success">수정</button>
+				<button type="button" id="deleteBtn" class="btn btn-secondary">삭제</button>
+			</c:if>
+
 			<div id="top">
 				<p>
 					등록일 :
@@ -35,14 +40,13 @@
 		</div>
 		<hr class="my-4" style="clear: right; margin: 0px">
 		<div class="card card-body" style="height: 15rem; margin-top: 25px">
-			<div style="white-space: pre">${vo.room_content}</div>
+			<div style="white-space: pre"><p id="room_con">${vo.room_content}</p></div>
 			
-			<!-- 	
-			<div id="btnGroup">
-				<button class="btn btn-primary" id="updateBtn" onclick="showModal('${ntv.notice_num}')">수정</button>
-				<button class="btn btn-danger" id="deleteBtn" onclick="deleteNotice('${ntv.notice_num}')">삭제</button>
-			</div>
-			 -->
+			<input type="hidden" id="room_num" value="${vo.room_num }">
+			<input type="hidden" id="save_filename" value="${vo.save_filename }">
+			<input type="hidden" id="horsehead" value="${vo.horsehead }">
+			<input type="hidden" id="org_filename" value="${vo.org_filename }">
+				
 		</div>
 		
 		
@@ -84,3 +88,25 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$("#deleteBtn").click(function(){
+		var room_num = $("#room_num").val();
+		var save_filename = $("#save_filename").val();
+		location.href="${cp}/community/archiveDelete?room_num="+room_num+"&save_filename="+save_filename;
+	});
+	
+	$("#updateBtn").click(function(){
+		var room_num = $("#room_num").val();
+		var save_filename = $("#save_filename").val();
+		var org_filename = $("#org_filename").val();
+		var room_title = $("h4").text();
+		var room_content = $("#room_con").text();
+		var horsehead = $("#horsehead").val();
+		
+		location.href="${cp}/community/archiveUpdate?room_num="+room_num+"&save_filename="+save_filename+"&room_title="
+				+room_title+"&room_content="+room_content+"&horsehead="+horsehead+"&org_filename="+org_filename;		
+	});
+
+	
+</script>
