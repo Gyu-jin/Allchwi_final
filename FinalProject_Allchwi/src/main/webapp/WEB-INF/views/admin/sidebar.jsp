@@ -107,7 +107,7 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${cp }/admin/changePics"> <i
-					class="far fa-image"></i> <span>대문바꾸기</span></a></li>
+					class="far fa-image"></i> <span>배너 바꾸기</span></a></li>
 
 
 			<!-- Sidebar Toggler (Sidebar) -->

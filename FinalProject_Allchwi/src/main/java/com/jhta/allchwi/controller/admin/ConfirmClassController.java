@@ -48,11 +48,10 @@ public class ConfirmClassController {
 		if(request.getServletPath().equals("/admin/denyClass")) {
 			//수업 반려상태로 update
 			try {
-			int n =service.denyClass(class_num);
-				
-			if(n>0) {
-				//반려사유 메일보내기
-				mailSender.sendMsg(msg,id);
+				int n =service.denyClass(class_num);	
+				if(n>0) {
+					//반려사유 메일보내기
+					mailSender.sendMsg(msg,id);
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -65,7 +64,7 @@ public class ConfirmClassController {
 		map.put("keyword", keyword);
 
 		int totalRowCount = service.count(map);
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 5);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 4, 5);
 		
 		map.put("startRow", pu.getStartRow()-1);
 		map.put("endRow", pu.getEndRow());
@@ -86,19 +85,11 @@ public class ConfirmClassController {
 		ClassDetailVO vo = service.class_detail(class_num);
 		List<CertiVO> certiList = service.certi_list(class_num);
 		List<CurriVO> curriList = service.curri_list(class_num);
-		
-		
-	
-		
+			
 		model.addAttribute("vo", vo);
 		model.addAttribute("certiList", certiList);
 		model.addAttribute("curriList", curriList);
 		
 		return "classDetail/AdminClassDetail";
 	}
-	
-	
-	
-	
-	
 }

@@ -12,6 +12,7 @@
 		insert into small_category values(null,#{bcategory_num},#{scategory_name})
 	</insert>
 	
+	<!-- 검색값 나타내기 (5행만 보여주기) -->
 	<select id="search" resultType="com.jhta.allchwi.vo.admin.BigsmallCategoryVO" parameterType="string">
 		select b.bcategory_num, b.bcategory_name,s.scategory_num,s.bcategory_num,s.scategory_name
 		from big_category b LEFT OUTER JOIN small_category s
@@ -20,6 +21,7 @@
 		limit 0,5
 	</select>
 	
+	<!-- 검색값 나타내기 (전체보여주기) -->
 	<select id="searchMore" resultType="com.jhta.allchwi.vo.admin.BigsmallCategoryVO" parameterType="string">
 		select b.bcategory_num, b.bcategory_name,s.scategory_num,s.bcategory_num,s.scategory_name
 		from big_category b LEFT OUTER JOIN small_category s

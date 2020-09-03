@@ -41,7 +41,6 @@
 			<tbody>
 				<c:forEach var="vo" items="${list }">
 					<tr>
-
 						<td>${vo.ml_num}</td>
 						<td>${vo.tutor_nickname}</td>
 						<td>${vo.class_title}</td>

@@ -34,19 +34,14 @@
 				<fmt:formatDate value="${now}" pattern="yyyy" />
 			</c:set>
 
-			<button type="button" id="twoyearsago"
-				class="btn btn-outline-secondary">
-				<c:out value="${sysYear-2}" />
-				년
+			<button type="button" id="twoyearsago" class="btn btn-outline-secondary">
+				<c:out value="${sysYear-2}" />년
 			</button>
 			<button type="button" id="lastyear" class="btn btn-outline-secondary">
-				<c:out value="${sysYear-1}" />
-				년
+				<c:out value="${sysYear-1}" />년
 			</button>
-			<button type="button" id="thisyear"
-				class="btn btn-outline-secondary active">
-				<c:out value="${sysYear}" />
-				년
+			<button type="button" id="thisyear" class="btn btn-outline-secondary active">
+				<c:out value="${sysYear}" />년
 			</button>
 			<button type="button" class="btn btn-success"
 				style="margin-left: 718px" onclick="fnExcelReport('table','monthly sales/revenue')">엑셀 파일 다운로드</button>
@@ -186,41 +181,38 @@
 		}
 	});
 
-	// 여기부터
+	
 	function getData(data) {
 		var array = new Array();
 		array[0] = [ '월별', '수익', '매출액' ];
 
 		$("#tb").empty();
 		$(data).each(function(i, arr) {
-			var subArray = [ arr.month + "월", arr.monthlySum,arr.monthlyRevenue ];
-				if (data.length - 1 != i) { //마지막 열 데이터 담지 않기// 같지 않을때까지 넣는다.
+			var subArray = [ arr.month + "월", arr.monthlySum,arr.monthlyRevenue ];	
+			if (data.length - 1 != i) { //마지막 열 데이터 담지 않기// 같지 않을때까지 넣는다.
 					array[++i] = subArray;
-				}
-				
-				var month = arr.month;
-				var monthlySum = arr.monthlySum;
-				var monthlyRevenue = arr.monthlyRevenue;
-
-				monthlySum = addComma(monthlySum);
-				monthlyRevenue = addComma(monthlyRevenue);
+			}
+			// 여기서부터는 chart 아래 표
+			var month = arr.month;
+			var monthlySum = arr.monthlySum;
+			var monthlyRevenue = arr.monthlyRevenue;
+			monthlySum = addComma(monthlySum);
+			monthlyRevenue = addComma(monthlyRevenue);
 					
-				var trs = $("<tr></tr>").appendTo("#tb");
+			var trs = $("<tr></tr>").appendTo("#tb");
 				
-				if (month == 0) {
-					$(trs).append("<td class='table-active'>합계:</td>");
-					$(trs).append(
-							"<td class='table-active'>" + monthlySum+ "원</td>");
-					$(trs).append("<td class='table-active'>" + monthlyRevenue+ "원</td>");
-				} else {
-					$(trs).append("<td>" + month + "월</td>");
-					$(trs).append("<td>" + monthlySum + "원</td>");
-					$(trs).append("<td>" + monthlyRevenue + "원</td>");
-				}
-			});
-
+			if (month == 0) {
+				$(trs).append("<td class='table-active'>합계:</td>");
+				$(trs).append(
+						"<td class='table-active'>" + monthlySum+ "원</td>");
+				$(trs).append("<td class='table-active'>" + monthlyRevenue+ "원</td>");
+			} else {
+				$(trs).append("<td>" + month + "월</td>");
+				$(trs).append("<td>" + monthlySum + "원</td>");
+				$(trs).append("<td>" + monthlyRevenue + "원</td>");
+			}
+		});
 		var data2 = google.visualization.arrayToDataTable(array);
-
 		var options = {
 			title : '월별 실적  [단위:원]',
 			hAxis : {
@@ -233,13 +225,11 @@
 				minValue : 0
 			}
 		};
-
 		var chart = new google.visualization.AreaChart(document
 				.getElementById('chart_div'));
-
 		chart.draw(data2, options);
 	}
-	//여기까지
+
 	
 	//숫자에 콤마 붙여주는 함수
 	function addComma(num) {

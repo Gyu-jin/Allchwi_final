@@ -59,7 +59,6 @@ public class ReceiptController {
 		return ".receipt.receiveTuition";
 	}
 	
-	
 	@RequestMapping(value="/receipt/apply")
 	public String receiptApply(Model model, int final_price, int pay_num, int class_fee) {	
 		model.addAttribute("final_price", final_price);

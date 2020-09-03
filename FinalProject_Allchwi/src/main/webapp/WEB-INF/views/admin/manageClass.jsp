@@ -82,8 +82,7 @@
 
 
 
-				<c:forEach var="i" begin="${pu.startPageNum}"
-					end="${pu.endPageNum }">
+				<c:forEach var="i" begin="${pu.startPageNum}" end="${pu.endPageNum }">
 					<c:choose>
 						<c:when test="${pu.pageNum==i}">
 							<li class="page-item active"><a class="page-link"

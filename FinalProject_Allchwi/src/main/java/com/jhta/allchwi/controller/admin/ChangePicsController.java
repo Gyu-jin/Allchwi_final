@@ -44,14 +44,12 @@ public class ChangePicsController {
 			@RequestParam(value="pageNum", defaultValue = "1") int pageNum,
 			String firstPic, String secondPic, String thirdPic
 	){
-		
 		// 이미지 업로드 할때
 		if (request.getServletPath().equals("/admin/insertPics")) {
 			// 업로드할 폴더 경로 얻어오기
 			String uploadPath = session.getServletContext().getRealPath("/resources/mainPicsUpload");
 			System.out.println(uploadPath);
 
-			
 			for (int i = 0; i < file1.size(); i++) {
 				MultipartFile file = file1.get(i);
 				// 전송된 파일명
@@ -99,8 +97,6 @@ public class ChangePicsController {
 			}
 		}
 		
-		
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int totalRowCount=service.count();
 		
@@ -130,26 +126,4 @@ public class ChangePicsController {
 		
 		return list;
 	}
-	
-	
-	
-	/*
-	@RequestMapping("admin/confirmPics")
-	public String confirmPics(String firstPic, String secondPic, String thirdPic) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("firstPic", firstPic);
-		map.put("secondPic", secondPic);
-		map.put("thirdPic", thirdPic);
-		try {
-			service.confirmPics(map);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ".admin.error";
-		}
-
-		return ".admin.changePics";
-	}
-	*/
-
 }

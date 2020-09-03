@@ -67,10 +67,10 @@
 		<div id="bottom">
 			<c:choose>
 				<c:when test="${prev != null }">
-					이전글&nbsp&nbsp <a href="${cp }/community/archiveDetail?room_num=${prev.room_num }">${prev.room_title }</a>
+					<strong>이전글</strong>&nbsp&nbsp <a href="${cp }/community/archiveDetail?room_num=${prev.room_num }">${prev.room_title }</a>
 				</c:when>
 				<c:otherwise>
-					이전글이 존재하지 않습니다.
+					<strong>이전글이 존재하지 않습니다.</strong>
 				</c:otherwise>
 			</c:choose>
 			
@@ -79,10 +79,10 @@
 			<hr class="my-2">
 			<c:choose>
 				<c:when test="${next != null }">
-					다음글&nbsp&nbsp <a href="${cp}/community/archiveDetail?room_num=${next.room_num }">${next.room_title }</a>
+					<strong>다음글</strong>&nbsp&nbsp <a href="${cp}/community/archiveDetail?room_num=${next.room_num }">${next.room_title }</a>
 				</c:when>
 				<c:otherwise>
-					다음글이 존재하지 않습니다.
+					<strong>다음글이 존재하지 않습니다.</strong>
 				</c:otherwise>
 			</c:choose>
 		</div>

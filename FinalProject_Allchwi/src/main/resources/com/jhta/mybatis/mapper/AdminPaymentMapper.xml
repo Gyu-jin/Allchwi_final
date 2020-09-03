@@ -7,9 +7,9 @@
 		select * from 		
 		(select ml.ml_num, ml.id, p.pay_regdate, ci.class_title, p.pay_way, p. final_price
 		from member_login ml, payment p, class_info ci
-		where ml.ml_num = p.ml_num and p.class_num = ci.class_num) ee
+		where ml.ml_num = p.ml_num and p.class_num = ci.class_num) ee order by pay_regdate desc
 		<if test="field!=null and field!=''">
-			where ${field} like CONCAT('%',#{keyword},'%')
+			where ${field} like CONCAT('%',#{keyword},'%') 
 		</if>
 		limit #{startRow},5
 	</select>

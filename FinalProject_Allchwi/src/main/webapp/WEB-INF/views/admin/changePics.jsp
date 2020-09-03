@@ -123,13 +123,10 @@
 		
 		if($("#imglist").children().length==3){
 			alert("세가지 그림을 모두 선택하셨습니다.");
-			
 			firstPic = $("#imglist img:nth-child(1)").prop("src").split("/").reverse()[0];	//선택된 이미지는 3개 nth-child로 구분해 가져옴
 			secondPic = $("#imglist img:nth-child(2)").prop("src").split("/").reverse()[0];
 			thirdPic = $("#imglist img:nth-child(3)").prop("src").split("/").reverse()[0];
-			
-			
-			
+				
 			$("#confirmBtn")
 					.append(
 							"<br><br><button type='button' style='width:240px;' class='btn btn-success'"
@@ -165,7 +162,6 @@
 							+ save_filename+ "' onclick=\"selectPics('"+ save_filename + "')\" id='"+save_filename+"'>");
 			$(div).append("<p style='text-align: center;'>"+ org_filename + "</p>");
 		});
-		
 		// empty후에 사라진 border유지 작업
 		var qwe1= arr[0];
 		var qwe2= arr[1];

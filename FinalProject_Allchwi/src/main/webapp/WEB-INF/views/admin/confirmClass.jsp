@@ -61,39 +61,20 @@
 			<c:choose>
 				<c:when test="${list.size()>0 }">
 					<c:forEach var="vo" items="${list }">
-						<div class="row" style="width: 565px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
+						<div class="row" style="width: 600px; display: inline-block; float: left; margin-left: 40px; margin-bottom: 20px;">
 							<div class="col-md-12">
 								<div class="card">
 									<h5 class="card-header" style="text-align: center;">
 										${vo.class_title }
-										<!-- 
-										<a href="${cp}/classDetail/detail?class_num=${vo.class_num}" target="_blank">
-											<button type="button" class="btn btn-primary">상세정보</button>
-										</a>
-										 -->
-										 
-										 <!-- 
-										<a href="${cp }/admin/classDetail?class_num=${vo.class_num}">
-											<button type="button" class="btn btn-primary">상세정보</button>
-										</a>	
-										  -->	
-										
-										
-										<button type="button" class="btn btn-primary" onclick="getDetail('${vo.class_num}')" data-toggle="modal" data-target="#myModal3">상세정보</button>
-											
+										<button type="button" class="btn btn-primary" onclick="getDetail('${vo.class_num}')" data-toggle="modal" data-target="#myModal3">상세정보</button>	
 									</h5>
-
 
 									<div class="card-body" style="height: 188px;">
 										<div style="display: inline-block;">
 											<img src="${cp }/classImg/getimg?cover_num=${vo.cover_num }"
 												style="width: 160px; height: 173px; margin-top: -130px;">
-											<!--  width: 85%; height: 37%; margin-top: -5%; -->
-											<!-- style="width: 160px; height: 173px; margin-top: -130px;"> -->
 										</div>
 										<div style="display: inline-block; margin-left: 60px;">
-											<!-- margin-left: 58%; margin-top: -31%; -->
-											<!-- <div style="display: inline-block; margin-left: 60px;">  -->
 											<p>강사명: ${vo.tutor_nickname }</p>
 											<p>장소: ${vo.class_address }</p>
 											<p>신청인원: ${vo.people }명 / 위시인원: ${vo.wish_count }명</p>
@@ -224,7 +205,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">수업 세부내용</h4>
+        <h4 class="modal-title" style="text-align: center ">수업 세부내용</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -294,7 +275,7 @@
 				"#modal-body2");
 		$(modalForm)
 				.append(
-						"<textarea rows='5' cols='50' name='msg' placeholder='거절 사유를 입력해주세요. 메일로 전송됩니다.' style='outline:none; border:none; resize:none'></textarea>");
+						"<textarea rows='5' cols='50' id='msg' placeholder='거절 사유를 입력해주세요. 메일로 전송됩니다.' style='outline:none; border:none; resize:none'></textarea>");
 		$(modalForm).append("<input type='hidden' name='id' value='"+id+"'>");
 		$(modalForm).append("<hr>");
 		$(modalForm)
@@ -305,8 +286,8 @@
 
 	}
 	function deny(class_num,id) {
-		
-		location.href = "${cp}/admin/denyClass?class_num=" + class_num+"&id="+id;
+		var msg = $("#msg").val();
+		location.href = "${cp}/admin/denyClass?class_num=" + class_num+"&id="+id+ "&msg="+msg;
 	}
 </script>
 

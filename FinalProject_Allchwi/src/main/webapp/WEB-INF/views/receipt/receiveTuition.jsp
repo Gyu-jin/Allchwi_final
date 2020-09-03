@@ -384,7 +384,6 @@ button, input, optgroup, select, textarea {
 		hiddenClassNum2.setAttribute("name", "final_price");
 		hiddenClassNum2.setAttribute("value", final_price);
 
-		
 		var hiddenClassNum3 = document.createElement("input");
 		hiddenClassNum3.setAttribute("type", "hidden");
 		hiddenClassNum3.setAttribute("name", "class_fee");
@@ -398,6 +397,5 @@ button, input, optgroup, select, textarea {
 		//a body부분에 폼을 붙이고 페이지 이동
 		document.body.appendChild(form);
 		form.submit();
-
 	}
 </script>

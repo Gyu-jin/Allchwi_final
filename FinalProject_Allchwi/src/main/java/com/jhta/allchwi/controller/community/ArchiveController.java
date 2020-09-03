@@ -153,7 +153,8 @@ public class ArchiveController {
 	
 	
 	@RequestMapping("/community/writeContentOk")
-	public String writeContentOk(int horsehead, String room_title, String room_content, MultipartFile file1,HttpSession session) {
+	public String writeContentOk(int horsehead, String room_title, String room_content, 
+			MultipartFile file1,HttpSession session) {
 		
 		CommunityVO commuVo = (CommunityVO) session.getAttribute("commuInfo");
 		int commu_num = commuVo.getCommu_num();
@@ -184,7 +185,8 @@ public class ArchiveController {
 			long filesize = file1.getSize(); //파일크기 얻어오기
 				
 			//DB에 파일정보 저장하기
-			ArchiveVO vo = new ArchiveVO(0, commu_num, room_title, room_content, null, 0, horsehead, org_filename, save_filename, filesize);
+			ArchiveVO vo = new ArchiveVO(0, commu_num, room_title, room_content, null, 0, horsehead, 
+					org_filename, save_filename, filesize);
 			service.insert(vo);
 			return "redirect:/community/archive";
 		
@@ -197,23 +199,17 @@ public class ArchiveController {
 	
 	@GetMapping("/community/download")
 	public String download(int room_num,Model model,HttpSession session) {
-		//다운로드할 파일정보를 갖는 객체얻어오기
-		//System.out.println("room_num:" + room_num);
-		
+		//다운로드할 파일정보를 갖는 객체얻어오기		
 		ArchiveVO vo =service.getInfo(room_num);
 		System.out.println("세이브 파일네임:" + vo.getSave_filename());
 		
-		
 		String path=session.getServletContext().getRealPath("/resources/archiveUpload");
+		
 		//다운로드할파일객체
 		File f=new File(path + File.separator + vo.getSave_filename());
 		
-		
 		//다운로드창에 보여질 파일명
-		String filename=vo.getOrg_filename();
-		
-		//System.out.println(filename);
-		
+		String filename=vo.getOrg_filename();		
 		model.addAttribute("file",f);
 		model.addAttribute("filename",filename);
 		model.addAttribute("filesize",vo.getFilesize());

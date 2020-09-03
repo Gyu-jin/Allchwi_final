@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div>
-			<table class="table table-hover">
+			<table class="table table-hover table-bordered">
 				<thead id="th" class="thead-dark">
 					<tr>
 						<th>회원번호</th>
@@ -126,23 +126,10 @@
 
 
 
-
-
 	function content(key, value) {
-		$("#th").empty();
 		$("#tb").empty();
 
 		if (key == "list") {
-			$("#th").append("<tr>");
-			$("#th").append("<th>회원번호</th>");
-			$("#th").append("<th>회원 아이디</th>");
-			$("#th").append("<th>결제날짜</th>");
-			$("#th").append("<th>수업제목</th>");
-			$("#th").append("<th>결제방법</th>");
-			$("#th").append("<th>결제금액</th>");
-			$("#th").append("</tr>");
-
-		
 			for (var i = 0; i < value.length; i++) {
 				var ml_num = value[i].ml_num;
 				var id = value[i].id;
@@ -153,28 +140,22 @@
 
 				if(pay_way == 'card'){			//결제수단 
 					pay_way = '신용카드';
-				}
-				
+				}				
 				final_price = addComma(final_price);	//숫자에 , 붙여주는 함수
-				
-				
-				
-				
-				$("#tb").append("<tr>");
-				$("#tb").append("<td>" + ml_num + "</td>");
-				$("#tb").append("<td>" + id + "</td>");
-				$("#tb").append("<td>" + pay_regdate + "</td>");
-				$("#tb").append("<td>" + class_title + "</td>");
-				$("#tb").append("<td>" + pay_way + "</td>");
-				$("#tb").append("<td>" + final_price + "원</td>");
-				$("#tb").append("</tr>");
-			
+		
+				var trs = $("<tr></tr>").appendTo("#tb");
+				$(trs).append("<td>" + ml_num + "</td>");
+				$(trs).append("<td>" + id + "</td>");
+				$(trs).append("<td>" + pay_regdate + "</td>");
+				$(trs).append("<td>" + class_title + "</td>");
+				$(trs).append("<td>" + pay_way + "</td>");
+				$(trs).append("<td>" + final_price + "원</td>");
+				$(trs).append("</tr>");
 			}
 		}
 	}
 
 	function pageClick(pageNum,keyword,field) {
-		//$("#pagination").empty();
 		$.getJSON({
 			url : "${cp}/admin/payment2",
 			data : {
@@ -191,7 +172,6 @@
 						var pageUl = $(
 								"<ul class='pagination justify-content-center' style='margin: 20px 0'></ul>")
 								.appendTo("#pagination");
-						//$(pageUl).append("<li class='page-item'><a class='page-link' onclick='prev()' href='#'>이전</a></li>");
 						for (var i = value.startPageNum; i <= value.endPageNum; i++) {
 							if (value.pageNum == i) {
 								$(pageUl).append(
@@ -212,15 +192,12 @@
 		});
 	}
 
-	var pageNumber = function(key, value) {
-
+	function pageNumber(key, value) {
 		if (key == "pu") {
-
 			$("#pagination").empty();
 			var pageUl = $(
 					"<ul class='pagination justify-content-center' style='margin: 20px 0'></ul>")
 					.appendTo("#pagination");
-			//$(pageUl).append("<li class='page-item'><a class='page-link' onclick='prev()' href='#'>이전</a></li>");
 			for (var i = value.startPageNum; i <= value.endPageNum; i++) {
 				if (value.pageNum == i) {
 					$(pageUl).append(
@@ -235,18 +212,12 @@
 									+ "</a></li>");
 				}
 			}
-
-			//$(pageUl).append("<li  class='page-item'><a class='page-link' href='#' >다음</a></li>");
-
 			$("#pageNum").val(value.pageNum);
 			paging(value.pageNum, value.totalPageCount, value.endPageNum);
-
 		}
-
 	}
 
-	var paging = function(pagenum, totalpage, endPageNum) {
-
+	function paging(pagenum, totalpage, endPageNum) {
 		if (pagenum == 1) {
 			$("#prev").attr('disabled', true);
 		} else {
@@ -289,7 +260,6 @@
 				keyword : $("#keywordCopy").val(),
 				field : $("#fieldCopy").val()
 			},
-
 			success : function(data) {
 				$("#tb").empty();
 				$.each(data, function(key, value) {

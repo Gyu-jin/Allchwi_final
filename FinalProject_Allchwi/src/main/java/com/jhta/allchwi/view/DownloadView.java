@@ -12,20 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-/*
- *     커스텀뷰만들기
- * AbstractView를 상속받아 만든다.
- */
-
-
-public class DownloadView extends AbstractView {
+public class DownloadView extends AbstractView {	//커스텀뷰 만들기 //AbstractView를 상속받아 만든다.
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		//1. 다운로드창으로 응답하기
-		super.setContentType("application/octet-stream");
+		super.setContentType("application/octet-stream");	//다운로드창 열리기위한 코드 8비트
 		File f=(File)model.get("file");
 		String filename = (String)model.get("filename");
 		long fileSize = (Long)model.get("filesize");
@@ -44,8 +38,4 @@ public class DownloadView extends AbstractView {
 		fis.close();
 		os.close();
 	}
-	
-	
-	
-	
 }

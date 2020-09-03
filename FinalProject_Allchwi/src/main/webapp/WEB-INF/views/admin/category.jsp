@@ -122,7 +122,7 @@
 		});
 		
 	
-		//대분류 등록 함수
+		//큰카테고리 등록 함수
 		function big_insert(){
 			var bcategory_name = $("input[name='bcategory_name']").val();
 			$("#bcate_check").empty();
@@ -153,7 +153,7 @@
 			});
 		}
 		
-		//소분류 등록 함수
+		//작은카테고리 등록 함수
 		function small_insert(){
 			var bcategory_num = $("select[name='cat']").val();
 			var scategory_name = $("input[name='scategory_name']").val();
@@ -170,23 +170,22 @@
 						var selectedCat = document.getElementById("cat");
 						var bcategory_num = selectedCat.options[selectedCat.selectedIndex].value;
 						
-						if(bcategory_num==0){
+						if(bcategory_num==0){	//전체카테고리 보기
 							$.getJSON({
 								url:"${cp}/admin/searchByCate/list",
 								success: function(data){	
 									redundlist(data);
 								}
 							});
-						}else{
+						}else{					//선택한 카테고리 보기
 							$.getJSON({
 								url:"${cp}/admin/category/searchByCate",
 								data: {bcategory_num:bcategory_num},
-								success: function(data){	
+								success: function(data){		
 									redundlist(data,bcategory_num);
 								}
 							});
 						}
-						//redundlist(data,bcategory_num);	//소분류 입력시 비교를 위한 big_num을 넘겨줌
 					}
 				});
 				alert("등록성공!");
@@ -204,7 +203,7 @@
 				let noSearch = $("<tr></tr>").appendTo("#tb");
 				$(noSearch).append("<td colspan='4' style='text-align: center;'>검색 결과 없음</td>");	
 			}
-		
+			// 본문에 나오는 전체리스트
 			$(data).each(function(i,arr){
 				var bcategory_num2= arr.bcategory_num;
 				var bcategory_name= arr.bcategory_name;
@@ -224,8 +223,8 @@
 					 	 $(trs).append("<td>"+scategory_name+"</td>");
 					}
 					$(trs).append("<td><button type='button' class='btn btn-outline-secondary del_btn' onclick='del("+ scategory_num+","+ bcategory_num2+")'>삭제</button></td>");
-					
-					
+
+				// selectBox에 나오는 카테고리이름 리스트
 				$.getJSON({
 					url:"${cp}/admin/big_category_list",
 					success: function(data){
@@ -253,12 +252,10 @@
 		//삭제함수(카테고리별로 볼때)
 		function del(scategory,bcategory){
 			var scategory_num = scategory;
-			//console.log(scategory);
 			var selectedCat = document.getElementById("selectedCat");
 			var selectedValue = selectedCat.options[selectedCat.selectedIndex].value;
 			
-			if(selectedValue==0){   //전체리스트에서 삭제 (전체리스트 selectedValue==0으로 해둠)
-				
+			if(selectedValue==0){   //전체리스트에서 삭제 (전체리스트 selectedValue==0으로 해둠)	
 				if(scategory_num!=0){	//소분류 삭제(snum이 0이 아닐때 = 소분류가 있을때)
 					$.getJSON({
 						url:"${cp}/admin/category/deleteScate2",
@@ -267,7 +264,6 @@
 							redundlist(data,bcategory);
 						}
 					});
-		
 				}else{		//대분류삭제
 					var bcategory_num = bcategory;	
 					console.log(bcategory_num);
@@ -279,7 +275,6 @@
 						}		
 					});
 				}
-			
 			}else if(scategory_num!=0){	//소분류 삭제 (scategory_num가 0이 아닐때 = 소분류가 있을때)
 				$.getJSON({
 					url:"${cp}/admin/category/deleteScate",
@@ -288,7 +283,6 @@
 						redundlist(data,bcategory);	
 					}
 				});
-	
 			}else{		//대분류삭제
 				var bcategory_num = bcategory;	
 				console.log(bcategory_num);

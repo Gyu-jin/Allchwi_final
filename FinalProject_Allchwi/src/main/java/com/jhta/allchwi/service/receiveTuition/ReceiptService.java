@@ -30,8 +30,4 @@ public class ReceiptService {
 		dao.updateRemit(pay_num);		//payment테이블 class_finish=2로 update
 		return 1;
 	}
-	
-
-
-
 }

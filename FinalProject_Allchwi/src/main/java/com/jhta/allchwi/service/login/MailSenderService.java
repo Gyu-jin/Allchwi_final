@@ -94,7 +94,7 @@ public class MailSenderService {
 	}
 	
 	
-	public void sendMsg(String msg,String id) {
+	public void sendMsg(String msg,String email) {
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = msg +"의 사유로 수업 거절되었습니다.";
 		
@@ -103,12 +103,10 @@ public class MailSenderService {
 			mail.setSubject("[수업신청결과 입니다]","utf-8");
 			//내용
 			mail.setText(htmlStr,"utf-8","html");
-			//인력한 메일주소로 이메일 보낼 주소 지정
-			mail.addRecipient(RecipientType.TO, new InternetAddress(id));
+			//입력한 메일주소로 이메일 보낼 주소 지정
+			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
 			//메일보내기
 			mailSender.send(mail);
-			
-			
 		}catch(MessagingException e) {
 			e.printStackTrace();
 		}

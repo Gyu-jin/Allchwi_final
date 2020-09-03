@@ -4,6 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="${cp}/resources/css/classDetail/classDetail.css">
 <!--  <script src="${cp}/resources/js/classDetail/classDetail.js"></script> -->
+<style>
+	li a{color:black;}
+	ul{
+   		list-style:none;
+   	}
+</style>
+
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74ead0f99ba4773dfee212b68149ffb7&libraries=services"></script>
@@ -222,13 +229,10 @@
 		level : 3, // 지도의 확대 레벨
 		draggable : false
 	};
-
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption);
-
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
-
 	//주소로 좌표를 검색합니다
 	geocoder.addressSearch('${vo.class_address}',function(result, status) {
 		// 정상적으로 검색이 완료됐으면 
@@ -239,7 +243,6 @@
 				map : map,
 				position : coords
 			});
-
 		// 인포윈도우로 장소에 대한 설명을 표시합니다
 			var infowindow = new kakao.maps.InfoWindow({
 					content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.class_address}</div>'
