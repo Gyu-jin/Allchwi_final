@@ -33,7 +33,7 @@
 </style>
 <!-- header.jsp -->
 <div>
- <!-- 반응형 Topbar?? -->
+ <!-- 반응형 Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <!-- 반응형 Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

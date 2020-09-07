@@ -8,7 +8,8 @@
 
 /*       수업 이미지          */
 .carousel-item img {
-	height: 450px;
+	height: auto;
+	max-height: 450px;
 }
 
 .carousel-item.active, .carousel-item-next, .carousel-item-prev {

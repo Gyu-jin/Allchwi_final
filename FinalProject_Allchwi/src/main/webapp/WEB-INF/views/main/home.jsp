@@ -8,16 +8,10 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <style>
-.carousel-inner {
-	position: relative;
-	width: 70%;
-	margin: auto;
-	overflow: hidden;
-}
-
-.carousel {
-	position: relative;
-	background-color: #bfd8ee;
+.carousel-item img {
+	max-width: 100%;
+	width: 100%;
+	max-height: 50rem;
 }
 
 h1 {
@@ -36,10 +30,9 @@ h1 {
 .q_menu ul {
 	display: flex;
 	justify-content: space-between;
-	height: 51px;
-	margin-bottom: 34px;
-	width: 100%;
-	margin-top: 20px;
+	height: 5rem;
+	margin-bottom: 3rem;
+	margin-top: 2rem;
 	padding-left: 0;
 }
 
@@ -52,13 +45,16 @@ h1 {
 .q_menu img {
 	vertical-align: middle;
 	border-style: none;
-	width: 25%;
-	height: 25%;
+	width: 3rem;
+	max-width: 100%;
+	height: auto;
+	margin-left: 0.5rem;
 }
 
 mark {
 	background-color: transparent;
 	color: gray;
+	font-size: 0.8rem;
 }
 
 .c-cover {
@@ -111,10 +107,11 @@ mark {
 .roundImg {
 	width: 100%;
 }
-.roundpro{
-	width: 100%;
-	height: 122px;
+
+.roundpro {
+	height: auto;
 	border-radius: 50%;
+	width: 9rem;
 }
 
 .sec01 {
@@ -158,10 +155,16 @@ mark {
 	font-size: 14px;
 }
 
-.swiper1{
+.swiper-container {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper1 {
 	height: 420px;
 }
-.swiper2{
+
+.swiper2 {
 	height: 200px;
 }
 
@@ -176,15 +179,21 @@ mark {
 	box-shadow: 0 0 5px #555;
 	max-width: 100%;
 }
-.swiper-button-prev{
- 	background-image: url("https://user-images.githubusercontent.com/65140754/89138241-e8180680-d575-11ea-8855-a1e5269eb285.png");   
+
+.swiper-button-prev {
+	background-image:
+		url("https://user-images.githubusercontent.com/65140754/89138241-e8180680-d575-11ea-8855-a1e5269eb285.png");
 }
-.swiper-button-next{
-	background-image: url("https://user-images.githubusercontent.com/65140754/89138252-efd7ab00-d575-11ea-8d50-2f89c0f73700.png");   
-} 
+
+.swiper-button-next {
+	background-image:
+		url("https://user-images.githubusercontent.com/65140754/89138252-efd7ab00-d575-11ea-8d50-2f89c0f73700.png");
+}
+
 .swiper-button-next, .swiper-button-prev {
-    width: 45px;
-    background-size: 50px 44px;
+	width: 45px;
+	background-size: 50px 44px;
+}
 </style>
 <div>
 	<!-- 메인 배너  -->
@@ -199,20 +208,17 @@ mark {
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<a href="${cp }/classDetail/detail?class_num=12"><img
-					src="${cp}/resources/mainPicsUpload/${firstPic}" id="b1" style="width:897px; height:505px;" 
-					alt="배너1"></a> 
+					src="${cp}/resources/mainPicsUpload/${firstPic}" id="b1" alt="배너1"></a>
 			</div>
 			<div class="carousel-item">
 				<a href="${cp}/list/search?bcategory_num=7"><img
-					src="${cp}/resources/mainPicsUpload/${secondPic}" id="b2" style="width:897px; height:505px;" 
-					alt="배너2"></a>
-					
-					<!--  class="d-block w-100"-->
+					src="${cp}/resources/mainPicsUpload/${secondPic}" id="b2" alt="배너2"></a>
+
+				<!--  class="d-block w-100"-->
 			</div>
 			<div class="carousel-item">
 				<a href="${cp}/list/search?scategory_num=19"><img
-					src="${cp}/resources/mainPicsUpload/${thirdPic}" id="b3" style="width:897px; height:505px;" 
-					alt="배너3"></a>
+					src="${cp}/resources/mainPicsUpload/${thirdPic}" id="b3" alt="배너3"></a>
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -274,7 +280,7 @@ mark {
 		<div class="swiper-wrapper">
 			<c:forEach var="list" items="${top_list }">
 				<div class="swiper-slide">
-					<div class="card shadow mb-4">
+					<div class="card">
 						<a href="${cp}/classDetail/detail?class_num=${list.class_num}">
 							<div class="card-body">
 								<p>
@@ -304,7 +310,7 @@ mark {
 		<div class="swiper-pagination"></div>
 	</div>
 	<!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-	
+
 
 
 	<!-- //인기수업  -->
@@ -315,19 +321,17 @@ mark {
 			<div class="swiper-wrapper">
 				<c:forEach var="best_tutor" items="${best_tutor }">
 					<div class="swiper-slide">
-						<div style="width: 120px; margin-right: 100px;">
-							<a
-								href="${cp}/classDetail/detail?class_num=${best_tutor.class_num}">
-								<div class="img">
-									<img class="roundpro"
-										src="${cp}/mypageImg/getimg?pro_num=${best_tutor.pro_num}">
-								</div>
-								<div class="t">
-									<div class="name">${best_tutor.tutor_nickname}</div> 
-									<div class="score">${best_tutor.tot_avg}(${best_tutor.cnt})</div>
-								</div>
-							</a>
-						</div>
+						<a
+							href="${cp}/classDetail/detail?class_num=${best_tutor.class_num}">
+							<div class="img">
+								<img class="roundpro"
+									src="${cp}/mypageImg/getimg?pro_num=${best_tutor.pro_num}">
+							</div>
+							<div class="t">
+								<div class="name">${best_tutor.tutor_nickname}</div>
+								<div class="score">${best_tutor.tot_avg}(${best_tutor.cnt})</div>
+							</div>
+						</a>
 					</div>
 				</c:forEach>
 
@@ -344,24 +348,31 @@ mark {
 	</div>
 </div>
 <script type="text/javascript">
-	var currentIndex = $('div.active').index() + 1;
-	$('#carouselExampleIndicators').on('slide.bs.carousel', function(event) {
-		var crs = document.getElementById("carouselExampleIndicators");
-		currentIndex = $('div.active').index() + 1;
-		if (currentIndex == 1) {
-			crs.style.backgroundColor = "#fff2cc";
-		} else if (currentIndex == 2) {
-			crs.style.backgroundColor = "#fbe5d7";
-		} else if (currentIndex == 3) {
-			crs.style.backgroundColor = "#bfd8ee";
-		}
-
-	});
+	
+	// 인기수업 swiper
 	new Swiper('.swiper1', {
 
-		slidesPerView : 4, // 동시에 보여줄 슬라이드 갯수
-		spaceBetween : 30, // 슬라이드간 간격
-		slidesPerGroup : 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+		slidesPerView : 4,
+		spaceBetween : 10,
+		// init: false,
+		pagination : {
+			el : '.swiper-pagination',
+			clickable : true,
+		},
+		breakpoints : {
+			640 : {
+				slidesPerView : 1,// 동시에 보여줄 슬라이드 갯수
+				spaceBetween : 20,// 슬라이드간 간격
+			},
+			900 : {
+				slidesPerView : 2,
+				spaceBetween : 20,
+			},
+			1024 : {
+				slidesPerView : 4,
+				spaceBetween : 50,
+			},
+		},
 
 		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
 		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
@@ -378,18 +389,30 @@ mark {
 			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 		},
 	});
+	
+	// 리뷰왕 swiper
 	new Swiper('.swiper2', {
 
-		slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
-		spaceBetween : 0, // 슬라이드간 간격
-		slidesPerGroup : 5, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-
-		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
-		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-		loopFillGroupWithBlank : true,
-
-		loop : true, // 무한 반복
-
+		slidesPerView : 5,
+		spaceBetween : 50,
+		pagination : {
+			el : '.swiper-pagination',
+			clickable : true,
+		},
+		breakpoints : {
+			640 : {
+				slidesPerView : 2,// 동시에 보여줄 슬라이드 갯수
+				spaceBetween : 20,// 슬라이드간 간격
+			},
+			900 : {
+				slidesPerView : 3,
+				spaceBetween : 30,
+			},
+			1024 : {
+				slidesPerView : 5,
+				spaceBetween : 50,
+			},
+		},
 		pagination : { // 페이징
 			el : '.swiper-pagination',
 			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
