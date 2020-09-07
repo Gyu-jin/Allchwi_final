@@ -268,7 +268,7 @@ button, input, optgroup, select, textarea {
 <div class="container">
 	<!--MyTItleBox head-->
 	<div class="title-box">
-		<h1>수업료 받기</h1>
+		<h1>튜터 수업료 정산</h1>
 	</div>
 	<div class="my-class-list">
 		<c:choose>
@@ -303,7 +303,8 @@ button, input, optgroup, select, textarea {
 								</div>
 
 								<div class="price">
-									<font>￦</font>${vo.final_price }</div>
+									<font>￦</font><fmt:formatNumber value="${vo.final_price}" pattern="#,###" /></div>
+										
 								<button type="button" class="btn btn-primary"
 									onclick="receive('${vo.pay_num}','${vo.final_price }','${vo.class_fee}')"
 									style="margin-left: 600px; width: 111px;">수업료 받기</button>
@@ -373,28 +374,28 @@ button, input, optgroup, select, textarea {
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "${cp}/receipt/apply");
 
-		//a 파라미터 값이 null이 아닌 경우 히든 input을 생성하여 값을 넣음.
-		var hiddenClassNum1 = document.createElement("input");
-		hiddenClassNum1.setAttribute("type", "hidden");
-		hiddenClassNum1.setAttribute("name", "pay_num");
-		hiddenClassNum1.setAttribute("value", pay_num);
+		//파라미터 값이 null이 아닌 경우, hidden input을 생성하여 값을 넣음.
+		var hiddenPayNum = document.createElement("input");
+		hiddenPayNum.setAttribute("type", "hidden");
+		hiddenPayNum.setAttribute("name", "pay_num");
+		hiddenPayNum.setAttribute("value", pay_num);
 
-		var hiddenClassNum2 = document.createElement("input");
-		hiddenClassNum2.setAttribute("type", "hidden");
-		hiddenClassNum2.setAttribute("name", "final_price");
-		hiddenClassNum2.setAttribute("value", final_price);
+		var hiddenFinalPrice = document.createElement("input");
+		hiddenFinalPrice.setAttribute("type", "hidden");
+		hiddenFinalPrice.setAttribute("name", "final_price");
+		hiddenFinalPrice.setAttribute("value", final_price);
 
-		var hiddenClassNum3 = document.createElement("input");
-		hiddenClassNum3.setAttribute("type", "hidden");
-		hiddenClassNum3.setAttribute("name", "class_fee");
-		hiddenClassNum3.setAttribute("value", class_fee);
+		var hiddenClassFee = document.createElement("input");
+		hiddenClassFee.setAttribute("type", "hidden");
+		hiddenClassFee.setAttribute("name", "class_fee");
+		hiddenClassFee.setAttribute("value", class_fee);
 
-		//a 폼에 히든 input 추가 
-		form.appendChild(hiddenClassNum1);
-		form.appendChild(hiddenClassNum2);
-		form.appendChild(hiddenClassNum3);
+		//폼에 hidden input 추가 
+		form.appendChild(hiddenPayNum);
+		form.appendChild(hiddenFinalPrice);
+		form.appendChild(hiddenClassFee);
 
-		//a body부분에 폼을 붙이고 페이지 이동
+		//body부분에 폼을 붙이고 페이지 이동
 		document.body.appendChild(form);
 		form.submit();
 	}

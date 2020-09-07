@@ -40,6 +40,7 @@ public class ReceiptController {
 				service.insertUpdateRecipt(vo, pay_num);
 			}catch(Exception e) {
 				e.printStackTrace();
+				return "fail";
 			}
 		}
 		

@@ -25,7 +25,7 @@ public class ReceiptService {
 	}
 	
 	@Transactional
-	public int insertUpdateRecipt(InsertRemitVO vo,int pay_num) {
+	public int insertUpdateRecipt(InsertRemitVO vo,int pay_num) throws Exception {
 		dao.insertRemit(vo);			//remit테이블에 insert		
 		dao.updateRemit(pay_num);		//payment테이블 class_finish=2로 update
 		return 1;

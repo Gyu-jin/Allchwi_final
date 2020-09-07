@@ -175,7 +175,7 @@ public class ArchiveController {
 			
 			//전송된 파일을 서버에 복사(업로드) 하기 위한 출력스트림
 			FileOutputStream fos =
-					new FileOutputStream(uploadPath+File.separator+save_filename);
+					new FileOutputStream(uploadPath+File.separator+save_filename);		
 			
 			//파일복사하기
 			FileCopyUtils.copy(fis, fos);
@@ -185,14 +185,14 @@ public class ArchiveController {
 			long filesize = file1.getSize(); //파일크기 얻어오기
 				
 			//DB에 파일정보 저장하기
-			ArchiveVO vo = new ArchiveVO(0, commu_num, room_title, room_content, null, 0, horsehead, 
-					org_filename, save_filename, filesize);
+			ArchiveVO vo = new ArchiveVO(0, commu_num, room_title, room_content, 
+					null, 0, horsehead, org_filename, save_filename, filesize);
 			service.insert(vo);
 			return "redirect:/community/archive";
 		
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());
-			return ".admin.error";
+			return ".community.board.error";
 		}
 	}
 	
